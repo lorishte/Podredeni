@@ -1,9 +1,10 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 
-import { Grid, PageHeader } from 'react-bootstrap';
+import { Grid, Row, Col, Image, PageHeader } from 'react-bootstrap';
 
-import ProductInfo from './partials/ProductInfo'
+import ProductInfo from './partials/ProductInfo';
+import AddToCartForm from './partials/AddToCartForm';
 import ProductTabs from './partials/ProductTabs';
 
 import products from '../../data/products';
@@ -14,6 +15,7 @@ class Product extends React.Component {
 
 		this.state = {
 			product: '',
+			quantity: 0
 		};
 	}
 
@@ -26,18 +28,45 @@ class Product extends React.Component {
 		this.setState({product});
 	};
 
+	addToCart = (quantity) => {
+		this.setState({quantity}, () => {
+			if (sessionStorage.getItem('products') === null) {
+				sessionStorage.setItem('products', JSON.stringify([this.state]));
+			} else {
+				let addedProducts = JSON.parse(sessionStorage.getItem('products'));
+				addedProducts.push(this.state);
+				sessionStorage.products = JSON.stringify(addedProducts);
+			}
+		});
+	};
+
 	render () {
 		const product = this.state.product;
 
+		// if (this.state.quantity !== 0) {
+		// 	return <Redirect to={{
+		// 		pathname: '/cart',
+		// 		product: this.state
+		// 	}}/>;
+		// }
+
 		return (
-			<Grid id="product" className="container">
+			<Grid id="product">
 				<PageHeader>
 					<Link to="/products" className="hidden-link">Products</Link>
 				</PageHeader>
-				<div>
-					<ProductInfo data={product}/>
+				<Row>
+					<Col xs={8} sm={6} md={4}>
+						<Image src={'../' + product.imageUrl} thumbnail/>
+					</Col>
+					<Col mdOffset={1} xs={12} sm={6} md={7}>
+						<ProductInfo data={product}/>
+						<AddToCartForm onSubmit={this.addToCart}/>
+					</Col>
+				</Row>
+				<Row>
 					<ProductTabs/>
-				</div>
+				</Row>
 			</Grid>
 		);
 	}

@@ -3,23 +3,19 @@ import React from 'react';
 import { FormGroup, ControlLabel, FormControl, Col, Row, Button, Form, HelpBlock } from 'react-bootstrap';
 
 class AddToCartForm extends React.Component {
-	constructor (props, context) {
-		super(props, context);
-
-		this.handleChange = this.handleChange.bind(this);
+	constructor (props) {
+		super(props);
 
 		this.state = {
-			value: 1,
+			quantity: 1,
 		};
 	}
 
-
-	handleChange (e) {
-		this.setState({value: e.target.value});
-	}
+	handleChange = (e) => {
+		this.setState({quantity: e.target.value});
+	};
 
 	message = '';
-
 	getValidationState = () => {
 		const num = Number(this.state.value);
 		console.log(num);
@@ -40,19 +36,28 @@ class AddToCartForm extends React.Component {
 		return null;
 	};
 
+	submit = (e) => {
+		e.preventDefault();
+		this.props.onSubmit(this.state.quantity);
+
+		this.setState({quantity: 1});
+	};
+
 	render () {
 		return (
 			<Row>
+
 				<Col xs={4} sm={12}>
-					<Form inline>
-						<FormGroup bsSize="large" // controlId="formBasicText" // validationState={this.getValidationState()}
+					<Form inline onSubmit={this.submit}>
+						<FormGroup
+							bsSize="large" // controlId="formBasicText" // validationState={this.getValidationState()}
 						>
 							<ControlLabel/>{' '}
 							<FormControl
 								type="number"
 								min="1"
 								max="10"
-								placeholder={this.state.value}
+								value={this.state.quantity}
 								onChange={this.handleChange}/>
 							{/*<FormControl.Feedback />*/}
 							{/*<HelpBlock>{this.message}</HelpBlock>*/}
@@ -60,6 +65,7 @@ class AddToCartForm extends React.Component {
 						<Button type="submit" className="btn btn-primary" bsSize="large">Add To Cart</Button>
 					</Form>
 				</Col>
+
 			</Row>
 
 		);

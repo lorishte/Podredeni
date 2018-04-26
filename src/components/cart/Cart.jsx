@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { FormGroup, ControlLabel, HelpBlock, FormControl, Col, Row, Button } from 'react-bootstrap';
+import { Grid, Col, Row, PageHeader } from 'react-bootstrap';
 
 class Cart extends React.Component {
 	constructor (props, context) {
@@ -9,60 +9,37 @@ class Cart extends React.Component {
 		this.handleChange = this.handleChange.bind(this);
 
 		this.state = {
-			value: 1,
+			products: '',
 		};
 	}
 
-	message = '';
+	componentDidMount () {
+		let addedProducts = JSON.parse(sessionStorage.getItem('products'));
 
-	getValidationState = () => {
-		const num = Number(this.state.value);
+		if (addedProducts === null) return;
 
-		if (num === 0) {
-			this.message = 'Please, add at least one product.';
-			return 'error';
-		}
-		else if (num > 9) {
-			this.message = 'Are you sure you want to add ' + num + ' testimonials?';
-			return 'warning';
-		}
-		else if (num > 0) {
-			this.message = '';
-			return 'success';
-		}
-
-		return null;
-	};
+		this.setState({products: addedProducts}, () => {
+			this.state.products.map(e => console.log(e.product, Number(e.quantity)));
+		})
+	}
 
 	handleChange (e) {
 		this.setState({value: e.target.value});
 	}
+
 	render() {
+
 		return (
-			<div className="container">
-				<h1>Cart</h1>
+			<Grid id="cart">
+				<PageHeader>
+					My Cart
+				</PageHeader>
 				<Row>
-					<Col xs={8} md={6}>
-						<form>
-							<FormGroup
-								controlId="formBasicText"
-								validationState={this.getValidationState()}
-							>
-								<ControlLabel>Working example with validation</ControlLabel>
-								<FormControl
-									type="number"
-									value={this.state.value}
-									min='0'
-									placeholder="Enter text"
-									onChange={this.handleChange}
-								/>
-								<FormControl.Feedback />
-								<HelpBlock>{this.message}</HelpBlock>
-							</FormGroup>
-						</form>
+					<Col xs={8} sm={6} md={4}>
+
 					</Col>
 				</Row>
-			</div>
+			</Grid>
 		);
 	}
 }
