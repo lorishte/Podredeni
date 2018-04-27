@@ -19,6 +19,10 @@ class Cart extends React.Component {
 		this.loadProducts();
 	}
 
+	componentWillReceiveProps (props) {
+		console.log(this.props)
+	}
+
 	loadProducts = () => {
 		let addedProducts = JSON.parse(sessionStorage.getItem('products'));
 		if (addedProducts === null) return;
@@ -64,6 +68,7 @@ class Cart extends React.Component {
 	};
 
 	editItem = (id, newQuantity) => {
+		console.log(222);
 		let addedProducts = this.state.products;
 		addedProducts.map((e) => {
 			if (e.product.id === id) {

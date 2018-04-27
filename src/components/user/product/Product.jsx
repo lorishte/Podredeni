@@ -39,8 +39,6 @@ class Product extends React.Component {
 
 			let addedProducts = JSON.parse(sessionStorage.getItem('products'));
 
-			console.log(this.checkIfProductIsInCart(addedProducts));
-
 			if (this.checkIfProductIsInCart(addedProducts)) {
 				this.toastContainer.warning('Please go to your cart to update quantity!', 'This product is already added in your cart!', {
 					closeButton: true,
@@ -55,9 +53,9 @@ class Product extends React.Component {
 				closeButton: true,
 			});
 
-			setTimeout(() => {
-				this.props.history.push('/products');
-			}, 4000);
+			// setTimeout(() => {
+			// 	this.props.history.push('/products');
+			// }, 4000);
 		});
 	};
 
