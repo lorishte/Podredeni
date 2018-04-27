@@ -2,7 +2,7 @@ import React from 'react';
 
 import { Row , Col } from 'react-bootstrap';
 
-import ProductCard from '../../../product/partials/ProductCard';
+import ProductCard from '../../../productList/partials/ProductCard';
 import products from '../../../../../data/products';
 
 class TopSellers extends React.Component {

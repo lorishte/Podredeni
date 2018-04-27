@@ -7,12 +7,12 @@ import PrivateRoute from './PrivateRoute'
 // Components
 import Login from '../auth/Login'
 import Register from '../auth/Register'
-import Home from '../home/Home'
-import ProductsList from '../product/ProductsList'
-import Product from '../product/Product'
-import Cart from '../cart/Cart'
-import About from '../about/About'
-import Contact from '../contact/Contact'
+import Home from '../user/home/Home'
+import ProductsList from '../user/productList/ProductsList'
+import Product from '../user/product/Product'
+import Cart from '../user/cart/Cart'
+import About from '../user/about/About'
+import Contact from '../user/contact/Contact'
 import NotFound from '../common/NotFound'
 
 

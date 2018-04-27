@@ -3,7 +3,7 @@ import { Redirect } from 'react-router-dom';
 
 import { Form, FormGroup, Col, FormControl, ControlLabel, Checkbox, Button } from 'react-bootstrap';
 
-import requester from '../../../services/requester';
+import requester from '../../services/requester';
 
 class Login extends React.Component {
 	constructor (props) {
