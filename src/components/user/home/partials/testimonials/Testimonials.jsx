@@ -2,8 +2,8 @@ import React from 'react';
 
 import { Row, Col, Grid } from 'react-bootstrap';
 
-import TestimonialCard from '../partials/TestimonialCard';
-import testimonials from '../../data/testimonials';
+import TestimonialCard from './partials/TestimonialCard';
+import testimonials from '../../../../../data/testimonials';
 
 class Testimonials extends React.Component {
 	constructor (props) {

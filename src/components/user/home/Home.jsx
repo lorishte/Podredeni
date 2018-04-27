@@ -2,10 +2,10 @@ import React from 'react';
 
 import { Grid } from 'react-bootstrap';
 
-import ControlledCarousel from '../carousel/ControlledCarousel';
+import ControlledCarousel from './partials/carousel/ControlledCarousel';
 import AboutProduct from './partials/AboutProduct';
-import TopSellers from '../topSellers/TopSellers';
-import Testimonials from '../testimonials/Testimonials';
+import TopSellers from './partials/topSellers/TopSellers';
+import Testimonials from './partials/testimonials/Testimonials';
 
 class Home extends React.Component {
 	constructor (props) {

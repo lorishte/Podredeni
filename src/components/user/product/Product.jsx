@@ -7,7 +7,7 @@ import ProductInfo from './partials/ProductInfo';
 import AddToCartForm from './partials/AddToCartForm';
 import ProductTabs from './partials/ProductTabs';
 
-import products from '../../data/products';
+import products from '../../../data/products';
 
 class Product extends React.Component {
 	constructor (props) {

@@ -2,8 +2,8 @@ import React from 'react';
 
 import { Row, PageHeader, Grid } from 'react-bootstrap';
 
-import ProductCard from '../partials/ProductCard';
-import products from '../../data/products';
+import ProductCard from './partials/ProductCard';
+import products from '../../../data/products';
 
 class ProductsList extends React.Component {
 	constructor (props) {

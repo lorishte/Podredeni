@@ -2,7 +2,7 @@ import React from 'react';
 import { withRouter } from 'react-router-dom';
 // import toastr from 'toastr';
 
-import requester from '../../services/requester';
+import requester from '../../../services/requester';
 
 
 class Register extends React.Component {
