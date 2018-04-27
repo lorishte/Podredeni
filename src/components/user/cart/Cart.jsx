@@ -16,10 +16,14 @@ class Cart extends React.Component {
 	}
 
 	componentDidMount () {
+		this.loadProducts();
+	}
+
+	loadProducts = () => {
 		let addedProducts = JSON.parse(sessionStorage.getItem('products'));
 		if (addedProducts === null) return;
 		this.setState({products: addedProducts});
-	}
+	};
 
 	calculateTotalSum = () => {
 		let sum = 0;
@@ -38,7 +42,6 @@ class Cart extends React.Component {
 			buttons: [
 				{
 					label: 'Delete',
-					class: 'btn btn-danger',
 					onClick: () => {
 						this.setState({
 							products: this.state.products.filter((e) => e.product.id !== id)
@@ -48,13 +51,10 @@ class Cart extends React.Component {
 					}
 				},
 				{
-					label: 'Cancel',
-					class: 'btn btn-primary',
+					label: 'Cancel'
 				}
 			]
 		});
-
-
 	};
 
 	removeFromSession = (id) => {
@@ -63,14 +63,17 @@ class Cart extends React.Component {
 		sessionStorage.products = JSON.stringify(filteredProducts);
 	};
 
-	editItem = (id) => {
-		console.log(id);
-		console.log('edit');
-	};
+	editItem = (id, newQuantity) => {
+		let addedProducts = this.state.products;
+		addedProducts.map((e) => {
+			if (e.product.id === id) {
+				e.quantity = newQuantity;
+			}
+		});
 
-	// componentDidUpdate () {
-	// 	this.setState({sum: this.calculateTotalSum})
-	// }
+		sessionStorage.products = JSON.stringify(addedProducts);
+		this.setState({products: addedProducts});
+	};
 
 	render () {
 		return (
