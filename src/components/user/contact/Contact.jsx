@@ -16,7 +16,6 @@ class Contact extends React.Component {
 					</Col>
 				</Row>
 			</Grid>
-
 		);
 	}
 }

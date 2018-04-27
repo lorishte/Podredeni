@@ -1,44 +1,118 @@
 import React from 'react';
 
-import { Grid, Col, Row, PageHeader } from 'react-bootstrap';
+import { Grid, PageHeader, Table } from 'react-bootstrap';
+import { confirmAlert } from 'react-confirm-alert';
+
+import CartProductRow from './partials/cartProductRow';
 
 class Cart extends React.Component {
-	constructor (props, context) {
-		super(props, context);
-
-		this.handleChange = this.handleChange.bind(this);
+	constructor (props) {
+		super(props);
 
 		this.state = {
-			products: '',
+			products: [],
+			sum: 0
 		};
 	}
 
 	componentDidMount () {
 		let addedProducts = JSON.parse(sessionStorage.getItem('products'));
-
 		if (addedProducts === null) return;
-
-		this.setState({products: addedProducts}, () => {
-			this.state.products.map(e => console.log(e.product, Number(e.quantity)));
-		})
+		this.setState({products: addedProducts});
 	}
 
-	handleChange (e) {
-		this.setState({value: e.target.value});
-	}
+	calculateTotalSum = () => {
+		let sum = 0;
 
-	render() {
+		this.state.products.map(e => {
+			sum += e.product.price * e.quantity;
+		});
 
+		return sum.toFixed(2);
+	};
+
+	deleteItem = (id) => {
+		confirmAlert({
+			title: 'Please confirm!',
+			message: 'Are you sure you want to delete this item?',
+			buttons: [
+				{
+					label: 'Delete',
+					class: 'btn btn-danger',
+					onClick: () => {
+						this.setState({
+							products: this.state.products.filter((e) => e.product.id !== id)
+						});
+
+						this.removeFromSession(id);
+					}
+				},
+				{
+					label: 'Cancel',
+					class: 'btn btn-primary',
+				}
+			]
+		});
+
+
+	};
+
+	removeFromSession = (id) => {
+		let productsInStorage = JSON.parse(sessionStorage.getItem('products'));
+		let filteredProducts = productsInStorage.filter((e) => e.product.id !== id);
+		sessionStorage.products = JSON.stringify(filteredProducts);
+	};
+
+	editItem = (id) => {
+		console.log(id);
+		console.log('edit');
+	};
+
+	// componentDidUpdate () {
+	// 	this.setState({sum: this.calculateTotalSum})
+	// }
+
+	render () {
 		return (
 			<Grid id="cart">
 				<PageHeader>
 					My Cart
 				</PageHeader>
-				<Row>
-					<Col xs={8} sm={6} md={4}>
+				<Table responsive>
+					<thead>
+					<tr>
+						<th>Product No</th>
+						<th>Product name</th>
+						<th>Quantity</th>
+						<th>Product price</th>
+						<th>Sum</th>
+						<th>Edit</th>
+					</tr>
+					</thead>
 
-					</Col>
-				</Row>
+					<tbody>
+					{this.state.products.length > 0 &&
+					this.state.products.map((e, i) => {
+						return <CartProductRow
+							key={e.product.id}
+							index={i + 1}
+							data={e.product}
+							quantity={e.quantity}
+							delete={this.deleteItem}
+							edit={this.editItem}/>;
+					})
+					}
+					</tbody>
+
+					<tfoot>
+					{this.state.products.length > 0 &&
+					<tr className="bg-info">
+						<th colSpan={4}>Total sum</th>
+						<th colSpan={2}>{this.calculateTotalSum()}</th>
+					</tr>}
+					</tfoot>
+
+				</Table>
 			</Grid>
 		);
 	}

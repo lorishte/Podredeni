@@ -6,10 +6,12 @@
     "bootstrap": "^4.1.0",
     "react": "^16.3.2",
     "react-bootstrap": "^0.32.1",
+    "react-confirm-alert": "^2.0.2",
     "react-dom": "^16.3.2",
     "react-router": "^4.2.0",
     "react-router-dom": "^4.2.2",
     "react-scripts": "1.1.4",
+    "react-toastr": "^3.0.0",
     "reactstrap": "^5.0.0-beta.3"
   },
   "scripts": {

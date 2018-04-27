@@ -1,5 +1,5 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom'
+import { NavLink } from 'react-router-dom';
 
 import { Navbar, Nav, NavItem, MenuItem, NavDropdown, Glyphicon } from 'react-bootstrap';
 
@@ -7,8 +7,8 @@ class Header extends React.Component {
 
 	constructor (props) {
 		super(props);
-
 	}
+
 
 	render () {
 
