@@ -1,7 +1,11 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
 
+import XMLParser from 'react-xml-parser';
+
 import { Row, Col, FormGroup, FormControl, ControlLabel, Checkbox, Radio, Button } from 'react-bootstrap';
+
+import ekontRequester from '../../../../services/ekontRequester'
 
 import FormField from './FormField';
 
@@ -28,11 +32,23 @@ class OrderDetails extends React.Component {
 		};
 	}
 
+	componentDidMount () {
+		ekontRequester.getOffices()
+			.then(response => {
+
+			console.log(response)
+		})
+			.catch(err => {
+				console.log(err)
+			})
+	}
+
 	handleChange = (e) => {
 		this.setState({[e.target.name]: e.target.value}, () => {
 			console.log(this.state);
 		});
 	};
+
 
 	getValidationState () {
 		const length = this.state.firstName.length;
