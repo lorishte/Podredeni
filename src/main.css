@@ -147,6 +147,7 @@ img {
   display: flex;
   flex-wrap: wrap;
   align-items: flex-end;
+  justify-content: center;
   padding: 25px 0;
   margin-bottom: 20px;
   transition: .4s; }
@@ -182,14 +183,17 @@ img {
       height: auto;
       border-bottom: 1px solid transparent; }
   .card .card-text {
+    display: flex;
+    align-items: center;
     color: #c6c6c6;
     visibility: hidden;
     opacity: 0;
+    height: 60px;
     transform: translateY(50px);
     transition: .4s; }
   .card .price {
     transition: .4s;
-    transform: translateY(-50px); }
+    transform: translateY(-60px); }
 
 #testimonials {
   background-color: #f6f5f3; }

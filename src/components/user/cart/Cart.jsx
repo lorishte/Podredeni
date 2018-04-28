@@ -3,8 +3,8 @@ import React from 'react';
 import { Grid, PageHeader, Table, Tabs, Tab, Row, Button, Label } from 'react-bootstrap';
 import { confirmAlert } from 'react-confirm-alert';
 
-import CartProductsTable from './partials/CartProductsTable';
-
+import CartProductsTable from './products/CartProductsTable';
+import OrderDetails from './orderDetails/OrderDetails';
 
 class Cart extends React.Component {
 	constructor (props) {
@@ -12,9 +12,8 @@ class Cart extends React.Component {
 
 		this.state = {
 			products: [],
-			sum: 0,
 			orderDetails: {},
-			key: 1
+			key: 2
 		};
 	}
 
@@ -70,7 +69,7 @@ class Cart extends React.Component {
 	};
 
 	handleSelect = (tab) => {
-		this.setState({ key: Number(tab) });
+		this.setState({key: Number(tab)});
 	};
 
 	render () {
@@ -87,19 +86,25 @@ class Cart extends React.Component {
 						<Tab eventKey={1} title="Cart">
 							<h3><span className="text-grey">Step 1.</span> Check cart</h3>
 							{this.state.products.length > 0 &&
-								<CartProductsTable
-									products={this.state.products}
-									totalSum={this.state.sum}
-									deleteItem={this.deleteItem}
-									editItem={this.editItem}
-								/>
+								<div>
+									<CartProductsTable
+										products={this.state.products}
+										totalSum={this.state.sum}
+										deleteItem={this.deleteItem}
+										editItem={this.editItem}
+									/>
+									<Button onClick={() => this.handleSelect(2)}>Continue</Button>
+								</div>
 							}
+							{this.state.products.length === 0 &&
+							<h3>Your cart is empty.</h3>}
+						</Tab>
 
-							<Button onClick={()=>this.handleSelect(2)}>Continue</Button>
-						</Tab>
-						<Tab eventKey={2}  title="Order details">
+						<Tab eventKey={2} title="Order details">
 							<h3><span className="text-grey">Step 2.</span> Order details</h3>
+							<OrderDetails/>
 						</Tab>
+
 						<Tab eventKey={3} title="Confirm">
 							<h3><span className="text-grey">Step 3.</span> Review and confirm</h3>
 						</Tab>

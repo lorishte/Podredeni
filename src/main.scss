@@ -219,6 +219,7 @@ img {
   display: flex;
   flex-wrap: wrap;
   align-items: flex-end;
+  justify-content: center;
   padding: 25px 0;
   margin-bottom: 20px;
   @include transition;
@@ -248,7 +249,6 @@ img {
   }
 
   .product-image {
-    //height: 220px;
     width: 100%;
     overflow: hidden;
     @include transition;
@@ -273,16 +273,19 @@ img {
   }
 
   .card-text {
+    display: flex;
+    align-items: center;
     color: $medium-grey;
     visibility: hidden;
     opacity: 0;
+    height: 60px;
     transform: translateY(50px);
     @include transition;
   }
 
   .price {
     @include transition;
-    transform: translateY(-50px);
+    transform: translateY(-60px);
   }
 }
 
