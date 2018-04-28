@@ -36,7 +36,6 @@ body {
   font-size: 14px;
 }
 
-
 main {
   //margin-top: $header-height;
   min-height: calc(100vh - 80px);
@@ -336,7 +335,7 @@ img {
   border-radius: .25em;
 }
 
-//Tabs
+// Product Tabs
 .nav-tabs {
   border-bottom: 1px solid #ddd;
   padding-left: 15px;
@@ -344,6 +343,43 @@ img {
 
 .tab-content {
   padding: 25px 15px;
+}
+
+//Cart
+
+.image-thumbnail {
+  height: 35px;
+  width: 35px;
+}
+
+.table > tbody > tr > td,
+.table > tbody > tr > th,
+.table > tfoot > tr > td,
+.table > tfoot > tr > th,
+.table > thead > tr > td,
+.table > thead > tr > th {
+  padding: 8px;
+  line-height: 1.42857143;
+  vertical-align: middle;
+  border-top: 1px solid #ddd;
+  height: 50px;
+}
+
+.quantity {
+  height: 50px;
+  line-height: 50px;
+}
+
+.arrows-container {
+  width: 60px;
+  height: 50px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+
+  .btn-xs {
+    width: 30px;
+  }
 }
 
 .hidden-link {

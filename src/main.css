@@ -235,6 +235,35 @@ img {
 .tab-content {
   padding: 25px 15px; }
 
+.image-thumbnail {
+  height: 35px;
+  width: 35px; }
+
+.table > tbody > tr > td,
+.table > tbody > tr > th,
+.table > tfoot > tr > td,
+.table > tfoot > tr > th,
+.table > thead > tr > td,
+.table > thead > tr > th {
+  padding: 8px;
+  line-height: 1.42857143;
+  vertical-align: middle;
+  border-top: 1px solid #ddd;
+  height: 50px; }
+
+.quantity {
+  height: 50px;
+  line-height: 50px; }
+
+.arrows-container {
+  width: 60px;
+  height: 50px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center; }
+  .arrows-container .btn-xs {
+    width: 30px; }
+
 .hidden-link {
   color: inherit;
   text-decoration: none; }

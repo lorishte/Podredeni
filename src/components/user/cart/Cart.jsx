@@ -89,35 +89,35 @@ class Cart extends React.Component {
 				<Table responsive>
 					<thead>
 					<tr>
-						<th>Product No</th>
-						<th>Product name</th>
-						<th>Quantity</th>
-						<th>Product price</th>
-						<th>Sum</th>
-						<th>Edit</th>
+						<th className="col-xs-1">No</th>
+						<th className="col-xs-4" colSpan={2}>Product</th>
+						<th className="col-xs-2">Quantity</th>
+						<th className="col-xs-2">Price</th>
+						<th className="col-xs-2">Sum</th>
+						<th className="col-xs-1">Remove</th>
 					</tr>
 					</thead>
 
 					<tbody>
-					{this.state.products.length > 0 &&
-					this.state.products.map((e, i) => {
-						return <CartProductRow
-							key={e.product.id}
-							index={i + 1}
-							data={e.product}
-							quantity={e.quantity}
-							delete={this.deleteItem}
-							edit={this.editItem}/>;
-					})
-					}
+						{this.state.products.length > 0 &&
+							this.state.products.map((e, i) => {
+								return <CartProductRow
+									key={e.product.id}
+									index={i + 1}
+									data={e.product}
+									quantity={e.quantity}
+									delete={this.deleteItem}
+									edit={this.editItem}/>;
+							})
+						}
 					</tbody>
 
 					<tfoot>
-					{this.state.products.length > 0 &&
-					<tr className="bg-info">
-						<th colSpan={4}>Total sum</th>
-						<th colSpan={2}>{this.calculateTotalSum()}</th>
-					</tr>}
+						{this.state.products.length > 0 &&
+							<tr>
+								<th colSpan={5}>Total sum</th>
+								<th colSpan={2}>{this.calculateTotalSum()}</th>
+							</tr>}
 					</tfoot>
 
 				</Table>
