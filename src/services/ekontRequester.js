@@ -7,7 +7,7 @@ const body = `<request>
 						<username>demo</username>
 						<password>demo</password>
 						</client>
-					<request_type>cities</request_type>
+					<request_type>offices</request_type>
 				</request>`;
 
 

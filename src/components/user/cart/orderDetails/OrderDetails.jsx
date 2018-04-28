@@ -1,11 +1,10 @@
 import React from 'react';
-import {Link} from 'react-router-dom';
-
-import XMLParser from 'react-xml-parser';
+import { Link } from 'react-router-dom';
 
 import { Row, Col, FormGroup, FormControl, ControlLabel, Checkbox, Radio, Button } from 'react-bootstrap';
 
-import ekontRequester from '../../../../services/ekontRequester'
+import ekontRequester from '../../../../services/ekontRequester';
+import ekontDataParser from '../../../../services/ekontData';
 
 import FormField from './FormField';
 
@@ -35,12 +34,12 @@ class OrderDetails extends React.Component {
 	componentDidMount () {
 		ekontRequester.getOffices()
 			.then(response => {
-
-			console.log(response)
-		})
-			.catch(err => {
-				console.log(err)
+				let result = ekontDataParser.transformXml(response);
+				console.log(result);
 			})
+			.catch(err => {
+				console.log(err);
+			});
 	}
 
 	handleChange = (e) => {
@@ -48,7 +47,6 @@ class OrderDetails extends React.Component {
 			console.log(this.state);
 		});
 	};
-
 
 	getValidationState () {
 		const length = this.state.firstName.length;
