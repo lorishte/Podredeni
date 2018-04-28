@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css?family=Montserrat:100,200,300,400,500,600,700,800,900');
 @import "https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css";
 
-$white: #fff;
+$white: #f9f9f9;
 $black: #000;
 $primary: #2dcc89;
 $primary-darken: #28b57a;
@@ -217,14 +217,13 @@ img {
 .card {
   text-align: center;
   display: flex;
+  flex-wrap: wrap;
   align-items: flex-end;
-  padding: 25px 50px;
+  padding: 25px 0;
   margin-bottom: 20px;
-  background-color: $white;
   @include transition;
 
   &:hover {
-
     .product-image {
       transform: translateY(-20px);
       @include transition;
@@ -249,14 +248,11 @@ img {
   }
 
   .product-image {
-    height: 220px;
+    //height: 220px;
     width: 100%;
     overflow: hidden;
     @include transition;
 
-    text-decoration: none;
-    color: $primary;
-    position: relative;
 
     &::after {
       content: '';
@@ -270,7 +266,8 @@ img {
     }
 
     .card-img-top {
-      width: 70%;
+      width: 65%;
+      height: auto;
       border-bottom: 1px solid transparent;
     }
   }
@@ -322,17 +319,19 @@ img {
   }
 }
 
-.label {
-  display: inline;
-  padding: 0.2em .6em 0.3em;
-  font-size: 50%;
-  font-weight: 400;
-  line-height: 1;
-  color: #fff;
-  text-align: center;
-  white-space: nowrap;
-  vertical-align: text-top;
-  border-radius: .25em;
+#product {
+  .label {
+    display: inline;
+    padding: 0.2em .6em 0.3em;
+    font-size: 50%;
+    font-weight: 400;
+    line-height: 1;
+    color: #fff;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: text-top;
+    border-radius: .25em;
+  }
 }
 
 // Product Tabs
@@ -347,6 +346,9 @@ img {
 
 //Cart
 
+.text-grey {
+  color: $medium-grey
+}
 .image-thumbnail {
   height: 35px;
   width: 35px;
@@ -363,6 +365,15 @@ img {
   vertical-align: middle;
   border-top: 1px solid #ddd;
   height: 50px;
+}
+
+.table > thead {
+  background-color: $light-grey;
+}
+
+.table td:last-child,
+.table th:last-child{
+  padding-right: 20px;
 }
 
 .quantity {

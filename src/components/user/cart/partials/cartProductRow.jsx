@@ -36,6 +36,12 @@ class CartProductRow extends React.Component {
 
 		return (
 			<tr>
+				<td>
+					<button onClick={() => this.props.delete(product.id)}
+					        className="btn btn-xs">
+						<i className="fa fa-times" aria-hidden="true"/>
+					</button>
+				</td>
 				<td>{this.props.index}</td>
 				<td className="col-xs-1"><img className="image-thumbnail" src={product.imageUrl}/></td>
 				<td>{product.name}</td>
@@ -45,16 +51,9 @@ class CartProductRow extends React.Component {
 						<button className="btn btn-xs" onClick={this.increment}>+</button>
 						<button className="btn btn-xs" onClick={this.decrement}>-</button>
 					</span>
-
 				</td>
-				<td>{product.price.toFixed(2)}</td>
-				<td>{(product.price * quantity).toFixed(2)}</td>
-				<th>
-					<button onClick={() => this.props.delete(product.id)}
-					        className="btn btn-xs">
-						<i className="fa fa-times" aria-hidden="true"/>
-					</button>
-				</th>
+				<td className="text-right">{product.price.toFixed(2)}</td>
+				<td className="text-right">{(product.price * quantity).toFixed(2)}</td>
 			</tr>
 
 		);

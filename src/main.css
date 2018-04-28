@@ -70,7 +70,7 @@ img {
   display: flex;
   align-items: center; }
   .navbar .navbar-default {
-    background-color: #fff; }
+    background-color: #f9f9f9; }
   .navbar .navbar-brand {
     display: flex;
     align-items: center;
@@ -90,7 +90,7 @@ img {
       transition: .4s; }
       .navbar .nav .nav-link.accent {
         background-color: #2dcc89;
-        color: #fff; }
+        color: #f9f9f9; }
         .navbar .nav .nav-link.accent:hover {
           background-color: #28b57a; }
       .navbar .nav .nav-link.active {
@@ -145,10 +145,10 @@ img {
 .card {
   text-align: center;
   display: flex;
+  flex-wrap: wrap;
   align-items: flex-end;
-  padding: 25px 50px;
+  padding: 25px 0;
   margin-bottom: 20px;
-  background-color: #fff;
   transition: .4s; }
   .card:hover .product-image {
     transform: translateY(-20px);
@@ -165,13 +165,9 @@ img {
   .card:hover .price {
     transform: translateY(0); }
   .card .product-image {
-    height: 220px;
     width: 100%;
     overflow: hidden;
-    transition: .4s;
-    text-decoration: none;
-    color: #2dcc89;
-    position: relative; }
+    transition: .4s; }
     .card .product-image::after {
       content: '';
       display: block;
@@ -182,7 +178,8 @@ img {
       background: #2dcc89;
       transition: width .5s, background 2s; }
     .card .product-image .card-img-top {
-      width: 70%;
+      width: 65%;
+      height: auto;
       border-bottom: 1px solid transparent; }
   .card .card-text {
     color: #c6c6c6;
@@ -216,7 +213,7 @@ img {
     font-size: .7em;
     opacity: .5; }
 
-.label {
+#product .label {
   display: inline;
   padding: 0.2em .6em 0.3em;
   font-size: 50%;
@@ -235,6 +232,9 @@ img {
 .tab-content {
   padding: 25px 15px; }
 
+.text-grey {
+  color: #c6c6c6; }
+
 .image-thumbnail {
   height: 35px;
   width: 35px; }
@@ -250,6 +250,13 @@ img {
   vertical-align: middle;
   border-top: 1px solid #ddd;
   height: 50px; }
+
+.table > thead {
+  background-color: #e6e6e6; }
+
+.table td:last-child,
+.table th:last-child {
+  padding-right: 20px; }
 
 .quantity {
   height: 50px;

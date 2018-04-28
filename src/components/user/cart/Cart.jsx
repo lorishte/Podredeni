@@ -1,9 +1,10 @@
 import React from 'react';
 
-import { Grid, PageHeader, Table } from 'react-bootstrap';
+import { Grid, PageHeader, Table, Tabs, Tab, Row, Button, Label } from 'react-bootstrap';
 import { confirmAlert } from 'react-confirm-alert';
 
-import CartProductRow from './partials/cartProductRow';
+import CartProductsTable from './partials/CartProductsTable';
+
 
 class Cart extends React.Component {
 	constructor (props) {
@@ -11,7 +12,9 @@ class Cart extends React.Component {
 
 		this.state = {
 			products: [],
-			sum: 0
+			sum: 0,
+			orderDetails: {},
+			key: 1
 		};
 	}
 
@@ -19,24 +22,10 @@ class Cart extends React.Component {
 		this.loadProducts();
 	}
 
-	componentWillReceiveProps (props) {
-		console.log(this.props)
-	}
-
 	loadProducts = () => {
 		let addedProducts = JSON.parse(sessionStorage.getItem('products'));
 		if (addedProducts === null) return;
 		this.setState({products: addedProducts});
-	};
-
-	calculateTotalSum = () => {
-		let sum = 0;
-
-		this.state.products.map(e => {
-			sum += e.product.price * e.quantity;
-		});
-
-		return sum.toFixed(2);
 	};
 
 	deleteItem = (id) => {
@@ -80,47 +69,43 @@ class Cart extends React.Component {
 		this.setState({products: addedProducts});
 	};
 
+	handleSelect = (tab) => {
+		this.setState({ key: Number(tab) });
+	};
+
 	render () {
 		return (
 			<Grid id="cart">
 				<PageHeader>
 					My Cart
 				</PageHeader>
-				<Table responsive>
-					<thead>
-					<tr>
-						<th className="col-xs-1">No</th>
-						<th className="col-xs-4" colSpan={2}>Product</th>
-						<th className="col-xs-2">Quantity</th>
-						<th className="col-xs-2">Price</th>
-						<th className="col-xs-2">Sum</th>
-						<th className="col-xs-1">Remove</th>
-					</tr>
-					</thead>
+				<Row>
+					<Tabs activeKey={this.state.key}
+					      onSelect={this.handleSelect}
+					      id="cart-tabs">
 
-					<tbody>
-						{this.state.products.length > 0 &&
-							this.state.products.map((e, i) => {
-								return <CartProductRow
-									key={e.product.id}
-									index={i + 1}
-									data={e.product}
-									quantity={e.quantity}
-									delete={this.deleteItem}
-									edit={this.editItem}/>;
-							})
-						}
-					</tbody>
+						<Tab eventKey={1} title="Cart">
+							<h3><span className="text-grey">Step 1.</span> Check cart</h3>
+							{this.state.products.length > 0 &&
+								<CartProductsTable
+									products={this.state.products}
+									totalSum={this.state.sum}
+									deleteItem={this.deleteItem}
+									editItem={this.editItem}
+								/>
+							}
 
-					<tfoot>
-						{this.state.products.length > 0 &&
-							<tr>
-								<th colSpan={5}>Total sum</th>
-								<th colSpan={2}>{this.calculateTotalSum()}</th>
-							</tr>}
-					</tfoot>
+							<Button onClick={()=>this.handleSelect(2)}>Continue</Button>
+						</Tab>
+						<Tab eventKey={2}  title="Order details">
+							<h3><span className="text-grey">Step 2.</span> Order details</h3>
+						</Tab>
+						<Tab eventKey={3} title="Confirm">
+							<h3><span className="text-grey">Step 3.</span> Review and confirm</h3>
+						</Tab>
+					</Tabs>
+				</Row>
 
-				</Table>
 			</Grid>
 		);
 	}
