@@ -1,14 +1,13 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 
-import { Navbar, Nav, NavItem, MenuItem, NavDropdown, Glyphicon } from 'react-bootstrap';
+import { Navbar, Nav, Badge } from 'react-bootstrap';
 
 class Header extends React.Component {
 
 	constructor (props) {
 		super(props);
 	}
-
 
 	render () {
 
@@ -20,9 +19,9 @@ class Header extends React.Component {
 					</Navbar.Brand>
 					<Navbar.Toggle />
 				</Navbar.Header>
-				<Navbar.Collapse>
+				<Navbar.Collapse >
 					<Nav pullRight>
-						<NavLink to="/products" style={this.active} activeClassName="active" className='nav-link'>
+						<NavLink to="/products" activeClassName="active" className='nav-link'>
 							Products
 						</NavLink>
 
@@ -36,7 +35,7 @@ class Header extends React.Component {
 
 						<NavLink to="/cart" className='nav-link accent'>
 							<i className="fa fa-cart-arrow-down" aria-hidden="true"/>
-							&nbsp; My Cart
+							&nbsp; My Cart &nbsp;
 						</NavLink>
 					</Nav>
 				</Navbar.Collapse>

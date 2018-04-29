@@ -10,6 +10,7 @@ import ProductTabs from './partials/ProductTabs';
 
 import products from '../../../data/products';
 
+
 class Product extends React.Component {
 	constructor (props) {
 		super(props);
@@ -52,12 +53,9 @@ class Product extends React.Component {
 			this.toastContainer.success('Redirecting to all products.', 'Product added to your cart.', {
 				closeButton: true,
 			});
-
-			// setTimeout(() => {
-			// 	this.props.history.push('/products');
-			// }, 4000);
 		});
 	};
+
 
 	checkIfProductIsInCart = (array) => {
 		return (array.filter(e => e.product.name === this.state.product.name).length > 0)
@@ -68,6 +66,7 @@ class Product extends React.Component {
 
 		return (
 			<Grid id="product">
+
 				<PageHeader>
 					<Link to="/products" className="hidden-link">Products</Link>
 				</PageHeader>

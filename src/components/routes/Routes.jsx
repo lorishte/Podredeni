@@ -33,6 +33,8 @@ let Routes = () => {
             <Route path='/contact' component= {Contact} />
 
             {/*<PrivateRoute path='/addVideo' component= {Modal} />*/}
+
+            <Route path='*' component= {NotFound}/>
         </Switch>
     )
 };

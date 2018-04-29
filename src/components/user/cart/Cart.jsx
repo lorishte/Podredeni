@@ -1,10 +1,12 @@
 import React from 'react';
 
+// Helpers
 import { Grid, PageHeader, Table, Tabs, Tab, Row, Button, Label } from 'react-bootstrap';
-import { confirmAlert } from 'react-confirm-alert';
 
+// Partials
 import CartProductsTable from './products/CartProductsTable';
 import OrderDetails from './orderDetails/OrderDetails';
+
 
 class Cart extends React.Component {
 	constructor (props) {
@@ -13,7 +15,7 @@ class Cart extends React.Component {
 		this.state = {
 			products: [],
 			orderDetails: {},
-			key: 2
+			activeTabKey: 2
 		};
 	}
 
@@ -27,49 +29,12 @@ class Cart extends React.Component {
 		this.setState({products: addedProducts});
 	};
 
-	deleteItem = (id) => {
-		confirmAlert({
-			title: 'Please confirm!',
-			message: 'Are you sure you want to delete this item?',
-			buttons: [
-				{
-					label: 'Delete',
-					onClick: () => {
-						this.setState({
-							products: this.state.products.filter((e) => e.product.id !== id)
-						});
-
-						this.removeFromSession(id);
-					}
-				},
-				{
-					label: 'Cancel'
-				}
-			]
-		});
+	updateProducts = (products) => {
+		this.setState({products: products});
 	};
 
-	removeFromSession = (id) => {
-		let productsInStorage = JSON.parse(sessionStorage.getItem('products'));
-		let filteredProducts = productsInStorage.filter((e) => e.product.id !== id);
-		sessionStorage.products = JSON.stringify(filteredProducts);
-	};
-
-	editItem = (id, newQuantity) => {
-		console.log(222);
-		let addedProducts = this.state.products;
-		addedProducts.map((e) => {
-			if (e.product.id === id) {
-				e.quantity = newQuantity;
-			}
-		});
-
-		sessionStorage.products = JSON.stringify(addedProducts);
-		this.setState({products: addedProducts});
-	};
-
-	handleSelect = (tab) => {
-		this.setState({key: Number(tab)});
+	handleSelectTab = (tab) => {
+		this.setState({activeTabKey: Number(tab)});
 	};
 
 	render () {
@@ -79,22 +44,20 @@ class Cart extends React.Component {
 					My Cart
 				</PageHeader>
 				<Row>
-					<Tabs activeKey={this.state.key}
-					      onSelect={this.handleSelect}
+					<Tabs activeKey={this.state.activeTabKey}
+					      onSelect={this.handleSelectTab}
 					      id="cart-tabs">
 
 						<Tab eventKey={1} title="Cart">
 							<h3><span className="text-grey">Step 1.</span> Check cart</h3>
 							{this.state.products.length > 0 &&
-								<div>
-									<CartProductsTable
-										products={this.state.products}
-										totalSum={this.state.sum}
-										deleteItem={this.deleteItem}
-										editItem={this.editItem}
-									/>
-									<Button onClick={() => this.handleSelect(2)}>Continue</Button>
-								</div>
+							<div>
+								<CartProductsTable
+									products={this.state.products}
+									onProductsUpdate={this.updateProducts}
+								/>
+								<Button onClick={() => this.handleSelectTab(2)}>Continue</Button>
+							</div>
 							}
 							{this.state.products.length === 0 &&
 							<h3>Your cart is empty.</h3>}

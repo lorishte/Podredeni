@@ -3,57 +3,33 @@ import { Link } from 'react-router-dom';
 
 import { Row, Col, FormGroup, FormControl, ControlLabel, Checkbox, Radio, Button } from 'react-bootstrap';
 
-import ekontRequester from '../../../../services/ekontRequester';
-import ekontDataParser from '../../../../services/ekontData';
-
-import FormField from './FormField';
+import RecipientInfoInputs from './RecipientInfoInputs';
+import EkontInfoInputs from './EkontInfoInputs';
+import AddressInfoInputs from './AddressInfoInputs';
+import DeliveryOptions from './DeliveryOptions';
 
 class OrderDetails extends React.Component {
 	constructor (props) {
 		super(props);
 
 		this.state = {
-			firstName: '',
-			lastName: '',
-			email: '',
-			phone: '',
-			country: '',
-			city: '',
-			postalCode: '',
-			district: '',
-			street: '',
-			streetNo: '',
-			block: '',
-			entrance: '',
-			floor: '',
-			apartment: '',
-			additional: ''
+			recipientInfo: {},
+			ekontDetails: {},
+			addressDetails: {},
+			comment: '',
+			toAddress: false
 		};
 	}
 
-	componentDidMount () {
-		ekontRequester.getOffices()
-			.then(response => {
-				let result = ekontDataParser.transformXml(response);
-				console.log(result);
-			})
-			.catch(err => {
-				console.log(err);
-			});
-	}
-
-	handleChange = (e) => {
-		this.setState({[e.target.name]: e.target.value}, () => {
-			console.log(this.state);
+	updateInfo = (stateProp, data) => {
+		this.setState({[stateProp]: data}, () => {
+			console.log(this.state[stateProp]);
 		});
 	};
 
-	getValidationState () {
-		const length = this.state.firstName.length;
-		if (length > 2) return 'success';
-
-		return null;
-	}
+	toggleDeliveryInputs = () => {
+		this.setState({toAddress: !this.state.toAddress});
+	};
 
 	render () {
 		return (
@@ -61,84 +37,36 @@ class OrderDetails extends React.Component {
 				<Row className="bg-light">
 					<Col sm={12}>
 						<h3>Recipient details</h3>
-					</Col>
-					<hr/>
-					<Col sm={6}>
-						<FormField
-							label="First Name"
-							name="firstName"
-							type="text"
-							value={this.state.firstName}
-							required={true}
-							onChange={this.handleChange}
-							validation={this.getValidationState()}/>
-					</Col>
-
-					<Col sm={6}>
-						<FormField
-							label="Last Name"
-							name="lastName"
-							type="text"
-							value={this.state.lastName}
-							required={true}
-							onChange={this.handleChange}
-							validation={this.getValidationState()}/>
-					</Col>
-
-					<Col sm={6}>
-						<FormField
-							label="Phone"
-							name="phone"
-							type="phone"
-							value={this.state.phone}
-							required={true}
-							onChange={this.handleChange}
-							validation={this.getValidationState()}/>
-					</Col>
-
-					<Col sm={6}>
-						<FormField
-							label="Email"
-							name="email"
-							type="email"
-							value={this.state.email}
-							required={true}
-							onChange={this.handleChange}
-							validation={this.getValidationState()}/>
+						<hr/>
+						<RecipientInfoInputs onChange={this.updateInfo}/>
 					</Col>
 				</Row>
 
 				<Row>
 					<Col sm={12}>
 						<h3>Delivery details</h3>
+						<hr/>
+						<DeliveryOptions onChange={this.updateInfo}/>
+
+						{!this.state.toAddress && <EkontInfoInputs onChange={this.updateInfo}/>}
+						{this.state.toAddress && <AddressInfoInputs onChange={this.updateInfo}/>}
 					</Col>
-					<FormGroup>
-						<Radio name="radioGroup" inline>
-							Delivery to address
-						</Radio>{' '}
-						<Radio name="radioGroup" inline>
-							Delivery to Ekont office
-						</Radio>{' '}
-					</FormGroup>
-
-					<FormGroup controlId="formControlsSelect">
-						<ControlLabel>Select</ControlLabel>
-						<FormControl componentClass="select" placeholder="select">
-							<option value="select">select</option>
-							<option value="other">...</option>
-						</FormControl>
-					</FormGroup>
-
-					<FormGroup controlId="formControlsTextarea">
-						<ControlLabel>Comment</ControlLabel>
-						<FormControl componentClass="textarea"/>
-					</FormGroup>
-
-					<Checkbox readOnly>
-						I agree with the <Link to={'/products'} className="btn-link">Terms of Use.</Link>
-					</Checkbox>
 				</Row>
 
+				<Row>
+					<Col sm={12}>
+						<h3>Additional info</h3>
+						<hr/>
+						<FormGroup controlId="formControlsTextarea">
+							<ControlLabel>Comment</ControlLabel>
+							<FormControl componentClass="textarea"/>
+						</FormGroup>
+
+						<Checkbox readOnly>
+							I agree with the <Link to={'/products'} className="btn-link">Terms of Use.</Link>
+						</Checkbox>
+					</Col>
+				</Row>
 
 				<Button type="submit">Submit</Button>
 			</form>
