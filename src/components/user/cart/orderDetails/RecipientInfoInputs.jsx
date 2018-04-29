@@ -2,7 +2,7 @@ import React from 'react';
 
 import { Row, Col } from 'react-bootstrap';
 
-import FormField from './FormField';
+import FormInputField from './FormInputField';
 
 class RecipientInfoInputs extends React.Component {
 	constructor (props) {
@@ -26,7 +26,7 @@ class RecipientInfoInputs extends React.Component {
 		return (
 				<Row>
 					<Col sm={6}>
-						<FormField
+						<FormInputField
 							label="First Name"
 							name="firstName"
 							type="text"
@@ -36,7 +36,7 @@ class RecipientInfoInputs extends React.Component {
 					</Col>
 
 					<Col sm={6}>
-						<FormField
+						<FormInputField
 							label="Last Name"
 							name="lastName"
 							type="text"
@@ -46,7 +46,7 @@ class RecipientInfoInputs extends React.Component {
 					</Col>
 
 					<Col sm={6}>
-						<FormField
+						<FormInputField
 							label="Phone"
 							name="phone"
 							type="phone"
@@ -56,7 +56,7 @@ class RecipientInfoInputs extends React.Component {
 					</Col>
 
 					<Col sm={6}>
-						<FormField
+						<FormInputField
 							label="Email"
 							name="email"
 							type="email"

@@ -2,28 +2,22 @@ import React from 'react';
 
 import { FormGroup, HelpBlock, FormControl, ControlLabel  } from 'react-bootstrap';
 
-class FormField extends React.Component {
+class FormInputField extends React.Component {
 	constructor (props) {
 		super(props);
-
-		this.state = {
-			value: this.props.value
-		};
 	}
 
-
 	render () {
-
-		const {type, label, name, value, required, onChange} = this.props;
+		const {type, label, name, value, required, onChange, placeholder} = this.props;
 
 		return (
 			<FormGroup controlId={name}>
-				<ControlLabel>{label} {required && <label>&nbsp;*</label>}</ControlLabel>
+				<ControlLabel>{label}{required && <label>&nbsp;*</label>}</ControlLabel>
 				<FormControl
 					type={type}
 					name={name}
 					value={value}
-					placeholder=''
+					placeholder={placeholder}
 					required={required}
 					onChange={onChange}
 				/>
@@ -32,4 +26,4 @@ class FormField extends React.Component {
 	}
 }
 
-export default FormField;
+export default FormInputField;

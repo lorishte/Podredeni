@@ -2,7 +2,7 @@ import React from 'react';
 
 import { Row, Col, FormControl, ControlLabel, FormGroup } from 'react-bootstrap';
 
-import FormField from './FormField';
+import FormInputField from './FormInputField';
 
 class AddressInfoInputs extends React.Component {
 	constructor (props) {
@@ -31,18 +31,11 @@ class AddressInfoInputs extends React.Component {
 	render () {
 		return (
 			<Row>
-				<Col xs={12}><h4>Please fill your address details</h4></Col>
-				<Col sm={6}>
-					<FormGroup controlId="formControlsSelect">
-						<ControlLabel>Select</ControlLabel>
-						<FormControl componentClass="select" placeholder="select">
-							<option value="select">select</option>
-							<option value="other">...</option>
-						</FormControl>
-					</FormGroup>
+				<Col xs={12}>
+					<h4>Please fill your address details</h4>
 				</Col>
 				<Col sm={6}>
-					<FormField
+					<FormInputField
 						label="District"
 						name="district"
 						type="text"
@@ -51,7 +44,7 @@ class AddressInfoInputs extends React.Component {
 						onChange={this.handleChange}/>
 				</Col>
 				<Col sm={6}>
-					<FormField
+					<FormInputField
 						label="Street"
 						name="street"
 						type="text"
@@ -60,7 +53,7 @@ class AddressInfoInputs extends React.Component {
 						onChange={this.handleChange}/>
 				</Col>
 				<Col sm={6}>
-					<FormField
+					<FormInputField
 						label="No"
 						name="streetNo"
 						type="number"

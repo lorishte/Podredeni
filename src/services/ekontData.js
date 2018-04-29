@@ -1,5 +1,17 @@
 import $ from 'jquery';
 
+let countries = {
+	BEL: 'Белгия',
+	BGR: 'България',
+	CYP: 'Кипър',
+	CZE: 'Чехия',
+	GBR: 'Великобритания',
+	GRC: 'Гърция',
+	HUN: 'Унгария',
+	ROU: 'Румъния',
+	SVN: 'Словения'
+};
+
 export default {
 	transformXml: (xml, lang='') => {
 
@@ -11,6 +23,7 @@ export default {
 			let current = $(e);
 
 			let countryCode = current.find('country_code').html();
+			countryCode = countries[countryCode];
 			let city = current.find('city_name' + lang).html();
 			let address = current.find('address' + lang).html();
 			let officeCode = current.find('office_code').html();
@@ -35,3 +48,4 @@ export default {
 		return result;
 	}
 }
+
