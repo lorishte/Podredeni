@@ -14,11 +14,11 @@ class OrderDetails extends React.Component {
 		super(props);
 
 		this.state = {
-			recipientInfo: {},
-			ekontDetails: {},
-			addressDetails: {},
-			comment: '',
-			toAddress: true
+			recipientInfo: this.props.data.recipientInfo,
+			ekontDetails: this.props.data.ekontDetails,
+			addressDetails: this.props.data.addressDetails,
+			comment: this.props.data.comment,
+			toAddress: this.props.data.toAddress
 		};
 	}
 
@@ -28,15 +28,22 @@ class OrderDetails extends React.Component {
 		});
 	};
 
+	submitInfo = (e) => {
+		e.preventDefault();
+		console.log(222);
+	};
+
 
 	render () {
 		return (
-			<form>
+			<form onSubmit={(e) => this.submitInfo(e)}>
 				<Row className="bg-light">
 					<Col sm={12}>
 						<h3>Recipient details</h3>
 						<hr/>
-						<RecipientDetails onChange={this.updateInfo}/>
+						<RecipientDetails
+							data={this.state.recipientInfo}
+							onChange={this.updateInfo}/>
 					</Col>
 				</Row>
 
@@ -45,10 +52,19 @@ class OrderDetails extends React.Component {
 						<h3>Delivery details</h3>
 						<hr/>
 
-						<DeliveryOptions onChange={this.updateInfo} toAddress={this.state.toAddress}/>
+						<DeliveryOptions
+							onChange={this.updateInfo}
+							toAddress={this.state.toAddress}/>
 
-						{!this.state.toAddress && <DeliveryToEkontOffice onChange={this.updateInfo}/>}
-						{this.state.toAddress && <DeliveryToAddress onChange={this.updateInfo}/>}
+						{!this.state.toAddress &&
+						<DeliveryToEkontOffice
+							data={this.state.ekontDetails}
+							onChange={this.updateInfo}/>}
+
+						{this.state.toAddress &&
+						<DeliveryToAddress
+							data={this.state.addressDetails}
+							onChange={this.updateInfo}/>}
 					</Col>
 				</Row>
 
@@ -57,7 +73,9 @@ class OrderDetails extends React.Component {
 						<h3>Additional info</h3>
 						<hr/>
 
-						<Comment onChange={this.updateInfo}/>
+						<Comment
+							data={this.state.comment}
+							onChange={this.updateInfo}/>
 
 						<Checkbox readOnly>
 							I agree with the <Link to={'/products'} className="btn-link">Terms of Use.</Link>
@@ -65,6 +83,7 @@ class OrderDetails extends React.Component {
 					</Col>
 				</Row>
 
+				<Button onClick={this.props.goBack}>Back</Button>
 				<Button type="submit">Continue</Button>
 			</form>
 		);

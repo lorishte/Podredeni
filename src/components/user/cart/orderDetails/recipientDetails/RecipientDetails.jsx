@@ -9,10 +9,10 @@ class RecipientInfoInputs extends React.Component {
 		super(props);
 
 		this.state = {
-			firstName: '',
-			lastName: '',
-			email: '',
-			phone: ''
+			firstName: this.props.data.firstName,
+			lastName: this.props.data.lastName,
+			email: this.props.data.email,
+			phone: this.props.data.phone
 		};
 	}
 

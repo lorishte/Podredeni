@@ -10,15 +10,15 @@ class AddressInfoInputs extends React.Component {
 
 		this.state = {
 			country: 'България',
-			city: '',
-			postalCode: '',
-			district: '',
-			street: '',
-			streetNo: '',
-			block: '',
-			entrance: '',
-			floor: '',
-			apartment: '',
+			city: this.props.data.city,
+			postalCode: this.props.data.postalCode,
+			district: this.props.data.district,
+			street: this.props.data.street,
+			streetNo: this.props.data.streetNo,
+			block: this.props.data.block,
+			entrance: this.props.data.entrance,
+			floor: this.props.data.floor,
+			apartment: this.props.data.apartment,
 		};
 	}
 

@@ -9,7 +9,7 @@ class Comment extends React.Component {
 		super(props);
 
 		this.state = {
-			comment: ''
+			comment: this.props.data
 		};
 	}
 
@@ -29,6 +29,7 @@ class Comment extends React.Component {
 						<FormControl
 							componentClass="textarea"
 							name="comment"
+							value={this.state.comment}
 							onChange={this.handleChange}/>
 					</FormGroup>
 				</Col>

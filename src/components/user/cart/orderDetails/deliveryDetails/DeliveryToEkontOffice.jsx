@@ -14,10 +14,10 @@ class EkontInfoInputs extends React.Component {
 
 		this.state = {
 			country: 'България',
-			city: '',
-			officeCode: '',
-			officeName: '',
-			address: '',
+			city: this.props.data.city,
+			officeCode: this.props.data.officeCode,
+			officeName: this.props.data.officeName,
+			address: this.props.data.address,
 			ekontData: ''
 		};
 	}
@@ -108,7 +108,8 @@ class EkontInfoInputs extends React.Component {
 									<FormSelectField
 										label="Office Name"
 										name="officeName"
-										value={this.state.address}
+										defaultValue={this.state.officeName}
+										value={this.state.officeName}
 										optionsList={this.state.ekontData[this.state.country][this.state.city]}
 										required={true}
 										onChange={this.handleChange}/>

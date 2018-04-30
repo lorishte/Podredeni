@@ -1,12 +1,11 @@
 import React from 'react';
 
 // Helpers
-import { Grid, PageHeader, Table, Tabs, Tab, Row, Button, Label } from 'react-bootstrap';
+import { Grid, PageHeader, Table, Tabs, Tab, Row, Button, Label, Col } from 'react-bootstrap';
 
 // Partials
 import CartProductsTable from './products/CartProductsTable';
 import OrderDetailsForm from './orderDetails/OrderDetailsForm';
-
 
 class Cart extends React.Component {
 	constructor (props) {
@@ -15,11 +14,44 @@ class Cart extends React.Component {
 		this.state = {
 			products: [],
 			orderDetails: {},
-			activeTabKey: 2
+			productsView: true,
+			orderDetailsView: false,
+			reviewView: false
 		};
 	}
 
+
+
 	componentDidMount () {
+		this.setState({orderDetails: {
+			recipientInfo: {
+				email: '',
+				firstName: '',
+				lastName: '',
+				phone: ''
+			},
+			ekontDetails: {
+				address: '',
+				city: '',
+				country: '',
+				officeCode: '',
+				officeName: ''
+			},
+			addressDetails: {
+				apartment: '',
+				block: '',
+				city: '',
+				country: '',
+				district: '',
+				entrance: '',
+				floor: '',
+				postalCode: '',
+				street: '',
+				streetNo: ''
+			},
+			comment: '',
+			toAddress: true
+		}});
 		this.loadProducts();
 	}
 
@@ -36,48 +68,73 @@ class Cart extends React.Component {
 		});
 	};
 
-	handleSelectTab = (tab) => {
-		this.setState({activeTabKey: Number(tab)});
+	showProducts = () => {
+		this.setState({
+			productsView: true,
+			orderDetailsView: false,
+			reviewView: false
+		});
+	};
+
+	showDeliveryDetailsForm = () => {
+		this.setState({
+			productsView: false,
+			orderDetailsView: true,
+			reviewView: false
+		});
+	};
+
+	showReview = () => {
+		this.setState({
+			productsView: false,
+			orderDetailsView: false,
+			reviewView: true
+		});
 	};
 
 	render () {
 		return (
 			<Grid id="cart">
+
 				<PageHeader>
 					My Cart
 				</PageHeader>
+
 				<Row>
-					<Tabs activeKey={this.state.activeTabKey}
-					      onSelect={this.handleSelectTab}
-					      id="cart-tabs">
+					{this.state.products.length > 0 && this.state.productsView &&
+					<Col xs={12}>
+						<h2><span className="text-grey">Step 1.</span> Check cart</h2>
+						<CartProductsTable
+							products={this.state.products}
+							onChange={this.updateInfo}
+						/>
+						<Button onClick={this.showDeliveryDetailsForm}>Continue</Button>
+					</Col>
+					}
 
-						<Tab eventKey={1} title="Cart">
-							<h2><span className="text-grey">Step 1.</span> Check cart</h2>
-							{this.state.products.length > 0 &&
-								<div>
-									<CartProductsTable
-										products={this.state.products}
-										onChange={this.updateInfo}
-									/>
-									<Button onClick={() => this.handleSelectTab(2)}>Continue</Button>
-								</div>
-							}
-							{this.state.products.length === 0 &&
-								<h3>Your cart is empty.</h3>
-							}
-						</Tab>
+					{this.state.products.length === 0 && this.state.productsView &&
+					<Col xs={12}>
+						<h3>Your cart is empty.</h3>
+					</Col>
+					}
 
-						<Tab eventKey={2} title="Order details">
-							<h2><span className="text-grey">Step 2.</span> Order details</h2>
-							<OrderDetailsForm onChange={this.updateInfo}/>
-						</Tab>
+					{this.state.orderDetailsView &&
+					<Col xs={12}>
+						<h2><span className="text-grey">Step 2.</span> Order details</h2>
+						<OrderDetailsForm
+							data={this.state.orderDetails}
+							onChange={this.updateInfo}
+							goBack={this.showProducts}/>
+					</Col>
+					}
 
-						<Tab eventKey={3} title="Confirm">
-							<h2><span className="text-grey">Step 3.</span> Review and confirm</h2>
-						</Tab>
-					</Tabs>
+					{this.state.reviewView &&
+					<Col xs={12}>
+						<h2><span className="text-grey">Step 3.</span> Review and confirm</h2>
+						<Button onClick={this.showDeliveryDetailsForm}>Back</Button>
+					</Col>
+					}
 				</Row>
-
 			</Grid>
 		);
 	}
