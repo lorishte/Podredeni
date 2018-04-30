@@ -6,7 +6,7 @@ import FormSelectField from './FormSelectField';
 
 // Services
 import ekontRequester from '../../../../services/ekontRequester';
-import ekontDataParser from '../../../../services/ekontData';
+import ekontDataParser from '../../../../services/ekontDataConvertor';
 
 class EkontInfoInputs extends React.Component {
 	constructor (props) {
@@ -42,12 +42,29 @@ class EkontInfoInputs extends React.Component {
 				address: '',
 				officeCode: '',
 				officeName: '',
-			})
+			});
+
+		} else if (e.target.name === 'city') {
+			this.setState({
+				address: '',
+				officeCode: '',
+				officeName: '',
+			});
+		} else if (e.target.name === 'officeName') {
+			let address = this.state.ekontData[this.state.country][this.state.city][e.target.value].address;
+			let officeCode = this.state.ekontData[this.state.country][this.state.city][e.target.value].officeCode;
+
+			this.setState({
+				address,
+				officeCode,
+			});
 		}
+
 		this.setState({[e.target.name]: e.target.value}, () => {
 			this.props.onChange('ekontDetails', this.state);
 		});
 	};
+
 
 	render () {
 		return (
@@ -62,33 +79,36 @@ class EkontInfoInputs extends React.Component {
 						<FormSelectField
 							label="Country"
 							name="country"
+							value={this.state.country}
+							defaultValue={this.state.country}
 							optionsList={this.state.ekontData}
 							onChange={this.handleChange}/>
 					</Col>
 					{this.state.country !== '' &&
-						<div>
+					<div>
 						<Col sm={6}>
 							<FormSelectField
 								label="City"
 								name="city"
+								value={this.state.city}
+								defaultValue={this.state.city}
 								optionsList={this.state.ekontData[this.state.country]}
 								onChange={this.handleChange}/>
 						</Col>
-							{this.state.city !== '' &&
-							<Col sm={6}>
-								<FormSelectField
-									label="Office Name"
-									name="officeName"
-									optionsList={this.state.ekontData[this.state.country][this.state.city]}
-									onChange={this.handleChange}/>
-							</Col>
-							}
-						</div>
+						{this.state.city !== '' &&
+						<Col sm={6}>
+							<FormSelectField
+								label="Office Name"
+								name="officeName"
+								value={this.state.address}
+								optionsList={this.state.ekontData[this.state.country][this.state.city]}
+								onChange={this.handleChange}/>
+						</Col>
+						}
+					</div>
 					}
 				</div>
 				}
-
-
 
 
 			</Row>

@@ -5,26 +5,24 @@ import { FormGroup, FormControl, ControlLabel } from 'react-bootstrap';
 class FormSelectField extends React.Component {
 	constructor (props) {
 		super(props);
+
+		this.state = {
+			selected: this.props.value
+		};
+	}
+
+	componentWillReceiveProps (nextProps) {
+		this.setState({selected: nextProps.value});
 	}
 
 	render () {
-		const {label, name, value, placeholder, required, onChange, optionsList} = this.props;
+		const {label, name, value, required, onChange, optionsList, defaultValue} = this.props;
 
-		let optionElements;
-		let defaultValue = 'България' || 'Bulgaria';
+		let options = Object.keys(optionsList);
 
-		if (optionsList.isArray) {
-			console.log(222);
-		} else {
-			let options = Object.keys(optionsList);
-
-			optionElements = options.map(e => {
-				if (e === 'България' || e === 'Bulgaria') {
-					return <option key={e}>{e}</option>;
-				}
-				return <option key={e}>{e}</option>;
-			});
-		}
+		let optionElements = options.map(e => {
+			return <option key={e}>{e}</option>;
+		});
 
 		return (
 			<FormGroup controlId={name}>
@@ -33,8 +31,10 @@ class FormSelectField extends React.Component {
 					defaultValue={defaultValue}
 					componentClass="select"
 					name={name}
-					value={value}
-					onChange={onChange}>
+					value={this.state.value}
+					onChange={onChange}
+					placeholder="test">
+					<option value="">Please select:</option>
 					{optionElements}
 				</FormControl>
 			</FormGroup>

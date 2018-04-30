@@ -35,14 +35,17 @@ export default {
 			}
 
 			if (!result[countryCode].hasOwnProperty(city)) {
-				result[countryCode][city] = [];
+				result[countryCode][city] = {};
 			}
 
-			result[countryCode][city].push({
+			if (!result[countryCode][city].hasOwnProperty(officeName)) {
+				result[countryCode][city][officeName] = {};
+			}
+
+			result[countryCode][city][officeName] = {
 				officeCode,
-				officeName,
 				address
-			})
+			}
 		});
 
 		return result;

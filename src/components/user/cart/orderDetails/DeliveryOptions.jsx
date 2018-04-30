@@ -23,7 +23,7 @@ class DeliveryOptions extends React.Component {
 				<Radio
 					name="1"
 					inline
-					checked={this.state.toAddress}
+					defaultChecked={this.state.toAddress}
 					onClick={(e) => {
 						this.setState({toAddress: true}, () => {
 							this.props.onChange('toAddress', this.state.toAddress);
@@ -34,7 +34,7 @@ class DeliveryOptions extends React.Component {
 				<Radio
 					name="1"
 					inline
-					checked={!this.state.toAddress}
+					defaultChecked={!this.state.toAddress}
 					onClick={(e) => {
 						this.setState({toAddress: false}, () => {
 							this.props.onChange('toAddress', this.state.toAddress);
