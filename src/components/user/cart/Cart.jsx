@@ -62,9 +62,6 @@ class Cart extends React.Component {
 		this.loadProducts();
 	}
 
-	componentWillUnMount () {
-		// sessionStorage.setItem('orderDetails', JSON.stringify(this.state.orderDetails));
-	}
 
 	loadProducts = () => {
 		let addedProducts = JSON.parse(sessionStorage.getItem('products'));
