@@ -3,10 +3,11 @@ import { Link } from 'react-router-dom';
 
 import { Row, Col, FormGroup, FormControl, ControlLabel, Checkbox, Radio, Button } from 'react-bootstrap';
 
-import RecipientInfoInputs from './RecipientInfoInputs';
-import EkontInfoInputs from './EkontInfoInputs';
-import AddressInfoInputs from './AddressInfoInputs';
-import DeliveryOptions from './DeliveryOptions';
+import RecipientInfoInputs from './recipientDetails/RecipientInfoInputs';
+import EkontInfoInputs from './deliveryDetails/EkontInfoInputs';
+import AddressInfoInputs from './deliveryDetails/AddressInfoInputs';
+import DeliveryOptions from './deliveryDetails/DeliveryOptions';
+import Comment from './comment/Comment';
 
 class OrderDetails extends React.Component {
 	constructor (props) {
@@ -23,13 +24,10 @@ class OrderDetails extends React.Component {
 
 	updateInfo = (stateProp, data) => {
 		this.setState({[stateProp]: data}, () => {
-			console.log(this.state[stateProp]);
+			this.props.onChange('orderDetails', this.state);
 		});
 	};
 
-	toggleDeliveryInputs = () => {
-		this.setState({toAddress: !this.state.toAddress});
-	};
 
 	render () {
 		return (
@@ -57,10 +55,9 @@ class OrderDetails extends React.Component {
 					<Col sm={12}>
 						<h3>Additional info</h3>
 						<hr/>
-						<FormGroup controlId="formControlsTextarea">
-							<ControlLabel>Comment</ControlLabel>
-							<FormControl componentClass="textarea"/>
-						</FormGroup>
+						<Comment
+							id="delivery-comment"
+							onChange={this.updateInfo}/>
 
 						<Checkbox readOnly>
 							I agree with the <Link to={'/products'} className="btn-link">Terms of Use.</Link>

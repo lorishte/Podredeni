@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 import { Row, Col, FormGroup, FormControl, ControlLabel, Checkbox, Radio, Button } from 'react-bootstrap';
 
-import RecipientInfoInputs from './RecipientInfoInputs';
+import RecipientInfoInputs from '../recipientDetails/RecipientInfoInputs';
 import EkontInfoInputs from './EkontInfoInputs';
 import AddressInfoInputs from './AddressInfoInputs';
 

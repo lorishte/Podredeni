@@ -2,11 +2,11 @@ import React from 'react';
 
 import { Row, Col, FormControl, ControlLabel, FormGroup } from 'react-bootstrap';
 
-import FormSelectField from './FormSelectField';
+import FormSelectField from '../formComponents/FormSelectField';
 
 // Services
-import ekontRequester from '../../../../services/ekontRequester';
-import ekontDataParser from '../../../../services/ekontDataConvertor';
+import ekontRequester from '../../../../../services/ekontRequester';
+import ekontDataParser from '../../../../../services/ekontDataConvertor';
 
 class EkontInfoInputs extends React.Component {
 	constructor (props) {
@@ -15,9 +15,9 @@ class EkontInfoInputs extends React.Component {
 		this.state = {
 			country: 'България',
 			city: '',
-			address: '',
 			officeCode: '',
 			officeName: '',
+			address: '',
 			ekontData: ''
 		};
 	}
@@ -26,7 +26,6 @@ class EkontInfoInputs extends React.Component {
 		ekontRequester.getOffices()
 			.then(response => {
 				let data = ekontDataParser.transformXml(response);
-				console.log(data);
 				this.setState({ekontData: data});
 			})
 			.catch(err => {
@@ -51,6 +50,7 @@ class EkontInfoInputs extends React.Component {
 				officeName: '',
 			});
 		} else if (e.target.name === 'officeName') {
+
 			let address = this.state.ekontData[this.state.country][this.state.city][e.target.value].address;
 			let officeCode = this.state.ekontData[this.state.country][this.state.city][e.target.value].officeCode;
 
@@ -61,7 +61,13 @@ class EkontInfoInputs extends React.Component {
 		}
 
 		this.setState({[e.target.name]: e.target.value}, () => {
-			this.props.onChange('ekontDetails', this.state);
+			this.props.onChange('ekontDetails', {
+				country: this.state.country,
+				city: this.state.city,
+				officeCode: this.state.officeCode,
+				officeName: this.state.officeName,
+				address: this.state.address
+			});
 		});
 	};
 

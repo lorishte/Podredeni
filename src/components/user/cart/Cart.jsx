@@ -5,7 +5,7 @@ import { Grid, PageHeader, Table, Tabs, Tab, Row, Button, Label } from 'react-bo
 
 // Partials
 import CartProductsTable from './products/CartProductsTable';
-import OrderDetails from './orderDetails/OrderDetails';
+import OrderDetailsForm from './orderDetails/OrderDetailsForm';
 
 
 class Cart extends React.Component {
@@ -29,8 +29,11 @@ class Cart extends React.Component {
 		this.setState({products: addedProducts});
 	};
 
-	updateProducts = (products) => {
-		this.setState({products: products});
+	updateInfo = (stateProp, data) => {
+		console.log(stateProp);
+		this.setState({[stateProp]: data}, () => {
+			console.log(this.state[stateProp]);
+		});
 	};
 
 	handleSelectTab = (tab) => {
@@ -54,7 +57,7 @@ class Cart extends React.Component {
 							<div>
 								<CartProductsTable
 									products={this.state.products}
-									onProductsUpdate={this.updateProducts}
+									onChange={this.updateInfo}
 								/>
 								<Button onClick={() => this.handleSelectTab(2)}>Continue</Button>
 							</div>
@@ -65,7 +68,7 @@ class Cart extends React.Component {
 
 						<Tab eventKey={2} title="Order details">
 							<h3><span className="text-grey">Step 2.</span> Order details</h3>
-							<OrderDetails/>
+							<OrderDetailsForm onChange={this.updateInfo}/>
 						</Tab>
 
 						<Tab eventKey={3} title="Confirm">

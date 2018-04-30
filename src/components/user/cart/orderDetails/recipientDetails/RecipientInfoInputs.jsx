@@ -2,7 +2,7 @@ import React from 'react';
 
 import { Row, Col } from 'react-bootstrap';
 
-import FormInputField from './FormInputField';
+import FormInputField from '../formComponents/FormInputField';
 
 class RecipientInfoInputs extends React.Component {
 	constructor (props) {

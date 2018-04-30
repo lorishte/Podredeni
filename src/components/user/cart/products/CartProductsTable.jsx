@@ -35,7 +35,7 @@ class CartProductsTable extends React.Component {
 						}, () => {
 							this.calculateTotalSum();
 							this.removeFromSession(id);
-							this.props.onProductsUpdate(this.state.products);
+							this.props.onChange('products', this.state.products);
 						});
 					}
 				},
@@ -60,7 +60,7 @@ class CartProductsTable extends React.Component {
 
 		sessionStorage.products = JSON.stringify(productsList);
 		this.setState({products: productsList}, () => {
-			this.props.onProductsUpdate(this.state.products);
+			this.props.onChange('products', this.state.products);
 			this.calculateTotalSum();
 		});
 	};
