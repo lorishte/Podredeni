@@ -88,30 +88,33 @@ class EkontInfoInputs extends React.Component {
 							value={this.state.country}
 							defaultValue={this.state.country}
 							optionsList={this.state.ekontData}
+							required={true}
 							onChange={this.handleChange}/>
 					</Col>
 					{this.state.country !== '' &&
-					<div>
-						<Col sm={6}>
-							<FormSelectField
-								label="City"
-								name="city"
-								value={this.state.city}
-								defaultValue={this.state.city}
-								optionsList={this.state.ekontData[this.state.country]}
-								onChange={this.handleChange}/>
-						</Col>
-						{this.state.city !== '' &&
-						<Col sm={6}>
-							<FormSelectField
-								label="Office Name"
-								name="officeName"
-								value={this.state.address}
-								optionsList={this.state.ekontData[this.state.country][this.state.city]}
-								onChange={this.handleChange}/>
-						</Col>
-						}
-					</div>
+						<div>
+								<Col sm={6}>
+									<FormSelectField
+										label="City"
+										name="city"
+										value={this.state.city}
+										defaultValue={this.state.city}
+										optionsList={this.state.ekontData[this.state.country]}
+										required={true}
+										onChange={this.handleChange}/>
+								</Col>
+							{this.state.city !== '' &&
+								<Col sm={6}>
+									<FormSelectField
+										label="Office Name"
+										name="officeName"
+										value={this.state.address}
+										optionsList={this.state.ekontData[this.state.country][this.state.city]}
+										required={true}
+										onChange={this.handleChange}/>
+								</Col>
+							}
+						</div>
 					}
 				</div>
 				}

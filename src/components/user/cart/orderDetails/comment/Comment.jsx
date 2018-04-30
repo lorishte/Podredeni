@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { FormGroup, ControlLabel, FormControl } from 'react-bootstrap';
+import { FormGroup, ControlLabel, FormControl, Row, Col } from 'react-bootstrap';
 
 import FormInputField from '../formComponents/FormInputField';
 
@@ -21,13 +21,19 @@ class Comment extends React.Component {
 
 	render () {
 		return (
-			<FormGroup controlId={this.props.id}>
-				<ControlLabel>Comment</ControlLabel>
-				<FormControl
-					componentClass="textarea"
-					name="comment"
-					onChange={this.handleChange}/>
-			</FormGroup>
+
+			<Row>
+				<Col sm={8}>
+					<FormGroup controlId={this.props.id}>
+						<ControlLabel>Comment</ControlLabel>
+						<FormControl
+							componentClass="textarea"
+							name="comment"
+							onChange={this.handleChange}/>
+					</FormGroup>
+				</Col>
+			</Row>
+
 		);
 	}
 }

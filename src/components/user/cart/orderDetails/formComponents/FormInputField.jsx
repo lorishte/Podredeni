@@ -8,7 +8,7 @@ class FormInputField extends React.Component {
 	}
 
 	render () {
-		const {type, label, name, value, required, onChange, placeholder} = this.props;
+		const {type, label, name, value, required, onChange, placeholder, disabled} = this.props;
 
 		return (
 			<FormGroup controlId={name}>
@@ -19,6 +19,7 @@ class FormInputField extends React.Component {
 					value={value}
 					placeholder={placeholder}
 					required={required}
+					disabled={disabled}
 					onChange={onChange}
 				/>
 			</FormGroup>

@@ -52,27 +52,28 @@ class Cart extends React.Component {
 					      id="cart-tabs">
 
 						<Tab eventKey={1} title="Cart">
-							<h3><span className="text-grey">Step 1.</span> Check cart</h3>
+							<h2><span className="text-grey">Step 1.</span> Check cart</h2>
 							{this.state.products.length > 0 &&
-							<div>
-								<CartProductsTable
-									products={this.state.products}
-									onChange={this.updateInfo}
-								/>
-								<Button onClick={() => this.handleSelectTab(2)}>Continue</Button>
-							</div>
+								<div>
+									<CartProductsTable
+										products={this.state.products}
+										onChange={this.updateInfo}
+									/>
+									<Button onClick={() => this.handleSelectTab(2)}>Continue</Button>
+								</div>
 							}
 							{this.state.products.length === 0 &&
-							<h3>Your cart is empty.</h3>}
+								<h3>Your cart is empty.</h3>
+							}
 						</Tab>
 
 						<Tab eventKey={2} title="Order details">
-							<h3><span className="text-grey">Step 2.</span> Order details</h3>
+							<h2><span className="text-grey">Step 2.</span> Order details</h2>
 							<OrderDetailsForm onChange={this.updateInfo}/>
 						</Tab>
 
 						<Tab eventKey={3} title="Confirm">
-							<h3><span className="text-grey">Step 3.</span> Review and confirm</h3>
+							<h2><span className="text-grey">Step 3.</span> Review and confirm</h2>
 						</Tab>
 					</Tabs>
 				</Row>

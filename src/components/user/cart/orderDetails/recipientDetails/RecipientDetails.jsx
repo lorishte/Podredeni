@@ -24,8 +24,9 @@ class RecipientInfoInputs extends React.Component {
 
 	render () {
 		return (
+			<div>
 				<Row>
-					<Col sm={6}>
+					<Col md={4} sm={5} xs={6}>
 						<FormInputField
 							label="First Name"
 							name="firstName"
@@ -35,7 +36,7 @@ class RecipientInfoInputs extends React.Component {
 							onChange={this.handleChange}/>
 					</Col>
 
-					<Col sm={6}>
+					<Col md={4} sm={5} xs={6}>
 						<FormInputField
 							label="Last Name"
 							name="lastName"
@@ -45,17 +46,20 @@ class RecipientInfoInputs extends React.Component {
 							onChange={this.handleChange}/>
 					</Col>
 
-					<Col sm={6}>
+				</Row>
+
+				<Row>
+					<Col md={4} sm={5} xs={6}>
 						<FormInputField
 							label="Phone"
 							name="phone"
-							type="phone"
+							type="tel"
 							value={this.state.phone}
 							required={true}
 							onChange={this.handleChange}/>
 					</Col>
 
-					<Col sm={6}>
+					<Col md={4} sm={5} xs={6}>
 						<FormInputField
 							label="Email"
 							name="email"
@@ -65,6 +69,7 @@ class RecipientInfoInputs extends React.Component {
 							onChange={this.handleChange}/>
 					</Col>
 				</Row>
+			</div>
 		);
 	}
 }

@@ -3,9 +3,9 @@ import { Link } from 'react-router-dom';
 
 import { Row, Col, FormGroup, FormControl, ControlLabel, Checkbox, Radio, Button } from 'react-bootstrap';
 
-import RecipientInfoInputs from './recipientDetails/RecipientInfoInputs';
-import EkontInfoInputs from './deliveryDetails/EkontInfoInputs';
-import AddressInfoInputs from './deliveryDetails/AddressInfoInputs';
+import RecipientDetails from './recipientDetails/RecipientDetails';
+import DeliveryToEkontOffice from './deliveryDetails/DeliveryToEkontOffice';
+import DeliveryToAddress from './deliveryDetails/DeliveryToAddress';
 import DeliveryOptions from './deliveryDetails/DeliveryOptions';
 import Comment from './comment/Comment';
 
@@ -18,7 +18,7 @@ class OrderDetails extends React.Component {
 			ekontDetails: {},
 			addressDetails: {},
 			comment: '',
-			toAddress: false
+			toAddress: true
 		};
 	}
 
@@ -36,7 +36,7 @@ class OrderDetails extends React.Component {
 					<Col sm={12}>
 						<h3>Recipient details</h3>
 						<hr/>
-						<RecipientInfoInputs onChange={this.updateInfo}/>
+						<RecipientDetails onChange={this.updateInfo}/>
 					</Col>
 				</Row>
 
@@ -44,10 +44,11 @@ class OrderDetails extends React.Component {
 					<Col sm={12}>
 						<h3>Delivery details</h3>
 						<hr/>
-						<DeliveryOptions onChange={this.updateInfo}/>
 
-						{!this.state.toAddress && <EkontInfoInputs onChange={this.updateInfo}/>}
-						{this.state.toAddress && <AddressInfoInputs onChange={this.updateInfo}/>}
+						<DeliveryOptions onChange={this.updateInfo} toAddress={this.state.toAddress}/>
+
+						{!this.state.toAddress && <DeliveryToEkontOffice onChange={this.updateInfo}/>}
+						{this.state.toAddress && <DeliveryToAddress onChange={this.updateInfo}/>}
 					</Col>
 				</Row>
 
@@ -55,9 +56,8 @@ class OrderDetails extends React.Component {
 					<Col sm={12}>
 						<h3>Additional info</h3>
 						<hr/>
-						<Comment
-							id="delivery-comment"
-							onChange={this.updateInfo}/>
+
+						<Comment onChange={this.updateInfo}/>
 
 						<Checkbox readOnly>
 							I agree with the <Link to={'/products'} className="btn-link">Terms of Use.</Link>
@@ -65,7 +65,7 @@ class OrderDetails extends React.Component {
 					</Col>
 				</Row>
 
-				<Button type="submit">Submit</Button>
+				<Button type="submit">Continue</Button>
 			</form>
 		);
 	}

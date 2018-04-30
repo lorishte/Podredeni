@@ -3,16 +3,16 @@ import { Link } from 'react-router-dom';
 
 import { Row, Col, FormGroup, FormControl, ControlLabel, Checkbox, Radio, Button } from 'react-bootstrap';
 
-import RecipientInfoInputs from '../recipientDetails/RecipientInfoInputs';
-import EkontInfoInputs from './EkontInfoInputs';
-import AddressInfoInputs from './AddressInfoInputs';
+import RecipientInfoInputs from '../recipientDetails/RecipientDetails';
+import EkontInfoInputs from './DeliveryToEkontOffice';
+import AddressInfoInputs from './DeliveryToAddress';
 
 class DeliveryOptions extends React.Component {
 	constructor (props) {
 		super(props);
 
 		this.state = {
-			toAddress: false,
+			toAddress: this.props.toAddress,
 		};
 	}
 

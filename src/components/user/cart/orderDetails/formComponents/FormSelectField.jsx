@@ -33,9 +33,12 @@ class FormSelectField extends React.Component {
 					name={name}
 					value={this.state.value}
 					onChange={onChange}
-					placeholder="test">
+					required={required}>
+
 					<option value="">Please select:</option>
+
 					{optionElements}
+
 				</FormControl>
 			</FormGroup>
 		);

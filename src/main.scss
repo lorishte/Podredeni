@@ -62,6 +62,17 @@ img {
   width: 100%;
 }
 
+h1, h2, h3 {
+  margin: 25px 0 30px 0;
+}
+
+h3 {
+  font-size: 2em;
+  color: #ccc;
+  text-transform: uppercase;
+  font-weight: 300;
+}
+
 .row {
   //padding: 25px 0;
 }
@@ -97,13 +108,10 @@ img {
 
 .section-heading {
   text-align: center;
-  line-height: 2em;
-  border-top: 1px solid $light-grey;
-  border-bottom: 1px solid $light-grey;
+  line-height: 3em;
+  border-top: 1px solid #e6e6e6;
+  border-bottom: 1px solid #e6e6e6;
   text-transform: uppercase;
-  //font-weight: 200;
-  font-size: 1.5em;
-  letter-spacing: 2px;
 }
 
 .navbar {
@@ -253,7 +261,6 @@ img {
     overflow: hidden;
     @include transition;
 
-
     &::after {
       content: '';
       display: block;
@@ -291,6 +298,7 @@ img {
 
 #testimonials {
   background-color: $warm-light-grey;
+  padding: 50px;
 
   .testimonial {
     .testimonial-body {
@@ -299,7 +307,7 @@ img {
   }
 
   .avatar {
-    margin-top: -60px;
+    margin-top: -80px;
     width: 100px;
     height: auto;
     border: 6px solid $warm-light-grey;
@@ -352,6 +360,7 @@ img {
 .text-grey {
   color: $medium-grey
 }
+
 .image-thumbnail {
   height: 35px;
   width: 35px;
@@ -375,7 +384,7 @@ img {
 }
 
 .table td:last-child,
-.table th:last-child{
+.table th:last-child {
   padding-right: 20px;
 }
 
