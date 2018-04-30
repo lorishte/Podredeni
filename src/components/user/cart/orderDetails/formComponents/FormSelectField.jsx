@@ -17,6 +17,7 @@ class FormSelectField extends React.Component {
 
 	render () {
 		const {label, name, value, required, onChange, optionsList, defaultValue} = this.props;
+		console.log(this.props);
 
 		let options = Object.keys(optionsList);
 

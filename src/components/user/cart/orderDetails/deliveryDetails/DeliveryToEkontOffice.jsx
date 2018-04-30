@@ -13,7 +13,7 @@ class EkontInfoInputs extends React.Component {
 		super(props);
 
 		this.state = {
-			country: 'България',
+			country: this.props.data.country || 'България',
 			city: this.props.data.city,
 			officeCode: this.props.data.officeCode,
 			officeName: this.props.data.officeName,
@@ -51,7 +51,15 @@ class EkontInfoInputs extends React.Component {
 			});
 		} else if (e.target.name === 'officeName') {
 
-			if (e.target.value === '') return;
+			if (e.target.value === '') {
+				this.setState({
+					address: '',
+					officeCode: '',
+					officeName: '',
+				});
+
+				return
+			}
 
 			let address = this.state.ekontData[this.state.country][this.state.city][e.target.value].address;
 			let officeCode = this.state.ekontData[this.state.country][this.state.city][e.target.value].officeCode;
@@ -63,6 +71,7 @@ class EkontInfoInputs extends React.Component {
 		}
 
 		this.setState({[e.target.name]: e.target.value}, () => {
+			console.log(this.state)
 			this.props.onChange('ekontDetails', {
 				country: this.state.country,
 				city: this.state.city,
@@ -83,7 +92,7 @@ class EkontInfoInputs extends React.Component {
 
 				{this.state.ekontData !== '' &&
 				<div>
-					<Col sm={6}>
+					<Col sm={4}>
 						<FormSelectField
 							label="Country"
 							name="country"
@@ -95,7 +104,7 @@ class EkontInfoInputs extends React.Component {
 					</Col>
 					{this.state.country !== '' &&
 						<div>
-								<Col sm={6}>
+								<Col sm={4}>
 									<FormSelectField
 										label="City"
 										name="city"
@@ -106,7 +115,7 @@ class EkontInfoInputs extends React.Component {
 										onChange={this.handleChange}/>
 								</Col>
 							{this.state.city !== '' &&
-								<Col sm={6}>
+								<Col sm={4}>
 									<FormSelectField
 										label="Office Name"
 										name="officeName"
