@@ -23,7 +23,6 @@ class Cart extends React.Component {
 
 	componentDidMount () {
 		let storedOrderDetails = JSON.parse(sessionStorage.getItem('orderDetails'));
-		console.log(storedOrderDetails);
 
 		if (storedOrderDetails === null) {
 			storedOrderDetails = {
@@ -56,7 +55,6 @@ class Cart extends React.Component {
 				toAddress: true
 			}
 		}
-		console.log(storedOrderDetails);
 
 		this.setState({ orderDetails: storedOrderDetails });
 		this.loadProducts();
@@ -70,9 +68,7 @@ class Cart extends React.Component {
 	};
 
 	updateInfo = (stateProp, data) => {
-		console.log(stateProp);
 		this.setState({[stateProp]: data}, () => {
-			console.log(this.state[stateProp]);
 			sessionStorage.setItem('orderDetails', JSON.stringify(this.state.orderDetails));
 		});
 	};
@@ -116,7 +112,9 @@ class Cart extends React.Component {
 				<Row>
 					{this.state.products.length > 0 && this.state.productsView &&
 					<Col xs={12}>
-						<h2><span className="text-grey">Step 1.</span> Check cart</h2>
+						<h2 className="cart-view-name">
+							<span className="text-grey">Step 1.</span> Check cart
+						</h2>
 						<CartProductsTable
 							products={this.state.products}
 							onChange={this.updateInfo}
@@ -134,7 +132,9 @@ class Cart extends React.Component {
 
 					{this.state.orderDetailsView &&
 					<Col xs={12}>
-						<h2><span className="text-grey">Step 2.</span> Order details</h2>
+						<h2 className="cart-view-name">
+							<span className="text-grey">Step 2.</span> Order details
+						</h2>
 						<OrderDetailsForm
 							data={this.state.orderDetails}
 							onChange={this.updateInfo}
@@ -145,7 +145,9 @@ class Cart extends React.Component {
 
 					{this.state.reviewView &&
 					<Col xs={12}>
-						<h2><span className="text-grey">Step 3.</span> Review and confirm</h2>
+						<h2 className="cart-view-name">
+							<span className="text-grey">Step 3.</span> Review and confirm
+						</h2>
 						<ReviewOrder
 							products={this.state.products}
 							orderDetails={this.state.orderDetails}

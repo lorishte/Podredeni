@@ -62,7 +62,7 @@ img {
   width: 100%;
 }
 
-h1, h2, h3, p {
+h1, h2, h3 {
   margin: 25px 0 30px 0;
 }
 
@@ -75,6 +75,10 @@ h3 {
 
 .row {
   //padding: 25px 0;
+}
+
+.btn {
+  margin-right: 5px;
 }
 
 .container .jumbotron,
@@ -356,7 +360,10 @@ h3 {
 }
 
 //Cart
-
+.cart-view-name {
+  border-bottom: 1px solid $light-grey;
+  padding-bottom: 15px;
+}
 .text-grey {
   color: $medium-grey
 }

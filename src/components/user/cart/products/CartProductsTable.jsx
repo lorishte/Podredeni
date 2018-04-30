@@ -5,8 +5,8 @@ import { Table, Button } from 'react-bootstrap';
 import { confirmAlert } from 'react-confirm-alert';
 
 // Partials
-import TableHead from './TableHead';
-import CartProductRow from './cartProductRow';
+import TableHead from './partials/TableHead';
+import CartProductRow from './partials/cartProductRow';
 
 class CartProductsTable extends React.Component {
 	constructor (props) {
@@ -107,7 +107,7 @@ class CartProductsTable extends React.Component {
 						</tfoot>
 
 					</Table>
-					<Button onClick={this.props.continue}>Continue</Button>
+					<Button bsStyle='primary' onClick={this.props.continue}>Continue</Button>
 				</div>
 			);
 		}

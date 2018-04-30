@@ -30,7 +30,6 @@ class OrderDetails extends React.Component {
 
 	submitInfo = (e) => {
 		e.preventDefault();
-		console.log(222);
 		this.props.continue();
 	};
 
@@ -84,8 +83,8 @@ class OrderDetails extends React.Component {
 					</Col>
 				</Row>
 
-				<Button onClick={this.props.goBack}>Back</Button>
-				<Button type="submit">Continue</Button>
+				<Button  onClick={this.props.goBack}>Back</Button>
+				<Button bsStyle='primary' type="submit">Continue</Button>
 			</form>
 		);
 	}

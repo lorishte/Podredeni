@@ -3,8 +3,8 @@ import React from 'react';
 import { Button, Table, Row, Col } from 'react-bootstrap';
 
 import CartProductsTable from '../products/CartProductsTable';
-import TableHead from '../products/TableHead';
-import CartProductRow from '../products/cartProductRow';
+import TableHead from '../products/partials/TableHead';
+import CartProductRow from '../products/partials/cartProductRow';
 import EkontOrderDetailsSummary from './partials/EkontOrderDetailsSummary';
 import AddressOrderDetailsSummary from './partials/AddressOrderDetailsSummary';
 import RecipientDetailsSummary from './partials/RecipientDetailsSummary';
@@ -12,10 +12,6 @@ import RecipientDetailsSummary from './partials/RecipientDetailsSummary';
 class ReviewOrder extends React.Component {
 	constructor (props) {
 		super(props);
-	}
-
-	componentDidMount () {
-		console.log(this.props);
 	}
 
 	calculateTotalSum = () => {
@@ -39,48 +35,60 @@ class ReviewOrder extends React.Component {
 
 		return (
 			<div>
-				<h2>Review order</h2>
-				<Table responsive>
-					<TableHead editable={false}/>
-					<tbody>
-						{this.props.products.map((e, i) => {
-							return <CartProductRow
-								key={e.product.id}
-								index={i + 1}
-								editable={false}
-								data={e.product}
-								quantity={e.quantity}/>;
-							})
-						}
-					</tbody>
-					<tfoot>
-						<tr className="lead">
-							<th colSpan={5} className="text-right">Total sum</th>
-							<th className="text-right">{this.calculateTotalSum()}</th>
-						</tr>
-					</tfoot>
-				</Table>
-
 				<Row>
 					<Col xs={12}>
-						<h2>Review delivery details</h2>
+						<h3>Delivery details</h3>
 						<Row>
-							<Col sm={6}>
+							<Col sm={3}>
 								<RecipientDetailsSummary recipient={recipient}/>
 							</Col>
-							<Col sm={6}>
+							<Col sm={5}>
 								{this.props.orderDetails.toAddress ?
 									<AddressOrderDetailsSummary deliveryDetails={deliveryDetails}/> :
-									<EkontOrderDetailsSummary deliveryDetails={deliveryDetails} />
+									<EkontOrderDetailsSummary deliveryDetails={deliveryDetails}/>
 								}
+							</Col>
+							<Col sm={4}>
+								<Row>
+									{this.props.orderDetails.comment ?
+									<Col xs={12}><h4> Comment:</h4>
+										<p>{this.props.orderDetails.comment}</p>
+										</Col> :
+									<Col xs={12}><h4>No comments added.</h4></Col>
+									}
+								</Row>
 							</Col>
 						</Row>
 
 					</Col>
 				</Row>
 
-				<Button onClick={this.props.goBack}>Back</Button>
-				<Button onClick={this.props.continue}>Submit Order</Button>
+				<h3>Products</h3>
+				<Table responsive>
+					<TableHead editable={false}/>
+					<tbody>
+					{this.props.products.map((e, i) => {
+						return <CartProductRow
+							key={e.product.id}
+							index={i + 1}
+							editable={false}
+							data={e.product}
+							quantity={e.quantity}/>;
+					})
+					}
+					</tbody>
+					<tfoot>
+					<tr className="lead">
+						<th colSpan={5} className="text-right">Total sum</th>
+						<th className="text-right">{this.calculateTotalSum()}</th>
+					</tr>
+					</tfoot>
+				</Table>
+
+
+
+				<Button bsStyle="default" onClick={this.props.goBack}>Back</Button>
+				<Button bsStyle="primary" onClick={this.props.continue}>Submit Order</Button>
 			</div>
 		);
 	}
