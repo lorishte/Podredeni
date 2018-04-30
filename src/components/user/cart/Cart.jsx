@@ -6,6 +6,7 @@ import { Grid, PageHeader, Table, Tabs, Tab, Row, Button, Label, Col } from 'rea
 // Partials
 import CartProductsTable from './products/CartProductsTable';
 import OrderDetailsForm from './orderDetails/OrderDetailsForm';
+import ReviewOrder from './reviewOrder/ReviewOrder';
 
 class Cart extends React.Component {
 	constructor (props) {
@@ -20,39 +21,49 @@ class Cart extends React.Component {
 		};
 	}
 
-
-
 	componentDidMount () {
-		this.setState({orderDetails: {
-			recipientInfo: {
-				email: '',
-				firstName: '',
-				lastName: '',
-				phone: ''
-			},
-			ekontDetails: {
-				address: '',
-				city: '',
-				country: '',
-				officeCode: '',
-				officeName: ''
-			},
-			addressDetails: {
-				apartment: '',
-				block: '',
-				city: '',
-				country: '',
-				district: '',
-				entrance: '',
-				floor: '',
-				postalCode: '',
-				street: '',
-				streetNo: ''
-			},
-			comment: '',
-			toAddress: true
-		}});
+		let storedOrderDetails = JSON.parse(sessionStorage.getItem('orderDetails'));
+		console.log(storedOrderDetails);
+
+		if (storedOrderDetails === null) {
+			storedOrderDetails = {
+				recipientInfo: {
+					email: '',
+					firstName: '',
+					lastName: '',
+					phone: ''
+				},
+				ekontDetails: {
+					address: '',
+					city: '',
+					country: '',
+					officeCode: '',
+					officeName: ''
+				},
+				addressDetails: {
+					apartment: '',
+					block: '',
+					city: '',
+					country: '',
+					district: '',
+					entrance: '',
+					floor: '',
+					postalCode: '',
+					street: '',
+					streetNo: ''
+				},
+				comment: '',
+				toAddress: true
+			}
+		}
+		console.log(storedOrderDetails);
+
+		this.setState({ orderDetails: storedOrderDetails });
 		this.loadProducts();
+	}
+
+	componentWillUnMount () {
+		// sessionStorage.setItem('orderDetails', JSON.stringify(this.state.orderDetails));
 	}
 
 	loadProducts = () => {
@@ -65,6 +76,7 @@ class Cart extends React.Component {
 		console.log(stateProp);
 		this.setState({[stateProp]: data}, () => {
 			console.log(this.state[stateProp]);
+			sessionStorage.setItem('orderDetails', JSON.stringify(this.state.orderDetails));
 		});
 	};
 
@@ -92,6 +104,10 @@ class Cart extends React.Component {
 		});
 	};
 
+	submitOrder = () => {
+		console.log('submitting')
+	};
+
 	render () {
 		return (
 			<Grid id="cart">
@@ -107,8 +123,9 @@ class Cart extends React.Component {
 						<CartProductsTable
 							products={this.state.products}
 							onChange={this.updateInfo}
+							continue={this.showDeliveryDetailsForm}
 						/>
-						<Button onClick={this.showDeliveryDetailsForm}>Continue</Button>
+
 					</Col>
 					}
 
@@ -124,14 +141,20 @@ class Cart extends React.Component {
 						<OrderDetailsForm
 							data={this.state.orderDetails}
 							onChange={this.updateInfo}
-							goBack={this.showProducts}/>
+							goBack={this.showProducts}
+							continue={this.showReview}/>
 					</Col>
 					}
 
 					{this.state.reviewView &&
 					<Col xs={12}>
 						<h2><span className="text-grey">Step 3.</span> Review and confirm</h2>
-						<Button onClick={this.showDeliveryDetailsForm}>Back</Button>
+						<ReviewOrder
+							products={this.state.products}
+							orderDetails={this.state.orderDetails}
+							goBack={this.showDeliveryDetailsForm}
+							continue={this.submitOrder}
+						/>
 					</Col>
 					}
 				</Row>

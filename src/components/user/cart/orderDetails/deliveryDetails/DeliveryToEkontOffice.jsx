@@ -51,6 +51,8 @@ class EkontInfoInputs extends React.Component {
 			});
 		} else if (e.target.name === 'officeName') {
 
+			if (e.target.value === '') return;
+
 			let address = this.state.ekontData[this.state.country][this.state.city][e.target.value].address;
 			let officeCode = this.state.ekontData[this.state.country][this.state.city][e.target.value].officeCode;
 

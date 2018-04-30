@@ -31,6 +31,7 @@ class OrderDetails extends React.Component {
 	submitInfo = (e) => {
 		e.preventDefault();
 		console.log(222);
+		this.props.continue();
 	};
 
 

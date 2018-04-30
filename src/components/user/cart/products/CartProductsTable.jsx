@@ -1,13 +1,12 @@
 import React from 'react';
 
 // Helpers
-import { Table } from 'react-bootstrap';
+import { Table, Button } from 'react-bootstrap';
 import { confirmAlert } from 'react-confirm-alert';
 
 // Partials
 import TableHead from './TableHead';
 import CartProductRow from './cartProductRow';
-
 
 class CartProductsTable extends React.Component {
 	constructor (props) {
@@ -28,7 +27,8 @@ class CartProductsTable extends React.Component {
 			title: 'Please confirm!',
 			message: 'Are you sure you want to delete this item?',
 			buttons: [
-				{label: 'Delete',
+				{
+					label: 'Delete',
 					onClick: () => {
 						this.setState({
 							products: this.state.products.filter((e) => e.product.id !== id)
@@ -77,37 +77,41 @@ class CartProductsTable extends React.Component {
 
 	render () {
 
-		if (this.state.products.length > 0){
+		if (this.state.products.length > 0) {
 			return (
-				<Table responsive>
+				<div>
+					<Table responsive>
 
-					<TableHead/>
+						<TableHead editable={true}/>
 
-					<tbody>
+						<tbody>
 
-					{this.state.products.map((e, i) => {
-						return <CartProductRow
-						key={e.product.id}
-						index={i + 1}
-						data={e.product}
-						quantity={e.quantity}
-						delete={this.deleteItem}
-						edit={this.editItem}/>;
+						{this.state.products.map((e, i) => {
+							return <CartProductRow
+								key={e.product.id}
+								index={i + 1}
+								editable={true}
+								data={e.product}
+								quantity={e.quantity}
+								delete={this.deleteItem}
+								edit={this.editItem}/>;
 						})
-					}
-					</tbody>
+						}
+						</tbody>
 
-					<tfoot>
+						<tfoot>
 						<tr className="lead">
 							<th colSpan={6} className="text-right">Total sum</th>
 							<th className="text-right">{this.state.totalSum}</th>
 						</tr>
-					</tfoot>
+						</tfoot>
 
-				</Table>
-			)
+					</Table>
+					<Button onClick={this.props.continue}>Continue</Button>
+				</div>
+			);
 		}
-		return null
+		return null;
 	}
 }
 
