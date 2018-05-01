@@ -2,7 +2,7 @@ import React from 'react';
 
 import { FormGroup, ControlLabel, FormControl, Row, Col } from 'react-bootstrap';
 
-import FormInputField from '../formComponents/FormInputField';
+import FormInputField from '../deliveryDetails/formComponents/FormInputField';
 
 class Comment extends React.Component {
 	constructor (props) {
@@ -25,7 +25,7 @@ class Comment extends React.Component {
 			<Row>
 				<Col sm={8}>
 					<FormGroup controlId={this.props.id}>
-						<ControlLabel>Comment</ControlLabel>
+						<ControlLabel>Забележка</ControlLabel>
 						<FormControl
 							componentClass="textarea"
 							name="comment"

@@ -39,7 +39,7 @@ class OrderDetails extends React.Component {
 			<form onSubmit={(e) => this.submitInfo(e)}>
 				<Row className="bg-light">
 					<Col sm={12}>
-						<h3>Recipient details</h3>
+						<h3>Данни за получателя</h3>
 						<hr/>
 						<RecipientDetails
 							data={this.state.recipientInfo}
@@ -49,12 +49,14 @@ class OrderDetails extends React.Component {
 
 				<Row>
 					<Col sm={12}>
-						<h3>Delivery details</h3>
+						<h3>Данни за доставка</h3>
 						<hr/>
 
 						<DeliveryOptions
 							onChange={this.updateInfo}
 							toAddress={this.state.toAddress}/>
+
+						<hr/>
 
 						{!this.state.toAddress &&
 						<DeliveryToEkontOffice
@@ -70,7 +72,7 @@ class OrderDetails extends React.Component {
 
 				<Row>
 					<Col sm={12}>
-						<h3>Additional info</h3>
+						<h3>Допълнителна информация</h3>
 						<hr/>
 
 						<Comment
@@ -78,13 +80,13 @@ class OrderDetails extends React.Component {
 							onChange={this.updateInfo}/>
 
 						<Checkbox readOnly>
-							I agree with the <Link to={'/products'} className="btn-link">Terms of Use.</Link>
+							Съгласен/а съм с <Link to={'/products'} className="btn-link">Условията за ползване.</Link>
 						</Checkbox>
 					</Col>
 				</Row>
 
-				<Button  onClick={this.props.goBack}>Back</Button>
-				<Button bsStyle='primary' type="submit">Continue</Button>
+				<Button  onClick={this.props.goBack}>Назад</Button>
+				<Button bsStyle='primary' type="submit">Продължи</Button>
 			</form>
 		);
 	}

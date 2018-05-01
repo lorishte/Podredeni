@@ -1,5 +1,5 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, Link } from 'react-router-dom';
 
 import { Navbar, Nav, Badge } from 'react-bootstrap';
 
@@ -15,7 +15,7 @@ class Header extends React.Component {
 			<Navbar collapseOnSelect className="navbar navbar-default navbar-fixed-top">
 				<Navbar.Header>
 					<Navbar.Brand>
-						<a href="/">Podredeni</a>
+						<Link to="/">Podredeni</Link>
 					</Navbar.Brand>
 					<Navbar.Toggle />
 				</Navbar.Header>
@@ -33,7 +33,7 @@ class Header extends React.Component {
 							Contact
 						</NavLink>
 
-						<NavLink to="/cart" className='nav-link accent'>
+						<NavLink to="/cart" activeClassName="active" className='nav-link cart'>
 							<i className="fa fa-cart-arrow-down" aria-hidden="true"/>
 							&nbsp; My Cart &nbsp;
 						</NavLink>

@@ -63,7 +63,7 @@ img {
 }
 
 h1, h2, h3 {
-  margin: 25px 0 30px 0;
+  margin: 50px 0 20px 0;
 }
 
 h3 {
@@ -71,6 +71,26 @@ h3 {
   color: #ccc;
   text-transform: uppercase;
   font-weight: 300;
+}
+
+.breadcrumb {
+  padding: 8px 15px;
+  margin-bottom: 20px;
+  list-style: none;
+  background-color: #f5f5f5;
+  border-radius: 4px;
+
+  .breadcrumb-item {
+    &::after {
+      content: ' / ';
+    }
+
+    &:last-child {
+      &::after {
+        content: '';
+      }
+    }
+  }
 }
 
 .row {
@@ -149,12 +169,20 @@ h3 {
       border-bottom: 3px solid transparent;
       @include transition;
 
-      &.accent {
+      &.cart {
         background-color: $primary;
         color: $white;
+        border-bottom: none;
 
         &:hover {
           background-color: $primary-darken;
+          border-bottom: none;
+        }
+
+        &.active {
+          background-color: $danger;
+          border-bottom: none;
+          @include transition;
         }
       }
 

@@ -29,7 +29,7 @@ class DeliveryOptions extends React.Component {
 							this.props.onChange('toAddress', this.state.toAddress);
 						})
 					}}>
-					Delivery to address
+					Доставка до посочен адрес
 				</Radio>{' '}
 				<Radio
 					name="1"
@@ -40,7 +40,7 @@ class DeliveryOptions extends React.Component {
 							this.props.onChange('toAddress', this.state.toAddress);
 						})
 					}}>
-					Delivery to Ekont office
+					Доставка со офис на ЕКОНТ
 				</Radio>{' '}
 			</FormGroup>
 		);

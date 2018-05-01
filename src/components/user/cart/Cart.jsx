@@ -1,7 +1,8 @@
 import React from 'react';
+import {Link} from 'react-router-dom';
 
 // Helpers
-import { Grid, PageHeader, Table, Tabs, Tab, Row, Button, Label, Col } from 'react-bootstrap';
+import { Grid, Row, Col, Breadcrumb } from 'react-bootstrap';
 
 // Partials
 import CartProductsTable from './products/CartProductsTable';
@@ -104,16 +105,15 @@ class Cart extends React.Component {
 	render () {
 		return (
 			<Grid id="cart">
-
-				<PageHeader>
-					My Cart
-				</PageHeader>
-
+				<Breadcrumb>
+					<Link to="/" className="breadcrumb-item">Начало</Link>
+					<Link to="/cart" className="breadcrumb-item">Кошница</Link>
+				</Breadcrumb>
 				<Row>
 					{this.state.products.length > 0 && this.state.productsView &&
 					<Col xs={12}>
 						<h2 className="cart-view-name">
-							<span className="text-grey">Step 1.</span> Check cart
+							<span className="text-grey">Стъпка 1.</span> Преглед на кошницата
 						</h2>
 						<CartProductsTable
 							products={this.state.products}
@@ -126,14 +126,14 @@ class Cart extends React.Component {
 
 					{this.state.products.length === 0 && this.state.productsView &&
 					<Col xs={12}>
-						<h3>Your cart is empty.</h3>
+						<h3>Вашата кошница е празна.</h3>
 					</Col>
 					}
 
 					{this.state.orderDetailsView &&
 					<Col xs={12}>
 						<h2 className="cart-view-name">
-							<span className="text-grey">Step 2.</span> Order details
+							<span className="text-grey">Стъпка 2.</span> Въвеждане на данни за доставка
 						</h2>
 						<OrderDetailsForm
 							data={this.state.orderDetails}
@@ -146,7 +146,7 @@ class Cart extends React.Component {
 					{this.state.reviewView &&
 					<Col xs={12}>
 						<h2 className="cart-view-name">
-							<span className="text-grey">Step 3.</span> Review and confirm
+							<span className="text-grey">Стъпка 3.</span> Преглед и потвърждение
 						</h2>
 						<ReviewOrder
 							products={this.state.products}

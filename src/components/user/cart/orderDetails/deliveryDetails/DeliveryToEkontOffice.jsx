@@ -2,7 +2,7 @@ import React from 'react';
 
 import { Row, Col, FormControl, ControlLabel, FormGroup } from 'react-bootstrap';
 
-import FormSelectField from '../formComponents/FormSelectField';
+import FormSelectField from './formComponents/FormSelectField';
 
 // Services
 import ekontRequester from '../../../../../services/ekontRequester';
@@ -86,15 +86,11 @@ class EkontInfoInputs extends React.Component {
 	render () {
 		return (
 			<Row>
-				<Col xs={12}>
-					<h4>Please select Ekont office</h4>
-				</Col>
-
 				{this.state.ekontData !== '' &&
 				<div>
 					<Col sm={4}>
 						<FormSelectField
-							label="Country"
+							label="Държава"
 							name="country"
 							value={this.state.country}
 							defaultValue={this.state.country}
@@ -106,7 +102,7 @@ class EkontInfoInputs extends React.Component {
 						<div>
 								<Col sm={4}>
 									<FormSelectField
-										label="City"
+										label="Населено място"
 										name="city"
 										value={this.state.city}
 										defaultValue={this.state.city}
@@ -117,7 +113,7 @@ class EkontInfoInputs extends React.Component {
 							{this.state.city !== '' &&
 								<Col sm={4}>
 									<FormSelectField
-										label="Office Name"
+										label="Наименование на офиса"
 										name="officeName"
 										defaultValue={this.state.officeName}
 										value={this.state.officeName}

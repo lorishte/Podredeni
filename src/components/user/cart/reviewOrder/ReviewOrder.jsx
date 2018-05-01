@@ -37,7 +37,7 @@ class ReviewOrder extends React.Component {
 			<div>
 				<Row>
 					<Col xs={12}>
-						<h3>Delivery details</h3>
+						<h3>Данни за доставка</h3>
 						<Row>
 							<Col sm={3}>
 								<RecipientDetailsSummary recipient={recipient}/>
@@ -51,10 +51,10 @@ class ReviewOrder extends React.Component {
 							<Col sm={4}>
 								<Row>
 									{this.props.orderDetails.comment ?
-									<Col xs={12}><h4> Comment:</h4>
+									<Col xs={12}><h4>Забележка:</h4>
 										<p>{this.props.orderDetails.comment}</p>
 										</Col> :
-									<Col xs={12}><h4>No comments added.</h4></Col>
+									<Col xs={12}><h4>Няма добавени забележки.</h4></Col>
 									}
 								</Row>
 							</Col>
@@ -63,7 +63,7 @@ class ReviewOrder extends React.Component {
 					</Col>
 				</Row>
 
-				<h3>Products</h3>
+				<h3>Добавени продукти</h3>
 				<Table responsive>
 					<TableHead editable={false}/>
 					<tbody>
@@ -79,7 +79,7 @@ class ReviewOrder extends React.Component {
 					</tbody>
 					<tfoot>
 					<tr className="lead">
-						<th colSpan={5} className="text-right">Total sum</th>
+						<th colSpan={5} className="text-right">Общо:</th>
 						<th className="text-right">{this.calculateTotalSum()}</th>
 					</tr>
 					</tfoot>
@@ -87,8 +87,8 @@ class ReviewOrder extends React.Component {
 
 
 
-				<Button bsStyle="default" onClick={this.props.goBack}>Back</Button>
-				<Button bsStyle="primary" onClick={this.props.continue}>Submit Order</Button>
+				<Button bsStyle="default" onClick={this.props.goBack}>Назад</Button>
+				<Button bsStyle="primary" onClick={this.props.continue}>Потвърди</Button>
 			</div>
 		);
 	}

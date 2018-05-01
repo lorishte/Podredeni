@@ -101,13 +101,13 @@ class CartProductsTable extends React.Component {
 
 						<tfoot>
 						<tr className="lead">
-							<th colSpan={6} className="text-right">Total sum</th>
+							<th colSpan={6} className="text-right">Общо:</th>
 							<th className="text-right">{this.state.totalSum}</th>
 						</tr>
 						</tfoot>
 
 					</Table>
-					<Button bsStyle='primary' onClick={this.props.continue}>Continue</Button>
+					<Button bsStyle='primary' onClick={this.props.continue}>Продължи</Button>
 				</div>
 			);
 		}

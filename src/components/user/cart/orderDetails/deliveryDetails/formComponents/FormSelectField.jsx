@@ -36,7 +36,7 @@ class FormSelectField extends React.Component {
 					onChange={onChange}
 					required={required}>
 
-					<option value="">Please select:</option>
+					<option value="">Моля, изберете:</option>
 
 					{optionElements}
 

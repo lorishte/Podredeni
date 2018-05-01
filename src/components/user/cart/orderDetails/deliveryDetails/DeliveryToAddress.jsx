@@ -2,7 +2,7 @@ import React from 'react';
 
 import { Row, Col, FormControl, ControlLabel, FormGroup } from 'react-bootstrap';
 
-import FormInputField from '../formComponents/FormInputField';
+import FormInputField from './formComponents/FormInputField';
 
 class AddressInfoInputs extends React.Component {
 	constructor (props) {
@@ -32,15 +32,9 @@ class AddressInfoInputs extends React.Component {
 		return (
 			<div>
 				<Row>
-					<Col xs={12}>
-						<h4>Please fill your address details</h4>
-					</Col>
-				</Row>
-
-				<Row>
 					<Col md={3} sm={4} xs={8}>
 						<FormInputField
-							label="Country"
+							label="Държава"
 							name="country"
 							type="text"
 							value={this.state.country}
@@ -50,7 +44,7 @@ class AddressInfoInputs extends React.Component {
 
 					<Col md={4} sm={5} xs={8}>
 						<FormInputField
-							label="City"
+							label="Населено място"
 							name="city"
 							type="text"
 							value={this.state.city}
@@ -60,7 +54,7 @@ class AddressInfoInputs extends React.Component {
 
 					<Col md={2} sm={3} xs={4}>
 						<FormInputField
-							label="Postal code"
+							label="Пощенски код"
 							name="postalCode"
 							type="text"
 							value={this.state.postalCode}
@@ -73,31 +67,31 @@ class AddressInfoInputs extends React.Component {
 
 					<Col sm={4}  xs={8}>
 						<FormInputField
-							label="District"
+							label="Квартал"
 							name="district"
 							type="text"
 							value={this.state.district}
-							required={true}
+							required={false}
 							onChange={this.handleChange}/>
 					</Col>
 
 					<Col sm={5} xs={8}>
 						<FormInputField
-							label="Street"
+							label="Улица"
 							name="street"
 							type="text"
 							value={this.state.street}
-							required={true}
+							required={false}
 							onChange={this.handleChange}/>
 					</Col>
 
 					<Col md={2} sm={3} xs={3}>
 						<FormInputField
-							label="Str. No"
+							label="Номер"
 							name="streetNo"
 							type="text"
 							value={this.state.streetNo}
-							required={true}
+							required={false}
 							onChange={this.handleChange}/>
 					</Col>
 				</Row>
@@ -106,41 +100,41 @@ class AddressInfoInputs extends React.Component {
 
 					<Col sm={2} xs={3}>
 						<FormInputField
-							label="Block"
+							label="Блок"
 							name="block"
 							type="text"
 							value={this.state.block}
-							required={true}
+							required={false}
 							onChange={this.handleChange}/>
 					</Col>
 
 					<Col sm={2} xs={3}>
 						<FormInputField
-							label="Entrance"
+							label="Вход"
 							name="entrance"
 							type="text"
 							value={this.state.entrance}
-							required={true}
+							required={false}
 							onChange={this.handleChange}/>
 					</Col>
 
 					<Col sm={2} xs={3}>
 						<FormInputField
-							label="Floor"
+							label="Етаж"
 							name="floor"
 							type="text"
 							value={this.state.floor}
-							required={true}
+							required={false}
 							onChange={this.handleChange}/>
 					</Col>
 
 					<Col sm={2} xs={3}>
 						<FormInputField
-							label="Apartment"
+							label="Апартамент"
 							name="apartment"
 							type="text"
 							value={this.state.apartment}
-							required={true}
+							required={false}
 							onChange={this.handleChange}/>
 					</Col>
 

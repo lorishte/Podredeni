@@ -2,7 +2,7 @@ import React from 'react';
 
 import { Row, Col } from 'react-bootstrap';
 
-import FormInputField from '../formComponents/FormInputField';
+import FormInputField from '../deliveryDetails/formComponents/FormInputField';
 
 class RecipientInfoInputs extends React.Component {
 	constructor (props) {
@@ -28,7 +28,7 @@ class RecipientInfoInputs extends React.Component {
 				<Row>
 					<Col md={4} sm={5} xs={6}>
 						<FormInputField
-							label="First Name"
+							label="Име"
 							name="firstName"
 							type="text"
 							value={this.state.firstName}
@@ -38,7 +38,7 @@ class RecipientInfoInputs extends React.Component {
 
 					<Col md={4} sm={5} xs={6}>
 						<FormInputField
-							label="Last Name"
+							label="Фамилия"
 							name="lastName"
 							type="text"
 							value={this.state.lastName}
@@ -51,7 +51,7 @@ class RecipientInfoInputs extends React.Component {
 				<Row>
 					<Col md={4} sm={5} xs={6}>
 						<FormInputField
-							label="Phone"
+							label="Телефон"
 							name="phone"
 							type="tel"
 							value={this.state.phone}
@@ -61,7 +61,7 @@ class RecipientInfoInputs extends React.Component {
 
 					<Col md={4} sm={5} xs={6}>
 						<FormInputField
-							label="Email"
+							label="Имейл"
 							name="email"
 							type="email"
 							value={this.state.email}
