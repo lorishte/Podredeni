@@ -2,7 +2,7 @@ import React from 'react';
 
 import { Row, Col, FormControl, ControlLabel, FormGroup } from 'react-bootstrap';
 
-import FormInputField from './formComponents/FormInputField';
+import FormInputField from '../../../../common/formComponents/FormInputField';
 
 class AddressInfoInputs extends React.Component {
 	constructor (props) {

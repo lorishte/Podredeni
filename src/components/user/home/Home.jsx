@@ -19,13 +19,13 @@ class Home extends React.Component {
 		const headline = 'Keep Your Eyeglasses Secure';
 		const text = 'ReadeREST® keeps your readers and sunglasses off the ground and securely attached to your shirt. No more losing, breaking, or scratching your eyeglasses! As the #1 sold magnetic eyeglass holder in the U.S. we offer a lifetime warranty and 100% satisfaction guarantee. ReadeREST is also multi-functional. You can use it as an ID badge holder and to manage your earbud wires.';
 
-
 		return (
 			<div>
 				<ControlledCarousel/>
 				<Grid>
 					<AboutProduct headline={headline} text={text}/>
-					<TopSellers/>
+					<TopSellers
+						productsToShow={2}/>
 				</Grid>
 				<Testimonials/>
 			</div>

@@ -78,7 +78,7 @@ class Product extends React.Component {
 
 				<Row>
 					<Col xs={8} sm={6} md={4}>
-						<Image src={'../' + product.imageUrl} thumbnail/>
+						<Image src={'../' + product.imageUrls[0]} thumbnail/>
 					</Col>
 					<Col mdOffset={1} xs={12} sm={6} md={7}>
 						<ProductInfo data={product}/>

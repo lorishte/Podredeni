@@ -14,6 +14,8 @@ import Cart from '../user/cart/Cart'
 import About from '../user/about/About'
 import Contact from '../user/contact/Contact'
 import NotFound from '../common/NotFound'
+import CreateProduct from '../admin/product/create/CreateProduct';
+import AdminProductsList from '../admin/product/list/ProductsList';
 
 
 let Routes = () => {
@@ -32,8 +34,13 @@ let Routes = () => {
             <Route path='/about' component= {About} />
             <Route path='/contact' component= {Contact} />
 
-            {/*<PrivateRoute path='/addVideo' component= {Modal} />*/}
+            {/*<PrivateRoute path='/product/create' component= {CreateProduct} />*/}
 
+            /*Admin*/
+            <Route path='/product/create' component= {CreateProduct} />
+            <Route path='/product/list' component= {AdminProductsList} />
+
+            /*Rest*/
             <Route path='*' component= {NotFound}/>
         </Switch>
     )

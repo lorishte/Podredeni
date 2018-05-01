@@ -2,11 +2,11 @@ import React from 'react';
 
 import { Row, Col, FormControl, ControlLabel, FormGroup } from 'react-bootstrap';
 
-import FormSelectField from './formComponents/FormSelectField';
+import FormSelectField from '../../../../common/formComponents/FormSelectField';
 
 // Services
-import ekontRequester from '../../../../../services/ekontRequester';
-import ekontDataParser from '../../../../../services/ekontDataConvertor';
+import ekontRequester from '../../../../../services/ekont/ekontRequester';
+import ekontDataParser from '../../../../../services/ekont/ekontDataConvertor';
 
 class EkontInfoInputs extends React.Component {
 	constructor (props) {

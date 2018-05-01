@@ -1,13 +1,30 @@
 import React from 'react';
 import { NavLink, Link } from 'react-router-dom';
 
-import { Navbar, Nav, Badge } from 'react-bootstrap';
+import { Navbar, Nav, Badge, Button } from 'react-bootstrap';
+import products from '../../data/products';
+import requesterService from '../../services/requester';
 
 class Header extends React.Component {
 
 	constructor (props) {
 		super(props);
 	}
+
+	seedProducts = () => {
+		for (let i = 0; i < products.length; i++) {
+			setTimeout(function () {
+				requesterService
+					.addProduct(products[i])
+					.then(response => {
+						console.log(response)
+					})
+					.catch(err => {
+						console.log(err.responseText)
+					})
+			}, i * 1000)
+		}
+	};
 
 	render () {
 
@@ -19,8 +36,20 @@ class Header extends React.Component {
 					</Navbar.Brand>
 					<Navbar.Toggle />
 				</Navbar.Header>
+
+				<Button onClick={this.seedProducts}>Seed products</Button>
+
 				<Navbar.Collapse >
 					<Nav pullRight>
+
+						<NavLink to="/product/list" activeClassName="active" className='nav-link'>
+							AdminProductsList
+						</NavLink>
+
+						<NavLink to="/product/create" activeClassName="active" className='nav-link'>
+							CreateProduct
+						</NavLink>
+
 						<NavLink to="/products" activeClassName="active" className='nav-link'>
 							Products
 						</NavLink>

@@ -1,115 +1,66 @@
-const host = 'http://localhost:5000/';
+import $ from 'jquery';
+
+const host = 'http://localhost:59384/api';
 
 let token = () => {
 	return localStorage.getItem('token');
 };
 
 export default {
-	register: (data) => {
-		return fetch(host + 'auth/signup',
+
+	post: (endPoint, auth, data) => {
+		let url = host + endPoint;
+
+		return $.ajax(
 			{
-				method: 'POST',
+				url: url,
+				type: 'POST',
 				headers: {
+					// 'Authorization': 'bearer ' + token(),
 					'Content-Type': 'application/json'
 				},
-				body: JSON.stringify(data)
-			})
-			.then(response => {
-				return response.json();
+				data: JSON.stringify(data)
 			});
 	},
 
-	login: (data) => {
-		return fetch(host + 'auth/login',
-			{
-				method: 'POST',
-				headers: {
-					'Content-Type': 'application/json'
-				},
-				body: JSON.stringify(data)
-			})
-			.then(response => {
-				return response.json();
-			});
-	},
+	get: (endPoint, auth, query) => {
+		let url = host + endPoint + query;
 
-	loadAllHotels: (page) => {
-		return fetch(host + 'hotels/all?page=' + page,
+		return $.ajax(
 			{
-				method: 'GET',
+				url: url,
+				type: 'GET',
 				headers: {
+					// 'Authorization': 'bearer ' + token(),
 					'Content-Type': 'application/json'
 				}
-			})
-			.then(response => {
-				return response.json();
 			});
 	},
 
-	createHotel: (data) => {
-		return fetch(host + 'hotels/create/',
+	update: (endPoint, auth, data) => {
+		let url = host + endPoint;
+
+		return $.ajax(
 			{
-				method: 'POST',
+				url: url,
+				type: 'PUT',
 				headers: {
-					'Authorization': 'bearer ' + token(),
+					// 'Authorization': 'bearer ' + token(),
 					'Content-Type': 'application/json'
 				},
-				body: JSON.stringify(data)
-			})
-			.then(response => {
-				return response.json();
+				data: JSON.stringify(data)
 			});
 	},
 
-	getHotelDetails: (hotelId) => {
-		return fetch(host + 'hotels/details/' + hotelId,
-			{
-				method: 'GET',
-				headers: {
-					'Authorization': 'bearer ' + token(),
-					'Content-Type': 'application/json'
-				},
-			})
-			.then(response => {
-				return response.json();
-			});
-	},
+	remove: (endPoint, auth) => {
+		let url = host + endPoint;
 
-	getHotelComments: (hotelId) => {
-		return fetch(host + 'hotels/details/' + hotelId + '/reviews',
+		return $.ajax(
 			{
-				method: 'GET',
+				url: url,
+				type: 'DELETE',
 				headers: {
-					'Authorization': 'bearer ' + token(),
-					'Content-Type': 'application/json'
-				},
-			})
-			.then(response => {
-				return response.json();
-			});
-	},
-
-	addComment: (data) => {
-		return fetch(host + 'hotels/details/' + data.hotelId + '/reviews/create',
-			{
-				method: 'POST',
-				headers: {
-					'Authorization': 'bearer ' + token(),
-					'Content-Type': 'application/json'
-				},
-				body: JSON.stringify(data)
-			})
-			.then(response => {
-				return response.json();
-			});
-	},
-
-	deleteHotel: (hotelId) => {
-		return fetch(host + `hotels/${hotelId}`,
-			{
-				method: 'DELETE',
-				headers: {
-					'Authorization': 'bearer ' + token(),
+					// 'Authorization': 'bearer ' + token(),
 					'Content-Type': 'application/json'
 				}
 			});

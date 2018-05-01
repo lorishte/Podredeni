@@ -17,11 +17,11 @@ class ProductCard extends React.Component {
 				<Link to={'/products/' + data.id}>
 					<div className="card">
 						<div className="product-image">
-							<img className="card-img-top" src={data.imageUrl} alt="Card image cap"/>
+							<img className="card-img-top" src={data.images[0]} alt="Card image cap"/>
 						</div>
 						<div className="card-body">
 							<h4 className="card-title">{data.name}</h4>
-							<p className="card-text">{data.description.substring(0, 80) + ' ...'}</p>
+							<p className="card-text">{data.desription.substring(0, 80) + ' ...'}</p>
 							<p className="price">{data.price}</p>
 						</div>
 					</div>

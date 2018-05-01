@@ -3,19 +3,35 @@ import React from 'react';
 import { Row , Col } from 'react-bootstrap';
 
 import ProductCard from '../../../productList/partials/ProductCard';
-import products from '../../../../../data/products';
+
+import productsService from '../../../../../services/products/productsService';
 
 class TopSellers extends React.Component {
 	constructor (props) {
 		super(props);
 
 		this.state = {
+			products: '',
+			size: 12,
+			page: 1,
+			filterProperty: 'IsTopSeller',
+			filterValue: true,
 			index: 0,
 		};
 	}
 
-	topSellers = [];
-	numberOfProductsToShow = 3;
+	numberOfProductsToShow = this.props.productsToShow;
+
+	componentDidMount () {
+		productsService
+			.loadProducts(this.state)
+			.then(res => {
+				console.log(res);
+			})
+			.catch(err => {
+				console.log(err.responseText)
+			});
+	}
 
 	loadPrevious = () => {
 		if (this.state.index === 0) {
@@ -27,7 +43,7 @@ class TopSellers extends React.Component {
 	};
 
 	loadNext = () => {
-		if (this.state.index === products.length - this.numberOfProductsToShow) {
+		if (this.state.index === this.state.products.length - this.numberOfProductsToShow) {
 			return;
 		}
 		this.setState((prevState) => ({
@@ -39,9 +55,12 @@ class TopSellers extends React.Component {
 		const start = this.state.index;
 		const end = start + this.numberOfProductsToShow;
 
-		this.topSellers = products.slice(start, end).map(product => {
-			return <ProductCard key={product.id} data={product}/>;
-		});
+		let cards;
+		if (this.state.products !== '') {
+			cards = this.state.products.slice(start, end).map(product => {
+				return <ProductCard key={product.id} data={product}/>;
+			});
+		}
 
 		return (
 			<Row className="top-sellers">
@@ -61,7 +80,7 @@ class TopSellers extends React.Component {
 						<span className="sr-only">Next</span>
 					</div>
 
-					{this.topSellers}
+					{cards}
 				</Col>
 
 			</Row>
