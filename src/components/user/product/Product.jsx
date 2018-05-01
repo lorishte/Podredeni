@@ -8,7 +8,7 @@ import ProductInfo from './partials/ProductInfo';
 import AddToCartForm from './partials/AddToCartForm';
 import ProductTabs from './partials/ProductTabs';
 
-import products from '../../../data/products';
+import productsService from '../../../services/products/productsService';
 
 
 class Product extends React.Component {
@@ -24,13 +24,18 @@ class Product extends React.Component {
 	toastContainer;
 
 	componentDidMount () {
-		this.getProductDetails(this.props.match.params.id);
+		let id = this.props.match.params.id;
+		productsService
+			.getProduct(id)
+			.then(res => {
+				console.log(res);
+				this.setState({product: res.product})
+			})
+			.catch(err => {
+				console.log(err.responseText)
+			})
 	}
 
-	getProductDetails = (id) => {
-		const product = products.filter(p => p.id === Number(id))[0];
-		this.setState({product});
-	};
 
 	addToCart = (quantity) => {
 		this.setState({quantity}, () => {
@@ -50,7 +55,7 @@ class Product extends React.Component {
 			addedProducts.push(this.state);
 			sessionStorage.products = JSON.stringify(addedProducts);
 
-			this.toastContainer.success('Redirecting to all products.', 'Product added to your cart.', {
+			this.toastContainer.success('', 'Product added to your cart.', {
 				closeButton: true,
 			});
 		});
@@ -62,7 +67,7 @@ class Product extends React.Component {
 	};
 
 	render () {
-		const product = this.state.product;
+		let product = this.state.product;
 
 		return (
 			<Grid id="product">
@@ -76,15 +81,17 @@ class Product extends React.Component {
 					ref={ref => this.toastContainer = ref}
 					className="toast-bottom-right"/>
 
-				<Row>
-					<Col xs={8} sm={6} md={4}>
-						<Image src={'../' + product.imageUrls[0]} thumbnail/>
-					</Col>
-					<Col mdOffset={1} xs={12} sm={6} md={7}>
-						<ProductInfo data={product}/>
-						<AddToCartForm onSubmit={this.addToCart}/>
-					</Col>
-				</Row>
+				{this.state.product !== '' &&
+					<Row>
+						<Col xs={8} sm={6} md={4}>
+							<Image src={'../' + product.images[0]} thumbnail/>
+						</Col>
+						<Col mdOffset={1} xs={12} sm={6} md={7}>
+							<ProductInfo data={product}/>
+							<AddToCartForm onSubmit={this.addToCart}/>
+						</Col>
+					</Row>
+				}
 				<Row>
 					<ProductTabs/>
 				</Row>

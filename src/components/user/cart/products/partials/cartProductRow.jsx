@@ -45,7 +45,7 @@ class CartProductRow extends React.Component {
 				</td>
 				}
 				<td>{this.props.index}</td>
-				<td className="col-xs-1"><img className="image-thumbnail" src={product.imageUrl}/></td>
+				<td className="col-xs-1"><img className="image-thumbnail" src={product.images[0]}/></td>
 				<td>{product.name}</td>
 				<td>
 					<span className="col-xs-2 quantity">{this.state.quantity}</span>

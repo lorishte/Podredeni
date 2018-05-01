@@ -3,17 +3,46 @@ import React from 'react';
 import { Row, PageHeader, Grid } from 'react-bootstrap';
 
 import ProductCard from './partials/ProductCard';
-import products from '../../../data/products';
+
+import productsService from '../../../services/products/productsService';
+
 
 class ProductsList extends React.Component {
 	constructor (props) {
 		super(props);
+
+		this.state = {
+			products: '',
+			size: 16,
+			page: 1,
+			sortProperty: 'number',
+			descending: true,
+			filterProperty: 'name',
+			filterValue: ''
+		};
 	}
 
+	componentDidMount () {
+		productsService
+			.loadProducts(this.state)
+			.then(res => {
+				console.log(res);
+				this.setState({products: res.products})
+			})
+			.catch(err => {
+				console.log(err.responseText)
+			});
+	}
+
+
 	render () {
-		this.topSellers = products.map(product => {
-			return <ProductCard key={product.id} data={product}/>;
-		});
+		let productsList;
+
+		if (this.state.products !== '') {
+			productsList = this.state.products.map(e => {
+				return <ProductCard key={e.id} data={e}/>;
+			});
+		}
 
 		return (
 			<Grid>
@@ -21,9 +50,7 @@ class ProductsList extends React.Component {
 					Products
 				</PageHeader>
 				<Row className="show-grid top-sellers">
-					{this.topSellers}
-					{this.topSellers}
-					{this.topSellers}
+					{productsList}
 				</Row>
 			</Grid>
 		);

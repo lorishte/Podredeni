@@ -24,7 +24,7 @@ export default {
 	},
 
 	get: (endPoint, auth, query) => {
-		let url = host + endPoint + query;
+		let url = query !== undefined ? host + endPoint + query : host + endPoint;
 
 		return $.ajax(
 			{

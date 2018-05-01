@@ -32,14 +32,17 @@ export default {
 	},
 
 	getProduct: (id) => {
+		console.log(id);
 		let endPointId = endPoint + `/${id}`;
+
+		console.log(endPointId);
 
 		return requesterService
 			.get(endPointId, null);
 	},
 
 	updateProduct: (state) => {
-		let endPointId = endPoint + `/${id}`;
+		let endPointId = endPoint + `/${state.id}`;
 
 		let product = {
 			Name: state.name,

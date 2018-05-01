@@ -27,6 +27,7 @@ class ProductsList extends React.Component {
 			.loadProducts(this.state)
 			.then(res => {
 				console.log(res);
+				this.setState({products: res.products})
 			})
 			.catch(err => {
 				console.log(err.responseText)
@@ -38,7 +39,7 @@ class ProductsList extends React.Component {
 
 		if (this.state.products !== '') {
 			productsList = this.state.products.map(e => {
-				return <ProductTableRow key={e.number} data={e}/>;
+				return <ProductTableRow key={e.id} data={e}/>;
 			});
 		}
 

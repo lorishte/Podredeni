@@ -126,7 +126,7 @@ class Cart extends React.Component {
 
 					{this.state.products.length === 0 && this.state.productsView &&
 					<Col xs={12}>
-						<h3>Вашата кошница е празна.</h3>
+						<h3>Нямате добавени продукти</h3>
 					</Col>
 					}
 
