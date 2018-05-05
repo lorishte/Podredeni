@@ -50,6 +50,12 @@ h3 {
 
 .btn {
   margin-right: 5px; }
+  .btn.btn-sort {
+    padding: 2px;
+    color: greenyellow;
+    background-color: transparent; }
+    .btn.btn-sort.active {
+      color: red; }
 
 .container .jumbotron,
 .container-fluid .jumbotron {

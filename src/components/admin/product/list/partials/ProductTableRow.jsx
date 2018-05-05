@@ -17,8 +17,8 @@ class ProductTableRow extends React.Component {
 				<td>
 					{p.name}
 				</td>
-				<td>
-					{p.price}
+				<td className="text-right">
+					<p className=""> {p.price.toFixed(2)}</p>
 				</td>
 				<td>
 					{p.isTopSeller}

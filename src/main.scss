@@ -99,6 +99,16 @@ h3 {
 
 .btn {
   margin-right: 5px;
+
+  &.btn-sort {
+    padding: 2px;
+    color: greenyellow;
+    background-color: transparent;
+
+    &.active {
+      color: red;
+    }
+  }
 }
 
 .container .jumbotron,

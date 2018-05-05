@@ -39,7 +39,11 @@ export default {
 			Apartment: addressDetails.apartment,
 			Comments: comment,
 			DeliveredToAnOffice: !toAddress,
-			OfficeAddress: generateEkontData(ekontDetails)
+			OfficeCode: ekontDetails.officeCode,
+			OfficeName: ekontDetails.officeName,
+			OfficeCountry: ekontDetails.country,
+			OfficeCity: ekontDetails.city,
+			OfficeAddress: ekontDetails.address
 		};
 
 		return requesterService
@@ -58,12 +62,3 @@ export default {
 
 	}
 };
-
-
-
-function generateEkontData (ekontDetails) {
-	let ekontOffice = 'офис No: ' + ekontDetails.officeCode + ',' + ekontDetails.officeName + '\n';
-	let ekontAddress = 'адрес: ' + ekontDetails.country + ',' + ekontDetails.address;
-
-	return ekontOffice + ekontAddress;
-}
