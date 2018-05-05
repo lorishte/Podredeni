@@ -70,7 +70,7 @@ class Cart extends React.Component {
 
 	updateInfo = (stateProp, data) => {
 		this.setState({[stateProp]: data}, () => {
-			sessionStorage.setItem('orderDetails', JSON.stringify(this.state.orderDetails));
+			sessionStorage.setItem([stateProp], JSON.stringify(this.state[stateProp]));
 		});
 	};
 
@@ -99,7 +99,8 @@ class Cart extends React.Component {
 	};
 
 	submitOrder = () => {
-		console.log('submitting')
+		console.log('from submit');
+		console.log(this.state.products);
 	};
 
 	render () {

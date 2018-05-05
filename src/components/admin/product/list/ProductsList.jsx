@@ -26,7 +26,6 @@ class ProductsList extends React.Component {
 		productsService
 			.loadProducts(this.state)
 			.then(res => {
-				console.log(res);
 				this.setState({products: res.products})
 			})
 			.catch(err => {
@@ -63,9 +62,6 @@ class ProductsList extends React.Component {
 							</tbody>
 						</Table>
 					</Col>
-				</Row>
-				<Row className="bg-light">
-
 				</Row>
 			</Grid>
 		);
