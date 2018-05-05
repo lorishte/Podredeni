@@ -8,13 +8,14 @@ import PrivateRoute from './PrivateRoute'
 import Login from '../auth/Login'
 import Register from '../auth/Register'
 import Home from '../user/home/Home'
-import ProductsList from '../user/productList/ProductsList'
-import Product from '../user/product/Product'
+import ProductsList from '../user/product/list/ProductsList'
+import ProductDetails from '../user/product/details/ProductDetails'
 import Cart from '../user/cart/Cart'
+import OrderReceived from '../common/OrderReceived'
 import About from '../user/about/About'
 import Contact from '../user/contact/Contact'
 import NotFound from '../common/NotFound'
-import CreateProduct from '../admin/product/create/CreateProduct';
+import CreateProduct from '../admin/product/create/editCreateProduct';
 import AdminProductsList from '../admin/product/list/ProductsList';
 
 
@@ -27,9 +28,11 @@ let Routes = () => {
             <Route path='/register' component= {NotFound} />
 
             <Route exact path='/products' component= {ProductsList} />
-            <Route path="/products/:id" component={Product} />
+            <Route path="/products/:id" component={ProductDetails} />
 
             <Route path='/cart' component= {Cart} />
+
+            <Route path='/order/confirmation' component= {OrderReceived} />
 
             <Route path='/about' component= {About} />
             <Route path='/contact' component= {Contact} />
@@ -37,7 +40,8 @@ let Routes = () => {
             {/*<PrivateRoute path='/product/create' component= {CreateProduct} />*/}
 
             /*Admin*/
-            <Route path='/product/create' component= {CreateProduct} />
+            <Route exact path='/product/create' component= {CreateProduct} />
+            <Route exact path='/product/edit/:id' component= {CreateProduct} />
             <Route path='/product/list' component= {AdminProductsList} />
 
             /*Rest*/

@@ -1,9 +1,9 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 
-import { Grid, Row, Col, Form, FormGroup, FormControl, ControlLabel, Checkbox, Radio, Button } from 'react-bootstrap';
+import { Grid, Row, Col, Checkbox, Button } from 'react-bootstrap';
 
 import FormInputField from '../../../common/formComponents/FormInputField';
+import FormTextareaField from '../../../common/formComponents/FormTextareaField';
 import AddImageForm from './partials/AddImageFrom';
 
 import productsService from '../../../../services/products/productsService';
@@ -17,12 +17,47 @@ class CreateProduct extends React.Component {
 			description: '',
 			price: '',
 			imageUrls: [],
-			isTopSeller: false
+			isTopSeller: false,
+			isBlocked: false
 		};
 	}
 
+	fromCreate = false;
+	requestPath = this.props.location.pathname;
+	productId = this.props.match.params.id;
+
+	componentDidMount () {
+		if (this.requestPath === '/product/create') {
+			this.fromCreate = true;
+			return
+		}
+
+		productsService
+			.getProduct(this.productId)
+			.then (res => {
+				let p = res.product;
+
+				this.setState({
+					name: p.name,
+					description: p.desription,
+					price: p.price,
+					imageUrls: p.images,
+					isTopSeller: p.isTopSeller,
+					isBlocked: p.isBlocked
+				}, () => {
+					console.log(this.state)
+				})
+			})
+			.catch(err => {
+				console.log(err);
+			});
+	}
+
 	updateInfo = (e) => {
-		this.setState({[e.target.name]: e.target.value});
+		console.log(e.target.name);
+		this.setState({[e.target.name]: e.target.value}, (e) => {
+			console.log(this.state)
+		});
 	};
 
 	addImage = (url) => {
@@ -32,23 +67,39 @@ class CreateProduct extends React.Component {
 	submitInfo = (e) => {
 		e.preventDefault();
 
+		if (this.fromCreate) {
+			productsService
+				.addProduct(this.state)
+				.then(res => {
+					console.log(res);
+				})
+				.catch(err => {
+					console.log(err.responseText)
+				});
+			return
+		}
+
 		productsService
-			.addProduct(this.state)
+			.updateProduct(this.state, this.productId)
 			.then(res => {
 				console.log(res);
 			})
 			.catch(err => {
 				console.log(err.responseText)
-			})
+			});
 	};
 
 	cancel = () => {
 		console.log('cancel');
 	};
 
-	handleCheckBox = () => {
-		this.setState({isTopSeller: !this.state.isTopSeller}, () => {
-			console.log(this.state.isTopSeller)
+	handleCheckBox = (e) => {
+
+		console.log(e.target.name);
+		console.log(this.state[e.target.name]);
+
+		this.setState({[e.target.name]: !this.state[e.target.name]}, () => {
+			console.log(this.state)
 		});
 	};
 
@@ -76,10 +127,9 @@ class CreateProduct extends React.Component {
 						</Col>
 
 						<Col md={3} sm={4} xs={8}>
-							<FormInputField
+							<FormTextareaField
 								label="Описание"
 								name="description"
-								type="text"
 								value={this.state.description}
 								required={true}
 								disabled={false}
@@ -104,15 +154,24 @@ class CreateProduct extends React.Component {
 
 						<Col md={3} sm={4} xs={8}>
 							<Checkbox readOnly
+							          name="isTopSeller"
 							          onChange={this.handleCheckBox}>
 								Top Seller
+							</Checkbox>
+						</Col>
+
+						<Col md={3} sm={4} xs={8}>
+							<Checkbox readOnly
+							          name="isBlocked"
+							          onChange={this.handleCheckBox}>
+								Блокиране
 							</Checkbox>
 						</Col>
 
 
 						<Col xs={12}>
 							<Button onClick={this.cancel}>Отказ</Button>
-							<Button bsStyle='primary' type="submit">Създай</Button>
+							<Button bsStyle='primary' type="submit">Потвърди</Button>
 						</Col>
 
 					</form>

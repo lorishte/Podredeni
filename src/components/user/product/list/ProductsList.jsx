@@ -4,7 +4,7 @@ import { Row, PageHeader, Grid } from 'react-bootstrap';
 
 import ProductCard from './partials/ProductCard';
 
-import productsService from '../../../services/products/productsService';
+import productsService from '../../../../services/products/productsService';
 
 
 class ProductsList extends React.Component {

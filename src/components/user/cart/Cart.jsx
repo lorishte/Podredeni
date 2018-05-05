@@ -9,6 +9,9 @@ import CartProductsTable from './products/CartProductsTable';
 import OrderDetailsForm from './orderDetails/OrderDetailsForm';
 import ReviewOrder from './reviewOrder/ReviewOrder';
 
+import orderService from '../../../services/orders/ordersService';
+
+
 class Cart extends React.Component {
 	constructor (props) {
 		super(props);
@@ -24,9 +27,6 @@ class Cart extends React.Component {
 
 	componentDidMount () {
 		let storedOrderDetails = JSON.parse(sessionStorage.getItem('orderDetails'));
-
-		console.log(this.state.orderDetails);
-		console.log(222);
 
 		if (storedOrderDetails === null) {
 			storedOrderDetails = {
@@ -103,7 +103,30 @@ class Cart extends React.Component {
 
 	submitOrder = () => {
 		console.log('from submit');
-		console.log(this.state.products);
+
+		orderService
+			.addDeliveryData(this.state.orderDetails)
+			.then(res => {
+				console.log(res);
+
+				let deliveryId = res.deliveryDataId;
+				let productIds = generateOrderData(this.state.products).productIds;
+				let quantities = generateOrderData(this.state.products).quantities;
+
+				console.log(deliveryId);
+				console.log(productIds);
+				console.log(quantities);
+
+				orderService
+					.addOrder(deliveryId, productIds, quantities)
+					.then(res => {
+						console.log(res);
+						sessionStorage.removeItem('products');
+						this.props.history.push('/order/confirmation')
+					})
+			})
+			.catch(err => console.log(err))
+
 	};
 
 	render () {
@@ -167,3 +190,15 @@ class Cart extends React.Component {
 }
 
 export default Cart;
+
+
+function generateOrderData (products) {
+	let productIds = [];
+	let quantities = [];
+	products.forEach(e => {
+		productIds.push(e.product.id);
+		quantities.push(e.quantity);
+	});
+
+	return {productIds, quantities};
+}

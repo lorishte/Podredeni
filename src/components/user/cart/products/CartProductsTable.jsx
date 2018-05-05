@@ -19,7 +19,6 @@ class CartProductsTable extends React.Component {
 
 	componentDidMount () {
 		this.calculateTotalSum();
-		console.log(this.props);
 	}
 
 	confirmDeletion = (id) => {
@@ -41,7 +40,7 @@ class CartProductsTable extends React.Component {
 
 	editItem = (id, newQuantity) => {
 		let correctedProducts = this.props.products;
-		correctedProducts.map(e => {
+		correctedProducts.forEach(e => {
 			if (e.product.id === id) {
 				e.quantity = newQuantity;
 			}
@@ -77,7 +76,6 @@ class CartProductsTable extends React.Component {
 						<tbody>
 
 						{this.props.products.map((e, i) => {
-							console.log(e);
 							return <CartProductRow
 								key={e.product.id}
 								index={i + 1}

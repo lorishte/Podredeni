@@ -8,7 +8,7 @@ import ProductInfo from './partials/ProductInfo';
 import AddToCartForm from './partials/AddToCartForm';
 import ProductTabs from './partials/ProductTabs';
 
-import productsService from '../../../services/products/productsService';
+import productsService from '../../../../services/products/productsService';
 
 
 class Product extends React.Component {

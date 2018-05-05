@@ -3,7 +3,7 @@ import { NavLink, Link } from 'react-router-dom';
 
 import { Navbar, Nav, Badge, Button } from 'react-bootstrap';
 import products from '../../data/products';
-import requesterService from '../../services/requester';
+import productsService from '../../services/products/productsService';
 
 class Header extends React.Component {
 
@@ -14,8 +14,8 @@ class Header extends React.Component {
 	seedProducts = () => {
 		for (let i = 0; i < products.length; i++) {
 			setTimeout(function () {
-				requesterService
-					.addProduct(products[i])
+				productsService
+					.seedProducts(products[i])
 					.then(response => {
 						console.log(response)
 					})

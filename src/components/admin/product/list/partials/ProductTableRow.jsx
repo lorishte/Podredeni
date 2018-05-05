@@ -1,4 +1,5 @@
 import React from 'react';
+import {Link} from 'react-router-dom';
 
 class ProductTableRow extends React.Component {
 	constructor (props) {
@@ -26,7 +27,7 @@ class ProductTableRow extends React.Component {
 					{p.isBlocked}
 				</td>
 				<td>
-					{p.isBlocked}
+					<Link to={'/product/edit/' + p.id}>Edit</Link>
 				</td>
 			</tr>
 

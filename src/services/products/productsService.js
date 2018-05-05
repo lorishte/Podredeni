@@ -41,8 +41,8 @@ export default {
 			.get(endPointId, null);
 	},
 
-	updateProduct: (state) => {
-		let endPointId = endPoint + `/${state.id}`;
+	updateProduct: (state, id) => {
+		let endPointId = endPoint + '/' + id;
 
 		let product = {
 			Name: state.name,
@@ -53,7 +53,7 @@ export default {
 		};
 
 		return requesterService
-			.put(endPointId, null, product);
+			.update(endPointId, null, product);
 	},
 
 	blockProduct: (id) => {
@@ -61,5 +61,11 @@ export default {
 
 		return requesterService
 			.remove(endPointId, null);
+	},
+
+	seedProducts: (product) => {
+
+		return requesterService
+			.post(endPoint, null, product);
 	},
 };

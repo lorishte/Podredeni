@@ -2,7 +2,7 @@ import React from 'react';
 
 import { Row , Col } from 'react-bootstrap';
 
-import ProductCard from '../../../productList/partials/ProductCard';
+import ProductCard from '../../../product/list/partials/ProductCard';
 
 import productsService from '../../../../../services/products/productsService';
 
