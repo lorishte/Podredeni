@@ -25,32 +25,35 @@ class Cart extends React.Component {
 	componentDidMount () {
 		let storedOrderDetails = JSON.parse(sessionStorage.getItem('orderDetails'));
 
+		console.log(this.state.orderDetails);
+		console.log(222);
+
 		if (storedOrderDetails === null) {
 			storedOrderDetails = {
 				recipientInfo: {
-					email: '',
-					firstName: '',
-					lastName: '',
-					phone: ''
+					firstName: 'Лора',
+					lastName: 'Милчева',
+					email: 'lori@abv.bg',
+					phone: '0887 718 788'
 				},
 				ekontDetails: {
-					address: '',
-					city: '',
 					country: '',
+					city: '',
 					officeCode: '',
-					officeName: ''
+					officeName: '',
+					address: ''
 				},
 				addressDetails: {
-					apartment: '',
-					block: '',
-					city: '',
 					country: '',
-					district: '',
-					entrance: '',
-					floor: '',
-					postalCode: '',
-					street: '',
-					streetNo: ''
+					city: 'София',
+					postalCode: '1632',
+					street: 'Тодор Александров',
+					streetNo: '40',
+					district: 'Младост',
+					block: '520',
+					entrance: 'Б',
+					floor: '8',
+					apartment: '132'
 				},
 				comment: '',
 				toAddress: true

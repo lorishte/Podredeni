@@ -22,6 +22,21 @@ class OrderDetails extends React.Component {
 		};
 	}
 
+	componentDiDMount () {
+		console.log(this.props)
+	}
+
+	// componentWillReceiveProps(nextProps){
+	// 	console.log(nextProps);
+	// 	this.setState({
+	// 		recipientInfo: nextProps.data.recipientInfo,
+	// 		ekontDetails: nextProps.data.ekontDetails,
+	// 		addressDetails: nextProps.data.addressDetails,
+	// 		comment: nextProps.data.comment,
+	// 		toAddress: nextProps.data.toAddress})
+	// }
+
+
 	updateInfo = (stateProp, data) => {
 		this.setState({[stateProp]: data}, () => {
 			this.props.onChange('orderDetails', this.state);
@@ -32,7 +47,6 @@ class OrderDetails extends React.Component {
 		e.preventDefault();
 		this.props.continue();
 	};
-
 
 	render () {
 		return (

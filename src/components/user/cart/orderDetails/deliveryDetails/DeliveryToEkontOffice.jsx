@@ -71,7 +71,6 @@ class EkontInfoInputs extends React.Component {
 		}
 
 		this.setState({[e.target.name]: e.target.value}, () => {
-			console.log(this.state)
 			this.props.onChange('ekontDetails', {
 				country: this.state.country,
 				city: this.state.city,
