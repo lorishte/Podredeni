@@ -37,10 +37,9 @@ class Header extends React.Component {
 					<Navbar.Toggle />
 				</Navbar.Header>
 
-				<Button onClick={this.seedProducts}>Seed products</Button>
-
 				<Navbar.Collapse >
 					<Nav pullRight>
+						<Button onClick={this.seedProducts}>Seed products</Button>
 
 						<NavLink to="/product/list" activeClassName="active" className='nav-link'>
 							AdminProductsList

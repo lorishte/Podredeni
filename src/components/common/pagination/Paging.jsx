@@ -13,7 +13,7 @@ class Paging extends React.Component {
 	}
 
 	changePage = (e, selectedPage) => {
-		console.log(this.props.active);
+		console.log(this.props);
 
 		if (selectedPage === undefined) selectedPage = Number(e.target.text);
 		if (selectedPage < 1 || selectedPage > this.props.pagesCount) return;
@@ -22,7 +22,6 @@ class Paging extends React.Component {
 	};
 
 	render () {
-
 		let {active, pagesCount} = this.props;
 
 		return (
@@ -41,7 +40,7 @@ class Paging extends React.Component {
 				<Pagination.Item active>{active}</Pagination.Item>
 
 				{active !== pagesCount && <Pagination.Item onClick={this.changePage}>{active + 1}</Pagination.Item>}
-				{active === 1 && <Pagination.Item onClick={this.changePage}>{active + 2}</Pagination.Item>}
+				{(active === 1 && pagesCount >= active + 2) && <Pagination.Item onClick={this.changePage}>{active + 2}</Pagination.Item>}
 				{active < pagesCount - 2 && <Pagination.Ellipsis /> }
 
 				<Pagination.Next

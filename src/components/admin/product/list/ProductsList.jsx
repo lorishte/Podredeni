@@ -3,9 +3,10 @@ import { Link } from 'react-router-dom';
 
 import { Grid, Row, Col, Table } from 'react-bootstrap';
 
+import TableHead from './partials/TableHead';
 import ProductTableRow from './partials/ProductTableRow';
-import SortButtons from './partials/SortButtons';
 import Paging from '../../../common/pagination/Paging';
+import FormSelectField from '../../../common/formComponents/FormSelectField';
 
 import productsService from '../../../../services/products/productsService';
 
@@ -15,10 +16,10 @@ class ProductsList extends React.Component {
 
 		this.state = {
 			products: '',
-			size: 3,
-			page: 3,
+			size: 10,
+			page: 1,
 			sortProperty: 'number',
-			descending: true,
+			descending: false,
 			filterProperty: 'name',
 			filterValue: '',
 			productsCount: '',
@@ -34,6 +35,7 @@ class ProductsList extends React.Component {
 		productsService
 			.loadProducts(this.state)
 			.then(res => {
+				console.log(res)
 				let productsCount = Number(res.productsCount);
 				let size = Number(this.state.size);
 
@@ -49,7 +51,7 @@ class ProductsList extends React.Component {
 	};
 
 	sort = (sortProperty, descending) => {
-		console.log(sortProperty, descending);
+
 		this.setState({
 			sortProperty: sortProperty,
 			descending: descending
@@ -68,11 +70,20 @@ class ProductsList extends React.Component {
 	};
 
 	goToPage = (page) => {
-		this.setState({ page: page }, () => this.loadProducts())
+		this.setState({page: page}, () => this.loadProducts());
 	};
+
+	handleChange = (e) => {
+		if(e.target.value === 'all') e.target.value = 10000000;
+		this.setState({[e.target.name] : e.target.value}, () => {
+			this.loadProducts();
+		})
+	};
+
 
 	render () {
 		let productsList;
+		let pagesOnPage = {10: 10, 15: 15, 20: 20, 25: 25, all: 'all'};
 
 		if (this.state.products !== '') {
 			productsList = this.state.products.map(e => {
@@ -83,37 +94,26 @@ class ProductsList extends React.Component {
 		return (
 			<Grid>
 				<Row>
-					<Col sm={12}>
-						<Table striped bordered condensed hover>
-							<thead>
-							<tr>
-								<th>#
-									<SortButtons
-										sortProperty="number"
-										changeClass={this.changeClass}
-										sort={this.sort}/></th>
-								<th>Наименование
-									<SortButtons
-										sortProperty="name"
-										changeClass={this.changeClass}
-										sort={this.sort}/></th>
-								<th>Цена
-									<SortButtons
-										sortProperty="price"
-										changeClass={this.changeClass}
-										sort={this.sort}/>
-								</th>
-								<th>TopSeller</th>
-								<th>Blocked</th>
-								<th>Редакция</th>
-							</tr>
-							</thead>
-							<tbody>
-							{productsList}
-							</tbody>
-						</Table>
+					<Col sm={4}>
+						<FormSelectField
+							label="Брой продукти на страница"
+							name="size"
+							value={this.state.size}
+							defaultValue={10}
+							optionsList={pagesOnPage}
+							required={false}
+							onChange={this.handleChange}/>
 					</Col>
 				</Row>
+
+				<Table striped bordered condensed hover>
+					<TableHead
+						changeClass={this.changeClass}
+						sort={this.sort}/>
+					<tbody>
+					{productsList}
+					</tbody>
+				</Table>
 
 				{this.state.productsCount !== '' &&
 				<Paging
