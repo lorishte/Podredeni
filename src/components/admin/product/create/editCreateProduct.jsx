@@ -32,6 +32,11 @@ class CreateProduct extends React.Component {
 			return
 		}
 
+		this.loadProductData();
+
+	}
+
+	loadProductData = () => {
 		productsService
 			.getProduct(this.productId)
 			.then (res => {
@@ -44,14 +49,12 @@ class CreateProduct extends React.Component {
 					imageUrls: p.images,
 					isTopSeller: p.isTopSeller,
 					isBlocked: p.isBlocked
-				}, () => {
-					console.log(this.state)
 				})
 			})
 			.catch(err => {
 				console.log(err);
 			});
-	}
+	};
 
 	updateInfo = (e) => {
 		console.log(e.target.name);
@@ -90,7 +93,8 @@ class CreateProduct extends React.Component {
 	};
 
 	cancel = () => {
-		console.log('cancel');
+		//redirect back
+		this.props.history.go(-1);
 	};
 
 	handleCheckBox = (e) => {
@@ -108,7 +112,8 @@ class CreateProduct extends React.Component {
 			<Grid>
 				<Row>
 					<Col sm={12}>
-						<h3>Създаване на продукт</h3>
+						{this.requestPath.includes('create') && <h3>Създаване на продукт</h3>}
+						{this.requestPath.includes('edit') && <h3>Редакция</h3>}
 						<hr/>
 					</Col>
 				</Row>

@@ -19,6 +19,7 @@ class CartProductsTable extends React.Component {
 
 	componentDidMount () {
 		this.calculateTotalSum();
+		console.log(this.props)
 	}
 
 	confirmDeletion = (id) => {
@@ -34,14 +35,14 @@ class CartProductsTable extends React.Component {
 	};
 
 	deleteItem = (id) => {
-		let correctedProducts = this.props.products.filter(e => e.product.id !== id);
+		let correctedProducts = this.props.products.filter(e => e.id !== id);
 		this.updateParent(correctedProducts);
 	};
 
 	editItem = (id, newQuantity) => {
 		let correctedProducts = this.props.products;
 		correctedProducts.forEach(e => {
-			if (e.product.id === id) {
+			if (e.id === id) {
 				e.quantity = newQuantity;
 			}
 		});
@@ -58,7 +59,7 @@ class CartProductsTable extends React.Component {
 		let sum = 0;
 
 		this.props.products.map(e => {
-			sum += e.product.price * e.quantity;
+			sum += e.price * e.quantity;
 		});
 
 		this.setState({totalSum: sum.toFixed(2)});
@@ -75,13 +76,12 @@ class CartProductsTable extends React.Component {
 
 						<tbody>
 
-						{this.props.products.map((e, i) => {
+						{this.props.products.map((p, i) => {
 							return <CartProductRow
-								key={e.product.id}
+								key={p.id}
 								index={i + 1}
 								editable={true}
-								data={e.product}
-								quantity={e.quantity}
+								data={p}
 								delete={this.confirmDeletion}
 								edit={this.editItem}/>;
 						})

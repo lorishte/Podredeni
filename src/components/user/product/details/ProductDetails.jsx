@@ -52,7 +52,17 @@ class Product extends React.Component {
 				return;
 			}
 
-			addedProducts.push(this.state);
+			let p = this.state.product;
+			let product = {
+				id: p.id,
+				name: p.name,
+				image: p.images[0],
+				price: p.price,
+				quantity: this.state.quantity
+			};
+
+			addedProducts.push(product);
+			console.log(addedProducts);
 			sessionStorage.products = JSON.stringify(addedProducts);
 
 			this.toastContainer.success('', 'Product added to your cart.', {
@@ -63,7 +73,7 @@ class Product extends React.Component {
 
 
 	checkIfProductIsInCart = (array) => {
-		return (array.filter(e => e.product.name === this.state.product.name).length > 0)
+		return (array.filter(e => e.id === this.state.product.id).length > 0)
 	};
 
 	render () {

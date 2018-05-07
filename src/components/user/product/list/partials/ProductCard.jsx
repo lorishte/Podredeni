@@ -22,7 +22,7 @@ class ProductCard extends React.Component {
 						<div className="card-body">
 							<h4 className="card-title">{data.name}</h4>
 							<p className="card-text">{data.desription.substring(0, 80) + ' ...'}</p>
-							<p className="price">{data.price}</p>
+							<p className="price">{data.price.toFixed(2)}</p>
 						</div>
 					</div>
 				</Link>

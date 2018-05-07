@@ -12,7 +12,7 @@ class TableHead extends React.Component {
 		return (
 			<thead>
 			<tr>
-				<th>#
+				<th className="text-center">No
 					<SortButtons
 						sortProperty="number"
 						changeClass={this.props.changeClass}
@@ -22,15 +22,15 @@ class TableHead extends React.Component {
 						sortProperty="name"
 						changeClass={this.props.changeClass}
 						sort={this.props.sort}/></th>
-				<th>Цена
+				<th className="text-center">Цена
 					<SortButtons
 						sortProperty="price"
 						changeClass={this.props.changeClass}
 						sort={this.props.sort}/>
 				</th>
-				<th>TopSeller</th>
-				<th>Blocked</th>
-				<th>Редакция</th>
+				<th className="text-center">TopSeller</th>
+				<th className="text-center">Blocked</th>
+				<th className="text-center">Редакция</th>
 			</tr>
 			</thead>
 		);

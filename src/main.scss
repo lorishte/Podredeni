@@ -102,13 +102,33 @@ h3 {
 
   &.btn-sort {
     padding: 2px;
-    color: greenyellow;
+    color: $primary;
     background-color: transparent;
+    @include transition;
 
     &.active {
-      color: red;
+      color: $danger;
     }
   }
+}
+
+.btn.active,
+.btn:active,
+.btn.active:focus{
+  background-image: none;
+  outline: 0;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+
+.btn.active.focus, .btn.active:focus, .btn.focus, .btn:active.focus, .btn:active:focus, .btn:focus {
+  outline: none;
+}
+
+.table-sorting-buttons {
+  margin-left: 15px;
+  display: inline-block;
+  margin-right: 0;
 }
 
 .container .jumbotron,
@@ -358,15 +378,16 @@ h3 {
 }
 
 .price {
-  font-size: 1.3em;
+  //font-size: 1.3em;
   padding: 5px 10px;
   display: inline-block;
-  background-color: #f1f1f1;
+  //background-color: #f1f1f1;
   font-weight: 400;
   font-family: "Lato", sans-serif;
 
   &::after {
-    content: ' BGN';
+    content: " BGN";
+    font-family: "Montserrat", sans-serif;
     font-size: .7em;
     opacity: .5;
   }

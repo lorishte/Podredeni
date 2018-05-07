@@ -5,7 +5,7 @@ class CartProductRow extends React.Component {
 		super(props);
 
 		this.state = {
-			quantity: this.props.quantity
+			quantity: this.props.data.quantity
 		};
 	}
 
@@ -30,22 +30,21 @@ class CartProductRow extends React.Component {
 	};
 
 	render () {
-		let product = this.props.data;
-		let quantity = this.props.quantity;
+		let p = this.props.data;
 
 		return (
 			<tr>
 				{this.props.editable &&
 					<td>
-						<button onClick={() => this.props.delete(product.id)}
+						<button onClick={() => this.props.delete(p.id)}
 						        className="btn btn-xs">
 							<i className="fa fa-times" aria-hidden="true"/>
 						</button>
 					</td>
 				}
 				<td>{this.props.index}</td>
-				<td className="col-xs-1"><img className="image-thumbnail" src={product.images[0]}/></td>
-				<td>{product.name}</td>
+				<td className="col-xs-1"><img className="image-thumbnail" src={p.image}/></td>
+				<td>{p.name}</td>
 				<td>
 					<span className="col-xs-2 quantity">{this.state.quantity}</span>
 					{this.props.editable &&
@@ -55,8 +54,8 @@ class CartProductRow extends React.Component {
 						</span>
 					}
 				</td>
-				<td className="text-right">{product.price.toFixed(2)}</td>
-				<td className="text-right">{(product.price * quantity).toFixed(2)}</td>
+				<td className="text-right">{p.price.toFixed(2)}</td>
+				<td className="text-right">{(p.price * p.quantity).toFixed(2)}</td>
 			</tr>
 
 		);

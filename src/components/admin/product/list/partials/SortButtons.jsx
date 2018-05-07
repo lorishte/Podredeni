@@ -12,7 +12,7 @@ class SortButtons extends React.Component {
 
 		return (
 
-			<div>
+			<div className="table-sorting-buttons">
 				<button
 					className={this.props.changeClass(sortProp, false)}
 					onClick={() => this.props.sort(sortProp, false)}>

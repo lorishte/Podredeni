@@ -94,12 +94,12 @@ class ProductsList extends React.Component {
 		return (
 			<Grid>
 				<Row>
-					<Col sm={4}>
+					<Col xs={3} sm={1}>
 						<FormSelectField
-							label="Брой продукти на страница"
+							label="Покажи"
 							name="size"
 							value={this.state.size}
-							defaultValue={10}
+							defaultValue={this.state.size}
 							optionsList={pagesOnPage}
 							required={false}
 							onChange={this.handleChange}/>

@@ -10,21 +10,22 @@ class ProductTableRow extends React.Component {
 
 		let p = this.props.data;
 		return (
-			<tr>
+			<tr className="text-center">
 				<td>
 					{p.number}
 				</td>
-				<td>
+				<td className="text-left">
 					{p.name}
 				</td>
 				<td className="text-right">
-					<p className=""> {p.price.toFixed(2)}</p>
+					<p className="price"> {p.price.toFixed(2)}</p>
 				</td>
 				<td>
-					{p.isTopSeller}
+					{!p.isTopSeller && <i className="fa fa-check" aria-hidden="true"/>
+					}
 				</td>
 				<td>
-					{p.isBlocked}
+					{!p.isBlocked && <i className="fa fa-check" aria-hidden="true"/>}
 				</td>
 				<td>
 					<Link to={'/product/edit/' + p.id}>Edit</Link>
