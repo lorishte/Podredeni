@@ -28,7 +28,6 @@ class Product extends React.Component {
 		productsService
 			.getProduct(id)
 			.then(res => {
-				console.log(res);
 				this.setState({product: res.product})
 			})
 			.catch(err => {
@@ -62,7 +61,6 @@ class Product extends React.Component {
 			};
 
 			addedProducts.push(product);
-			console.log(addedProducts);
 			sessionStorage.products = JSON.stringify(addedProducts);
 
 			this.toastContainer.success('', 'Product added to your cart.', {
@@ -94,7 +92,7 @@ class Product extends React.Component {
 				{this.state.product !== '' &&
 					<Row>
 						<Col xs={8} sm={6} md={4}>
-							<Image src={'../' + product.images[0]} thumbnail/>
+							<Image src={product.images[0]} thumbnail/>
 						</Col>
 						<Col mdOffset={1} xs={12} sm={6} md={7}>
 							<ProductInfo data={product}/>

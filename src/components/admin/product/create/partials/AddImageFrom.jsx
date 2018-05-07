@@ -1,8 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-
-import { Row, Col, Button } from 'react-bootstrap';
+import { Row, Col, Button, FormControl, FormGroup, InputGroup } from 'react-bootstrap';
 
 import FormInputField from '../../../../common/formComponents/FormInputField';
 
@@ -16,24 +15,28 @@ class AddImageForm extends React.Component {
 	}
 
 	handleChange = (e) => {
-		this.setState({imageUrl: e.target.value}, () => {
-			console.log(this.state);
-		});
+		this.setState({imageUrl: e.target.value});
+	};
+
+	addImage = () => {
+		if(this.state.imageUrl === '') return;
+
+		this.props.addImage((this.state.imageUrl)   );
+		this.setState({imageUrl: ''});
 	};
 
 	render () {
 		return (
-			<Col md={3} sm={4} xs={8}>
-				<FormInputField
-					label="Добави снимка"
-					name="imageUrl"
-					type="text"
-					required={false}
-					disabled={false}
-					onChange={this.handleChange}/>
-
-				<Button onClick={() => this.props.onEnter(this.state.imageUrl)} bsStyle='primary'>Добави</Button>
-			</Col>
+			<FormGroup>
+				<InputGroup>
+					<FormControl type="text"
+					             onChange={this.handleChange}
+					             value={this.state.imageUrl}/>
+					< InputGroup.Button >
+						< Button onClick={this.addImage}>Добави</Button>
+					</InputGroup.Button>
+				</InputGroup>
+			</FormGroup>
 		);
 	}
 }

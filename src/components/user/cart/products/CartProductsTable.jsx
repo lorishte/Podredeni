@@ -6,7 +6,7 @@ import { confirmAlert } from 'react-confirm-alert';
 
 // Partials
 import TableHead from './partials/TableHead';
-import CartProductRow from './partials/cartProductRow';
+import CartProductRow from './partials/CartProductRow';
 
 class CartProductsTable extends React.Component {
 	constructor (props) {
@@ -19,7 +19,6 @@ class CartProductsTable extends React.Component {
 
 	componentDidMount () {
 		this.calculateTotalSum();
-		console.log(this.props)
 	}
 
 	confirmDeletion = (id) => {

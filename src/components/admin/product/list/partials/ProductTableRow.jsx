@@ -21,11 +21,11 @@ class ProductTableRow extends React.Component {
 					<p className="price"> {p.price.toFixed(2)}</p>
 				</td>
 				<td>
-					{!p.isTopSeller && <i className="fa fa-check" aria-hidden="true"/>
+					{p.isTopSeller && <i className="fa fa-check" aria-hidden="true"/>
 					}
 				</td>
 				<td>
-					{!p.isBlocked && <i className="fa fa-check" aria-hidden="true"/>}
+					{p.isBlocked && <i className="fa fa-check" aria-hidden="true"/>}
 				</td>
 				<td>
 					<Link to={'/product/edit/' + p.id}>Edit</Link>

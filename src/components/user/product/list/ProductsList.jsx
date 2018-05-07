@@ -6,13 +6,12 @@ import ProductCard from './partials/ProductCard';
 
 import productsService from '../../../../services/products/productsService';
 
-
 class ProductsList extends React.Component {
 	constructor (props) {
 		super(props);
 
 		this.state = {
-			products: '',
+			products: [],
 			size: 16,
 			page: 1,
 			sortProperty: 'number',
@@ -26,22 +25,19 @@ class ProductsList extends React.Component {
 		productsService
 			.loadProducts(this.state)
 			.then(res => {
-				this.setState({products: res.products})
+				this.setState({products: res.products});
 			})
 			.catch(err => {
-				console.log(err.responseText)
+				console.log(err.responseText);
 			});
 	}
-
 
 	render () {
 		let productsList;
 
-		if (this.state.products !== '') {
-			productsList = this.state.products.map(e => {
-				return <ProductCard key={e.id} data={e}/>;
-			});
-		}
+		productsList = this.state.products.map(e => {
+			return <ProductCard key={e.id} data={e}/>;
+		});
 
 		return (
 			<Grid>

@@ -50,20 +50,19 @@ class Header extends React.Component {
 						</NavLink>
 
 						<NavLink to="/products" activeClassName="active" className='nav-link'>
-							Products
+							Продукти
 						</NavLink>
 
 						<NavLink to="/about" activeClassName="active" className='nav-link'>
-							About
+							За нас
 						</NavLink>
 
 						<NavLink to="/contact" activeClassName="active" className='nav-link'>
-							Contact
+							Контакт
 						</NavLink>
 
 						<NavLink to="/cart" activeClassName="active" className='nav-link cart'>
 							<i className="fa fa-cart-arrow-down" aria-hidden="true"/>
-							&nbsp; My Cart &nbsp;
 						</NavLink>
 					</Nav>
 				</Navbar.Collapse>

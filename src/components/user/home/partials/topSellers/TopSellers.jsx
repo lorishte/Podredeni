@@ -26,7 +26,6 @@ class TopSellers extends React.Component {
 		productsService
 			.loadProducts(this.state)
 			.then(res => {
-				console.log(res);
 				this.setState({products: res.products})
 			})
 			.catch(err => {

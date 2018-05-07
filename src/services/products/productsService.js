@@ -10,8 +10,9 @@ export default {
 			'&size=' + state.size +
 			'&filterElement=' + state.filterProperty +
 			'&filterValue=' + state.filterValue +
-			'&sortelEment=' + state.sortProperty +
-			'&sortDesc=' + state.descending;
+			'&sortElement=' + state.sortProperty +
+			'&sortDesc=' + state.descending +
+			'&includeBlocked=' + true;
 
 		return requesterService
 			.get(endPoint, null, query);
@@ -32,10 +33,7 @@ export default {
 	},
 
 	getProduct: (id) => {
-		console.log(id);
 		let endPointId = endPoint + `/${id}`;
-
-		console.log(endPointId);
 
 		return requesterService
 			.get(endPointId, null);
@@ -49,7 +47,8 @@ export default {
 			Description: state.description,
 			Price: state.price,
 			ImageUrls: state.imageUrls,
-			IsTopSeller: state.isTopSeller
+			IsTopSeller: state.isTopSeller,
+			IsBlocked: state.isBlocked
 		};
 
 		return requesterService

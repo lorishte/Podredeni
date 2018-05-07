@@ -4,7 +4,7 @@ import { Button, Table, Row, Col } from 'react-bootstrap';
 
 import CartProductsTable from '../products/CartProductsTable';
 import TableHead from '../products/partials/TableHead';
-import CartProductRow from '../products/partials/cartProductRow';
+import CartProductRow from '../products/partials/CartProductRow';
 import EkontOrderDetailsSummary from './partials/EkontOrderDetailsSummary';
 import AddressOrderDetailsSummary from './partials/AddressOrderDetailsSummary';
 import RecipientDetailsSummary from './partials/RecipientDetailsSummary';

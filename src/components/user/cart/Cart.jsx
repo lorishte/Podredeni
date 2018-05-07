@@ -1,5 +1,5 @@
 import React from 'react';
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 // Helpers
 import { Grid, Row, Col, Breadcrumb } from 'react-bootstrap';
@@ -10,7 +10,6 @@ import OrderDetailsForm from './orderDetails/OrderDetailsForm';
 import ReviewOrder from './reviewOrder/ReviewOrder';
 
 import orderService from '../../../services/orders/ordersService';
-
 
 class Cart extends React.Component {
 	constructor (props) {
@@ -57,13 +56,12 @@ class Cart extends React.Component {
 				},
 				comment: '',
 				toAddress: true
-			}
+			};
 		}
 
-		this.setState({ orderDetails: storedOrderDetails });
+		this.setState({orderDetails: storedOrderDetails});
 		this.loadProducts();
 	}
-
 
 	loadProducts = () => {
 		let addedProducts = JSON.parse(sessionStorage.getItem('products'));
@@ -102,45 +100,43 @@ class Cart extends React.Component {
 	};
 
 	submitOrder = () => {
-		console.log('from submit');
-
 		orderService
 			.addDeliveryData(this.state.orderDetails)
 			.then(res => {
-				console.log(res);
-
 				let deliveryId = res.deliveryDataId;
-				let productIds = generateOrderData(this.state.products).productIds;
-				let quantities = generateOrderData(this.state.products).quantities;
-
-				console.log(deliveryId);
-				console.log(productIds);
-				console.log(quantities);
+				let products = generateOrderData(this.state.products);
 
 				orderService
-					.addOrder(deliveryId, productIds, quantities)
+					.addOrder(deliveryId, products)
 					.then(res => {
 						console.log(res);
 						sessionStorage.removeItem('products');
-						this.props.history.push('/order/confirmation')
-					})
+						this.props.history.push('/order/confirmation');
+					});
 			})
-			.catch(err => console.log(err))
+			.catch(err => console.log(err));
 
 	};
 
 	render () {
 		return (
 			<Grid id="cart">
-				<Breadcrumb>
-					<Link to="/" className="breadcrumb-item">Начало</Link>
-					<Link to="/cart" className="breadcrumb-item">Кошница</Link>
-				</Breadcrumb>
+				<Row>
+					<Col xs={12}>
+						<p>
+							<span className={this.state.productsView ? '' : 'text-grey'}>Преглед и редакция</span>
+							<span className="text-grey">&nbsp; &#10231; &nbsp;</span>
+							<span className={this.state.orderDetailsView ? '' : 'text-grey'}>Данни за доставка</span>
+							<span className="text-grey">&nbsp; &#10231; &nbsp;</span>
+							<span className={this.state.reviewView ? '' : 'text-grey'}>Потвърждение</span>
+						</p>
+					</Col>
+				</Row>
 				<Row>
 					{this.state.products.length > 0 && this.state.productsView &&
 					<Col xs={12}>
 						<h2 className="cart-view-name">
-							<span className="text-grey">Стъпка 1.</span> Преглед на кошницата
+							<span className="text-grey">Стъпка 1.</span> Преглед и редакция
 						</h2>
 						<CartProductsTable
 							products={this.state.products}
@@ -153,6 +149,9 @@ class Cart extends React.Component {
 
 					{this.state.products.length === 0 && this.state.productsView &&
 					<Col xs={12}>
+						<h2 className="cart-view-name">
+							<span className="text-grey">Стъпка 1.</span> Преглед и редакция
+						</h2>
 						<h3>Нямате добавени продукти</h3>
 					</Col>
 					}
@@ -160,7 +159,7 @@ class Cart extends React.Component {
 					{this.state.orderDetailsView &&
 					<Col xs={12}>
 						<h2 className="cart-view-name">
-							<span className="text-grey">Стъпка 2.</span> Въвеждане на данни за доставка
+							<span className="text-grey">Стъпка 2.</span> Данни за доставка
 						</h2>
 						<OrderDetailsForm
 							data={this.state.orderDetails}
@@ -173,7 +172,7 @@ class Cart extends React.Component {
 					{this.state.reviewView &&
 					<Col xs={12}>
 						<h2 className="cart-view-name">
-							<span className="text-grey">Стъпка 3.</span> Преглед и потвърждение
+							<span className="text-grey">Стъпка 3.</span> Потвърждение
 						</h2>
 						<ReviewOrder
 							products={this.state.products}
@@ -191,14 +190,13 @@ class Cart extends React.Component {
 
 export default Cart;
 
-
 function generateOrderData (products) {
-	let productIds = [];
-	let quantities = [];
-	products.forEach(e => {
-		productIds.push(e.product.id);
-		quantities.push(e.quantity);
-	});
-
-	return {productIds, quantities};
+	return products.map(e => {
+			return {
+				ProductId: e.id,
+				Quantity: e.quantity,
+				Price: e.price
+			};
+		}
+	);
 }

@@ -46,13 +46,13 @@ export default {
 			.post(deliveryDataEndPoint, null, details);
 	},
 
-	addOrder: (deliveryId, products, quantities) => {
+	addOrder: (deliveryId, products) => {
 		let order = {
-			ProductIds: products,
-			Quantities: quantities,
+			Products: products,
 			DeliveryDataId: deliveryId
 		};
 
+		console.log(order)
 		return requesterService
 			.post(orderEndPoint, null, order)
 

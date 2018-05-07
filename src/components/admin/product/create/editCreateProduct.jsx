@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Grid, Row, Col, Checkbox, Button } from 'react-bootstrap';
+import { Grid, Row, Col, Checkbox, Button, FormGroup, InputGroup, FormControl, Image } from 'react-bootstrap';
 
 import FormInputField from '../../../common/formComponents/FormInputField';
 import FormTextareaField from '../../../common/formComponents/FormTextareaField';
@@ -29,7 +29,7 @@ class CreateProduct extends React.Component {
 	componentDidMount () {
 		if (this.requestPath === '/product/create') {
 			this.fromCreate = true;
-			return
+			return;
 		}
 
 		this.loadProductData();
@@ -39,17 +39,17 @@ class CreateProduct extends React.Component {
 	loadProductData = () => {
 		productsService
 			.getProduct(this.productId)
-			.then (res => {
+			.then(res => {
 				let p = res.product;
 
 				this.setState({
 					name: p.name,
-					description: p.desription,
+					description: p.description,
 					price: p.price,
 					imageUrls: p.images,
 					isTopSeller: p.isTopSeller,
 					isBlocked: p.isBlocked
-				})
+				});
 			})
 			.catch(err => {
 				console.log(err);
@@ -59,12 +59,14 @@ class CreateProduct extends React.Component {
 	updateInfo = (e) => {
 		console.log(e.target.name);
 		this.setState({[e.target.name]: e.target.value}, (e) => {
-			console.log(this.state)
+			console.log(this.state);
 		});
 	};
 
 	addImage = (url) => {
-		this.setState({imageUrls: [...this.state.imageUrls, url]});
+		this.setState({imageUrls: [...this.state.imageUrls, url]}, () => {
+			console.log(this.state.imageUrls);
+		});
 	};
 
 	submitInfo = (e) => {
@@ -75,20 +77,24 @@ class CreateProduct extends React.Component {
 				.addProduct(this.state)
 				.then(res => {
 					console.log(res);
+					//redirect back
+					this.props.history.go(-1);
 				})
 				.catch(err => {
-					console.log(err.responseText)
+					console.log(err.responseText);
 				});
-			return
+			return;
 		}
 
 		productsService
 			.updateProduct(this.state, this.productId)
 			.then(res => {
 				console.log(res);
+				//redirect back
+				this.props.history.go(-1);
 			})
 			.catch(err => {
-				console.log(err.responseText)
+				console.log(err.responseText);
 			});
 	};
 
@@ -103,13 +109,13 @@ class CreateProduct extends React.Component {
 		console.log(this.state[e.target.name]);
 
 		this.setState({[e.target.name]: !this.state[e.target.name]}, () => {
-			console.log(this.state)
+			console.log(this.state);
 		});
 	};
 
 	render () {
 		return (
-			<Grid>
+			<Grid id="create-edit-product">
 				<Row>
 					<Col sm={12}>
 						{this.requestPath.includes('create') && <h3>Създаване на продукт</h3>}
@@ -117,10 +123,27 @@ class CreateProduct extends React.Component {
 						<hr/>
 					</Col>
 				</Row>
-				<Row className="bg-light">
 
-					<form onSubmit={(e) => this.submitInfo(e)}>
-						<Col md={3} sm={4} xs={8}>
+
+				<form onSubmit={(e) => this.submitInfo(e)}>
+					<Row>
+
+						{this.requestPath.includes('edit') &&
+							<div className="text-right">
+								<Col xs={12}>
+									{this.state.isBlocked && <span>Този продукт е блокиран &nbsp;</span>}
+									<Button bsStyle={this.state.isBlocked ? 'info' : 'danger'}
+									        name="isBlocked"
+									        onClick={this.handleCheckBox}>
+										{!this.state.isBlocked && 'Блокиране'}
+										{this.state.isBlocked && 'Отблокиране'}
+									</Button>
+								</Col>
+							</div>
+						}
+
+
+						<Col md={5} sm={8}>
 							<FormInputField
 								label="Име"
 								name="name"
@@ -129,9 +152,18 @@ class CreateProduct extends React.Component {
 								required={true}
 								disabled={false}
 								onChange={this.updateInfo}/>
-						</Col>
 
-						<Col md={3} sm={4} xs={8}>
+							<Checkbox readOnly
+							          name="isTopSeller"
+							          checked={this.state.isTopSeller}
+							          onChange={this.handleCheckBox}>
+								Top Seller
+							</Checkbox>
+						</Col>
+					</Row>
+
+					<Row>
+						<Col md={5} sm={8}>
 							<FormTextareaField
 								label="Описание"
 								name="description"
@@ -140,49 +172,53 @@ class CreateProduct extends React.Component {
 								disabled={false}
 								onChange={this.updateInfo}/>
 						</Col>
+					</Row>
 
-						<Col md={3} sm={4} xs={8}>
+					<Row>
+						<Col md={2} sm={5} xs={6}>
 							<FormInputField
 								label="Цена"
 								name="price"
 								type="number"
+								step="any"
 								value={this.state.price}
 								required={false}
 								disabled={false}
 								onChange={this.updateInfo}/>
 						</Col>
+					</Row>
 
+					<Row>
 
-						<AddImageForm
-							onEnter={this.addImage}/>
-
-
-						<Col md={3} sm={4} xs={8}>
-							<Checkbox readOnly
-							          name="isTopSeller"
-							          onChange={this.handleCheckBox}>
-								Top Seller
-							</Checkbox>
+						<Col xs={12}>
+							{this.state.imageUrls.map((e, i) => {
+								return <Image
+									key={i}
+									thumbnail
+									className="image-thumbnail"
+									src={e}/>;
+							})
+							}
 						</Col>
 
-						<Col md={3} sm={4} xs={8}>
-							<Checkbox readOnly
-							          name="isBlocked"
-							          onChange={this.handleCheckBox}>
-								Блокиране
-							</Checkbox>
+						<Col md={6} sm={12}>
+							<AddImageForm
+								addImage={this.addImage}/>
 						</Col>
+					</Row>
 
 
+					<Row>
 						<Col xs={12}>
 							<Button onClick={this.cancel}>Отказ</Button>
 							<Button bsStyle='primary' type="submit">Потвърди</Button>
 						</Col>
+					</Row>
 
-					</form>
-				</Row>
+				</form>
 			</Grid>
-		);
+		)
+			;
 	}
 }
 
