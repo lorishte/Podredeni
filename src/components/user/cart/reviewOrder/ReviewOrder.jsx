@@ -18,7 +18,7 @@ class ReviewOrder extends React.Component {
 		let sum = 0;
 
 		this.props.products.map(e => {
-			sum += e.product.price * e.quantity;
+			sum += e.price * e.quantity;
 		});
 
 		return sum.toFixed(2);
@@ -69,11 +69,10 @@ class ReviewOrder extends React.Component {
 					<tbody>
 					{this.props.products.map((e, i) => {
 						return <CartProductRow
-							key={e.product.id}
+							key={e.id}
 							index={i + 1}
 							editable={false}
-							data={e.product}
-							quantity={e.quantity}/>;
+							data={e}/>;
 					})
 					}
 					</tbody>
