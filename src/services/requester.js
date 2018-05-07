@@ -1,6 +1,6 @@
 import $ from 'jquery';
 
-const host = 'http://localhost:30336/api';
+const host = 'http://api.podredeni.eu/api';
 
 let token = () => {
 	return localStorage.getItem('token');
