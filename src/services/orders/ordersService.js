@@ -11,11 +11,21 @@ export default {
 			'&size=' + state.size +
 			'&filterElement=' + state.filterProperty +
 			'&filterValue=' + state.filterValue +
-			'&sortelEment=' + state.sortProperty +
+			'&sortElement=' + state.sortProperty +
 			'&sortDesc=' + state.descending;
 
 		return requesterService
 			.get(orderEndPoint, null, query);
+	},
+
+	loadDeliveryData: (deliveryDataId) => {
+
+		let endPoint = deliveryDataEndPoint + '/' + deliveryDataId;
+
+        console.log(endPoint);
+
+        return requesterService
+			.get(endPoint, null)
 	},
 
 	addDeliveryData: (data) => {
@@ -58,8 +68,6 @@ export default {
 
 	}
 };
-
-
 
 function generateEkontData (ekontDetails) {
 	let ekontOffice = 'офис No: ' + ekontDetails.officeCode + ',' + ekontDetails.officeName + '\n';

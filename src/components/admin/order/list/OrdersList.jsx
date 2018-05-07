@@ -36,7 +36,7 @@ class OrdersList extends React.Component {
 	render () {
 		let ordersList;
 
-		if (this.state.products !== '') {
+		if (this.state.orders !== '') {
 			ordersList = this.state.orders.map(e => {
 				return <OrderTableRow key={e.id} data={e}/>;
 			});

@@ -17,6 +17,7 @@ import Contact from '../user/contact/Contact'
 import NotFound from '../common/NotFound'
 import CreateProduct from '../admin/product/create/editCreateProduct';
 import AdminProductsList from '../admin/product/list/ProductsList';
+import AdminOrdersList from '../admin/order/list/OrdersList'
 
 
 let Routes = () => {
@@ -43,6 +44,8 @@ let Routes = () => {
             <Route exact path='/product/create' component= {CreateProduct} />
             <Route exact path='/product/edit/:id' component= {CreateProduct} />
             <Route path='/product/list' component= {AdminProductsList} />
+
+            <Route path='/order/list' component= {AdminOrdersList} />
 
             /*Rest*/
             <Route path='*' component= {NotFound}/>
