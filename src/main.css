@@ -294,10 +294,31 @@ h3 {
   height: 35px;
   width: 35px; }
 
-#create-edit-product .image-thumbnail {
-  height: 80px;
-  width: auto;
-  margin: 0 10px 10px 0; }
+#create-edit-product .image-container {
+  position: relative;
+  display: inline-block;
+  margin: 0 20px 10px 0; }
+  #create-edit-product .image-container .image-thumbnail {
+    height: 80px;
+    width: auto; }
+  #create-edit-product .image-container .deleteImgBtn {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 25px;
+    height: 25px;
+    border: 1px solid #e6e6e6;
+    color: #363636;
+    background-color: #f9f9f9;
+    border-radius: 50%;
+    right: -8px;
+    top: -8px;
+    font-size: .8em;
+    font-weight: 600;
+    transition: .4s; }
+    #create-edit-product .image-container .deleteImgBtn:hover {
+      background-color: #e6e6e6; }
 
 .table > tbody > tr > td,
 .table > tbody > tr > th,
