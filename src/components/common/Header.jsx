@@ -45,6 +45,10 @@ class Header extends React.Component {
 							AdminProductsList
 						</NavLink>
 
+						<NavLink to="/order/list" activeClassName="active" className='nav-link'>
+							AdminOrdersList
+						</NavLink>
+
 						<NavLink to="/product/create" activeClassName="active" className='nav-link'>
 							CreateProduct
 						</NavLink>
