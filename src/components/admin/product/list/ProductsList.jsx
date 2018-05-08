@@ -88,7 +88,7 @@ class ProductsList extends React.Component {
 	};
 
 	handleSizeChange = (e) => {
-		this.setState({size: e.target.value}, () => this.loadProducts());
+		this.setState({size: e.target.value}, () => this.goToPage(1));
 	};
 
 	handleFilterProperty = (evt) => {
