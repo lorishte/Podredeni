@@ -442,11 +442,40 @@ h3 {
 
 // Admin: Create - Edit product
 #create-edit-product {
-  .image-thumbnail {
-    height: 80px;
-    width: auto;
-    margin: 0 10px 10px 0;
+
+  .image-container {
+    position: relative;
+    display: inline-block;
+    margin: 0 20px 10px 0;
+
+    .image-thumbnail {
+      height: 80px;
+      width: auto;
+    }
+
+    .deleteImgBtn {
+      position: absolute;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 25px;
+      height: 25px;
+      border: 1px solid $light-grey;
+      color: $dark-grey;
+      background-color: $white;
+      border-radius: 50%;
+      right: -8px;
+      top: -8px;
+      font-size: .8em;
+      font-weight: 600;
+      @include transition;
+
+      &:hover {
+        background-color: $light-grey;
+      }
+    }
   }
+
 }
 
 .table > tbody > tr > td,

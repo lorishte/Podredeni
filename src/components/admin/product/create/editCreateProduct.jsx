@@ -56,19 +56,6 @@ class CreateProduct extends React.Component {
 			});
 	};
 
-	updateInfo = (e) => {
-		console.log(e.target.name);
-		this.setState({[e.target.name]: e.target.value}, (e) => {
-			console.log(this.state);
-		});
-	};
-
-	addImage = (url) => {
-		this.setState({imageUrls: [...this.state.imageUrls, url]}, () => {
-			console.log(this.state.imageUrls);
-		});
-	};
-
 	submitInfo = (e) => {
 		e.preventDefault();
 
@@ -103,17 +90,37 @@ class CreateProduct extends React.Component {
 		this.props.history.go(-1);
 	};
 
+	addImage = (url) => {
+		this.setState({imageUrls: [...this.state.imageUrls, url]});
+	};
+
+	removeImage = (e) => {
+		this.setState({
+			imageUrls: this.state.imageUrls.filter(el => el !== e.target.name)
+		}, () => console.log(this.state.imageUrls));
+	};
+
+	handleChange = (e) => {
+		this.setState({[e.target.name]: e.target.value});
+	};
+
 	handleCheckBox = (e) => {
-
-		console.log(e.target.name);
-		console.log(this.state[e.target.name]);
-
-		this.setState({[e.target.name]: !this.state[e.target.name]}, () => {
-			console.log(this.state);
-		});
+		this.setState({[e.target.name]: !this.state[e.target.name]});
 	};
 
 	render () {
+
+		let images = this.state.imageUrls.map((e, i) => {
+			return (
+				<div className="image-container" key={i}>
+					<Image
+						thumbnail
+						className="image-thumbnail"
+						src={e}/>
+					<button className="deleteImgBtn" name={e} onClick={this.removeImage}>x</button>
+				</div>
+			);
+		});
 		return (
 			<Grid id="create-edit-product">
 				<Row>
@@ -127,7 +134,6 @@ class CreateProduct extends React.Component {
 
 				<form onSubmit={(e) => this.submitInfo(e)}>
 					<Row>
-
 						{this.requestPath.includes('edit') &&
 							<div className="text-right">
 								<Col xs={12}>
@@ -151,7 +157,7 @@ class CreateProduct extends React.Component {
 								value={this.state.name}
 								required={true}
 								disabled={false}
-								onChange={this.updateInfo}/>
+								onChange={this.handleChange}/>
 
 							<Checkbox readOnly
 							          name="isTopSeller"
@@ -170,7 +176,7 @@ class CreateProduct extends React.Component {
 								value={this.state.description}
 								required={true}
 								disabled={false}
-								onChange={this.updateInfo}/>
+								onChange={this.handleChange}/>
 						</Col>
 					</Row>
 
@@ -184,25 +190,19 @@ class CreateProduct extends React.Component {
 								value={this.state.price}
 								required={false}
 								disabled={false}
-								onChange={this.updateInfo}/>
+								onChange={this.handleChange}/>
 						</Col>
 					</Row>
 
 					<Row>
 
 						<Col xs={12}>
-							{this.state.imageUrls.map((e, i) => {
-								return <Image
-									key={i}
-									thumbnail
-									className="image-thumbnail"
-									src={e}/>;
-							})
-							}
+							{images}
 						</Col>
 
 						<Col md={6} sm={12}>
 							<AddImageForm
+								label="Добави снимка"
 								addImage={this.addImage}/>
 						</Col>
 					</Row>

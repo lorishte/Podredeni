@@ -28,14 +28,13 @@ class FormSelectField extends React.Component {
 			<FormGroup controlId={name}>
 				<ControlLabel>{label}{required && <label>&nbsp;*</label>}</ControlLabel>
 				<FormControl
-					defaultValue={defaultValue}
 					componentClass="select"
 					name={name}
-					value={this.state.value}
+					value={this.state.selected}
 					onChange={onChange}
 					required={required}>
 
-					<option value="">Моля, изберете:</option>
+					<option value="" disabled={false}>Моля, изберете:</option>
 
 					{optionElements}
 

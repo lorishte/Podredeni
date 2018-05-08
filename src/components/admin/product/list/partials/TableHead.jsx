@@ -1,5 +1,7 @@
 import React from 'react';
 
+import { Checkbox } from 'react-bootstrap';
+
 import SortButtons from './SortButtons';
 
 
@@ -28,7 +30,8 @@ class TableHead extends React.Component {
 						changeClass={this.props.changeClass}
 						sort={this.props.sort}/>
 				</th>
-				<th className="text-center">TopSeller</th>
+				<th className="text-center">TopSeller
+				</th>
 				<th className="text-center">Blocked</th>
 				<th className="text-center">Редакция</th>
 			</tr>

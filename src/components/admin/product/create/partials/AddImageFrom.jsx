@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-import { Row, Col, Button, FormControl, FormGroup, InputGroup } from 'react-bootstrap';
+import { ControlLabel, Button, FormControl, FormGroup, InputGroup } from 'react-bootstrap';
 
 import FormInputField from '../../../../common/formComponents/FormInputField';
 
@@ -28,6 +28,7 @@ class AddImageForm extends React.Component {
 	render () {
 		return (
 			<FormGroup>
+				<ControlLabel>{this.props.label}</ControlLabel>
 				<InputGroup>
 					<FormControl type="text"
 					             onChange={this.handleChange}
