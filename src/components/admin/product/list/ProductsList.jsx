@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 
 import {
 	Grid,
@@ -18,10 +17,14 @@ import {
 import TableHead from './partials/TableHead';
 import ProductTableRow from './partials/ProductTableRow';
 import Paging from '../../../common/pagination/Paging';
+import FormSelectField from '../../../common/formComponents/FormSelectField';
+import FormInputWithDropdown from '../../../common/formComponents/FormInputWithDropdown'
 
 import productsService from '../../../../services/products/productsService';
 
 const WAIT_INTERVAL = 2000;
+const PAGES_ON_PAGE = {10: 10, 20: 20, 30: 30, 40: 40, 50: 50};
+const FILTER_OPTIONS = { 'name': 'име', 'number': 'номер' };
 
 class ProductsList extends React.Component {
 	constructor (props) {
@@ -60,7 +63,6 @@ class ProductsList extends React.Component {
 					pagesCount: Math.ceil(productsCount / size)
 				});
 
-
 			})
 			.catch(err => {
 				console.log(err.responseText);
@@ -88,11 +90,12 @@ class ProductsList extends React.Component {
 	};
 
 	handleSizeChange = (e) => {
+		if (e.target.value === '') return;
 		this.setState({size: e.target.value}, () => this.goToPage(1));
 	};
 
-	handleFilterProperty = (evt) => {
-		this.setState({filterProperty: evt});
+	handleFilterProperty = (е) => {
+		this.setState({filterValue: '', filterProperty: е});
 	};
 
 	handleFilterValue = (e) => {
@@ -110,63 +113,33 @@ class ProductsList extends React.Component {
 			return <ProductTableRow key={e.id} data={e}/>;
 		});
 
-		let pagesOnPage = {2: 2, 10: 10, 15: 15, 20: 20, 25: 25, all: 0};
-		let pagesOnPageKeys = Object.keys(pagesOnPage);
-		let options = pagesOnPageKeys.map(e => {
-			return <option key={e} value={pagesOnPage[e]}>{e}</option>;
-		});
-
-		let filterOptions = {
-			'name': 'име',
-			'number': 'номер'
-		};
-		let filterOptionsKeys = Object.keys(filterOptions);
-		let filterOptionsList = filterOptionsKeys.map((e, i) => {
-			return <MenuItem eventKey={e}>{filterOptions[e]}</MenuItem>;
-		});
-
 		return (
 			<Grid>
 				<Row>
 					<Col xs={3} sm={2}>
-						<FormGroup controlId="formControlsSelect">
-							<ControlLabel>Покажи</ControlLabel>
-							<FormControl
-								componentClass="select"
-								placeholder="select"
-								label="Покажи"
-								name="size"
-								value={this.state.size}
-								defaultValue={this.state.size}
-								onChange={this.handleSizeChange}>
-								{options}
-							</FormControl>
-						</FormGroup>
+						<FormSelectField
+							label="Покажи"
+							name="size"
+							value={this.state.size}
+							optionsList={PAGES_ON_PAGE}
+							required={false}
+							onChange={this.handleSizeChange}/>
 					</Col>
 
 					<Col xs={9} sm={6}>
-						<FormGroup>
-							<ControlLabel>Филтър по</ControlLabel>
-							<InputGroup>
-								<FormControl type="text"
-								             placeholder=""
-								             name="filterValue"
-								             defaultValue={this.state.filterValue}
-								             value={this.state.filterValue}
-								             onChange={this.handleFilterValue}
-								             onKeyDown={this.handleKeyDown}/>
-								<DropdownButton
-									componentClass={InputGroup.Button}
-									bsStyle="primary"
-									id='filter-options-dropdown'
-									title={filterOptions[this.state.filterProperty]}
-									value={this.state.filterProperty}
-									name="filterProperty"
-									onSelect={this.handleFilterProperty}>
-									{filterOptionsList}
-								</DropdownButton>
-							</InputGroup>
-						</FormGroup>
+						<FormInputWithDropdown
+							label="Филтър по"
+							// input
+							inputName="filterValue"
+							filterValue={this.state.filterValue}
+							onChange={this.handleFilterValue}
+							onKeyDown={this.handleKeyDown}
+							// dropdown
+							filterProperty={this.state.filterProperty}
+							dropdownName="filterProperty"
+							onSelect={this.handleFilterProperty}
+							// dropdown options
+							optionsList={FILTER_OPTIONS} />
 					</Col>
 				</Row>
 
