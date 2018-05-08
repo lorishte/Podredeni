@@ -18,6 +18,7 @@ import NotFound from '../common/NotFound'
 import CreateProduct from '../admin/product/create/editCreateProduct';
 import AdminProductsList from '../admin/product/list/ProductsList';
 import AdminOrdersList from '../admin/order/list/OrdersList'
+import OrderLog from '../admin/order/log/OrderLog'
 
 
 let Routes = () => {
@@ -46,6 +47,7 @@ let Routes = () => {
             <Route path='/product/list' component= {AdminProductsList} />
 
             <Route path='/order/list' component= {AdminOrdersList} />
+            <Route path='/order/log/:id' component= {OrderLog} />
 
             /*Rest*/
             <Route path='*' component= {NotFound}/>

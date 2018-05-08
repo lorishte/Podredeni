@@ -56,7 +56,7 @@ class OrderTableRow extends React.Component {
                     {totalSum.toFixed(2)}
                 </td>
                 <td>
-                    <Button onClick></Button>
+                    <Link to={'/order/log/' + o.id}>История</Link>
                 </td>
                 <td>
                     <Link to={'/order/edit/' + o.id}>Edit</Link>

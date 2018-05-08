@@ -18,11 +18,17 @@ export default {
 			.get(orderEndPoint, null, query);
 	},
 
+	loadOrderLog: (orderId) => {
+
+		let endPoint = orderEndPoint + '/logs/' + orderId;
+
+		return requesterService
+			.get(endPoint, null, '');
+	},
+
 	loadDeliveryData: (deliveryDataId) => {
 
 		let endPoint = deliveryDataEndPoint + '/' + deliveryDataId;
-
-        console.log(endPoint);
 
         return requesterService
 			.get(endPoint, null)
