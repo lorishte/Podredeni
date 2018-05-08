@@ -11,15 +11,17 @@ import {
 	FormGroup,
 	MenuItem,
 	DropdownButton,
-	InputGroup
+	InputGroup,
+	Checkbox
 } from 'react-bootstrap';
 
 import TableHead from './partials/TableHead';
 import ProductTableRow from './partials/ProductTableRow';
 import Paging from '../../../common/pagination/Paging';
-import FormSelectField from '../../../common/formComponents/FormSelectField';
 
 import productsService from '../../../../services/products/productsService';
+
+const WAIT_INTERVAL = 2000;
 
 class ProductsList extends React.Component {
 	constructor (props) {
@@ -38,11 +40,14 @@ class ProductsList extends React.Component {
 		};
 	}
 
+	timer = null;
+
 	componentDidMount () {
 		this.loadProducts();
 	}
 
 	loadProducts = () => {
+		console.log('from load');
 		productsService
 			.loadProducts(this.state)
 			.then(res => {
@@ -54,6 +59,8 @@ class ProductsList extends React.Component {
 					productsCount: productsCount,
 					pagesCount: Math.ceil(productsCount / size)
 				});
+
+
 			})
 			.catch(err => {
 				console.log(err.responseText);
@@ -61,13 +68,10 @@ class ProductsList extends React.Component {
 	};
 
 	sort = (sortProperty, descending) => {
-
 		this.setState({
 			sortProperty: sortProperty,
 			descending: descending
-		}, () => {
-			this.loadProducts();
-		});
+		}, () => this.loadProducts());
 	};
 
 	changeClass = (sortProp, descending) => {
@@ -83,18 +87,21 @@ class ProductsList extends React.Component {
 		this.setState({page: page}, () => this.loadProducts());
 	};
 
-	handleChange = (e) => {
-		console.log(e);
-		this.setState({[e.target.name]: e.target.value}, () => {
-			console.log(this.state);
-			this.loadProducts();
-		});
+	handleSizeChange = (e) => {
+		this.setState({size: e.target.value}, () => this.loadProducts());
 	};
 
-	handleSelect = (evt, evtKey) => {
-		// what am I suppose to write in there to get the value?
-		console.log(evtKey);
-		console.log(evt)
+	handleFilterProperty = (evt) => {
+		this.setState({filterProperty: evt});
+	};
+
+	handleFilterValue = (e) => {
+		this.setState({filterValue: e.target.value});
+	};
+
+	handleKeyDown = (e) => {
+		clearTimeout(this.timer);
+		this.timer = setTimeout(() => this.goToPage(1), WAIT_INTERVAL);
 	};
 
 	render () {
@@ -103,27 +110,25 @@ class ProductsList extends React.Component {
 			return <ProductTableRow key={e.id} data={e}/>;
 		});
 
-		let pagesOnPage = {10: 10, 15: 15, 20: 20, 25: 25, all: 0};
+		let pagesOnPage = {2: 2, 10: 10, 15: 15, 20: 20, 25: 25, all: 0};
 		let pagesOnPageKeys = Object.keys(pagesOnPage);
 		let options = pagesOnPageKeys.map(e => {
 			return <option key={e} value={pagesOnPage[e]}>{e}</option>;
 		});
 
 		let filterOptions = {
-			'име': 'name',
-			'номер': 'number',
-			'блокирани': 'isBlocked',
-			'най-продавани': 'isTopSeller'
+			'name': 'име',
+			'number': 'номер'
 		};
 		let filterOptionsKeys = Object.keys(filterOptions);
 		let filterOptionsList = filterOptionsKeys.map((e, i) => {
-			return <MenuItem eventKey={i + 1} value={filterOptions[e]} >{e}</MenuItem>;
+			return <MenuItem eventKey={e}>{filterOptions[e]}</MenuItem>;
 		});
 
 		return (
 			<Grid>
 				<Row>
-					<Col xs={6} sm={2}>
+					<Col xs={3} sm={2}>
 						<FormGroup controlId="formControlsSelect">
 							<ControlLabel>Покажи</ControlLabel>
 							<FormControl
@@ -133,43 +138,31 @@ class ProductsList extends React.Component {
 								name="size"
 								value={this.state.size}
 								defaultValue={this.state.size}
-								onChange={this.handleChange}>
+								onChange={this.handleSizeChange}>
 								{options}
 							</FormControl>
 						</FormGroup>
 					</Col>
 
-					<Col xs={12} sm={12}>
-						<FormGroup controlId="formControlsSelect">
-							<ControlLabel>Филтър по</ControlLabel>
-							<FormControl
-								componentClass="select"
-								placeholder="select"
-								label="Покажи"
-								name="filterProperty"
-								defaultValue={this.state.filterProperty}
-								value={this.state.filterProperty}
-								onChange={this.handleChange}>
-
-							</FormControl>
-						</FormGroup>
-
+					<Col xs={9} sm={6}>
 						<FormGroup>
+							<ControlLabel>Филтър по</ControlLabel>
 							<InputGroup>
 								<FormControl type="text"
 								             placeholder=""
 								             name="filterValue"
 								             defaultValue={this.state.filterValue}
 								             value={this.state.filterValue}
-								             onChange={this.handleChange}/>
+								             onChange={this.handleFilterValue}
+								             onKeyDown={this.handleKeyDown}/>
 								<DropdownButton
 									componentClass={InputGroup.Button}
-									id="input-dropdown-addon"
-									title={this.state.filterProperty}
+									bsStyle="primary"
+									id='filter-options-dropdown'
+									title={filterOptions[this.state.filterProperty]}
 									value={this.state.filterProperty}
 									name="filterProperty"
-									onSelect={(e) => this.handleSelect(e)}
-								>
+									onSelect={this.handleFilterProperty}>
 									{filterOptionsList}
 								</DropdownButton>
 							</InputGroup>
@@ -180,7 +173,8 @@ class ProductsList extends React.Component {
 				<Table striped bordered condensed hover>
 					<TableHead
 						changeClass={this.changeClass}
-						sort={this.sort}/>
+						sort={this.sort}
+						handleChange={this.handleSizeChange}/>
 					<tbody>
 					{productsList}
 					</tbody>
