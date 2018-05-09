@@ -55,15 +55,15 @@ class OrderDetails extends React.Component {
 						<Col xs={12}>
 							<h4>Поръчка номер <Label bsStyle="success">{o.number}</Label></h4>
 							<p className="">
-								<small>Дата на последна редакция:</small>
-								{utils.formatDate(o.lastModificationDate)}</p>
+								<small className="text-grey">Дата на последна редакция:</small>
+								{' ' + utils.formatDate(o.lastModificationDate)}</p>
 							<hr />
 						</Col>
 
-						<Col xs={4}><p>Получател:</p></Col>
+						<Col xs={4} sm={3}><p className="text-grey">Получател:</p></Col>
 						<Col xs={8}><p>{d.customerName}</p></Col>
 
-						<Col xs={4}><p>Доставка до:</p></Col>
+						<Col xs={4} sm={3}><p className="text-grey">Доставка до:</p></Col>
 						{!d.deliveredToAnOffice &&
 						<Col xs={8}><p>{d.city} {d.postCode}, ул. {d.street} {d.streetNumber}, кв. {d.district},
 							бл. {d.block}, вх. {d.entrance}, ет. {d.floor}, ап. {d.apartment}</p>
@@ -74,14 +74,14 @@ class OrderDetails extends React.Component {
 						</Col>
 						}
 
-						<Col xs={4}><p>Телефон:</p></Col>
+						<Col xs={4} sm={3}><p className="text-grey">Телефон:</p></Col>
 						<Col xs={8}><p>{d.phoneNumber}</p></Col>
 
-						<Col xs={4}><p>Емейл:</p></Col>
+						<Col xs={4} sm={3}><p className="text-grey">Емейл:</p></Col>
 						<Col xs={8}><p>{d.email}</p></Col>
 
 
-						<Col xs={4}><p>Забележка:</p></Col>
+						<Col xs={4} sm={3}><p className="text-grey">Забележка:</p></Col>
 						<Col xs={8}><p className="text-bigger"><Label bsStyle="warning">{d.comments}</Label></p></Col>
 
 					</Row>

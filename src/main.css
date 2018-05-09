@@ -315,8 +315,6 @@ h3 {
 #cart .cart-view-name {
   border-bottom: 1px solid #e6e6e6;
   padding-bottom: 15px; }
-#cart .text-grey {
-  color: #c6c6c6; }
 #cart .image-thumbnail {
   height: 35px;
   width: 35px; }
@@ -324,6 +322,9 @@ h3 {
 .quantity {
   height: 50px;
   line-height: 50px; }
+
+.text-grey {
+  color: #c6c6c6; }
 
 #create-edit-product .image-container {
   position: relative;
@@ -360,7 +361,7 @@ h3 {
   transform: translate(-50%, 0);
   background-color: #ffffff;
   border-radius: 3px;
-  padding: 20px;
+  padding: 20px 30px;
   -webkit-box-shadow: 10px 10px 5px -5px rgba(0, 0, 0, 0.3);
   -moz-box-shadow: 10px 10px 5px -5px rgba(0, 0, 0, 0.3);
   box-shadow: 10px 10px 5px -5px rgba(0, 0, 0, 0.3);

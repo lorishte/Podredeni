@@ -462,9 +462,7 @@ h3 {
     border-bottom: 1px solid $light-grey;
     padding-bottom: 15px;
   }
-  .text-grey {
-    color: $medium-grey
-  }
+
 
   .image-thumbnail {
     height: 35px;
@@ -476,7 +474,9 @@ h3 {
   height: 50px;
   line-height: 50px;
 }
-
+.text-grey {
+  color: $medium-grey
+}
 
 // Admin: Create - Edit product
 #create-edit-product {
@@ -530,7 +530,7 @@ h3 {
     transform: translate(-50%, 0);
     background-color: $white;
     border-radius: 3px;
-    padding: 20px;
+    padding: 20px 30px;
 
     -webkit-box-shadow: 10px 10px 5px -5px rgba(0,0,0,0.3);
     -moz-box-shadow: 10px 10px 5px -5px rgba(0,0,0,0.3);
