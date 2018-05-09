@@ -20,7 +20,9 @@ class OrderDetails extends React.Component {
 			comment: this.props.data.comment,
 			toAddress: this.props.data.toAddress
 		};
-	}
+
+        console.log(this.state);
+    }
 
 	updateInfo = (stateProp, data) => {
 		this.setState({[stateProp]: data}, () => {

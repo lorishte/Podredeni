@@ -15,10 +15,11 @@ import OrderReceived from '../common/OrderReceived'
 import About from '../user/about/About'
 import Contact from '../user/contact/Contact'
 import NotFound from '../common/NotFound'
-import CreateProduct from '../admin/product/create/editCreateProduct';
-import AdminProductsList from '../admin/product/list/ProductsList';
+import CreateProduct from '../admin/product/create/editCreateProduct'
+import AdminProductsList from '../admin/product/list/ProductsList'
 import AdminOrdersList from '../admin/order/list/OrdersList'
 import OrderLog from '../admin/order/log/OrderLog'
+import OrderEdit from '../admin/order/edit/OrderEdit'
 
 
 let Routes = () => {
@@ -48,6 +49,7 @@ let Routes = () => {
 
             <Route path='/order/list' component= {AdminOrdersList} />
             <Route path='/order/log/:id' component= {OrderLog} />
+            <Route path='/order/edit/:id' component={OrderEdit}/>
 
             /*Rest*/
             <Route path='*' component= {NotFound}/>

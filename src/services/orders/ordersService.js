@@ -18,6 +18,14 @@ export default {
 			.get(orderEndPoint, null, query);
 	},
 
+	loadOrder: (orderId) => {
+
+		let endPoint = orderEndPoint + '/' + orderId;
+
+		return requesterService.get(endPoint, null);
+
+	},
+
 	loadOrderLog: (orderId) => {
 
 		let endPoint = orderEndPoint + '/logs/' + orderId;
@@ -32,6 +40,41 @@ export default {
 
         return requesterService
 			.get(endPoint, null)
+	},
+
+	editDeliveryData: (deliveryDataId, data) => {
+
+        let recipientInfo = data.recipientInfo;
+        let ekontDetails = data.ekontDetails;
+        let addressDetails = data.addressDetails;
+        let comment = data.comment;
+        let toAddress = data.toAddress;
+
+        let details = {
+            CustomerName: recipientInfo.firstName+ ' ' + recipientInfo.lastName,
+            PhoneNumber: recipientInfo.phone,
+            Email: recipientInfo.email,
+            City: addressDetails.city,
+            PostCode: addressDetails.postalCode,
+            Street: addressDetails.street,
+            StreetNumber: addressDetails.streetNo,
+            District: addressDetails.district,
+            Block: addressDetails.block,
+            Floor: addressDetails.floor,
+            Apartment: addressDetails.apartment,
+            Comments: comment,
+            DeliveredToAnOffice: !toAddress,
+            OfficeAddress: ekontDetails.address,
+            OfficeCode: ekontDetails.officeCode,
+            OfficeName: ekontDetails.officeName,
+            OfficeCountry: ekontDetails.country,
+            OfficeCity: ekontDetails.city
+        };
+
+        let endPoint = deliveryDataEndPoint + '/' + deliveryDataId;
+
+        return requesterService
+            .update(endPoint, null, details);
 	},
 
 	addDeliveryData: (data) => {
@@ -55,7 +98,11 @@ export default {
 			Apartment: addressDetails.apartment,
 			Comments: comment,
 			DeliveredToAnOffice: !toAddress,
-			OfficeAddress: generateEkontData(ekontDetails)
+			OfficeAddress: ekontDetails.address,
+			OfficeCode: ekontDetails.officeCode,
+			OfficeName: ekontDetails.officeName,
+			OfficeCountry: ekontDetails.country,
+			OfficeCity: ekontDetails.city
 		};
 
 		return requesterService
@@ -68,11 +115,23 @@ export default {
 			DeliveryDataId: deliveryId
 		};
 
-		console.log(order)
 		return requesterService
 			.post(orderEndPoint, null, order)
 
+	},
+
+	editOrder: (orderId, products) => {
+
+		let order = {
+            Products: products
+		};
+
+		let endPoint = orderEndPoint + '/' + orderId;
+
+		return requesterService.update(endPoint, null, order);
 	}
+
+
 };
 
 function generateEkontData (ekontDetails) {

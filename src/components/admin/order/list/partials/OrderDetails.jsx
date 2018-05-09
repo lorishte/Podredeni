@@ -14,12 +14,10 @@ class OrderDetails extends React.Component {
 	}
 
 	componentDidMount () {
-		console.log(this.props);
 	}
 
 	componentWillReceiveProps (nextProps) {
 		this.setState({showDetails: nextProps.visible});
-		console.log(nextProps);
 	}
 
 	render () {
@@ -35,7 +33,7 @@ class OrderDetails extends React.Component {
 				totalSum += e.price * e.quantity;
 				return (<Col xs={12}>
 					<Row key={e.productId}>
-						<Col xs={6}><p>{e.productId}</p></Col>
+						<Col xs={6}><p>{e.name}</p></Col>
 						<Col xs={2} className="text-right">{e.quantity}</Col>
 						<Col xs={2} className="text-right">{e.price.toFixed(2)}</Col>
 						<Col xs={2} className="text-right">{(e.price * e.quantity).toFixed(2)}</Col>
