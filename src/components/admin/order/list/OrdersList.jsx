@@ -1,9 +1,9 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 
 import { Grid, Row, Col, Table } from 'react-bootstrap';
 
 import OrderTableRow from './partials/OrderTableRow';
+import OrderDetails from './partials/OrderDetails';
 
 import ordersService from '../../../../services/orders/ordersService';
 
@@ -18,7 +18,10 @@ class OrdersList extends React.Component {
 			sortProperty: 'number',
 			descending: true,
 			filterProperty: 'status',
-			filterValue: 'ordered'
+			filterValue: 'ordered',
+			showDetails: false,
+			orderToShowInfo: '',
+			deliveryInfo: ''
 		};
 	}
 
@@ -26,26 +29,49 @@ class OrdersList extends React.Component {
 		ordersService
 			.loadOrders(this.state)
 			.then(res => {
-				this.setState({orders: res.orders})
+				this.setState({orders: res.orders});
 			})
 			.catch(err => {
-				console.log(err.responseText)
+				console.log(err.responseText);
 			});
 	}
+
+	showDetails = (o, d) => {
+		this.setState({
+			showDetails: true,
+			orderToShowInfo: o,
+			deliveryInfo: d
+		});
+	};
+
+	hideDetails = () => {
+		this.setState({
+			showDetails: false,
+			orderToShowInfo: ''
+		});
+	};
 
 	render () {
 		let ordersList;
 
 		if (this.state.orders !== '') {
 			ordersList = this.state.orders.map(e => {
-				return <OrderTableRow key={e.id} data={e}/>;
+				return <OrderTableRow key={e.id} data={e} showDetails={this.showDetails} />;
 			});
 		}
 
 		return (
-			<Grid>
+			<Grid id="orders">
 				<Row>
 					<Col sm={12}>
+
+						<OrderDetails
+							visible={this.state.showDetails}
+							order={this.state.orderToShowInfo}
+							delivery={this.state.deliveryInfo}
+							hideDetails={this.hideDetails}
+						/>
+
 						<Table striped bordered condensed hover>
 							<thead>
 							<tr>
@@ -55,7 +81,7 @@ class OrdersList extends React.Component {
 								<th>Получател</th>
 								<th>Телефон</th>
 								<th>Сума</th>
-								<th colSpan={2}>Редакция</th>
+								<th colSpan={3}>Редакция</th>
 							</tr>
 							</thead>
 							<tbody>

@@ -1,7 +1,6 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 
-import { Row, Col, Grid, PageHeader, Image, Label, Tabs, Tab } from 'react-bootstrap';
+import { Row, Col, PageHeader, Label } from 'react-bootstrap';
 
 class ProductInfo extends React.Component {
 	constructor (props) {

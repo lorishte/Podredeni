@@ -2,7 +2,6 @@ import React from 'react';
 
 import { Button, Table, Row, Col } from 'react-bootstrap';
 
-import CartProductsTable from '../products/CartProductsTable';
 import TableHead from '../products/partials/TableHead';
 import CartProductRow from '../products/partials/CartProductRow';
 import EkontOrderDetailsSummary from './partials/EkontOrderDetailsSummary';
@@ -17,7 +16,7 @@ class ReviewOrder extends React.Component {
 	calculateTotalSum = () => {
 		let sum = 0;
 
-		this.props.products.map(e => {
+		this.props.products.forEach(e => {
 			sum += e.price * e.quantity;
 		});
 

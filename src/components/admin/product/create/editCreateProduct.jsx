@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Grid, Row, Col, Checkbox, Button, FormGroup, InputGroup, FormControl, Image } from 'react-bootstrap';
+import { Grid, Row, Col, Checkbox, Button, Image } from 'react-bootstrap';
 
 import FormInputField from '../../../common/formComponents/FormInputField';
 import FormTextareaField from '../../../common/formComponents/FormTextareaField';

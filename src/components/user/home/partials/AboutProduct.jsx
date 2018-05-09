@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Jumbotron, Button, Image } from 'react-bootstrap';
+import { Jumbotron, Button } from 'react-bootstrap';
 
 class AboutProduct extends React.Component {
 	constructor (props) {

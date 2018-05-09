@@ -2,8 +2,6 @@ import React from 'react';
 
 import { FormGroup, ControlLabel, FormControl, Row, Col } from 'react-bootstrap';
 
-import FormInputField from '../../../../common/formComponents/FormInputField';
-
 class Comment extends React.Component {
 	constructor (props) {
 		super(props);

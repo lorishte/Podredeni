@@ -1,30 +1,18 @@
 import React from 'react';
 
-import {
-	Grid,
-	Row,
-	Col,
-	Table,
-	FormControl,
-	ControlLabel,
-	FormGroup,
-	MenuItem,
-	DropdownButton,
-	InputGroup,
-	Checkbox
-} from 'react-bootstrap';
+import { Grid, Row, Col, Table } from 'react-bootstrap';
 
 import TableHead from './partials/TableHead';
 import ProductTableRow from './partials/ProductTableRow';
 import Paging from '../../../common/pagination/Paging';
 import FormSelectField from '../../../common/formComponents/FormSelectField';
-import FormInputWithDropdown from '../../../common/formComponents/FormInputWithDropdown'
+import FormInputWithDropdown from '../../../common/formComponents/FormInputWithDropdown';
 
 import productsService from '../../../../services/products/productsService';
 
 const WAIT_INTERVAL = 2000;
 const PAGES_ON_PAGE = {10: 10, 20: 20, 30: 30, 40: 40, 50: 50};
-const FILTER_OPTIONS = { 'name': 'име', 'number': 'номер' };
+const FILTER_OPTIONS = {'name': 'име', 'number': 'номер'};
 
 class ProductsList extends React.Component {
 	constructor (props) {
@@ -139,7 +127,7 @@ class ProductsList extends React.Component {
 							dropdownName="filterProperty"
 							onSelect={this.handleFilterProperty}
 							// dropdown options
-							optionsList={FILTER_OPTIONS} />
+							optionsList={FILTER_OPTIONS}/>
 					</Col>
 				</Row>
 

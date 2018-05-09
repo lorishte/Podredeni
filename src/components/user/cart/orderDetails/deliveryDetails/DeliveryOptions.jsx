@@ -1,11 +1,7 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 
-import { Row, Col, FormGroup, FormControl, ControlLabel, Checkbox, Radio, Button } from 'react-bootstrap';
+import { FormGroup, Radio } from 'react-bootstrap';
 
-import RecipientInfoInputs from '../recipientDetails/RecipientDetails';
-import EkontInfoInputs from './DeliveryToEkontOffice';
-import AddressInfoInputs from './DeliveryToAddress';
 
 class DeliveryOptions extends React.Component {
 	constructor (props) {

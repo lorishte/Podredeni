@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-import { Row, Col, FormGroup, FormControl, ControlLabel, Checkbox, Radio, Button } from 'react-bootstrap';
+import { Row, Col, Checkbox, Button } from 'react-bootstrap';
 
 import RecipientDetails from './recipientDetails/RecipientDetails';
 import DeliveryToEkontOffice from './deliveryDetails/DeliveryToEkontOffice';

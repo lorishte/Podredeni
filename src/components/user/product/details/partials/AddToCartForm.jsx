@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { FormGroup, ControlLabel, FormControl, Col, Row, Button, Form, HelpBlock } from 'react-bootstrap';
+import { FormGroup, ControlLabel, FormControl, Col, Row, Button, Form } from 'react-bootstrap';
 
 class AddToCartForm extends React.Component {
 	constructor (props) {

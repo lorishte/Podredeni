@@ -57,7 +57,7 @@ class CartProductsTable extends React.Component {
 	calculateTotalSum = () => {
 		let sum = 0;
 
-		this.props.products.map(e => {
+		this.props.products.forEach(e => {
 			sum += e.price * e.quantity;
 		});
 

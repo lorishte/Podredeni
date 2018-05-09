@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Button, Table, Row, Col } from 'react-bootstrap';
+import { Row, Col } from 'react-bootstrap';
 
 class RecipientDetailsSummary extends React.Component {
 	constructor (props) {

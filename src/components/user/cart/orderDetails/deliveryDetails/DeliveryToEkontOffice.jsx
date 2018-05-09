@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Row, Col, FormControl, ControlLabel, FormGroup } from 'react-bootstrap';
+import { Row, Col } from 'react-bootstrap';
 
 import FormSelectField from '../../../../common/formComponents/FormSelectField';
 
