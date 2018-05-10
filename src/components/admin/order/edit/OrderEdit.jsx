@@ -30,6 +30,8 @@ class OrderEdit extends React.Component {
         orderService.loadOrder(this.props.match.params.id)
             .then(res => {
 
+                console.log(res);
+
                 this.setState({
                     products: res.order.products,
                     deliveryDataId: res.order.deliveryDataId,
@@ -197,7 +199,7 @@ export default OrderEdit;
 function generateOrderData (products) {
     return products.map(e => {
             return {
-                ProductId: e.productId,
+                ProductId: e.id,
                 Quantity: e.quantity,
                 Price: e.price
             };

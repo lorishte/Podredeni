@@ -1,9 +1,10 @@
 import React from 'react';
 
-import { Grid, Row, Col, Table } from 'react-bootstrap';
+import { Grid, Row, Col, Table, FormGroup } from 'react-bootstrap';
 
 import OrderTableRow from './partials/OrderTableRow';
 import OrderDetails from './partials/OrderDetails';
+import FormRadioButton from '../../../common/formComponents/FormRadioButton';
 
 import ordersService from '../../../../services/orders/ordersService';
 
@@ -51,6 +52,21 @@ class OrdersList extends React.Component {
 		});
 	};
 
+	onCheckboxChange = (e) => {
+
+        this.setState({filterProperty: 'status', filterValue: e.target.value}, () => {
+
+            ordersService.loadOrders(this.state)
+                .then(res => {
+
+                    this.setState({orders: res.orders});
+
+                }).catch(err => console.log(err));
+
+		});
+
+	};
+
 	render () {
 		let ordersList;
 
@@ -71,6 +87,13 @@ class OrdersList extends React.Component {
 							delivery={this.state.deliveryInfo}
 							hideDetails={this.hideDetails}
 						/>
+
+						<FormGroup style={{'display': 'flex'}}>
+								<FormRadioButton checked={this.state.filterValue==='ordered'} label="Not confirmed" value="ordered" onChange={this.onCheckboxChange}/>
+								<FormRadioButton checked={this.state.filterValue==='confirmed'} label="Confirmed" value="confirmed" onChange={this.onCheckboxChange}/>
+								<FormRadioButton checked={this.state.filterValue==='dispatched'} label="Dispatched" value="dispatched" onChange={this.onCheckboxChange}/>
+								<FormRadioButton checked={this.state.filterValue==='cancelled'} label="Cancelled" value="cancelled" onChange={this.onCheckboxChange}/>
+						</FormGroup>
 
 						<Table striped bordered condensed hover>
 							<thead>

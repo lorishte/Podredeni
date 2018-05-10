@@ -5,6 +5,7 @@ import { Grid, Row, Col, Table } from 'react-bootstrap';
 import ordersService from '../../../../services/orders/ordersService';
 import LogTableRow from './partials/LogTableRow';
 
+
 class OrderLog extends React.Component {
     constructor (props) {
         super(props);
@@ -37,6 +38,9 @@ class OrderLog extends React.Component {
             <Grid>
                 <Row>
                     <Col sm={12}>
+
+
+
                         <Table striped bordered condensed hover>
                             <thead>
                             <tr>

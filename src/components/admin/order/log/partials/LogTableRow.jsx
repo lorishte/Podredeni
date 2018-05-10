@@ -17,7 +17,7 @@ class LogTableRow extends React.Component {
         return (
             <tr>
                 <td>
-                    {utils.formatDate(log.dateTime)}
+                    {utils.formatDateAndTime(log.dateTime)}
                 </td>
                 <td>
                     {log.username}
