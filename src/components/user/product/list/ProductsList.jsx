@@ -12,7 +12,7 @@ class ProductsList extends React.Component {
 
 		this.state = {
 			products: [],
-			size: 16,
+			size: 50,
 			page: 1,
 			sortProperty: 'number',
 			descending: true,
@@ -25,6 +25,7 @@ class ProductsList extends React.Component {
 		productsService
 			.loadProducts(this.state)
 			.then(res => {
+				res.products.forEach(e => e.images.reverse());
 				this.setState({products: res.products});
 			})
 			.catch(err => {

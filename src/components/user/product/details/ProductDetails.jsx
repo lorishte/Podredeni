@@ -4,6 +4,7 @@ import { Link, Redirect } from 'react-router-dom';
 import { Grid, Row, Col, Image, PageHeader } from 'react-bootstrap';
 import { ToastContainer } from 'react-toastr';
 
+import ImageGallery from './partials/ImageGallery';
 import ProductInfo from './partials/ProductInfo';
 import AddToCartForm from './partials/AddToCartForm';
 import ProductTabs from './partials/ProductTabs';
@@ -28,7 +29,8 @@ class Product extends React.Component {
 		productsService
 			.getProduct(id)
 			.then(res => {
-				this.setState({product: res.product})
+				res.product.images.reverse();
+				this.setState({product: res.product}, () => console.log(this.state))
 			})
 			.catch(err => {
 				console.log(err.responseText)
@@ -69,13 +71,13 @@ class Product extends React.Component {
 		});
 	};
 
-
 	checkIfProductIsInCart = (array) => {
 		return (array.filter(e => e.id === this.state.product.id).length > 0)
 	};
 
 	render () {
 		let product = this.state.product;
+
 
 		return (
 			<Grid id="product">
@@ -87,14 +89,15 @@ class Product extends React.Component {
 
 				<ToastContainer
 					ref={ref => this.toastContainer = ref}
-					className="toast-bottom-right"/>
+					className="toast-bottom-right"
+				/>
 
 				{this.state.product !== '' &&
 					<Row>
-						<Col xs={8} sm={6} md={4}>
-							<Image src={product.images[0]} thumbnail/>
+						<Col xs={8} sm={6} md={5}>
+							<ImageGallery images={product.images}/>
 						</Col>
-						<Col mdOffset={1} xs={12} sm={6} md={7}>
+						<Col xs={12} sm={6} md={7}>
 							<ProductInfo data={product}/>
 							<AddToCartForm onSubmit={this.addToCart}/>
 						</Col>

@@ -10,7 +10,7 @@ class ProductTabs extends React.Component {
 
 	render () {
 		return (
-			<Row>
+			<Row id="product-tabs">
 				<Col xs={12}>
 					<Tabs defaultActiveKey={1} id="uncontrolled-tab-example">
 						<Tab eventKey={1} title="Details">
