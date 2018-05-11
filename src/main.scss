@@ -79,7 +79,7 @@ h3 {
 }
 
 .label {
-  padding: .3em .6em ;
+  padding: .3em .6em;
   font-weight: 400;
 }
 
@@ -124,7 +124,7 @@ h3 {
 
 .btn.active,
 .btn:active,
-.btn.active:focus{
+.btn.active:focus {
   background-image: none;
   outline: 0;
   -webkit-box-shadow: none;
@@ -297,26 +297,44 @@ h3 {
   }
 }
 
-.top-sellers {
-  position: relative;
+#top-sellers {
+  padding-bottom: 60px;
+  .top-sellers-carousel {
+    position: relative;
+    overflow: hidden;
 
-  .carousel-control.left,
-  .carousel-control.right {
-    width: 20px;
-    background: none;
-    color: $light-grey;
-    text-shadow: none;
-    z-index: 1;
-    opacity: 1;
+    button {
+      border: none;
+      outline: none;
 
-    &:hover {
-      cursor: pointer;
-      color: $primary-darken;
+      &:disabled {
+        cursor: default !important;
+
+        &:hover {
+          color: $light-grey !important;
+        }
+      }
+    }
+
+    .carousel-control.left,
+    .carousel-control.right {
+      width: 20px;
+      background: none;
+      color: $light-grey;
+      text-shadow: none;
+      z-index: 1;
+      opacity: 1;
+
+      &:hover {
+        cursor: pointer;
+        color: $primary-darken;
+      }
     }
   }
 }
 
-.card {
+.card,
+.top-seller-card {
   text-align: center;
   display: flex;
   flex-wrap: wrap;
@@ -391,6 +409,12 @@ h3 {
   }
 }
 
+.top-seller-card {
+  width: 300px;
+  display: inline-block;
+  padding: 0 20px;
+}
+
 #testimonials {
   background-color: $warm-light-grey;
   padding: 50px;
@@ -455,7 +479,6 @@ h3 {
   padding: 25px 15px;
 }
 
-
 //User: Cart
 #cart {
   .active-tab {
@@ -467,10 +490,13 @@ h3 {
     padding-bottom: 15px;
   }
 
-
   .image-thumbnail {
     height: 35px;
     width: 35px;
+  }
+
+  .buttons-container {
+    padding-top: 90px;
   }
 }
 
@@ -478,6 +504,7 @@ h3 {
   height: 50px;
   line-height: 50px;
 }
+
 .text-grey {
   color: $medium-grey
 }
@@ -520,9 +547,7 @@ h3 {
 
 }
 
-
 //Admin: Orders
-
 #orders {
 
   .order-info {
@@ -536,9 +561,9 @@ h3 {
     border-radius: 3px;
     padding: 20px 30px;
 
-    -webkit-box-shadow: 10px 10px 5px -5px rgba(0,0,0,0.3);
-    -moz-box-shadow: 10px 10px 5px -5px rgba(0,0,0,0.3);
-    box-shadow: 10px 10px 5px -5px rgba(0,0,0,0.3);
+    -webkit-box-shadow: 10px 10px 5px -5px rgba(0, 0, 0, 0.3);
+    -moz-box-shadow: 10px 10px 5px -5px rgba(0, 0, 0, 0.3);
+    box-shadow: 10px 10px 5px -5px rgba(0, 0, 0, 0.3);
 
     z-index: 2001;
   }
@@ -550,7 +575,7 @@ h3 {
   .overlay {
     width: 100%;
     height: 100vh;
-    background-color: rgba(0,0,0, .3);
+    background-color: rgba(0, 0, 0, .3);
     position: fixed;
     top: 0;
     left: 0;
@@ -569,7 +594,6 @@ h3 {
     margin-bottom: 10px;
   }
 }
-
 
 .arrows-container {
   width: 60px;
@@ -629,9 +653,10 @@ footer {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 100%;
-    height: 300px;
+    width: 400px;
+    height: 400px;
     overflow: hidden;
+    margin-right: 30px;
 
     .main-image {
       margin: auto;
@@ -662,7 +687,6 @@ footer {
       }
     }
   }
-
 
   .gallery-controls {
     position: absolute;
@@ -712,3 +736,5 @@ footer {
     }
   }
 }
+
+

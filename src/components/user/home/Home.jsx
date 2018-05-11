@@ -24,8 +24,7 @@ class Home extends React.Component {
 				<ControlledCarousel/>
 				<Grid>
 					<AboutProduct headline={headline} text={text}/>
-					<TopSellers
-						productsToShow={2}/>
+					<TopSellers productsToShow={3}/>
 				</Grid>
 				<Testimonials/>
 			</div>

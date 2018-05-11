@@ -42,7 +42,7 @@ h3 {
   font-weight: 400 !important; }
 
 .label {
-  padding: 0.3em 0.6em;
+  padding: .3em .6em;
   font-weight: 400; }
 
 .breadcrumb {
@@ -201,22 +201,33 @@ h3 {
   .carousel .carousel-control.right {
     background: none; }
 
-.top-sellers {
-  position: relative; }
-  .top-sellers .carousel-control.left,
-  .top-sellers .carousel-control.right {
-    width: 20px;
-    background: none;
-    color: #e6e6e6;
-    text-shadow: none;
-    z-index: 1;
-    opacity: 1; }
-    .top-sellers .carousel-control.left:hover,
-    .top-sellers .carousel-control.right:hover {
-      cursor: pointer;
-      color: #28b57a; }
+#top-sellers {
+  padding-bottom: 60px; }
+  #top-sellers .top-sellers-carousel {
+    position: relative;
+    overflow: hidden; }
+    #top-sellers .top-sellers-carousel button {
+      border: none;
+      outline: none; }
+      #top-sellers .top-sellers-carousel button:disabled {
+        cursor: default !important; }
+        #top-sellers .top-sellers-carousel button:disabled:hover {
+          color: #e6e6e6 !important; }
+    #top-sellers .top-sellers-carousel .carousel-control.left,
+    #top-sellers .top-sellers-carousel .carousel-control.right {
+      width: 20px;
+      background: none;
+      color: #e6e6e6;
+      text-shadow: none;
+      z-index: 1;
+      opacity: 1; }
+      #top-sellers .top-sellers-carousel .carousel-control.left:hover,
+      #top-sellers .top-sellers-carousel .carousel-control.right:hover {
+        cursor: pointer;
+        color: #28b57a; }
 
-.card {
+.card,
+.top-seller-card {
   text-align: center;
   display: flex;
   flex-wrap: wrap;
@@ -225,26 +236,32 @@ h3 {
   padding: 25px 0;
   margin-bottom: 20px;
   transition: .4s; }
-  .card:hover .product-image {
+  .card:hover .product-image,
+  .top-seller-card:hover .product-image {
     transform: translateY(-20px);
     transition: .4s; }
-    .card:hover .product-image::after {
+    .card:hover .product-image::after,
+    .top-seller-card:hover .product-image::after {
       width: 50%;
       transform: translateX(50%);
       background: skyblue; }
-  .card:hover .card-text {
+  .card:hover .card-text,
+  .top-seller-card:hover .card-text {
     visibility: visible;
     transform: translateY(0);
     opacity: 1;
     transition: .4s; }
-  .card:hover .price {
+  .card:hover .price,
+  .top-seller-card:hover .price {
     transform: translateY(0); }
-  .card .product-image {
+  .card .product-image,
+  .top-seller-card .product-image {
     width: 100%;
     height: 200px;
     overflow: hidden;
     transition: .4s; }
-    .card .product-image::after {
+    .card .product-image::after,
+    .top-seller-card .product-image::after {
       content: '';
       display: block;
       width: 0;
@@ -253,11 +270,13 @@ h3 {
       height: 1px;
       background: #2dcc89;
       transition: width .5s, background 2s; }
-    .card .product-image .card-img-top {
+    .card .product-image .card-img-top,
+    .top-seller-card .product-image .card-img-top {
       height: 90%;
       width: auto;
       border-bottom: 1px solid transparent; }
-  .card .card-text {
+  .card .card-text,
+  .top-seller-card .card-text {
     display: flex;
     align-items: center;
     color: #c6c6c6;
@@ -266,9 +285,15 @@ h3 {
     height: 60px;
     transform: translateY(50px);
     transition: .4s; }
-  .card .price {
+  .card .price,
+  .top-seller-card .price {
     transition: .4s;
     transform: translateY(-60px); }
+
+.top-seller-card {
+  width: 300px;
+  display: inline-block;
+  padding: 0 20px; }
 
 #testimonials {
   background-color: #f6f5f3;
@@ -320,6 +345,8 @@ h3 {
 #cart .image-thumbnail {
   height: 35px;
   width: 35px; }
+#cart .buttons-container {
+  padding-top: 90px; }
 
 .quantity {
   height: 50px;
@@ -426,9 +453,10 @@ footer {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 100%;
-    height: 300px;
-    overflow: hidden; }
+    width: 400px;
+    height: 400px;
+    overflow: hidden;
+    margin-right: 30px; }
     #image-gallery .main-image-container .main-image {
       margin: auto;
       height: 100%;

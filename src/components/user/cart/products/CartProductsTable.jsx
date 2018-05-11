@@ -1,7 +1,7 @@
 import React from 'react';
 
 // Helpers
-import { Table, Button } from 'react-bootstrap';
+import { Table, Button, Row, Col } from 'react-bootstrap';
 import { confirmAlert } from 'react-confirm-alert';
 
 // Partials
@@ -24,12 +24,12 @@ class CartProductsTable extends React.Component {
 	confirmDeletion = (id) => {
 		confirmAlert({
 			title: '',
-			message: 'Are you sure you want to delete this item?',
+			message: 'Сигурни ли сте, че искате да изтриете този продукт?',
 			buttons: [{
-				label: 'Delete',
+				label: 'Изтрий',
 				onClick: () => this.deleteItem(id)
 			},
-				{label: 'Cancel'}]
+				{label: 'Отказ'}]
 		});
 	};
 
@@ -96,7 +96,15 @@ class CartProductsTable extends React.Component {
 
 					</Table>
 
-					<Button bsStyle='primary' onClick={this.props.continue}>Продължи</Button>
+					<Row className="buttons-container">
+						<Col xs={3}>
+							<Button bsStyle='default' onClick={this.props.cancelOrder}>Отказ</Button>
+						</Col>
+						<Col xs={9} className="text-right">
+							<Button bsStyle='primary' onClick={this.props.continue}>Напред</Button>
+						</Col>
+					</Row>
+
 				</div>
 			);
 		}

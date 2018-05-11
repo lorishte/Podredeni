@@ -2,7 +2,8 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 // Helpers
-import { Grid, Row, Col, Breadcrumb } from 'react-bootstrap';
+import { Grid, Row, Col } from 'react-bootstrap';
+import { confirmAlert } from 'react-confirm-alert';
 
 // Partials
 import CartProductsTable from './products/CartProductsTable';
@@ -75,6 +76,24 @@ class Cart extends React.Component {
 		});
 	};
 
+	cancelOrder = () => {
+		sessionStorage.removeItem('products');
+		sessionStorage.removeItem('orderDetails');
+		this.props.history.push('/products')
+	};
+
+	confirmCancel = () => {
+		confirmAlert({
+			title: '',
+			message: 'Сигурни ли сте, че искате да откажете поръчката?',
+			buttons: [{
+				label: 'ДА',
+				onClick: () => this.cancelOrder()
+			},
+				{ label: 'НЕ' }]
+		});
+	};
+
 	showProducts = () => {
 		this.setState({
 			productsView: true,
@@ -142,8 +161,8 @@ class Cart extends React.Component {
 							products={this.state.products}
 							onChange={this.updateInfo}
 							continue={this.showDeliveryDetailsForm}
+							cancelOrder={this.confirmCancel}
 						/>
-
 					</Col>
 					}
 
@@ -165,7 +184,8 @@ class Cart extends React.Component {
 							data={this.state.orderDetails}
 							onChange={this.updateInfo}
 							goBack={this.showProducts}
-							continue={this.showReview}/>
+							continue={this.showReview}
+							cancelOrder={this.confirmCancel}/>
 					</Col>
 					}
 
@@ -179,6 +199,7 @@ class Cart extends React.Component {
 							orderDetails={this.state.orderDetails}
 							goBack={this.showDeliveryDetailsForm}
 							continue={this.submitOrder}
+							cancelOrder={this.confirmCancel}
 						/>
 					</Col>
 					}

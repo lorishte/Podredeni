@@ -1,9 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-import { Col } from 'react-bootstrap';
 
-class ProductCard extends React.Component {
+class TopSellerProductCard extends React.Component {
 	constructor (props) {
 		super(props);
 	}
@@ -13,9 +12,8 @@ class ProductCard extends React.Component {
 		const data = this.props.data;
 
 		return (
-			<Col xs={12} sm={6} md={3}>
 				<Link to={'/products/' + data.id}>
-					<div className="card">
+					<div className="top-seller-card" style={{width: this.props.width + 'px'}}>
 						<div className="product-image">
 							<img className="card-img-top" src={data.images[0]} alt="Card image cap"/>
 						</div>
@@ -26,9 +24,8 @@ class ProductCard extends React.Component {
 						</div>
 					</div>
 				</Link>
-			</Col>
 		);
 	}
 }
 
-export default ProductCard;
+export default TopSellerProductCard;

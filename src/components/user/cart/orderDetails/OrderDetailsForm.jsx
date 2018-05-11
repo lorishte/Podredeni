@@ -20,8 +20,6 @@ class OrderDetails extends React.Component {
 			comment: this.props.data.comment,
 			toAddress: this.props.data.toAddress
 		};
-
-        console.log(this.state);
     }
 
 	updateInfo = (stateProp, data) => {
@@ -75,7 +73,6 @@ class OrderDetails extends React.Component {
 					<Col sm={12}>
 						<h3>Допълнителна информация</h3>
 						<hr/>
-
 						<Comment
 							data={this.state.comment}
 							onChange={this.updateInfo}/>
@@ -86,8 +83,15 @@ class OrderDetails extends React.Component {
 					</Col>
 				</Row>
 
-				<Button  onClick={this.props.goBack}>Назад</Button>
-				<Button bsStyle='primary' type="submit">Продължи</Button>
+				<Row className="buttons-container">
+					<Col xs={3}>
+						<Button bsStyle='default' onClick={this.props.cancelOrder}>Отказ</Button>
+					</Col>
+					<Col xs={9} className="text-right">
+						<Button  onClick={this.props.goBack}>Назад</Button>
+						<Button bsStyle='primary' type="submit">Напред</Button>
+					</Col>
+				</Row>
 			</form>
 		);
 	}

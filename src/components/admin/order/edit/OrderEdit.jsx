@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 // Helpers
-import { Grid, Row, Col, Breadcrumb } from 'react-bootstrap';
+import { Grid, Row, Col } from 'react-bootstrap';
 
 // Partials
 import CartProductsTable from '../../../user/cart/products/CartProductsTable';

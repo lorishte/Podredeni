@@ -17,7 +17,7 @@ class ProductInfo extends React.Component {
 						{product.name + ' '}<Label bsStyle="info">New</Label>
 					</PageHeader>
 					<p>{product.description}</p>
-					<p>Price: <span className="price">{product.price}</span></p>
+					<p>Price: <span className="price">{product.price.toFixed(2)}</span></p>
 				</Col>
 			</Row>
 		);
