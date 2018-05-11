@@ -1,121 +1,186 @@
 import React from 'react';
 
-import { Grid, Row, Col, Table, FormGroup } from 'react-bootstrap';
+import {Grid, Row, Col, Table, FormGroup} from 'react-bootstrap';
+
+import constants from '../../../../data/constants/componentConstants'
 
 import OrderTableRow from './partials/OrderTableRow';
 import OrderDetails from './partials/OrderDetails';
 import FormRadioButton from '../../../common/formComponents/FormRadioButton';
+import FormSelectField from '../../../common/formComponents/FormSelectField'
+import OrderListTableHead from './partials/OrderListTableHead';
+import Paging from '../../../common/pagination/Paging'
 
 import ordersService from '../../../../services/orders/ordersService';
 
+
+
 class OrdersList extends React.Component {
-	constructor (props) {
-		super(props);
+    constructor(props) {
+        super(props);
 
-		this.state = {
-			orders: '',
-			size: 16,
-			page: 1,
-			sortProperty: 'number',
-			descending: true,
-			filterProperty: 'status',
-			filterValue: 'ordered',
-			showDetails: false,
-			orderToShowInfo: '',
-			deliveryInfo: ''
-		};
-	}
+        this.state = {
+            orders: '',
+            size: 15,
+            page: 1,
+            sortProperty: 'number',
+            descending: true,
+            filterProperty: 'status',
+            filterValue: 'ordered',
+            showDetails: false,
+            orderToShowInfo: '',
+            deliveryInfo: '',
+            ordersCount: '',
+            pagesCount: ''
+        };
+    }
 
-	componentDidMount () {
-		ordersService
-			.loadOrders(this.state)
-			.then(res => {
-				this.setState({orders: res.orders});
-			})
-			.catch(err => {
-				console.log(err.responseText);
-			});
-	}
+    componentDidMount() {
+        this.loadOrders();
+    }
 
-	showDetails = (o, d) => {
-		this.setState({
-			showDetails: true,
-			orderToShowInfo: o,
-			deliveryInfo: d
-		});
-	};
+    loadOrders = () => {
+        ordersService
+            .loadOrders(this.state)
+            .then(res => {
 
-	hideDetails = () => {
-		this.setState({
-			showDetails: false,
-			orderToShowInfo: ''
-		});
-	};
+                console.log(res);
+                let ordersCount = Number(res.ordersCount);
+                let size = Number(this.state.size);
 
-	onCheckboxChange = (e) => {
+                this.setState({
+                    orders: res.orders,
+                    ordersCount: ordersCount,
+                    pagesCount: Math.ceil(ordersCount / size)});
+            })
+            .catch(err => {
+                console.log(err.responseText);
+            });
+    };
+
+    sort = (sortProperty, descending) => {
+        this.setState({
+            sortProperty: sortProperty,
+            descending: descending
+        }, () => this.loadOrders());
+    };
+
+    changeClass = (sortProp, descending) => {
+        if (this.state.sortProperty === sortProp &&
+            this.state.descending === descending) {
+            return 'btn btn-sort active';
+        }
+
+        return 'btn btn-sort';
+    };
+
+    goToPage = (page) => {
+        this.setState({page: page}, () => this.loadOrders());
+    };
+
+    handleSizeChange = (e) => {
+        if (e.target.value === '') return;
+        this.setState({size: e.target.value}, () => this.goToPage(1));
+    };
+
+    showDetails = (o, d) => {
+        this.setState({
+            showDetails: true,
+            orderToShowInfo: o,
+            deliveryInfo: d
+        });
+    };
+
+    hideDetails = () => {
+        this.setState({
+            showDetails: false,
+            orderToShowInfo: ''
+        });
+    };
+
+    onCheckboxChange = (e) => {
 
         this.setState({filterProperty: 'status', filterValue: e.target.value}, () => {
 
-            ordersService.loadOrders(this.state)
-                .then(res => {
+            this.loadOrders();
+            this.goToPage(1);
 
-                    this.setState({orders: res.orders});
+        });
 
-                }).catch(err => console.log(err));
+    };
 
-		});
+    render() {
+        let ordersList;
 
-	};
+        if (this.state.orders !== '') {
+            ordersList = this.state.orders.map(e => {
+                return <OrderTableRow key={e.id} data={e} showDetails={this.showDetails}/>;
+            });
+        }
 
-	render () {
-		let ordersList;
+        let radioButtons = [];
 
-		if (this.state.orders !== '') {
-			ordersList = this.state.orders.map(e => {
-				return <OrderTableRow key={e.id} data={e} showDetails={this.showDetails} />;
-			});
-		}
+        for (let i = 0; i < 4; i++) {
 
-		return (
-			<Grid id="orders">
-				<Row>
-					<Col sm={12}>
+            radioButtons.push(<FormRadioButton
+                value={constants.ORDER_STATUS_EN[i]}
+                checked={this.state.filterValue === constants.ORDER_STATUS_EN[i]}
+                label={constants.ORDER_STATUS[i]}
+                onChange={this.onCheckboxChange}/>)
+        }
 
-						<OrderDetails
-							visible={this.state.showDetails}
-							order={this.state.orderToShowInfo}
-							delivery={this.state.deliveryInfo}
-							hideDetails={this.hideDetails}
-						/>
+        return (
+            <Grid id="orders">
 
-						<FormGroup style={{'display': 'flex'}}>
-								<FormRadioButton checked={this.state.filterValue==='ordered'} label="Not confirmed" value="ordered" onChange={this.onCheckboxChange}/>
-								<FormRadioButton checked={this.state.filterValue==='confirmed'} label="Confirmed" value="confirmed" onChange={this.onCheckboxChange}/>
-								<FormRadioButton checked={this.state.filterValue==='dispatched'} label="Dispatched" value="dispatched" onChange={this.onCheckboxChange}/>
-								<FormRadioButton checked={this.state.filterValue==='cancelled'} label="Cancelled" value="cancelled" onChange={this.onCheckboxChange}/>
-						</FormGroup>
+                <Row>
+                    <Col sm={12}>
 
-						<Table striped bordered condensed hover>
-							<thead>
-							<tr>
-								<th>#</th>
-								<th>Статус</th>
-								<th>Последна редакция</th>
-								<th>Получател</th>
-								<th>Телефон</th>
-								<th>Сума</th>
-								<th colSpan={3}>Редакция</th>
-							</tr>
-							</thead>
-							<tbody>
-							{ordersList}
-							</tbody>
-						</Table>
-					</Col>
-				</Row>
-			</Grid>
-		);
-	}
+
+                        <OrderDetails
+                            visible={this.state.showDetails}
+                            order={this.state.orderToShowInfo}
+                            delivery={this.state.deliveryInfo}
+                            hideDetails={this.hideDetails}
+                        />
+
+                        <Col sm={6}>
+                            <FormGroup style={{'display': 'flex'}}>
+                                {radioButtons}
+                            </FormGroup>
+                        </Col>
+                        <Col sm={6}>
+                            <Col xs={6} sm={4}>
+                                <FormSelectField
+                                    label="Покажи"
+                                    name="size"
+                                    value={this.state.size}
+                                    optionsList={constants.ELEMENTS_ON_PAGE}
+                                    required={false}
+                                    onChange={this.handleSizeChange}/>
+                            </Col>
+                        </Col>
+
+                        <Table striped bordered condensed hover>
+                            <OrderListTableHead
+                                changeClass={this.changeClass}
+                                sort={this.sort}
+                            />
+                            <tbody>
+                            {ordersList}
+                            </tbody>
+                        </Table>
+                    </Col>
+                </Row>
+
+                {this.state.size !== '0' && this.state.ordersCount !== 0 &&
+                <Paging
+                    active={Number(this.state.page)}
+                    pagesCount={Number(this.state.pagesCount)}
+                    goToPage={this.goToPage}/>}
+
+            </Grid>
+        );
+    }
 }
 
 export default OrdersList;

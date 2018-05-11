@@ -54,12 +54,14 @@ export default {
             CustomerName: recipientInfo.firstName+ ' ' + recipientInfo.lastName,
             PhoneNumber: recipientInfo.phone,
             Email: recipientInfo.email,
+			Country: addressDetails.country,
             City: addressDetails.city,
             PostCode: addressDetails.postalCode,
             Street: addressDetails.street,
             StreetNumber: addressDetails.streetNo,
             District: addressDetails.district,
             Block: addressDetails.block,
+            Entrance: addressDetails.entrance,
             Floor: addressDetails.floor,
             Apartment: addressDetails.apartment,
             Comments: comment,
@@ -78,7 +80,8 @@ export default {
 	},
 
 	addDeliveryData: (data) => {
-		let recipientInfo = data.recipientInfo;
+
+        let recipientInfo = data.recipientInfo;
 		let ekontDetails = data.ekontDetails;
 		let addressDetails = data.addressDetails;
 		let comment = data.comment;
@@ -88,12 +91,14 @@ export default {
 			CustomerName: recipientInfo.firstName+ ' ' + recipientInfo.lastName,
 			PhoneNumber: recipientInfo.phone,
 			Email: recipientInfo.email,
+			Country: addressDetails.country,
 			City: addressDetails.city,
 			PostCode: addressDetails.postalCode,
 			Street: addressDetails.street,
 			StreetNumber: addressDetails.streetNo,
 			District: addressDetails.district,
 			Block: addressDetails.block,
+			Entrance: addressDetails.entrance,
 			Floor: addressDetails.floor,
 			Apartment: addressDetails.apartment,
 			Comments: comment,

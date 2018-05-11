@@ -39,7 +39,7 @@ class Cart extends React.Component {
 				ekontDetails: {
 					country: '',
 					city: '',
-					officeCode: '',
+					officeCode: 0,
 					officeName: '',
 					address: ''
 				},

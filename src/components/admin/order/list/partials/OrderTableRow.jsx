@@ -20,7 +20,8 @@ class OrderTableRow extends React.Component {
 		ordersService
 			.loadDeliveryData(this.props.data.deliveryDataId)
 			.then(res => {
-				this.setState(res.deliveryData);
+
+                this.setState(res.deliveryData);
 			})
 			.catch(err => {
 				console.log(err.responseText);
@@ -43,7 +44,7 @@ class OrderTableRow extends React.Component {
 					{o.number}
 				</td>
 				<td>
-					{constants.orderStatus[o.status]}
+					{constants.ORDER_STATUS[o.status]}
 				</td>
 				<td>
 					{utils.formatDate(o.lastModificationDate)}

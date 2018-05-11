@@ -4,6 +4,8 @@ import { Row, Col, Label } from 'react-bootstrap';
 
 import utils from '../../../../../utils/utils';
 
+import constants from '../../../../../data/constants/componentConstants'
+
 class OrderDetails extends React.Component {
 	constructor (props) {
 		super(props);
@@ -51,20 +53,19 @@ class OrderDetails extends React.Component {
 
 					<Row>
 						<Col xs={12}>
-							<h4>Поръчка номер <Label bsStyle="success">{o.number}</Label></h4>
+							<h4>{constants.LABELS_BG.orderNumber} <Label bsStyle="success">{o.number}</Label></h4>
 							<p className="">
-								<small className="text-grey">Дата на последна редакция:</small>
+								<small className="text-grey">{constants.LABELS_BG.lastModification}:</small>
 								{' ' + utils.formatDate(o.lastModificationDate)}</p>
 							<hr />
 						</Col>
 
-						<Col xs={4} sm={3}><p className="text-grey">Получател:</p></Col>
+						<Col xs={4} sm={3}><p className="text-grey">{constants.LABELS_BG.customer}:</p></Col>
 						<Col xs={8}><p>{d.customerName}</p></Col>
 
-						<Col xs={4} sm={3}><p className="text-grey">Доставка до:</p></Col>
+						<Col xs={4} sm={3}><p className="text-grey">{constants.LABELS_BG.deliveredTo}:</p></Col>
 						{!d.deliveredToAnOffice &&
-						<Col xs={8}><p>{d.city} {d.postCode}, ул. {d.street} {d.streetNumber}, кв. {d.district},
-							бл. {d.block}, вх. {d.entrance}, ет. {d.floor}, ап. {d.apartment}</p>
+						<Col xs={8}><p>{d.city} {d.postCode}, {d.street !== '' && constants.LABELS_BG.streetShort + ' ' + d.street + ' ' + d.streetNumber + ', '} {d.district !== '' && constants.LABELS_BG.districtShort + ' ' + d.district + ', '} {d.block !== '' && constants.LABELS_BG.blockShort + ' ' + d.block + ', '} {d.entrance !== undefined && constants.LABELS_BG.entranceShort + ' ' + d.entrance + ', '}  {d.floor !== '' && constants.LABELS_BG.floorShort + ' ' + d.floor + ', '}  {d.apartment !== '' && constants.LABELS_BG.apartmentShort + ' ' + d.apartment }</p>
 						</Col>
 						}
 						{d.deliveredToAnOffice &&
@@ -72,14 +73,14 @@ class OrderDetails extends React.Component {
 						</Col>
 						}
 
-						<Col xs={4} sm={3}><p className="text-grey">Телефон:</p></Col>
+						<Col xs={4} sm={3}><p className="text-grey">{constants.LABELS_BG.phone}:</p></Col>
 						<Col xs={8}><p>{d.phoneNumber}</p></Col>
 
-						<Col xs={4} sm={3}><p className="text-grey">Емейл:</p></Col>
+						<Col xs={4} sm={3}><p className="text-grey">{constants.LABELS_BG.email}:</p></Col>
 						<Col xs={8}><p>{d.email}</p></Col>
 
 
-						<Col xs={4} sm={3}><p className="text-grey">Забележка:</p></Col>
+						<Col xs={4} sm={3}><p className="text-grey">{constants.LABELS_BG.comments}:</p></Col>
 						<Col xs={8}><p className="text-bigger"><Label bsStyle="warning">{d.comments}</Label></p></Col>
 
 					</Row>
@@ -89,17 +90,17 @@ class OrderDetails extends React.Component {
 						<Col xs={12}>
 							<hr />
 							<Col xs={12} className="order-info-table-header">
-								<Col xs={6}>Продукт</Col>
-								<Col xs={2} className="text-right">Брой</Col>
-								<Col xs={2} className="text-right">Цена</Col>
-								<Col xs={2} className="text-right">Сума</Col>
+								<Col xs={6}>{constants.LABELS_BG.product}</Col>
+								<Col xs={2} className="text-right">{constants.LABELS_BG.quantity}</Col>
+								<Col xs={2} className="text-right">{constants.LABELS_BG.price}</Col>
+								<Col xs={2} className="text-right">{constants.LABELS_BG.amount}</Col>
 							</Col>
 
 							{products}
 
 							<Col xs={12}>
 								<hr />
-								<h4 className="text-info text-right">Общо: {totalSum.toFixed(2)}</h4>
+								<h4 className="text-info text-right">{constants.LABELS_BG.total}: {totalSum.toFixed(2)}</h4>
 							</Col>
 						</Col>
 					</Row>
