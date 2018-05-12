@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 // Helpers
 import { Table, Button, Row, Col } from 'react-bootstrap';
@@ -69,6 +70,10 @@ class CartProductsTable extends React.Component {
 		if (this.props.products.length > 0) {
 			return (
 				<div>
+					<div className="buttons-container text-right">
+						<Link to="/products" className="btn btn-default">Добави продукт</Link>
+					</div>
+
 					<Table responsive>
 
 						<TableHead editable={true}/>

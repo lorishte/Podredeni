@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 
 import { Row, Col, Checkbox, Button } from 'react-bootstrap';
 
+import { ToastContainer } from 'react-toastr';
+
 import RecipientDetails from './recipientDetails/RecipientDetails';
 import DeliveryToEkontOffice from './deliveryDetails/DeliveryToEkontOffice';
 import DeliveryToAddress from './deliveryDetails/DeliveryToAddress';
@@ -18,9 +20,12 @@ class OrderDetails extends React.Component {
 			ekontDetails: this.props.data.ekontDetails,
 			addressDetails: this.props.data.addressDetails,
 			comment: this.props.data.comment,
-			toAddress: this.props.data.toAddress
+			toAddress: this.props.data.toAddress,
+			termsAgreed: false
 		};
-    }
+
+		this.agreed = React.createRef();
+	}
 
 	updateInfo = (stateProp, data) => {
 		this.setState({[stateProp]: data}, () => {
@@ -28,14 +33,34 @@ class OrderDetails extends React.Component {
 		});
 	};
 
+	handleCheckBox = (e) => {
+		this.setState({termsAgreed: e.target.checked}, () => console.log(this.state));
+	};
+
 	submitInfo = (e) => {
 		e.preventDefault();
+
+		if (!this.state.termsAgreed) {
+			this.toastContainer.warning('Моля, съгласете се с условията за ползване!', '', {
+				closeButton: true,
+			});
+
+			this.agreed.current.focus();
+			return;
+		}
+
 		this.props.continue();
 	};
 
 	render () {
 		return (
 			<form onSubmit={(e) => this.submitInfo(e)}>
+
+				<ToastContainer
+					ref={ref => this.toastContainer = ref}
+					className="toast-bottom-right"
+				/>
+
 				<Row className="bg-light">
 					<Col sm={12}>
 						<h3>Данни за получателя</h3>
@@ -77,9 +102,16 @@ class OrderDetails extends React.Component {
 							data={this.state.comment}
 							onChange={this.updateInfo}/>
 
-						<Checkbox readOnly>
-							Съгласен/а съм с <Link to={'/products'} className="btn-link">Условията за ползване.</Link>
-						</Checkbox>
+						<label>
+							<input type="checkbox"
+							       ref={this.agreed}
+							       name="termsAgreed"
+							       defaultChecked={this.state.termsAgreed}
+							       onChange={this.handleCheckBox}/>
+							Съгласен/а съм с <Link to={'/products'} className="btn-link">Условията за
+							ползване.</Link>
+						</label>
+
 					</Col>
 				</Row>
 
@@ -88,7 +120,7 @@ class OrderDetails extends React.Component {
 						<Button bsStyle='default' onClick={this.props.cancelOrder}>Отказ</Button>
 					</Col>
 					<Col xs={9} className="text-right">
-						<Button  onClick={this.props.goBack}>Назад</Button>
+						<Button onClick={this.props.goBack}>Назад</Button>
 						<Button bsStyle='primary' type="submit">Напред</Button>
 					</Col>
 				</Row>

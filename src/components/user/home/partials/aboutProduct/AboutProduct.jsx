@@ -13,9 +13,6 @@ class AboutProduct extends React.Component {
 			<Jumbotron>
 				<h1>{this.props.headline}</h1>
 				<p>{this.props.text} </p>
-				<p>
-					<Button bsStyle="primary">Learn more</Button>
-				</p>
 				<img className="jumbotron-image" src="./images/banners/image_01.jpg"/>
 			</Jumbotron>
 

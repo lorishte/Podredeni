@@ -30,7 +30,7 @@ class Product extends React.Component {
 			.getProduct(id)
 			.then(res => {
 				res.product.images.reverse();
-				this.setState({product: res.product}, () => console.log(this.state))
+				this.setState({product: res.product})
 			})
 			.catch(err => {
 				console.log(err.responseText)

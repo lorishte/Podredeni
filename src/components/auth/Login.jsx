@@ -1,7 +1,7 @@
 import React from 'react';
 import { Redirect } from 'react-router-dom';
 
-import { Form, FormGroup, Col, FormControl, ControlLabel, Checkbox, Button } from 'react-bootstrap';
+import { Grid, Form, FormGroup, Col, FormControl, ControlLabel, Checkbox, Button } from 'react-bootstrap';
 
 import requester from '../../services/requester';
 
@@ -42,7 +42,7 @@ class Login extends React.Component {
 
 	render () {
 		return (
-			<div className="container well">
+			<Grid>
 				<Form horizontal>
 					<h1>Login</h1>
 
@@ -76,7 +76,7 @@ class Login extends React.Component {
 						</Col>
 					</FormGroup>
 				</Form>
-			</div>
+			</Grid>
 		);
 	}
 }

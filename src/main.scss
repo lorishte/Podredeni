@@ -73,6 +73,12 @@ h3 {
   font-weight: 300;
 }
 
+input[type=checkbox], input[type=radio] {
+  margin: 4px 7px 0 0;
+  margin-top: 1px\9;
+  line-height: normal;
+}
+
 .text-bigger {
   font-size: 1.3em;
   font-weight: 400 !important;
@@ -496,7 +502,7 @@ h3 {
   }
 
   .buttons-container {
-    padding-top: 90px;
+    padding: 20px 0;
   }
 }
 
@@ -556,7 +562,9 @@ h3 {
     width: 60%;
     top: 30%;
     left: 50%;
-    transform: translate(-50%, 0);
+    -webkit-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
     background-color: $white;
     border-radius: 3px;
     padding: 20px 30px;
