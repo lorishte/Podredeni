@@ -22,10 +22,6 @@ class Register extends React.Component {
 		};
 	}
 
-	getData (e) {
-		this.setState({[e.target.name]: e.target.value});
-	}
-
 	registerUser = (e) => {
 		e.preventDefault();
 
@@ -39,9 +35,8 @@ class Register extends React.Component {
 		authService
 			.register(this.state)
 			.then(res => {
-				console.log(res);
-
-				this.props.history.push('/login');
+				sessionStorage.setItem('p_token', res.token);
+				this.props.history.push('/order/list');
 			})
 			.catch(err => console.log(err));
 	};
@@ -50,11 +45,10 @@ class Register extends React.Component {
 		this.setState({[e.target.name] : e.target.value})
 	};
 
-	cancelRegistration = () => {
+	cancelLogin = () => {
 		this.setState({
 			email: '',
-			password: '',
-			confirmPassword: ''
+			password: ''
 		});
 
 		this.props.history.go(-1);
@@ -101,7 +95,7 @@ class Register extends React.Component {
 
 
 						<FormGroup>
-							<Button onClick={this.cancelRegistration}>{constants.USER_ACCOUNT.cancel}</Button>
+							<Button onClick={this.cancelLogin}>{constants.USER_ACCOUNT.cancel}</Button>
 							<Button type="reset">Reset</Button>
 							<Button type="submit" bsStyle="primary">{constants.USER_ACCOUNT.register}</Button>
 						</FormGroup>

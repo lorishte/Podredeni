@@ -86,6 +86,7 @@ class CreateProduct extends React.Component {
 	};
 
 	cancel = () => {
+		console.log(this)
 		//redirect back
 		this.props.history.go(-1);
 	};

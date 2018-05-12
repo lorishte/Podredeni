@@ -1,9 +1,12 @@
 import React from 'react';
-import { Redirect } from 'react-router-dom';
 
-import { Grid, Form, FormGroup, Col, FormControl, ControlLabel, Checkbox, Button } from 'react-bootstrap';
+import { Grid, Form, FormGroup, Col, Button } from 'react-bootstrap';
 
-import requester from '../../services/requester';
+import FormInputField from '../common/formComponents/FormInputField';
+
+import authService from '../../services/auth/authService';
+
+import constants from '../../data/constants/componentConstants';
 
 class Login extends React.Component {
 	constructor (props) {
@@ -15,68 +18,53 @@ class Login extends React.Component {
 		};
 	}
 
-	getData (e) {
+	handleChange = (e) => {
 		this.setState({[e.target.name]: e.target.value});
-	}
+	};
 
 	loginUser = (e) => {
 		e.preventDefault();
 
-		requester
+		authService
 			.login(this.state)
 			.then(response => {
-
-				if (!response.success) {
-					// toastr.error(response.message);
-					console.log(response.message);
-					return;
-				}
-
-				localStorage.setItem('token', response.token);
-				localStorage.setItem('name', response.user.name);
-
-				// toastr.success('Logged in')
-				this.props.history.push('/');
+				sessionStorage.setItem('p_token', response.token);
+				this.props.history.push('/order/list');
 			});
 	};
 
 	render () {
 		return (
 			<Grid>
-				<Form horizontal>
-					<h1>Login</h1>
+				<Col xs={12} md={4}>
+					<Form onSubmit={this.loginUser}>
+						<h1>{constants.USER_ACCOUNT.login}</h1>
 
-					<FormGroup controlId="formHorizontalEmail">
-						<Col componentClass={ControlLabel} sm={2}>
-							Email
-						</Col>
-						<Col sm={10}>
-							<FormControl type="email" placeholder="Email" />
-						</Col>
-					</FormGroup>
+						<FormInputField
+							label={constants.USER_ACCOUNT.email}
+							name="email"
+							type="email"
+							value={this.state.email}
+							required={true}
+							onChange={this.handleChange}/>
 
-					<FormGroup controlId="formHorizontalPassword">
-						<Col componentClass={ControlLabel} sm={2}>
-							Password
-						</Col>
-						<Col sm={10}>
-							<FormControl type="password" placeholder="Password" />
-						</Col>
-					</FormGroup>
 
-					<FormGroup>
-						<Col smOffset={2} sm={10}>
-							<Checkbox>Remember me</Checkbox>
-						</Col>
-					</FormGroup>
+						<FormInputField
+							label={constants.USER_ACCOUNT.password}
+							name="password"
+							type="password"
+							value={this.state.password}
+							required={true}
+							onChange={this.handleChange}/>
 
-					<FormGroup>
-						<Col smOffset={2} sm={10}>
-							<Button type="submit">Sign in</Button>
-						</Col>
-					</FormGroup>
-				</Form>
+						<FormGroup>
+							<Button onClick={this.cancelLogin}>{constants.USER_ACCOUNT.cancel}</Button>
+							<Button type="submit" bsStyle="primary">{constants.USER_ACCOUNT.login}</Button>
+						</FormGroup>
+					</Form>
+				</Col>
 			</Grid>
+
 		);
 	}
 }
