@@ -11,7 +11,6 @@ class Header extends React.Component {
 	}
 
 	componentDidMount () {
-		console.log(this.props);
 	}
 
 	seedProducts = () => {
@@ -36,6 +35,13 @@ class Header extends React.Component {
 
 	render () {
 
+		let isLoggedIn = sessionStorage.getItem('p_token');
+		let productsCount = 0;
+
+		if (sessionStorage.getItem('products') !== null) {
+			productsCount = JSON.parse(sessionStorage.getItem('products')).length;
+		}
+
 		return (
 			<nav className="navbar navbar-default navbar-fixed-top">
 				<div className="container">
@@ -54,36 +60,52 @@ class Header extends React.Component {
 
 					<div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 						<ul className="nav navbar-nav navbar-right">
-							<NavLink to="/product/list" activeClassName="active" className='nav-link'>
-								AdminProductsList
-							</NavLink>
+							{isLoggedIn &&
+								<NavLink to="/product/list" activeClassName="active" className='nav-link'>
+									AdminProductsList
+								</NavLink>
+							}
 
-							<NavLink to="/order/list" activeClassName="active" className='nav-link'>
-								AdminOrdersList
-							</NavLink>
+							{isLoggedIn &&
+								<NavLink to="/order/list" activeClassName="active" className='nav-link'>
+									AdminOrdersList
+								</NavLink>
+							}
 
-							<NavLink to="/product/create" activeClassName="active" className='nav-link'>
-								CreateProduct
-							</NavLink>
+							{isLoggedIn &&
+								<NavLink to="/product/create" activeClassName="active" className='nav-link'>
+									CreateProduct
+								</NavLink>
+							}
 
+							{!isLoggedIn &&
 							<NavLink to="/products" activeClassName="active" className='nav-link'>
 								Продукти
 							</NavLink>
-
+							}
+							{!isLoggedIn &&
 							<NavLink to="/about" activeClassName="active" className='nav-link'>
 								За нас
 							</NavLink>
-
+							}
+							{!isLoggedIn &&
 							<NavLink to="/contact" activeClassName="active" className='nav-link'>
 								Контакт
 							</NavLink>
+							}
 
+							{!isLoggedIn &&
 							<NavLink to="/cart" activeClassName="active" className='nav-link cart'>
+								{productsCount}
 								<i className="fa fa-cart-arrow-down" aria-hidden="true"/>
 							</NavLink>
-							<button className="btn btn-default"
-							        onClick={this.logout}>Logout
-							</button>
+							}
+
+							{isLoggedIn &&
+								<NavLink to="/" className="btn btn-default"
+								        onClick={this.logout}>Logout
+								</NavLink>
+							}
 						</ul>
 					</div>
 				</div>

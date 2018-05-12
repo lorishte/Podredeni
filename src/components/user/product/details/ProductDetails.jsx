@@ -11,7 +11,6 @@ import ProductTabs from './partials/ProductTabs';
 
 import productsService from '../../../../services/products/productsService';
 
-
 class Product extends React.Component {
 	constructor (props) {
 		super(props);
@@ -30,15 +29,19 @@ class Product extends React.Component {
 			.getProduct(id)
 			.then(res => {
 				res.product.images.reverse();
-				this.setState({product: res.product})
+				this.setState({product: res.product});
 			})
 			.catch(err => {
-				console.log(err.responseText)
-			})
+				console.log(err.responseText);
+			});
+
+		console.log(this.toastContainer);
 	}
 
-
 	addToCart = (quantity) => {
+
+		console.log(this.toastContainer);
+
 		this.setState({quantity}, () => {
 			if (sessionStorage.getItem('products') === null) {
 				sessionStorage.setItem('products', '[]');
@@ -68,16 +71,18 @@ class Product extends React.Component {
 			this.toastContainer.success('', 'Product added to your cart.', {
 				closeButton: true,
 			});
+
+			this.props.history.push('/products/' + this.state.product.id);
+
 		});
 	};
 
 	checkIfProductIsInCart = (array) => {
-		return (array.filter(e => e.id === this.state.product.id).length > 0)
+		return (array.filter(e => e.id === this.state.product.id).length > 0);
 	};
 
 	render () {
 		let product = this.state.product;
-
 
 		return (
 			<Grid id="product">
@@ -93,15 +98,15 @@ class Product extends React.Component {
 				/>
 
 				{this.state.product !== '' &&
-					<Row>
-						<Col xs={8} sm={6} md={5}>
-							<ImageGallery images={product.images}/>
-						</Col>
-						<Col xs={12} sm={6} md={7}>
-							<ProductInfo data={product}/>
-							<AddToCartForm onSubmit={this.addToCart}/>
-						</Col>
-					</Row>
+				<Row>
+					<Col xs={8} sm={6} md={5}>
+						<ImageGallery images={product.images}/>
+					</Col>
+					<Col xs={12} sm={6} md={7}>
+						<ProductInfo data={product}/>
+						<AddToCartForm onSubmit={this.addToCart}/>
+					</Col>
+				</Row>
 				}
 				<Row>
 					<ProductTabs/>

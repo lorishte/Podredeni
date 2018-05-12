@@ -2,7 +2,7 @@ import React from 'react'
 import { Route, Redirect } from 'react-router-dom'
 
 function getToken () {
-    return localStorage.getItem('token')
+    return sessionStorage.getItem('p_token')
 }
 
 const PrivateRoute = ({component: Component, ...rest}) => (
@@ -18,6 +18,6 @@ const PrivateRoute = ({component: Component, ...rest}) => (
         )
     )
     } />
-)
+);
 
 export default PrivateRoute

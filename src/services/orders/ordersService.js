@@ -1,6 +1,7 @@
 import requesterService from '../requester';
 const deliveryDataEndPoint = '/deliveryData';
 const orderEndPoint = '/orders';
+const auth = 'admin';
 
 export default {
 
@@ -15,14 +16,14 @@ export default {
 			'&sortDesc=' + state.descending;
 
 		return requesterService
-			.get(orderEndPoint, null, query);
+			.get(orderEndPoint, auth, query);
 	},
 
 	loadOrder: (orderId) => {
 
 		let endPoint = orderEndPoint + '/' + orderId;
 
-		return requesterService.get(endPoint, null);
+		return requesterService.get(endPoint, auth);
 
 	},
 
@@ -31,7 +32,7 @@ export default {
 		let endPoint = orderEndPoint + '/logs/' + orderId;
 
 		return requesterService
-			.get(endPoint, null, '');
+			.get(endPoint, auth, '');
 	},
 
 	loadDeliveryData: (deliveryDataId) => {
@@ -39,7 +40,7 @@ export default {
 		let endPoint = deliveryDataEndPoint + '/' + deliveryDataId;
 
         return requesterService
-			.get(endPoint, null)
+			.get(endPoint, auth)
 	},
 
 	editDeliveryData: (deliveryDataId, data) => {
@@ -76,7 +77,7 @@ export default {
         let endPoint = deliveryDataEndPoint + '/' + deliveryDataId;
 
         return requesterService
-            .update(endPoint, null, details);
+            .update(endPoint, auth, details);
 	},
 
 	addDeliveryData: (data) => {
@@ -133,7 +134,7 @@ export default {
 
 		let endPoint = orderEndPoint + '/' + orderId;
 
-		return requesterService.update(endPoint, null, order);
+		return requesterService.update(endPoint, auth, order);
 	}
 
 

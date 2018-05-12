@@ -45,7 +45,7 @@ class Register extends React.Component {
 		this.setState({[e.target.name] : e.target.value})
 	};
 
-	cancelLogin = () => {
+	cancelRegister = () => {
 		this.setState({
 			email: '',
 			password: ''
@@ -95,7 +95,7 @@ class Register extends React.Component {
 
 
 						<FormGroup>
-							<Button onClick={this.cancelLogin}>{constants.USER_ACCOUNT.cancel}</Button>
+							<Button onClick={this.cancelRegister}>{constants.USER_ACCOUNT.cancel}</Button>
 							<Button type="reset">Reset</Button>
 							<Button type="submit" bsStyle="primary">{constants.USER_ACCOUNT.register}</Button>
 						</FormGroup>

@@ -4,7 +4,7 @@ import $ from 'jquery';
 const host = 'http://api.podredeni.eu/api';
 
 let token = () => {
-	return localStorage.getItem('token');
+	return sessionStorage.getItem('p_token');
 };
 
 export default {
@@ -16,10 +16,7 @@ export default {
 			{
 				url: url,
 				type: 'POST',
-				headers: {
-					// 'Authorization': 'bearer ' + token(),
-					'Content-Type': 'application/json'
-				},
+				headers: createHeader(auth),
 				data: JSON.stringify(data)
 			});
 	},
@@ -31,10 +28,7 @@ export default {
             {
                 url: url,
                 type: 'PUT',
-                headers: {
-                    // 'Authorization': 'bearer ' + token(),
-                    'Content-Type': 'application/json'
-                },
+                headers: createHeader(auth),
                 data: JSON.stringify(data)
             });
     },
@@ -46,10 +40,7 @@ export default {
 			{
 				url: url,
 				type: 'GET',
-				headers: {
-					// 'Authorization': 'bearer ' + token(),
-					'Content-Type': 'application/json'
-				}
+				headers: createHeader(auth)
 			});
 	},
 
@@ -60,10 +51,18 @@ export default {
 			{
 				url: url,
 				type: 'DELETE',
-				headers: {
-					// 'Authorization': 'bearer ' + token(),
-					'Content-Type': 'application/json'
-				}
+				headers: createHeader(auth)
 			});
+	}
+};
+
+let createHeader = (auth) => {
+	if (auth === null) {
+		return { 'Content-Type': 'application/json' }
+	}
+
+	return {
+		'Authorization': 'bearer ' + token(),
+		'Content-Type': 'application/json'
 	}
 };

@@ -14,10 +14,10 @@ class EkontInfoInputs extends React.Component {
 
 		this.state = {
 			country: this.props.data.country || 'България',
-			city: this.props.data.city,
-			officeCode: this.props.data.officeCode,
-			officeName: this.props.data.officeName,
-			address: this.props.data.address,
+			city: this.props.data.city || '',
+			officeCode: this.props.data.officeCode || '',
+			officeName: this.props.data.officeName || '',
+			address: this.props.data.address || '',
 			ekontData: ''
 		};
 	}
@@ -26,7 +26,9 @@ class EkontInfoInputs extends React.Component {
 		ekontRequester.getOffices()
 			.then(response => {
 				let data = ekontDataParser.transformXml(response);
-				this.setState({ekontData: data});
+				console.log(data);
+				console.log(this.state);
+				this.setState({ekontData: data}, () => console.log(this.state.ekontData));
 			})
 			.catch(err => {
 				console.log(err);
@@ -85,7 +87,7 @@ class EkontInfoInputs extends React.Component {
 	render () {
 		return (
 			<Row>
-				{this.state.ekontData !== '' &&
+				{this.state.ekontData !== ''  &&
 				<div>
 					<Col sm={4}>
 						<FormSelectField

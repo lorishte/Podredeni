@@ -1,5 +1,6 @@
 import requesterService from '../requester';
 const endPoint = '/products';
+const auth = 'admin';
 
 export default {
 
@@ -29,7 +30,7 @@ export default {
 		};
 
 		return requesterService
-			.post(endPoint, null, product);
+			.post(endPoint, auth, product);
 	},
 
 	getProduct: (id) => {
@@ -52,14 +53,14 @@ export default {
 		};
 
 		return requesterService
-			.update(endPointId, null, product);
+			.update(endPointId, auth, product);
 	},
 
 	blockProduct: (id) => {
 		let endPointId = endPoint + `/${id}`;
 
 		return requesterService
-			.remove(endPointId, null);
+			.remove(endPointId, auth);
 	},
 
 	seedProducts: (product) => {

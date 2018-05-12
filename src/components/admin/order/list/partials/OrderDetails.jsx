@@ -33,14 +33,16 @@ class OrderDetails extends React.Component {
 		if (o !== '') {
 			products = o.products.map(e => {
 				totalSum += e.price * e.quantity;
-				return (<Col xs={12}>
-					<Row key={e.productId}>
-						<Col xs={6}><p>{e.name}</p></Col>
-						<Col xs={2} className="text-right">{e.quantity}</Col>
-						<Col xs={2} className="text-right">{e.price.toFixed(2)}</Col>
-						<Col xs={2} className="text-right">{(e.price * e.quantity).toFixed(2)}</Col>
-					</Row>
-				</Col>);
+				return (
+					<Col xs={12} key={e.id}>
+						<Row >
+							<Col xs={6}><p>{e.name}</p></Col>
+							<Col xs={2} className="text-right">{e.quantity}</Col>
+							<Col xs={2} className="text-right">{e.price.toFixed(2)}</Col>
+							<Col xs={2} className="text-right">{(e.price * e.quantity).toFixed(2)}</Col>
+						</Row>
+					</Col>
+				);
 			});
 		}
 
@@ -65,11 +67,12 @@ class OrderDetails extends React.Component {
 
 						<Col xs={4} sm={3}><p className="text-grey">{constants.LABELS_BG.deliveredTo}:</p></Col>
 						{!d.deliveredToAnOffice &&
-						<Col xs={8}><p>{d.city} {d.postCode}, {d.street !== '' && constants.LABELS_BG.streetShort + ' ' + d.street + ' ' + d.streetNumber + ', '} {d.district !== '' && constants.LABELS_BG.districtShort + ' ' + d.district + ', '} {d.block !== '' && constants.LABELS_BG.blockShort + ' ' + d.block + ', '} {d.entrance !== undefined && constants.LABELS_BG.entranceShort + ' ' + d.entrance + ', '}  {d.floor !== '' && constants.LABELS_BG.floorShort + ' ' + d.floor + ', '}  {d.apartment !== '' && constants.LABELS_BG.apartmentShort + ' ' + d.apartment }</p>
+						<Col xs={8}><p>{d.city} {d.postCode}, {d.street !== '' && constants.LABELS_BG.streetShort + ' ' + d.street + ' ' + d.streetNumber + ', '} {d.district !== '' && constants.LABELS_BG.districtShort + ' ' + d.district + ', '} {d.block !== '' && constants.LABELS_BG.blockShort + ' ' + d.block + ', '} {d.entrance !== undefined && constants.LABELS_BG.entranceShort + ' ' + d.entrance + ', '}  {d.floor !== '' && constants.LABELS_BG.floorShort + ' ' + d.floor + ', '}  {d.apartment !== '' && constants.LABELS_BG.apartmentShort + ' ' + d.apartment }&nbsp;<Label bsStyle="success">Адрес</Label></p>
 						</Col>
 						}
 						{d.deliveredToAnOffice &&
-						<Col xs={8}><p>{d.officeAddress}</p>
+						<Col xs={8}>
+							<p>{d.officeAddress}&nbsp;<Label bsStyle="danger">Офис</Label></p>
 						</Col>
 						}
 

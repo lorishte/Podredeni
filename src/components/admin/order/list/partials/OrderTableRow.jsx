@@ -20,7 +20,6 @@ class OrderTableRow extends React.Component {
 		ordersService
 			.loadDeliveryData(this.props.data.deliveryDataId)
 			.then(res => {
-
                 this.setState(res.deliveryData);
 			})
 			.catch(err => {
@@ -59,14 +58,20 @@ class OrderTableRow extends React.Component {
 					{totalSum.toFixed(2)}
 				</td>
 				<td>
-					<Link to={'/order/log/' + o.id} className="btn btn-success btn-xs">История</Link>
+					<Link to={'/order/log/' + o.id} className="btn btn-success btn-xs">
+						<i className="fa fa-history" aria-hidden="true"/>
+					</Link>
 				</td>
 				<td>
-					<Link to={'/order/edit/' + o.id} className="btn btn-danger btn-xs">Редакция</Link>
+					<Link to={'/order/edit/' + o.id} className="btn btn-danger btn-xs">
+						<i className="fa fa-pencil" aria-hidden="true"/>
+					</Link>
 				</td>
 				<td>
 					<button className="btn btn-info btn-xs"
-							onClick={() => this.props.showDetails(o, d)}>Детайли</button>
+							onClick={() => this.props.showDetails(o, d)}>
+						Детайли
+					</button>
 				</td>
 
 			</tr>

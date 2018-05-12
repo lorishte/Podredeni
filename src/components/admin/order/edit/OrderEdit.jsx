@@ -49,25 +49,25 @@ class OrderEdit extends React.Component {
                             phone: dd.phoneNumber
                         },
                         ekontDetails: {
-                            country: dd.officeCountry,
-                            city: dd.officeCity,
-                            officeCode: dd.officeCode,
-                            officeName: dd.officeName,
-                            address: dd.officeAddress
+                            country: dd.officeCountry  || '',
+                            city: dd.officeCity || '',
+                            officeCode: dd.officeCode || '',
+                            officeName: dd.officeName || '',
+                            address: dd.officeAddress || ''
                         },
                         addressDetails: {
-                            country: '',
-                            city: dd.city,
-                            postalCode: dd.postCode,
-                            street: dd.street,
-                            streetNo: dd.streetNumber,
-                            district: dd.district,
-                            block: dd.block,
-                            entrance: '',
-                            floor: dd.floor,
-                            apartment: dd.apartment
+                            country: dd.country || '',
+                            city: dd.city || '',
+                            postalCode: dd.postCode || '',
+                            street: dd.street || '',
+                            streetNo: dd.streetNumber || '',
+                            district: dd.district || '',
+                            block: dd.block || '',
+                            entrance: dd.entrance || '',
+                            floor: dd.floor || '',
+                            apartment: dd.apartment || ''
                         },
-                        comment: dd.comments,
+                        comment: dd.comments  || '',
                         toAddress: !dd.deliveredToAnOffice
                     };
 

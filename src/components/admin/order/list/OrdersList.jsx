@@ -123,6 +123,7 @@ class OrdersList extends React.Component {
         for (let i = 0; i < 4; i++) {
 
             radioButtons.push(<FormRadioButton
+                key={i}
                 value={constants.ORDER_STATUS_EN[i]}
                 checked={this.state.filterValue === constants.ORDER_STATUS_EN[i]}
                 label={constants.ORDER_STATUS[i]}

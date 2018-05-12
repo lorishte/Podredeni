@@ -30,7 +30,17 @@ class Login extends React.Component {
 			.then(response => {
 				sessionStorage.setItem('p_token', response.token);
 				this.props.history.push('/order/list');
-			});
+			})
+			.catch(err => console.log(err));
+	};
+
+	cancelLogin = () => {
+		this.setState({
+			email: '',
+			password: ''
+		});
+
+		this.props.history.go(-1);
 	};
 
 	render () {
