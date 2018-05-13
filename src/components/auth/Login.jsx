@@ -6,7 +6,7 @@ import FormInputField from '../common/formComponents/FormInputField';
 
 import authService from '../../services/auth/authService';
 
-import constants from '../../data/constants/componentConstants';
+import { USER_ACCOUNT } from '../../data/constants/componentConstants';
 
 class Login extends React.Component {
 	constructor (props) {
@@ -28,8 +28,15 @@ class Login extends React.Component {
 		authService
 			.login(this.state)
 			.then(response => {
+				console.log(response);
 				sessionStorage.setItem('p_token', response.token);
-				this.props.history.push('/order/list');
+				sessionStorage.setItem('role', response.role);
+
+				if (response.role === 'admin') {
+					this.props.history.push('/order/list');
+				} else {
+					this.props.history.push('/');
+				}
 			})
 			.catch(err => console.log(err));
 	};
@@ -48,10 +55,10 @@ class Login extends React.Component {
 			<Grid>
 				<Col xs={12} md={4}>
 					<Form onSubmit={this.loginUser}>
-						<h1>{constants.USER_ACCOUNT.login}</h1>
+						<h1>{USER_ACCOUNT.login}</h1>
 
 						<FormInputField
-							label={constants.USER_ACCOUNT.email}
+							label={USER_ACCOUNT.email}
 							name="email"
 							type="email"
 							value={this.state.email}
@@ -60,7 +67,7 @@ class Login extends React.Component {
 
 
 						<FormInputField
-							label={constants.USER_ACCOUNT.password}
+							label={USER_ACCOUNT.password}
 							name="password"
 							type="password"
 							value={this.state.password}
@@ -68,8 +75,8 @@ class Login extends React.Component {
 							onChange={this.handleChange}/>
 
 						<FormGroup>
-							<Button onClick={this.cancelLogin}>{constants.USER_ACCOUNT.cancel}</Button>
-							<Button type="submit" bsStyle="primary">{constants.USER_ACCOUNT.login}</Button>
+							<Button onClick={this.cancelLogin}>{USER_ACCOUNT.cancel}</Button>
+							<Button type="submit" bsStyle="primary">{USER_ACCOUNT.login}</Button>
 						</FormGroup>
 					</Form>
 				</Col>

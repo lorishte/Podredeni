@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 import ordersService from '../../../../../services/orders/ordersService';
 
-import constants from '../../../../../data/constants/componentConstants';
+import { ORDER_STATUS } from '../../../../../data/constants/componentConstants';
 import utils from '../../../../../utils/utils';
 
 class OrderTableRow extends React.Component {
@@ -43,7 +43,7 @@ class OrderTableRow extends React.Component {
 					{o.number}
 				</td>
 				<td>
-					{constants.ORDER_STATUS[o.status]}
+					{ORDER_STATUS[o.status]}
 				</td>
 				<td>
 					{utils.formatDate(o.lastModificationDate)}

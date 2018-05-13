@@ -45,7 +45,7 @@ const ERROR_MESSAGES = {
     passwordsMismatch: 'Паролите не съвпадат.'
 };
 
-export default {
+export {
 	FILTER_INPUT_WAIT_INTERVAL,
 	ADMIN_PRODUCTS_FILTER_OPTIONS,
     ELEMENTS_ON_PAGE,

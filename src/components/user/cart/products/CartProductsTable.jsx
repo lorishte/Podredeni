@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 
 // Helpers
 import { Table, Button, Row, Col } from 'react-bootstrap';
@@ -114,4 +113,4 @@ class CartProductsTable extends React.Component {
 	}
 }
 
-export default CartProductsTable;
+export default CartProductsTable ;

@@ -1,6 +1,7 @@
 import React from 'react';
 
-import { Row, PageHeader, Grid } from 'react-bootstrap';
+import { Row, Grid } from 'react-bootstrap';
+import { ToastContainer } from 'react-toastr';
 
 import ProductCard from './partials/ProductCard';
 
@@ -37,14 +38,15 @@ class ProductsList extends React.Component {
 		let productsList;
 
 		productsList = this.state.products.map(e => {
-			return <ProductCard key={e.id} data={e}/>;
+			return <ProductCard key={e.id} data={e} toastContainer={this.toastContainer}/>;
 		});
 
 		return (
 			<Grid>
-				<PageHeader>
-					Products
-				</PageHeader>
+				<ToastContainer
+					ref={ref => this.toastContainer = ref}
+					className="toast-bottom-right"
+				/>
 				<Row className="show-grid top-sellers">
 					{productsList}
 				</Row>

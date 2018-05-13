@@ -12,8 +12,9 @@ class TopSellerProductCard extends React.Component {
 		const data = this.props.data;
 
 		return (
+
 				<Link to={'/products/' + data.id}>
-					<div className="top-seller-card" style={{width: this.props.width + 'px'}}>
+					<div className="top-seller-card" style={{width: this.props.width - 50 + 'px'}}>
 						<div className="product-image">
 							<img className="card-img-top" src={data.images[0]} alt="Card image cap"/>
 						</div>
@@ -24,6 +25,7 @@ class TopSellerProductCard extends React.Component {
 						</div>
 					</div>
 				</Link>
+
 		);
 	}
 }

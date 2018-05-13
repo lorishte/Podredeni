@@ -19,9 +19,11 @@ class Product extends React.Component {
 			product: '',
 			quantity: 0
 		};
+
+		this.toastContainer;
 	}
 
-	toastContainer;
+
 
 	componentDidMount () {
 		let id = this.props.match.params.id;
@@ -34,14 +36,9 @@ class Product extends React.Component {
 			.catch(err => {
 				console.log(err.responseText);
 			});
-
-		console.log(this.toastContainer);
 	}
 
 	addToCart = (quantity) => {
-
-		console.log(this.toastContainer);
-
 		this.setState({quantity}, () => {
 			if (sessionStorage.getItem('products') === null) {
 				sessionStorage.setItem('products', '[]');
@@ -72,8 +69,8 @@ class Product extends React.Component {
 				closeButton: true,
 			});
 
-			this.props.history.push('/products/' + this.state.product.id);
-
+			this.props.history.push('/products/' + this.state.product.id); // to refresh products count in header
+			this.props.history.go(-1); // step back to fix history logic
 		});
 	};
 
@@ -86,12 +83,6 @@ class Product extends React.Component {
 
 		return (
 			<Grid id="product">
-
-				<PageHeader>
-					<Link to="/products" className="hidden-link">Products</Link>
-				</PageHeader>
-
-
 				<ToastContainer
 					ref={ref => this.toastContainer = ref}
 					className="toast-bottom-right"

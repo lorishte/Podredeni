@@ -21,9 +21,13 @@ class Home extends React.Component {
 				<ControlledCarousel/>
 				<Grid>
 					<AboutProduct headline={headline} text={text}/>
+				</Grid>
+				<Grid fluid>
 					<TopSellers productsToShow={3}/>
 				</Grid>
-				<Testimonials/>
+				<Grid fluid>
+					<Testimonials/>
+				</Grid>
 			</div>
 		);
 	}

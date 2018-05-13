@@ -9,7 +9,7 @@ import FormInputField from '../common/formComponents/FormInputField';
 
 import authService from '../../services/auth/authService';
 
-import constants from '../../data/constants/componentConstants';
+import { USER_ACCOUNT, ERROR_MESSAGES } from '../../data/constants/componentConstants';
 
 class Register extends React.Component {
 	constructor (props) {
@@ -26,7 +26,7 @@ class Register extends React.Component {
 		e.preventDefault();
 
 		if (this.state.password !== this.state.confirmPassword) {
-			this.toastContainer.error(constants.ERROR_MESSAGES.passwordsMismatch, '', {
+			this.toastContainer.error(ERROR_MESSAGES.passwordsMismatch, '', {
 				closeButton: true,
 			});
 			return
@@ -65,10 +65,10 @@ class Register extends React.Component {
 
 				<Col xs={12} md={4}>
 					<Form onSubmit={this.registerUser}>
-						<h1>{constants.USER_ACCOUNT.register}</h1>
+						<h1>{USER_ACCOUNT.register}</h1>
 
 						<FormInputField
-							label={constants.USER_ACCOUNT.email}
+							label={USER_ACCOUNT.email}
 							name="email"
 							type="email"
 							value={this.state.email}
@@ -77,7 +77,7 @@ class Register extends React.Component {
 
 
 						<FormInputField
-							label={constants.USER_ACCOUNT.password}
+							label={USER_ACCOUNT.password}
 							name="password"
 							type="password"
 							value={this.state.password}
@@ -86,7 +86,7 @@ class Register extends React.Component {
 
 
 						<FormInputField
-							label={constants.USER_ACCOUNT.confirmPassword}
+							label={USER_ACCOUNT.confirmPassword}
 							name="confirmPassword"
 							type="password"
 							value={this.state.confirmPassword}
@@ -95,9 +95,9 @@ class Register extends React.Component {
 
 
 						<FormGroup>
-							<Button onClick={this.cancelRegister}>{constants.USER_ACCOUNT.cancel}</Button>
+							<Button onClick={this.cancelRegister}>{USER_ACCOUNT.cancel}</Button>
 							<Button type="reset">Reset</Button>
-							<Button type="submit" bsStyle="primary">{constants.USER_ACCOUNT.register}</Button>
+							<Button type="submit" bsStyle="primary">{USER_ACCOUNT.register}</Button>
 						</FormGroup>
 					</Form>
 				</Col>

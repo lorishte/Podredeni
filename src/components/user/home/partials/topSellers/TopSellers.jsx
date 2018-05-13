@@ -1,11 +1,11 @@
 import React from 'react';
 
-import { Row, Col } from 'react-bootstrap';
+import { Grid } from 'react-bootstrap';
 
-import ProductCard from '../../../product/list/partials/ProductCard';
 import TopSellerProductCard from './TopSellerProductCard';
 
 import productsService from '../../../../../services/products/productsService';
+
 
 class TopSellers extends React.Component {
 	constructor (props) {
@@ -97,9 +97,7 @@ class TopSellers extends React.Component {
 		}
 
 		return (
-			<div id="top-sellers">
-				<div>
-
+			<Grid id="top-sellers">
 					<h1 className="section-heading">Top sellers</h1>
 
 					<div className="top-sellers-carousel" ref={this.container}>
@@ -122,10 +120,7 @@ class TopSellers extends React.Component {
 						</button>}
 
 					</div>
-
-				</div>
-
-			</div>
+			</Grid>
 		);
 	}
 }

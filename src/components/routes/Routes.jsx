@@ -25,10 +25,12 @@ import OrderEdit from '../admin/order/edit/OrderEdit';
 let Routes = () => {
 	return (
 		<Switch>
+			/*User*/
 			<Route exact path='/' component={Home}/>
+			<Route path='/home' component={Home}/>
 
 			<Route path='/login' component={Login}/>
-			<Route path='/register' component={Register}/>
+			<Route path='/register' component={NotFound}/>
 
 			<Route exact path='/products' component={ProductsList}/>
 			<Route path="/products/:id" component={ProductDetails}/>

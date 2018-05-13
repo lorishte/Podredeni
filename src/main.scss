@@ -3,16 +3,15 @@
 
 $white: #ffffff;
 $black: #000;
-$primary: #2dcc89;
-$primary-darken: #28b57a;
+$primary: #b49543;
+$primary-hover: #ffa4a2;
 $secondary: #00a8b8;
-$dark-grey: #363636;
+$dark-grey: #5b5b5b;
 $medium-grey: #c6c6c6;
 $light-grey: #e6e6e6;
 $warm-light-grey: #f6f5f3;
 $danger: #ea445b;
 $danger-darken: #b13343;
-
 $header-height: 65px;
 
 @mixin transition {
@@ -39,20 +38,27 @@ body {
 main {
   //margin-top: $header-height;
   min-height: calc(100vh - 80px);
-  margin-top: 100px;
 
-  .container {
-    //background-color: #fff;
-    //padding: 25px;
-    //margin: 50px auto;
-  }
+  padding-top: 160px;
+  background-color: $warm-light-grey;
+}
+
+.container-fluid {
+  padding: 0;
+}
+
+button {
+  border: none;
+  outline: none;
 }
 
 a {
   color: inherit;
   text-decoration: none;
 
-  &:hover {
+  &:hover,
+  &:active,
+  &:focus {
     color: inherit;
     text-decoration: none;
   }
@@ -199,71 +205,83 @@ input[type=checkbox], input[type=radio] {
 }
 
 .section-heading {
+  font-family: "Garamond", serif;
   text-align: center;
   line-height: 3em;
   border-top: 1px solid #e6e6e6;
   border-bottom: 1px solid #e6e6e6;
   text-transform: uppercase;
+  font-weight: 200;
+  letter-spacing: 8px;
+  color: $medium-grey;
 }
 
-.navbar {
-  border-radius: 0;
+nav {
   display: flex;
   align-items: center;
+  flex-direction: column;
+  padding-top: 15px;
 
-  & .navbar-default {
-    background-color: $white;
-    //border-bottom: 3px solid $primary;
+  &.navbar-default {
+    background-image: -webkit-linear-gradient(top,#fff 0,#f8f8f8 100%);
+    background-image: -o-linear-gradient(top,#fff 0,#f8f8f8 100%);
+    background-image: -webkit-gradient(linear,left top,left bottom,from(#fff),to(#f8f8f8));
+    background-image: linear-gradient(to bottom,#fff 0,#f8f8f8 100%);
+    background-repeat: repeat-x;
+    border-radius: 4px;
+    -webkit-box-shadow: none;
+    box-shadow: none;
   }
 
   .navbar-brand {
     display: flex;
     align-items: center;
-    height: $header-height;
-    font-weight: 800;
-    text-transform: lowercase;
+    //height: $header-height;
+    font-weight: 300;
+    font-size: 2em;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    border: 1px solid $medium-grey;
   }
 
   .nav {
     display: flex;
+    height: $header-height;
     align-items: center;
 
     .nav-link {
       display: flex;
       align-items: center;
-      padding: 0 20px;
-      height: $header-height;
+      padding: 10px 20px;
+      text-transform: uppercase;
+      letter-spacing: .3px;
       text-decoration: none;
-      border-bottom: 3px solid transparent;
+      font-size: .9em;
       @include transition;
 
       &.cart {
-        background-color: $primary;
-        color: $white;
+        color: $medium-grey;
         border-bottom: none;
+        font-size: 1em;
 
-        &:hover {
-          background-color: $primary-darken;
-          border-bottom: none;
-        }
-
-        &.active {
-          background-color: $danger;
-          border-bottom: none;
-          @include transition;
+        .fa {
+          font-size: 1.5em;
+          padding-right: 8px;
         }
       }
 
       &.active {
-        border-bottom: 3px solid $primary;
-        @include transition;
+        color: $primary;
       }
 
       &:last-child {
         margin-left: 25px;
-        height: 45px;
       }
     }
+  }
+
+  .navbar-default .navbar-collapse, .navbar-default .navbar-form {
+    border: none;
   }
 }
 
@@ -300,19 +318,25 @@ input[type=checkbox], input[type=radio] {
   .carousel-control.left,
   .carousel-control.right {
     background: none;
+    @include transition;
   }
+}
+
+#home-about {
+  text-align: center;
+  padding-bottom: 60px;
 }
 
 #top-sellers {
   padding-bottom: 60px;
+  background-color: $white;
+
   .top-sellers-carousel {
     position: relative;
     overflow: hidden;
 
-    button {
-      border: none;
-      outline: none;
 
+    button {
       &:disabled {
         cursor: default !important;
 
@@ -330,10 +354,12 @@ input[type=checkbox], input[type=radio] {
       text-shadow: none;
       z-index: 1;
       opacity: 1;
+      margin: 20px;
+      @include transition;
 
       &:hover {
         cursor: pointer;
-        color: $primary-darken;
+        color: $primary-hover;
       }
     }
   }
@@ -346,31 +372,30 @@ input[type=checkbox], input[type=radio] {
   flex-wrap: wrap;
   align-items: flex-end;
   justify-content: center;
-  padding: 25px 0;
+  padding: 25px;
   margin-bottom: 20px;
+  background-color: $white;
   @include transition;
 
   &:hover {
+    -webkit-box-shadow: 0 0 10px -1px rgba(0,0,0,0.23);
+    -moz-box-shadow: 0 0 10px -1px rgba(0,0,0,0.23);
+    box-shadow: 0 0 10px -1px rgba(0,0,0,0.23);
+
     .product-image {
       transform: translateY(-20px);
-      @include transition;
-
-      &::after {
-        width: 50%;
-        transform: translateX(50%);
-        background: skyblue;
-      }
-    }
-
-    .card-text {
-      visibility: visible;
-      transform: translateY(0);
-      opacity: 1;
       @include transition;
     }
 
     .price {
-      transform: translateY(0);
+      //background-color: $primary;
+      color: $primary;
+    }
+
+    .add-to-cart-btn {
+      @include transition;
+      background-color: $primary;
+      color: $white;
     }
   }
 
@@ -379,17 +404,6 @@ input[type=checkbox], input[type=radio] {
     height: 200px;
     overflow: hidden;
     @include transition;
-
-    &::after {
-      content: '';
-      display: block;
-      width: 0;
-      position: absolute;
-      bottom: 5px;
-      height: 1px;
-      background: $primary;
-      transition: width .5s, background 2s;
-    }
 
     .card-img-top {
       height: 90%;
@@ -400,25 +414,41 @@ input[type=checkbox], input[type=radio] {
 
   .card-text {
     display: flex;
+    justify-content: center;
     align-items: center;
     color: $medium-grey;
-    visibility: hidden;
-    opacity: 0;
+    visibility: visible;
+    opacity: 1;
     height: 60px;
-    transform: translateY(50px);
+    font-size: .9em;
     @include transition;
   }
 
   .price {
     @include transition;
-    transform: translateY(-60px);
+  }
+
+  .add-to-cart-btn {
+    padding: 5px 10px;
+    @include transition;
+    background-color: $dark-grey;
+    color: $white;
+    z-index: 3000;
+    margin-right: 5px;
   }
 }
 
 .top-seller-card {
   width: 300px;
   display: inline-block;
-  padding: 0 20px;
+  padding: 25px;
+  margin: 5px 25px;
+
+  &:hover {
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+  }
 }
 
 #testimonials {
@@ -432,21 +462,29 @@ input[type=checkbox], input[type=radio] {
   }
 
   .avatar {
-    margin-top: -80px;
     width: 100px;
-    height: auto;
+    height: 100px;
     border: 6px solid $warm-light-grey;
+  }
+
+  .carousel {
+    height: 250px;
+
+    .carousel-inner {
+      height: auto;
+      position: relative;
+    }
+
+    .carousel-indicators {
+      display: none;
+    }
   }
 
 }
 
 .price {
-  //font-size: 1.3em;
   padding: 5px 10px;
   display: inline-block;
-  //background-color: #f1f1f1;
-  font-weight: 400;
-  //font-family: "Lato", sans-serif;
 
   &::after {
     content: " BGN";
@@ -502,7 +540,7 @@ input[type=checkbox], input[type=radio] {
   }
 
   .buttons-container {
-    padding: 20px 0;
+    padding: 50px 0;
   }
 }
 
@@ -628,7 +666,7 @@ input[type=checkbox], input[type=radio] {
 footer {
   background-color: rgba(240, 240, 240, 0);
   //margin: 50px auto 0;
-  padding: 50px 40px;
+  padding: 20px 40px;
   font-size: .8em;
 
   .wrapper {
@@ -722,12 +760,12 @@ footer {
       text-decoration: none;
       background: rgba(255, 255, 255, .7);
       cursor: pointer;
-      transition: .2s;
+      @include transition;
 
       &:hover {
         color: #fff;
         background-color: rgba(0, 0, 0, .6);
-        transition: .2s;
+        @include transition;
       }
     }
 

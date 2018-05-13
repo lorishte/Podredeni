@@ -10,11 +10,10 @@ class AboutProduct extends React.Component {
 	render () {
 		return (
 
-			<Jumbotron>
+			<div id="home-about">
 				<h1>{this.props.headline}</h1>
 				<p>{this.props.text} </p>
-				<img className="jumbotron-image" src="./images/banners/image_01.jpg"/>
-			</Jumbotron>
+			</div>
 
 		);
 	}

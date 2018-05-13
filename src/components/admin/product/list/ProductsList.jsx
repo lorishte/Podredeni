@@ -10,7 +10,7 @@ import FormInputWithDropdown from '../../../common/formComponents/FormInputWithD
 
 import productsService from '../../../../services/products/productsService';
 
-import constants from '../../../../data/constants/componentConstants';
+import { ELEMENTS_ON_PAGE, ADMIN_PRODUCTS_FILTER_OPTIONS, FILTER_INPUT_WAIT_INTERVAL } from '../../../../data/constants/componentConstants';
 
 
 class ProductsList extends React.Component {
@@ -91,7 +91,7 @@ class ProductsList extends React.Component {
 
 	handleKeyDown = (e) => {
 		clearTimeout(this.timer);
-		this.timer = setTimeout(() => this.goToPage(1), constants.FILTER_INPUT_WAIT_INTERVAL);
+		this.timer = setTimeout(() => this.goToPage(1), FILTER_INPUT_WAIT_INTERVAL);
 	};
 
 	render () {
@@ -108,7 +108,7 @@ class ProductsList extends React.Component {
 							label="Покажи"
 							name="size"
 							value={this.state.size}
-							optionsList={constants.ELEMENTS_ON_PAGE}
+							optionsList={ELEMENTS_ON_PAGE}
 							required={false}
 							onChange={this.handleSizeChange}/>
 					</Col>
@@ -126,7 +126,7 @@ class ProductsList extends React.Component {
 							dropdownName="filterProperty"
 							onSelect={this.handleFilterProperty}
 							// dropdown options
-							optionsList={constants.ADMIN_PRODUCTS_FILTER_OPTIONS}/>
+							optionsList={ADMIN_PRODUCTS_FILTER_OPTIONS}/>
 					</Col>
 				</Row>
 

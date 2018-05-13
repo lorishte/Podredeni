@@ -2,7 +2,7 @@ import React from 'react';
 
 import {Grid, Row, Col, Table, FormGroup} from 'react-bootstrap';
 
-import constants from '../../../../data/constants/componentConstants'
+import { ORDER_STATUS_EN, ORDER_STATUS, ELEMENTS_ON_PAGE } from '../../../../data/constants/componentConstants'
 
 import OrderTableRow from './partials/OrderTableRow';
 import OrderDetails from './partials/OrderDetails';
@@ -124,9 +124,9 @@ class OrdersList extends React.Component {
 
             radioButtons.push(<FormRadioButton
                 key={i}
-                value={constants.ORDER_STATUS_EN[i]}
-                checked={this.state.filterValue === constants.ORDER_STATUS_EN[i]}
-                label={constants.ORDER_STATUS[i]}
+                value={ORDER_STATUS_EN[i]}
+                checked={this.state.filterValue === ORDER_STATUS_EN[i]}
+                label={ORDER_STATUS[i]}
                 onChange={this.onCheckboxChange}/>)
         }
 
@@ -155,7 +155,7 @@ class OrdersList extends React.Component {
                                     label="Покажи"
                                     name="size"
                                     value={this.state.size}
-                                    optionsList={constants.ELEMENTS_ON_PAGE}
+                                    optionsList={ELEMENTS_ON_PAGE}
                                     required={false}
                                     onChange={this.handleSizeChange}/>
                             </Col>
