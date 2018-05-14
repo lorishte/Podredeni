@@ -234,8 +234,7 @@ nav {
 
 #home-main-carousel .carousel {
   height: 550px;
-  margin-top: -35px;
-  margin-bottom: 35px; }
+  margin-top: -35px; }
   #home-main-carousel .carousel .carousel-inner {
     height: 550px;
     position: relative; }
@@ -270,57 +269,46 @@ nav {
   transition: .4s; }
 
 #home-about {
-  text-align: center;
-  padding-bottom: 60px; }
+  text-align: center; }
   #home-about .content-text {
     padding: 25px;
     font-size: 1.3em; }
-  #home-about .wrapper {
-    padding: 0 100px;
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    align-items: stretch;
+
+#home-about .wrapper,
+#home-banner-2 .wrapper {
+  padding-top: 50px;
+  width: 100%; }
+#home-about .article-box,
+#home-banner-2 .article-box {
+  position: relative;
+  height: 700px;
+  background-color: #f6f5f3;
+  text-align: left;
+  display: flex;
+  align-items: flex-end; }
+#home-about .article-image,
+#home-banner-2 .article-image {
+  width: 100%;
+  height: 80%;
+  overflow: hidden; }
+  #home-about .article-image img,
+  #home-banner-2 .article-image img {
     width: 100%;
-    margin: 30px 0 0 0; }
-  #home-about .article-box {
-    display: flex;
-    flex-direction: row;
-    flex-grow: 1;
-    justify-content: center;
-    align-items: center;
-    flex-basis: 100%;
-    height: auto;
-    color: #333;
-    text-align: left;
-    border-bottom: 1px solid #f6f5f3;
-    padding: 30px; }
-    #home-about .article-box:first-of-type {
-      border-top: 1px solid #f6f5f3; }
-  #home-about .article-image {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-basis: 30%;
-    height: 100%;
-    overflow: hidden;
-    border-radius: 50%;
-    border: 10px solid #ffffff; }
-    #home-about .article-image img {
-      width: 100%;
-      height: auto; }
-  #home-about .article-content {
-    flex-basis: 50%;
-    flex-grow: 1;
-    padding: 15px 30px; }
-    #home-about .article-content h4 {
-      color: #896e36;
-      font-weight: 300;
-      text-transform: uppercase;
-      font-size: 1.5em;
-      width: 60%; }
-    #home-about .article-content p {
-      width: 80%; }
+    height: auto; }
+#home-about .article-content,
+#home-banner-2 .article-content {
+  position: absolute;
+  left: 100px;
+  top: 70px;
+  padding: 50px;
+  width: 40%;
+  z-index: 1; }
+  #home-about .article-content h4,
+  #home-banner-2 .article-content h4 {
+    color: #896e36;
+    font-weight: 300;
+    text-transform: uppercase;
+    font-size: 1.5em; }
 
 #top-sellers {
   padding-bottom: 60px; }

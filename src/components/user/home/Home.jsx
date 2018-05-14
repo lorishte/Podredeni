@@ -22,12 +22,32 @@ class Home extends React.Component {
 				<Grid fluid id="home-about">
 					<AboutProduct/>
 				</Grid>
+
 				<Grid fluid id="top-sellers" className="bg-white">
 					<TopSellers productsToShow={3}/>
 				</Grid>
 				<Grid fluid id="testimonials">
 					<Testimonials/>
 				</Grid>
+				<Grid fluid id="home-banner-2">
+					<div className="wrapper">
+						<article className="article-box">
+							<div className="article-image">
+								<img src="/images/show/image_03.jpg"/>
+							</div>
+
+							<div className="article-content bg-white">
+								<h4>Гаранция за качество</h4>
+								<p>
+									ReadeREST е продукт, изработен от висококачествени магнити, неръждаема стомана и с
+									елегантен дизайн. 100% произведени в САЩ, те са вашия многофункционален и незаменим
+									аксесоар.
+								</p>
+							</div>
+						</article>
+					</div>
+				</Grid>
+
 			</div>
 		);
 	}
