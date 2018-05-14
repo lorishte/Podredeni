@@ -281,7 +281,7 @@ nav {
 #home-about .article-box,
 #home-banner-2 .article-box {
   position: relative;
-  height: 700px;
+  height: 600px;
   background-color: #f6f5f3;
   text-align: left;
   display: flex;
@@ -304,6 +304,36 @@ nav {
   width: 40%;
   z-index: 1; }
   #home-about .article-content h4,
+  #home-banner-2 .article-content h4 {
+    color: #896e36;
+    font-weight: 300;
+    text-transform: uppercase;
+    font-size: 1.5em; }
+
+#home-banner-2 .wrapper {
+  padding-top: 50px;
+  width: 100%; }
+#home-banner-2 .article-box {
+  position: relative;
+  height: 450px;
+  background-color: #f6f5f3;
+  text-align: left;
+  display: flex;
+  align-items: flex-end; }
+#home-banner-2 .article-image {
+  width: 100%;
+  height: 100%;
+  overflow: hidden; }
+  #home-banner-2 .article-image img {
+    width: 100%;
+    height: auto; }
+#home-banner-2 .article-content {
+  position: absolute;
+  left: 100px;
+  top: -60px;
+  padding: 50px;
+  width: 40%;
+  z-index: 1; }
   #home-banner-2 .article-content h4 {
     color: #896e36;
     font-weight: 300;
@@ -411,7 +441,6 @@ nav {
     box-shadow: none; }
 
 #testimonials {
-  background-color: #f6f5f3;
   padding: 50px; }
   #testimonials .testimonial .testimonial-body {
     margin-top: 25px; }

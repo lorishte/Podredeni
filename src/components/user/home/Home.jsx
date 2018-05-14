@@ -19,6 +19,7 @@ class Home extends React.Component {
 				<Grid fluid id="home-main-carousel">
 					<ControlledCarousel/>
 				</Grid>
+
 				<Grid fluid id="home-about">
 					<AboutProduct/>
 				</Grid>
@@ -26,9 +27,11 @@ class Home extends React.Component {
 				<Grid fluid id="top-sellers" className="bg-white">
 					<TopSellers productsToShow={3}/>
 				</Grid>
+
 				<Grid fluid id="testimonials">
 					<Testimonials/>
 				</Grid>
+
 				<Grid fluid id="home-banner-2">
 					<div className="wrapper">
 						<article className="article-box">
