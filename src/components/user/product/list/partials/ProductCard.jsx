@@ -56,23 +56,27 @@ class ProductCard extends React.Component {
 			<Col xs={12} sm={6} md={4} lg={3}>
 
 				<div className="card">
-					<Link to={'/products/' + product.id}>
+
 						<div className="product-image">
 							<img className="card-img-top" src={product.images[0]} alt="Card image cap"/>
 						</div>
-					</Link>
+
+
 					<div className="card-body">
 						<h4 className="card-title">{product.name}</h4>
 						<p className="card-text">{product.description.substring(0, 80) + ' ...'}</p>
-
-						<button className="add-to-cart-btn"
-						        onClick={this.addToCart}>+
-							{/*<i class="fa fa-plus" aria-hidden="true"/>*/}
-						</button>
 						<p className="price">{product.price.toFixed(2)}</p>
+						<button className="add-to-cart-btn" onClick={this.addToCart}>
+							<i className="fa fa-shopping-cart" aria-hidden="true"/>
+						</button>
+
+						<Link to={'/products/' + product.id} className="add-to-cart-btn">
+							<i className="fa fa-search" aria-hidden="true"/>
+						</Link>
 
 					</div>
 				</div>
+
 
 			</Col>
 		);

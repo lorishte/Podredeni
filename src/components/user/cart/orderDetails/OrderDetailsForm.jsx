@@ -42,7 +42,7 @@ class OrderDetails extends React.Component {
 
 		if (!this.state.termsAgreed) {
 			this.toastContainer.warning('Моля, съгласете се с условията за ползване!', '', {
-				closeButton: true,
+				closeButton: false,
 			});
 
 			this.agreed.current.focus();
@@ -63,17 +63,12 @@ class OrderDetails extends React.Component {
 
 				<Row className="bg-light">
 					<Col sm={12}>
-						<h3>Данни за получателя</h3>
-						<hr/>
 						<RecipientDetails
 							data={this.state.recipientInfo}
 							onChange={this.updateInfo}/>
 					</Col>
-				</Row>
 
-				<Row>
 					<Col sm={12}>
-						<h3>Данни за доставка</h3>
 						<hr/>
 
 						<DeliveryOptions
@@ -83,21 +78,19 @@ class OrderDetails extends React.Component {
 						<hr/>
 
 						{!this.state.toAddress &&
-						<DeliveryToEkontOffice
-							data={this.state.ekontDetails}
-							onChange={this.updateInfo}/>}
+							<DeliveryToEkontOffice
+								data={this.state.ekontDetails}
+								onChange={this.updateInfo}/>
+						}
 
 						{this.state.toAddress &&
-						<DeliveryToAddress
-							data={this.state.addressDetails}
-							onChange={this.updateInfo}/>}
+							<DeliveryToAddress
+								data={this.state.addressDetails}
+								onChange={this.updateInfo}/>
+						}
 					</Col>
-				</Row>
 
-				<Row>
 					<Col sm={12}>
-						<h3>Допълнителна информация</h3>
-						<hr/>
 						<Comment
 							data={this.state.comment}
 							onChange={this.updateInfo}/>
@@ -116,12 +109,10 @@ class OrderDetails extends React.Component {
 				</Row>
 
 				<Row className="buttons-container">
-					<Col xs={3}>
-						<Button bsStyle='default' onClick={this.props.cancelOrder}>Отказ</Button>
-					</Col>
-					<Col xs={9} className="text-right">
-						<Button onClick={this.props.goBack}>Назад</Button>
-						<Button bsStyle='primary' type="submit">Напред</Button>
+					<Col xs={12} className="text-center">
+						<button className="btn-custom default md" onClick={this.props.cancelOrder}>Отказ</button>
+						<button className="btn-custom default md" onClick={this.props.goBack}>Назад</button>
+						<button className="btn-custom primary md" type="submit">Напред</button>
 					</Col>
 				</Row>
 			</form>

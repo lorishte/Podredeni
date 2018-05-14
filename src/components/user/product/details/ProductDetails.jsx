@@ -99,9 +99,9 @@ class Product extends React.Component {
 					</Col>
 				</Row>
 				}
-				<Row>
-					<ProductTabs/>
-				</Row>
+				{/*<Row>*/}
+					{/*<ProductTabs/>*/}
+				{/*</Row>*/}
 			</Grid>
 		);
 	}

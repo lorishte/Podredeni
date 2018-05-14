@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Grid } from 'react-bootstrap';
+import { Grid, Col } from 'react-bootstrap';
 
 import TopSellerProductCard from './TopSellerProductCard';
 
@@ -97,29 +97,31 @@ class TopSellers extends React.Component {
 		}
 
 		return (
-			<Grid id="top-sellers">
-					<h1 className="section-heading">Top sellers</h1>
+			<Grid className="bg-white">
+					<Col xs={12}>
+						<h1 className="section-heading">Top sellers</h1>
 
-					<div className="top-sellers-carousel" ref={this.container}>
-						<div className="top-sellers" ref={this.topSellers}>
-							{cards}
+						<div className="top-sellers-carousel" ref={this.container}>
+							<div className="top-sellers" ref={this.topSellers}>
+								{cards}
+							</div>
+
+							<button disabled={this.state.translateValue <= 10}
+							        className="carousel-control left"
+							        onClick={this.loadPrevious}>
+								<span className="glyphicon glyphicon-chevron-left"/>
+								<span className="sr-only">Prev</span>
+							</button>
+							{this.topSellers.current !== null &&
+							<button disabled={this.state.translateValue >=  Math.floor(this.topSellers.current.clientWidth) - this.state.productsToShow * this.state.cardWidth - 10}
+							        className="carousel-control right"
+							        onClick={this.loadNext}>
+								<span className="glyphicon glyphicon-chevron-right"/>
+								<span className="sr-only">Next</span>
+							</button>}
+
 						</div>
-
-						<button disabled={this.state.translateValue <= 10}
-						        className="carousel-control left"
-						        onClick={this.loadPrevious}>
-							<span className="glyphicon glyphicon-chevron-left"/>
-							<span className="sr-only">Prev</span>
-						</button>
-						{this.topSellers.current !== null &&
-						<button disabled={this.state.translateValue >=  Math.floor(this.topSellers.current.clientWidth) - this.state.productsToShow * this.state.cardWidth - 10}
-						        className="carousel-control right"
-						        onClick={this.loadNext}>
-							<span className="glyphicon glyphicon-chevron-right"/>
-							<span className="sr-only">Next</span>
-						</button>}
-
-					</div>
+					</Col>
 			</Grid>
 		);
 	}

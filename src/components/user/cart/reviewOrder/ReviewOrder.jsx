@@ -84,13 +84,10 @@ class ReviewOrder extends React.Component {
 				</Table>
 
 				<Row className="buttons-container">
-					<Col xs={3}>
-						<Button bsStyle='default' onClick={this.props.cancelOrder}>Отказ</Button>
-					</Col>
-
-					<Col xs={9} className="text-right">
-						<Button onClick={this.props.goBack}>Назад</Button>
-						<Button bsStyle="danger"  onClick={this.props.continue}>Изпрати поръчката</Button>
+					<Col xs={12} className="text-center">
+						<button className="btn-custom default md" onClick={this.props.cancelOrder}>Отказ</button>
+						<button className="btn-custom default md" onClick={this.props.goBack}>Назад</button>
+						<button className="btn-custom primary lg"  onClick={this.props.continue}>Изпрати поръчката</button>
 					</Col>
 				</Row>
 			</div>

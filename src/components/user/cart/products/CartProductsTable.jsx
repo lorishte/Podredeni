@@ -66,7 +66,20 @@ class CartProductsTable extends React.Component {
 
 	render () {
 
+		let products;
+
 		if (this.props.products.length > 0) {
+			products = this.props.products.map((p, i) => {
+				return <CartProductRow
+					key={p.id}
+					index={i + 1}
+					editable={true}
+					data={p}
+					delete={this.confirmDeletion}
+					edit={this.editItem}/>;
+			})
+		}
+
 			return (
 				<div>
 					<Table responsive>
@@ -74,17 +87,7 @@ class CartProductsTable extends React.Component {
 						<TableHead editable={true}/>
 
 						<tbody>
-
-						{this.props.products.map((p, i) => {
-							return <CartProductRow
-								key={p.id}
-								index={i + 1}
-								editable={true}
-								data={p}
-								delete={this.confirmDeletion}
-								edit={this.editItem}/>;
-						})
-						}
+						{products}
 						</tbody>
 
 						<tfoot>
@@ -97,19 +100,15 @@ class CartProductsTable extends React.Component {
 					</Table>
 
 					<Row className="buttons-container">
-						<Col xs={3}>
-							<Button bsStyle='default' onClick={this.props.cancelOrder}>Отказ</Button>
-						</Col>
-						<Col xs={9} className="text-right">
-							<Button bsStyle='primary' onClick={this.props.continue}>Напред</Button>
+						<Col xs={12} className="text-center">
+							<button className="btn-custom default md" onClick={this.props.cancelOrder}>Отказ</button>
+							<button className="btn-custom primary md" onClick={this.props.continue}>Напред</button>
 						</Col>
 					</Row>
 
 				</div>
 			);
-		}
 
-		return null;
 	}
 }
 

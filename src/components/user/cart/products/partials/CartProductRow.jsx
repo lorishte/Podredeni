@@ -37,7 +37,7 @@ class CartProductRow extends React.Component {
 				{this.props.editable &&
 					<td>
 						<button onClick={() => this.props.delete(p.id)}
-						        className="btn btn-xs">
+						        className="btn btn-default btn-xs">
 							<i className="fa fa-times" aria-hidden="true"/>
 						</button>
 					</td>
@@ -49,8 +49,8 @@ class CartProductRow extends React.Component {
 					<span className="col-xs-2 quantity">{this.state.quantity}</span>
 					{this.props.editable &&
 						<span className="col-xs-8 arrows-container">
-							<button className="btn btn-xs" onClick={() => this.changeQuantity('increment')}>+</button>
-							<button className="btn btn-xs" onClick={() => this.changeQuantity('decrement')}>-</button>
+							<button className="btn btn-default btn-xs" onClick={() => this.changeQuantity('increment')}>+</button>
+							<button className="btn btn-default btn-xs" onClick={() => this.changeQuantity('decrement')}>-</button>
 						</span>
 					}
 				</td>

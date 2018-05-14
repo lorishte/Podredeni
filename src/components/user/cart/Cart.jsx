@@ -74,15 +74,17 @@ class Cart extends React.Component {
 		this.setState({[stateProp]: data}, () => {
 			sessionStorage.setItem([stateProp], JSON.stringify(this.state[stateProp]));
 
-			this.props.history.push('/cart'); // to refresh products count in header
-			this.props.history.go(-1); // step back to fix history logic
+			if (stateProp === 'products') {
+				this.props.history.push('/cart'); // to refresh products count in header
+				this.props.history.go(-1); // step back to fix history logic
+			}
 		});
 	};
 
 	cancelOrder = () => {
 		sessionStorage.removeItem('products');
 		sessionStorage.removeItem('orderDetails');
-		this.props.history.push('/products')
+		this.props.history.push('/')
 	};
 
 	confirmCancel = () => {

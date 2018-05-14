@@ -75,7 +75,7 @@ class Testimonials extends React.Component {
 
 		return (
 
-			<Col xs={12} id="testimonials">
+			<Col xs={12}>
 				<Carousel
 					ref={this.testimonial}
 					activeIndex={index}

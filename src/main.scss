@@ -4,7 +4,8 @@
 $white: #ffffff;
 $black: #000;
 $primary: #b49543;
-$primary-hover: #ffa4a2;
+$buttons-second: #a1a984;
+$primary-hover: #896e36;
 $secondary: #00a8b8;
 $dark-grey: #5b5b5b;
 $medium-grey: #c6c6c6;
@@ -81,7 +82,8 @@ h3 {
 
 input[type=checkbox], input[type=radio] {
   margin: 4px 7px 0 0;
-  margin-top: 1px\9;
+  margin-top: 1px \9
+;
   line-height: normal;
 }
 
@@ -124,13 +126,98 @@ input[type=checkbox], input[type=radio] {
 
   &.btn-sort {
     padding: 2px;
-    color: $primary;
+    color: $buttons-second;
     background-color: transparent;
     @include transition;
 
     &.active {
       color: $danger;
     }
+  }
+}
+
+.btn-custom {
+  border: none;
+  margin-right: 5px;
+  @include transition;
+
+  &:last-child {
+    margin-right: 0;
+  }
+
+  &.primary {
+    color: $white;
+    background-color: $primary;
+
+    &:hover {
+      background-color: $primary-hover;
+    }
+  }
+
+  &.default {
+    color: $dark-grey;
+    background-color: $light-grey;
+
+    &:hover {
+      background-color: $medium-grey;
+    }
+  }
+
+  &:hover {
+    cursor: pointer;
+  }
+
+  &.xs {
+    padding: 1px 5px;
+    border-radius: 2px;
+  }
+
+  &.sm {
+    padding: 5px 10px;
+    border-radius: 3px;
+  }
+
+  &.md {
+    padding: 10px 20px;
+    border-radius: 4px;
+  }
+
+  &.lg {
+    padding: 14px 25px;
+    border-radius: 5px;
+  }
+}
+
+.btn-default-custom {
+  border: none;
+  color: $medium-grey;
+  background-color: $white;
+  @include transition;
+
+  &:hover {
+    background-color: $medium-grey;
+    cursor: pointer;
+    color: $white;
+  }
+
+  &.xs {
+    padding: 1px 5px;
+    border-radius: 2px;
+  }
+
+  &.sm {
+    padding: 5px 10px;
+    border-radius: 3px;
+  }
+
+  &.md {
+    padding: 10px 20px;
+    border-radius: 4px;
+  }
+
+  &.lg {
+    padding: 14px 25px;
+    border-radius: 5px;
   }
 }
 
@@ -175,45 +262,21 @@ input[type=checkbox], input[type=radio] {
   padding-right: 20px;
 }
 
-.container .jumbotron,
-.container-fluid .jumbotron {
-  padding-right: 15px;
-  padding-left: 50px;
-  border-radius: 0;
-  background-color: $warm-light-grey;
-  position: relative;
-
-  h1 {
-    font-size: 3em;
-    width: 45%;
-  }
-
-  p {
-    font-size: 1.2em;
-    font-weight: 400;
-    width: 45%;
-  }
-
-  .jumbotron-image {
-    position: absolute;
-    right: 0;
-    top: 0;
-    width: auto;
-    max-width: 50%;
-    height: 100%;
-  }
+.bg-white {
+  background-color: $white;
 }
 
 .section-heading {
-  font-family: "Garamond", serif;
+  //font-family: "Garamond", serif;
   text-align: center;
-  line-height: 3em;
-  border-top: 1px solid #e6e6e6;
-  border-bottom: 1px solid #e6e6e6;
+  font-size: 3em;
+  line-height: 2.5em;
+  border-top: 1px solid $warm-light-grey;
+  border-bottom: 1px solid $warm-light-grey;
   text-transform: uppercase;
   font-weight: 200;
   letter-spacing: 8px;
-  color: $medium-grey;
+  color: $primary;
 }
 
 nav {
@@ -222,11 +285,15 @@ nav {
   flex-direction: column;
   padding-top: 15px;
 
+  .navbar-default .navbar-collapse, .navbar-default .navbar-form {
+    border: none;
+  }
+
   &.navbar-default {
-    background-image: -webkit-linear-gradient(top,#fff 0,#f8f8f8 100%);
-    background-image: -o-linear-gradient(top,#fff 0,#f8f8f8 100%);
-    background-image: -webkit-gradient(linear,left top,left bottom,from(#fff),to(#f8f8f8));
-    background-image: linear-gradient(to bottom,#fff 0,#f8f8f8 100%);
+    background-image: -webkit-linear-gradient(top, #fff 0, #f8f8f8 100%);
+    background-image: -o-linear-gradient(top, #fff 0, #f8f8f8 100%);
+    background-image: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#f8f8f8));
+    background-image: linear-gradient(to bottom, #fff 0, #f8f8f8 100%);
     background-repeat: repeat-x;
     border-radius: 4px;
     -webkit-box-shadow: none;
@@ -280,61 +347,158 @@ nav {
     }
   }
 
-  .navbar-default .navbar-collapse, .navbar-default .navbar-form {
-    border: none;
+  .label-danger {
+    background-color: $primary;
   }
 }
 
-.carousel {
-  height: 550px;
-  margin-top: -35px;
-  margin-bottom: 35px;
+#home-main-carousel {
 
-  .carousel-inner {
+  .carousel {
     height: 550px;
-    position: relative;
+    margin-top: -35px;
+    margin-bottom: 35px;
 
-    .carousel-img {
-      width: 100%;
+    .carousel-inner {
+      height: 550px;
+      position: relative;
+
+      .item {
+        height: 100%;
+      }
+
+      .carousel-img {
+        width: 100%;
+        height: auto;
+        min-height: 100%;
+        position: absolute;
+        //transform: translateY(-10%);
+        z-index: -1;
+      }
+
+    }
+
+    .carousel-caption {
       position: absolute;
-      transform: translateY(-10%);
-      z-index: -1;
+      top: 200px;
+      width: 60%;
+      left: 20%;
+
+      padding-top: 20px;
+      padding-bottom: 20px;
+
+      z-index: 10;
+
+      color: #fff;
+      text-align: center;
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
+
+      h3 {
+        font-size: 5em;
+        color: #fff;
+        text-transform: uppercase;
+        font-weight: 600;
+      }
     }
   }
+}
 
-  .carousel-caption {
-    position: absolute;
-    right: 15%;
-    top: 250px;
-    left: 15%;
-    z-index: 10;
-    padding-top: 20px;
-    padding-bottom: 20px;
-    color: #fff;
-    text-align: center;
-    text-shadow: 0 1px 2px rgba(0, 0, 0, .6);
-  }
-
-  .carousel-control.left,
-  .carousel-control.right {
-    background: none;
-    @include transition;
-  }
+.carousel-control.left,
+.carousel-control.right {
+  background: none;
+  @include transition;
 }
 
 #home-about {
   text-align: center;
   padding-bottom: 60px;
+
+  .content-text {
+    padding: 25px;
+
+    font-size: 1.3em;
+    //background-color: $primary;
+    //text-transform: uppercase;
+    //color: $white;
+  }
+
+  .wrapper {
+    padding: 0 100px;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    align-items: stretch;
+    width: 100%;
+
+    margin: 30px 0 0 0;
+
+  }
+
+  .article-box {
+    display: flex;
+    flex-direction: row;
+    flex-grow: 1;
+    justify-content: center;
+    align-items: center;
+    flex-basis: 100%;
+    height: auto;
+    color: #333;
+    //background-color: $warm-light-grey;
+    text-align: left;
+    border-bottom: 1px solid $warm-light-grey;
+    padding: 30px;
+
+    &:first-of-type {
+      border-top: 1px solid $warm-light-grey;
+    }
+  }
+
+  .article-image {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-basis: 30%;
+    height: 100%;
+    overflow: hidden;
+    border-radius: 50%;
+    border: 10px solid $white;
+
+    img {
+      width: 100%;
+      height: auto;
+    }
+  }
+
+  .article-content {
+    flex-basis: 50%;
+    flex-grow: 1;
+    padding: 15px 30px;
+
+    &:nth-child(odd) {
+      //padding-left: 0;
+    }
+
+    h4 {
+      color: $primary-hover;
+      font-weight: 300;
+      text-transform: uppercase;
+      font-size: 1.5em;
+      width: 60%;
+    }
+
+    p {
+      width: 80%;
+    }
+
+  }
 }
 
 #top-sellers {
   padding-bottom: 60px;
-  background-color: $white;
 
   .top-sellers-carousel {
     position: relative;
     overflow: hidden;
-
 
     button {
       &:disabled {
@@ -359,7 +523,7 @@ nav {
 
       &:hover {
         cursor: pointer;
-        color: $primary-hover;
+        color: $primary;
       }
     }
   }
@@ -378,9 +542,9 @@ nav {
   @include transition;
 
   &:hover {
-    -webkit-box-shadow: 0 0 10px -1px rgba(0,0,0,0.23);
-    -moz-box-shadow: 0 0 10px -1px rgba(0,0,0,0.23);
-    box-shadow: 0 0 10px -1px rgba(0,0,0,0.23);
+    -webkit-box-shadow: 0 0 10px -1px rgba(0, 0, 0, 0.23);
+    -moz-box-shadow: 0 0 10px -1px rgba(0, 0, 0, 0.23);
+    box-shadow: 0 0 10px -1px rgba(0, 0, 0, 0.23);
 
     .product-image {
       transform: translateY(-20px);
@@ -393,9 +557,7 @@ nav {
     }
 
     .add-to-cart-btn {
-      @include transition;
       background-color: $primary;
-      color: $white;
     }
   }
 
@@ -429,12 +591,19 @@ nav {
   }
 
   .add-to-cart-btn {
+    display: inline-block;
     padding: 5px 10px;
+    height: 30px;
     @include transition;
-    background-color: $dark-grey;
+    background-color: $light-grey;
     color: $white;
     z-index: 3000;
     margin-right: 5px;
+
+    &:hover {
+      background-color: $primary-hover;
+      color: $white;
+    }
   }
 }
 
@@ -484,7 +653,7 @@ nav {
 
 .price {
   padding: 5px 10px;
-  display: inline-block;
+  display: block;
 
   &::after {
     content: " BGN";

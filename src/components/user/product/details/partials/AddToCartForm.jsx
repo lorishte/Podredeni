@@ -50,7 +50,7 @@ class AddToCartForm extends React.Component {
 				<Col xs={4} sm={12}>
 					<Form inline onSubmit={this.submit}>
 						<FormGroup
-							bsSize="large" // controlId="formBasicText" // validationState={this.getValidationState()}
+							bsSize="large"
 						>
 							<ControlLabel/>{' '}
 							<FormControl
@@ -59,10 +59,9 @@ class AddToCartForm extends React.Component {
 								max="10"
 								value={this.state.quantity}
 								onChange={this.handleChange}/>
-							{/*<FormControl.Feedback />*/}
-							{/*<HelpBlock>{this.message}</HelpBlock>*/}
+
 						</FormGroup>{' '}
-						<Button type="submit" className="btn btn-primary" bsSize="large">Add To Cart</Button>
+						<button type="submit" className="btn-custom primary lg">Add To Cart</button>
 					</Form>
 				</Col>
 

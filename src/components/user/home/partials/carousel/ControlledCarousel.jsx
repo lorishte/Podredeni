@@ -65,28 +65,38 @@ class ControlledCarousel extends React.Component {
 
 				<Carousel.Item >
 					<img className="carousel-img" alt="slider_01" src="./images/banners/podredeni_banner_03.jpg"/>
-					<Carousel.Caption>
-						<h3>First slide label</h3>
-						<p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
-					</Carousel.Caption>
+					{/*<Carousel.Caption>*/}
+						{/*<h3>First slide label</h3>*/}
+						{/*<p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>*/}
+					{/*</Carousel.Caption>*/}
 				</Carousel.Item>
 
 				<Carousel.Item>
 					<img className="carousel-img" alt="slider_02" src="images/banners/podredeni_banner_01.jpg"/>
-					<Carousel.Caption>
-						<h3>Second slide label</h3>
-						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-					</Carousel.Caption>
+					{/*<Carousel.Caption>*/}
+						{/*<h3>Second slide label</h3>*/}
+						{/*<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>*/}
+					{/*</Carousel.Caption>*/}
 				</Carousel.Item>
 
 				<Carousel.Item>
 					<img className="carousel-img" alt="slider_03" src="images/banners/podredeni_banner_02.jpg"/>
-					<Carousel.Caption>
-						<h3>Third slide label</h3>
-						<p>
-							Praesent commodo cursus magna, vel scelerisque nisl consectetur.
-						</p>
-					</Carousel.Caption>
+					{/*<Carousel.Caption>*/}
+						{/*<h3>Third slide label</h3>*/}
+						{/*<p>*/}
+							{/*Praesent commodo cursus magna, vel scelerisque nisl consectetur.*/}
+						{/*</p>*/}
+					{/*</Carousel.Caption>*/}
+				</Carousel.Item>
+
+				<Carousel.Item>
+					<img className="carousel-img" alt="slider_03" src="http://www.readerest.fr/wp-content/uploads/2016/06/sac_slider1920x665px.jpg"/>
+					{/*<Carousel.Caption>*/}
+						{/*<h3>Third slide label</h3>*/}
+						{/*<p>*/}
+							{/*Praesent commodo cursus magna, vel scelerisque nisl consectetur.*/}
+						{/*</p>*/}
+					{/*</Carousel.Caption>*/}
 				</Carousel.Item>
 
 			</Carousel>

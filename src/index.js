@@ -6,7 +6,7 @@ import registerServiceWorker from './registerServiceWorker';
 
 
 ReactDOM.render(
-	<BrowserRouter>
+	<BrowserRouter onUpdate={() => window.scrollTo(0, 0)}>
 		<App />
 	</BrowserRouter>,
 	document.getElementById('root')
