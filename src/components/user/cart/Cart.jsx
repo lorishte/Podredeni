@@ -1,6 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
+import { Label } from 'react-bootstrap';
+
 // Helpers
 import { Grid, Row, Col } from 'react-bootstrap';
 import { confirmAlert } from 'react-confirm-alert';
@@ -160,7 +162,7 @@ class Cart extends React.Component {
 					{this.state.products.length > 0 && this.state.productsView &&
 					<Col xs={12}>
 						<h2 className="cart-view-name">
-							<span className="text-grey">Стъпка 1.</span> Преглед и редакция
+							<Label>Стъпка 1</Label> Преглед и редакция
 						</h2>
 						<CartProductsTable
 							products={this.state.products}
@@ -174,7 +176,7 @@ class Cart extends React.Component {
 					{this.state.products.length === 0 && this.state.productsView &&
 					<Col xs={12}>
 						<h2 className="cart-view-name">
-							<span className="text-grey">Стъпка 1.</span> Преглед и редакция
+							<Label >Стъпка 1</Label> Преглед и редакция
 						</h2>
 						<h3>Нямате добавени продукти</h3>
 					</Col>
@@ -183,7 +185,7 @@ class Cart extends React.Component {
 					{this.state.orderDetailsView &&
 					<Col xs={12}>
 						<h2 className="cart-view-name">
-							<span className="text-grey">Стъпка 2.</span> Данни за доставка
+							<Label>Стъпка 2</Label> Данни за доставка
 						</h2>
 						<OrderDetailsForm
 							data={this.state.orderDetails}
@@ -197,7 +199,7 @@ class Cart extends React.Component {
 					{this.state.reviewView &&
 					<Col xs={12}>
 						<h2 className="cart-view-name">
-							<span className="text-grey">Стъпка 3.</span> Потвърждение
+							<Label>Стъпка 3</Label>Потвърждение
 						</h2>
 						<ReviewOrder
 							products={this.state.products}

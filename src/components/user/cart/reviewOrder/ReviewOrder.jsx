@@ -36,7 +36,6 @@ class ReviewOrder extends React.Component {
 			<div>
 				<Row>
 					<Col xs={12}>
-						<h3>Данни за доставка</h3>
 						<Row>
 							<Col sm={3}>
 								<RecipientDetailsSummary recipient={recipient}/>
@@ -62,7 +61,6 @@ class ReviewOrder extends React.Component {
 					</Col>
 				</Row>
 
-				<h3>Добавени продукти</h3>
 				<Table responsive>
 					<TableHead editable={false}/>
 					<tbody>

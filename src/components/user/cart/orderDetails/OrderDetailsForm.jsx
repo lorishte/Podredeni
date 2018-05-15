@@ -91,6 +91,7 @@ class OrderDetails extends React.Component {
 					</Col>
 
 					<Col sm={12}>
+						<hr/>
 						<Comment
 							data={this.state.comment}
 							onChange={this.updateInfo}/>

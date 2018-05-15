@@ -88,7 +88,7 @@ class EkontInfoInputs extends React.Component {
 		return (
 			<Row>
 				{this.state.ekontData !== ''  &&
-				<div>
+				<div className="form-group">
 					<Col sm={4}>
 						<FormSelectField
 							label="Държава"

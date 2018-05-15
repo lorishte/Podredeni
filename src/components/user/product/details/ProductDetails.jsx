@@ -90,7 +90,7 @@ class Product extends React.Component {
 
 				{this.state.product !== '' &&
 				<Row>
-					<Col xs={8} sm={6} md={5}>
+					<Col xs={12} sm={6} md={5}>
 						<ImageGallery images={product.images}/>
 					</Col>
 					<Col xs={12} sm={6} md={7}>
