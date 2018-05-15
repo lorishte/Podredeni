@@ -86,9 +86,9 @@ export default {
 
 	changeStatus: (orderId, status) => {
 
-		let endpoint = orderEndPoint + '/' + status + '/' + id;
+		let endpoint = orderEndPoint + '/' + status + '/' + orderId;
 
-		return requesterService.post(endPoint, auth)
+		return requesterService.post(endpoint, auth)
     }
 };
 
