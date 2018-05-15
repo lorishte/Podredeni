@@ -17,7 +17,7 @@ const LABELS_BG = {
     phone: 'Телефон',
     email: 'Емейл',
     amount: 'Сума',
-    quantity: 'Количество',
+    quantity: 'Брой',
     price: 'Цена',
     total: 'Общо',
     edit: 'Редакция',

@@ -739,6 +739,10 @@ nav {
 // Admin: Create - Edit product
 #create-edit-product {
 
+  .buttons-container {
+    padding: 10px 0 50px 0;
+  }
+
   .image-container {
     position: relative;
     display: inline-block;
@@ -833,6 +837,7 @@ nav {
     padding: 10px 0;
     margin-bottom: 10px;
   }
+
 }
 
 .arrows-container {

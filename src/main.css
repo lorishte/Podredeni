@@ -497,6 +497,8 @@ nav {
 .text-grey {
   color: #c6c6c6; }
 
+#create-edit-product .buttons-container {
+  padding: 10px 0 50px 0; }
 #create-edit-product .image-container {
   position: relative;
   display: inline-block;

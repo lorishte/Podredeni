@@ -160,40 +160,39 @@ class Cart extends React.Component {
 				</Row>
 				<Row>
 					{this.state.products.length > 0 && this.state.productsView &&
-					<Col xs={12}>
-						<h2 className="cart-view-name">
-							<Label>Стъпка 1</Label> Преглед и редакция
-						</h2>
-						<CartProductsTable
-							products={this.state.products}
-							onChange={this.updateInfo}
-							continue={this.showDeliveryDetailsForm}
-							cancelOrder={this.confirmCancel}
-						/>
-					</Col>
+						<Col xs={12}>
+							<h2 className="cart-view-name">
+								<Label>Стъпка 1</Label> Преглед и редакция
+							</h2>
+							<CartProductsTable
+								products={this.state.products}
+								onChange={this.updateInfo}
+								continue={this.showDeliveryDetailsForm}
+								cancelOrder={this.confirmCancel} />
+						</Col>
 					}
 
 					{this.state.products.length === 0 && this.state.productsView &&
-					<Col xs={12}>
-						<h2 className="cart-view-name">
-							<Label >Стъпка 1</Label> Преглед и редакция
-						</h2>
-						<h3>Нямате добавени продукти</h3>
-					</Col>
+						<Col xs={12}>
+							<h2 className="cart-view-name">
+								<Label >Стъпка 1</Label> Преглед и редакция
+							</h2>
+							<h3>Нямате добавени продукти</h3>
+						</Col>
 					}
 
 					{this.state.orderDetailsView &&
-					<Col xs={12}>
-						<h2 className="cart-view-name">
-							<Label>Стъпка 2</Label> Данни за доставка
-						</h2>
-						<OrderDetailsForm
-							data={this.state.orderDetails}
-							onChange={this.updateInfo}
-							goBack={this.showProducts}
-							continue={this.showReview}
-							cancelOrder={this.confirmCancel}/>
-					</Col>
+						<Col xs={12}>
+							<h2 className="cart-view-name">
+								<Label>Стъпка 2</Label> Данни за доставка
+							</h2>
+							<OrderDetailsForm
+								data={this.state.orderDetails}
+								onChange={this.updateInfo}
+								goBack={this.showProducts}
+								continue={this.showReview}
+								cancelOrder={this.confirmCancel}/>
+						</Col>
 					}
 
 					{this.state.reviewView &&

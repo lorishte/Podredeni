@@ -31,9 +31,7 @@ class Header extends React.Component {
 	};
 
 	logout = (e) => {
-		e.preventDefault();
 		sessionStorage.clear();
-		this.props.history.push('/');
 	};
 
 	render () {

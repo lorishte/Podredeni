@@ -86,7 +86,6 @@ class CreateProduct extends React.Component {
 	};
 
 	cancel = () => {
-		console.log(this)
 		//redirect back
 		this.props.history.go(-1);
 	};
@@ -150,7 +149,7 @@ class CreateProduct extends React.Component {
 						}
 
 
-						<Col md={5} sm={8}>
+						<Col xs={12} md={5} sm={8}>
 							<FormInputField
 								label="Име"
 								name="name"
@@ -187,7 +186,7 @@ class CreateProduct extends React.Component {
 								label="Цена"
 								name="price"
 								type="number"
-								step="any"
+								step="0.1"
 								value={this.state.price}
 								required={false}
 								disabled={false}
@@ -196,12 +195,11 @@ class CreateProduct extends React.Component {
 					</Row>
 
 					<Row>
-
 						<Col xs={12}>
 							{images}
 						</Col>
 
-						<Col md={6} sm={12}>
+						<Col xs={12} md={6} sm={12}>
 							<AddImageForm
 								label="Добави снимка"
 								addImage={this.addImage}/>
@@ -209,8 +207,8 @@ class CreateProduct extends React.Component {
 					</Row>
 
 
-					<Row>
-						<Col xs={12}>
+					<Row className="buttons-container">
+						<Col xs={12} >
 							<Button onClick={this.cancel}>Отказ</Button>
 							<Button bsStyle='primary' type="submit">Потвърди</Button>
 						</Col>
