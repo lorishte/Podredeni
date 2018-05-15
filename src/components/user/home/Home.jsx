@@ -36,7 +36,7 @@ class Home extends React.Component {
 					<div className="wrapper">
 						<article className="article-box">
 							<div className="article-image">
-								<img src="/images/show/image_03.jpg"/>
+								<img src="/images/banners/podredeni_banner_04.jpg"/>
 							</div>
 
 							<div className="article-content bg-white">

@@ -6,7 +6,6 @@ import TopSellerProductCard from './TopSellerProductCard';
 
 import productsService from '../../../../../services/products/productsService';
 
-
 class TopSellers extends React.Component {
 	constructor (props) {
 		super(props);
@@ -19,27 +18,29 @@ class TopSellers extends React.Component {
 			filterValue: true,
 			translateValue: 0,
 			cardWidth: 0,
-			productsToShow: this.props.productsToShow
+			productsToShow: 1
 		};
 
 		this.topSellers = React.createRef();
 		this.container = React.createRef();
 	}
 
-
-
 	componentDidMount () {
 		this.loadProducts();
 		window.addEventListener('resize', this.loadProducts);
 	}
 
-	componentWillUnmount() {
+	componentWillUnmount () {
 		window.removeEventListener('resize', this.loadProducts);
 	}
 
 	loadProducts = () => {
-		if (window.innerWidth < 800) {
+		if (window.innerWidth < 700) {
+			this.setState({productsToShow: 1});
+		} else if (window.innerWidth < 1000) {
 			this.setState({productsToShow: 2});
+		} else {
+			this.setState({productsToShow: 3});
 		}
 
 		productsService
@@ -60,7 +61,6 @@ class TopSellers extends React.Component {
 		let translateValue = this.state.translateValue - step;
 		this.moveCarousel(translateValue);
 	};
-
 
 	loadNext = () => {
 		let step = this.state.cardWidth;
@@ -98,30 +98,31 @@ class TopSellers extends React.Component {
 
 		return (
 			<Grid className="bg-white">
-					<Col xs={12}>
-						<h1 className="section-heading">Top sellers</h1>
+				<Col xs={12}>
+					<h1 className="section-heading">Top sellers</h1>
 
-						<div className="top-sellers-carousel" ref={this.container}>
-							<div className="top-sellers" ref={this.topSellers}>
-								{cards}
-							</div>
-
-							<button disabled={this.state.translateValue <= 10}
-							        className="carousel-control left"
-							        onClick={this.loadPrevious}>
-								<span className="glyphicon glyphicon-chevron-left"/>
-								<span className="sr-only">Prev</span>
-							</button>
-							{this.topSellers.current !== null &&
-							<button disabled={this.state.translateValue >=  Math.floor(this.topSellers.current.clientWidth) - this.state.productsToShow * this.state.cardWidth - 10}
-							        className="carousel-control right"
-							        onClick={this.loadNext}>
-								<span className="glyphicon glyphicon-chevron-right"/>
-								<span className="sr-only">Next</span>
-							</button>}
-
+					<div className="top-sellers-carousel" ref={this.container}>
+						<div className="top-sellers" ref={this.topSellers}>
+							{cards}
 						</div>
-					</Col>
+
+						<button disabled={this.state.translateValue <= 10}
+						        className="carousel-control left"
+						        onClick={this.loadPrevious}>
+							<span className="glyphicon glyphicon-chevron-left"/>
+							<span className="sr-only">Prev</span>
+						</button>
+						{this.topSellers.current !== null &&
+						<button
+							disabled={this.state.translateValue >= Math.floor(this.topSellers.current.clientWidth) - this.state.productsToShow * this.state.cardWidth - 10}
+							className="carousel-control right"
+							onClick={this.loadNext}>
+							<span className="glyphicon glyphicon-chevron-right"/>
+							<span className="sr-only">Next</span>
+						</button>}
+
+					</div>
+				</Col>
 			</Grid>
 		);
 	}

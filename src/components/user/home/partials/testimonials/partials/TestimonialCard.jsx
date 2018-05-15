@@ -13,15 +13,17 @@ class TestimonialCard extends React.Component {
 		const data = this.props.data;
 
 		return (
-			<Col xs={12} data={this.data} className="testimonial text-center">
+			<Col xs={12} className="testimonial text-center">
 				<Col xs={12}>
 					<Image circle src={data.imageUrl} className='avatar' alt="Card image cap"/>
 				</Col>
-				<Col xs={6} xsOffset={3} className='testimonial-body'>
+				<Col xs={12} sm={8} md={6} smOffset={2} mdOffset={3} className='testimonial-body'>
 					<h4 className="">{data.name + ' ' + data.lastName}</h4>
 					<p className="">{data.testimonial}</p>
 				</Col>
 			</Col>
+
+
 		);
 	}
 }

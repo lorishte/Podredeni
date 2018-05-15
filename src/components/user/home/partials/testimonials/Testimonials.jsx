@@ -1,10 +1,11 @@
 import React from 'react';
 
-import { Row, Col, Image } from 'react-bootstrap';
+import { Col, Clearfix } from 'react-bootstrap';
 
 import data from '../../../../../data/testimonials';
 
 import { Carousel } from 'react-bootstrap';
+import TestimonialCard from './partials/TestimonialCard';
 
 const TIMER_INTERVAL = 8000;
 
@@ -58,15 +59,7 @@ class Testimonials extends React.Component {
 		let testimonialCards = data.map(t => {
 			return (
 				<Carousel.Item key={t.authorId}>
-					<Col xs={12} data={this.data} className="testimonial text-center">
-						<Col xs={12}>
-							<Image circle src={t.imageUrl} className="avatar" alt="author"/>
-						</Col>
-						<Col xs={6} xsOffset={3} className='testimonial-body'>
-							<h4 className="">{t.name + ' ' + t.lastName}</h4>
-							<p className="">{t.testimonial}</p>
-						</Col>
-					</Col>
+					<TestimonialCard data={t}/>
 				</Carousel.Item>
 			);
 		});
@@ -75,16 +68,17 @@ class Testimonials extends React.Component {
 
 		return (
 
-			<Col xs={12}>
-				<Carousel
-					ref={this.testimonial}
-					activeIndex={index}
-					direction={direction}
-					onSelect={this.handleSelect}>
 
-					{testimonialCards}
-				</Carousel>
-			</Col>
+			<Carousel
+				ref={this.testimonial}
+				activeIndex={index}
+				direction={direction}
+				onSelect={this.handleSelect}>
+
+				{testimonialCards}
+			</Carousel>
+
+
 		);
 	}
 }

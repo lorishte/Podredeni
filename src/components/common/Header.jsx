@@ -62,7 +62,7 @@ class Header extends React.Component {
 
 				{isAdmin &&
 					<div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-						<ul className="nav navbar-nav navbar-right">
+						<ul className="nav navbar-nav">
 
 							<NavLink to="/order/list" activeClassName="active" className='nav-link'>
 								Поръчки
@@ -76,7 +76,7 @@ class Header extends React.Component {
 								Нов продукт
 							</NavLink>
 
-							<NavLink to="/" className="btn btn-default"
+							<NavLink to="/" activeClassName="active" className='nav-link'
 							         onClick={this.logout}>Изход
 							</NavLink>
 
@@ -105,7 +105,7 @@ class Header extends React.Component {
 							</NavLink>
 
 							{!isLoggedInUser &&
-								<NavLink to="/login" className="btn btn-default">
+								<NavLink to="/login" activeClassName="active" className='nav-link'>
 									Вход
 								</NavLink>
 							}
