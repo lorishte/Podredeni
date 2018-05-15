@@ -43,8 +43,8 @@ let Routes = () => {
 			<Route path='/contact' component={Contact}/>
 
 			/*Admin*/
-			<PrivateRoute exact path='/product/create' component={CreateProduct}/>
-			<PrivateRoute exact path='/product/edit/:id' component={CreateProduct}/>
+			<PrivateRoute path='/product/create' component={CreateProduct}/>
+			<PrivateRoute path='/product/edit/:id' component={CreateProduct}/>
 			<PrivateRoute path='/product/list' component={AdminProductsList}/>
 
 			<PrivateRoute path='/order/list' component={AdminOrdersList}/>

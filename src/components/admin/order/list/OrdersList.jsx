@@ -120,11 +120,9 @@ class OrdersList extends React.Component {
 		let radioButtons = [];
 
 		for (let i = 0; i < 4; i++) {
-
 			radioButtons.push(
-				<Col xs={6} sm={3}>
+				<Col xs={6} sm={3} key={i}>
 					<FormRadioButton
-						key={i}
 						value={ORDER_STATUS_EN[i]}
 						checked={this.state.filterValue === ORDER_STATUS_EN[i]}
 						label={ORDER_STATUS[i]}
@@ -136,43 +134,40 @@ class OrdersList extends React.Component {
 			<Grid id="orders">
 
 				<Row>
+					<Col xs={12}>
+						<Row>
 
+							<OrderDetails
+								visible={this.state.showDetails}
+								order={this.state.orderToShowInfo}
+								delivery={this.state.deliveryInfo}
+								hideDetails={this.hideDetails}/>
 
-					<OrderDetails
-						visible={this.state.showDetails}
-						order={this.state.orderToShowInfo}
-						delivery={this.state.deliveryInfo}
-						hideDetails={this.hideDetails}
-					/>
+							<Col xs={12}>
+								<FormGroup className="filters-container">
+									{radioButtons}
+								</FormGroup>
+							</Col>
 
+							<Col xs={4} sm={3} md={2}>
+								<FormSelectField
+									name="size"
+									value={this.state.size}
+									optionsList={ELEMENTS_ON_PAGE}
+									required={false}
+									onChange={this.handleSizeChange}/>
+							</Col>
+						</Row>
 
-					<Row>
-						<Col xs={12}>
-							<FormGroup className="filters-container">
-								{radioButtons}
-							</FormGroup>
-						</Col>
-						<Col xs={3} sm={4} md={2}>
-							<FormSelectField
-								name="size"
-								value={this.state.size}
-								optionsList={ELEMENTS_ON_PAGE}
-								required={false}
-								onChange={this.handleSizeChange}/>
-						</Col>
-
-					</Row>
-
-
-					<Table striped bordered condensed hover>
-						<OrderListTableHead
-							changeClass={this.changeClass}
-							sort={this.sort}
-						/>
-						<tbody>
-						{ordersList}
-						</tbody>
-					</Table>
+						<Table striped bordered condensed hover>
+							<OrderListTableHead
+								changeClass={this.changeClass}
+								sort={this.sort}/>
+							<tbody>
+							{ordersList}
+							</tbody>
+						</Table>
+					</Col>
 
 				</Row>
 

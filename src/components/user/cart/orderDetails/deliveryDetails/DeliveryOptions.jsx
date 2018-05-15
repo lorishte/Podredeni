@@ -36,7 +36,7 @@ class DeliveryOptions extends React.Component {
 							this.props.onChange('toAddress', this.state.toAddress);
 						})
 					}}>
-					Доставка со офис на ЕКОНТ
+					Доставка до офис на ЕКОНТ
 				</Radio>{' '}
 			</FormGroup>
 		);

@@ -13,25 +13,25 @@ class OrderListTableHead extends React.Component {
 		return (
 			<thead>
 			<tr>
-				<th className="text-center">{LABELS_BG.number}
+				<th>
 					<OrderListSortButtons
 						sortProperty="number"
 						changeClass={this.props.changeClass}
 						sort={this.props.sort}/></th>
 
-				<th className="text-center">{LABELS_BG.status}</th>
+				<th>{LABELS_BG.status}</th>
 
-				<th className="text-center visible-md visible-lg">{LABELS_BG.lastModification}
+				<th className="visible-md visible-lg">{LABELS_BG.lastModification}
 					<OrderListSortButtons
 						sortProperty="lastModificationDate"
 						changeClass={this.props.changeClass}
 						sort={this.props.sort}/></th>
 
-				<th className="text-center visible-md visible-lg">{LABELS_BG.customer}</th>
+				<th className="visible-md visible-lg">{LABELS_BG.customer}</th>
 
-				<th className="text-center visible-md visible-lg">{LABELS_BG.phone}</th>
+				<th className="visible-md visible-lg">{LABELS_BG.phone}</th>
 
-				<th className="text-center visible-md visible-lg">{LABELS_BG.amount}</th>
+				<th className="text-right visible-md visible-lg">{LABELS_BG.amount}</th>
 
 				<th className="text-center" >{LABELS_BG.edit}</th>
 			</tr>

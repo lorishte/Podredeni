@@ -14,17 +14,17 @@ class TableHead extends React.Component {
 		return (
 			<thead>
 			<tr>
-				<th className="text-center">No
+				<th className="text-center">
 					<SortButtons
 						sortProperty="number"
 						changeClass={this.props.changeClass}
 						sort={this.props.sort}/></th>
-				<th>Наименование
+				<th>
 					<SortButtons
 						sortProperty="name"
 						changeClass={this.props.changeClass}
 						sort={this.props.sort}/></th>
-				<th className="text-center">Цена
+				<th className="text-center">
 					<SortButtons
 						sortProperty="price"
 						changeClass={this.props.changeClass}

@@ -30,9 +30,10 @@ class Header extends React.Component {
 		}
 	};
 
-	logout = () => {
+	logout = (e) => {
+		e.preventDefault();
 		sessionStorage.clear();
-		// this.props.history.push('/');
+		this.props.history.push('/');
 	};
 
 	render () {
@@ -88,7 +89,7 @@ class Header extends React.Component {
 					<div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 						<ul className="nav navbar-nav navbar-right">
 
-							<NavLink to="/home" activeClassName="active" className='nav-link'>
+							<NavLink to="/" activeClassName="active" className='nav-link'>
 								Начало
 							</NavLink>
 
