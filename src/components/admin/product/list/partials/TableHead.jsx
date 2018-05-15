@@ -30,10 +30,13 @@ class TableHead extends React.Component {
 						changeClass={this.props.changeClass}
 						sort={this.props.sort}/>
 				</th>
-				<th className="text-center">TopSeller
+				<th className="text-center">
+					<i className="fa fa-diamond" aria-hidden="true" />
 				</th>
-				<th className="text-center">Blocked</th>
-				<th className="text-center">Редакция</th>
+				<th className="text-center">
+					<i className="fa fa-ban" aria-hidden="true"/>
+				</th>
+				<th className="text-center"/>
 			</tr>
 			</thead>
 		);

@@ -11,17 +11,11 @@ class FormRadioButton extends React.Component {
 
     render() {
 
-        const radio = (
-                <label>
-                    <input type="radio" checked={this.props.checked} value={this.props.value} onChange={this.props.onChange} />
-                    {this.props.label}
-                </label>
-        );
-
         return (
-            <div>
-                {radio}
-            </div>
+            <label>
+                <input type="radio" checked={this.props.checked} value={this.props.value} onChange={this.props.onChange} />
+		        {this.props.label}
+            </label>
         );
     }
 }

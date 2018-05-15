@@ -21,19 +21,19 @@ class OrderListTableHead extends React.Component {
 
 				<th className="text-center">{LABELS_BG.status}</th>
 
-				<th className="text-center">{LABELS_BG.lastModification}
+				<th className="text-center visible-md visible-lg">{LABELS_BG.lastModification}
 					<OrderListSortButtons
 						sortProperty="lastModificationDate"
 						changeClass={this.props.changeClass}
 						sort={this.props.sort}/></th>
 
-				<th className="text-center">{LABELS_BG.customer}</th>
+				<th className="text-center visible-md visible-lg">{LABELS_BG.customer}</th>
 
-				<th className="text-center">{LABELS_BG.phone}</th>
+				<th className="text-center visible-md visible-lg">{LABELS_BG.phone}</th>
 
-				<th className="text-center">{LABELS_BG.amount}</th>
+				<th className="text-center visible-md visible-lg">{LABELS_BG.amount}</th>
 
-				<th className="text-center" colSpan={3}>{LABELS_BG.edit}</th>
+				<th className="text-center" >{LABELS_BG.edit}</th>
 			</tr>
 			</thead>
 		);

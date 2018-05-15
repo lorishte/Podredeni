@@ -33,10 +33,10 @@ class OrderDetails extends React.Component {
 				return (
 					<Col xs={12} key={e.id}>
 						<Row >
-							<Col xs={6}><p>{e.name}</p></Col>
+							<Col xs={4}><p>{e.name}</p></Col>
 							<Col xs={2} className="text-right">{e.quantity}</Col>
-							<Col xs={2} className="text-right">{e.price.toFixed(2)}</Col>
-							<Col xs={2} className="text-right">{(e.price * e.quantity).toFixed(2)}</Col>
+							<Col xs={3} className="text-right">{e.price.toFixed(2)}</Col>
+							<Col xs={3} className="text-right">{(e.price * e.quantity).toFixed(2)}</Col>
 						</Row>
 					</Col>
 				);
@@ -45,11 +45,9 @@ class OrderDetails extends React.Component {
 
 		return (
 			<div>
-				<div className={this.state.showDetails ? 'overlay' : ''} onClick={this.props.hideDetails}>
-				</div>
+				<div className={this.state.showDetails ? 'overlay' : ''} onClick={this.props.hideDetails} />
+
 				<div className={this.state.showDetails ? 'order-info visible' : 'order-info'}>
-
-
 					<Row>
 						<Col xs={12}>
 							<h4>{LABELS_BG.orderNumber} <Label bsStyle="success">{o.number}</Label></h4>
@@ -90,10 +88,10 @@ class OrderDetails extends React.Component {
 						<Col xs={12}>
 							<hr />
 							<Col xs={12} className="order-info-table-header">
-								<Col xs={6}>{LABELS_BG.product}</Col>
+								<Col xs={4}>{LABELS_BG.product}</Col>
 								<Col xs={2} className="text-right">{LABELS_BG.quantity}</Col>
-								<Col xs={2} className="text-right">{LABELS_BG.price}</Col>
-								<Col xs={2} className="text-right">{LABELS_BG.amount}</Col>
+								<Col xs={3} className="text-right">{LABELS_BG.price}</Col>
+								<Col xs={3} className="text-right">{LABELS_BG.amount}</Col>
 							</Col>
 
 							{products}

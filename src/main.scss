@@ -133,7 +133,7 @@ input[type=checkbox], input[type=radio] {
 
   &.btn-sort {
     padding: 2px;
-    color: $buttons-second;
+    color: $light-grey;
     background-color: transparent;
     @include transition;
 
@@ -213,6 +213,15 @@ input[type=checkbox], input[type=radio] {
   margin-left: 15px;
   display: inline-block;
   margin-right: 0;
+
+  .btn {
+    margin-right: 0;
+  }
+}
+
+.table-responsive {
+  min-height: .01%;
+  overflow-x: auto;
 }
 
 .table > tbody > tr > td,
@@ -480,7 +489,7 @@ nav {
 }
 
 #top-sellers {
-  padding-bottom: 60px;
+  padding-bottom: 30px;
 
   .top-sellers-carousel {
     position: relative;
@@ -573,7 +582,16 @@ nav {
   }
 
   .price {
+    padding: 5px 10px;
+    font-weight: 600;
     @include transition;
+
+    &::after {
+      content: " BGN";
+      font-family: "Montserrat", sans-serif;
+      font-size: .7em;
+      opacity: .5;
+    }
   }
 
   .add-to-cart-btn {
@@ -608,7 +626,7 @@ nav {
 
 #testimonials {
   //background-color: $warm-light-grey;
-  padding: 50px;
+  padding: 50px 0;
 
   .testimonial {
     .testimonial-body {
@@ -636,18 +654,6 @@ nav {
     }
   }
 
-}
-
-.price {
-  padding: 5px 10px;
-  font-weight: 600;
-
-  &::after {
-    content: " BGN";
-    font-family: "Montserrat", sans-serif;
-    font-size: .7em;
-    opacity: .5;
-  }
 }
 
 #product {
@@ -769,17 +775,28 @@ nav {
 }
 
 //Admin: Orders
+
 #orders {
+
+  .filters-container {
+    display: flex;
+    -ms-flex-align: center;
+    align-items: center;
+    flex-wrap: wrap;
+    background: #fff;
+    padding: 10px;
+    border: 1px solid $light-grey;
+  }
 
   .order-info {
     display: none;
     position: absolute;
     width: 60%;
-    top: 30%;
+    top: 10%;
     left: 50%;
-    -webkit-transform: translate(-50%, -50%);
-    -ms-transform: translate(-50%, -50%);
-    transform: translate(-50%, -50%);
+    -webkit-transform: translate(-50%, 0);
+    -ms-transform: translate(-50%, 0);
+    transform: translate(-50%, 0);
     background-color: $white;
     border-radius: 3px;
     padding: 20px 30px;
@@ -1013,6 +1030,14 @@ footer {
       }
     }
   }
+
+  //Admin
+
+  #orders {
+    .order-info {
+      width: 80%;
+    }
+  }
 }
 
 @media screen and (max-width: 767px) {
@@ -1041,9 +1066,9 @@ footer {
       text-align: center;
 
       background-color: rgba(255, 255, 255, .95);
-      -webkit-box-shadow: 2px 4px 5px 0 rgba(0,0,0,0.15);
-      -moz-box-shadow: 2px 4px 5px 0 rgba(0,0,0,0.15);
-      box-shadow: 2px 4px 5px 0 rgba(0,0,0,0.15);
+      -webkit-box-shadow: 2px 4px 5px 0 rgba(0, 0, 0, 0.15);
+      -moz-box-shadow: 2px 4px 5px 0 rgba(0, 0, 0, 0.15);
+      box-shadow: 2px 4px 5px 0 rgba(0, 0, 0, 0.15);
 
       &.in {
         display: -ms-flexbox;
@@ -1126,6 +1151,27 @@ footer {
     }
   }
 
+  #top-sellers {
+    padding-bottom: 0;
+  }
+
+  #testimonials {
+    padding: 30px 0;
+  }
+
+  //Admin
+
+  .table-sorting-buttons {
+    margin-left: 2px;
+  }
+
+  #orders {
+    .order-info {
+      width: 95%;
+      top: 0;
+    }
+  }
+
 }
 
 @media screen and (max-width: 400px) {
@@ -1140,7 +1186,6 @@ footer {
         .carousel-img {
           width: auto;
           height: 100%;
-          min-width: 100%;
         }
       }
     }
