@@ -50,7 +50,7 @@ class Header extends React.Component {
 			<nav className="navbar navbar-default navbar-fixed-top">
 
 				<div className="navbar-brand">
-					<Link to="/">Podredeni</Link>
+					<Link to="/home">Podredeni</Link>
 				</div>
 
 				<button type="button" className="navbar-toggle collapsed" data-toggle="collapse"
@@ -77,7 +77,7 @@ class Header extends React.Component {
 								Нов продукт
 							</NavLink>
 
-							<NavLink to="/" activeClassName="active" className='nav-link'
+							<NavLink to="/home" activeClassName="active" className='nav-link'
 							         onClick={this.logout}>Изход
 							</NavLink>
 
@@ -89,7 +89,7 @@ class Header extends React.Component {
 					<div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 						<ul className="nav navbar-nav navbar-right">
 
-							<NavLink to="/" activeClassName="active" className='nav-link'>
+							<NavLink to="/home" activeClassName="active" className='nav-link'>
 								Начало
 							</NavLink>
 
