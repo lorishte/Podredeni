@@ -11,7 +11,7 @@ const ORDER_STATUS_EN = {0: 'ordered', 1: 'confirmed', 2: 'dispatched', 3: 'canc
 const LABELS_BG = {
     number: '#',
     status: 'Статус',
-    lastModification: 'Последна редакция',
+    lastModification: 'Посл. ред.',
     customer: 'Получател',
     product: 'Продукт',
     phone: 'Телефон',

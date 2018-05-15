@@ -54,7 +54,7 @@ class OrderTableRow extends React.Component {
 				<td className="visible-md visible-lg">
 					{d.phoneNumber}
 				</td>
-				<td className="visible-md visible-lg">
+				<td className="text-right visible-md visible-lg">
 					{totalSum.toFixed(2)}
 				</td>
 				<td className="text-center">

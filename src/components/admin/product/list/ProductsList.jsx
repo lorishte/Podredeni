@@ -103,7 +103,7 @@ class ProductsList extends React.Component {
 		return (
 			<Grid>
 				<Row>
-					<Col xs={3} sm={2}>
+					<Col xs={4} sm={3} md={2}>
 						<FormSelectField
 							label="Покажи"
 							name="size"
@@ -113,7 +113,7 @@ class ProductsList extends React.Component {
 							onChange={this.handleSizeChange}/>
 					</Col>
 
-					<Col xs={9} sm={6}>
+					<Col xs={8} sm={6}>
 						<FormInputWithDropdown
 							label="Филтър по"
 							// input
