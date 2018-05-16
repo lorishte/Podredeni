@@ -130,6 +130,7 @@ input[type=checkbox], input[type=radio] {
 
 .btn {
   margin-right: 5px;
+  margin-bottom: 5px;
 
   &.btn-sort {
     padding: 2px;
@@ -294,6 +295,10 @@ nav {
     letter-spacing: 3px;
     border: 1px solid $medium-grey;
     margin: 15px auto 0 auto;
+
+    &.admin {
+      margin: 15px;
+    }
   }
 
   .nav {
@@ -1063,7 +1068,7 @@ footer {
       margin-top: 0;
       position: absolute;
       top: 23px;
-      right: 20px;
+      right: 3px;
     }
 
     .navbar-collapse {
@@ -1109,17 +1114,19 @@ footer {
       padding-bottom: 10px;
     }
 
-    .nav {
-      display: -ms-flexbox;
-      display: flex;
-      height: auto;
-      -ms-flex-align: center;
-      align-items: center;
-      flex-direction: column;
+    #user-nav {
+      .nav {
+        display: -ms-flexbox;
+        display: flex;
+        height: auto;
+        -ms-flex-align: center;
+        align-items: center;
+        flex-direction: column;
 
-      .nav-link {
-        color: $medium-grey;
-        border-bottom: 1px solid rgba(255, 255, 255, .1);
+        .nav-link {
+          color: $medium-grey;
+          border-bottom: 1px solid rgba(255, 255, 255, .1);
+        }
       }
     }
   }
@@ -1215,7 +1222,13 @@ footer {
 
     .navbar-brand {
       font-size: 120%;
-      margin: 15px auto 15px 30px;
+      margin: 15px;
+    }
+
+    #admin-nav {
+      .nav-link {
+        padding: 10px;
+      }
     }
   }
 

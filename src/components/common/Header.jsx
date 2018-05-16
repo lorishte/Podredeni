@@ -47,21 +47,74 @@ class Header extends React.Component {
 		return (
 			<nav className="navbar navbar-default navbar-fixed-top">
 
+				{!isAdmin &&
 				<div className="navbar-brand">
 					<Link to="/home">Podredeni</Link>
 				</div>
+				}
 
-				<button type="button" className="navbar-toggle collapsed" data-toggle="collapse"
-				        data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+				{!isAdmin &&
+				<button type="button"
+				        className="navbar-toggle collapsed"
+				        data-toggle="collapse"
+				        data-target="#user-nav"
+				        aria-expanded="false">
 					<span className="sr-only">Toggle navigation</span>
 					<span className="icon-bar"/>
 					<span className="icon-bar"/>
 					<span className="icon-bar"/>
 				</button>
+				}
+
+				{!isAdmin &&
+				<div className="collapse navbar-collapse" id="user-nav">
+					<ul className="nav navbar-nav navbar-right">
+
+						<NavLink to="/home" activeClassName="active" className='nav-link'>
+							Начало
+						</NavLink>
+
+						< NavLink to="/products" activeClassName="active" className='nav-link'>
+							Продукти
+						</NavLink>
+
+						<NavLink to="/about" activeClassName="active" className='nav-link'>
+							За нас
+						</NavLink>
+
+						<NavLink to="/contact" activeClassName="active" className='nav-link'>
+							Контакт
+						</NavLink>
+
+						{!isLoggedInUser &&
+						<NavLink to="/login" activeClassName="active" className='nav-link'>
+							Вход
+						</NavLink>
+						}
+
+						{isLoggedInUser &&
+						<NavLink to="/" className="btn btn-default"
+						         onClick={this.logout}>Изход
+						</NavLink>
+						}
+
+						<NavLink to="/cart" activeClassName="active" className='nav-link cart'>
+							<i className="fa fa-cart-arrow-down" aria-hidden="true"/>
+							{productsCount !== 0 &&
+							<Label bsStyle="danger">{' ' + productsCount}</Label>
+							}
+						</NavLink>
+					</ul>
+				</div>
+				}
 
 				{isAdmin &&
-					<div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+				<nav className="navbar navbar-default navbar-fixed-top">
+					<div id="admin-nav">
 						<ul className="nav navbar-nav">
+							<div className="navbar-brand admin">
+								<span>P</span>
+							</div>
 
 							<NavLink to="/order/list" activeClassName="active" className='nav-link'>
 								Поръчки
@@ -71,58 +124,15 @@ class Header extends React.Component {
 								Продукти
 							</NavLink>
 
-							<NavLink to="/product/create" activeClassName="active" className='nav-link'>
-								Нов продукт
-							</NavLink>
-
-							<NavLink to="/home" activeClassName="active" className='nav-link'
+							<NavLink to="/home"
+							         activeClassName="active"
+							         className='btn btn-default'
 							         onClick={this.logout}>Изход
 							</NavLink>
 
 						</ul>
 					</div>
-				}
-
-				{!isAdmin &&
-					<div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-						<ul className="nav navbar-nav navbar-right">
-
-							<NavLink to="/home" activeClassName="active" className='nav-link'>
-								Начало
-							</NavLink>
-
-							< NavLink to="/products" activeClassName="active" className='nav-link'>
-								Продукти
-							</NavLink>
-
-							<NavLink to="/about" activeClassName="active" className='nav-link'>
-								За нас
-							</NavLink>
-
-							<NavLink to="/contact" activeClassName="active" className='nav-link'>
-								Контакт
-							</NavLink>
-
-							{!isLoggedInUser &&
-								<NavLink to="/login" activeClassName="active" className='nav-link'>
-									Вход
-								</NavLink>
-							}
-
-							{isLoggedInUser &&
-								<NavLink to="/" className="btn btn-default"
-								         onClick={this.logout}>Изход
-								</NavLink>
-							}
-
-							<NavLink to="/cart" activeClassName="active" className='nav-link cart'>
-								<i className="fa fa-cart-arrow-down" aria-hidden="true"/>
-								{productsCount !== 0 &&
-								<Label bsStyle="danger">{' ' + productsCount}</Label>
-								}
-							</NavLink>
-						</ul>
-					</div>
+				</nav>
 				}
 			</nav>
 		);

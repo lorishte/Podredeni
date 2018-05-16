@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 import ordersService from '../../../../../services/orders/ordersService';
 
-import { ORDER_STATUS } from '../../../../../data/constants/componentConstants';
+import { ORDER_STATUS_BG } from '../../../../../data/constants/componentConstants';
 import utils from '../../../../../utils/utils';
 
 class OrderTableRow extends React.Component {
@@ -38,12 +38,11 @@ class OrderTableRow extends React.Component {
 
 		return (
 			<tr className="order">
-
 				<td className="text-center">
 					{o.number}
 				</td>
 				<td>
-					{ORDER_STATUS[o.status]}
+					{ORDER_STATUS_BG[o.status]}
 				</td>
 				<td className="visible-md visible-lg" >
 					{utils.formatDate(o.lastModificationDate)}
@@ -69,8 +68,6 @@ class OrderTableRow extends React.Component {
 						Детайли
 					</button>
 				</td>
-
-
 			</tr>
 		);
 	}

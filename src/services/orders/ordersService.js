@@ -40,18 +40,18 @@ export default {
 
 		let endPoint = deliveryDataEndPoint + '/' + deliveryDataId;
 
-        return requesterService
-			.get(endPoint, auth)
+		return requesterService
+			.get(endPoint, auth);
 	},
 
 	editDeliveryData: (deliveryDataId, data) => {
 
-        let details = generateDeliveryDataDetails(data);
+		let details = generateDeliveryDataDetails(data);
 
-        let endPoint = deliveryDataEndPoint + '/' + deliveryDataId;
+		let endPoint = deliveryDataEndPoint + '/' + deliveryDataId;
 
-        return requesterService
-            .update(endPoint, auth, details);
+		return requesterService
+			.update(endPoint, auth, details);
 	},
 
 	addDeliveryData: (data) => {
@@ -69,14 +69,14 @@ export default {
 		};
 
 		return requesterService
-			.post(orderEndPoint, null, order)
+			.post(orderEndPoint, null, order);
 
 	},
 
 	editOrder: (orderId, products) => {
 
 		let order = {
-            Products: products
+			Products: products
 		};
 
 		let endPoint = orderEndPoint + '/' + orderId;
@@ -88,38 +88,38 @@ export default {
 
 		let endpoint = orderEndPoint + '/' + status + '/' + orderId;
 
-		return requesterService.post(endpoint, auth)
-    }
+		return requesterService.post(endpoint, auth);
+	}
 };
 
-function generateDeliveryDataDetails(data) {
+function generateDeliveryDataDetails (data) {
 
-    let recipientInfo = data.recipientInfo;
-    let ekontDetails = data.ekontDetails;
-    let addressDetails = data.addressDetails;
-    let comment = data.comment;
-    let toAddress = data.toAddress;
+	let recipientInfo = data.recipientInfo;
+	let ekontDetails = data.ekontDetails;
+	let addressDetails = data.addressDetails;
+	let comment = data.comment;
+	let toAddress = data.toAddress;
 
-    return {
-        CustomerName: recipientInfo.firstName+ ' ' + recipientInfo.lastName,
-        PhoneNumber: recipientInfo.phone,
-        Email: recipientInfo.email,
-        Country: addressDetails.country,
-        City: addressDetails.city,
-        PostCode: addressDetails.postalCode,
-        Street: addressDetails.street,
-        StreetNumber: addressDetails.streetNo,
-        District: addressDetails.district,
-        Block: addressDetails.block,
-        Entrance: addressDetails.entrance,
-        Floor: addressDetails.floor,
-        Apartment: addressDetails.apartment,
-        Comments: comment,
-        DeliveredToAnOffice: !toAddress,
-        OfficeAddress: ekontDetails.address,
-        OfficeCode: ekontDetails.officeCode,
-        OfficeName: ekontDetails.officeName,
-        OfficeCountry: ekontDetails.country,
-        OfficeCity: ekontDetails.city
-    };
+	return {
+		CustomerName: recipientInfo.firstName + ' ' + recipientInfo.lastName,
+		PhoneNumber: recipientInfo.phone,
+		Email: recipientInfo.email,
+		Country: addressDetails.country,
+		City: addressDetails.city,
+		PostCode: addressDetails.postalCode,
+		Street: addressDetails.street,
+		StreetNumber: addressDetails.streetNo,
+		District: addressDetails.district,
+		Block: addressDetails.block,
+		Entrance: addressDetails.entrance,
+		Floor: addressDetails.floor,
+		Apartment: addressDetails.apartment,
+		Comments: comment,
+		DeliveredToAnOffice: !toAddress,
+		OfficeAddress: ekontDetails.address,
+		OfficeCode: ekontDetails.officeCode,
+		OfficeName: ekontDetails.officeName,
+		OfficeCountry: ekontDetails.country,
+		OfficeCity: ekontDetails.city
+	};
 }

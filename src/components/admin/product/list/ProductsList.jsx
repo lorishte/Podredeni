@@ -1,5 +1,5 @@
 import React from 'react';
-
+import { Link } from 'react-router-dom';
 import { Grid, Row, Col, Table } from 'react-bootstrap';
 
 import TableHead from './partials/TableHead';
@@ -103,6 +103,10 @@ class ProductsList extends React.Component {
 		return (
 			<Grid>
 				<Row>
+					<Col xs={12} className="text-right buttons-container">
+						<Link to="/product/create" className="btn btn-xs btn-success">Нов Продукт</Link>
+					</Col>
+
 					<Col xs={4} sm={3} md={2}>
 						<FormSelectField
 							label="Покажи"

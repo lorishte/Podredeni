@@ -2,7 +2,7 @@ import React from 'react';
 import { ToastContainer } from 'react-toastr';
 import { Grid, Row, Col, Table, FormGroup } from 'react-bootstrap';
 
-import { ORDER_STATUS_EN, ORDER_STATUS, ELEMENTS_ON_PAGE } from '../../../../data/constants/componentConstants';
+import { ORDER_STATUS_EN, ORDER_STATUS_BG, ELEMENTS_ON_PAGE } from '../../../../data/constants/componentConstants';
 
 import OrderTableRow from './partials/OrderTableRow';
 import OrderDetails from './partials/OrderDetails';
@@ -51,7 +51,6 @@ class OrdersList extends React.Component {
 				});
 			})
 			.catch(err => {
-				console.log(err.responseText);
 				this.toastContainer.error(err.responseText, '', {
 					closeButton: false,
 				});
@@ -105,6 +104,25 @@ class OrdersList extends React.Component {
 		});
 	};
 
+	changeStatus = (orderId, status) => {
+		console.log(orderId, status);
+
+		ordersService
+			.changeStatus(orderId, status)
+			.then( () => {
+				this.toastContainer.success('Успешно потвърждение.', '', {
+					closeButton: false,
+				});
+				setTimeout(() => this.hideDetails(), 2000);
+				this.loadOrders();
+			})
+			.catch(err => {
+				this.toastContainer.error(err.responseText, 'Грешка', {
+					closeButton: false,
+				});
+			});
+	};
+
 	render () {
 		let ordersList;
 
@@ -122,7 +140,7 @@ class OrdersList extends React.Component {
 					<FormRadioButton
 						value={ORDER_STATUS_EN[i]}
 						checked={this.state.filterValue === ORDER_STATUS_EN[i]}
-						label={ORDER_STATUS[i]}
+						label={ORDER_STATUS_BG[i]}
 						onChange={this.onCheckboxChange}/>
 				</Col>);
 		}
@@ -142,7 +160,8 @@ class OrdersList extends React.Component {
 								visible={this.state.showDetails}
 								order={this.state.orderToShowInfo}
 								delivery={this.state.deliveryInfo}
-								hideDetails={this.hideDetails}/>
+								hideDetails={this.hideDetails}
+								changeStatus={this.changeStatus}/>
 
 							<Col xs={12}>
 								<FormGroup className="filters-container">
@@ -177,7 +196,6 @@ class OrdersList extends React.Component {
 					active={Number(this.state.page)}
 					pagesCount={Number(this.state.pagesCount)}
 					goToPage={this.goToPage}/>}
-
 			</Grid>
 		);
 	}

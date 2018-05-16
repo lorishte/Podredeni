@@ -4,14 +4,15 @@ const ADMIN_PRODUCTS_FILTER_OPTIONS = {'name': 'име', 'number': 'номер'}
 
 const ELEMENTS_ON_PAGE = {10: 10, 20: 20, 30: 30, 40: 40, 50: 50};
 
-const ORDER_STATUS = {0: 'Непотвърдена', 1: 'Потвърдена', 2: 'Изпратена', 3: 'Отказана'};
+const ORDER_STATUS_BG = {0: 'Получена', 1: 'Потвърдена', 2: 'Изпратена', 3: 'Отказана'};
 
 const ORDER_STATUS_EN = {0: 'ordered', 1: 'confirmed', 2: 'dispatched', 3: 'cancelled'};
 
 const LABELS_BG = {
     number: '#',
     status: 'Статус',
-    lastModification: 'Посл. ред.',
+    lastModification: 'Последна редакция',
+	lastModificationTableHeader: 'Редакция',
     customer: 'Получател',
     product: 'Продукт',
     phone: 'Телефон',
@@ -32,6 +33,18 @@ const LABELS_BG = {
     apartmentShort: 'ап.'
 };
 
+const BUTTONS_BG = {
+    confirm: '',
+    cancel: '',
+    continue: '',
+
+    // Order
+	received: '',
+    confirmed: '',
+    dispatched: '',
+    cancelled: ''
+};
+
 const USER_ACCOUNT = {
 	email: 'Имейл',
 	password: 'Парола',
@@ -49,10 +62,11 @@ export {
 	FILTER_INPUT_WAIT_INTERVAL,
 	ADMIN_PRODUCTS_FILTER_OPTIONS,
     ELEMENTS_ON_PAGE,
-    ORDER_STATUS,
+	ORDER_STATUS_BG,
     ORDER_STATUS_EN,
     LABELS_BG,
     USER_ACCOUNT,
-	ERROR_MESSAGES
+	ERROR_MESSAGES,
+    BUTTONS_BG
 }
 

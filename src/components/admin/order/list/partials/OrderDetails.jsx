@@ -1,10 +1,12 @@
 import React from 'react';
 
-import { Row, Col, Label } from 'react-bootstrap';
+import { Row, Col, Label, Button } from 'react-bootstrap';
 
 import utils from '../../../../../utils/utils';
 
-import { LABELS_BG } from '../../../../../data/constants/componentConstants'
+import { LABELS_BG, ORDER_STATUS_BG } from '../../../../../data/constants/componentConstants';
+
+const CONVERT_STATUS = {0: 'order', 1: 'confirm', 2: 'dispatch', 3: 'cancel'};
 
 class OrderDetails extends React.Component {
 	constructor (props) {
@@ -19,8 +21,12 @@ class OrderDetails extends React.Component {
 		this.setState({showDetails: nextProps.visible});
 	}
 
-	render () {
+	changeStatus = (status) => {
+		let o = this.props.order;
+		this.props.changeStatus(o.id, status);
+	};
 
+	render () {
 		let o = this.props.order;
 		let d = this.props.delivery;
 
@@ -45,7 +51,7 @@ class OrderDetails extends React.Component {
 
 		return (
 			<div>
-				<div className={this.state.showDetails ? 'overlay' : ''} onClick={this.props.hideDetails} />
+				<div className={this.state.showDetails ? 'overlay' : ''} onClick={this.props.hideDetails}/>
 
 				<div className={this.state.showDetails ? 'order-info visible' : 'order-info'}>
 					<Row>
@@ -53,7 +59,9 @@ class OrderDetails extends React.Component {
 							<h4>{LABELS_BG.orderNumber} <Label bsStyle="success">{o.number}</Label></h4>
 							<p className="">
 								<small className="text-grey">{LABELS_BG.lastModification}:</small>
-								{' ' + utils.formatDate(o.lastModificationDate)}</p>
+								&nbsp;{utils.formatDate(o.lastModificationDate)}
+								&nbsp;<Label>{ORDER_STATUS_BG[o.status]}</Label>
+							</p>
 							<hr />
 						</Col>
 
@@ -61,13 +69,26 @@ class OrderDetails extends React.Component {
 						<Col xs={8}><p>{d.customerName}</p></Col>
 
 						<Col xs={4} sm={3}><p className="text-grey">{LABELS_BG.deliveredTo}:</p></Col>
+
 						{!d.deliveredToAnOffice &&
-						<Col xs={8}><p>{d.city} {d.postCode}, {d.street !== '' && LABELS_BG.streetShort + ' ' + d.street + ' ' + d.streetNumber + ', '} {d.district !== '' && LABELS_BG.districtShort + ' ' + d.district + ', '} {d.block !== '' && LABELS_BG.blockShort + ' ' + d.block + ', '} {d.entrance !== undefined && LABELS_BG.entranceShort + ' ' + d.entrance + ', '}  {d.floor !== '' && LABELS_BG.floorShort + ' ' + d.floor + ', '}  {d.apartment !== '' && LABELS_BG.apartmentShort + ' ' + d.apartment }&nbsp;<Label bsStyle="success">Адрес</Label></p>
+						<Col xs={8}>
+							<p>
+								{d.city} {d.postCode},
+								{d.street !== '' && LABELS_BG.streetShort + ' ' + d.street + ' ' + d.streetNumber + ', '}
+								{d.district !== '' && LABELS_BG.districtShort + ' ' + d.district + ', '}
+								{d.block !== '' && LABELS_BG.blockShort + ' ' + d.block + ', '}
+								{d.entrance !== undefined && LABELS_BG.entranceShort + ' ' + d.entrance + ', '}
+								{d.floor !== '' && LABELS_BG.floorShort + ' ' + d.floor + ', '}
+								{d.apartment !== '' && LABELS_BG.apartmentShort + ' ' + d.apartment }&nbsp;
+								<Label bsStyle="success">Адрес</Label>
+							</p>
 						</Col>
 						}
 						{d.deliveredToAnOffice &&
 						<Col xs={8}>
-							<p>{d.officeAddress}&nbsp;<Label bsStyle="danger">Офис</Label></p>
+							<p>{d.officeAddress}&nbsp;
+								<Label bsStyle="danger">Офис</Label>
+							</p>
 						</Col>
 						}
 
@@ -76,7 +97,6 @@ class OrderDetails extends React.Component {
 
 						<Col xs={4} sm={3}><p className="text-grey">{LABELS_BG.email}:</p></Col>
 						<Col xs={8}><p>{d.email}</p></Col>
-
 
 						<Col xs={4} sm={3}><p className="text-grey">{LABELS_BG.comments}:</p></Col>
 						<Col xs={8}><p className="text-bigger"><Label bsStyle="warning">{d.comments}</Label></p></Col>
@@ -100,6 +120,23 @@ class OrderDetails extends React.Component {
 								<hr />
 								<h4 className="text-info text-right">{LABELS_BG.total}: {totalSum.toFixed(2)}</h4>
 							</Col>
+						</Col>
+					</Row>
+
+					<Row>
+						<Col xs={12} className="buttons-container">
+							<p>Отбележи като:</p>
+							<Button className="btn btn-sm"
+							        onClick={() => this.changeStatus('receive')}>Получена</Button>
+
+							<Button className={o.status === 0 ? 'btn btn-sm btn-success' : 'btn btn-sm'}
+							        onClick={() => this.changeStatus('confirm')}>Потвърдена</Button>
+
+							<Button className={o.status === 1 ? 'btn btn-sm btn-success' : 'btn btn-sm'}
+							        onClick={() => this.changeStatus('dispatch')}>Изпратена</Button>
+
+							<Button className="btn btn-sm"
+							        onClick={() => this.changeStatus('cancel')}>Отказана</Button>
 						</Col>
 					</Row>
 

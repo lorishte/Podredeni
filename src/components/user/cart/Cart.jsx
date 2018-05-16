@@ -87,7 +87,7 @@ class Cart extends React.Component {
 	cancelOrder = () => {
 		sessionStorage.removeItem('products');
 		sessionStorage.removeItem('orderDetails');
-		this.props.history.push('/')
+		this.props.history.push('/home')
 	};
 
 	confirmCancel = () => {

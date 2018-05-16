@@ -119,7 +119,10 @@ class OrderEdit extends React.Component {
 				orderService
 					.editOrder(this.state.orderId, products)
 					.then(res => {
-						this.props.history.push('/order/list');
+						this.toastContainer.success('Успешна редакция.', '', {
+							closeButton: true,
+						});
+						setTimeout(() => this.props.history.push('/order/list'), 2000 )
 					});
 			})
 			.catch(err => {

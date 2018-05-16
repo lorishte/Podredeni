@@ -21,7 +21,7 @@ class OrderListTableHead extends React.Component {
 
 				<th>{LABELS_BG.status}</th>
 
-				<th className="visible-md visible-lg">{LABELS_BG.lastModification}
+				<th className="visible-md visible-lg">{LABELS_BG.lastModificationTableHeader}
 					<OrderListSortButtons
 						sortProperty="lastModificationDate"
 						changeClass={this.props.changeClass}

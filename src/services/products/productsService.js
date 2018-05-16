@@ -28,6 +28,7 @@ export default {
     },
 
     getProduct: (id) => {
+
         let endPointId = endPoint + `/${id}`;
 
         return requesterService
@@ -35,6 +36,7 @@ export default {
     },
 
     updateProduct: (state, id) => {
+
         let endPointId = endPoint + '/' + id;
 
         let product = generateProductDetails(state);

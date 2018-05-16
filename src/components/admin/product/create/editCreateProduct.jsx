@@ -1,5 +1,5 @@
 import React from 'react';
-
+import { ToastContainer } from 'react-toastr';
 import { Grid, Row, Col, Checkbox, Button, Image } from 'react-bootstrap';
 
 import FormInputField from '../../../common/formComponents/FormInputField';
@@ -76,12 +76,14 @@ class CreateProduct extends React.Component {
 		productsService
 			.updateProduct(this.state, this.productId)
 			.then(res => {
-				console.log(res);
 				//redirect back
 				this.props.history.go(-1);
 			})
 			.catch(err => {
 				console.log(err.responseText);
+				this.toastContainer.error('', err.responseText, {
+					closeButton: true,
+				});
 			});
 	};
 
@@ -123,6 +125,13 @@ class CreateProduct extends React.Component {
 		});
 		return (
 			<Grid id="create-edit-product">
+
+				<ToastContainer
+					ref={ref => this.toastContainer = ref}
+					className="toast-bottom-right"
+				/>
+
+
 				<Row>
 					<Col sm={12}>
 						{this.requestPath.includes('create') && <h3>Създаване на продукт</h3>}
