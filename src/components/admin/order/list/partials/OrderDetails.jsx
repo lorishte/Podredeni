@@ -135,7 +135,7 @@ class OrderDetails extends React.Component {
 							<Button className={o.status === 1 ? 'btn btn-sm btn-success' : 'btn btn-sm'}
 							        onClick={() => this.changeStatus('dispatch')}>Изпратена</Button>
 
-							<Button className="btn btn-sm"
+							<Button className="btn btn-sm btn-light"
 							        onClick={() => this.changeStatus('cancel')}>Отказана</Button>
 						</Col>
 					</Row>

@@ -25,7 +25,7 @@ class OrderLog extends React.Component {
             });
     }
 
-	cancel = () => {
+	goBack = () => {
 		//redirect back
 		this.props.history.go(-1);
 	};
@@ -60,7 +60,7 @@ class OrderLog extends React.Component {
 
                 <Row className="buttons-container">
                     <Col xs={12} >
-                        <Button onClick={this.cancel}>Назад</Button>
+                        <Button onClick={this.goBack}>Отказ</Button>
                     </Col>
                 </Row>
             </Grid>

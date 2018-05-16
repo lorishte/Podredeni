@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link, Redirect } from 'react-router-dom';
 
 import { Grid, Row, Col, Image, PageHeader } from 'react-bootstrap';
 import { ToastContainer } from 'react-toastr';
@@ -20,8 +19,6 @@ class Product extends React.Component {
 			quantity: 0
 		};
 	}
-
-
 
 	componentDidMount () {
 		let id = this.props.match.params.id;

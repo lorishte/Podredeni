@@ -72,9 +72,11 @@ input[type=checkbox], input[type=radio] {
   .breadcrumb .breadcrumb-item:last-child::after {
     content: ''; }
 
-.btn {
-  margin-right: 5px;
+.buttons-container .btn {
   margin-bottom: 5px; }
+
+.btn {
+  margin-right: 5px; }
   .btn.btn-sort {
     padding: 2px;
     color: #e6e6e6;

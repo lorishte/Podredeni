@@ -1,14 +1,14 @@
 import React from 'react';
 import { ToastContainer } from 'react-toastr';
-import { Grid, Row, Col, Table, FormGroup } from 'react-bootstrap';
+import { Grid, Row, Col, Table, FormGroup, Tab, Tabs } from 'react-bootstrap';
 
 import { ORDER_STATUS_EN, ORDER_STATUS_BG, ELEMENTS_ON_PAGE } from '../../../../data/constants/componentConstants';
 
+import OrdersTable from './partials/OrdersTable';
+import OrderListTableHead from './partials/OrderListTableHead';
 import OrderTableRow from './partials/OrderTableRow';
 import OrderDetails from './partials/OrderDetails';
-import FormRadioButton from '../../../common/formComponents/FormRadioButton';
 import FormSelectField from '../../../common/formComponents/FormSelectField';
-import OrderListTableHead from './partials/OrderListTableHead';
 import Paging from '../../../common/pagination/Paging';
 
 import ordersService from '../../../../services/orders/ordersService';
@@ -94,10 +94,12 @@ class OrdersList extends React.Component {
 		this.setState({showDetails: false, orderToShowInfo: ''});
 	};
 
-	onCheckboxChange = (e) => {
+	handleSelect = (key) => {
+		console.log(ORDER_STATUS_EN[key]);
+
 		this.setState({
 			filterProperty: 'status',
-			filterValue: e.target.value
+			filterValue: ORDER_STATUS_EN[key]
 		}, () => {
 			this.loadOrders();
 			this.goToPage(1);
@@ -109,8 +111,8 @@ class OrdersList extends React.Component {
 
 		ordersService
 			.changeStatus(orderId, status)
-			.then( () => {
-				this.toastContainer.success('Успешно потвърждение.', '', {
+			.then(() => {
+				this.toastContainer.success('Поръчката е обработена.', '', {
 					closeButton: false,
 				});
 				setTimeout(() => this.hideDetails(), 2000);
@@ -125,24 +127,10 @@ class OrdersList extends React.Component {
 
 	render () {
 		let ordersList;
-
 		if (this.state.orders !== '') {
 			ordersList = this.state.orders.map(e => {
 				return <OrderTableRow key={e.id} data={e} showDetails={this.showDetails}/>;
 			});
-		}
-
-		let radioButtons = [];
-
-		for (let i = 0; i < 4; i++) {
-			radioButtons.push(
-				<Col xs={6} sm={3} key={i}>
-					<FormRadioButton
-						value={ORDER_STATUS_EN[i]}
-						checked={this.state.filterValue === ORDER_STATUS_EN[i]}
-						label={ORDER_STATUS_BG[i]}
-						onChange={this.onCheckboxChange}/>
-				</Col>);
 		}
 
 		return (
@@ -155,19 +143,12 @@ class OrdersList extends React.Component {
 				<Row>
 					<Col xs={12}>
 						<Row>
-
 							<OrderDetails
 								visible={this.state.showDetails}
 								order={this.state.orderToShowInfo}
 								delivery={this.state.deliveryInfo}
 								hideDetails={this.hideDetails}
 								changeStatus={this.changeStatus}/>
-
-							<Col xs={12}>
-								<FormGroup className="filters-container">
-									{radioButtons}
-								</FormGroup>
-							</Col>
 
 							<Col xs={4} sm={3} md={2}>
 								<FormSelectField
@@ -179,14 +160,41 @@ class OrdersList extends React.Component {
 							</Col>
 						</Row>
 
-						<Table striped bordered condensed hover>
-							<OrderListTableHead
-								changeClass={this.changeClass}
-								sort={this.sort}/>
-							<tbody>
-							{ordersList}
-							</tbody>
-						</Table>
+						<Row>
+
+							<Tabs defaultActiveKey={0}
+							      id="order-list-tabs"
+							      onSelect={this.handleSelect}>
+
+								<Tab eventKey={0} title="Получени">
+									<OrdersTable
+										changeClass={this.changeClass}
+										sort={this.sort}
+										ordersList={ordersList}/>
+								</Tab>
+
+								<Tab eventKey={1} title="Потвърдени">
+									<OrdersTable
+										changeClass={this.changeClass}
+										sort={this.sort}
+										ordersList={ordersList}/>
+								</Tab>
+
+								<Tab eventKey={2} title="Изпратени">
+									<OrdersTable
+										changeClass={this.changeClass}
+										sort={this.sort}
+										ordersList={ordersList}/>
+								</Tab>
+
+								<Tab eventKey={3} title="Отказани">
+									<OrdersTable
+										changeClass={this.changeClass}
+										sort={this.sort}
+										ordersList={ordersList}/>
+								</Tab>
+							</Tabs>
+						</Row>
 					</Col>
 
 				</Row>

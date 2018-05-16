@@ -128,9 +128,14 @@ input[type=checkbox], input[type=radio] {
   //padding: 25px 0;
 }
 
+.buttons-container {
+  .btn {
+    margin-bottom: 5px;
+  }
+}
+
 .btn {
   margin-right: 5px;
-  margin-bottom: 5px;
 
   &.btn-sort {
     padding: 2px;
