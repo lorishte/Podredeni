@@ -1,4 +1,5 @@
 import React from 'react';
+import { ToastContainer } from 'react-toastr';
 
 import { Grid, Form, FormGroup, Col, Button } from 'react-bootstrap';
 
@@ -38,7 +39,11 @@ class Login extends React.Component {
 					this.props.history.push('/');
 				}
 			})
-			.catch(err => console.log(err));
+			.catch(err => {
+				this.toastContainer.error('', err.responseText, {
+					closeButton: true,
+				});
+			});
 	};
 
 	cancelLogin = () => {
@@ -53,6 +58,12 @@ class Login extends React.Component {
 	render () {
 		return (
 			<Grid>
+
+				<ToastContainer
+					ref={ref => this.toastContainer = ref}
+					className="toast-bottom-right"
+				/>
+
 				<Col xs={12} md={4}>
 					<Form onSubmit={this.loginUser}>
 						<h1>{USER_ACCOUNT.login}</h1>

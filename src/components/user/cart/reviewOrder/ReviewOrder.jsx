@@ -48,11 +48,9 @@ class ReviewOrder extends React.Component {
 							</Col>
 							<Col sm={4}>
 								<Row>
-									{this.props.orderDetails.comment ?
-									<Col xs={12}><h4>Забележка:</h4>
+									{this.props.orderDetails.comment ? <Col xs={12}><h4>Забележка:</h4>
 										<p>{this.props.orderDetails.comment}</p>
-										</Col> :
-									<Col xs={12}><h4>Няма добавени забележки.</h4></Col>
+									</Col> : <Col xs={12}><h4>Няма добавени забележки.</h4></Col>
 									}
 								</Row>
 							</Col>
@@ -83,9 +81,16 @@ class ReviewOrder extends React.Component {
 
 				<Row className="buttons-container">
 					<Col xs={12} className="text-center">
-						<button className="btn-custom default md" onClick={this.props.cancelOrder}>Отказ</button>
+						<button className="btn-custom default md" onClick={this.props.cancel}>Отказ</button>
 						<button className="btn-custom default md" onClick={this.props.goBack}>Назад</button>
-						<button className="btn-custom primary lg"  onClick={this.props.continue}>Изпрати поръчката</button>
+						{sessionStorage.getItem('role') !== 'admin' &&
+						<button className="btn-custom primary lg" onClick={this.props.continue}>Изпрати
+							поръчката</button>}
+
+						{sessionStorage.getItem('role') === 'admin' &&
+						<button className="btn-custom primary lg" onClick={this.props.continue}>Запази
+							промените</button>
+						}
 					</Col>
 				</Row>
 			</div>

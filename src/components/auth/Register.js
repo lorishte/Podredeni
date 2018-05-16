@@ -38,7 +38,11 @@ class Register extends React.Component {
 				sessionStorage.setItem('p_token', res.token);
 				this.props.history.push('/order/list');
 			})
-			.catch(err => console.log(err));
+			.catch(err => {
+				this.toastContainer.error('', err.responseText, {
+					closeButton: true,
+				});
+			});
 	};
 
 	handleChange = (e) => {

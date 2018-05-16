@@ -732,6 +732,14 @@ footer {
       -ms-flex-pack: center;
       justify-content: center; } }
 @media screen and (max-width: 650px) {
+  h1 {
+    font-size: 1.6em;
+    margin: 15px 0 12px 0; }
+
+  h2, h3 {
+    font-size: 1.4em;
+    margin: 15px 0 12px 0; }
+
   nav .navbar-collapse {
     width: 100%;
     background-color: rgba(45, 45, 45, 0.95);

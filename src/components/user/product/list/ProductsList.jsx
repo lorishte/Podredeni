@@ -30,7 +30,9 @@ class ProductsList extends React.Component {
 				this.setState({products: res.products});
 			})
 			.catch(err => {
-				console.log(err.responseText);
+				this.toastContainer.error('', err.responseText, {
+					closeButton: true,
+				});
 			});
 	}
 

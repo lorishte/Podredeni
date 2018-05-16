@@ -1,9 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-
-import { Row, Col, Checkbox, Button } from 'react-bootstrap';
-
 import { ToastContainer } from 'react-toastr';
+import { Row, Col } from 'react-bootstrap';
 
 import RecipientDetails from './recipientDetails/RecipientDetails';
 import DeliveryToEkontOffice from './deliveryDetails/DeliveryToEkontOffice';
@@ -34,14 +32,19 @@ class OrderDetails extends React.Component {
 	};
 
 	handleCheckBox = (e) => {
-		this.setState({termsAgreed: e.target.checked}, () => console.log(this.state));
+		this.setState({termsAgreed: e.target.checked});
 	};
 
 	submitInfo = (e) => {
 		e.preventDefault();
 
+		if (sessionStorage.getItem('role') === 'admin'){
+			this.props.continue();
+			return;
+		}
+
 		if (!this.state.termsAgreed) {
-			this.toastContainer.warning('Моля, съгласете се с условията за ползване!', '', {
+			this.toastContainer.warning('Моля, попълнете всички задължителни полета.', '', {
 				closeButton: false,
 			});
 
@@ -78,15 +81,15 @@ class OrderDetails extends React.Component {
 						<hr/>
 
 						{!this.state.toAddress &&
-							<DeliveryToEkontOffice
-								data={this.state.ekontDetails}
-								onChange={this.updateInfo}/>
+						<DeliveryToEkontOffice
+							data={this.state.ekontDetails}
+							onChange={this.updateInfo}/>
 						}
 
 						{this.state.toAddress &&
-							<DeliveryToAddress
-								data={this.state.addressDetails}
-								onChange={this.updateInfo}/>
+						<DeliveryToAddress
+							data={this.state.addressDetails}
+							onChange={this.updateInfo}/>
 						}
 					</Col>
 
@@ -96,23 +99,33 @@ class OrderDetails extends React.Component {
 							data={this.state.comment}
 							onChange={this.updateInfo}/>
 
+						{sessionStorage.getItem('role') !== 'admin' &&
 						<label>
 							<input type="checkbox"
 							       ref={this.agreed}
 							       name="termsAgreed"
 							       defaultChecked={this.state.termsAgreed}
 							       onChange={this.handleCheckBox}/>
-							Съгласен/а съм с <Link to={'/products'} className="btn-link">Условията за
+							* Съгласен/а съм с <Link to={'/products'} className="btn-link">Условията за
 							ползване.</Link>
 						</label>
+						}
 
 					</Col>
 				</Row>
 
 				<Row className="buttons-container">
 					<Col xs={12} className="text-center">
-						<button className="btn-custom default md" onClick={this.props.cancelOrder}>Отказ</button>
-						<button className="btn-custom default md" onClick={this.props.goBack}>Назад</button>
+						<button className="btn-custom default md" onClick={e => {
+							e.preventDefault();
+							this.props.cancel();
+						}}>Отказ
+						</button>
+						<button className="btn-custom default md" onClick={ e => {
+							e.preventDefault();
+							this.props.goBack();
+						}}>Назад
+						</button>
 						<button className="btn-custom primary md" type="submit">Напред</button>
 					</Col>
 				</Row>

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Grid, Row, Col, Table } from 'react-bootstrap';
+import { Grid, Row, Col, Table, Button } from 'react-bootstrap';
 
 import ordersService from '../../../../services/orders/ordersService';
 import LogTableRow from './partials/LogTableRow';
@@ -25,6 +25,11 @@ class OrderLog extends React.Component {
             });
     }
 
+	cancel = () => {
+		//redirect back
+		this.props.history.go(-1);
+	};
+
     render () {
         let logList;
 
@@ -38,9 +43,6 @@ class OrderLog extends React.Component {
             <Grid>
                 <Row>
                     <Col sm={12}>
-
-
-
                         <Table striped bordered condensed hover>
                             <thead>
                             <tr>
@@ -53,6 +55,12 @@ class OrderLog extends React.Component {
                             {logList}
                             </tbody>
                         </Table>
+                    </Col>
+                </Row>
+
+                <Row className="buttons-container">
+                    <Col xs={12} >
+                        <Button onClick={this.cancel}>Назад</Button>
                     </Col>
                 </Row>
             </Grid>

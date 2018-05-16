@@ -1,5 +1,5 @@
 import React from 'react';
-
+import { ToastContainer } from 'react-toastr';
 import { Grid, Row, Col, Table, FormGroup } from 'react-bootstrap';
 
 import { ORDER_STATUS_EN, ORDER_STATUS, ELEMENTS_ON_PAGE } from '../../../../data/constants/componentConstants';
@@ -41,8 +41,6 @@ class OrdersList extends React.Component {
 		ordersService
 			.loadOrders(this.state)
 			.then(res => {
-
-				console.log(res);
 				let ordersCount = Number(res.ordersCount);
 				let size = Number(this.state.size);
 
@@ -54,6 +52,9 @@ class OrdersList extends React.Component {
 			})
 			.catch(err => {
 				console.log(err.responseText);
+				this.toastContainer.error(err.responseText, '', {
+					closeButton: false,
+				});
 			});
 	};
 
@@ -91,21 +92,17 @@ class OrdersList extends React.Component {
 	};
 
 	hideDetails = () => {
-		this.setState({
-			showDetails: false,
-			orderToShowInfo: ''
-		});
+		this.setState({showDetails: false, orderToShowInfo: ''});
 	};
 
 	onCheckboxChange = (e) => {
-
-		this.setState({filterProperty: 'status', filterValue: e.target.value}, () => {
-
+		this.setState({
+			filterProperty: 'status',
+			filterValue: e.target.value
+		}, () => {
 			this.loadOrders();
 			this.goToPage(1);
-
 		});
-
 	};
 
 	render () {
@@ -132,6 +129,10 @@ class OrdersList extends React.Component {
 
 		return (
 			<Grid id="orders">
+				<ToastContainer
+					ref={ref => this.toastContainer = ref}
+					className="toast-bottom-right"
+				/>
 
 				<Row>
 					<Col xs={12}>

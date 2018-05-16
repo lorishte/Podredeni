@@ -1,6 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-
+import { ToastContainer } from 'react-toastr';
 import { Label } from 'react-bootstrap';
 
 // Helpers
@@ -25,6 +24,8 @@ class Cart extends React.Component {
 			orderDetailsView: false,
 			reviewView: false
 		};
+
+		this.toastContainer = React.createRef();
 	}
 
 	componentDidMount () {
@@ -140,13 +141,23 @@ class Cart extends React.Component {
 						this.props.history.push('/order/confirmation');
 					});
 			})
-			.catch(err => console.log(err));
+			.catch(err => {
+				this.toastContainer.error('', err.responseText, {
+					closeButton: true,
+				});
+			});
 
 	};
 
 	render () {
 		return (
 			<Grid id="cart">
+
+				<ToastContainer
+					ref={ref => this.toastContainer = ref}
+					className="toast-bottom-right"
+				/>
+
 				<Row>
 					<Col xs={12}>
 						<p>
@@ -168,7 +179,8 @@ class Cart extends React.Component {
 								products={this.state.products}
 								onChange={this.updateInfo}
 								continue={this.showDeliveryDetailsForm}
-								cancelOrder={this.confirmCancel} />
+								cancel={this.confirmCancel}
+							/>
 						</Col>
 					}
 
@@ -191,7 +203,7 @@ class Cart extends React.Component {
 								onChange={this.updateInfo}
 								goBack={this.showProducts}
 								continue={this.showReview}
-								cancelOrder={this.confirmCancel}/>
+								cancel={this.confirmCancel}/>
 						</Col>
 					}
 
@@ -205,7 +217,7 @@ class Cart extends React.Component {
 							orderDetails={this.state.orderDetails}
 							goBack={this.showDeliveryDetailsForm}
 							continue={this.submitOrder}
-							cancelOrder={this.confirmCancel}
+							cancel={this.confirmCancel}
 						/>
 					</Col>
 					}

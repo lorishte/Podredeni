@@ -19,8 +19,6 @@ class Product extends React.Component {
 			product: '',
 			quantity: 0
 		};
-
-		this.toastContainer;
 	}
 
 

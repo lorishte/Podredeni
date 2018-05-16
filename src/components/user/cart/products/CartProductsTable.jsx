@@ -101,7 +101,7 @@ class CartProductsTable extends React.Component {
 
 					<Row className="buttons-container">
 						<Col xs={12} className="text-center">
-							<button className="btn-custom default md" onClick={this.props.cancelOrder}>Отказ</button>
+							<button className="btn-custom default md" onClick={this.props.cancel}>Отказ</button>
 							<button className="btn-custom primary md" onClick={this.props.continue}>Напред</button>
 						</Col>
 					</Row>
