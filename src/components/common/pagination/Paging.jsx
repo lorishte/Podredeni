@@ -24,31 +24,34 @@ class Paging extends React.Component {
 		let {active, pagesCount} = this.props;
 
 		return (
-			<Pagination>
-				<Pagination.First
-					disabled={active === 1}
-					onClick={(e) => this.changePage(e, 1)}/>
-				<Pagination.Prev
-					disabled={active === 1}
-					onClick={(e) => this.changePage(e, active - 1)}/>
+			<div className="text-center">
+				<Pagination>
+					<Pagination.First
+						disabled={active === 1}
+						onClick={(e) => this.changePage(e, 1)}/>
+					<Pagination.Prev
+						disabled={active === 1}
+						onClick={(e) => this.changePage(e, active - 1)}/>
 
-				{active > 3 && <Pagination.Ellipsis /> }
-				{active === 3 && <Pagination.Item onClick={this.changePage}>{active - 2}</Pagination.Item>}
-				{active !== 1 && <Pagination.Item onClick={this.changePage}>{active - 1}</Pagination.Item>}
+					{active > 3 && <Pagination.Ellipsis /> }
+					{active === 3 && <Pagination.Item onClick={this.changePage}>{active - 2}</Pagination.Item>}
+					{active !== 1 && <Pagination.Item onClick={this.changePage}>{active - 1}</Pagination.Item>}
 
-				<Pagination.Item active>{active}</Pagination.Item>
+					<Pagination.Item active>{active}</Pagination.Item>
 
-				{active !== pagesCount && <Pagination.Item onClick={this.changePage}>{active + 1}</Pagination.Item>}
-				{(active === 1 && pagesCount >= active + 2) && <Pagination.Item onClick={this.changePage}>{active + 2}</Pagination.Item>}
-				{active < pagesCount - 2 && <Pagination.Ellipsis /> }
+					{active !== pagesCount && <Pagination.Item onClick={this.changePage}>{active + 1}</Pagination.Item>}
+					{(active === 1 && pagesCount >= active + 2) &&
+					<Pagination.Item onClick={this.changePage}>{active + 2}</Pagination.Item>}
+					{active < pagesCount - 2 && <Pagination.Ellipsis /> }
 
-				<Pagination.Next
-					disabled={active === pagesCount}
-					onClick={(e) => this.changePage(e, active + 1)}/>
-				<Pagination.Last
-					onClick={(e) => this.changePage(e, pagesCount)}
-					disabled={active === pagesCount}/>
-			</Pagination>
+					<Pagination.Next
+						disabled={active === pagesCount}
+						onClick={(e) => this.changePage(e, active + 1)}/>
+					<Pagination.Last
+						onClick={(e) => this.changePage(e, pagesCount)}
+						disabled={active === pagesCount}/>
+				</Pagination>
+			</div>
 		);
 	}
 }

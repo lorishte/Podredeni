@@ -149,15 +149,6 @@ class OrdersList extends React.Component {
 								delivery={this.state.deliveryInfo}
 								hideDetails={this.hideDetails}
 								changeStatus={this.changeStatus}/>
-
-							<Col xs={4} sm={3} md={2}>
-								<FormSelectField
-									name="size"
-									value={this.state.size}
-									optionsList={ELEMENTS_ON_PAGE}
-									required={false}
-									onChange={this.handleSizeChange}/>
-							</Col>
 						</Row>
 
 						<Row>
@@ -165,6 +156,17 @@ class OrdersList extends React.Component {
 							<Tabs defaultActiveKey={0}
 							      id="order-list-tabs"
 							      onSelect={this.handleSelect}>
+
+								<Row>
+									<Col xs={4} sm={3} md={2}>
+										<FormSelectField
+											name="size"
+											value={this.state.size}
+											optionsList={ELEMENTS_ON_PAGE}
+											required={false}
+											onChange={this.handleSizeChange}/>
+									</Col>
+								</Row>
 
 								<Tab eventKey={0} title="Получени">
 									<OrdersTable
@@ -193,17 +195,16 @@ class OrdersList extends React.Component {
 										sort={this.sort}
 										ordersList={ordersList}/>
 								</Tab>
+
+								{this.state.size !== '0' && this.state.ordersCount !== 0 &&
+								<Paging
+									active={Number(this.state.page)}
+									pagesCount={Number(this.state.pagesCount)}
+									goToPage={this.goToPage}/>}
 							</Tabs>
 						</Row>
 					</Col>
-
 				</Row>
-
-				{this.state.size !== '0' && this.state.ordersCount !== 0 &&
-				<Paging
-					active={Number(this.state.page)}
-					pagesCount={Number(this.state.pagesCount)}
-					goToPage={this.goToPage}/>}
 			</Grid>
 		);
 	}

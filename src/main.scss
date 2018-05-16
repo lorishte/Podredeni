@@ -802,6 +802,12 @@ nav {
     border: 1px solid $light-grey;
   }
 
+  #order-list-tabs {
+    .tab-content {
+      background-color: #fff;
+    }
+  }
+
   .order-info {
     display: none;
     position: absolute;
@@ -1203,6 +1209,18 @@ footer {
     }
   }
 
+}
+
+@media screen and (max-width: 480px) {
+  #order-list-tabs {
+    .tab-content {
+      background-color: #fff;
+    }
+    .nav>li>a {
+      padding: 5px 5px;
+      font-size: 1em;
+    }
+  }
 }
 
 @media screen and (max-width: 400px) {

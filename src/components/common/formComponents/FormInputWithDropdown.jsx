@@ -20,7 +20,7 @@ class FormInputWithDropdown extends React.Component {
 	}
 
 	render () {
-		const {label, inputName, dropdownName, onSelect, onKeyDown, onChange, optionsList} = this.props;
+		const {label, inputName, placeholder, dropdownName, onSelect, onKeyDown, onChange, optionsList} = this.props;
 
 		let options = Object.keys(optionsList);
 
@@ -36,6 +36,7 @@ class FormInputWithDropdown extends React.Component {
 					<FormControl type="text"
 					             name={inputName}
 					             value={this.state.filterValue}
+					             placeholder={placeholder}
 					             onChange={onChange}
 					             onKeyDown={onKeyDown}/>
 

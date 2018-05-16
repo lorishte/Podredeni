@@ -103,13 +103,12 @@ class ProductsList extends React.Component {
 		return (
 			<Grid>
 				<Row>
-					<Col xs={12} className="text-right buttons-container">
-						<Link to="/product/create" className="btn btn-xs btn-success">Нов Продукт</Link>
+					<Col xs={12} sm={3} className="buttons-container">
+						<Link to="/product/create" className="btn btn-sm btn-primary">Нов Продукт</Link>
 					</Col>
 
 					<Col xs={4} sm={3} md={2}>
 						<FormSelectField
-							label="Покажи"
 							name="size"
 							value={this.state.size}
 							optionsList={ELEMENTS_ON_PAGE}
@@ -119,10 +118,10 @@ class ProductsList extends React.Component {
 
 					<Col xs={8} sm={6}>
 						<FormInputWithDropdown
-							label="Филтър по"
 							// input
 							inputName="filterValue"
 							filterValue={this.state.filterValue}
+							placeholder="филтър по"
 							onChange={this.handleFilterValue}
 							onKeyDown={this.handleKeyDown}
 							// dropdown

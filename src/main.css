@@ -538,6 +538,8 @@ nav {
   background: #fff;
   padding: 10px;
   border: 1px solid #e6e6e6; }
+#orders #order-list-tabs .tab-content {
+  background-color: #fff; }
 #orders .order-info {
   display: none;
   position: absolute;
@@ -800,6 +802,12 @@ footer {
   #orders .order-info {
     width: 95%;
     top: 5%; } }
+@media screen and (max-width: 480px) {
+  #order-list-tabs .tab-content {
+    background-color: #fff; }
+  #order-list-tabs .nav > li > a {
+    padding: 5px 5px;
+    font-size: 1em; } }
 @media screen and (max-width: 400px) {
   #home-main-carousel .carousel {
     height: 250px;
