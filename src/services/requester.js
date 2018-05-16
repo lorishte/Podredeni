@@ -1,25 +1,25 @@
 import $ from 'jquery';
 
-//const host = 'http://localhost:30336/api';
-const host = 'http://api.podredeni.eu/api';
+const host = 'http://localhost:30336/api';
+//const host = 'http://api.podredeni.eu/api';
 
 let token = () => {
-	return sessionStorage.getItem('p_token');
+    return sessionStorage.getItem('p_token');
 };
 
 export default {
 
-	post: (endPoint, auth, data) => {
-		let url = host + endPoint;
+    post: (endPoint, auth, data) => {
+        let url = host + endPoint;
 
         return $.ajax(
-			{
-				url: url,
-				type: 'POST',
-				headers: createHeader(auth),
-				data: JSON.stringify(data)
-			});
-	},
+            {
+                url: url,
+                type: 'POST',
+                headers: createHeader(auth),
+                data: JSON.stringify(data)
+            });
+    },
 
     update: (endPoint, auth, data) => {
         let url = host + endPoint;
@@ -33,36 +33,36 @@ export default {
             });
     },
 
-	get: (endPoint, auth, query) => {
-		let url = query !== undefined ? host + endPoint + query : host + endPoint;
+    get: (endPoint, auth, query) => {
+        let url = query !== undefined ? host + endPoint + query : host + endPoint;
 
-		return $.ajax(
-			{
-				url: url,
-				type: 'GET',
-				headers: createHeader(auth)
-			});
-	},
+        return $.ajax(
+            {
+                url: url,
+                type: 'GET',
+                headers: createHeader(auth)
+            });
+    },
 
-	remove: (endPoint, auth) => {
-		let url = host + endPoint;
+    remove: (endPoint, auth) => {
+        let url = host + endPoint;
 
-		return $.ajax(
-			{
-				url: url,
-				type: 'DELETE',
-				headers: createHeader(auth)
-			});
-	}
+        return $.ajax(
+            {
+                url: url,
+                type: 'DELETE',
+                headers: createHeader(auth)
+            });
+    }
 };
 
 let createHeader = (auth) => {
-	if (auth === null) {
-		return { 'Content-Type': 'application/json' }
-	}
+    if (auth === null) {
+        return {'Content-Type': 'application/json'}
+    }
 
-	return {
-		'Authorization': 'bearer ' + token(),
-		'Content-Type': 'application/json'
-	}
+    return {
+        'Authorization': 'bearer ' + token(),
+        'Content-Type': 'application/json'
+    }
 };

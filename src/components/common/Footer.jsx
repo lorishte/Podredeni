@@ -1,4 +1,5 @@
 import React from 'react';
+// import FacebookProvider, { Like } from 'react-facebook';
 
 import {  } from 'react-bootstrap';
 
@@ -13,6 +14,9 @@ class Footer extends React.Component {
 					</div>
 
 					<div className="social">
+						{/*<FacebookProvider appId="602878320047542">*/}
+							{/*<Like href="http://www.facebook.com" colorScheme="dark" showFaces share />*/}
+						{/*</FacebookProvider>*/}
 						<a href="#"><i className="fa fa-facebook-official" aria-hidden="true"/></a>
 						<a href="#"><i className="fa fa-twitter-square"/></a>
 						<a href="#"><i className="fa fa-linkedin-square"/></a>

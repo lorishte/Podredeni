@@ -80,14 +80,14 @@ class OrderDetails extends React.Component {
 								{d.entrance !== undefined && LABELS_BG.entranceShort + ' ' + d.entrance + ', '}
 								{d.floor !== '' && LABELS_BG.floorShort + ' ' + d.floor + ', '}
 								{d.apartment !== '' && LABELS_BG.apartmentShort + ' ' + d.apartment }&nbsp;
-								<Label bsStyle="success">Адрес</Label>
+								<Label bsStyle="success">{LABELS_BG.address}</Label>
 							</p>
 						</Col>
 						}
 						{d.deliveredToAnOffice &&
 						<Col xs={8}>
 							<p>{d.officeAddress}&nbsp;
-								<Label bsStyle="danger">Офис</Label>
+								<Label bsStyle="danger">{LABELS_BG.office}</Label>
 							</p>
 						</Col>
 						}
@@ -125,18 +125,18 @@ class OrderDetails extends React.Component {
 
 					<Row>
 						<Col xs={12} className="buttons-container">
-							<p>Отбележи като:</p>
+							<p>{LABELS_BG.markAs + ' :'}</p>
 							<Button className="btn btn-sm"
-							        onClick={() => this.changeStatus('receive')}>Получена</Button>
+							        onClick={() => this.changeStatus('reset')}>{ORDER_STATUS_BG['0']}</Button>
 
 							<Button className={o.status === 0 ? 'btn btn-sm btn-success' : 'btn btn-sm'}
-							        onClick={() => this.changeStatus('confirm')}>Потвърдена</Button>
+							        onClick={() => this.changeStatus('confirm')}>{ORDER_STATUS_BG['1']}</Button>
 
 							<Button className={o.status === 1 ? 'btn btn-sm btn-success' : 'btn btn-sm'}
-							        onClick={() => this.changeStatus('dispatch')}>Изпратена</Button>
+							        onClick={() => this.changeStatus('dispatch')}>{ORDER_STATUS_BG['2']}</Button>
 
 							<Button className="btn btn-sm btn-light"
-							        onClick={() => this.changeStatus('cancel')}>Отказана</Button>
+							        onClick={() => this.changeStatus('cancel')}>{ORDER_STATUS_BG['3']}</Button>
 						</Col>
 					</Row>
 
