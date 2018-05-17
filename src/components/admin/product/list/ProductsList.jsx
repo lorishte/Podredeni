@@ -133,7 +133,7 @@ class ProductsList extends React.Component {
 					</Col>
 				</Row>
 
-				<Table striped bordered condensed hover>
+				<Table striped bordered condensed hover id="admin-products-table">
 					<TableHead
 						changeClass={this.changeClass}
 						sort={this.sort}

@@ -130,7 +130,7 @@ class AddressInfoInputs extends React.Component {
 
 					<Col sm={2} xs={3}>
 						<FormInputField
-							label="Апартамент"
+							label="Ап."
 							name="apartment"
 							type="text"
 							value={this.state.apartment}

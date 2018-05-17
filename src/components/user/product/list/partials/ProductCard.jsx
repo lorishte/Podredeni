@@ -7,10 +7,18 @@ import { Col } from 'react-bootstrap';
 class ProductCard extends React.Component {
 	constructor (props) {
 		super(props);
+
+		this.state = {
+			xsRes: this.props.xsRes
+		}
+	}
+
+	componentWillReceiveProps (nextProps) {
+		console.log(nextProps.xsRes);
+		this.setState({xsRes: nextProps.xsRes})
 	}
 
 	addToCart = () => {
-
 		if (sessionStorage.getItem('products') === null) {
 			sessionStorage.setItem('products', '[]');
 		}
@@ -49,28 +57,27 @@ class ProductCard extends React.Component {
 	};
 
 	render () {
-
-		const product = this.props.data;
+		const p = this.props.data;
 
 		return (
-			<Col xs={12} sm={6} md={4} lg={3}>
+			<Col xs={this.state.xsRes} sm={6} md={4} lg={3}>
 
 				<div className="card">
 
 						<div className="product-image">
-							<img className="card-img-top" src={product.images[0]} alt="Card image cap"/>
+							<img className="card-img-top" src={p.images[0]} alt="Card image cap"/>
 						</div>
 
 
 					<div className="card-body">
-						<h4 className="card-title">{product.name}</h4>
-						<p className="card-text">{product.description.substring(0, 80) + ' ...'}</p>
-						<p className="price">{product.price.toFixed(2)}</p>
+						<h4 className="card-title">{p.name}</h4>
+						<p className="card-text">{p.description.substring(0, 80) + ' ...'}</p>
+						<p className="price">{p.price.toFixed(2)}</p>
 						<button className="add-to-cart-btn" onClick={this.addToCart}>
 							<i className="fa fa-shopping-cart" aria-hidden="true"/>
 						</button>
 
-						<Link to={'/products/' + product.id} className="add-to-cart-btn">
+						<Link to={'/products/' + p.id} className="add-to-cart-btn">
 							<i className="fa fa-search" aria-hidden="true"/>
 						</Link>
 

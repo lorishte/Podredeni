@@ -12,11 +12,16 @@ class Header extends React.Component {
 		super(props);
 
 		this.state = {
-			lastScroll: null
+			lastScroll: null,
 		};
+
+		this.mainNav = null;
+		this.userNav = null;
 	}
 
 	componentDidMount () {
+		this.mainNav = document.getElementById('main-menu');
+		this.userNav = document.getElementById('user-nav');
 		window.addEventListener('scroll', this.handleScroll, {passive: true});
 	}
 
@@ -25,12 +30,10 @@ class Header extends React.Component {
 	}
 
 	handleScroll = () => {
-
 		if (document.documentElement.scrollTop > this.state.lastScroll) {
-			document.getElementById('main-menu').style.top = '-200px';
+			this.mainNav.style.top = '-200px';
 		} else {
-			console.log(222);
-			document.getElementById('main-menu').style.top = 0 + 'px';
+			this.mainNav.style.top = 0 + 'px';
 		}
 
 		this.setState({lastScroll: document.documentElement.scrollTop});
@@ -53,6 +56,11 @@ class Header extends React.Component {
 
 	logout = (e) => {
 		sessionStorage.clear();
+	};
+
+	hideMenu = () => {
+		console.log(this.userNav);
+		this.userNav.classList.remove('in');
 	};
 
 	render () {
@@ -89,13 +97,13 @@ class Header extends React.Component {
 
 				{!isAdmin &&
 				<div id="user-nav" className="collapse navbar-collapse">
-					<ul className="nav navbar-nav navbar-right">
+					<ul className="nav navbar-nav navbar-right" onClick={this.hideMenu}>
 
 						<NavLink to="/home" activeClassName="active" className='nav-link'>
 							Начало
 						</NavLink>
 
-						< NavLink to="/products" activeClassName="active" className='nav-link'>
+						<NavLink to="/products" activeClassName="active" className='nav-link'>
 							Продукти
 						</NavLink>
 
@@ -130,7 +138,6 @@ class Header extends React.Component {
 				}
 
 				{isAdmin &&
-
 				<div id="admin-nav">
 					<ul className="nav navbar-nav">
 						<div className="navbar-brand admin">
@@ -153,7 +160,6 @@ class Header extends React.Component {
 
 					</ul>
 				</div>
-
 				}
 			</nav>
 		);

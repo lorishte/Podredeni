@@ -7,6 +7,8 @@ import ProductCard from './partials/ProductCard';
 
 import productsService from '../../../../services/products/productsService';
 
+import { RESOLUTIONS } from '../../../../data/constants/componentConstants';
+
 class ProductsList extends React.Component {
 	constructor (props) {
 		super(props);
@@ -18,11 +20,23 @@ class ProductsList extends React.Component {
 			sortProperty: 'number',
 			descending: true,
 			filterProperty: 'name',
-			filterValue: ''
+			filterValue: '',
+			resolution: window.innerWidth
 		};
 	}
 
 	componentDidMount () {
+		this.loadProducts();
+		window.addEventListener('orientationchange', this.handleResolutionChange);
+		window.addEventListener('resize', this.handleResolutionChange);
+	}
+
+	componentWillUnmount () {
+		window.removeEventListener('orientationchange', this.handleResolutionChange);
+		window.removeEventListener('resize', this.handleResolutionChange);
+	}
+
+	loadProducts = () => {
 		productsService
 			.loadProducts(this.state)
 			.then(res => {
@@ -31,19 +45,27 @@ class ProductsList extends React.Component {
 			})
 			.catch(err => {
 				console.log(err);
-				this.toastContainer.error(err.statusText, "Грешка", {
+				this.toastContainer.error(err.statusText, 'Грешка', {
 					closeButton: true,
 				});
 
-				this.props.history.push('/error')
+				this.props.history.push('/error');
 			});
-	}
+	};
+
+	handleResolutionChange = () => {
+		this.setState({resolution: window.innerWidth});
+	};
 
 	render () {
-		let productsList;
+		let resolution = this.state.resolution < RESOLUTIONS.xs;
 
+		let productsList;
 		productsList = this.state.products.map(e => {
-			return <ProductCard key={e.id} data={e} toastContainer={this.toastContainer}/>;
+			return <ProductCard key={e.id}
+			                    data={e}
+			                    toastContainer={this.toastContainer}
+								xsRes={this.state.resolution < RESOLUTIONS.xs ? 12 : 6}/>;
 		});
 
 		return (

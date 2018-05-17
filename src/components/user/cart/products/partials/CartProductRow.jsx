@@ -38,15 +38,19 @@ class CartProductRow extends React.Component {
 					<td>
 						<button onClick={() => this.props.delete(p.id)}
 						        className="btn btn-default btn-xs">
-							<i className="fa fa-times" aria-hidden="true"/>
+							{/*<i className="fa fa-times" aria-hidden="true"/>*/}
+							x
 						</button>
 					</td>
 				}
-				<td>{this.props.index}</td>
-				<td ><img className="image-thumbnail" src={p.image}/></td>
-				<td>{p.name}</td>
+				<td >
+					<img className="image-thumbnail" src={p.image}/>
+				</td>
 				<td>
-					<span className=" quantity">{this.state.quantity}</span>
+					{p.name}
+					</td>
+				<td className="quantity-edit">
+					<span className="quantity">{this.state.quantity}</span>
 					{this.props.editable &&
 						<span className="arrows-container">
 							<button className="btn btn-default btn-xs" onClick={() => this.changeQuantity('increment')}>+</button>
@@ -54,8 +58,12 @@ class CartProductRow extends React.Component {
 						</span>
 					}
 				</td>
-				<td className="text-right">{p.price.toFixed(2)}</td>
-				<td className="text-right">{(p.price * p.quantity).toFixed(2)}</td>
+				<td className="text-right">
+					{p.price.toFixed(2)}
+					</td>
+				<td className="text-right">
+					{(p.price * p.quantity).toFixed(2)}
+					</td>
 			</tr>
 
 		);

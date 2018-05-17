@@ -62,6 +62,12 @@ const ERROR_MESSAGES = {
     passwordsMismatch: 'Паролите не съвпадат.'
 };
 
+const RESOLUTIONS = {
+    xs: 450,
+    sm: 680,
+    md: 980
+};
+
 export {
 	FILTER_INPUT_WAIT_INTERVAL,
 	ADMIN_PRODUCTS_FILTER_OPTIONS,
@@ -71,6 +77,7 @@ export {
     LABELS_BG,
     USER_ACCOUNT,
 	ERROR_MESSAGES,
-    BUTTONS_BG
+    BUTTONS_BG,
+    RESOLUTIONS
 }
 

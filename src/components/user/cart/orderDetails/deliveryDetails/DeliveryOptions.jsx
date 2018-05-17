@@ -15,7 +15,7 @@ class DeliveryOptions extends React.Component {
 	render () {
 		return (
 
-			<FormGroup >
+			<FormGroup className="delivery-options">
 				<Radio
 					name="1"
 					inline

@@ -10,6 +10,8 @@ import ProductTabs from './partials/ProductTabs';
 
 import productsService from '../../../../services/products/productsService';
 
+import { RESOLUTIONS } from '../../../../data/constants/componentConstants';
+
 class Product extends React.Component {
 	constructor (props) {
 		super(props);
@@ -24,10 +26,12 @@ class Product extends React.Component {
 	componentDidMount () {
 		this.loadProductData();
 		window.addEventListener('orientationchange',  this.handleResolutionChange );
+		window.addEventListener('resize', this.handleResolutionChange);
 	}
 
 	componentWillUnmount () {
 		window.removeEventListener('orientationchange', this.handleResolutionChange );
+		window.removeEventListener('resize', this.handleResolutionChange);
 	}
 
 	loadProductData = () => {
@@ -84,12 +88,12 @@ class Product extends React.Component {
 	};
 
 	handleResolutionChange = () => {
-		this.setState({resolution: window.innerHeight})
+		this.setState({resolution: window.innerWidth})
 	};
 
 	render () {
 		let product = this.state.product;
-		let resolution = this.state.resolution < 500;
+		let resolution = this.state.resolution < RESOLUTIONS.xs;
 
 		return (
 			<Grid id="product">

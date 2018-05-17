@@ -9,13 +9,12 @@ class TableHead extends React.Component {
 			<thead>
 			<tr>
 				{this.props.editable &&
-				<th className="col-xs-1"/>
+				<th/>
 				}
-				<th className="col-xs-1">No</th>
-				<th className="col-xs-4" colSpan={2}>Продукт</th>
-				<th className="col-xs-2">Количество</th>
-				<th className="col-xs-2 text-right">Единична цена</th>
-				<th className="col-xs-2 text-right">Сума</th>
+				<th colSpan={2}>Продукт</th>
+				<th>Брой</th>
+				<th className="text-right">Цена</th>
+				<th className="text-right">Сума</th>
 			</tr>
 			</thead>
 		);

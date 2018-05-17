@@ -10,7 +10,7 @@ class OrdersTable extends React.Component {
 
 	render () {
 		return (
-			<Table striped bordered condensed hover>
+			<Table striped bordered condensed hover id="admin-orders-table">
 				<OrderListTableHead
 					changeClass={this.props.changeClass}
 					sort={this.props.sort}/>

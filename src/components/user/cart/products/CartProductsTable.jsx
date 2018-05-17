@@ -8,17 +8,25 @@ import { confirmAlert } from 'react-confirm-alert';
 import TableHead from './partials/TableHead';
 import CartProductRow from './partials/CartProductRow';
 
+import { RESOLUTIONS } from '../../../../data/constants/componentConstants';
+
 class CartProductsTable extends React.Component {
 	constructor (props) {
 		super(props);
 
 		this.state = {
-			totalSum: 0
+			totalSum: 0,
+			resolution: window.innerWidth
 		};
 	}
 
 	componentDidMount () {
 		this.calculateTotalSum();
+		window.addEventListener('orientationchange', this.handleResolutionChange);
+	}
+
+	componentWillUnmount () {
+		window.removeEventListener('orientationchange', this.handleResolutionChange);
 	}
 
 	confirmDeletion = (id) => {
@@ -64,10 +72,14 @@ class CartProductsTable extends React.Component {
 		this.setState({totalSum: sum.toFixed(2)});
 	};
 
+	handleResolutionChange = () => {
+		this.setState({resolution: window.innerHeight});
+	};
+
 	render () {
+		let resolution = this.state.resolution < RESOLUTIONS.xs;
 
 		let products;
-
 		if (this.props.products.length > 0) {
 			products = this.props.products.map((p, i) => {
 				return <CartProductRow
@@ -77,37 +89,39 @@ class CartProductsTable extends React.Component {
 					data={p}
 					delete={this.confirmDeletion}
 					edit={this.editItem}/>;
-			})
+			});
 		}
 
-			return (
-				<div>
-					<Table responsive condensed>
+		return (
+			<div>
+				<Table responsive condensed id="cart-products-table">
 
-						<TableHead editable={true}/>
+					<TableHead editable={true}/>
 
-						<tbody>
-						{products}
-						</tbody>
+					<tbody>
+					{products}
+					</tbody>
 
-						<tfoot>
-						<tr className="lead">
-							<th colSpan={6} className="text-right">Общо:</th>
-							<th className="text-right">{this.state.totalSum}</th>
-						</tr>
-						</tfoot>
+					<tfoot>
+					<tr className="lead">
+						{!resolution && <th colSpan={5} className="text-right">Общо:</th>}
+						{!resolution && <th className="text-right">{this.state.totalSum}</th>}
 
-					</Table>
+						{resolution && <th colSpan={6} className="text-center">Общо: {this.state.totalSum}</th>}
+					</tr>
+					</tfoot>
 
-					<Row className="buttons-container">
-						<Col xs={12} className="text-center">
-							<button className="btn-custom default md" onClick={this.props.cancel}>Отказ</button>
-							<button className="btn-custom primary md" onClick={this.props.continue}>Напред</button>
-						</Col>
-					</Row>
+				</Table>
 
-				</div>
-			);
+				<Row className="buttons-container">
+					<Col xs={12} className="text-center">
+						<button className="btn-custom default md" onClick={this.props.cancel}>Отказ</button>
+						<button className="btn-custom primary md" onClick={this.props.continue}>Напред</button>
+					</Col>
+				</Row>
+
+			</div>
+		);
 
 	}
 }
