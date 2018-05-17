@@ -16,11 +16,21 @@ class Product extends React.Component {
 
 		this.state = {
 			product: '',
-			quantity: 0
+			quantity: 0,
+			resolution: window.innerWidth
 		};
 	}
 
 	componentDidMount () {
+		this.loadProductData();
+		window.addEventListener('orientationchange',  this.handleResolutionChange );
+	}
+
+	componentWillUnmount () {
+		window.removeEventListener('orientationchange', this.handleResolutionChange );
+	}
+
+	loadProductData = () => {
 		let id = this.props.match.params.id;
 		productsService
 			.getProduct(id)
@@ -29,9 +39,9 @@ class Product extends React.Component {
 				this.setState({product: res.product});
 			})
 			.catch(err => {
-				console.log(err.responseText);
+				this.props.history.push('/error');
 			});
-	}
+	};
 
 	addToCart = (quantity) => {
 		this.setState({quantity}, () => {
@@ -73,8 +83,13 @@ class Product extends React.Component {
 		return (array.filter(e => e.id === this.state.product.id).length > 0);
 	};
 
+	handleResolutionChange = () => {
+		this.setState({resolution: window.innerHeight})
+	};
+
 	render () {
 		let product = this.state.product;
+		let resolution = this.state.resolution < 500;
 
 		return (
 			<Grid id="product">
@@ -85,10 +100,10 @@ class Product extends React.Component {
 
 				{this.state.product !== '' &&
 				<Row>
-					<Col xs={12} sm={6} md={5}>
+					<Col xs={resolution ? 12 : 6} sm={6} md={5}>
 						<ImageGallery images={product.images}/>
 					</Col>
-					<Col xs={12} sm={6} md={7}>
+					<Col xs={resolution ? 12 : 6} sm={6} md={7}>
 						<ProductInfo data={product}/>
 						<AddToCartForm onSubmit={this.addToCart}/>
 					</Col>

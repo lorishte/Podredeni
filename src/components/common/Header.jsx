@@ -10,10 +10,31 @@ class Header extends React.Component {
 
 	constructor (props) {
 		super(props);
+
+		this.state = {
+			lastScroll: null
+		};
 	}
 
 	componentDidMount () {
+		window.addEventListener('scroll', this.handleScroll, {passive: true});
 	}
+
+	componentWillUnmount () {
+		window.removeEventListener('scroll', this.handleScroll);
+	}
+
+	handleScroll = () => {
+
+		if (document.documentElement.scrollTop > this.state.lastScroll) {
+			document.getElementById('main-menu').style.top = '-200px';
+		} else {
+			console.log(222);
+			document.getElementById('main-menu').style.top = 0 + 'px';
+		}
+
+		this.setState({lastScroll: document.documentElement.scrollTop});
+	};
 
 	seedProducts = () => {
 		for (let i = 0; i < products.length; i++) {
@@ -45,7 +66,7 @@ class Header extends React.Component {
 		}
 
 		return (
-			<nav className="navbar navbar-default navbar-fixed-top">
+			<nav className="navbar navbar-default navbar-fixed-top" id="main-menu">
 
 				{!isAdmin &&
 				<div className="navbar-brand">
@@ -67,7 +88,7 @@ class Header extends React.Component {
 				}
 
 				{!isAdmin &&
-				<div className="collapse navbar-collapse" id="user-nav">
+				<div id="user-nav" className="collapse navbar-collapse">
 					<ul className="nav navbar-nav navbar-right">
 
 						<NavLink to="/home" activeClassName="active" className='nav-link'>
@@ -78,9 +99,9 @@ class Header extends React.Component {
 							Продукти
 						</NavLink>
 
-						<NavLink to="/about" activeClassName="active" className='nav-link'>
-							За нас
-						</NavLink>
+						{/*<NavLink to="/about" activeClassName="active" className='nav-link'>*/}
+						{/*За нас*/}
+						{/*</NavLink>*/}
 
 						<NavLink to="/contact" activeClassName="active" className='nav-link'>
 							Контакт
@@ -109,30 +130,30 @@ class Header extends React.Component {
 				}
 
 				{isAdmin &&
-				<nav className="navbar navbar-default navbar-fixed-top">
-					<div id="admin-nav">
-						<ul className="nav navbar-nav">
-							<div className="navbar-brand admin">
-								<span>P</span>
-							</div>
 
-							<NavLink to="/order/list" activeClassName="active" className='nav-link'>
-								Поръчки
-							</NavLink>
+				<div id="admin-nav">
+					<ul className="nav navbar-nav">
+						<div className="navbar-brand admin">
+							<span>P</span>
+						</div>
 
-							<NavLink to="/product/list" activeClassName="active" className='nav-link'>
-								Продукти
-							</NavLink>
+						<NavLink to="/order/list" activeClassName="active" className='nav-link'>
+							Поръчки
+						</NavLink>
 
-							<NavLink to="/home"
-							         activeClassName="active"
-							         className='btn btn-default'
-							         onClick={this.logout}>Изход
-							</NavLink>
+						<NavLink to="/product/list" activeClassName="active" className='nav-link'>
+							Продукти
+						</NavLink>
 
-						</ul>
-					</div>
-				</nav>
+						<NavLink to="/home"
+						         activeClassName="active"
+						         className='btn btn-default'
+						         onClick={this.logout}>Изход
+						</NavLink>
+
+					</ul>
+				</div>
+
 				}
 			</nav>
 		);

@@ -5,6 +5,8 @@ import { Grid, Row, Col, Table, Button } from 'react-bootstrap';
 import ordersService from '../../../../services/orders/ordersService';
 import LogTableRow from './partials/LogTableRow';
 
+import { BUTTONS_BG } from '../../../../data/constants/componentConstants';
+
 
 class OrderLog extends React.Component {
     constructor (props) {
@@ -60,7 +62,7 @@ class OrderLog extends React.Component {
 
                 <Row className="buttons-container">
                     <Col xs={12} >
-                        <Button onClick={this.goBack}>Отказ</Button>
+                        <Button onClick={this.goBack}>{BUTTONS_BG.back}</Button>
                     </Col>
                 </Row>
             </Grid>

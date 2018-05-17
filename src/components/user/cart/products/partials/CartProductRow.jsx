@@ -43,12 +43,12 @@ class CartProductRow extends React.Component {
 					</td>
 				}
 				<td>{this.props.index}</td>
-				<td className="col-xs-1"><img className="image-thumbnail" src={p.image}/></td>
+				<td ><img className="image-thumbnail" src={p.image}/></td>
 				<td>{p.name}</td>
 				<td>
-					<span className="col-xs-2 quantity">{this.state.quantity}</span>
+					<span className=" quantity">{this.state.quantity}</span>
 					{this.props.editable &&
-						<span className="col-xs-8 arrows-container">
+						<span className="arrows-container">
 							<button className="btn btn-default btn-xs" onClick={() => this.changeQuantity('increment')}>+</button>
 							<button className="btn btn-default btn-xs" onClick={() => this.changeQuantity('decrement')}>-</button>
 						</span>

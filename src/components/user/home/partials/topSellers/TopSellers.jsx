@@ -2,7 +2,7 @@ import React from 'react';
 
 import { Grid, Col } from 'react-bootstrap';
 
-import TopSellerProductCard from './TopSellerProductCard';
+import TopSellerProductCard from './partials/TopSellerProductCard';
 
 import productsService from '../../../../../services/products/productsService';
 
@@ -98,7 +98,7 @@ class TopSellers extends React.Component {
 
 		return (
 			<Grid className="bg-white">
-				<Col xs={12}>
+
 					<h1 className="section-heading">Top sellers</h1>
 
 					<div className="top-sellers-carousel" ref={this.container}>
@@ -122,7 +122,7 @@ class TopSellers extends React.Component {
 						</button>}
 
 					</div>
-				</Col>
+
 			</Grid>
 		);
 	}

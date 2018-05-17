@@ -44,6 +44,7 @@ main {
   min-height: calc(100vh - 80px);
 
   padding-top: 160px;
+  padding-bottom: 50px;
   background-color: $warm-light-grey;
 }
 
@@ -267,6 +268,10 @@ input[type=checkbox], input[type=radio] {
   font-weight: 200;
   letter-spacing: 8px;
   color: $primary;
+}
+
+#main-menu {
+  @include transition;
 }
 
 nav {
@@ -523,10 +528,11 @@ nav {
       text-shadow: none;
       z-index: 1;
       opacity: 1;
-      margin: 20px;
+      margin: 10px;
       @include transition;
 
-      &:hover {
+      &:hover,
+      &:active {
         cursor: pointer;
         color: $primary;
       }
@@ -546,7 +552,8 @@ nav {
   background-color: $white;
   @include transition;
 
-  &:hover {
+  &:hover,
+  &:active {
     -webkit-box-shadow: 0 0 10px -1px rgba(0, 0, 0, 0.23);
     -moz-box-shadow: 0 0 10px -1px rgba(0, 0, 0, 0.23);
     box-shadow: 0 0 10px -1px rgba(0, 0, 0, 0.23);
@@ -1104,6 +1111,13 @@ footer {
 
     }
   }
+
+  #image-gallery {
+    .main-image-container {
+      height: 300px;
+      width: 100%;
+    }
+  }
 }
 
 @media screen and (max-width: 650px) {
@@ -1219,6 +1233,13 @@ footer {
     .nav>li>a {
       padding: 5px 5px;
       font-size: 1em;
+    }
+  }
+
+  #image-gallery {
+    .main-image-container {
+      height: 300px;
+      width: 100%;
     }
   }
 }

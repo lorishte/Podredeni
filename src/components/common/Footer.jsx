@@ -6,6 +6,8 @@ import {  } from 'react-bootstrap';
 class Footer extends React.Component {
 
 	render () {
+		if (sessionStorage.getItem('role') === 'admin') return null;
+
 		return (
 			<footer>
 				<div className="wrapper">
@@ -30,7 +32,6 @@ class Footer extends React.Component {
 					</div>
 				</div>
 			</footer>
-
 		);
 	}
 }

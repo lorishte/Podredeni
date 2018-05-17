@@ -82,7 +82,7 @@ class CartProductsTable extends React.Component {
 
 			return (
 				<div>
-					<Table responsive>
+					<Table responsive condensed>
 
 						<TableHead editable={true}/>
 

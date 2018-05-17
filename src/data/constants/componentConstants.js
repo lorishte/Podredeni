@@ -37,15 +37,16 @@ const LABELS_BG = {
 };
 
 const BUTTONS_BG = {
-    confirm: '',
-    cancel: '',
-    continue: '',
+    confirm: 'Потвърди',
+    cancel: 'Отказ',
+    continue: 'Продължи',
+    back: 'Назад',
 
     // Order
-	received: '',
-    confirmed: '',
-    dispatched: '',
-    cancelled: ''
+	received: 'Получена',
+    confirmed: 'Потвърдена',
+    dispatched: 'Изпратена',
+    cancelled: 'Отказана'
 };
 
 const USER_ACCOUNT = {

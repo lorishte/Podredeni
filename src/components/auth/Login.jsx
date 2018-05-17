@@ -40,7 +40,7 @@ class Login extends React.Component {
 				}
 			})
 			.catch(err => {
-				this.toastContainer.error('', err.responseText, {
+				this.toastContainer.error(err.statusText, "Грешка", {
 					closeButton: true,
 				});
 			});

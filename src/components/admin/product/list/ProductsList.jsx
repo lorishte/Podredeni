@@ -103,7 +103,7 @@ class ProductsList extends React.Component {
 		return (
 			<Grid>
 				<Row>
-					<Col xs={12} sm={3} className="buttons-container">
+					<Col xs={12} className="buttons-container">
 						<Link to="/product/create" className="btn btn-sm btn-primary">Нов Продукт</Link>
 					</Col>
 
