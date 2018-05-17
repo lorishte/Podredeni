@@ -1,6 +1,6 @@
 import React from 'react';
 
-class TableHead extends React.Component {
+class CartTableHeader extends React.Component {
 	constructor (props) {
 		super(props);
 	}
@@ -21,4 +21,4 @@ class TableHead extends React.Component {
 	}
 }
 
-export default TableHead;
+export default CartTableHeader;

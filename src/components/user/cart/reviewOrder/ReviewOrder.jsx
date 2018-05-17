@@ -1,17 +1,38 @@
 import React from 'react';
 
-import { Button, Table, Row, Col } from 'react-bootstrap';
+import { Table, Row, Col } from 'react-bootstrap';
 
-import TableHead from '../products/partials/TableHead';
+import CartTableHeader from '../products/partials/CartTableHeader';
+import CartTableFooter from '../products/partials/CartTableFooter';
 import CartProductRow from '../products/partials/CartProductRow';
 import EkontOrderDetailsSummary from './partials/EkontOrderDetailsSummary';
 import AddressOrderDetailsSummary from './partials/AddressOrderDetailsSummary';
 import RecipientDetailsSummary from './partials/RecipientDetailsSummary';
 
+import { RESOLUTIONS } from '../../../../data/constants/componentConstants';
+
 class ReviewOrder extends React.Component {
 	constructor (props) {
 		super(props);
+
+		this.state = {
+			resolution: window.innerWidth
+		};
 	}
+
+	componentDidMount () {
+		window.addEventListener('orientationchange', this.handleResolutionChange);
+		window.addEventListener('resize', this.handleResolutionChange);
+	}
+
+	componentWillUnmount () {
+		window.removeEventListener('orientationchange', this.handleResolutionChange);
+		window.removeEventListener('resize', this.handleResolutionChange);
+	}
+
+	handleResolutionChange = () => {
+		this.setState({resolution: window.innerWidth});
+	};
 
 	calculateTotalSum = () => {
 		let sum = 0;
@@ -24,6 +45,8 @@ class ReviewOrder extends React.Component {
 	};
 
 	render () {
+		let resolution = this.state.resolution < RESOLUTIONS.xs;
+		let totalSum = this.calculateTotalSum();
 
 		let recipient = this.props.orderDetails.recipientInfo;
 
@@ -60,7 +83,7 @@ class ReviewOrder extends React.Component {
 				</Row>
 
 				<Table responsive>
-					<TableHead editable={false}/>
+					<CartTableHeader editable={false}/>
 					<tbody>
 					{this.props.products.map((e, i) => {
 						return <CartProductRow
@@ -71,12 +94,8 @@ class ReviewOrder extends React.Component {
 					})
 					}
 					</tbody>
-					<tfoot>
-					<tr className="lead">
-						<th colSpan={5} className="text-right">Общо:</th>
-						<th className="text-right">{this.calculateTotalSum()}</th>
-					</tr>
-					</tfoot>
+
+					<CartTableFooter resolution={resolution} totalSum={totalSum} colSpan={4}/>
 				</Table>
 
 				<Row className="buttons-container">

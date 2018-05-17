@@ -5,8 +5,9 @@ import { Table, Button, Row, Col } from 'react-bootstrap';
 import { confirmAlert } from 'react-confirm-alert';
 
 // Partials
-import TableHead from './partials/TableHead';
+import CartTableHeader from './partials/CartTableHeader';
 import CartProductRow from './partials/CartProductRow';
+import CartTableFooter from './partials/CartTableFooter'
 
 import { RESOLUTIONS } from '../../../../data/constants/componentConstants';
 
@@ -23,10 +24,12 @@ class CartProductsTable extends React.Component {
 	componentDidMount () {
 		this.calculateTotalSum();
 		window.addEventListener('orientationchange', this.handleResolutionChange);
+		window.addEventListener('resize', this.handleResolutionChange);
 	}
 
 	componentWillUnmount () {
 		window.removeEventListener('orientationchange', this.handleResolutionChange);
+		window.removeEventListener('resize', this.handleResolutionChange);
 	}
 
 	confirmDeletion = (id) => {
@@ -73,7 +76,7 @@ class CartProductsTable extends React.Component {
 	};
 
 	handleResolutionChange = () => {
-		this.setState({resolution: window.innerHeight});
+		this.setState({resolution: window.innerWidth});
 	};
 
 	render () {
@@ -96,21 +99,13 @@ class CartProductsTable extends React.Component {
 			<div>
 				<Table responsive condensed id="cart-products-table">
 
-					<TableHead editable={true}/>
+					<CartTableHeader editable={true}/>
 
 					<tbody>
 					{products}
 					</tbody>
 
-					<tfoot>
-					<tr className="lead">
-						{!resolution && <th colSpan={5} className="text-right">Общо:</th>}
-						{!resolution && <th className="text-right">{this.state.totalSum}</th>}
-
-						{resolution && <th colSpan={6} className="text-center">Общо: {this.state.totalSum}</th>}
-					</tr>
-					</tfoot>
-
+					<CartTableFooter resolution={resolution} totalSum={this.state.totalSum} colSpan={5}/>
 				</Table>
 
 				<Row className="buttons-container">

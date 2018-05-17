@@ -23,14 +23,17 @@ class Header extends React.Component {
 		this.mainNav = document.getElementById('main-menu');
 		this.userNav = document.getElementById('user-nav');
 		window.addEventListener('scroll', this.handleScroll, {passive: true});
+
+		window.addEventListener('touchmove', this.handleScroll);
 	}
 
 	componentWillUnmount () {
 		window.removeEventListener('scroll', this.handleScroll);
+		window.removeEventListener('touchmove', this.handleScroll);
 	}
 
 	handleScroll = () => {
-		if (document.documentElement.scrollTop > this.state.lastScroll) {
+		if (document.documentElement.scrollTop > this.state.lastScroll && document.documentElement.scrollTop > 200) {
 			this.mainNav.style.top = '-200px';
 		} else {
 			this.mainNav.style.top = 0 + 'px';
@@ -59,7 +62,6 @@ class Header extends React.Component {
 	};
 
 	hideMenu = () => {
-		console.log(this.userNav);
 		this.userNav.classList.remove('in');
 	};
 

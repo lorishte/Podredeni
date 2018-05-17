@@ -26,8 +26,6 @@ class EkontInfoInputs extends React.Component {
 		ekontRequester.getOffices()
 			.then(response => {
 				let data = ekontDataParser.transformXml(response);
-				console.log(data);
-				console.log(this.state);
 				this.setState({ekontData: data}, () => console.log(this.state.ekontData));
 			})
 			.catch(err => {
@@ -87,8 +85,11 @@ class EkontInfoInputs extends React.Component {
 	render () {
 		return (
 			<Row>
+				{this.state.ekontData === '' && <div className="loader"/>}
+
 				{this.state.ekontData !== ''  &&
 				<div className="form-group">
+
 					<Col sm={4}>
 						<FormSelectField
 							label="Държава"
