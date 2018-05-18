@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css?family=Montserrat:100,200,300,400,500,600,700,800,900');
+@import url('https://fonts.googleapis.com/css?family=Montserrat:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i&subset=cyrillic');
 @import "https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css";
 
 $white: #ffffff;
@@ -690,6 +690,10 @@ nav {
 
 //User: Cart
 #cart {
+
+  .text-danger {
+    color: $danger;
+  }
   .active-tab {
     color: $primary;
   }
@@ -725,6 +729,8 @@ nav {
   }
 
   #cart-products-table {
+    margin-top: 45px;
+
     .quantity-edit {
       display: flex;
 

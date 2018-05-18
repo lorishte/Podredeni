@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css?family=Montserrat:100,200,300,400,500,600,700,800,900");
+@import url("https://fonts.googleapis.com/css?family=Montserrat:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i&subset=cyrillic");
 @import "https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css";
 * {
   box-sizing: border-box;
@@ -473,6 +473,8 @@ nav {
 .tab-content {
   padding: 25px 15px; }
 
+#cart .text-danger {
+  color: #ea445b; }
 #cart .active-tab {
   color: #b49543; }
 #cart .cart-view-name {
@@ -495,24 +497,26 @@ nav {
   color: #ffffff;
   top: -5px;
   margin-right: 15px; }
-#cart #cart-products-table .quantity-edit {
-  display: flex; }
-  #cart #cart-products-table .quantity-edit .quantity {
-    margin-right: 8px;
-    display: flex;
-    align-items: center;
-    width: 15px; }
-  #cart #cart-products-table .quantity-edit .arrows-container {
+#cart #cart-products-table {
+  margin-top: 45px; }
+  #cart #cart-products-table .quantity-edit {
+    display: flex; }
+    #cart #cart-products-table .quantity-edit .quantity {
+      margin-right: 8px;
+      display: flex;
+      align-items: center;
+      width: 15px; }
+    #cart #cart-products-table .quantity-edit .arrows-container {
+      width: 25px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center; }
+  #cart #cart-products-table .btn-xs {
     width: 25px;
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center; }
-#cart #cart-products-table .btn-xs {
-  width: 25px;
-  height: 46%;
-  padding: 0;
-  margin: 2px 0;
-  line-height: 0; }
+    height: 46%;
+    padding: 0;
+    margin: 2px 0;
+    line-height: 0; }
 #cart .delivery-options {
   display: flex; }
 

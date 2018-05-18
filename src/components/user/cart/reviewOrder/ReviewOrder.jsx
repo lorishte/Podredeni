@@ -82,7 +82,7 @@ class ReviewOrder extends React.Component {
 					</Col>
 				</Row>
 
-				<Table responsive>
+				<Table responsive id="cart-products-table">
 					<CartTableHeader editable={false}/>
 					<tbody>
 					{this.props.products.map((e, i) => {

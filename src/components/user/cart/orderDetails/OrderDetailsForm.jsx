@@ -35,19 +35,83 @@ class OrderDetails extends React.Component {
 		this.setState({termsAgreed: e.target.checked});
 	};
 
+	checkFields = () => {
+
+		for (let el in this.state) {
+			if (el === 'toAddress' || el === 'comment') break;
+			console.log(el);
+
+			if (el === 'termsAgreed') {
+				console.log('from terms');
+
+				if (!this.state[el]) {
+					this.showWarning();
+					this.agreed.current.focus();
+					return false;
+				}
+			}
+
+			if (el === 'recipientInfo') {
+				console.log('from user');
+				let user = this.state.recipientInfo;
+
+				for (let input in user) {
+					console.log(user[input]);
+					if (user[input] === '') {
+						console.log(222)
+						this.showWarning();
+						return false;
+					}
+				}
+			}
+
+			if (el === 'ekontDetails' && !this.state.toAddress) {
+				console.log('from ekont');
+				let ekont = this.state.ekontDetails;
+
+				for (let input in ekont) {
+					console.log(ekont[input]);
+					if (ekont[input] === '') {
+						this.showWarning();
+						return false;
+					}
+				}
+			}
+
+			if (el === 'addressDetails' && this.state.toAddress) {
+				console.log('from address');
+				let address = this.state.addressDetails;
+
+				for (let input in address) {
+					console.log(address[input]);
+					if (address[input] === '') {
+						this.showWarning(input);
+						return false;
+					}
+				}
+			}
+		}
+	};
+
+	showWarning = (message) => {
+		this.toastContainer.warning('Моля, попълнете всички задължителни полета.', message, {
+			closeButton: false,
+		});
+	};
+
 	submitInfo = (e) => {
 		e.preventDefault();
 
-		if (sessionStorage.getItem('role') === 'admin'){
+		if (!this.checkFields()) return;
+
+		if (sessionStorage.getItem('role') === 'admin') {
 			this.props.continue();
 			return;
 		}
 
 		if (!this.state.termsAgreed) {
-			this.toastContainer.warning('Моля, попълнете всички задължителни полета.', '', {
-				closeButton: false,
-			});
 
+			this.showWarning();
 			this.agreed.current.focus();
 			return;
 		}
@@ -106,7 +170,7 @@ class OrderDetails extends React.Component {
 							       name="termsAgreed"
 							       defaultChecked={this.state.termsAgreed}
 							       onChange={this.handleCheckBox}/>
-							* Съгласен/а съм с <Link to={'/products'} className="btn-link">Условията за
+							<span className="text-danger">*&nbsp;</span> Съгласен/а съм с <Link to={'/products'} className="btn-link">Условията за
 							ползване.</Link>
 						</label>
 						}
