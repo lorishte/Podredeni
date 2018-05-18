@@ -65,7 +65,7 @@ class ProductsList extends React.Component {
 			return <ProductCard key={e.id}
 			                    data={e}
 			                    toastContainer={this.toastContainer}
-								xsRes={this.state.resolution < RESOLUTIONS.xs ? 12 : 6}/>;
+								xsRes={resolution ? 12 : 6}/>;
 		});
 
 		return (

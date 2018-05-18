@@ -8,6 +8,8 @@ import FormSelectField from '../../../../common/formComponents/FormSelectField';
 import ekontRequester from '../../../../../services/ekont/ekontRequester';
 import ekontDataParser from '../../../../../services/ekont/ekontDataConvertor';
 
+import { RESOLUTIONS } from '../../../../../data/constants/componentConstants';
+
 class EkontInfoInputs extends React.Component {
 	constructor (props) {
 		super(props);
@@ -18,11 +20,24 @@ class EkontInfoInputs extends React.Component {
 			officeCode: this.props.data.officeCode || '',
 			officeName: this.props.data.officeName || '',
 			address: this.props.data.address || '',
-			ekontData: ''
+			ekontData: '',
+			resolution: window.innerWidth
 		};
 	}
 
 	componentDidMount () {
+		this.loadEkontOffices();
+
+		window.addEventListener('orientationchange', this.handleResolutionChange);
+		window.addEventListener('resize', this.handleResolutionChange);
+	}
+
+	componentWillUnmount () {
+		window.removeEventListener('orientationchange', this.handleResolutionChange );
+		window.removeEventListener('resize', this.handleResolutionChange);
+	}
+
+	loadEkontOffices = () => {
 		ekontRequester.getOffices()
 			.then(response => {
 				let data = ekontDataParser.transformXml(response);
@@ -31,7 +46,7 @@ class EkontInfoInputs extends React.Component {
 			.catch(err => {
 				console.log(err);
 			});
-	}
+	};
 
 	handleChange = (e) => {
 
@@ -58,7 +73,7 @@ class EkontInfoInputs extends React.Component {
 					officeName: '',
 				});
 
-				return
+				return;
 			}
 
 			let address = this.state.ekontData[this.state.country][this.state.city][e.target.value].address;
@@ -81,28 +96,39 @@ class EkontInfoInputs extends React.Component {
 		});
 	};
 
+	handleResolutionChange = () => {
+		this.setState({resolution: window.innerWidth})
+	};
 
 	render () {
+
+		let resolution = this.state.resolution < RESOLUTIONS.xs;
+		let isAdmin = sessionStorage.getItem('role') === 'admin';
+
 		return (
 			<Row>
-				{this.state.ekontData === '' && <div className="loader"/>}
+				{this.state.ekontData === '' && isAdmin && <div className="admin-loader"/> }
+				{this.state.ekontData === '' && !isAdmin && <div className="loader"/> }
 
-				{this.state.ekontData !== ''  &&
-				<div className="form-group">
+				{this.state.ekontData !== '' &&
 
-					<Col sm={4}>
-						<FormSelectField
-							label="Държава"
-							name="country"
-							value={this.state.country}
-							defaultValue={this.state.country}
-							optionsList={this.state.ekontData}
-							required={true}
-							onChange={this.handleChange}/>
-					</Col>
-					{this.state.country !== '' &&
-						<div>
-								<Col sm={4}>
+					<div className="form-group">
+
+						<Col xs={resolution ? 12 : 6} sm={4}>
+							<FormSelectField
+								label="Държава"
+								name="country"
+								value={this.state.country}
+								defaultValue={this.state.country}
+								optionsList={this.state.ekontData}
+								required={true}
+								onChange={this.handleChange}/>
+						</Col>
+
+						{this.state.country !== '' &&
+
+							<div>
+								<Col xs={resolution ? 12 : 6} sm={4}>
 									<FormSelectField
 										label="Населено място"
 										name="city"
@@ -112,24 +138,24 @@ class EkontInfoInputs extends React.Component {
 										required={true}
 										onChange={this.handleChange}/>
 								</Col>
-							{this.state.city !== '' &&
-								<Col sm={4}>
-									<FormSelectField
-										label="Наименование на офиса"
-										name="officeName"
-										defaultValue={this.state.officeName}
-										value={this.state.officeName}
-										optionsList={this.state.ekontData[this.state.country][this.state.city]}
-										required={true}
-										onChange={this.handleChange}/>
-								</Col>
-							}
-						</div>
-					}
-				</div>
+
+								{this.state.city !== '' &&
+
+									<Col xs={resolution ? 12 : 6} sm={4}>
+										<FormSelectField
+											label="Наименование на офиса"
+											name="officeName"
+											defaultValue={this.state.officeName}
+											value={this.state.officeName}
+											optionsList={this.state.ekontData[this.state.country][this.state.city]}
+											required={true}
+											onChange={this.handleChange}/>
+									</Col>
+								}
+							</div>
+						}
+					</div>
 				}
-
-
 			</Row>
 		);
 	}

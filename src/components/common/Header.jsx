@@ -1,7 +1,7 @@
 import React from 'react';
 import { NavLink, Link } from 'react-router-dom';
 
-import { Label, Badge } from 'react-bootstrap';
+import { Label } from 'react-bootstrap';
 
 import products from '../../data/products';
 import productsService from '../../services/products/productsService';
@@ -23,13 +23,10 @@ class Header extends React.Component {
 		this.mainNav = document.getElementById('main-menu');
 		this.userNav = document.getElementById('user-nav');
 		window.addEventListener('scroll', this.handleScroll, {passive: true});
-
-		window.addEventListener('touchmove', this.handleScroll);
 	}
 
 	componentWillUnmount () {
 		window.removeEventListener('scroll', this.handleScroll);
-		window.removeEventListener('touchmove', this.handleScroll);
 	}
 
 	handleScroll = () => {
@@ -155,6 +152,7 @@ class Header extends React.Component {
 						</NavLink>
 
 						<NavLink to="/home"
+						         id="logout-btn"
 						         activeClassName="active"
 						         className='btn btn-default'
 						         onClick={this.logout}>Изход

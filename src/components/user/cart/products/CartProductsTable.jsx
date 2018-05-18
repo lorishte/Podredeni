@@ -82,6 +82,8 @@ class CartProductsTable extends React.Component {
 	render () {
 		let resolution = this.state.resolution < RESOLUTIONS.xs;
 
+		let isAdmin = sessionStorage.getItem('role') === 'admin';
+
 		let products;
 		if (this.props.products.length > 0) {
 			products = this.props.products.map((p, i) => {
@@ -110,8 +112,10 @@ class CartProductsTable extends React.Component {
 
 				<Row className="buttons-container">
 					<Col xs={12} className="text-center">
-						<button className="btn-custom default md" onClick={this.props.cancel}>Отказ</button>
-						<button className="btn-custom primary md" onClick={this.props.continue}>Напред</button>
+						<button className={isAdmin ? "btn btn-default" : "btn-custom default md"}
+						        onClick={this.props.cancel}>Отказ</button>
+						<button className={isAdmin ? "btn btn-primary" : "btn-custom primary md"}
+						        onClick={this.props.continue}>Напред</button>
 					</Col>
 				</Row>
 

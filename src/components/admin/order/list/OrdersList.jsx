@@ -13,6 +13,7 @@ import Paging from '../../../common/pagination/Paging';
 
 import ordersService from '../../../../services/orders/ordersService';
 
+
 class OrdersList extends React.Component {
 	constructor (props) {
 		super(props);
@@ -25,9 +26,11 @@ class OrdersList extends React.Component {
 			descending: true,
 			filterProperty: 'status',
 			filterValue: 'ordered',
+
 			showDetails: false,
 			orderToShowInfo: '',
 			deliveryInfo: '',
+
 			ordersCount: '',
 			pagesCount: ''
 		};
@@ -168,28 +171,41 @@ class OrdersList extends React.Component {
 									</Col>
 								</Row>
 
-								<Tab eventKey={0} title="Получени">
+								<Tab eventKey={0}
+								     title={<span>
+									     <i className="fa fa-arrow-down text-info" aria-hidden="true"/>
+									     <span className="hidden-xs">Получени</span>
+									     </span>}>
 									<OrdersTable
 										changeClass={this.changeClass}
 										sort={this.sort}
 										ordersList={ordersList}/>
 								</Tab>
 
-								<Tab eventKey={1} title="Потвърдени">
+								<Tab eventKey={1} title={<span>
+									     <i className="fa fa-check text-success" aria-hidden="true"/>
+									     <span className="hidden-xs">Потвърдени</span>
+									     </span>}>
 									<OrdersTable
 										changeClass={this.changeClass}
 										sort={this.sort}
 										ordersList={ordersList}/>
 								</Tab>
 
-								<Tab eventKey={2} title="Изпратени">
+								<Tab eventKey={2} title={<span>
+									     <i className="fa fa-arrow-up  text-warning" aria-hidden="true"/>
+									     <span className="hidden-xs">Изпратени</span>
+									     </span>}>
 									<OrdersTable
 										changeClass={this.changeClass}
 										sort={this.sort}
 										ordersList={ordersList}/>
 								</Tab>
 
-								<Tab eventKey={3} title="Отказани">
+								<Tab eventKey={3} title={<span>
+									     <i className="fa fa-close text-danger" aria-hidden="true"/>
+									     <span className="hidden-xs">Отказани</span>
+									     </span>}>
 									<OrdersTable
 										changeClass={this.changeClass}
 										sort={this.sort}

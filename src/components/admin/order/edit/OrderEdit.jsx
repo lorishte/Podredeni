@@ -29,9 +29,6 @@ class OrderEdit extends React.Component {
 	componentDidMount () {
 		orderService.loadOrder(this.props.match.params.id)
 			.then(res => {
-
-				console.log(res);
-
 				this.setState({
 					products: res.order.products,
 					deliveryDataId: res.order.deliveryDataId,

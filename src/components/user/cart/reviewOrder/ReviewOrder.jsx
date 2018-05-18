@@ -46,6 +46,9 @@ class ReviewOrder extends React.Component {
 
 	render () {
 		let resolution = this.state.resolution < RESOLUTIONS.xs;
+
+		let isAdmin = sessionStorage.getItem('role') === 'admin';
+
 		let totalSum = this.calculateTotalSum();
 
 		let recipient = this.props.orderDetails.recipientInfo;
@@ -71,9 +74,11 @@ class ReviewOrder extends React.Component {
 							</Col>
 							<Col sm={4}>
 								<Row>
-									{this.props.orderDetails.comment ? <Col xs={12}><h4>Забележка:</h4>
+									{this.props.orderDetails.comment ?
+										<Col xs={12}><h4>Забележка:</h4>
 										<p>{this.props.orderDetails.comment}</p>
-									</Col> : <Col xs={12}><h4>Няма добавени забележки.</h4></Col>
+										</Col> :
+										<Col xs={12}><h4>Няма добавени забележки.</h4></Col>
 									}
 								</Row>
 							</Col>
@@ -100,16 +105,21 @@ class ReviewOrder extends React.Component {
 
 				<Row className="buttons-container">
 					<Col xs={12} className="text-center">
-						<button className="btn-custom default md" onClick={this.props.cancel}>Отказ</button>
-						<button className="btn-custom default md" onClick={this.props.goBack}>Назад</button>
-						{sessionStorage.getItem('role') !== 'admin' &&
-						<button className="btn-custom primary lg" onClick={this.props.continue}>Изпрати
-							поръчката</button>}
 
-						{sessionStorage.getItem('role') === 'admin' &&
-						<button className="btn-custom primary lg" onClick={this.props.continue}>Запази
-							промените</button>
-						}
+						<button className={isAdmin ? 'btn btn-default' : 'btn-custom default md'}
+						        onClick={this.props.cancel}>Отказ
+						</button>
+
+						<button className={isAdmin ? 'btn btn-default' : 'btn-custom default md'}
+						        onClick={this.props.goBack}>Назад
+						</button>
+
+						<button className={isAdmin ? 'btn btn-primary' : 'btn-custom primary md'}
+						        onClick={this.props.continue}>
+							{isAdmin ? 'Запази промените' : 'Изпрати поръчката'}
+						</button>
+
+
 					</Col>
 				</Row>
 			</div>

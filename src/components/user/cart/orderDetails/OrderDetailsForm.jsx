@@ -9,6 +9,8 @@ import DeliveryToAddress from './deliveryDetails/DeliveryToAddress';
 import DeliveryOptions from './deliveryDetails/DeliveryOptions';
 import Comment from './comment/Comment';
 
+const REQUIRED_FIELDS = [];
+
 class OrderDetails extends React.Component {
 	constructor (props) {
 		super(props);
@@ -36,31 +38,20 @@ class OrderDetails extends React.Component {
 	};
 
 	checkFields = () => {
+		let emptyFields = [];
 
 		for (let el in this.state) {
-			if (el === 'toAddress' || el === 'comment') break;
+			if (el === 'toAddress' || el === 'comment') continue;
+
 			console.log(el);
-
-			if (el === 'termsAgreed') {
-				console.log('from terms');
-
-				if (!this.state[el]) {
-					this.showWarning();
-					this.agreed.current.focus();
-					return false;
-				}
-			}
 
 			if (el === 'recipientInfo') {
 				console.log('from user');
 				let user = this.state.recipientInfo;
 
 				for (let input in user) {
-					console.log(user[input]);
 					if (user[input] === '') {
-						console.log(222)
-						this.showWarning();
-						return false;
+						emptyFields.push(input);
 					}
 				}
 			}
@@ -70,10 +61,10 @@ class OrderDetails extends React.Component {
 				let ekont = this.state.ekontDetails;
 
 				for (let input in ekont) {
-					console.log(ekont[input]);
+					if (input === 'country') continue;
+
 					if (ekont[input] === '') {
-						this.showWarning();
-						return false;
+						emptyFields.push(input);
 					}
 				}
 			}
@@ -83,18 +74,37 @@ class OrderDetails extends React.Component {
 				let address = this.state.addressDetails;
 
 				for (let input in address) {
-					console.log(address[input]);
+
+					if (input === 'district' ||
+						input === 'street' ||
+						input === 'streetNo' ||
+						input === 'block' ||
+						input === 'entrance' ||
+						input === 'floor' ||
+						input === 'apartment') continue;
+
 					if (address[input] === '') {
-						this.showWarning(input);
-						return false;
+						emptyFields.push(input);
 					}
 				}
 			}
+
+			if (el === 'termsAgreed') {
+				console.log('from terms');
+				if (sessionStorage.getItem('role') === 'admin') continue;
+
+				if (!this.state[el]) {
+					emptyFields.push(el);
+					this.agreed.current.focus();
+				}
+			}
 		}
+
+		return emptyFields;
 	};
 
 	showWarning = (message) => {
-		this.toastContainer.warning('Моля, попълнете всички задължителни полета.', message, {
+		this.toastContainer.warning(message, 'Моля, попълнете следните полета:', {
 			closeButton: false,
 		});
 	};
@@ -102,17 +112,17 @@ class OrderDetails extends React.Component {
 	submitInfo = (e) => {
 		e.preventDefault();
 
-		if (!this.checkFields()) return;
+		console.log(this.checkFields());
 
-		if (sessionStorage.getItem('role') === 'admin') {
-			this.props.continue();
+		let result = this.checkFields();
+
+		if (result.length !== 0) {
+			this.showWarning(result.join(', '));
 			return;
 		}
 
-		if (!this.state.termsAgreed) {
-
-			this.showWarning();
-			this.agreed.current.focus();
+		if (sessionStorage.getItem('role') === 'admin') {
+			this.props.continue();
 			return;
 		}
 
@@ -120,6 +130,9 @@ class OrderDetails extends React.Component {
 	};
 
 	render () {
+
+		let isAdmin = sessionStorage.getItem('role') === 'admin';
+
 		return (
 			<form onSubmit={(e) => this.submitInfo(e)}>
 
@@ -163,16 +176,16 @@ class OrderDetails extends React.Component {
 							data={this.state.comment}
 							onChange={this.updateInfo}/>
 
-						{sessionStorage.getItem('role') !== 'admin' &&
-						<label>
-							<input type="checkbox"
-							       ref={this.agreed}
-							       name="termsAgreed"
-							       defaultChecked={this.state.termsAgreed}
-							       onChange={this.handleCheckBox}/>
-							<span className="text-danger">*&nbsp;</span> Съгласен/а съм с <Link to={'/products'} className="btn-link">Условията за
-							ползване.</Link>
-						</label>
+						{!isAdmin &&
+							<label>
+								<input type="checkbox"
+								       ref={this.agreed}
+								       name="termsAgreed"
+								       defaultChecked={this.state.termsAgreed}
+								       onChange={this.handleCheckBox}/>
+								<span className="text-danger">*&nbsp;</span> Съгласен/а съм с <Link to={'/products'} className="btn-link">Условията за
+								ползване.</Link>
+							</label>
 						}
 
 					</Col>
@@ -180,17 +193,20 @@ class OrderDetails extends React.Component {
 
 				<Row className="buttons-container">
 					<Col xs={12} className="text-center">
-						<button className="btn-custom default md" onClick={e => {
+						<button className={isAdmin ? "btn btn-default" : "btn-custom default md"}
+						        onClick={e => {
 							e.preventDefault();
 							this.props.cancel();
 						}}>Отказ
 						</button>
-						<button className="btn-custom default md" onClick={ e => {
+						<button className={isAdmin ? "btn btn-default" : "btn-custom default md"}
+						        onClick={ e => {
 							e.preventDefault();
 							this.props.goBack();
 						}}>Назад
 						</button>
-						<button className="btn-custom primary md" type="submit">Напред</button>
+						<button className={isAdmin ? "btn btn-primary" : "btn-custom primary md"}
+						        type="submit">Напред</button>
 					</Col>
 				</Row>
 			</form>
