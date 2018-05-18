@@ -792,6 +792,13 @@ footer {
   #admin-orders-table .table th:last-child {
     padding-right: 4px; }
 
+  #orders .order-info {
+    top: 20px;
+    left: 50%;
+    -webkit-transform: translate(-50%, 0);
+    -ms-transform: translate(-50%, 0);
+    transform: translate(-50%, 0); }
+
   nav .navbar-brand {
     height: auto;
     padding: 10px 10px;
@@ -849,6 +856,9 @@ footer {
       border-bottom: 1px solid rgba(255, 255, 255, 0.1); }
       nav .nav .nav-link:last-child {
         border-bottom: none; }
+
+  #admin-nav .nav {
+    flex-direction: row; }
 
   #home-main-carousel .carousel {
     height: 300px;
