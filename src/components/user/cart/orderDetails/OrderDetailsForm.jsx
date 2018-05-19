@@ -47,7 +47,7 @@ class OrderDetails extends React.Component {
 				let user = this.state.recipientInfo;
 
 				for (let input in user) {
-					if (user[input] === '') {
+					if (user[input].trim() === '') {
 						emptyFields.push(REQUIRED_ORDER_INPUTS[input]);
 					}
 				}
@@ -59,7 +59,7 @@ class OrderDetails extends React.Component {
 				for (let input in ekont) {
 					if (input === 'country') continue;
 
-					if (ekont[input] === '') {
+					if (ekont[input].trim() === '') {
 						emptyFields.push(REQUIRED_ORDER_INPUTS[input]);
 					}
 				}
@@ -72,7 +72,7 @@ class OrderDetails extends React.Component {
 
 					if (!REQUIRED_ORDER_INPUTS.hasOwnProperty('el')) continue;
 
-					if (address[input] === '') {
+					if (address[input].trim() === '') {
 						emptyFields.push(REQUIRED_ORDER_INPUTS[input]);
 					}
 				}

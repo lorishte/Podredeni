@@ -33,6 +33,21 @@ class CartProductsTable extends React.Component {
 	}
 
 	confirmDeletion = (id) => {
+
+		if (this.props.products.length === 1 && sessionStorage.getItem('role') === 'admin') {
+			confirmAlert({
+				title: '',
+				message: 'Желаете ли да откажете поръчката?',
+				buttons: [{
+					label: 'Да',
+					onClick: () => this.props.cancelOrder()
+				},
+					{label: 'Не'}]
+			});
+
+			return;
+		}
+
 		confirmAlert({
 			title: '',
 			message: 'Сигурни ли сте, че искате да изтриете този продукт?',

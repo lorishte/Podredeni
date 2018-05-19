@@ -56,9 +56,9 @@ const REQUIRED_ORDER_INPUTS = {
 		floor: 'етаж',
 		apartment: 'апартамент',
 
-	    comment: 'комнетар',
+	    comment: 'коментар',
 
-        termsAgreed: 'условия за плзване'
+        termsAgreed: 'условия за ползване'
 };
 
 const BUTTONS_BG = {

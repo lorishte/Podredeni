@@ -92,14 +92,10 @@ class TopSellers extends React.Component {
 			});
 		}
 
-		if (this.topSellers.current !== null) {
-
-		}
-
 		return (
 			<Grid className="bg-white">
 
-					<h1 className="section-heading">Top sellers</h1>
+					<h1 className="section-heading">Най-продавани</h1>
 
 					<div className="top-sellers-carousel" ref={this.container}>
 						<div className="top-sellers" ref={this.topSellers}>

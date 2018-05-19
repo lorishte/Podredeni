@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 import ordersService from '../../../../../services/orders/ordersService';
 
-import { ORDER_STATUS_BG } from '../../../../../data/constants/componentConstants';
+import { ORDER_STATUS_BG, ORDER_STATUS_EN } from '../../../../../data/constants/componentConstants';
 import utils from '../../../../../utils/utils';
 
 class OrderTableRow extends React.Component {
@@ -41,14 +41,14 @@ class OrderTableRow extends React.Component {
 				<td className="text-center">
 					{o.number}
 				</td>
-				<td>
+				<td className="visible-md visible-lg" >
 					{ORDER_STATUS_BG[o.status]}
 				</td>
-				<td className="visible-md visible-lg" >
+				<td>
 					{utils.formatDate(o.lastModificationDate)}
 				</td>
 				<td className="visible-md visible-lg">
-					{d.customerName}
+					{d.customerName + ' ' + d.customerLastName}
 				</td>
 				<td className="visible-md visible-lg">
 					{d.phoneNumber}
@@ -60,9 +60,13 @@ class OrderTableRow extends React.Component {
 					<Link to={'/order/log/' + o.id} className="btn btn-success btn-xs">
 						<i className="fa fa-history" aria-hidden="true"/>
 					</Link>
+
+					{o.status === 0 &&
 					<Link to={'/order/edit/' + o.id} className="btn btn-danger btn-xs">
 						<i className="fa fa-pencil" aria-hidden="true"/>
 					</Link>
+					}
+
 					<button className="btn btn-info btn-xs"
 					        onClick={() => this.props.showDetails(o, d)}>
 						Детайли

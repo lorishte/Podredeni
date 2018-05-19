@@ -14,7 +14,7 @@ class ProductInfo extends React.Component {
 			<Row>
 				<Col xs={12}>
 					<PageHeader>
-						{product.name + ' '}<Label bsStyle="info">New</Label>
+						{product.name + ' '}
 					</PageHeader>
 					<p>{product.description}</p>
 					<p>Price: <span className="price">{product.price.toFixed(2)}</span></p>

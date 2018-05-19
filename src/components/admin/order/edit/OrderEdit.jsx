@@ -9,7 +9,7 @@ import CartProductsTable from '../../../user/cart/products/CartProductsTable';
 import OrderDetailsForm from '../../../user/cart/orderDetails/OrderDetailsForm';
 import ReviewOrder from '../../../user/cart/reviewOrder/ReviewOrder';
 
-import orderService from '../../../../services/orders/ordersService';
+import ordersService from '../../../../services/orders/ordersService';
 
 class OrderEdit extends React.Component {
 	constructor (props) {
@@ -27,7 +27,7 @@ class OrderEdit extends React.Component {
 	}
 
 	componentDidMount () {
-		orderService.loadOrder(this.props.match.params.id)
+		ordersService.loadOrder(this.props.match.params.id)
 			.then(res => {
 				this.setState({
 					products: res.order.products,
@@ -35,7 +35,7 @@ class OrderEdit extends React.Component {
 					orderId: res.order.id
 				});
 
-				orderService
+				ordersService
 					.loadDeliveryData(res.order.deliveryDataId)
 					.then(data => {
 
@@ -107,13 +107,13 @@ class OrderEdit extends React.Component {
 	};
 
 	submitOrder = () => {
-		orderService
+		ordersService
 			.editDeliveryData(this.state.deliveryDataId, this.state.orderDetails)
 			.then(res => {
 
 				let products = generateOrderData(this.state.products);
 
-				orderService
+				ordersService
 					.editOrder(this.state.orderId, products)
 					.then(res => {
 						this.toastContainer.success('Успешна редакция.', '', {
@@ -125,6 +125,23 @@ class OrderEdit extends React.Component {
 			.catch(err => {
 				this.toastContainer.error('', err.responseText, {
 					closeButton: true,
+				});
+			});
+	};
+
+	cancelOrder = () => {
+		ordersService
+			.changeStatus(this.state.orderId, 'cancel')
+			.then(() => {
+				this.toastContainer.success('Поръчката е отказана.', '', {
+					closeButton: false,
+				});
+
+				setTimeout(() => this.cancel(), 2000)
+			})
+			.catch(err => {
+				this.toastContainer.error(err.responseText, 'Грешка', {
+					closeButton: false,
 				});
 			});
 	};
@@ -148,6 +165,7 @@ class OrderEdit extends React.Component {
 						<CartProductsTable
 							products={this.state.products}
 							onChange={this.updateInfo}
+							cancelOrder={this.cancelOrder}
 							continue={this.showDeliveryDetailsForm}
 							cancel={this.cancel}
 						/>

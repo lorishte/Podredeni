@@ -59,7 +59,8 @@ class Header extends React.Component {
 	};
 
 	hideMenu = () => {
-		this.userNav.classList.remove('in');
+		console.log(this.userNav);
+		if (this.userNav) this.userNav.classList.remove('in');
 	};
 
 	render () {

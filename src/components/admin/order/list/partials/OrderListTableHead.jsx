@@ -13,15 +13,17 @@ class OrderListTableHead extends React.Component {
 		return (
 			<thead>
 			<tr>
-				<th>
+				<th className="text-center">
+					<span className="text-hidden-xs">#</span>
 					<OrderListSortButtons
 						sortProperty="number"
 						changeClass={this.props.changeClass}
 						sort={this.props.sort}/></th>
 
-				<th>{LABELS_BG.status}</th>
+				<th className="visible-md visible-lg">{LABELS_BG.status}</th>
 
-				<th className="visible-md visible-lg">{LABELS_BG.lastModificationTableHeader}
+				<th>
+					<span className="text-hidden-xs">{LABELS_BG.lastModificationTableHeader}</span>
 					<OrderListSortButtons
 						sortProperty="lastModificationDate"
 						changeClass={this.props.changeClass}
@@ -33,7 +35,7 @@ class OrderListTableHead extends React.Component {
 
 				<th className="text-right visible-md visible-lg">{LABELS_BG.amount}</th>
 
-				<th className="text-center" >{LABELS_BG.edit}</th>
+				<th className="text-center" />
 			</tr>
 			</thead>
 		);

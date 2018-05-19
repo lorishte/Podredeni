@@ -245,6 +245,11 @@ input[type=checkbox], input[type=radio] {
   color: $medium-grey
 }
 
+.text-hidden-xs {
+  display: inline-block;
+  margin-left: 10px;
+}
+
 .text-danger {
   color: $danger;
 }
@@ -743,7 +748,7 @@ nav {
     }
 
     .add-to-cart-btn {
-      background-color: $primary;
+      background-color: $primary-hover;
     }
   }
 
@@ -781,15 +786,17 @@ nav {
 
   .price {
     padding: 5px 10px;
-    font-weight: 600;
+    font-weight: 400;
     @include transition;
+    color: $primary;
+    font-size: 1.35em;
 
-    &::after {
-      content: " BGN";
-      font-family: "Montserrat", sans-serif;
-      font-size: .7em;
-      opacity: .5;
-    }
+    //&::after {
+    //  content: ' лв.';
+    //  //font-family: "Montserrat", sans-serif;
+    //  font-size: .7em;
+    //  opacity: .5;
+    //}
   }
 
   .add-to-cart-btn {
@@ -824,11 +831,30 @@ nav {
 
 #testimonials {
   //background-color: $warm-light-grey;
-  padding: 50px 0;
+  padding-bottom: 50px ;
 
   .testimonial {
     .testimonial-body {
-      margin-top: 25px;
+
+      .testimonial-text {
+        margin-top: 25px;
+        font-style: italic;
+        font-size: 1.2em;
+        text-align: left;
+        margin-bottom: 15px;
+      }
+
+      .testimonial-author {
+        font-weight: 600;
+        text-align: right;
+      }
+
+      &::before {
+        content: open-quote;
+        font-size: 5em;
+        color: $primary;
+        line-height: 1em;
+      }
     }
   }
 
@@ -839,7 +865,7 @@ nav {
   }
 
   .carousel {
-    min-height: 250px;
+    min-height: 130px;
     @include transition;
 
     .carousel-inner {
@@ -1010,12 +1036,6 @@ nav {
   }
 
   #order-list-tabs {
-
-    .hidden-xs {
-      display: inline-block;
-      margin-left: 10px;
-    }
-
     .tab-content {
       background-color: #fff;
     }
@@ -1533,6 +1553,10 @@ footer {
 
 @media screen and (max-width: 400px) {
 
+  .text-hidden-xs {
+    display: none;
+  }
+
   #home-main-carousel {
     .carousel {
       height: 250px;
@@ -1546,10 +1570,6 @@ footer {
         }
       }
     }
-  }
-
-  .hidden-xs {
-    display: none;
   }
 
   nav {

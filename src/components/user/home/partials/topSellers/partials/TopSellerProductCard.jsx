@@ -20,8 +20,7 @@ class TopSellerProductCard extends React.Component {
 						</div>
 						<div className="card-body">
 							<h4 className="card-title">{data.name}</h4>
-							<p className="card-text">{data.description.substring(0, 80) + ' ...'}</p>
-							<p className="price">{data.price.toFixed(2)}</p>
+							<p className="price">{data.price.toFixed(2)} лв.</p>
 						</div>
 					</div>
 				</Link>

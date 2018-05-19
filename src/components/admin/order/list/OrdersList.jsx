@@ -110,8 +110,6 @@ class OrdersList extends React.Component {
 	};
 
 	changeStatus = (orderId, status) => {
-		console.log(orderId, status);
-
 		ordersService
 			.changeStatus(orderId, status)
 			.then(() => {
@@ -174,7 +172,7 @@ class OrdersList extends React.Component {
 								<Tab eventKey={0}
 								     title={<span>
 									     <i className="fa fa-arrow-down text-info" aria-hidden="true"/>
-									     <span className="hidden-xs">Получени</span>
+									     <span className="text-hidden-xs">Получени</span>
 									     </span>}>
 									<OrdersTable
 										changeClass={this.changeClass}
@@ -184,7 +182,7 @@ class OrdersList extends React.Component {
 
 								<Tab eventKey={1} title={<span>
 									     <i className="fa fa-check text-success" aria-hidden="true"/>
-									     <span className="hidden-xs">Потвърдени</span>
+									     <span className="text-hidden-xs">Потвърдени</span>
 									     </span>}>
 									<OrdersTable
 										changeClass={this.changeClass}
@@ -194,7 +192,7 @@ class OrdersList extends React.Component {
 
 								<Tab eventKey={2} title={<span>
 									     <i className="fa fa-arrow-up  text-warning" aria-hidden="true"/>
-									     <span className="hidden-xs">Изпратени</span>
+									     <span className="text-hidden-xs">Изпратени</span>
 									     </span>}>
 									<OrdersTable
 										changeClass={this.changeClass}
@@ -204,7 +202,7 @@ class OrdersList extends React.Component {
 
 								<Tab eventKey={3} title={<span>
 									     <i className="fa fa-close text-danger" aria-hidden="true"/>
-									     <span className="hidden-xs">Отказани</span>
+									     <span className="text-hidden-xs">Отказани</span>
 									     </span>}>
 									<OrdersTable
 										changeClass={this.changeClass}

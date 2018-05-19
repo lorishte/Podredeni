@@ -100,8 +100,13 @@ function generateDeliveryDataDetails (data) {
 	let comment = data.comment;
 	let toAddress = data.toAddress;
 
+	for (let el in recipientInfo) {
+		recipientInfo[el] = recipientInfo[el].trim();
+	}
+
 	return {
-		CustomerName: recipientInfo.firstName + ' ' + recipientInfo.lastName,
+		CustomerName: recipientInfo.firstName,
+		CustomerLastName: recipientInfo.lastName,
 		PhoneNumber: recipientInfo.phone,
 		Email: recipientInfo.email,
 		Country: addressDetails.country,

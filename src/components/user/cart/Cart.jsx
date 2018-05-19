@@ -34,10 +34,10 @@ class Cart extends React.Component {
 		if (storedOrderDetails === null) {
 			storedOrderDetails = {
 				recipientInfo: {
-					firstName: 'Лора',
-					lastName: 'Милчева',
-					email: 'lori@abv.bg',
-					phone: '0887 718 788'
+					firstName: '',
+					lastName: '',
+					email: '',
+					phone: ''
 				},
 				ekontDetails: {
 					country: '',
@@ -48,15 +48,15 @@ class Cart extends React.Component {
 				},
 				addressDetails: {
 					country: '',
-					city: 'София',
-					postalCode: '1632',
-					street: 'Тодор Александров',
-					streetNo: '40',
-					district: 'Младост',
-					block: '520',
-					entrance: 'Б',
-					floor: '8',
-					apartment: '132'
+					city: '',
+					postalCode: '',
+					street: '',
+					streetNo: '',
+					district: '',
+					block: '',
+					entrance: '',
+					floor: '',
+					apartment: ''
 				},
 				comment: '',
 				toAddress: true

@@ -61,6 +61,10 @@ input[type=checkbox], input[type=radio] {
 .text-grey {
   color: #c6c6c6; }
 
+.text-hidden-xs {
+  display: inline-block;
+  margin-left: 10px; }
+
 .text-danger {
   color: #ea445b; }
 
@@ -497,7 +501,7 @@ nav {
     .card:hover .add-to-cart-btn, .card:active .add-to-cart-btn,
     .top-seller-card:hover .add-to-cart-btn,
     .top-seller-card:active .add-to-cart-btn {
-      background-color: #b49543; }
+      background-color: #896e36; }
   .card .product-image,
   .top-seller-card .product-image {
     width: 100%;
@@ -542,16 +546,12 @@ nav {
   .card .price,
   .top-seller-card .price {
     padding: 5px 10px;
-    font-weight: 600;
+    font-weight: 400;
     -webkit-transition: .4s;
     -moz-transition: .4s;
-    transition: .4s; }
-    .card .price::after,
-    .top-seller-card .price::after {
-      content: " BGN";
-      font-family: "Montserrat", sans-serif;
-      font-size: .7em;
-      opacity: .5; }
+    transition: .4s;
+    color: #b49543;
+    font-size: 1.35em; }
   .card .add-to-cart-btn,
   .top-seller-card .add-to-cart-btn {
     display: inline-block;
@@ -580,15 +580,27 @@ nav {
     box-shadow: none; }
 
 #testimonials {
-  padding: 50px 0; }
-  #testimonials .testimonial .testimonial-body {
-    margin-top: 25px; }
+  padding-bottom: 50px; }
+  #testimonials .testimonial .testimonial-body .testimonial-text {
+    margin-top: 25px;
+    font-style: italic;
+    font-size: 1.2em;
+    text-align: left;
+    margin-bottom: 15px; }
+  #testimonials .testimonial .testimonial-body .testimonial-author {
+    font-weight: 600;
+    text-align: right; }
+  #testimonials .testimonial .testimonial-body::before {
+    content: open-quote;
+    font-size: 5em;
+    color: #b49543;
+    line-height: 1em; }
   #testimonials .avatar {
     width: 100px;
     height: 100px;
     border: 6px solid #f6f5f3; }
   #testimonials .carousel {
-    min-height: 250px;
+    min-height: 130px;
     -webkit-transition: .4s;
     -moz-transition: .4s;
     transition: .4s; }
@@ -743,9 +755,6 @@ nav {
   background: #fff;
   padding: 10px;
   border: 1px solid #e6e6e6; }
-#orders #order-list-tabs .hidden-xs {
-  display: inline-block;
-  margin-left: 10px; }
 #orders #order-list-tabs .tab-content {
   background-color: #fff; }
 #orders #order-list-tabs .nav-tabs li {
@@ -1148,15 +1157,15 @@ footer {
   #cart .table > thead > tr > th {
     padding: 8px 4px; } }
 @media screen and (max-width: 400px) {
+  .text-hidden-xs {
+    display: none; }
+
   #home-main-carousel .carousel {
     height: 250px;
     margin-top: -35px; }
     #home-main-carousel .carousel .carousel-inner .carousel-img {
       width: auto;
       height: 100%; }
-
-  .hidden-xs {
-    display: none; }
 
   nav {
     -webkit-box-align: start;
