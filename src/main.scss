@@ -31,6 +31,8 @@ $warm-light-grey: #f6f5f3;
 $header-height: 65px;
 
 @mixin transition {
+  -webkit-transition: .4s;
+  -moz-transition: .4s;
   transition: .4s;
 }
 
@@ -551,6 +553,10 @@ nav {
 
 #top-sellers {
   padding-bottom: 30px;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
 
   .top-sellers-carousel {
     position: relative;
@@ -633,9 +639,22 @@ nav {
   }
 
   .card-text {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
     display: flex;
+
+    -webkit-box-pack: center;
+    -moz-box-pack: center;
+    -ms-flex-pack: center;
     justify-content: center;
+
+    -webkit-box-align: center;
+    -moz-box-align: center;
+    -ms-flex-align: center;
+    -webkit-align-items: center;
     align-items: center;
+
     color: $medium-grey;
     visibility: visible;
     opacity: 1;

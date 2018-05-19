@@ -36,6 +36,31 @@ const LABELS_BG = {
     apartmentShort: 'ап.'
 };
 
+const REQUIRED_ORDER_INPUTS = {
+
+		firstName: 'име',
+		lastName: 'фамилия',
+		email: 'имейл',
+		phone: 'телефон',
+
+		country: 'държава',
+		officeName: 'име на офис',
+
+		city: 'град',
+		postalCode: 'пощенски код',
+		street: 'улица',
+		streetNo: 'улица №',
+		district: 'квартал',
+		block: 'блок',
+		entrance: 'вход',
+		floor: 'етаж',
+		apartment: 'апартамент',
+
+	    comment: 'комнетар',
+
+        termsAgreed: 'условия за плзване'
+};
+
 const BUTTONS_BG = {
     confirm: 'Потвърди',
     cancel: 'Отказ',
@@ -77,6 +102,7 @@ export {
     LABELS_BG,
     USER_ACCOUNT,
 	ERROR_MESSAGES,
+	REQUIRED_ORDER_INPUTS,
     BUTTONS_BG,
     RESOLUTIONS
 }

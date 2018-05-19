@@ -9,7 +9,7 @@ import DeliveryToAddress from './deliveryDetails/DeliveryToAddress';
 import DeliveryOptions from './deliveryDetails/DeliveryOptions';
 import Comment from './comment/Comment';
 
-const REQUIRED_FIELDS = [];
+import { REQUIRED_ORDER_INPUTS } from '../../../../data/constants/componentConstants';
 
 class OrderDetails extends React.Component {
 	constructor (props) {
@@ -43,58 +43,46 @@ class OrderDetails extends React.Component {
 		for (let el in this.state) {
 			if (el === 'toAddress' || el === 'comment') continue;
 
-			console.log(el);
-
 			if (el === 'recipientInfo') {
-				console.log('from user');
 				let user = this.state.recipientInfo;
 
 				for (let input in user) {
 					if (user[input] === '') {
-						emptyFields.push(input);
+						emptyFields.push(REQUIRED_ORDER_INPUTS[input]);
 					}
 				}
 			}
 
 			if (el === 'ekontDetails' && !this.state.toAddress) {
-				console.log('from ekont');
 				let ekont = this.state.ekontDetails;
 
 				for (let input in ekont) {
 					if (input === 'country') continue;
 
 					if (ekont[input] === '') {
-						emptyFields.push(input);
+						emptyFields.push(REQUIRED_ORDER_INPUTS[input]);
 					}
 				}
 			}
 
 			if (el === 'addressDetails' && this.state.toAddress) {
-				console.log('from address');
 				let address = this.state.addressDetails;
 
 				for (let input in address) {
 
-					if (input === 'district' ||
-						input === 'street' ||
-						input === 'streetNo' ||
-						input === 'block' ||
-						input === 'entrance' ||
-						input === 'floor' ||
-						input === 'apartment') continue;
+					if (!REQUIRED_ORDER_INPUTS.hasOwnProperty('el')) continue;
 
 					if (address[input] === '') {
-						emptyFields.push(input);
+						emptyFields.push(REQUIRED_ORDER_INPUTS[input]);
 					}
 				}
 			}
 
 			if (el === 'termsAgreed') {
-				console.log('from terms');
 				if (sessionStorage.getItem('role') === 'admin') continue;
 
 				if (!this.state[el]) {
-					emptyFields.push(el);
+					emptyFields.push(ORDER_INPUTS[el]);
 					this.agreed.current.focus();
 				}
 			}
