@@ -82,7 +82,7 @@ class OrderDetails extends React.Component {
 				if (sessionStorage.getItem('role') === 'admin') continue;
 
 				if (!this.state[el]) {
-					emptyFields.push(ORDER_INPUTS[el]);
+					emptyFields.push(REQUIRED_ORDER_INPUTS[el]);
 					this.agreed.current.focus();
 				}
 			}
