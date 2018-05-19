@@ -10,12 +10,12 @@ class ProductCard extends React.Component {
 
 		this.state = {
 			xsRes: this.props.xsRes
-		}
+		};
 	}
 
 	componentWillReceiveProps (nextProps) {
 		console.log(nextProps.xsRes);
-		this.setState({xsRes: nextProps.xsRes})
+		this.setState({xsRes: nextProps.xsRes});
 	}
 
 	addToCart = () => {
@@ -64,9 +64,9 @@ class ProductCard extends React.Component {
 
 				<div className="card">
 
-						<div className="product-image">
-							<img className="card-img-top" src={p.images[0]} alt="Card image cap"/>
-						</div>
+					<div className="product-image">
+						<img className="card-img-top" src={p.images[0]} alt="Card image cap"/>
+					</div>
 
 
 					<div className="card-body">

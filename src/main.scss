@@ -36,6 +36,133 @@ $header-height: 65px;
   transition: .4s;
 }
 
+@mixin flex {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+@mixin inline-flex {
+  //display: -webkit-inline-box;
+  display: -moz-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+}
+
+@mixin justify-content($value: flex-start) {
+  @if $value == flex-start {
+    -webkit-box-pack: start;
+    -moz-box-pack: start;
+    -ms-flex-pack: start;
+  } @else if $value == flex-end {
+    -webkit-box-pack: end;
+    -moz-box-pack: end;
+    -ms-flex-pack: end;
+  } @else if $value == space-between {
+    -webkit-box-pack: justify;
+    -moz-box-pack: justify;
+    -ms-flex-pack: justify;
+  } @else if $value == space-around {
+    -ms-flex-pack: distribute;
+  } @else {
+    -webkit-box-pack: $value;
+    -moz-box-pack: $value;
+    -ms-flex-pack: $value;
+  }
+  -webkit-justify-content: $value;
+  justify-content: $value;
+}
+
+@mixin align-items($value: stretch) {
+  @if $value == flex-start {
+    -webkit-box-align: start;
+    -moz-box-align: start;
+    -ms-flex-align: start;
+  } @else if $value == flex-end {
+    -webkit-box-align: end;
+    -moz-box-align: end;
+    -ms-flex-align: end;
+  } @else {
+    -webkit-box-align: $value;
+    -moz-box-align: $value;
+    -ms-flex-align: $value;
+  }
+  -webkit-align-items: $value;
+  align-items: $value;
+}
+
+@mixin flex-direction($value: row) {
+  @if $value == row-reverse {
+    -webkit-box-direction: reverse;
+    -webkit-box-orient: horizontal;
+    -moz-box-direction: reverse;
+    -moz-box-orient: horizontal;
+  } @else if $value == column {
+    -webkit-box-direction: normal;
+    -webkit-box-orient: vertical;
+    -moz-box-direction: normal;
+    -moz-box-orient: vertical;
+  } @else if $value == column-reverse {
+    -webkit-box-direction: reverse;
+    -webkit-box-orient: vertical;
+    -moz-box-direction: reverse;
+    -moz-box-orient: vertical;
+  } @else {
+    -webkit-box-direction: normal;
+    -webkit-box-orient: horizontal;
+    -moz-box-direction: normal;
+    -moz-box-orient: horizontal;
+  }
+  -webkit-flex-direction: $value;
+  -ms-flex-direction: $value;
+  flex-direction: $value;
+}
+
+@mixin flex-wrap($value: nowrap) {
+  // No Webkit/FF Box fallback.
+  -webkit-flex-wrap: $value;
+  @if $value == nowrap {
+    -ms-flex-wrap: nowrap;
+  } @else {
+    -ms-flex-wrap: $value;
+  }
+  flex-wrap: $value;
+}
+
+@mixin flex-flow($values: (row nowrap)) {
+  // No Webkit/FF Box fallback.
+  -webkit-flex-flow: $values;
+  -ms-flex-flow: $values;
+  flex-flow: $values;
+}
+
+@mixin flex-shrink($int: 0) {
+  -webkit-flex-shrink: $int;
+  -moz-flex-shrink: $int;
+  -ms-flex: $int;
+  flex-shrink: $int;
+}
+
+@mixin flex-basis($value: auto) {
+  -webkit-flex-basis: $value;
+  flex-basis: $value;
+}
+
+@mixin align-self($value: auto) {
+  // No Webkit Box Fallback.
+  -webkit-align-self: $value;
+  @if $value == flex-start {
+    -ms-flex-item-align: start;
+  } @else if $value == flex-end {
+    -ms-flex-item-align: end;
+  } @else {
+    -ms-flex-item-align: $value;
+  }
+  align-self: $value;
+}
+
 * {
   box-sizing: border-box;
   margin: 0;
@@ -133,8 +260,6 @@ input[type=checkbox], input[type=radio] {
 .text-warning {
   color: $warning;
 }
-
-
 
 .label {
   padding: .3em .6em;
@@ -289,13 +414,13 @@ input[type=checkbox], input[type=radio] {
 }
 
 nav {
-  display: flex;
-  align-items: center;
-  flex-direction: column;
+  @include flex;
+  @include align-items(center);
+  @include flex-direction(column);
 
   .navbar .navbar-fixed-top .navbar-default {
     .collapse {
-      display: flex;
+      @include flex;
     }
   }
 
@@ -331,12 +456,12 @@ nav {
 
   #user-nav {
     .nav {
-      display: flex;
-      align-items: center;
+      @include flex;
+      @include align-items(center);
 
       .nav-link {
-        display: flex;
-        align-items: center;
+        @include flex;
+        @include align-items(center);
         padding: 12px 20px;
         text-transform: uppercase;
         letter-spacing: .3px;
@@ -368,12 +493,12 @@ nav {
 
   #admin-nav {
     .nav {
-      display: flex;
-      align-items: center;
+      @include flex;
+      @include align-items(center);
 
       .nav-link {
-        display: flex;
-        align-items: center;
+        @include flex;
+        @include align-items(center);
         padding: 5px 12px;
         text-transform: uppercase;
         letter-spacing: .3px;
@@ -415,10 +540,8 @@ nav {
         height: auto;
         min-height: 100%;
         position: absolute;
-        //transform: translateY(-10%);
         z-index: -1;
       }
-
     }
 
     .carousel-caption {
@@ -470,8 +593,8 @@ nav {
 
   .article-box {
     position: relative;
-    display: flex;
-    align-items: flex-end;
+    @include flex;
+    @include flex-direction(flex-end);
     height: 600px;
     background-color: $warm-light-grey;
     text-align: left;
@@ -513,13 +636,13 @@ nav {
 
   .article-image {
     position: absolute;
+    @include flex;
+    @include align-items(center);
     left: 25%;
     bottom: 10%;
     width: 70%;
     height: 70%;
     overflow: hidden;
-    display: flex;
-    align-items: center;
 
     img {
       width: 100%;
@@ -553,10 +676,6 @@ nav {
 
 #top-sellers {
   padding-bottom: 30px;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
 
   .top-sellers-carousel {
     position: relative;
@@ -595,13 +714,16 @@ nav {
 .card,
 .top-seller-card {
   text-align: center;
-  display: flex;
-  flex-wrap: wrap;
-  align-items: flex-end;
-  justify-content: center;
+
+  @include flex;
+  @include align-items(center);
+  @include justify-content(flex-start);
+  @include flex-wrap(wrap);
+
   padding: 25px;
   margin-bottom: 20px;
   background-color: $white;
+
   @include transition;
 
   &:hover,
@@ -638,22 +760,16 @@ nav {
     }
   }
 
+  .card-body {
+    width: 100%;
+  }
+
   .card-text {
-    display: -webkit-box;
-    display: -webkit-flex;
-    display: -ms-flexbox;
-    display: flex;
+    max-width: 100%;
 
-    -webkit-box-pack: center;
-    -moz-box-pack: center;
-    -ms-flex-pack: center;
-    justify-content: center;
-
-    -webkit-box-align: center;
-    -moz-box-align: center;
-    -ms-flex-align: center;
-    -webkit-align-items: center;
-    align-items: center;
+    @include flex;
+    @include align-items(center);
+    @include justify-content(center);
 
     color: $medium-grey;
     visibility: visible;
@@ -808,20 +924,20 @@ nav {
     margin-top: 45px;
 
     .quantity-edit {
-      display: flex;
+      @include flex;
 
       .quantity {
+        @include flex;
+        @include align-items(center);
         margin-right: 8px;
-        display: flex;
-        align-items: center;
         width: 15px;
       }
 
       .arrows-container {
         width: 25px;
-        display: flex;
-        flex-wrap: wrap;
-        align-items: center;
+        @include flex;
+        @include flex-wrap(wrap);
+        @include align-items(center);
       }
     }
     .btn-xs {
@@ -834,7 +950,7 @@ nav {
   }
 
   .delivery-options {
-    display: flex;
+    @include flex;
   }
 }
 
@@ -856,9 +972,10 @@ nav {
 
     .deleteImgBtn {
       position: absolute;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      @include flex;
+      @include align-items(center);
+      @include justify-content(center);
+
       width: 25px;
       height: 25px;
       border: 1px solid $light-grey;
@@ -884,10 +1001,9 @@ nav {
 #orders {
 
   .filters-container {
-    display: flex;
-    -ms-flex-align: center;
-    align-items: center;
-    flex-wrap: wrap;
+    @include flex;
+    @include align-items(center);
+    @include flex-wrap(wrap);
     background: #fff;
     padding: 10px;
     border: 1px solid $light-grey;
@@ -979,9 +1095,9 @@ footer {
   font-size: .8em;
 
   .wrapper {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    @include flex;
+    @include justify-content(space-between);
+    @include align-items(center);
   }
 
   .social {
@@ -1005,9 +1121,9 @@ footer {
 
   .main-image-container {
     position: relative;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    @include flex;
+    @include justify-content(center);
+    @include align-items(center);
     width: 400px;
     height: 400px;
     overflow: hidden;
@@ -1022,9 +1138,9 @@ footer {
 
   .gallery-thumbnails {
     width: 100%;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
+    @include flex;
+    @include flex-direction(row);
+    @include flex-wrap(wrap);
 
     .image-thumbnail {
       width: 60px;
@@ -1049,8 +1165,8 @@ footer {
     transform: translateY(-50%);
     left: 2.5%;
 
-    display: flex;
-    justify-content: space-between;
+    @include flex;
+    @include justify-content(space-between);
     width: 95%;
 
     z-index: 1;
@@ -1252,10 +1368,8 @@ footer {
       box-shadow: 2px 4px 5px 0 rgba(0, 0, 0, 0.15);
 
       &.in {
-        display: -ms-flexbox;
-        display: flex;
-        -ms-flex-pack: center;
-        justify-content: center;
+        @include flex;
+        @include justify-content(center);
         @include transition;
       }
     }
@@ -1288,12 +1402,10 @@ footer {
     }
 
     .nav {
-      display: -ms-flexbox;
-      display: flex;
+      @include flex;
+      @include align-items(center);
+      @include flex-direction(column);
       height: auto;
-      -ms-flex-align: center;
-      align-items: center;
-      flex-direction: column;
 
       .nav-link {
         color: $medium-grey;
@@ -1308,8 +1420,8 @@ footer {
   }
 
   #admin-nav {
-    .nav{
-      flex-direction: row;
+    .nav {
+      @include flex-direction(row);
     }
 
   }
@@ -1441,7 +1553,7 @@ footer {
   }
 
   nav {
-    align-items: flex-start;
+    @include align-items(flex-start);
 
     .navbar-brand {
       font-size: 120%;
