@@ -10,7 +10,7 @@ import ProductTabs from './partials/ProductTabs';
 
 import productsService from '../../../../services/products/productsService';
 
-import { RESOLUTIONS } from '../../../../data/constants/componentConstants';
+import { RESOLUTIONS, TOASTR_MESSAGES } from '../../../../data/constants/componentConstants';
 
 class Product extends React.Component {
 	constructor (props) {
@@ -56,8 +56,8 @@ class Product extends React.Component {
 			let addedProducts = JSON.parse(sessionStorage.getItem('products'));
 
 			if (this.checkIfProductIsInCart(addedProducts)) {
-				this.toastContainer.warning('Please go to your cart to update quantity!', 'This product is already added in your cart!', {
-					closeButton: true,
+				this.toastContainer.warning(TOASTR_MESSAGES.editQuantityFromCart, TOASTR_MESSAGES.productAlreadyInCart, {
+					closeButton: false,
 				});
 				return;
 			}
@@ -74,7 +74,7 @@ class Product extends React.Component {
 			addedProducts.push(product);
 			sessionStorage.products = JSON.stringify(addedProducts);
 
-			this.toastContainer.success('', 'Product added to your cart.', {
+			this.toastContainer.success(TOASTR_MESSAGES.productAddedToCart, '', {
 				closeButton: true,
 			});
 

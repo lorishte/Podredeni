@@ -9,7 +9,7 @@ import CartTableHeader from './partials/CartTableHeader';
 import CartProductRow from './partials/CartProductRow';
 import CartTableFooter from './partials/CartTableFooter'
 
-import { RESOLUTIONS } from '../../../../data/constants/componentConstants';
+import { RESOLUTIONS, CONFIRM_DIALOGS, BUTTONS_BG } from '../../../../data/constants/componentConstants';
 
 class CartProductsTable extends React.Component {
 	constructor (props) {
@@ -37,12 +37,12 @@ class CartProductsTable extends React.Component {
 		if (this.props.products.length === 1 && sessionStorage.getItem('role') === 'admin') {
 			confirmAlert({
 				title: '',
-				message: 'Желаете ли да откажете поръчката?',
+				message: CONFIRM_DIALOGS.cancelOrder,
 				buttons: [{
-					label: 'Да',
+					label: BUTTONS_BG.yes,
 					onClick: () => this.props.cancelOrder()
 				},
-					{label: 'Не'}]
+					{label: BUTTONS_BG.no}]
 			});
 
 			return;
@@ -50,12 +50,12 @@ class CartProductsTable extends React.Component {
 
 		confirmAlert({
 			title: '',
-			message: 'Сигурни ли сте, че искате да изтриете този продукт?',
+			message: CONFIRM_DIALOGS.deleteProduct,
 			buttons: [{
-				label: 'Изтрий',
+				label: BUTTONS_BG.yes,
 				onClick: () => this.deleteItem(id)
 			},
-				{label: 'Отказ'}]
+				{label: BUTTONS_BG.no}]
 		});
 	};
 

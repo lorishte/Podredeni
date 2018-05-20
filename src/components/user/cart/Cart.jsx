@@ -1,9 +1,8 @@
 import React from 'react';
-import { ToastContainer } from 'react-toastr';
-import { Label } from 'react-bootstrap';
+
+import { Grid, Row, Col, Label } from 'react-bootstrap';
 
 // Helpers
-import { Grid, Row, Col } from 'react-bootstrap';
 import { confirmAlert } from 'react-confirm-alert';
 
 // Partials
@@ -12,6 +11,9 @@ import OrderDetailsForm from './orderDetails/OrderDetailsForm';
 import ReviewOrder from './reviewOrder/ReviewOrder';
 
 import orderService from '../../../services/orders/ordersService';
+
+import { BUTTONS_BG, CONFIRM_DIALOGS } from '../../../data/constants/componentConstants';
+
 
 class Cart extends React.Component {
 	constructor (props) {
@@ -24,8 +26,6 @@ class Cart extends React.Component {
 			orderDetailsView: false,
 			reviewView: false
 		};
-
-		this.toastContainer = React.createRef();
 	}
 
 	componentDidMount () {
@@ -93,12 +93,12 @@ class Cart extends React.Component {
 	confirmCancel = () => {
 		confirmAlert({
 			title: '',
-			message: 'Сигурни ли сте, че искате да откажете поръчката?',
+			message: CONFIRM_DIALOGS.deleteOrder,
 			buttons: [{
-				label: 'ДА',
+				label: BUTTONS_BG.yes,
 				onClick: () => this.cancelOrder()
 			},
-				{ label: 'НЕ' }]
+				{ label: BUTTONS_BG.no }]
 		});
 	};
 
@@ -136,15 +136,12 @@ class Cart extends React.Component {
 				orderService
 					.addOrder(deliveryId, products)
 					.then(res => {
-						console.log(res);
 						sessionStorage.removeItem('products');
 						this.props.history.push('/order/confirmation');
 					});
 			})
 			.catch(err => {
-				this.toastContainer.error('', err.responseText, {
-					closeButton: true,
-				});
+				this.props.history.push('/error');
 			});
 
 	};
@@ -152,11 +149,6 @@ class Cart extends React.Component {
 	render () {
 		return (
 			<Grid id="cart">
-
-				<ToastContainer
-					ref={ref => this.toastContainer = ref}
-					className="toast-bottom-right"
-				/>
 
 				<Row>
 					<Col xs={12}>

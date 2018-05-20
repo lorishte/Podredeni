@@ -44,11 +44,6 @@ class ProductsList extends React.Component {
 				this.setState({products: res.products});
 			})
 			.catch(err => {
-				console.log(err);
-				this.toastContainer.error(err.statusText, 'Грешка', {
-					closeButton: true,
-				});
-
 				this.props.history.push('/error');
 			});
 	};

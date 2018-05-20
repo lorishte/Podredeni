@@ -9,7 +9,7 @@ import FormInputField from '../common/formComponents/FormInputField';
 
 import authService from '../../services/auth/authService';
 
-import { USER_ACCOUNT, ERROR_MESSAGES } from '../../data/constants/componentConstants';
+import { USER_ACCOUNT, TOASTR_MESSAGES } from '../../data/constants/componentConstants';
 
 class Register extends React.Component {
 	constructor (props) {
@@ -26,7 +26,7 @@ class Register extends React.Component {
 		e.preventDefault();
 
 		if (this.state.password !== this.state.confirmPassword) {
-			this.toastContainer.error(ERROR_MESSAGES.passwordsMismatch, '', {
+			this.toastContainer.error(TOASTR_MESSAGES.passwordsMismatch, TOASTR_MESSAGES.error, {
 				closeButton: true,
 			});
 			return
@@ -39,8 +39,8 @@ class Register extends React.Component {
 				this.props.history.push('/order/list');
 			})
 			.catch(err => {
-				this.toastContainer.error('', err.responseText, {
-					closeButton: true,
+				this.toastContainer.error(err.responseText, TOASTR_MESSAGES.error, {
+					closeButton: false,
 				});
 			});
 	};

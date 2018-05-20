@@ -2,6 +2,8 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Grid, Row, Col, Table } from 'react-bootstrap';
 
+import ToastContainer from 'react-toastr';
+
 import TableHead from './partials/TableHead';
 import ProductTableRow from './partials/ProductTableRow';
 import Paging from '../../../common/pagination/Paging';
@@ -10,7 +12,7 @@ import FormInputWithDropdown from '../../../common/formComponents/FormInputWithD
 
 import productsService from '../../../../services/products/productsService';
 
-import { ELEMENTS_ON_PAGE, ADMIN_PRODUCTS_FILTER_OPTIONS, FILTER_INPUT_WAIT_INTERVAL } from '../../../../data/constants/componentConstants';
+import { ELEMENTS_ON_PAGE, ADMIN_PRODUCTS_FILTER_OPTIONS, FILTER_INPUT_WAIT_INTERVAL, TOASTR_MESSAGES } from '../../../../data/constants/componentConstants';
 
 
 class ProductsList extends React.Component {
@@ -52,7 +54,9 @@ class ProductsList extends React.Component {
 
 			})
 			.catch(err => {
-				console.log(err.responseText);
+				this.toastContainer.error(err.responseText, TOASTR_MESSAGES.error, {
+					closeButton: false,
+				});
 			});
 	};
 
@@ -102,6 +106,12 @@ class ProductsList extends React.Component {
 
 		return (
 			<Grid>
+
+				<ToastContainer
+					ref={ref => this.toastContainer = ref}
+					className="toast-bottom-right"
+				/>
+
 				<Row>
 					<Col xs={12} className="buttons-container">
 						<Link to="/product/create" className="btn btn-sm btn-primary">Нов Продукт</Link>

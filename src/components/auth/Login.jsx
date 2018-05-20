@@ -7,7 +7,7 @@ import FormInputField from '../common/formComponents/FormInputField';
 
 import authService from '../../services/auth/authService';
 
-import { USER_ACCOUNT } from '../../data/constants/componentConstants';
+import { USER_ACCOUNT, TOASTR_MESSAGES } from '../../data/constants/componentConstants';
 
 class Login extends React.Component {
 	constructor (props) {
@@ -40,7 +40,7 @@ class Login extends React.Component {
 				}
 			})
 			.catch(err => {
-				this.toastContainer.error(err.statusText, "Грешка", {
+				this.toastContainer.error(err.statusText, TOASTR_MESSAGES.error, {
 					closeButton: true,
 				});
 			});

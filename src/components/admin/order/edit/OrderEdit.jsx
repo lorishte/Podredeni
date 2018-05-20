@@ -11,6 +11,8 @@ import ReviewOrder from '../../../user/cart/reviewOrder/ReviewOrder';
 
 import ordersService from '../../../../services/orders/ordersService';
 
+import { REDIRECT_DELAY, TOASTR_MESSAGES } from '../../../../data/constants/componentConstants';
+
 class OrderEdit extends React.Component {
 	constructor (props) {
 		super(props);
@@ -116,15 +118,15 @@ class OrderEdit extends React.Component {
 				ordersService
 					.editOrder(this.state.orderId, products)
 					.then(res => {
-						this.toastContainer.success('Успешна редакция.', '', {
+						this.toastContainer.success(TOASTR_MESSAGES.successOrderEdit, '', {
 							closeButton: true,
 						});
-						setTimeout(() => this.props.history.push('/order/list'), 2000 )
+						setTimeout(() => this.props.history.push('/order/list'), REDIRECT_DELAY);
 					});
 			})
 			.catch(err => {
-				this.toastContainer.error('', err.responseText, {
-					closeButton: true,
+				this.toastContainer.error(err.responseText, TOASTR_MESSAGES.error, {
+					closeButton: false,
 				});
 			});
 	};
@@ -133,14 +135,14 @@ class OrderEdit extends React.Component {
 		ordersService
 			.changeStatus(this.state.orderId, 'cancel')
 			.then(() => {
-				this.toastContainer.success('Поръчката е отказана.', '', {
+				this.toastContainer.success( TOASTR_MESSAGES.successCancelOrder, '', {
 					closeButton: false,
 				});
 
-				setTimeout(() => this.cancel(), 2000)
+				setTimeout(() => this.cancel(), 2000);
 			})
 			.catch(err => {
-				this.toastContainer.error(err.responseText, 'Грешка', {
+				this.toastContainer.error(err.responseText, TOASTR_MESSAGES.error, {
 					closeButton: false,
 				});
 			});
@@ -193,7 +195,7 @@ class OrderEdit extends React.Component {
 							orderDetails={this.state.orderDetails}
 							goBack={this.showDeliveryDetailsForm}
 							continue={this.submitOrder}
-							cancel={this.cancel} />
+							cancel={this.cancel}/>
 					</Col>
 					}
 				</Row>

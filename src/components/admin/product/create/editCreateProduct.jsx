@@ -8,6 +8,9 @@ import AddImageForm from './partials/AddImageFrom';
 
 import productsService from '../../../../services/products/productsService';
 
+import { TOASTR_MESSAGES } from '../../../../data/constants/componentConstants';
+
+
 class CreateProduct extends React.Component {
 	constructor (props) {
 		super(props);
@@ -68,7 +71,9 @@ class CreateProduct extends React.Component {
 					this.props.history.go(-1);
 				})
 				.catch(err => {
-					console.log(err.responseText);
+					this.toastContainer.error(err.responseText, TOASTR_MESSAGES.error, {
+						closeButton: false,
+					});
 				});
 			return;
 		}
@@ -80,9 +85,8 @@ class CreateProduct extends React.Component {
 				this.props.history.go(-1);
 			})
 			.catch(err => {
-				console.log(err.responseText);
-				this.toastContainer.error('', err.responseText, {
-					closeButton: true,
+				this.toastContainer.error(err.responseText, TOASTR_MESSAGES.error, {
+					closeButton: false,
 				});
 			});
 	};
@@ -97,9 +101,7 @@ class CreateProduct extends React.Component {
 	};
 
 	removeImage = (e) => {
-		this.setState({
-			imageUrls: this.state.imageUrls.filter(el => el !== e.target.name)
-		}, () => console.log(this.state.imageUrls));
+		this.setState({ imageUrls: this.state.imageUrls.filter(el => el !== e.target.name)});
 	};
 
 	handleChange = (e) => {

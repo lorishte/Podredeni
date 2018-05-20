@@ -33,7 +33,7 @@ import OrderLog from '../admin/order/log/OrderLog';
 import OrderEdit from '../admin/order/edit/OrderEdit';
 
 // ERRORS and CONFIRMATIONS
-import OrderReceived from '../common/OrderReceived';
+import OrderReceived from '../common/confirmation/OrderReceived';
 import Error from '../common/errors/Error';
 import NotFound from '../common/errors/NotFound';
 

@@ -1,9 +1,7 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 
 import { ControlLabel, Button, FormControl, FormGroup, InputGroup } from 'react-bootstrap';
 
-import FormInputField from '../../../../common/formComponents/FormInputField';
 
 class AddImageForm extends React.Component {
 	constructor (props) {

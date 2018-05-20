@@ -1,10 +1,14 @@
 import React from 'react';
 
-import { Grid, Col } from 'react-bootstrap';
+import {ToastContainer} from 'react-toastr';
+
+import { Grid } from 'react-bootstrap';
 
 import TopSellerProductCard from './partials/TopSellerProductCard';
 
 import productsService from '../../../../../services/products/productsService';
+
+import { TOASTR_MESSAGES } from '../../../../../data/constants/componentConstants';
 
 class TopSellers extends React.Component {
 	constructor (props) {
@@ -52,7 +56,9 @@ class TopSellers extends React.Component {
 				this.setState({products: res.products, cardWidth: cardWidth});
 			})
 			.catch(err => {
-				console.log(err.responseText);
+				this.toastContainer.error(err.responseText, TOASTR_MESSAGES.error, {
+					closeButton: false,
+				});
 			});
 	};
 

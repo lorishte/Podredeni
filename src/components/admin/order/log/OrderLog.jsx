@@ -1,11 +1,12 @@
 import React from 'react';
+import ToastContainer from 'react-toastr';
 
 import { Grid, Row, Col, Table, Button } from 'react-bootstrap';
 
 import ordersService from '../../../../services/orders/ordersService';
 import LogTableRow from './partials/LogTableRow';
 
-import { BUTTONS_BG } from '../../../../data/constants/componentConstants';
+import { BUTTONS_BG, TOASTR_MESSAGES } from '../../../../data/constants/componentConstants';
 
 
 class OrderLog extends React.Component {
@@ -22,9 +23,11 @@ class OrderLog extends React.Component {
             .then(res => {
                 this.setState({logs: res.logs})
             })
-            .catch(err => {
-                console.log(err.responseText)
-            });
+	        .catch(err => {
+		        this.toastContainer.error(err.responseText, TOASTR_MESSAGES.error, {
+			        closeButton: false,
+		        });
+	        });
     }
 
 	goBack = () => {
@@ -43,6 +46,12 @@ class OrderLog extends React.Component {
 
         return (
             <Grid>
+
+                <ToastContainer
+                    ref={ref => this.toastContainer = ref}
+                    className="toast-bottom-right"
+                />
+
                 <Row>
                     <Col sm={12}>
                         <Table striped bordered condensed hover>

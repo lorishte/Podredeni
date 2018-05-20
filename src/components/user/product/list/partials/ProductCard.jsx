@@ -4,6 +4,9 @@ import { withRouter } from 'react-router-dom';
 
 import { Col } from 'react-bootstrap';
 
+import { TOASTR_MESSAGES } from '../../../../../data/constants/componentConstants';
+
+
 class ProductCard extends React.Component {
 	constructor (props) {
 		super(props);
@@ -26,8 +29,8 @@ class ProductCard extends React.Component {
 		let addedProducts = JSON.parse(sessionStorage.getItem('products'));
 
 		if (this.checkIfProductIsInCart(addedProducts)) {
-			this.props.toastContainer.warning('Please go to your cart to update quantity!', 'This product is already added in your cart!', {
-				closeButton: true,
+			this.props.toastContainer.warning(TOASTR_MESSAGES.editQuantityFromCart, TOASTR_MESSAGES.productAlreadyInCart, {
+				closeButton: false,
 			});
 			return;
 		}
@@ -44,7 +47,7 @@ class ProductCard extends React.Component {
 		addedProducts.push(product);
 		sessionStorage.products = JSON.stringify(addedProducts);
 
-		this.props.toastContainer.success('', 'Product added to your cart.', {
+		this.props.toastContainer.success(TOASTR_MESSAGES.productAddedToCart, '', {
 			closeButton: true,
 		});
 

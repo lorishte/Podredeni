@@ -9,7 +9,7 @@ import DeliveryToAddress from './deliveryDetails/DeliveryToAddress';
 import DeliveryOptions from './deliveryDetails/DeliveryOptions';
 import Comment from './comment/Comment';
 
-import { REQUIRED_ORDER_INPUTS } from '../../../../data/constants/componentConstants';
+import { REQUIRED_ORDER_INPUTS, TOASTR_MESSAGES } from '../../../../data/constants/componentConstants';
 
 class OrderDetails extends React.Component {
 	constructor (props) {
@@ -92,15 +92,13 @@ class OrderDetails extends React.Component {
 	};
 
 	showWarning = (message) => {
-		this.toastContainer.warning(message, 'Моля, попълнете следните полета:', {
+		this.toastContainer.warning(message, TOASTR_MESSAGES.requestEmptyFields, {
 			closeButton: false,
 		});
 	};
 
 	submitInfo = (e) => {
 		e.preventDefault();
-
-		console.log(this.checkFields());
 
 		let result = this.checkFields();
 

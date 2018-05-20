@@ -6,7 +6,6 @@ import utils from '../../../../../utils/utils';
 
 import { LABELS_BG, ORDER_STATUS_BG } from '../../../../../data/constants/componentConstants';
 
-const CONVERT_STATUS = {0: 'order', 1: 'confirm', 2: 'dispatch', 3: 'cancel'};
 
 class OrderDetails extends React.Component {
 	constructor (props) {

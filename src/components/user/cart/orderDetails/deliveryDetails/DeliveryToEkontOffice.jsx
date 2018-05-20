@@ -1,5 +1,7 @@
 import React from 'react';
 
+import { ToastContainer } from 'react-toastr';
+
 import { Row, Col } from 'react-bootstrap';
 
 import FormSelectField from '../../../../common/formComponents/FormSelectField';
@@ -8,7 +10,7 @@ import FormSelectField from '../../../../common/formComponents/FormSelectField';
 import ekontRequester from '../../../../../services/ekont/ekontRequester';
 import ekontDataParser from '../../../../../services/ekont/ekontDataConvertor';
 
-import { RESOLUTIONS } from '../../../../../data/constants/componentConstants';
+import { RESOLUTIONS, TOASTR_MESSAGES } from '../../../../../data/constants/componentConstants';
 
 class EkontInfoInputs extends React.Component {
 	constructor (props) {
@@ -44,7 +46,9 @@ class EkontInfoInputs extends React.Component {
 				this.setState({ekontData: data});
 			})
 			.catch(err => {
-				console.log(err);
+				this.toastContainer.error(err.responseText, TOASTR_MESSAGES.error, {
+					closeButton: false,
+				});
 			});
 	};
 
@@ -107,6 +111,11 @@ class EkontInfoInputs extends React.Component {
 
 		return (
 			<Row>
+				<ToastContainer
+					ref={ref => this.toastContainer = ref}
+					className="toast-bottom-right"
+				/>
+
 				{this.state.ekontData === '' && isAdmin && <div className="admin-loader"/> }
 				{this.state.ekontData === '' && !isAdmin && <div className="loader"/> }
 

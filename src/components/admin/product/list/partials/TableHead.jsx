@@ -1,7 +1,5 @@
 import React from 'react';
 
-import { Checkbox } from 'react-bootstrap';
-
 import SortButtons from './SortButtons';
 
 

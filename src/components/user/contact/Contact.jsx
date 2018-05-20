@@ -5,6 +5,9 @@ import {PageHeader, Grid, Row, Col, FormGroup, FormControl, ControlLabel, Button
 
 import contactService from '../../../services/contact/contactService';
 
+import { TOASTR_MESSAGES } from '../../../data/constants/componentConstants';
+
+
 class Contact extends React.Component {
 
     constructor(props) {
@@ -45,9 +48,9 @@ class Contact extends React.Component {
 
             })
             .catch(err => {
-                this.toastContainer.error('', err.responseText, {
-                    closeButton: true,
-                });
+	            this.toastContainer.error(err.responseText, TOASTR_MESSAGES.error, {
+		            closeButton: false,
+	            });
             });
     };
 

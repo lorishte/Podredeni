@@ -2,16 +2,15 @@ import React from 'react';
 import { ToastContainer } from 'react-toastr';
 import { Grid, Row, Col, Table, FormGroup, Tab, Tabs } from 'react-bootstrap';
 
-import { ORDER_STATUS_EN, ORDER_STATUS_BG, ELEMENTS_ON_PAGE } from '../../../../data/constants/componentConstants';
-
 import OrdersTable from './partials/OrdersTable';
-import OrderListTableHead from './partials/OrderListTableHead';
 import OrderTableRow from './partials/OrderTableRow';
 import OrderDetails from './partials/OrderDetails';
 import FormSelectField from '../../../common/formComponents/FormSelectField';
 import Paging from '../../../common/pagination/Paging';
 
 import ordersService from '../../../../services/orders/ordersService';
+
+import { ORDER_STATUS_EN, ORDER_STATUS_BG, ELEMENTS_ON_PAGE, TOASTR_MESSAGES } from '../../../../data/constants/componentConstants';
 
 
 class OrdersList extends React.Component {
@@ -54,7 +53,7 @@ class OrdersList extends React.Component {
 				});
 			})
 			.catch(err => {
-				this.toastContainer.error(err.responseText, '', {
+				this.toastContainer.error(err.responseText, TOASTR_MESSAGES.error, {
 					closeButton: false,
 				});
 			});

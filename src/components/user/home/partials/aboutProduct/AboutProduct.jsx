@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Grid, Col, Clearfix } from 'react-bootstrap';
+import { Col, Clearfix } from 'react-bootstrap';
 
 class AboutProduct extends React.Component {
 	constructor (props) {
