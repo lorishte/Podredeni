@@ -38,19 +38,33 @@ const LABELS_BG = {
 	apartmentShort: 'ап.'
 };
 
-const REQUIRED_ORDER_INPUTS = {
+const ORDER_DELIVERY_INPUTS = {
 
-	firstName: 'име',
-	lastName: 'фамилия',
-	email: 'имейл',
-	phone: 'телефон',
+	firstName: 'Име',
+	lastName: 'Фамилия',
+	email: 'Имейл',
+	phone: 'Телефон',
 
-	country: 'държава',
-	city: 'град',
+	country: 'Държава',
+	city: 'Населено място',
 
-	officeName: 'име на офис',
+	officeName: 'Офис',
 
-	postalCode: 'пощенски код',
+	postalCode: 'Пощенски код',
+	street: 'Улица',
+	streetNo: 'Улица №',
+	district: 'Квартал',
+	block: 'Блок',
+	entrance: 'Вход',
+	floor: 'Етаж',
+	apartment: 'Апартамент',
+
+	comment: 'Коментар',
+
+	termsAgreed: 'Условия за ползване'
+};
+
+const NOT_REQUIRED_ORDER_INPUTS = {
 	street: 'улица',
 	streetNo: 'улица №',
 	district: 'квартал',
@@ -58,19 +72,21 @@ const REQUIRED_ORDER_INPUTS = {
 	entrance: 'вход',
 	floor: 'етаж',
 	apartment: 'апартамент',
-
-	comment: 'коментар',
-
-	termsAgreed: 'условия за ползване'
 };
 
 const BUTTONS_BG = {
 	confirm: 'Потвърди',
 	cancel: 'Отказ',
 	continue: 'Продължи',
+	next: 'Напред',
 	back: 'Назад',
 	yes: 'Да',
 	no: 'Не',
+	send: 'Изпрати',
+
+	//Cart
+	saveChanges: 'Запази промените',
+	sendOrder: 'Изпрати поръчката',
 
 	// Order
 	received: 'Получена',
@@ -98,9 +114,11 @@ const TOASTR_MESSAGES = {
 	productAlreadyInCart: 'Този продукт вече е добавен.',
 	editQuantityFromCart: 'Може да редактирате продукта от кошницата Ви.',
 
+	//Success
 	productAddedToCart: 'Продуктът е добавен в кошницата Ви.',
 	successOrderEdit: 'Успешна редакция.',
-	successCancelOrder: 'Поръчката е отказана.'
+	successCancelOrder: 'Поръчката е отказана.',
+	messageSent: 'Вашето съобщение беше изпратено!'
 };
 
 const CONFIRM_DIALOGS = {
@@ -108,13 +126,61 @@ const CONFIRM_DIALOGS = {
 	deleteOrder: 'Сигурни ли сте, че искате да откажете поръчката?',
 	deleteProduct: 'Сигурни ли сте, че искате да изтриете този продукт?'
 
-}
+};
 
 const RESOLUTIONS = {
 	xs: 450,
 	sm: 680,
 	md: 980
 };
+
+const PRODUCT = {
+	price: 'Цена:',
+	addToCart: 'Добави'
+};
+
+const HOME = {
+	topSellers: 'Най-продавани',
+};
+
+const CURRENCY = 'лв.';
+
+const CONTACT_FORM = {
+	name: 'Име:',
+	email: 'Имейл:',
+	subject: 'Относно:',
+	message: 'Съобщение:'
+};
+
+const CART = {
+	//Main
+	edit: 'Преглед и редакция',
+	deliveryData: 'Данни за доставка',
+	confirm: 'Потвърждение',
+	step1: 'Стъпка 1',
+	step2: 'Стъпка 2',
+	step3: 'Стъпка 3',
+	noProductAdded: 'Нямате добавени продукти',
+
+	//Products table
+	product: 'Продукт',
+	quantity: 'Брой',
+	price: 'Цена',
+	sum: 'Сума',
+	totalSum: 'Общо:',
+
+	//Delivery details
+
+
+	//Review
+	recipient: 'Получател',
+	toEkontOffice: 'Доставка до офис на ЕКОНТ:',
+	toAddress: 'Доставка до адрес:',
+	comment: 'Коментар:',
+	noComment: 'Няма добавени забележки.',
+};
+
+const TOP_SELLERS_TIMER_INTERVAL = 8000;
 
 export {
 	FILTER_INPUT_WAIT_INTERVAL,
@@ -125,10 +191,17 @@ export {
 	LABELS_BG,
 	USER_ACCOUNT,
 	TOASTR_MESSAGES,
-	REQUIRED_ORDER_INPUTS,
+	ORDER_DELIVERY_INPUTS,
+	NOT_REQUIRED_ORDER_INPUTS,
 	BUTTONS_BG,
 	RESOLUTIONS,
 	REDIRECT_DELAY,
-	CONFIRM_DIALOGS
+	CONFIRM_DIALOGS,
+	PRODUCT,
+	HOME,
+	CURRENCY,
+	CONTACT_FORM,
+	CART,
+	TOP_SELLERS_TIMER_INTERVAL
 };
 

@@ -9,7 +9,7 @@ import EkontOrderDetailsSummary from './partials/EkontOrderDetailsSummary';
 import AddressOrderDetailsSummary from './partials/AddressOrderDetailsSummary';
 import RecipientDetailsSummary from './partials/RecipientDetailsSummary';
 
-import { RESOLUTIONS } from '../../../../data/constants/componentConstants';
+import { RESOLUTIONS, BUTTONS_BG, LABELS_BG, CART} from '../../../../data/constants/componentConstants';
 
 class ReviewOrder extends React.Component {
 	constructor (props) {
@@ -75,10 +75,10 @@ class ReviewOrder extends React.Component {
 							<Col sm={4}>
 								<Row>
 									{this.props.orderDetails.comment ?
-										<Col xs={12}><h4>Забележка:</h4>
+										<Col xs={12}><h4>{CART.comment}</h4>
 										<p>{this.props.orderDetails.comment}</p>
 										</Col> :
-										<Col xs={12}><h4>Няма добавени забележки.</h4></Col>
+										<Col xs={12}><h4>{CART.noComment}</h4></Col>
 									}
 								</Row>
 							</Col>
@@ -107,16 +107,16 @@ class ReviewOrder extends React.Component {
 					<Col xs={12} className="text-center">
 
 						<button className={isAdmin ? 'btn btn-default' : 'btn-custom default md'}
-						        onClick={this.props.cancel}>Отказ
+						        onClick={this.props.cancel}>{BUTTONS_BG.cancel}
 						</button>
 
 						<button className={isAdmin ? 'btn btn-default' : 'btn-custom default md'}
-						        onClick={this.props.goBack}>Назад
+						        onClick={this.props.goBack}>{BUTTONS_BG.back}
 						</button>
 
 						<button className={isAdmin ? 'btn btn-primary' : 'btn-custom primary md'}
 						        onClick={this.props.continue}>
-							{isAdmin ? 'Запази промените' : 'Изпрати поръчката'}
+							{isAdmin ? BUTTONS_BG.saveChanges : BUTTONS_BG.sendOrder}
 						</button>
 
 

@@ -4,6 +4,9 @@ import { Row, Col } from 'react-bootstrap';
 
 import FormInputField from '../../../../common/formComponents/FormInputField';
 
+import { ORDER_DELIVERY_INPUTS } from '../../../../../data/constants/componentConstants';
+
+
 class AddressInfoInputs extends React.Component {
 	constructor (props) {
 		super(props);
@@ -34,7 +37,7 @@ class AddressInfoInputs extends React.Component {
 				<Row>
 					<Col md={3} sm={4} xs={8}>
 						<FormInputField
-							label="Държава"
+							label={ORDER_DELIVERY_INPUTS.country}
 							name="country"
 							type="text"
 							value={this.state.country}
@@ -44,7 +47,7 @@ class AddressInfoInputs extends React.Component {
 
 					<Col md={4} sm={5} xs={8}>
 						<FormInputField
-							label="Населено място"
+							label={ORDER_DELIVERY_INPUTS.city}
 							name="city"
 							type="text"
 							value={this.state.city}
@@ -54,7 +57,7 @@ class AddressInfoInputs extends React.Component {
 
 					<Col md={2} sm={3} xs={4}>
 						<FormInputField
-							label="Пощенски код"
+							label={ORDER_DELIVERY_INPUTS.postalCode}
 							name="postalCode"
 							type="text"
 							value={this.state.postalCode}
@@ -67,7 +70,7 @@ class AddressInfoInputs extends React.Component {
 
 					<Col sm={4}  xs={8}>
 						<FormInputField
-							label="Квартал"
+							label={ORDER_DELIVERY_INPUTS.district}
 							name="district"
 							type="text"
 							value={this.state.district}
@@ -77,7 +80,7 @@ class AddressInfoInputs extends React.Component {
 
 					<Col sm={5} xs={8}>
 						<FormInputField
-							label="Улица"
+							label={ORDER_DELIVERY_INPUTS.street}
 							name="street"
 							type="text"
 							value={this.state.street}
@@ -87,7 +90,7 @@ class AddressInfoInputs extends React.Component {
 
 					<Col md={2} sm={3} xs={3}>
 						<FormInputField
-							label="Номер"
+							label={ORDER_DELIVERY_INPUTS.streetNo}
 							name="streetNo"
 							type="text"
 							value={this.state.streetNo}
@@ -100,7 +103,7 @@ class AddressInfoInputs extends React.Component {
 
 					<Col sm={2} xs={3}>
 						<FormInputField
-							label="Блок"
+							label={ORDER_DELIVERY_INPUTS.block}
 							name="block"
 							type="text"
 							value={this.state.block}
@@ -110,7 +113,7 @@ class AddressInfoInputs extends React.Component {
 
 					<Col sm={2} xs={3}>
 						<FormInputField
-							label="Вход"
+							label={ORDER_DELIVERY_INPUTS.entrance}
 							name="entrance"
 							type="text"
 							value={this.state.entrance}
@@ -120,7 +123,7 @@ class AddressInfoInputs extends React.Component {
 
 					<Col sm={2} xs={3}>
 						<FormInputField
-							label="Етаж"
+							label={ORDER_DELIVERY_INPUTS.floor}
 							name="floor"
 							type="text"
 							value={this.state.floor}
@@ -130,7 +133,7 @@ class AddressInfoInputs extends React.Component {
 
 					<Col sm={2} xs={3}>
 						<FormInputField
-							label="Ап."
+							label={ORDER_DELIVERY_INPUTS.apartment}
 							name="apartment"
 							type="text"
 							value={this.state.apartment}

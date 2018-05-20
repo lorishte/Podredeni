@@ -1,13 +1,11 @@
 import React from 'react';
 
-import { Col, Clearfix } from 'react-bootstrap';
-
 import data from '../../../../../data/testimonials';
 
 import { Carousel } from 'react-bootstrap';
 import TestimonialCard from './partials/TestimonialCard';
 
-const TIMER_INTERVAL = 8000;
+import { TOP_SELLERS_TIMER_INTERVAL } from '../../../../../data/constants/componentConstants';
 
 class Testimonials extends React.Component {
 	constructor (props, context) {
@@ -23,7 +21,7 @@ class Testimonials extends React.Component {
 	}
 
 	componentDidMount () {
-		this.timer = setInterval(this.changeSlide, TIMER_INTERVAL);
+		this.timer = setInterval(this.changeSlide, TOP_SELLERS_TIMER_INTERVAL);
 
 	};
 
@@ -51,7 +49,7 @@ class Testimonials extends React.Component {
 			direction: e.direction
 		});
 
-		this.timer = setInterval(this.changeSlide, TIMER_INTERVAL);
+		this.timer = setInterval(this.changeSlide, TOP_SELLERS_TIMER_INTERVAL);
 	};
 
 	render () {
@@ -67,8 +65,6 @@ class Testimonials extends React.Component {
 		const {index, direction} = this.state;
 
 		return (
-
-
 			<Carousel
 				ref={this.testimonial}
 				activeIndex={index}
@@ -77,8 +73,6 @@ class Testimonials extends React.Component {
 
 				{testimonialCards}
 			</Carousel>
-
-
 		);
 	}
 }

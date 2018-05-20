@@ -4,6 +4,9 @@ import { Row, Col } from 'react-bootstrap';
 
 import FormInputField from '../../../../common/formComponents/FormInputField';
 
+import { ORDER_DELIVERY_INPUTS } from '../../../../../data/constants/componentConstants';
+
+
 class RecipientInfoInputs extends React.Component {
 	constructor (props) {
 		super(props);
@@ -28,7 +31,7 @@ class RecipientInfoInputs extends React.Component {
 				<Row>
 					<Col md={4} sm={5} xs={6}>
 						<FormInputField
-							label="Име"
+							label={ORDER_DELIVERY_INPUTS.firstName}
 							name="firstName"
 							type="text"
 							value={this.state.firstName}
@@ -38,7 +41,7 @@ class RecipientInfoInputs extends React.Component {
 
 					<Col md={4} sm={5} xs={6}>
 						<FormInputField
-							label="Фамилия"
+							label={ORDER_DELIVERY_INPUTS.lastName}
 							name="lastName"
 							type="text"
 							value={this.state.lastName}
@@ -51,7 +54,7 @@ class RecipientInfoInputs extends React.Component {
 				<Row>
 					<Col md={4} sm={5} xs={6}>
 						<FormInputField
-							label="Телефон"
+							label={ORDER_DELIVERY_INPUTS.phone}
 							name="phone"
 							type="tel"
 							value={this.state.phone}
@@ -61,7 +64,7 @@ class RecipientInfoInputs extends React.Component {
 
 					<Col md={4} sm={5} xs={6}>
 						<FormInputField
-							label="Имейл"
+							label={ORDER_DELIVERY_INPUTS.email}
 							name="email"
 							type="email"
 							value={this.state.email}

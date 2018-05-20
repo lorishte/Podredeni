@@ -2,6 +2,8 @@ import React from 'react';
 
 import { FormGroup, ControlLabel, FormControl, Row, Col } from 'react-bootstrap';
 
+import { ORDER_DELIVERY_INPUTS } from '../../../../../data/constants/componentConstants';
+
 class Comment extends React.Component {
 	constructor (props) {
 		super(props);
@@ -23,7 +25,7 @@ class Comment extends React.Component {
 			<Row>
 				<Col sm={8}>
 					<FormGroup controlId={this.props.id}>
-						<ControlLabel>Забележка</ControlLabel>
+						<ControlLabel>{ORDER_DELIVERY_INPUTS.comment}</ControlLabel>
 						<FormControl
 							componentClass="textarea"
 							name="comment"

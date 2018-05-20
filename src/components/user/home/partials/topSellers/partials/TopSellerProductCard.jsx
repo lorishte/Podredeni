@@ -1,6 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
+import { CURRENCY } from '../../../../../../data/constants/componentConstants';
+
 
 class TopSellerProductCard extends React.Component {
 	constructor (props) {
@@ -20,7 +22,7 @@ class TopSellerProductCard extends React.Component {
 						</div>
 						<div className="card-body">
 							<h4 className="card-title">{data.name}</h4>
-							<p className="price">{data.price.toFixed(2)} лв.</p>
+							<p className="price">{data.price.toFixed(2)} {CURRENCY}</p>
 						</div>
 					</div>
 				</Link>

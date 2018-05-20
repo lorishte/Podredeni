@@ -4,7 +4,7 @@ import { withRouter } from 'react-router-dom';
 
 import { Col } from 'react-bootstrap';
 
-import { TOASTR_MESSAGES } from '../../../../../data/constants/componentConstants';
+import { TOASTR_MESSAGES, CURRENCY } from '../../../../../data/constants/componentConstants';
 
 
 class ProductCard extends React.Component {
@@ -75,7 +75,7 @@ class ProductCard extends React.Component {
 					<div className="card-body">
 						<h4 className="card-title">{p.name}</h4>
 						<p className="card-text">{p.description.substring(0, 80) + ' ...'}</p>
-						<p className="price">{p.price.toFixed(2)} лв.</p>
+						<p className="price">{p.price.toFixed(2)} {CURRENCY}</p>
 						<button className="add-to-cart-btn" onClick={this.addToCart}>
 							<i className="fa fa-shopping-cart" aria-hidden="true"/>
 						</button>

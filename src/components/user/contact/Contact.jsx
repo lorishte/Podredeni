@@ -5,7 +5,7 @@ import {PageHeader, Grid, Row, Col, FormGroup, FormControl, ControlLabel, Button
 
 import contactService from '../../../services/contact/contactService';
 
-import { TOASTR_MESSAGES } from '../../../data/constants/componentConstants';
+import { TOASTR_MESSAGES, CONTACT_FORM, BUTTONS_BG } from '../../../data/constants/componentConstants';
 
 
 class Contact extends React.Component {
@@ -42,7 +42,7 @@ class Contact extends React.Component {
 
                 this.resetState();
 
-                this.toastContainer.success('', "Вашето съобщение беше изпратено!", {
+                this.toastContainer.success(TOASTR_MESSAGES.messageSent, '', {
                     closeButton: true,
                 });
 
@@ -72,7 +72,7 @@ class Contact extends React.Component {
                         <FormGroup
                             controlId="contact-form">
 
-                            <ControlLabel>Име: </ControlLabel>
+                            <ControlLabel>{CONTACT_FORM.name} </ControlLabel>
                             <FormControl
                                 type="text"
                                 name="name"
@@ -81,7 +81,7 @@ class Contact extends React.Component {
                                 placeholder=""
                                 onChange={this.handleChange}/>
 
-                            <ControlLabel>Имейл: </ControlLabel>
+                            <ControlLabel>{CONTACT_FORM.email} </ControlLabel>
                             <FormControl
                                 type="email"
                                 name="email"
@@ -90,7 +90,7 @@ class Contact extends React.Component {
                                 placeholder=""
                                 onChange={this.handleChange}/>
 
-                            <ControlLabel>Тема: </ControlLabel>
+                            <ControlLabel>{CONTACT_FORM.subject} </ControlLabel>
                             <FormControl
                                 type="text"
                                 name="subject"
@@ -99,7 +99,7 @@ class Contact extends React.Component {
                                 placeholder=""
                                 onChange={this.handleChange}/>
 
-                            <ControlLabel>Съдържание: </ControlLabel>
+                            <ControlLabel>{CONTACT_FORM.message} </ControlLabel>
                             <FormControl
                                 componentClass="textarea"
                                 type="text"
@@ -110,7 +110,7 @@ class Contact extends React.Component {
                                 onChange={this.handleChange}/>
                         </FormGroup>
 
-                        <button className="btn-custom primary lg" onClick={this.sendContactForm}>Изпрати</button>
+                        <button className="btn-custom primary lg" onClick={this.sendContactForm}>{BUTTONS_BG.send}</button>
                     </Col>
                 </Row>
             </Grid>

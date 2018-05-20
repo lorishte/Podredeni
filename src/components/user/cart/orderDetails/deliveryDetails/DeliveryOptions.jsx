@@ -2,6 +2,8 @@ import React from 'react';
 
 import { FormGroup, Radio } from 'react-bootstrap';
 
+import { CART } from '../../../../../data/constants/componentConstants';
+
 
 class DeliveryOptions extends React.Component {
 	constructor (props) {
@@ -25,7 +27,7 @@ class DeliveryOptions extends React.Component {
 							this.props.onChange('toAddress', this.state.toAddress);
 						})
 					}}>
-					Доставка до посочен адрес
+					{CART.toAddress}
 				</Radio>{' '}
 				<Radio
 					name="1"
@@ -36,7 +38,7 @@ class DeliveryOptions extends React.Component {
 							this.props.onChange('toAddress', this.state.toAddress);
 						})
 					}}>
-					Доставка до офис на ЕКОНТ
+					{CART.toEkontOffice}
 				</Radio>{' '}
 			</FormGroup>
 		);

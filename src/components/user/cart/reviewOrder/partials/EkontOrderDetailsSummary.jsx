@@ -2,6 +2,9 @@ import React from 'react';
 
 import { Row, Col } from 'react-bootstrap';
 
+import { CART } from '../../../../../data/constants/componentConstants';
+
+
 class EkontOrderDetailsSummary extends React.Component {
 	constructor (props) {
 		super(props);
@@ -12,7 +15,7 @@ class EkontOrderDetailsSummary extends React.Component {
 
 		return (
 			<Row>
-				<Col xs={12}><h4>Доставка до офис на ЕКОНТ:</h4></Col>
+				<Col xs={12}><h4>{CART.toEkontOffice}</h4></Col>
 				<Col xs={12}><strong>&#8470;&nbsp;{orderDetails.officeCode}</strong> - {orderDetails.officeName}</Col>
 
 				<Col xs={12}>{orderDetails.country}</Col>

@@ -128,9 +128,9 @@ class CartProductsTable extends React.Component {
 				<Row className="buttons-container">
 					<Col xs={12} className="text-center">
 						<button className={isAdmin ? "btn btn-default" : "btn-custom default md"}
-						        onClick={this.props.cancel}>Отказ</button>
+						        onClick={this.props.cancel}>{BUTTONS_BG.cancel}</button>
 						<button className={isAdmin ? "btn btn-primary" : "btn-custom primary md"}
-						        onClick={this.props.continue}>Напред</button>
+						        onClick={this.props.continue}>{BUTTONS_BG.next}</button>
 					</Col>
 				</Row>
 

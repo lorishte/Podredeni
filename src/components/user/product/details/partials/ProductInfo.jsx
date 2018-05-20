@@ -2,6 +2,8 @@ import React from 'react';
 
 import { Row, Col, PageHeader, Label } from 'react-bootstrap';
 
+import { PRODUCT, CURRENCY } from '../../../../../data/constants/componentConstants';
+
 class ProductInfo extends React.Component {
 	constructor (props) {
 		super(props);
@@ -17,7 +19,7 @@ class ProductInfo extends React.Component {
 						{product.name + ' '}
 					</PageHeader>
 					<p>{product.description}</p>
-					<p>Price: <span className="price">{product.price.toFixed(2)}</span></p>
+					<p>{PRODUCT.price} <span className="price">{product.price.toFixed(2)} {CURRENCY}</span></p>
 				</Col>
 			</Row>
 		);

@@ -1,5 +1,7 @@
 import React from 'react';
 
+import { CART } from '../../../../../data/constants/componentConstants';
+
 class CartTableFooter extends React.Component {
 	constructor (props) {
 		super(props);
@@ -13,10 +15,10 @@ class CartTableFooter extends React.Component {
 		return (
 			<tfoot>
 			<tr className="lead">
-				{!resolution && <th colSpan={colSpan} className="text-right">Общо:</th>}
+				{!resolution && <th colSpan={colSpan} className="text-right">{CART.totalSum}</th>}
 				{!resolution && <th className="text-right">{totalSum}</th>}
 
-				{resolution && <th colSpan={colSpan + 1} className="text-center">Общо: {totalSum}</th>}
+				{resolution && <th colSpan={colSpan + 1} className="text-center">{CART.totalSum} {totalSum}</th>}
 			</tr>
 			</tfoot>
 		);

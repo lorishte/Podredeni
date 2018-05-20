@@ -2,6 +2,8 @@ import React from 'react';
 
 import { FormGroup, ControlLabel, FormControl, Col, Row, Button, Form } from 'react-bootstrap';
 
+import { PRODUCT } from '../../../../../data/constants/componentConstants';
+
 class AddToCartForm extends React.Component {
 	constructor (props) {
 		super(props);
@@ -37,12 +39,8 @@ class AddToCartForm extends React.Component {
 					</FormGroup>{' '}
 				</Col>
 
-
-				<button onClick={this.submit} className="btn-custom primary lg add-to-cart-btn">Add To Cart</button>
-
-
+				<button onClick={this.submit} className="btn-custom primary lg add-to-cart-btn">{PRODUCT.addToCart}</button>
 			</Row>
-
 		);
 	}
 }

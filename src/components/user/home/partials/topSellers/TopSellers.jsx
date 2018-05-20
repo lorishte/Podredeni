@@ -1,14 +1,12 @@
 import React from 'react';
 
-import {ToastContainer} from 'react-toastr';
-
 import { Grid } from 'react-bootstrap';
 
 import TopSellerProductCard from './partials/TopSellerProductCard';
 
 import productsService from '../../../../../services/products/productsService';
 
-import { TOASTR_MESSAGES } from '../../../../../data/constants/componentConstants';
+import { TOASTR_MESSAGES, HOME } from '../../../../../data/constants/componentConstants';
 
 class TopSellers extends React.Component {
 	constructor (props) {
@@ -101,7 +99,7 @@ class TopSellers extends React.Component {
 		return (
 			<Grid className="bg-white">
 
-					<h1 className="section-heading">Най-продавани</h1>
+					<h1 className="section-heading">{HOME.topSellers}</h1>
 
 					<div className="top-sellers-carousel" ref={this.container}>
 						<div className="top-sellers" ref={this.topSellers}>
@@ -122,9 +120,7 @@ class TopSellers extends React.Component {
 							<span className="glyphicon glyphicon-chevron-right"/>
 							<span className="sr-only">Next</span>
 						</button>}
-
 					</div>
-
 			</Grid>
 		);
 	}

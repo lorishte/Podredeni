@@ -12,7 +12,7 @@ import ReviewOrder from './reviewOrder/ReviewOrder';
 
 import orderService from '../../../services/orders/ordersService';
 
-import { BUTTONS_BG, CONFIRM_DIALOGS } from '../../../data/constants/componentConstants';
+import { BUTTONS_BG, CONFIRM_DIALOGS, CART } from '../../../data/constants/componentConstants';
 
 
 class Cart extends React.Component {
@@ -153,11 +153,11 @@ class Cart extends React.Component {
 				<Row>
 					<Col xs={12}>
 						<p>
-							<span className={this.state.productsView ? '' : 'text-grey'}>Преглед и редакция</span>
+							<span className={this.state.productsView ? '' : 'text-grey'}>{CART.edit}</span>
 							<span className="text-grey">&nbsp; &#10231; &nbsp;</span>
-							<span className={this.state.orderDetailsView ? '' : 'text-grey'}>Данни за доставка</span>
+							<span className={this.state.orderDetailsView ? '' : 'text-grey'}>{CART.deliveryData}</span>
 							<span className="text-grey">&nbsp; &#10231; &nbsp;</span>
-							<span className={this.state.reviewView ? '' : 'text-grey'}>Потвърждение</span>
+							<span className={this.state.reviewView ? '' : 'text-grey'}>{CART.confirm}</span>
 						</p>
 					</Col>
 				</Row>
@@ -165,7 +165,7 @@ class Cart extends React.Component {
 					{this.state.products.length > 0 && this.state.productsView &&
 						<Col xs={12}>
 							<h2 className="cart-view-name">
-								<Label>Стъпка 1</Label> Преглед и редакция
+								<Label>{CART.step1}</Label> {CART.edit}
 							</h2>
 							<CartProductsTable
 								products={this.state.products}
@@ -178,14 +178,14 @@ class Cart extends React.Component {
 
 					{this.state.products.length === 0 && this.state.productsView &&
 						<Col xs={12}>
-							<h3>Нямате добавени продукти</h3>
+							<h3>{CART.noProductAdded}</h3>
 						</Col>
 					}
 
 					{this.state.orderDetailsView &&
 						<Col xs={12}>
 							<h2 className="cart-view-name">
-								<Label>Стъпка 2</Label> Данни за доставка
+								<Label>{CART.step2}</Label> {CART.deliveryData}
 							</h2>
 							<OrderDetailsForm
 								data={this.state.orderDetails}
@@ -199,7 +199,7 @@ class Cart extends React.Component {
 					{this.state.reviewView &&
 					<Col xs={12}>
 						<h2 className="cart-view-name">
-							<Label>Стъпка 3</Label>Потвърждение
+							<Label>{CART.step3}</Label>{CART.confirm}
 						</h2>
 						<ReviewOrder
 							products={this.state.products}

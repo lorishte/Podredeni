@@ -9,7 +9,7 @@ import DeliveryToAddress from './deliveryDetails/DeliveryToAddress';
 import DeliveryOptions from './deliveryDetails/DeliveryOptions';
 import Comment from './comment/Comment';
 
-import { REQUIRED_ORDER_INPUTS, TOASTR_MESSAGES } from '../../../../data/constants/componentConstants';
+import { ORDER_DELIVERY_INPUTS, NOT_REQUIRED_ORDER_INPUTS, TOASTR_MESSAGES, BUTTONS_BG } from '../../../../data/constants/componentConstants';
 
 class OrderDetails extends React.Component {
 	constructor (props) {
@@ -48,7 +48,7 @@ class OrderDetails extends React.Component {
 
 				for (let input in user) {
 					if (user[input].trim() === '') {
-						emptyFields.push(REQUIRED_ORDER_INPUTS[input]);
+						emptyFields.push(ORDER_DELIVERY_INPUTS[input]);
 					}
 				}
 			}
@@ -60,7 +60,7 @@ class OrderDetails extends React.Component {
 					if (input === 'country') continue;
 
 					if (ekont[input].trim() === '') {
-						emptyFields.push(REQUIRED_ORDER_INPUTS[input]);
+						emptyFields.push(ORDER_DELIVERY_INPUTS[input]);
 					}
 				}
 			}
@@ -70,10 +70,10 @@ class OrderDetails extends React.Component {
 
 				for (let input in address) {
 
-					if (!REQUIRED_ORDER_INPUTS.hasOwnProperty('el')) continue;
+					if (NOT_REQUIRED_ORDER_INPUTS.hasOwnProperty(input)) continue;
 
 					if (address[input].trim() === '') {
-						emptyFields.push(REQUIRED_ORDER_INPUTS[input]);
+						emptyFields.push(ORDER_DELIVERY_INPUTS[input]);
 					}
 				}
 			}
@@ -82,7 +82,7 @@ class OrderDetails extends React.Component {
 				if (sessionStorage.getItem('role') === 'admin') continue;
 
 				if (!this.state[el]) {
-					emptyFields.push(REQUIRED_ORDER_INPUTS[el]);
+					emptyFields.push(ORDER_DELIVERY_INPUTS[el]);
 					this.agreed.current.focus();
 				}
 			}
@@ -163,15 +163,16 @@ class OrderDetails extends React.Component {
 							onChange={this.updateInfo}/>
 
 						{!isAdmin &&
-							<label>
-								<input type="checkbox"
-								       ref={this.agreed}
-								       name="termsAgreed"
-								       defaultChecked={this.state.termsAgreed}
-								       onChange={this.handleCheckBox}/>
-								<span className="text-danger">*&nbsp;</span> Съгласен/а съм с <Link to={'/products'} className="btn-link">Условията за
-								ползване.</Link>
-							</label>
+						<label>
+							<input type="checkbox"
+							       ref={this.agreed}
+							       name="termsAgreed"
+							       defaultChecked={this.state.termsAgreed}
+							       onChange={this.handleCheckBox}/>
+							<span className="text-danger">*&nbsp;</span>
+							Съгласен/а съм с &nbsp;
+							<Link to={'/products'} className="btn-link">Условията за ползване.</Link>
+						</label>
 						}
 
 					</Col>
@@ -179,20 +180,22 @@ class OrderDetails extends React.Component {
 
 				<Row className="buttons-container">
 					<Col xs={12} className="text-center">
-						<button className={isAdmin ? "btn btn-default" : "btn-custom default md"}
+						<button className={isAdmin ? 'btn btn-default' : 'btn-custom default md'}
 						        onClick={e => {
-							e.preventDefault();
-							this.props.cancel();
-						}}>Отказ
+							        e.preventDefault();
+							        this.props.cancel();
+						        }}>{BUTTONS_BG.cancel}
 						</button>
-						<button className={isAdmin ? "btn btn-default" : "btn-custom default md"}
+						<button className={isAdmin ? 'btn btn-default' : 'btn-custom default md'}
 						        onClick={ e => {
-							e.preventDefault();
-							this.props.goBack();
-						}}>Назад
+							        e.preventDefault();
+							        this.props.goBack();
+						        }}>{BUTTONS_BG.back}
 						</button>
-						<button className={isAdmin ? "btn btn-primary" : "btn-custom primary md"}
-						        type="submit">Напред</button>
+						<button className={isAdmin ? 'btn btn-primary' : 'btn-custom primary md'}
+						        type="submit">
+							{BUTTONS_BG.next}
+						</button>
 					</Col>
 				</Row>
 			</form>

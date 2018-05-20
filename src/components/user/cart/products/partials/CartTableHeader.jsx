@@ -1,5 +1,7 @@
 import React from 'react';
 
+import { CART } from '../../../../../data/constants/componentConstants';
+
 class CartTableHeader extends React.Component {
 	constructor (props) {
 		super(props);
@@ -11,10 +13,10 @@ class CartTableHeader extends React.Component {
 				{this.props.editable &&
 				<th/>
 				}
-				<th colSpan={2}>Продукт</th>
-				<th>Брой</th>
-				<th className="text-right">Цена</th>
-				<th className="text-right">Сума</th>
+				<th colSpan={2}>{CART.product}</th>
+				<th>{CART.quantity}</th>
+				<th className="text-right">{CART.price}</th>
+				<th className="text-right">{CART.sum}</th>
 			</tr>
 			</thead>
 		);

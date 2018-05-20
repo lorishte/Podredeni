@@ -10,7 +10,7 @@ import FormSelectField from '../../../../common/formComponents/FormSelectField';
 import ekontRequester from '../../../../../services/ekont/ekontRequester';
 import ekontDataParser from '../../../../../services/ekont/ekontDataConvertor';
 
-import { RESOLUTIONS, TOASTR_MESSAGES } from '../../../../../data/constants/componentConstants';
+import { RESOLUTIONS, TOASTR_MESSAGES, ORDER_DELIVERY_INPUTS } from '../../../../../data/constants/componentConstants';
 
 class EkontInfoInputs extends React.Component {
 	constructor (props) {
@@ -125,7 +125,7 @@ class EkontInfoInputs extends React.Component {
 
 						<Col xs={resolution ? 12 : 6} sm={4}>
 							<FormSelectField
-								label="Държава"
+								label={ORDER_DELIVERY_INPUTS.country}
 								name="country"
 								value={this.state.country}
 								defaultValue={this.state.country}
@@ -139,7 +139,7 @@ class EkontInfoInputs extends React.Component {
 							<div>
 								<Col xs={resolution ? 12 : 6} sm={4}>
 									<FormSelectField
-										label="Населено място"
+										label={ORDER_DELIVERY_INPUTS.city}
 										name="city"
 										value={this.state.city}
 										defaultValue={this.state.city}
@@ -152,7 +152,7 @@ class EkontInfoInputs extends React.Component {
 
 									<Col xs={resolution ? 12 : 6} sm={4}>
 										<FormSelectField
-											label="Наименование на офиса"
+											label={ORDER_DELIVERY_INPUTS.officeName}
 											name="officeName"
 											defaultValue={this.state.officeName}
 											value={this.state.officeName}
