@@ -39,9 +39,9 @@ class TopSellers extends React.Component {
 	}
 
 	loadProducts = () => {
-		if (window.innerWidth <= RESOLUTIONS.xs) {
+		if (window.innerWidth < RESOLUTIONS.smTopSellers) {
 			this.setState({productsToShow: 1});
-		} else if (window.innerWidth <= RESOLUTIONS.sm) {
+		} else if (window.innerWidth < RESOLUTIONS.mdTopSellers) {
 			this.setState({productsToShow: 2});
 		} else {
 			this.setState({productsToShow: 3});

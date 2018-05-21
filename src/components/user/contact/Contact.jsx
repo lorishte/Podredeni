@@ -1,121 +1,143 @@
 import React from 'react';
-import {ToastContainer} from 'react-toastr';
+import { ToastContainer } from 'react-toastr';
 
-import {PageHeader, Grid, Row, Col, FormGroup, FormControl, ControlLabel, Button} from 'react-bootstrap';
+import { Grid, Row, Col, FormGroup, FormControl, ControlLabel } from 'react-bootstrap';
+
+import FormInputField from '../../common/formComponents/FormInputField';
+import FormTextareaField from '../../common/formComponents/FormTextareaField';
 
 import contactService from '../../../services/contact/contactService';
 
-import { TOASTR_MESSAGES, CONTACT_FORM, BUTTONS_BG } from '../../../data/constants/componentConstants';
-
+import { TOASTR_MESSAGES, CONTACT_FORM, BUTTONS_BG, RESOLUTIONS } from '../../../data/constants/componentConstants';
 
 class Contact extends React.Component {
 
-    constructor(props) {
-        super(props);
+	constructor (props) {
+		super(props);
 
-        this.state = {
-            name: '',
-            email: '',
-            subject: '',
-            content: ''
-        };
+		this.state = {
+			name: '',
+			email: '',
+			subject: '',
+			content: '',
+			resolution: window.innerWidth
+		};
 
-        this.baseState = this.state;
+		this.baseState = this.state;
 
-        this.toastContainer = React.createRef();
-    }
+		this.toastContainer = React.createRef();
+	}
 
-    handleChange = (e) => {
-        this.setState({[e.target.name]: e.target.value});
-    };
+	componentDidMount () {
+		window.scrollTo(0, 0);
+		window.addEventListener('orientationchange', this.handleResolutionChange);
+		window.addEventListener('resize', this.handleResolutionChange);
+	}
 
-    resetState = () => {
-        this.setState(this.baseState);
-    };
+	componentWillUnmount () {
+		window.removeEventListener('orientationchange', this.handleResolutionChange);
+		window.removeEventListener('resize', this.handleResolutionChange);
+	}
 
-    sendContactForm = () => {
+	handleResolutionChange = () => {
+		this.setState({resolution: window.innerWidth});
+	};
 
-        const [name, email, subject, content] = [this.state.name, this.state.email, this.state.subject, this.state.content];
+	handleChange = (e) => {
+		this.setState({[e.target.name]: e.target.value});
+	};
 
-        contactService.sendContactForm(name, email, subject, content)
-            .then(res => {
+	resetState = () => {
+		this.setState(this.baseState);
+	};
 
-                this.resetState();
+	sendContactForm = () => {
 
-                this.toastContainer.success(TOASTR_MESSAGES.messageSent, '', {
-                    closeButton: true,
-                });
+		const [name, email, subject, content] = [this.state.name, this.state.email, this.state.subject, this.state.content];
 
-            })
-            .catch(err => {
-	            this.toastContainer.error(err.responseText, TOASTR_MESSAGES.error, {
-		            closeButton: false,
-	            });
-            });
-    };
+		contactService.sendContactForm(name, email, subject, content)
+			.then(res => {
 
-    render() {
-        return (
-            <Grid >
+				this.resetState();
 
-                <ToastContainer
-                    ref={ref => this.toastContainer = ref}
-                    className="toast-bottom-right"
-                />
+				this.toastContainer.success(TOASTR_MESSAGES.messageSent, '', {
+					closeButton: true,
+				});
 
-                <PageHeader>
-                    Contact
-                </PageHeader>
+			})
+			.catch(err => {
+				this.toastContainer.error(err.responseText, TOASTR_MESSAGES.error, {
+					closeButton: false,
+				});
+			});
+	};
 
-                <Row>
-                    <Col xs={8} sm={6} md={4}>
-                        <FormGroup
-                            controlId="contact-form">
+	render () {
 
-                            <ControlLabel>{CONTACT_FORM.name} </ControlLabel>
-                            <FormControl
-                                type="text"
-                                name="name"
-                                required={true}
-                                value={this.state.name}
-                                placeholder=""
-                                onChange={this.handleChange}/>
+		let resolution = this.state.resolution < RESOLUTIONS.xs;
 
-                            <ControlLabel>{CONTACT_FORM.email} </ControlLabel>
-                            <FormControl
-                                type="email"
-                                name="email"
-                                required={true}
-                                value={this.state.email}
-                                placeholder=""
-                                onChange={this.handleChange}/>
+		return (
+			<Grid >
 
-                            <ControlLabel>{CONTACT_FORM.subject} </ControlLabel>
-                            <FormControl
-                                type="text"
-                                name="subject"
-                                required={true}
-                                value={this.state.subject}
-                                placeholder=""
-                                onChange={this.handleChange}/>
+				<ToastContainer
+					ref={ref => this.toastContainer = ref}
+					className="toast-bottom-right"
+				/>
 
-                            <ControlLabel>{CONTACT_FORM.message} </ControlLabel>
-                            <FormControl
-                                componentClass="textarea"
-                                type="text"
-                                name="content"
-                                required={true}
-                                value={this.state.content}
-                                placeholder=""
-                                onChange={this.handleChange}/>
-                        </FormGroup>
+				<Row>
+					<Col xs={resolution ? 12 : 8} sm={6} md={4} xsOffset={resolution ? 0 : 2} smOffset={3} mdOffset={4}>
+						<FormGroup controlId="contact-form">
 
-                        <button className="btn-custom primary lg" onClick={this.sendContactForm}>{BUTTONS_BG.send}</button>
-                    </Col>
-                </Row>
-            </Grid>
-        );
-    }
+							<FormInputField
+								label={CONTACT_FORM.name}
+								type="text"
+								name="name"
+								required={true}
+								value={this.state.name}
+								placeholder=""
+								onChange={this.handleChange}
+							/>
+
+							<FormInputField
+								label={CONTACT_FORM.email}
+								type="email"
+								name="email"
+								required={true}
+								value={this.state.email}
+								placeholder=""
+								onChange={this.handleChange}
+							/>
+
+							<FormInputField
+								label={CONTACT_FORM.subject}
+								type="text"
+								name="subject"
+								required={false}
+								value={this.state.subject}
+								placeholder=""
+								onChange={this.handleChange}/>
+
+							<FormTextareaField
+								label={CONTACT_FORM.message}
+								componentClass="textarea"
+								type="text"
+								name="content"
+								required={true}
+								value={this.state.content}
+								placeholder=""
+								onChange={this.handleChange}/>
+						</FormGroup>
+
+						<div className="buttons-container text-center">
+
+							<button className="btn-custom primary md"
+							        onClick={this.sendContactForm}>{BUTTONS_BG.send}</button>
+						</div>
+					</Col>
+				</Row>
+			</Grid>
+		);
+	}
 }
 
 export default Contact;

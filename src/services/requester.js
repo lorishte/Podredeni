@@ -58,11 +58,11 @@ export default {
 
 let createHeader = (auth) => {
     if (auth === null) {
-        return {'Content-Type': 'application/json'}
+        return {'Content-Type': 'application/json; charset=UTF-8'}
     }
 
     return {
         'Authorization': 'bearer ' + token(),
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json; charset=UTF-8'
     }
 };

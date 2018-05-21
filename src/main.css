@@ -121,7 +121,7 @@ input[type=checkbox], input[type=radio] {
   .btn-custom:hover {
     cursor: pointer; }
   .btn-custom.xs {
-    padding: 1px 5px;
+    padding: 5px 5px;
     border-radius: 2px; }
   .btn-custom.sm {
     padding: 5px 10px;
@@ -707,7 +707,7 @@ nav {
   margin: 35px 10% 0 10%;
   font-weight: 600; }
 #terms ol {
-  margin: 35px 10% 80px 10%; }
+  margin: 15px 10% 80px 10%; }
   #terms ol li {
     margin: 0 15px;
     padding: 20px 0;

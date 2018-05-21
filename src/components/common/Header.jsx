@@ -103,11 +103,11 @@ class Header extends React.Component {
 							Контакт
 						</NavLink>
 
-						{!isLoggedInUser &&
-						<NavLink to="/login" activeClassName="active" className='nav-link'>
-							Вход
-						</NavLink>
-						}
+						{/*{!isLoggedInUser &&*/}
+						{/*<NavLink to="/login" activeClassName="active" className='nav-link'>*/}
+							{/*Вход*/}
+						{/*</NavLink>*/}
+						{/*}*/}
 
 						{isLoggedInUser &&
 						<NavLink to="/" className="btn btn-default"

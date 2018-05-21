@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { FormGroup, HelpBlock, FormControl, ControlLabel  } from 'react-bootstrap';
+import { FormGroup, FormControl, ControlLabel  } from 'react-bootstrap';
 
 class FormInputField extends React.Component {
 	constructor (props) {

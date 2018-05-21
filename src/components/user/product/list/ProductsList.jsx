@@ -38,6 +38,10 @@ class ProductsList extends React.Component {
 		window.removeEventListener('resize', this.handleResolutionChange);
 	}
 
+	handleResolutionChange = () => {
+		this.setState({resolution: window.innerWidth});
+	};
+
 	loadProducts = () => {
 		productsService
 			.loadProducts(this.state)
@@ -50,9 +54,7 @@ class ProductsList extends React.Component {
 			});
 	};
 
-	handleResolutionChange = () => {
-		this.setState({resolution: window.innerWidth});
-	};
+
 
 	render () {
 		let resolution = this.state.resolution < RESOLUTIONS.xs;

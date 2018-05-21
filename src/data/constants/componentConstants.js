@@ -86,7 +86,7 @@ const BUTTONS_BG = {
 
 	//Cart
 	saveChanges: 'Запази промените',
-	sendOrder: 'Изпрати поръчката',
+	sendOrder: 'Изпрати',
 
 	// Order
 	received: 'Получена',
@@ -131,7 +131,9 @@ const CONFIRM_DIALOGS = {
 const RESOLUTIONS = {
 	xs: 450,
 	sm: 680,
-	md: 980
+	md: 980,
+	smTopSellers: 640,
+	mdTopSellers: 1000,
 };
 
 const PRODUCT = {
@@ -146,7 +148,7 @@ const HOME = {
 const TERMS = {
 	terms: 'Общи условия',
 
-}
+};
 
 const CURRENCY = 'лв.';
 

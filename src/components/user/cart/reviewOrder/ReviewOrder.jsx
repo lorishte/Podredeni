@@ -100,6 +100,7 @@ class ReviewOrder extends React.Component {
 				</Col>
 
 
+
 				<Col xs={12} className="text-center buttons-container">
 
 					<button className={isAdmin ? 'btn btn-default' : 'btn-custom default md'}
@@ -114,7 +115,6 @@ class ReviewOrder extends React.Component {
 					        onClick={this.props.continue}>
 						{isAdmin ? BUTTONS_BG.saveChanges : BUTTONS_BG.sendOrder}
 					</button>
-
 
 				</Col>
 

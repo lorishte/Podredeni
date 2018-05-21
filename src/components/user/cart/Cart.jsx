@@ -217,14 +217,18 @@ class Cart extends React.Component {
 						}
 
 
+
 						<Panel.Body>
+							{this.state.products.length > 0 &&
 							<small className="info-text">
 								ВАЖНО!<br/>
 								Доставката се осъществява до 2 дни след направена заявка по куриерска фирма Еконт.
 								Разходите са за сметка на получателя, като при заявка над 60 лв, разходите са за наша
 								сметка. Заплащането се извършва с наложен платеж.
 							</small>
+							}
 						</Panel.Body>
+
 					</Panel>
 					</Col>
 

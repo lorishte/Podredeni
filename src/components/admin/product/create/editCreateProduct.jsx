@@ -8,7 +8,7 @@ import AddImageForm from './partials/AddImageFrom';
 
 import productsService from '../../../../services/products/productsService';
 
-import { TOASTR_MESSAGES } from '../../../../data/constants/componentConstants';
+import { TOASTR_MESSAGES, REDIRECT_DELAY } from '../../../../data/constants/componentConstants';
 
 
 class CreateProduct extends React.Component {
@@ -55,7 +55,9 @@ class CreateProduct extends React.Component {
 				});
 			})
 			.catch(err => {
-				console.log(err);
+				this.toastContainer.error(err.responseText, TOASTR_MESSAGES.error, {
+					closeButton: false,
+				});
 			});
 	};
 
@@ -82,7 +84,10 @@ class CreateProduct extends React.Component {
 			.updateProduct(this.state, this.productId)
 			.then(res => {
 				//redirect back
-				this.props.history.go(-1);
+				this.toastContainer.success(TOASTR_MESSAGES.successOrderEdit, '', {
+					closeButton: false,
+				});
+				setTimeout(() => this.props.history.go(-1), REDIRECT_DELAY )
 			})
 			.catch(err => {
 				this.toastContainer.error(err.responseText, TOASTR_MESSAGES.error, {

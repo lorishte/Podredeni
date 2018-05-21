@@ -26,7 +26,7 @@ class FormSelectField extends React.Component {
 
 		return (
 			<FormGroup controlId={name}>
-				<ControlLabel>{label}{required && <label>&nbsp;*</label>}</ControlLabel>
+				<ControlLabel>{label}{required && <label className="text-danger">&nbsp;*</label>}</ControlLabel>
 				<FormControl
 					componentClass="select"
 					name={name}

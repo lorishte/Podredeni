@@ -44,7 +44,7 @@ let Routes = () => {
 		<Switch>
 			/*User*/
 			<Route exact path='/' component={Home}/>
-			<Route path='/home' component={Home}/>
+			<Route exact path='/home' component={Home}/>
 
 			<Route path='/login' component={Login}/>
 			<Route path='/register' component={NotFound}/>

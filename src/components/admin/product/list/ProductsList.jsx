@@ -1,8 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+
+import { ToastContainer } from 'react-toastr';
+
 import { Grid, Row, Col, Table } from 'react-bootstrap';
 
-import ToastContainer from 'react-toastr';
 
 import TableHead from './partials/TableHead';
 import ProductTableRow from './partials/ProductTableRow';
@@ -39,7 +41,6 @@ class ProductsList extends React.Component {
 	}
 
 	loadProducts = () => {
-		console.log('from load');
 		productsService
 			.loadProducts(this.state)
 			.then(res => {
@@ -111,6 +112,7 @@ class ProductsList extends React.Component {
 					ref={ref => this.toastContainer = ref}
 					className="toast-bottom-right"
 				/>
+
 
 				<Row>
 					<Col xs={12} className="buttons-container">
