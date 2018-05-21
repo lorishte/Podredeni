@@ -14,7 +14,7 @@ class CartTableHeader extends React.Component {
 				<th/>
 				}
 				<th colSpan={2}>{CART.product}</th>
-				<th>{CART.quantity}</th>
+				<th className="text-center">{CART.quantity}</th>
 				<th className="text-right">{CART.price}</th>
 				<th className="text-right">{CART.sum}</th>
 			</tr>

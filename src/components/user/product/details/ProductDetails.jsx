@@ -24,9 +24,11 @@ class Product extends React.Component {
 	}
 
 	componentDidMount () {
-		this.loadProductData();
+		window.scrollTo(0, 0);
 		window.addEventListener('orientationchange',  this.handleResolutionChange );
 		window.addEventListener('resize', this.handleResolutionChange);
+
+		this.loadProductData();
 	}
 
 	componentWillUnmount () {

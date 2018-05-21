@@ -22,9 +22,11 @@ class CartProductsTable extends React.Component {
 	}
 
 	componentDidMount () {
-		this.calculateTotalSum();
+		window.scrollTo(0, 0);
 		window.addEventListener('orientationchange', this.handleResolutionChange);
 		window.addEventListener('resize', this.handleResolutionChange);
+
+		this.calculateTotalSum();
 	}
 
 	componentWillUnmount () {
@@ -114,7 +116,7 @@ class CartProductsTable extends React.Component {
 
 		return (
 			<div>
-				<Table responsive condensed id="cart-products-table">
+				<Table condensed id="cart-products-table">
 
 					<CartTableHeader editable={true}/>
 

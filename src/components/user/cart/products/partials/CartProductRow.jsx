@@ -1,5 +1,8 @@
 import React from 'react';
 
+import { CURRENCY } from '../../../../../data/constants/componentConstants';
+
+
 class CartProductRow extends React.Component {
 	constructor (props) {
 		super(props);
@@ -38,7 +41,7 @@ class CartProductRow extends React.Component {
 					<td>
 						<button onClick={() => this.props.delete(p.id)}
 						        className="btn btn-default btn-xs">
-							{/*<i className="fa fa-times" aria-hidden="true"/>*/}
+
 							x
 						</button>
 					</td>
@@ -49,20 +52,24 @@ class CartProductRow extends React.Component {
 				<td>
 					{p.name}
 					</td>
-				<td className="quantity-edit">
-					<span className="quantity">{this.state.quantity}</span>
+				<td className="text-center">
+					<span className="quantity">
+						{this.state.quantity}
+					</span>
+
 					{this.props.editable &&
-						<span className="arrows-container">
+					<span className="arrows-container">
 							<button className="btn btn-default btn-xs" onClick={() => this.changeQuantity('increment')}>+</button>
 							<button className="btn btn-default btn-xs" onClick={() => this.changeQuantity('decrement')}>-</button>
 						</span>
 					}
 				</td>
+
 				<td className="text-right">
-					{p.price.toFixed(2)}
+					{p.price.toFixed(2) + ' ' + CURRENCY}
 					</td>
 				<td className="text-right">
-					{(p.price * p.quantity).toFixed(2)}
+					{(p.price * p.quantity).toFixed(2) + ' ' + CURRENCY}
 					</td>
 			</tr>
 

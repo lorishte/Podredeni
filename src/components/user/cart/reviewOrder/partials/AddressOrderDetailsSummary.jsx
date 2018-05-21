@@ -13,17 +13,17 @@ class AddressOrderDetailsSummary extends React.Component {
 		let orderDetails = this.props.deliveryDetails;
 
 		return (
-			<Row>
-				<Col xs={12}><h4>{CART.toAddress}</h4></Col>
-				<Col xs={12}>{orderDetails.country}</Col>
-				<Col xs={12}>{orderDetails.postalCode},&nbsp;{orderDetails.city}</Col>
+			<div>
+				<h4>{CART.toAddress}</h4>
+				<p>{orderDetails.country}</p>
+				<p>{orderDetails.postalCode},&nbsp;{orderDetails.city}</p>
 				{orderDetails.district &&
-				<Col xs={12}>кв.&nbsp;{orderDetails.district}</Col>
+				<p>кв.&nbsp;{orderDetails.district}</p>
 				}
 				{orderDetails.street &&
-				<Col xs={12}>{LABELS_BG.streetShort}&nbsp;{'"'}{orderDetails.street}{'"'}&nbsp;{orderDetails.streetNo}</Col>
+				<p>{LABELS_BG.streetShort}&nbsp;{'"'}{orderDetails.street}{'"'}&nbsp;{orderDetails.streetNo}</p>
 				}
-				<Col xs={12}>
+				<p>
 					{orderDetails.block &&
 					<span>{LABELS_BG.blockShort} {orderDetails.block},&nbsp;</span>
 					}
@@ -36,8 +36,8 @@ class AddressOrderDetailsSummary extends React.Component {
 					{orderDetails.apartment &&
 					<span>{LABELS_BG.apartmentShort} {orderDetails.apartment}</span>
 					}
-				</Col>
-			</Row>
+				</p>
+			</div>
 
 		);
 	}

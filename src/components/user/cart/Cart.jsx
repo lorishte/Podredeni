@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Grid, Row, Col, Label } from 'react-bootstrap';
+import { Grid, Row, Col, Label, Panel } from 'react-bootstrap';
 
 // Helpers
 import { confirmAlert } from 'react-confirm-alert';
@@ -13,7 +13,6 @@ import ReviewOrder from './reviewOrder/ReviewOrder';
 import orderService from '../../../services/orders/ordersService';
 
 import { BUTTONS_BG, CONFIRM_DIALOGS, CART } from '../../../data/constants/componentConstants';
-
 
 class Cart extends React.Component {
 	constructor (props) {
@@ -29,6 +28,8 @@ class Cart extends React.Component {
 	}
 
 	componentDidMount () {
+		window.scrollTo(0, 0);
+
 		let storedOrderDetails = JSON.parse(sessionStorage.getItem('orderDetails'));
 
 		if (storedOrderDetails === null) {
@@ -87,7 +88,7 @@ class Cart extends React.Component {
 	cancelOrder = () => {
 		sessionStorage.removeItem('products');
 		sessionStorage.removeItem('orderDetails');
-		this.props.history.push('/home')
+		this.props.history.push('/home');
 	};
 
 	confirmCancel = () => {
@@ -98,7 +99,7 @@ class Cart extends React.Component {
 				label: BUTTONS_BG.yes,
 				onClick: () => this.cancelOrder()
 			},
-				{ label: BUTTONS_BG.no }]
+				{label: BUTTONS_BG.no}]
 		});
 	};
 
@@ -161,8 +162,12 @@ class Cart extends React.Component {
 						</p>
 					</Col>
 				</Row>
+
+
 				<Row>
-					{this.state.products.length > 0 && this.state.productsView &&
+					<Col xs={12}>
+					<Panel>
+						{this.state.products.length > 0 && this.state.productsView &&
 						<Col xs={12}>
 							<h2 className="cart-view-name">
 								<Label>{CART.step1}</Label> {CART.edit}
@@ -174,15 +179,15 @@ class Cart extends React.Component {
 								cancel={this.confirmCancel}
 							/>
 						</Col>
-					}
+						}
 
-					{this.state.products.length === 0 && this.state.productsView &&
+						{this.state.products.length === 0 && this.state.productsView &&
 						<Col xs={12}>
 							<h3>{CART.noProductAdded}</h3>
 						</Col>
-					}
+						}
 
-					{this.state.orderDetailsView &&
+						{this.state.orderDetailsView &&
 						<Col xs={12}>
 							<h2 className="cart-view-name">
 								<Label>{CART.step2}</Label> {CART.deliveryData}
@@ -194,22 +199,35 @@ class Cart extends React.Component {
 								continue={this.showReview}
 								cancel={this.confirmCancel}/>
 						</Col>
-					}
+						}
 
-					{this.state.reviewView &&
-					<Col xs={12}>
-						<h2 className="cart-view-name">
-							<Label>{CART.step3}</Label>{CART.confirm}
-						</h2>
-						<ReviewOrder
-							products={this.state.products}
-							orderDetails={this.state.orderDetails}
-							goBack={this.showDeliveryDetailsForm}
-							continue={this.submitOrder}
-							cancel={this.confirmCancel}
-						/>
+						{this.state.reviewView &&
+						<Col xs={12}>
+							<h2 className="cart-view-name">
+								<Label>{CART.step3}</Label>{CART.confirm}
+							</h2>
+							<ReviewOrder
+								products={this.state.products}
+								orderDetails={this.state.orderDetails}
+								goBack={this.showDeliveryDetailsForm}
+								continue={this.submitOrder}
+								cancel={this.confirmCancel}
+							/>
+						</Col>
+						}
+
+
+						<Panel.Body>
+							<small className="info-text">
+								ВАЖНО!<br/>
+								Доставката се осъществява до 2 дни след направена заявка по куриерска фирма Еконт.
+								Разходите са за сметка на получателя, като при заявка над 60 лв, разходите са за наша
+								сметка. Заплащането се извършва с наложен платеж.
+							</small>
+						</Panel.Body>
+					</Panel>
 					</Col>
-					}
+
 				</Row>
 			</Grid>
 		);

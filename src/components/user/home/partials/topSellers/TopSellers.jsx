@@ -6,7 +6,7 @@ import TopSellerProductCard from './partials/TopSellerProductCard';
 
 import productsService from '../../../../../services/products/productsService';
 
-import { TOASTR_MESSAGES, HOME } from '../../../../../data/constants/componentConstants';
+import { TOASTR_MESSAGES, HOME, RESOLUTIONS } from '../../../../../data/constants/componentConstants';
 
 class TopSellers extends React.Component {
 	constructor (props) {
@@ -30,16 +30,18 @@ class TopSellers extends React.Component {
 	componentDidMount () {
 		this.loadProducts();
 		window.addEventListener('resize', this.loadProducts);
+		window.addEventListener('orientationchange',  this.loadProducts );
 	}
 
 	componentWillUnmount () {
 		window.removeEventListener('resize', this.loadProducts);
+		window.removeEventListener('orientationchange',  this.loadProducts );
 	}
 
 	loadProducts = () => {
-		if (window.innerWidth < 700) {
+		if (window.innerWidth <= RESOLUTIONS.xs) {
 			this.setState({productsToShow: 1});
-		} else if (window.innerWidth < 1000) {
+		} else if (window.innerWidth <= RESOLUTIONS.sm) {
 			this.setState({productsToShow: 2});
 		} else {
 			this.setState({productsToShow: 3});

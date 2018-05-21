@@ -112,7 +112,7 @@ const TOASTR_MESSAGES = {
 	//Warnings
 	requestEmptyFields: 'Моля, попълнете следните полета:',
 	productAlreadyInCart: 'Този продукт вече е добавен.',
-	editQuantityFromCart: 'Може да редактирате продукта от кошницата Ви.',
+	editQuantityFromCart: 'За редакция, моля, отидете в кошница.',
 
 	//Success
 	productAddedToCart: 'Продуктът е добавен в кошницата Ви.',
@@ -142,6 +142,11 @@ const PRODUCT = {
 const HOME = {
 	topSellers: 'Най-продавани',
 };
+
+const TERMS = {
+	terms: 'Общи условия',
+
+}
 
 const CURRENCY = 'лв.';
 
@@ -174,9 +179,9 @@ const CART = {
 
 	//Review
 	recipient: 'Получател',
-	toEkontOffice: 'Доставка до офис на ЕКОНТ:',
-	toAddress: 'Доставка до адрес:',
-	comment: 'Коментар:',
+	toEkontOffice: 'Доставка до офис на ЕКОНТ',
+	toAddress: 'Доставка до адрес',
+	comment: 'Коментар',
 	noComment: 'Няма добавени забележки.',
 };
 
@@ -199,6 +204,7 @@ export {
 	CONFIRM_DIALOGS,
 	PRODUCT,
 	HOME,
+	TERMS,
 	CURRENCY,
 	CONTACT_FORM,
 	CART,

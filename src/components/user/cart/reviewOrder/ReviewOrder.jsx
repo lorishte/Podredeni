@@ -9,7 +9,7 @@ import EkontOrderDetailsSummary from './partials/EkontOrderDetailsSummary';
 import AddressOrderDetailsSummary from './partials/AddressOrderDetailsSummary';
 import RecipientDetailsSummary from './partials/RecipientDetailsSummary';
 
-import { RESOLUTIONS, BUTTONS_BG, LABELS_BG, CART} from '../../../../data/constants/componentConstants';
+import { RESOLUTIONS, BUTTONS_BG, LABELS_BG, CART } from '../../../../data/constants/componentConstants';
 
 class ReviewOrder extends React.Component {
 	constructor (props) {
@@ -21,6 +21,8 @@ class ReviewOrder extends React.Component {
 	}
 
 	componentDidMount () {
+		window.scrollTo(0, 0);
+
 		window.addEventListener('orientationchange', this.handleResolutionChange);
 		window.addEventListener('resize', this.handleResolutionChange);
 	}
@@ -59,70 +61,64 @@ class ReviewOrder extends React.Component {
 		}
 
 		return (
-			<div>
-				<Row>
-					<Col xs={12}>
-						<Row>
-							<Col sm={3}>
-								<RecipientDetailsSummary recipient={recipient}/>
-							</Col>
-							<Col sm={5}>
-								{this.props.orderDetails.toAddress ?
-									<AddressOrderDetailsSummary deliveryDetails={deliveryDetails}/> :
-									<EkontOrderDetailsSummary deliveryDetails={deliveryDetails}/>
-								}
-							</Col>
-							<Col sm={4}>
-								<Row>
-									{this.props.orderDetails.comment ?
-										<Col xs={12}><h4>{CART.comment}</h4>
-										<p>{this.props.orderDetails.comment}</p>
-										</Col> :
-										<Col xs={12}><h4>{CART.noComment}</h4></Col>
-									}
-								</Row>
-							</Col>
-						</Row>
-
-					</Col>
-				</Row>
-
-				<Table responsive id="cart-products-table">
-					<CartTableHeader editable={false}/>
-					<tbody>
-					{this.props.products.map((e, i) => {
-						return <CartProductRow
-							key={e.id}
-							index={i + 1}
-							editable={false}
-							data={e}/>;
-					})
+			<Row id="cart-review">
+				<Col sm={3}>
+					<RecipientDetailsSummary recipient={recipient}/>
+				</Col>
+				<Col sm={5}>
+					{this.props.orderDetails.toAddress ?
+						<AddressOrderDetailsSummary deliveryDetails={deliveryDetails}/> :
+						<EkontOrderDetailsSummary deliveryDetails={deliveryDetails}/>
 					}
-					</tbody>
-
-					<CartTableFooter resolution={resolution} totalSum={totalSum} colSpan={4}/>
-				</Table>
-
-				<Row className="buttons-container">
-					<Col xs={12} className="text-center">
-
-						<button className={isAdmin ? 'btn btn-default' : 'btn-custom default md'}
-						        onClick={this.props.cancel}>{BUTTONS_BG.cancel}
-						</button>
-
-						<button className={isAdmin ? 'btn btn-default' : 'btn-custom default md'}
-						        onClick={this.props.goBack}>{BUTTONS_BG.back}
-						</button>
-
-						<button className={isAdmin ? 'btn btn-primary' : 'btn-custom primary md'}
-						        onClick={this.props.continue}>
-							{isAdmin ? BUTTONS_BG.saveChanges : BUTTONS_BG.sendOrder}
-						</button>
+				</Col>
+				<Col sm={4}>
+					<Row>
+						{this.props.orderDetails.comment ? <Col xs={12}><h4>{CART.comment}</h4>
+							<p>{this.props.orderDetails.comment}</p>
+						</Col> : <Col xs={12}><h4>{CART.noComment}</h4></Col>
+						}
+					</Row>
+				</Col>
 
 
-					</Col>
-				</Row>
-			</div>
+				<Col xs={12}>
+					<Table condensed id="cart-products-table">
+						<CartTableHeader editable={false}/>
+						<tbody>
+						{this.props.products.map((e, i) => {
+							return <CartProductRow
+								key={e.id}
+								index={i + 1}
+								editable={false}
+								data={e}/>;
+						})
+						}
+						</tbody>
+
+						<CartTableFooter resolution={resolution} totalSum={totalSum} colSpan={4}/>
+					</Table>
+				</Col>
+
+
+				<Col xs={12} className="text-center buttons-container">
+
+					<button className={isAdmin ? 'btn btn-default' : 'btn-custom default md'}
+					        onClick={this.props.cancel}>{BUTTONS_BG.cancel}
+					</button>
+
+					<button className={isAdmin ? 'btn btn-default' : 'btn-custom default md'}
+					        onClick={this.props.goBack}>{BUTTONS_BG.back}
+					</button>
+
+					<button className={isAdmin ? 'btn btn-primary' : 'btn-custom primary md'}
+					        onClick={this.props.continue}>
+						{isAdmin ? BUTTONS_BG.saveChanges : BUTTONS_BG.sendOrder}
+					</button>
+
+
+				</Col>
+
+			</Row>
 		);
 	}
 }

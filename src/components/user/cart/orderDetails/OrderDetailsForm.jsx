@@ -27,6 +27,10 @@ class OrderDetails extends React.Component {
 		this.agreed = React.createRef();
 	}
 
+	componentDidMount () {
+		window.scrollTo(0, 0);
+	}
+
 	updateInfo = (stateProp, data) => {
 		this.setState({[stateProp]: data}, () => {
 			this.props.onChange('orderDetails', this.state);
@@ -171,7 +175,7 @@ class OrderDetails extends React.Component {
 							       onChange={this.handleCheckBox}/>
 							<span className="text-danger">*&nbsp;</span>
 							Съгласен/а съм с &nbsp;
-							<Link to={'/products'} className="btn-link">Условията за ползване.</Link>
+							<Link to={'/terms'} className="btn-link">Условията за ползване.</Link>
 						</label>
 						}
 

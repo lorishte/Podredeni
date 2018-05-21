@@ -63,7 +63,7 @@ class ProductCard extends React.Component {
 		const p = this.props.data;
 
 		return (
-			<Col xs={this.state.xsRes} sm={6} md={4} lg={3}>
+			<Col xs={this.state.xsRes} sm={6} md={4} lg={4}>
 
 				<div className="card">
 

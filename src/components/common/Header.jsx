@@ -3,8 +3,8 @@ import { NavLink, Link } from 'react-router-dom';
 
 import { Label } from 'react-bootstrap';
 
-import products from '../../data/products';
-import productsService from '../../services/products/productsService';
+import { RESOLUTIONS } from '../../data/constants/componentConstants';
+
 
 class Header extends React.Component {
 
@@ -30,7 +30,11 @@ class Header extends React.Component {
 	}
 
 	handleScroll = () => {
+
+		if (window.innerWidth >= RESOLUTIONS.sm) return;
+
 		if (document.documentElement.scrollTop > this.state.lastScroll && document.documentElement.scrollTop > 200) {
+			this.hideMenu();
 			this.mainNav.style.top = '-200px';
 		} else {
 			this.mainNav.style.top = 0 + 'px';
@@ -39,27 +43,11 @@ class Header extends React.Component {
 		this.setState({lastScroll: document.documentElement.scrollTop});
 	};
 
-	seedProducts = () => {
-		for (let i = 0; i < products.length; i++) {
-			setTimeout(function () {
-				productsService
-					.seedProducts(products[i])
-					.then(response => {
-						console.log(response);
-					})
-					.catch(err => {
-						console.log(err.responseText);
-					});
-			}, i * 1000);
-		}
-	};
-
 	logout = (e) => {
 		sessionStorage.clear();
 	};
 
 	hideMenu = () => {
-		console.log(this.userNav);
 		if (this.userNav) this.userNav.classList.remove('in');
 	};
 

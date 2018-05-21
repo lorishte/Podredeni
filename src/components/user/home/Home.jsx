@@ -12,12 +12,16 @@ class Home extends React.Component {
 		super(props);
 	}
 
+	componentDidMount () {
+		window.scrollTo(0, 0)
+	}
+
 	render () {
 
 		return (
-			<div>
+			<div id="home">
 				<Grid fluid id="home-main-carousel">
-					<ControlledCarousel/>
+					<ControlledCarousel />
 				</Grid>
 
 				<Grid fluid id="home-about">
@@ -25,7 +29,7 @@ class Home extends React.Component {
 				</Grid>
 
 				<Grid fluid id="top-sellers" className="bg-white">
-					<TopSellers productsToShow={3}/>
+					<TopSellers/>
 				</Grid>
 
 				<Grid fluid id="testimonials">
@@ -50,7 +54,6 @@ class Home extends React.Component {
 						</article>
 					</div>
 				</Grid>
-
 			</div>
 		);
 	}

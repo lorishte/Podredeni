@@ -13,6 +13,7 @@ import Register from '../auth/Register';
 import Home from '../user/home/Home';
 import About from '../user/about/About';
 import Contact from '../user/contact/Contact';
+import Terms from '../user/terms/Terms';
 
 // User Products
 import ProductsList from '../user/product/list/ProductsList';
@@ -57,6 +58,8 @@ let Routes = () => {
 
 			{/*<Route path='/about' component={About}/>*/}
 			<Route path='/contact' component={Contact}/>
+
+			<Route path='/terms' component={Terms}/>
 
 			/*Admin*/
 			<PrivateRoute path='/product/create' component={CreateProduct}/>
