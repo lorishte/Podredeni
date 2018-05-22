@@ -42,7 +42,7 @@ class ProductsList extends React.Component {
 
 	loadProducts = () => {
 		productsService
-			.loadProducts(this.state)
+			.loadProducts(this.state, true)
 			.then(res => {
 				let productsCount = Number(res.productsCount);
 				let size = Number(this.state.size);

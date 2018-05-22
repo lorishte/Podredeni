@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-// import FacebookProvider, { Like } from 'react-facebook';
+import FacebookProvider, { Like } from 'react-facebook';
 
 import { TERMS } from '../../data/constants/componentConstants';
 
@@ -17,11 +17,11 @@ class Footer extends React.Component {
 					</div>
 
 					<div className="social">
-						{/*<FacebookProvider appId="602878320047542">*/}
-						{/*<Like href="http://www.facebook.com" colorScheme="dark" showFaces share />*/}
-						{/*</FacebookProvider>*/}
-						<Link to=""><i className="fa fa-facebook-official" aria-hidden="true"/></Link>
-						<Link to=""><i className="fa fa-instagram"/></Link>
+						<FacebookProvider appId="602878320047542">
+						<Like href="http://podredeni.eu" colorScheme="dark" share />
+						</FacebookProvider>
+						{/*<Link to=""><i className="fa fa-facebook-official" aria-hidden="true"/></Link>*/}
+						{/*<Link to=""><i className="fa fa-instagram"/></Link>*/}
 					</div>
 
 					<Link to="/terms">{TERMS.terms}</Link>

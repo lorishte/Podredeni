@@ -4,7 +4,7 @@ const auth = 'admin';
 
 export default {
 
-    loadProducts: (state) => {
+    loadProducts: (state, includeBlocked = false) => {
 
         let query =
             '?page=' + state.page +
@@ -13,7 +13,7 @@ export default {
             '&filterValue=' + state.filterValue +
             '&sortElement=' + state.sortProperty +
             '&sortDesc=' + state.descending +
-            '&includeBlocked=' + true;
+            '&includeBlocked=' + includeBlocked;
 
         return requesterService
             .get(endPoint, null, query);
