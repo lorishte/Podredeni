@@ -13,7 +13,7 @@ class Footer extends React.Component {
 			<footer>
 				<div className="wrapper">
 					<div className="copy">
-						<p> &copy; 2018 podredeni.com</p>
+						<p> &copy; 2018 podredeni.eu</p>
 					</div>
 
 					<div className="social">

@@ -77,8 +77,22 @@ class Contact extends React.Component {
 		let resolution = this.state.resolution < RESOLUTIONS.xs;
 
 		return (
-			<Grid >
 
+			<Grid >
+				<div style={{"text-align": "center"}}>
+					<p>
+						<strong>Армоник ООД</strong> е вносител на американските магнитни клипсове<br/>
+						адрес: гр. София, бул. Цар Борис III, 91<br/>
+						тел. 0888 170 767
+					</p>
+				</div>
+
+				<hr/>
+				<div style={{"text-align": "center"}}>
+					<p>
+						<strong>Форма за контакт</strong>
+					</p>
+				</div>
 				<ToastContainer
 					ref={ref => this.toastContainer = ref}
 					className="toast-bottom-right"
