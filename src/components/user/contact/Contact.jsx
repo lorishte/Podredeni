@@ -79,7 +79,7 @@ class Contact extends React.Component {
 		return (
 
 			<Grid >
-				<div style={{"text-align": "center"}}>
+				<div style={{"textAlign": "center"}}>
 					<p>
 						<strong>Армоник ООД</strong> е вносител на американските магнитни клипсове<br/>
 						адрес: гр. София, бул. Цар Борис III, 91<br/>
@@ -88,7 +88,7 @@ class Contact extends React.Component {
 				</div>
 
 				<hr/>
-				<div style={{"text-align": "center"}}>
+				<div style={{"textAlign": "center"}}>
 					<p>
 						<strong>Форма за контакт</strong>
 					</p>

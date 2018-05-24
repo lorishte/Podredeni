@@ -145,8 +145,8 @@ const HOME = {
 	topSellers: 'Най-продавани',
 };
 
-const TERMS = {
-	terms: 'Общи условия',
+const TERMS_AND_CONDITIONS = {
+	terms: 'Общи условия и поверителност'
 
 };
 
@@ -206,7 +206,7 @@ export {
 	CONFIRM_DIALOGS,
 	PRODUCT,
 	HOME,
-	TERMS,
+    TERMS_AND_CONDITIONS,
 	CURRENCY,
 	CONTACT_FORM,
 	CART,

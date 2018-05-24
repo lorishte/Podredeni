@@ -72,7 +72,7 @@ class ControlledCarousel extends React.Component {
 				</Carousel.Item>
 
 				<Carousel.Item>
-					<img className="carousel-img" alt="slider_02" src="images/banners/podredeni_banner_01.jpg"/>
+					<img className="carousel-img" alt="slider_02" src="images/banners/BM6V1596.jpg"/>
 					{/*<Carousel.Caption>*/}
 						{/*<h3>Second slide label</h3>*/}
 						{/*<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>*/}
@@ -80,7 +80,7 @@ class ControlledCarousel extends React.Component {
 				</Carousel.Item>
 
 				<Carousel.Item>
-					<img className="carousel-img" alt="slider_03" src="images/banners/podredeni_banner_02.jpg"/>
+					<img className="carousel-img" alt="slider_03" src="images/banners/Reader-Rest-04051811926.jpg"/>
 					{/*<Carousel.Caption>*/}
 						{/*<h3>Third slide label</h3>*/}
 						{/*<p>*/}
@@ -90,7 +90,31 @@ class ControlledCarousel extends React.Component {
 				</Carousel.Item>
 
 				<Carousel.Item>
-					<img className="carousel-img" alt="slider_03" src="http://www.readerest.fr/wp-content/uploads/2016/06/sac_slider1920x665px.jpg"/>
+					<img className="carousel-img" alt="slider_04" src="images/banners/Reader-Rest-04051811966.jpg"/>
+                    {/*<Carousel.Caption>*/}
+                    {/*<h3>Second slide label</h3>*/}
+                    {/*<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>*/}
+                    {/*</Carousel.Caption>*/}
+				</Carousel.Item>
+
+				<Carousel.Item>
+					<img className="carousel-img" alt="slider_05" src="images/banners/Reader-Rest-04051812172.jpg"/>
+                    {/*<Carousel.Caption>*/}
+                    {/*<h3>Second slide label</h3>*/}
+                    {/*<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>*/}
+                    {/*</Carousel.Caption>*/}
+				</Carousel.Item>
+
+				<Carousel.Item>
+					<img className="carousel-img" alt="slider_06" src="images/banners/Reader-Rest-04051812085.jpg"/>
+                    {/*<Carousel.Caption>*/}
+                    {/*<h3>Second slide label</h3>*/}
+                    {/*<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>*/}
+                    {/*</Carousel.Caption>*/}
+				</Carousel.Item>
+
+				<Carousel.Item>
+					<img className="carousel-img" alt="slider_07" src="images/banners/bag.jpg"/>
 					{/*<Carousel.Caption>*/}
 						{/*<h3>Third slide label</h3>*/}
 						{/*<p>*/}

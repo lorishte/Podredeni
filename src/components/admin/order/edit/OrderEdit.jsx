@@ -45,8 +45,8 @@ class OrderEdit extends React.Component {
 
 						let orderDetails = {
 							recipientInfo: {
-								firstName: dd.customerName.split(' ')[0],
-								lastName: dd.customerName.split(' ')[1],
+								firstName: dd.customerName,
+								lastName: dd.customerLastName,
 								email: dd.email,
 								phone: dd.phoneNumber
 							},

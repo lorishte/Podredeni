@@ -13,7 +13,7 @@ import Register from '../auth/Register';
 import Home from '../user/home/Home';
 import About from '../user/about/About';
 import Contact from '../user/contact/Contact';
-import Terms from '../user/terms/Terms';
+import Terms from '../user/termsAndConditions/Terms';
 
 // User Products
 import ProductsList from '../user/product/list/ProductsList';

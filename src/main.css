@@ -308,7 +308,7 @@ nav {
       margin-left: 8px; }
 
 #home-main-carousel .carousel {
-  height: 550px;
+  height: 500px;
   margin-top: -35px; }
   #home-main-carousel .carousel .carousel-inner {
     height: 100%;
@@ -341,9 +341,9 @@ nav {
 .carousel-control.left,
 .carousel-control.right {
   background: none;
-  -webkit-transition: .4s;
-  -moz-transition: .4s;
-  transition: .4s; }
+  -webkit-transition: .6s;
+  -moz-transition: .6s;
+  transition: .6s; }
 
 #home-about {
   text-align: center; }

@@ -1,6 +1,6 @@
 import $ from 'jquery'
 
-const host = 'http://demo.econt.com/e-econt/xml_service_tool.php';
+const host = 'https://demo.econt.com/e-econt/xml_service_tool.php';
 
 const body = `<request>
 					<client>

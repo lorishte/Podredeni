@@ -65,7 +65,7 @@ class OrderDetails extends React.Component {
 						</Col>
 
 						<Col xs={4} sm={3}><p className="text-grey">{LABELS_BG.customer}:</p></Col>
-						<Col xs={8}><p>{d.customerName}</p></Col>
+						<Col xs={8}><p>{d.customerName} {d.customerLastName}</p></Col>
 
 						<Col xs={4} sm={3}><p className="text-grey">{LABELS_BG.deliveredTo}:</p></Col>
 

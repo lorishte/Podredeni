@@ -1,5 +1,5 @@
 import React from 'react';
-import ToastContainer from 'react-toastr';
+import { ToastContainer } from 'react-toastr';
 
 import { Grid, Row, Col, Table, Button } from 'react-bootstrap';
 
@@ -21,6 +21,7 @@ class OrderLog extends React.Component {
         ordersService
             .loadOrderLog(this.props.match.params.id)
             .then(res => {
+
                 this.setState({logs: res.logs})
             })
 	        .catch(err => {
@@ -39,8 +40,11 @@ class OrderLog extends React.Component {
         let logList;
 
         if (this.state.logs !== '') {
+
+            let index = 0;
+
             logList = this.state.logs.map(e => {
-                return <LogTableRow key={e.id} data={e}/>;
+                return <LogTableRow key={index++} data={e}/>;
             });
         }
 

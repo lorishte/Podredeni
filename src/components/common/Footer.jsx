@@ -1,8 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import FacebookProvider, { Like } from 'react-facebook';
 
-import { TERMS } from '../../data/constants/componentConstants';
+import { TERMS_AND_CONDITIONS } from '../../data/constants/componentConstants';
 
 class Footer extends React.Component {
 
@@ -11,20 +10,17 @@ class Footer extends React.Component {
 
 		return (
 			<footer>
+
+
 				<div className="wrapper">
 					<div className="copy">
 						<p> &copy; 2018 podredeni.eu</p>
 					</div>
 
-					<div className="social">
-						<FacebookProvider appId="602878320047542">
-						<Like href="http://podredeni.eu" colorScheme="dark" share />
-						</FacebookProvider>
-						{/*<Link to=""><i className="fa fa-facebook-official" aria-hidden="true"/></Link>*/}
-						{/*<Link to=""><i className="fa fa-instagram"/></Link>*/}
+					<div className="">
+						<div className="fb-like" data-href="https://podredeni.eu" data-layout="button" data-action="like" data-size="small" data-show-faces="false" data-share="false"></div>
 					</div>
-
-					<Link to="/terms">{TERMS.terms}</Link>
+					<Link to="/terms">{TERMS_AND_CONDITIONS.terms}</Link>
 
 
 					{/*<div className="created-by">*/}

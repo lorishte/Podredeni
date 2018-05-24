@@ -13,7 +13,13 @@ class Home extends React.Component {
 	}
 
 	componentDidMount () {
-		window.scrollTo(0, 0)
+		window.scrollTo(0, 0);
+
+        const s = document.createElement('script');
+        s.type = 'text/javascript';
+        s.async = true;
+        s.innerHTML = "(function(d, s, id) {var js, fjs = d.getElementsByTagName(s)[0];if (d.getElementById(id)) return;js = d.createElement(s); js.id = id;js.src = 'https://connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v3.0&appId=602878320047542&autoLogAppEvents=1';fjs.parentNode.insertBefore(js, fjs);}(document, 'script', 'facebook-jssdk'));";
+        document.body.appendChild(s);
 	}
 
 	render () {
@@ -24,7 +30,7 @@ class Home extends React.Component {
 					<ControlledCarousel />
 				</Grid>
 
-				<Grid fluid id="top-sellers" className="bg-white" style={{"margin-bottom": "60px"}}>
+				<Grid fluid id="top-sellers" className="bg-white" style={{"marginBottom": "60px"}}>
 					<TopSellers/>
 				</Grid>
 
