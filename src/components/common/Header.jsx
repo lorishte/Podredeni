@@ -68,6 +68,7 @@ class Header extends React.Component {
 				<div className="navbar-brand">
 					<Link to="/home">Podredeni</Link>
 				</div>
+
 				}
 
 				{!isAdmin &&

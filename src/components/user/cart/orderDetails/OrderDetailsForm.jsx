@@ -175,7 +175,7 @@ class OrderDetails extends React.Component {
 							       onChange={this.handleCheckBox}/>
 							<span className="text-danger">*&nbsp;</span>
 							Съгласен/а съм с &nbsp;
-							<Link to={'/terms'} className="btn-link">Условията за ползване.</Link>
+							<Link to={'/terms'} className="btn-link">Условията за ползване и политика за поверителност.</Link>
 						</label>
 						}
 
