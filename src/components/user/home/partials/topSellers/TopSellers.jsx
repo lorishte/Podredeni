@@ -94,8 +94,8 @@ class TopSellers extends React.Component {
 		let cards;
 		if (this.state.products !== '') {
 			cards = this.state.products.map(product => {
-				return <TopSellerProductCard key={product.id} data={product} width={this.state.cardWidth}/>;
-			});
+                return <TopSellerProductCard key={product.id} data={product} width={this.state.cardWidth}/>;
+            });
 		}
 
 		return (

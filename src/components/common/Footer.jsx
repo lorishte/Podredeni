@@ -12,60 +12,43 @@ class Footer extends React.Component {
             <footer>
 
                 <div  className="facebook-wrapper">
-                    <div className="fb-like"
-                         data-href="https://podredeni.eu"
-                         data-layout="button_count"
-                         data-action="like"
-                         data-size="large"
-                         data-show-faces="false"
-                         data-share="true"></div>
 
+                    <iframe src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2F%2Fmoiteochila&tabs&width=340&height=70&small_header=true&adapt_container_width=true&hide_cover=false&show_facepile=false&appId=602878320047542"
+                            width="220"
+                            height="70"
+                            style={{"border":"none", "overflow":"hidden"}}
+                            scrolling="no"
+                            frameBorder="0"
+                            allowtransparency="true"
+                            allow="encrypted-media">
 
-                    <div className="fb-page"
-                         data-href="https://www.facebook.com/moiteochila"
-                         data-tabs=""
-                         data-small-header="true"
-                         data-adapt-container-width="false"
-                         data-hide-cover="false"
-                         data-show-facepile="false">
-                        <blockquote cite="https://www.facebook.com/moiteochila"
-                                    className="fb-xfbml-parse-ignore">
-                            <a href="https://www.facebook.com/moiteochila">PODREDeni</a>
-                        </blockquote>
-                    </div>
+                    </iframe>
                 </div>
 
                 <br/>
 
                 <div className="wrapper">
+
+
+
+                    <Link to="/terms">{TERMS_AND_CONDITIONS.terms}</Link>
+
+
+                    <iframe src="https://www.facebook.com/plugins/like.php?href=https%3A%2F%2Fpodredeni.eu&width=62&layout=button_count&action=like&size=small&show_faces=false&share=false&height=21&appId=602878320047542"
+                            width="62"
+                            height="21"
+                            style={{"border":"none", "overflow":"hidden"}}
+                            scrolling="no"
+                            frameBorder="0"
+                            allowtransparency="true"
+                            allow="encrypted-media">
+
+                    </iframe>
+
                     <div className="copy">
                         <p> &copy; 2018 podredeni.eu</p>
                     </div>
 
-
-                    {/*<div className="fb-like"*/}
-                         {/*data-href="https://podredeni.eu"*/}
-                         {/*data-layout="button_count"*/}
-                         {/*data-action="like"*/}
-                         {/*data-size="large"*/}
-                         {/*data-show-faces="false"*/}
-                         {/*data-share="true"></div>*/}
-
-
-                    {/*<div className="fb-page"*/}
-                         {/*data-href="https://www.facebook.com/moiteochila"*/}
-                         {/*data-tabs=""*/}
-                         {/*data-small-header="true"*/}
-                         {/*data-adapt-container-width="false"*/}
-                         {/*data-hide-cover="false"*/}
-                         {/*data-show-facepile="false">*/}
-                        {/*<blockquote cite="https://www.facebook.com/moiteochila"*/}
-                                    {/*className="fb-xfbml-parse-ignore">*/}
-                            {/*<a href="https://www.facebook.com/moiteochila">PODREDeni</a>*/}
-                        {/*</blockquote>*/}
-                    {/*</div>*/}
-
-                    <Link to="/terms">{TERMS_AND_CONDITIONS.terms}</Link>
 
 
                     {/*<div className="created-by">*/}
