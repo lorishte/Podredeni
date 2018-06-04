@@ -75,10 +75,8 @@ class TopSellers extends React.Component {
 	};
 
 	moveCarousel = (translateValue) => {
-		console.log(translateValue);
 
 		let element = this.topSellers.current;
-		console.log(element.clientWidth);
 
 		if (translateValue < 0 || translateValue > (Math.floor(element.clientWidth) - this.state.productsToShow * this.state.cardWidth)) return;
 		this.setState({translateValue});

@@ -17,7 +17,6 @@ class ProductCard extends React.Component {
 	}
 
 	componentWillReceiveProps (nextProps) {
-		console.log(nextProps.xsRes);
 		this.setState({xsRes: nextProps.xsRes});
 	}
 

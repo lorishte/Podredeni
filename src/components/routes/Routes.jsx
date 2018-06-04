@@ -11,7 +11,7 @@ import Register from '../auth/Register';
 
 // USER
 import Home from '../user/home/Home';
-import About from '../user/about/About';
+import Videos from '../user/videos/Videos';
 import Contact from '../user/contact/Contact';
 import Terms from '../user/termsAndConditions/Terms';
 
@@ -54,9 +54,8 @@ let Routes = () => {
 
 			<Route path='/cart' component={Cart}/>
 
-			<Route path='/order/confirmation' component={OrderReceived}/>
+			<Route path='/videos' component={Videos}/>
 
-			{/*<Route path='/about' component={About}/>*/}
 			<Route path='/contact' component={Contact}/>
 
 			<Route path='/terms' component={Terms}/>
@@ -70,7 +69,10 @@ let Routes = () => {
 			<PrivateRoute path='/order/log/:id' component={OrderLog}/>
 			<PrivateRoute path='/order/edit/:id' component={OrderEdit}/>
 
+
+			/*Errors and Confirmations*/
 			<Route path='/error' component={Error}/>
+			<Route path='/order/confirmation' component={OrderReceived}/>
 
 			/*Rest*/
 			<Route path='*' component={NotFound}/>

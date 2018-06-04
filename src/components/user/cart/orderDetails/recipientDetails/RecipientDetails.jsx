@@ -11,8 +11,6 @@ class RecipientInfoInputs extends React.Component {
 	constructor (props) {
 		super(props);
 
-		console.log(this.props.data);
-
 		this.state = {
 			firstName: this.props.data.firstName,
 			lastName: this.props.data.lastName,

@@ -35,7 +35,7 @@ class EkontInfoInputs extends React.Component {
 	}
 
 	componentWillUnmount () {
-		window.removeEventListener('orientationchange', this.handleResolutionChange );
+		window.removeEventListener('orientationchange', this.handleResolutionChange);
 		window.removeEventListener('resize', this.handleResolutionChange);
 	}
 
@@ -46,7 +46,8 @@ class EkontInfoInputs extends React.Component {
 				this.setState({ekontData: data});
 			})
 			.catch(err => {
-				this.toastContainer.error(err.responseText, TOASTR_MESSAGES.error, {
+				console.log(err);
+				this.toastContainer.error(err.statusText, TOASTR_MESSAGES.error, {
 					closeButton: false,
 				});
 			});
@@ -101,7 +102,7 @@ class EkontInfoInputs extends React.Component {
 	};
 
 	handleResolutionChange = () => {
-		this.setState({resolution: window.innerWidth})
+		this.setState({resolution: window.innerWidth});
 	};
 
 	render () {
@@ -121,49 +122,49 @@ class EkontInfoInputs extends React.Component {
 
 				{this.state.ekontData !== '' &&
 
-					<div className="form-group">
+				<div className="form-group">
 
+					<Col xs={resolution ? 12 : 6} sm={4}>
+						<FormSelectField
+							label={ORDER_DELIVERY_INPUTS.country}
+							name="country"
+							value={this.state.country}
+							defaultValue={this.state.country}
+							optionsList={this.state.ekontData}
+							required={true}
+							onChange={this.handleChange}/>
+					</Col>
+
+					{this.state.country !== '' &&
+
+					<div>
 						<Col xs={resolution ? 12 : 6} sm={4}>
 							<FormSelectField
-								label={ORDER_DELIVERY_INPUTS.country}
-								name="country"
-								value={this.state.country}
-								defaultValue={this.state.country}
-								optionsList={this.state.ekontData}
+								label={ORDER_DELIVERY_INPUTS.city}
+								name="city"
+								value={this.state.city}
+								defaultValue={this.state.city}
+								optionsList={this.state.ekontData[this.state.country]}
 								required={true}
 								onChange={this.handleChange}/>
 						</Col>
 
-						{this.state.country !== '' &&
+						{this.state.city !== '' &&
 
-							<div>
-								<Col xs={resolution ? 12 : 6} sm={4}>
-									<FormSelectField
-										label={ORDER_DELIVERY_INPUTS.city}
-										name="city"
-										value={this.state.city}
-										defaultValue={this.state.city}
-										optionsList={this.state.ekontData[this.state.country]}
-										required={true}
-										onChange={this.handleChange}/>
-								</Col>
-
-								{this.state.city !== '' &&
-
-									<Col xs={resolution ? 12 : 6} sm={4}>
-										<FormSelectField
-											label={ORDER_DELIVERY_INPUTS.officeName}
-											name="officeName"
-											defaultValue={this.state.officeName}
-											value={this.state.officeName}
-											optionsList={this.state.ekontData[this.state.country][this.state.city]}
-											required={true}
-											onChange={this.handleChange}/>
-									</Col>
-								}
-							</div>
+						<Col xs={resolution ? 12 : 6} sm={4}>
+							<FormSelectField
+								label={ORDER_DELIVERY_INPUTS.officeName}
+								name="officeName"
+								defaultValue={this.state.officeName}
+								value={this.state.officeName}
+								optionsList={this.state.ekontData[this.state.country][this.state.city]}
+								required={true}
+								onChange={this.handleChange}/>
+						</Col>
 						}
 					</div>
+					}
+				</div>
 				}
 			</Row>
 		);

@@ -12,7 +12,6 @@ class Paging extends React.Component {
 	}
 
 	changePage = (e, selectedPage) => {
-		console.log(this.props);
 
 		if (selectedPage === undefined) selectedPage = Number(e.target.text);
 		if (selectedPage < 1 || selectedPage > this.props.pagesCount) return;

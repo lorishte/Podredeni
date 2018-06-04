@@ -5,7 +5,7 @@ import data from '../../../../../data/testimonials';
 import { Carousel } from 'react-bootstrap';
 import TestimonialCard from './partials/TestimonialCard';
 
-import { TOP_SELLERS_TIMER_INTERVAL } from '../../../../../data/constants/componentConstants';
+import { TESTIMONIALS_TIMER_INTERVAL } from '../../../../../data/constants/componentConstants';
 
 class Testimonials extends React.Component {
 	constructor (props, context) {
@@ -21,7 +21,7 @@ class Testimonials extends React.Component {
 	}
 
 	componentDidMount () {
-		this.timer = setInterval(this.changeSlide, TOP_SELLERS_TIMER_INTERVAL);
+		this.timer = setInterval(this.changeSlide, TESTIMONIALS_TIMER_INTERVAL);
 
 	};
 
@@ -49,7 +49,7 @@ class Testimonials extends React.Component {
 			direction: e.direction
 		});
 
-		this.timer = setInterval(this.changeSlide, TOP_SELLERS_TIMER_INTERVAL);
+		this.timer = setInterval(this.changeSlide, TESTIMONIALS_TIMER_INTERVAL);
 	};
 
 	render () {

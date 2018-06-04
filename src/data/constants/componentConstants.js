@@ -2,6 +2,10 @@ const FILTER_INPUT_WAIT_INTERVAL = 2000;
 
 const REDIRECT_DELAY = 2000;
 
+const TESTIMONIALS_TIMER_INTERVAL = 8000;
+
+const MAIN_CAROUSEL_TIMER_INTERVAL = 5000;
+
 const ADMIN_PRODUCTS_FILTER_OPTIONS = {'name': 'име', 'number': 'номер'};
 
 const ELEMENTS_ON_PAGE = {10: 10, 20: 20, 30: 30, 40: 40, 50: 50};
@@ -130,7 +134,6 @@ const CONFIRM_DIALOGS = {
 	cancelOrder: 'Желаете ли да откажете поръчката?',
 	deleteOrder: 'Сигурни ли сте, че искате да откажете поръчката?',
 	deleteProduct: 'Сигурни ли сте, че искате да изтриете този продукт?'
-
 };
 
 const RESOLUTIONS = {
@@ -152,16 +155,15 @@ const HOME = {
 
 const TERMS_AND_CONDITIONS = {
 	terms: 'Общи условия и поверителност'
-
 };
 
 const CURRENCY = 'лв.';
 
 const CONTACT_FORM = {
-	name: 'Име:',
-	email: 'Имейл:',
-	subject: 'Относно:',
-	message: 'Съобщение:'
+	name: 'Име и Фамилия',
+	email: 'Имейл',
+	subject: 'Относно',
+	message: 'Съобщение'
 };
 
 const CART = {
@@ -192,10 +194,11 @@ const CART = {
 	noComment: 'Няма добавени забележки.',
 };
 
-const TOP_SELLERS_TIMER_INTERVAL = 8000;
 
 export {
 	FILTER_INPUT_WAIT_INTERVAL,
+	MAIN_CAROUSEL_TIMER_INTERVAL,
+	TESTIMONIALS_TIMER_INTERVAL,
 	ADMIN_PRODUCTS_FILTER_OPTIONS,
 	ELEMENTS_ON_PAGE,
 	ORDER_STATUS_BG,
@@ -215,7 +218,6 @@ export {
 	CURRENCY,
 	CONTACT_FORM,
 	CART,
-	TOP_SELLERS_TIMER_INTERVAL,
-	FACEBOOK_VIDEOS
+	FACEBOOK_VIDEOS,
 };
 

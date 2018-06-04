@@ -6,7 +6,6 @@ import ControlledCarousel from './partials/carousel/ControlledCarousel';
 import AboutProduct from './partials/aboutProduct/AboutProduct';
 import TopSellers from './partials/topSellers/TopSellers';
 import Testimonials from './partials/testimonials/Testimonials';
-import Videos from './partials/videos/Videos';
 
 class Home extends React.Component {
     constructor(props) {
@@ -37,9 +36,7 @@ class Home extends React.Component {
                     <Testimonials/>
                 </Grid>
 
-                <Grid fluid id="videos">
-                    <Videos/>
-                </Grid>
+
 
                 {/*<Grid fluid id="home-banner-2">*/}
                 {/*<div className="wrapper">*/}

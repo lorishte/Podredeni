@@ -2,7 +2,7 @@ import React from 'react';
 
 import { Carousel } from 'react-bootstrap';
 
-const TIMER_INTERVAL = 5000;
+import { MAIN_CAROUSEL_TIMER_INTERVAL } from '../../../../../data/constants/componentConstants';
 
 class ControlledCarousel extends React.Component {
 	constructor (props, context) {
@@ -26,7 +26,7 @@ class ControlledCarousel extends React.Component {
 	}
 
 	startTimer = () => {
-		this.timer = setInterval(this.changeSlide, TIMER_INTERVAL);
+		this.timer = setInterval(this.changeSlide, MAIN_CAROUSEL_TIMER_INTERVAL);
 	};
 
 	changeSlide = () => {
@@ -64,7 +64,7 @@ class ControlledCarousel extends React.Component {
 				onSelect={this.handleSelect}>
 
 				<Carousel.Item >
-					<img className="carousel-img" alt="slider_01" src="./images/banners/podredeni_banner_03.jpg"/>
+					<img className="carousel-img" alt="slider_01" src="images/banners/podredeni_banner_03.jpg"/>
 					{/*<Carousel.Caption>*/}
 						{/*<h3>First slide label</h3>*/}
 						{/*<p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>*/}

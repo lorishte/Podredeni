@@ -19,7 +19,7 @@ class Contact extends React.Component {
 			name: '',
 			email: '',
 			subject: '',
-			content: '',
+			message: '',
 			resolution: window.innerWidth
 		};
 
@@ -43,7 +43,7 @@ class Contact extends React.Component {
 		this.setState({resolution: window.innerWidth});
 	};
 
-	handleChange = (e) => {
+	handleInputChange = (e) => {
 		this.setState({[e.target.name]: e.target.value});
 	};
 
@@ -51,19 +51,43 @@ class Contact extends React.Component {
 		this.setState(this.baseState);
 	};
 
-	sendContactForm = () => {
+	checkFields = (inputs) => {
+		let emptyFields = [];
 
-		const [name, email, subject, content] = [this.state.name, this.state.email, this.state.subject, this.state.content];
+		for (let el in this.state) {
+			if (el === 'subject' || el === 'resolution')continue;
+			if (this.state[el].trim() === '') {
+				emptyFields.push(CONTACT_FORM[el])
+			}
+		}
 
-		contactService.sendContactForm(name, email, subject, content)
+		return emptyFields;
+	};
+
+	showWarning = (message) => {
+		this.toastContainer.warning(message, TOASTR_MESSAGES.requestEmptyFields, {
+			closeButton: false,
+		});
+	};
+
+	sendMessage = (e) => {
+		e.preventDefault();
+
+		const [name, email, subject, message] = [this.state.name, this.state.email, this.state.subject, this.state.message];
+
+		// Check for empty fields
+		let result = this.checkFields();
+		if (result.length !== 0) {
+			this.showWarning(result.join('; '));
+			return;
+		}
+
+		contactService.sendContactForm(name, email, subject, message)
 			.then(res => {
-
 				this.resetState();
-
 				this.toastContainer.success(TOASTR_MESSAGES.messageSent, '', {
 					closeButton: true,
 				});
-
 			})
 			.catch(err => {
 				this.toastContainer.error(err.responseText, TOASTR_MESSAGES.error, {
@@ -79,74 +103,73 @@ class Contact extends React.Component {
 		return (
 
 			<Grid >
-				<div style={{"textAlign": "center"}}>
-					<p>
-						<strong>Армоник ООД</strong> е вносител на американските магнитни клипсове<br/>
-						адрес: гр. София, бул. Цар Борис III, 91<br/>
-						тел. 0888 170 767
-					</p>
-				</div>
-
-				<hr/>
-				<div style={{"textAlign": "center"}}>
-					<p>
-						<strong>Форма за контакт</strong>
-					</p>
-				</div>
 				<ToastContainer
 					ref={ref => this.toastContainer = ref}
 					className="toast-bottom-right"
 				/>
 
+				<p className="text-center">
+					<strong>Армоник ООД</strong> е вносител на американските магнитни клипсове.<br/>
+					адрес: гр. София, бул. Цар Борис III, 91<br/>
+					тел. 0888 170 767
+				</p>
+				<hr/>
+				<p className="text-center">
+					<strong>Форма за контакт</strong>
+				</p>
+
+
 				<Row>
 					<Col xs={resolution ? 12 : 8} sm={6} md={4} xsOffset={resolution ? 0 : 2} smOffset={3} mdOffset={4}>
-						<FormGroup controlId="contact-form">
+						<form onSubmit={this.sendMessage}>
 
-							<FormInputField
-								label={CONTACT_FORM.name}
-								type="text"
-								name="name"
-								required={true}
-								value={this.state.name}
-								placeholder=""
-								onChange={this.handleChange}
-							/>
+							<FormGroup controlId="contact-form">
 
-							<FormInputField
-								label={CONTACT_FORM.email}
-								type="email"
-								name="email"
-								required={true}
-								value={this.state.email}
-								placeholder=""
-								onChange={this.handleChange}
-							/>
+								<FormInputField
+									label={CONTACT_FORM.name}
+									type="text"
+									name="name"
+									required={true}
+									value={this.state.name}
+									placeholder=""
+									onChange={this.handleInputChange}
+								/>
 
-							<FormInputField
-								label={CONTACT_FORM.subject}
-								type="text"
-								name="subject"
-								required={false}
-								value={this.state.subject}
-								placeholder=""
-								onChange={this.handleChange}/>
+								<FormInputField
+									label={CONTACT_FORM.email}
+									type="email"
+									name="email"
+									required={true}
+									value={this.state.email}
+									placeholder=""
+									onChange={this.handleInputChange}
+								/>
 
-							<FormTextareaField
-								label={CONTACT_FORM.message}
-								componentClass="textarea"
-								type="text"
-								name="content"
-								required={true}
-								value={this.state.content}
-								placeholder=""
-								onChange={this.handleChange}/>
-						</FormGroup>
+								<FormInputField
+									label={CONTACT_FORM.subject}
+									type="text"
+									name="subject"
+									required={false}
+									value={this.state.subject}
+									placeholder=""
+									onChange={this.handleInputChange}/>
 
-						<div className="buttons-container text-center">
+								<FormTextareaField
+									label={CONTACT_FORM.message}
+									componentClass="textarea"
+									type="text"
+									name="message"
+									required={true}
+									value={this.state.message}
+									placeholder=""
+									onChange={this.handleInputChange}/>
+							</FormGroup>
 
-							<button className="btn-custom primary md"
-							        onClick={this.sendContactForm}>{BUTTONS_BG.send}</button>
-						</div>
+							<div className="buttons-container text-center">
+
+								<button type="submit" className="btn-custom primary md">{BUTTONS_BG.send}</button>
+							</div>
+						</form>
 					</Col>
 				</Row>
 			</Grid>

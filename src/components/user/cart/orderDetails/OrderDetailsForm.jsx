@@ -48,10 +48,10 @@ class OrderDetails extends React.Component {
 			if (el === 'toAddress' || el === 'comment') continue;
 
 			if (el === 'recipientInfo') {
-				let user = this.state.recipientInfo;
+				let recipient = this.state.recipientInfo;
 
-				for (let input in user) {
-					if (user[input].trim() === '') {
+				for (let input in recipient) {
+					if (recipient[input].trim() === '') {
 						emptyFields.push(ORDER_DELIVERY_INPUTS[input]);
 					}
 				}
