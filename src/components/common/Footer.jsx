@@ -11,50 +11,20 @@ class Footer extends React.Component {
         return (
             <footer>
 
-                <div  className="facebook-wrapper">
-
-                    <iframe src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2F%2Fmoiteochila&tabs&width=340&height=70&small_header=true&adapt_container_width=true&hide_cover=false&show_facepile=false&appId=602878320047542"
-                            width="220"
-                            height="70"
-                            style={{"border":"none", "overflow":"hidden"}}
-                            scrolling="no"
-                            frameBorder="0"
-                            allowtransparency="true"
-                            allow="encrypted-media">
-
-                    </iframe>
-                </div>
-
-                <br/>
-
                 <div className="wrapper">
 
+                    <Link to="/terms" className="terms">{TERMS_AND_CONDITIONS.terms}</Link>
 
-
-                    <Link to="/terms">{TERMS_AND_CONDITIONS.terms}</Link>
-
-
-                    <iframe src="https://www.facebook.com/plugins/like.php?href=https%3A%2F%2Fpodredeni.eu&width=62&layout=button_count&action=like&size=small&show_faces=false&share=false&height=21&appId=602878320047542"
-                            width="62"
-                            height="21"
-                            style={{"border":"none", "overflow":"hidden"}}
-                            scrolling="no"
-                            frameBorder="0"
-                            allowtransparency="true"
-                            allow="encrypted-media">
-
-                    </iframe>
-
-                    <div className="copy">
-                        <p> &copy; 2018 podredeni.eu</p>
+                    <div className="social-media-icons">
+                        <a className="icon" target="_blank" href="https://www.facebook.com/moiteochila/">
+                            <i className="fa fa-facebook-official" aria-hidden="true"/>
+                        </a>
                     </div>
 
+                    <div className="copy">
+                        <span> &copy; 2018 podredeni.eu</span>
+                    </div>
 
-
-                    {/*<div className="created-by">*/}
-                    {/*<p> A web page by <a href="" target="_blank" className="text-accent-secondary">US</a>*/}
-                    {/*</p>*/}
-                    {/*</div>*/}
                 </div>
             </footer>
         );
@@ -62,3 +32,25 @@ class Footer extends React.Component {
 }
 
 export default Footer;
+
+{/*<div  className="facebook-wrapper">*/}
+{/*<iframe src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2F%2Fmoiteochila&tabs&width=340&height=70&small_header=true&adapt_container_width=true&hide_cover=false&show_facepile=false&appId=602878320047542"*/}
+{/*width="220"*/}
+{/*height="70"*/}
+{/*style={{"border":"none", "overflow":"hidden"}}*/}
+{/*scrolling="no"*/}
+{/*frameBorder="0"*/}
+{/*allowtransparency="true"*/}
+{/*allow="encrypted-media">*/}
+{/*</iframe>*/}
+{/*</div>*/}
+
+{/*<iframe src="https://www.facebook.com/plugins/like.php?href=https%3A%2F%2Fpodredeni.eu&width=62&layout=button_count&action=like&size=small&show_faces=false&share=false&height=21&appId=602878320047542"*/}
+        {/*width="62"*/}
+        {/*height="21"*/}
+        {/*style={{"border":"none", "overflow":"hidden"}}*/}
+        {/*scrolling="no"*/}
+        {/*frameBorder="0"*/}
+        {/*allowtransparency="true"*/}
+        {/*allow="encrypted-media">*/}
+{/*</iframe>*/}

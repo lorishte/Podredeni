@@ -5,7 +5,6 @@ import { Label } from 'react-bootstrap';
 
 import { RESOLUTIONS } from '../../data/constants/componentConstants';
 
-
 class Header extends React.Component {
 
 	constructor (props) {
@@ -68,7 +67,6 @@ class Header extends React.Component {
 				<div className="navbar-brand">
 					<Link to="/home">Podredeni</Link>
 				</div>
-
 				}
 
 				{!isAdmin &&
@@ -85,7 +83,16 @@ class Header extends React.Component {
 				}
 
 				{!isAdmin &&
+				<div className="social-media-icons hidden-xs">
+					<a className="icon" target="_blank" href="https://www.facebook.com/moiteochila/">
+						<i className="fa fa-facebook-official" aria-hidden="true"/>
+					</a>
+				</div>
+				}
+
+				{!isAdmin &&
 				<div id="user-nav" className="collapse navbar-collapse">
+
 					<ul className="nav navbar-nav navbar-right" onClick={this.hideMenu}>
 
 						<NavLink to="/home" activeClassName="active" className='nav-link'>
@@ -106,7 +113,7 @@ class Header extends React.Component {
 
 						{/*{!isLoggedInUser &&*/}
 						{/*<NavLink to="/login" activeClassName="active" className='nav-link'>*/}
-							{/*Вход*/}
+						{/*Вход*/}
 						{/*</NavLink>*/}
 						{/*}*/}
 
@@ -116,13 +123,30 @@ class Header extends React.Component {
 						</NavLink>
 						}
 
-						<NavLink to="/cart" activeClassName="active" className='nav-link cart'>
+						<NavLink to="/cart" activeClassName="active" className='nav-link cart hidden-xs'>
 							<i className="fa fa-cart-arrow-down" aria-hidden="true"/>
 							{productsCount !== 0 &&
 							<Label bsStyle="danger">{' ' + productsCount}</Label>
 							}
 						</NavLink>
+
+						<div className="social-media-icons visible-xs">
+							<a className="icon" target="_blank" href="https://www.facebook.com/moiteochila/">
+								<i className="fa fa-facebook-official" aria-hidden="true"/>
+							</a>
+						</div>
 					</ul>
+				</div>
+				}
+
+				{!isAdmin &&
+				<div className="cart-xs">
+					<NavLink to="/cart" activeClassName="active" className='nav-link cart visible-xs'>
+						<i className="fa fa-cart-arrow-down" aria-hidden="true"/>
+						{productsCount !== 0 &&
+						<Label bsStyle="danger">{' ' + productsCount}</Label>
+						}
+					</NavLink>
 				</div>
 				}
 

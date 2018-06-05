@@ -184,7 +184,7 @@ main {
   //margin-top: $header-height;
   min-height: calc(100vh - 80px);
 
-  padding-top: 160px;
+  padding-top: 195px;
   padding-bottom: 50px;
   background-color: $warm-light-grey;
 }
@@ -278,6 +278,16 @@ input[type=checkbox], input[type=radio] {
 .buttons-container {
   .btn {
     margin-bottom: 5px;
+  }
+}
+
+.icon {
+  font-size: 1.8em;
+  color: $primary;
+  @include transition;
+
+  &:hover {
+    color: $primary-hover;
   }
 }
 
@@ -462,6 +472,21 @@ nav {
     }
   }
 
+  .cart {
+    color: $medium-grey;
+    border-bottom: none;
+    font-size: 1em;
+
+    .fa {
+      font-size: 1.5em;
+      padding-right: 8px;
+    }
+
+    .label-danger {
+      background-color: $primary;
+    }
+  }
+
   #user-nav {
     .nav {
       @include flex;
@@ -477,25 +502,10 @@ nav {
         font-size: .9em;
         @include transition;
 
-        &.cart {
-          color: $medium-grey;
-          border-bottom: none;
-          font-size: 1em;
-
-          .fa {
-            font-size: 1.5em;
-            padding-right: 8px;
-          }
-        }
-
         &.active {
           color: $primary;
         }
       }
-    }
-
-    .label-danger {
-      background-color: $primary;
     }
   }
 
@@ -1163,21 +1173,24 @@ footer {
 
   .wrapper {
     @include flex;
-    @include justify-content(space-between);
+    @include justify-content(center);
     @include align-items(center);
+
+    * {
+      flex-basis: 33%;
+      flex-grow: 1;
+    }
   }
 
-  .social {
-    i {
-      margin: 0 10px;
-      font-size: 2em;
-      color: #383838;
+  .terms {
+  }
 
-      &:hover {
-        color: $primary;
-        transition: all .3s;
-      }
-    }
+  .social-media-icons {
+    text-align: center;
+  }
+
+  .copy {
+    text-align: right;
   }
 }
 
@@ -1414,6 +1427,16 @@ footer {
       position: absolute;
       top: 14px;
       right: 3px;
+    }
+
+    .cart-xs {
+      @include flex;
+      @include justify-content(center);
+      @include transition;
+      margin-top: 0;
+      position: absolute;
+      top: 14px;
+      right: 80px;
     }
 
     #user-nav {

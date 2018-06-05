@@ -5,7 +5,6 @@
   margin: 0;
   padding: 0; }
 
-
 body {
   margin: 0;
   padding: 0;
@@ -17,7 +16,7 @@ body {
 
 main {
   min-height: calc(100vh - 80px);
-  padding-top: 160px;
+  padding-top: 195px;
   padding-bottom: 50px;
   background-color: #f6f5f3; }
 
@@ -87,6 +86,15 @@ input[type=checkbox], input[type=radio] {
 
 .buttons-container .btn {
   margin-bottom: 5px; }
+
+.icon {
+  font-size: 1.8em;
+  color: #b49543;
+  -webkit-transition: .4s;
+  -moz-transition: .4s;
+  transition: .4s; }
+  .icon:hover {
+    color: #896e36; }
 
 .btn {
   margin-right: 5px; }
@@ -233,6 +241,15 @@ nav {
     margin: 15px auto 15px auto; }
     nav .navbar-brand.admin {
       margin: 15px; }
+  nav .cart {
+    color: #c6c6c6;
+    border-bottom: none;
+    font-size: 1em; }
+    nav .cart .fa {
+      font-size: 1.5em;
+      padding-right: 8px; }
+    nav .cart .label-danger {
+      background-color: #b49543; }
   nav #user-nav .nav {
     display: -webkit-box;
     display: -webkit-flex;
@@ -261,17 +278,8 @@ nav {
       -webkit-transition: .4s;
       -moz-transition: .4s;
       transition: .4s; }
-      nav #user-nav .nav .nav-link.cart {
-        color: #c6c6c6;
-        border-bottom: none;
-        font-size: 1em; }
-        nav #user-nav .nav .nav-link.cart .fa {
-          font-size: 1.5em;
-          padding-right: 8px; }
       nav #user-nav .nav .nav-link.active {
         color: #b49543; }
-  nav #user-nav .label-danger {
-    background-color: #b49543; }
   nav #admin-nav .nav {
     display: -webkit-box;
     display: -webkit-flex;
@@ -308,28 +316,8 @@ nav {
     nav #admin-nav .nav #logout-btn {
       margin-left: 8px; }
 
-.facebook-responsive {
-  padding-bottom:70%;
-  margin-top: -55px;
-  margin-right: 20px;
-  position:relative;
-  height:0;
-}
-.videos{
-  margin: 15px;
-
-}
-.facebook-responsive iframe {
-  margin: 10px;
-  left:10px;
-  top:10px;
-  height:100%;
-  width:100%;
-  position:absolute;
-}
-
 #home-main-carousel .carousel {
-  height: 600px;
+  height: 550px;
   margin-top: -35px; }
   #home-main-carousel .carousel .carousel-inner {
     height: 100%;
@@ -362,9 +350,9 @@ nav {
 .carousel-control.left,
 .carousel-control.right {
   background: none;
-  -webkit-transition: .6s;
-  -moz-transition: .6s;
-  transition: .6s; }
+  -webkit-transition: .4s;
+  -moz-transition: .4s;
+  transition: .4s; }
 
 #home-about {
   text-align: center; }
@@ -853,23 +841,23 @@ footer {
     display: -webkit-flex;
     display: -ms-flexbox;
     display: flex;
-    -webkit-box-pack: justify;
-    -moz-box-pack: justify;
-    -ms-flex-pack: justify;
-    -webkit-justify-content: space-between;
-    justify-content: space-between;
+    -webkit-box-pack: center;
+    -moz-box-pack: center;
+    -ms-flex-pack: center;
+    -webkit-justify-content: center;
+    justify-content: center;
     -webkit-box-align: center;
     -moz-box-align: center;
     -ms-flex-align: center;
     -webkit-align-items: center;
     align-items: center; }
-  footer .social i {
-    margin: 0 10px;
-    font-size: 2em;
-    color: #383838; }
-    footer .social i:hover {
-      color: #b49543;
-      transition: all .3s; }
+    footer .wrapper * {
+      flex-basis: 33%;
+      flex-grow: 1; }
+  footer .social-media-icons {
+    text-align: center; }
+  footer .copy {
+    text-align: right; }
 
 #image-gallery {
   width: 100%; }
@@ -970,10 +958,6 @@ footer {
         color: rgba(0, 0, 0, 0.2);
         background-color: rgba(255, 255, 255, 0.3); }
 
-.facebook-wrapper {
-  text-align: center;
-  margin-bottom:15px;}
-
 .loader {
   border: 1px solid #b49543;
   border-top: 1px solid #ffffff;
@@ -1066,6 +1050,23 @@ footer {
     position: absolute;
     top: 14px;
     right: 3px; }
+  nav .cart-xs {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+    -moz-box-pack: center;
+    -ms-flex-pack: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+    -webkit-transition: .4s;
+    -moz-transition: .4s;
+    transition: .4s;
+    margin-top: 0;
+    position: absolute;
+    top: 14px;
+    right: 80px; }
   nav #user-nav {
     position: absolute;
     top: 62px; }

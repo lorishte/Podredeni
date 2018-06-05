@@ -41,7 +41,7 @@ class OrderDetails extends React.Component {
 		this.setState({termsAgreed: e.target.checked});
 	};
 
-	checkFields = () => {
+	validateForm = () => {
 		let emptyFields = [];
 
 		for (let el in this.state) {
@@ -104,7 +104,7 @@ class OrderDetails extends React.Component {
 	submitInfo = (e) => {
 		e.preventDefault();
 
-		let result = this.checkFields();
+		let result = this.validateForm();
 
 		if (result.length !== 0) {
 			this.showWarning(result.join(', '));

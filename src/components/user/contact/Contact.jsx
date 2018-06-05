@@ -51,7 +51,7 @@ class Contact extends React.Component {
 		this.setState(this.baseState);
 	};
 
-	checkFields = (inputs) => {
+	validateForm = () => {
 		let emptyFields = [];
 
 		for (let el in this.state) {
@@ -76,7 +76,7 @@ class Contact extends React.Component {
 		const [name, email, subject, message] = [this.state.name, this.state.email, this.state.subject, this.state.message];
 
 		// Check for empty fields
-		let result = this.checkFields();
+		let result = this.validateForm();
 		if (result.length !== 0) {
 			this.showWarning(result.join('; '));
 			return;
