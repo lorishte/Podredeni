@@ -394,7 +394,7 @@ nav {
   z-index: 1; }
   #home-banner-1 .article-content h4,
   #home-banner-2 .article-content h4 {
-    color: #896e36;
+    color: #b49543;
     font-weight: 300;
     text-transform: uppercase;
     font-size: 1.5em; }
@@ -604,7 +604,8 @@ nav {
 
 #testimonials {
   padding-bottom: 50px;
-  min-height: 250px; }
+  min-height: 250px;
+  background-color: #ece9e1; }
   #testimonials .testimonial .testimonial-body .testimonial-text {
     margin-top: 25px;
     font-style: italic;
@@ -654,6 +655,11 @@ nav {
 
 .tab-content {
   padding: 25px 15px; }
+
+#videos .video {
+  width: 100%;
+  height: 300px;
+  margin-bottom: 25px; }
 
 #cart .active-tab {
   color: #b49543; }
@@ -835,7 +841,8 @@ nav {
 footer {
   background-color: rgba(240, 240, 240, 0);
   padding: 20px 40px;
-  font-size: .8em; }
+  font-size: .8em;
+  border-top: 1px solid #f6f5f3; }
   footer .wrapper {
     display: -webkit-box;
     display: -webkit-flex;
@@ -1014,6 +1021,9 @@ footer {
     width: auto;
     height: 100%; }
 
+  #videos .video {
+    height: 200px; }
+
   #orders .order-info {
     width: 80%; } }
 @media screen and (max-width: 767px) {
@@ -1181,7 +1191,10 @@ footer {
 
   #orders .order-info {
     width: 95%;
-    top: 5%; } }
+    top: 5%; }
+
+  #videos .video {
+    height: 150px; } }
 @media screen and (max-width: 480px) {
   #order-list-tabs .tab-content {
     background-color: #fff; }

@@ -30,12 +30,12 @@ class TopSellers extends React.Component {
 	componentDidMount () {
 		this.loadProducts();
 		window.addEventListener('resize', this.loadProducts);
-		window.addEventListener('orientationchange',  this.loadProducts );
+		window.addEventListener('orientationchange', this.loadProducts);
 	}
 
 	componentWillUnmount () {
 		window.removeEventListener('resize', this.loadProducts);
-		window.removeEventListener('orientationchange',  this.loadProducts );
+		window.removeEventListener('orientationchange', this.loadProducts);
 	}
 
 	loadProducts = () => {
@@ -92,14 +92,17 @@ class TopSellers extends React.Component {
 		let cards;
 		if (this.state.products !== '') {
 			cards = this.state.products.map(product => {
-                return <TopSellerProductCard key={product.id} data={product} width={this.state.cardWidth}/>;
-            });
+				return <TopSellerProductCard key={product.id} data={product} width={this.state.cardWidth}/>;
+			});
 		}
 
 		return (
-			<Grid className="bg-white">
+			<Grid fluid id="top-sellers" className="bg-white">
+				<Grid>
 
 					<h1 className="section-heading">{HOME.topSellers}</h1>
+
+					{this.state.products === '' && <div className="loader"/> }
 
 					<div className="top-sellers-carousel" ref={this.container}>
 						<div className="top-sellers" ref={this.topSellers}>
@@ -121,6 +124,7 @@ class TopSellers extends React.Component {
 							<span className="sr-only">Next</span>
 						</button>}
 					</div>
+				</Grid>
 			</Grid>
 		);
 	}

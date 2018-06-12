@@ -1,5 +1,7 @@
-import React, { Component } from 'react';
+import React from 'react';
+
 import { Grid, Col } from 'react-bootstrap';
+
 import Video from './partials/Video';
 
 import { FACEBOOK_VIDEOS } from '../../../data/constants/componentConstants';
@@ -8,24 +10,31 @@ class Videos extends React.Component {
 
 	constructor (props) {
 		super(props);
+
 	}
+
+	handleSelect = (selectedIndex, e) => {
+		this.setState({
+			index: selectedIndex,
+			direction: e.direction
+		});
+	};
 
 	render () {
 
-		let index = 1;
-		let count = FACEBOOK_VIDEOS.length;
-
-		let videos = FACEBOOK_VIDEOS.map(v => {
-			return <Col key={index++} xs={12 / count}>
-				<div className="facebook-responsive">
-					<Video src={v}/>
-				</div>
-			</Col>;
+		let videos = FACEBOOK_VIDEOS.map((v, i) => {
+			return (
+				<Col key={i} xs={6}>
+					<Video src={v} className="video"/>
+				</Col>);
 		});
 
-		return <Grid fluid id="videos" className="videos">
-			{videos}
-		</Grid>;
+
+		return (
+			<Grid id="videos">
+				{videos}
+			</Grid>
+		);
 	}
 }
 

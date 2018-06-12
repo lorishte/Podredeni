@@ -9,10 +9,7 @@ class Video extends React.Component {
     render() {
 
         return <iframe src={this.props.src}
-                       width="500"
-                       height=""
-                       key=""
-                       style={{"border": "none", "overflow": "hidden"}}
+                       className="video"
                        scrolling="no"
                        frameBorder="0"
                        data-show-text="false"

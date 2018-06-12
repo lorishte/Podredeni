@@ -114,9 +114,7 @@ class Contact extends React.Component {
 					тел. 0888 170 767
 				</p>
 				<hr/>
-				<p className="text-center">
-					<strong>Форма за контакт</strong>
-				</p>
+
 
 
 				<Row>

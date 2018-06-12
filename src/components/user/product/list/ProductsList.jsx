@@ -73,6 +73,9 @@ class ProductsList extends React.Component {
 					ref={ref => this.toastContainer = ref}
 					className="toast-bottom-right"
 				/>
+
+				{this.state.products.length === 0 && <div className="loader"/> }
+
 				<Row className="show-grid top-sellers">
 					{productsList}
 				</Row>

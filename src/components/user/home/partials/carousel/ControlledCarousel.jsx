@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Carousel } from 'react-bootstrap';
+import { Grid, Carousel } from 'react-bootstrap';
 
 import { MAIN_CAROUSEL_TIMER_INTERVAL } from '../../../../../data/constants/componentConstants';
 
@@ -57,6 +57,7 @@ class ControlledCarousel extends React.Component {
 		const {index, direction} = this.state;
 
 		return (
+			<Grid fluid id="home-main-carousel">
 			<Carousel
 				ref={this.carousel}
 				activeIndex={index}
@@ -124,6 +125,7 @@ class ControlledCarousel extends React.Component {
 				</Carousel.Item>
 
 			</Carousel>
+			</Grid>
 		);
 	}
 }

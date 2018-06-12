@@ -27,6 +27,7 @@ $dark-grey: #5b5b5b;
 $medium-grey: #c6c6c6;
 $light-grey: #e6e6e6;
 $warm-light-grey: #f6f5f3;
+$warm-light-grey-2: #ece9e1;
 
 $header-height: 65px;
 
@@ -633,7 +634,7 @@ nav {
     z-index: 1;
 
     h4 {
-      color: $primary-hover;
+      color: $primary;
       font-weight: 300;
       text-transform: uppercase;
       font-size: 1.5em;
@@ -855,6 +856,7 @@ nav {
 #testimonials {
   padding-bottom: 50px;
   min-height: 250px;
+  background-color: $warm-light-grey-2;
 
   .testimonial {
     .testimonial-body {
@@ -931,6 +933,15 @@ nav {
 
 .tab-content {
   padding: 25px 15px;
+}
+
+//User Videos
+#videos {
+  .video {
+    width: 100%;
+    height: 300px;
+    margin-bottom: 25px;
+  }
 }
 
 //User: Cart
@@ -1170,6 +1181,7 @@ footer {
   //margin: 50px auto 0;
   padding: 20px 40px;
   font-size: .8em;
+  border-top: 1px solid $warm-light-grey;
 
   .wrapper {
     @include flex;
@@ -1369,6 +1381,12 @@ footer {
         width: auto;
         height: 100%;
       }
+    }
+  }
+
+  #videos {
+    .video {
+      height: 200px;
     }
   }
 
@@ -1580,6 +1598,12 @@ footer {
     .order-info {
       width: 95%;
       top: 5%;
+    }
+  }
+
+  #videos {
+    .video {
+      height: 150px;
     }
   }
 

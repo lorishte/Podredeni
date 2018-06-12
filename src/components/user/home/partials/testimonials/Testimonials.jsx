@@ -2,7 +2,7 @@ import React from 'react';
 
 import data from '../../../../../data/testimonials';
 
-import { Carousel } from 'react-bootstrap';
+import { Grid, Carousel } from 'react-bootstrap';
 import TestimonialCard from './partials/TestimonialCard';
 
 import { TESTIMONIALS_TIMER_INTERVAL } from '../../../../../data/constants/componentConstants';
@@ -65,14 +65,16 @@ class Testimonials extends React.Component {
 		const {index, direction} = this.state;
 
 		return (
-			<Carousel
-				ref={this.testimonial}
-				activeIndex={index}
-				direction={direction}
-				onSelect={this.handleSelect}>
+			<Grid fluid id="testimonials" className="bg-white">
+				<Carousel
+					ref={this.testimonial}
+					activeIndex={index}
+					direction={direction}
+					onSelect={this.handleSelect}>
 
-				{testimonialCards}
-			</Carousel>
+					{testimonialCards}
+				</Carousel>
+			</Grid>
 		);
 	}
 }

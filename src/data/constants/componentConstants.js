@@ -43,8 +43,9 @@ const LABELS_BG = {
 };
 
 const FACEBOOK_VIDEOS = [
-	"https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2Fmoiteochila%2Fvideos%2F180041719364210%2F&width=500&show_text=false&appId=602878320047542&height=280",
-    "https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2Fmoiteochila%2Fvideos%2F176997756335273%2F&width=500&show_text=false&appId=602878320047542&height=280"
+	"https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2Fmoiteochila%2Fvideos%2F180041719364210%2F",
+    "https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2Fmoiteochila%2Fvideos%2F176997756335273%2F",
+	"https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2Fmoiteochila%2Fvideos%2F176997756335273%2F"
 ];
 
 const ORDER_DELIVERY_INPUTS = {

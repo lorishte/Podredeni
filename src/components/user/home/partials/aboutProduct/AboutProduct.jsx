@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Col, Clearfix } from 'react-bootstrap';
+import { Grid, Col, Clearfix } from 'react-bootstrap';
 
 class AboutProduct extends React.Component {
 	constructor (props) {
@@ -10,8 +10,8 @@ class AboutProduct extends React.Component {
 	render () {
 
 		return (
-			<div className="bg-white">
-				<Col xs={12}>
+			<Grid fluid id="home-about" className="bg-white">
+				<Grid>
 					<h2 className="section-heading">Винаги под ръка!</h2>
 					<div className="home-text">
 						<p>Никога не откривате очилата си?</p>
@@ -19,10 +19,9 @@ class AboutProduct extends React.Component {
 						<p>Поставяте ги на деколтето на дрехата си, но се навеждате и те падат?</p>
 						<p>КРАЙ НА ТОВА!</p>
 					</div>
-				</Col>
+				</Grid>
 
-				<Clearfix>
-				</Clearfix>
+				<Clearfix/>
 
 
 				<div id="home-banner-1">
@@ -47,7 +46,7 @@ class AboutProduct extends React.Component {
 						</article>
 					</div>
 				</div>
-			</div>
+			</Grid>
 		);
 	}
 }
