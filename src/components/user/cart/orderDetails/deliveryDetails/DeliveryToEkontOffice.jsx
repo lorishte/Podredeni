@@ -8,6 +8,7 @@ import FormSelectField from '../../../../common/formComponents/FormSelectField';
 
 // Services
 import ekontRequester from '../../../../../services/ekont/ekontRequester';
+import ekontService from '../../../../../services/ekont/ekontService';
 import ekontDataParser from '../../../../../services/ekont/ekontDataConvertor';
 
 import { RESOLUTIONS, TOASTR_MESSAGES, ORDER_DELIVERY_INPUTS } from '../../../../../data/constants/componentConstants';
@@ -40,9 +41,10 @@ class EkontInfoInputs extends React.Component {
 	}
 
 	loadEkontOffices = () => {
-		ekontRequester.getOffices()
+		ekontService.getOffices()
 			.then(response => {
-				let data = ekontDataParser.transformXml(response);
+
+				let data = ekontDataParser.transformXml(response.offices);
 				this.setState({ekontData: data});
 			})
 			.catch(err => {
@@ -52,6 +54,22 @@ class EkontInfoInputs extends React.Component {
 				});
 			});
 	};
+
+	//**Data is retrieved from API instead
+
+    // loadEkontOffices = () => {
+    //     ekontRequester.getOffices()
+    //         .then(response => {
+    //             let data = ekontDataParser.transformXml(response);
+    //             this.setState({ekontData: data});
+    //         })
+    //         .catch(err => {
+    //             console.log(err);
+    //             this.toastContainer.error(err.statusText, TOASTR_MESSAGES.error, {
+    //                 closeButton: false,
+    //             });
+    //         });
+    // };
 
 	handleChange = (e) => {
 

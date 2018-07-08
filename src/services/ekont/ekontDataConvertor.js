@@ -15,7 +15,9 @@ let countries = {
 export default {
 	transformXml: (xml, lang='') => {
 
-		let offices = $(xml).find('response').find('offices').children();
+		let xmlDoc = $.parseXML(xml);
+
+		let offices = $(xmlDoc).find('response').find('offices').children();
 
 		let result = {};
 
