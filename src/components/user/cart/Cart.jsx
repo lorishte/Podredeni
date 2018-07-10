@@ -66,6 +66,11 @@ class Cart extends React.Component {
 
 		this.setState({orderDetails: storedOrderDetails});
 		this.loadProducts();
+
+        if(this.props.location.goToOrderDetailsView) {
+
+            this.showDeliveryDetailsForm();
+        }
 	}
 
 	loadProducts = () => {

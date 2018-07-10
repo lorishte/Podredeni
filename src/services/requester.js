@@ -1,7 +1,7 @@
 import $ from 'jquery';
 
-const host = 'http://localhost:30336/api';
-//const host = 'https://rest.podredeni.eu/api';
+//const host = 'http://localhost:30336/api';
+const host = 'https://rest.podredeni.eu/api';
 
 let token = () => {
     return sessionStorage.getItem('p_token');

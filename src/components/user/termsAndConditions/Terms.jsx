@@ -1,6 +1,8 @@
 import React from 'react';
 
-import {Grid, Col} from 'react-bootstrap';
+import {Grid, Col, Row} from 'react-bootstrap';
+
+import {Link} from 'react-router-dom';
 
 import {TERMS_AND_CONDITIONS} from '../../../data/constants/componentConstants';
 
@@ -154,7 +156,14 @@ class Terms extends React.Component {
 
                     </Col>
 
+
+                    <Col xs={12} className="text-center">
+                        <Link className={"btn-custom default md"} to={{pathname: '/cart', goToOrderDetailsView: true}} > Назад </Link>
+                    </Col>
+
+
                 </Grid>
+
 
 
             </Grid>
