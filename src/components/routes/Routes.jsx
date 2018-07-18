@@ -19,6 +19,12 @@ import Terms from '../user/termsAndConditions/Terms';
 import ProductsList from '../user/product/list/ProductsList';
 import ProductDetails from '../user/product/details/ProductDetails';
 
+// User News
+import NewsList from '../user/news/NewsList';
+import NewsDetails from '../user/news/NewsDetails';
+import NewsEdit from '../user/news/NewsEdit';
+import NewsCreate from '../user/news/NewsCreate';
+
 // User Cart
 import Cart from '../user/cart/Cart';
 
@@ -51,6 +57,12 @@ let Routes = () => {
 
 			<Route exact path='/products' component={ProductsList}/>
 			<Route path='/products/:id' component={ProductDetails}/>
+
+			<Route exact path='/news/create' component={NewsCreate}/>
+			<Route exact path='/news' component={NewsList}/>
+			<Route exact path='/news/:id' component={NewsDetails}/>
+			<Route exact path='/news/edit/:id' component={NewsEdit}/>
+
 
 			<Route path='/cart' component={Cart}/>
 

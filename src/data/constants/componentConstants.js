@@ -129,6 +129,8 @@ const TOASTR_MESSAGES = {
 	//Success
 	productAddedToCart: 'Продуктът е добавен в кошницата Ви.',
 	successOrderEdit: 'Успешна редакция.',
+	successNewsEdit: 'Новината е редактирана успешно.',
+	successNewsCreate: 'Новината е създадена успешно.',
 	successCancelOrder: 'Поръчката е отказана.',
 	messageSent: 'Вашето съобщение беше изпратено!'
 };
