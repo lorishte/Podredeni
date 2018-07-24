@@ -4,6 +4,8 @@ import { Grid, Row} from 'react-bootstrap';
 
 import { Link } from 'react-router-dom';
 
+import {BUTTONS_BG} from '../../../../data/constants/componentConstants';
+
 class ReadMoreButton extends React.Component {
     constructor (props) {
         super(props);
@@ -14,7 +16,7 @@ class ReadMoreButton extends React.Component {
         return (
             <Grid>
                 <Row>
-                    <Link className={"btn-custom default md"} to={'/news/' + this.props.newsId} > Повече </Link>
+                    <Link className={"btn-custom default md"} to={'/news/' + this.props.newsId} >{BUTTONS_BG.more}</Link>
                 </Row>
             </Grid>
         );

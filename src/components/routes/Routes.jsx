@@ -39,6 +39,9 @@ import AdminOrdersList from '../admin/order/list/OrdersList';
 import OrderLog from '../admin/order/log/OrderLog';
 import OrderEdit from '../admin/order/edit/OrderEdit';
 
+// Admin Home content
+import HomeContent from '../admin/homeContent/homeContent';
+
 // ERRORS and CONFIRMATIONS
 import OrderReceived from '../common/confirmation/OrderReceived';
 import Error from '../common/errors/Error';
@@ -80,6 +83,8 @@ let Routes = () => {
 			<PrivateRoute path='/order/list' component={AdminOrdersList}/>
 			<PrivateRoute path='/order/log/:id' component={OrderLog}/>
 			<PrivateRoute path='/order/edit/:id' component={OrderEdit}/>
+
+			<PrivateRoute exact path='/home-content' component={HomeContent}/>
 
 
 			/*Errors and Confirmations*/

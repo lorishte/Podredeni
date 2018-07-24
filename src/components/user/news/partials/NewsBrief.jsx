@@ -3,9 +3,11 @@ import { Grid, Row, Col, Image } from 'react-bootstrap';
 
 import EditButton from './EditButton';
 import ReadMoreButton from './ReadMoreButton';
+import DeleteButton from './DeleteButton';
 
 import Utils from '../../../../utils/utils';
 
+import {NEWS} from '../../../../data/constants/componentConstants';
 
 class NewsBrief extends React.Component {
     constructor (props) {
@@ -22,10 +24,15 @@ class NewsBrief extends React.Component {
                 <Row>
                     <Col>
                         <Image src={news.imageUrl}/>
-                        <h2>{news.title}</h2><p>Публикуван на {Utils.formatDateAndTime(news.creationDate)}</p>
+                        <h2>{news.title}</h2><p>{NEWS.published}{Utils.formatDateAndTime(news.creationDate)}</p>
 
                         {isAdmin &&
                         <EditButton
+                            newsId={news.id}/>
+                        }
+
+                        {isAdmin &&
+                        <DeleteButton
                             newsId={news.id}/>
                         }
 

@@ -10,7 +10,7 @@ import Paging from '../../common/pagination/Paging';
 
 import newsService from '../../../services/news/newsService';
 
-import { RESOLUTIONS } from '../../../data/constants/componentConstants';
+import { RESOLUTIONS, BUTTONS_BG} from '../../../data/constants/componentConstants';
 
 class NewsList extends React.Component {
     constructor (props) {
@@ -97,17 +97,15 @@ class NewsList extends React.Component {
 
                 {isAdmin &&
                 <Row>
-                    <Link className={"btn-custom default md"} to={'/news/create'} > Създай </Link>
+                    <Link className={"btn-custom default md"} to={'/news/create'} >{BUTTONS_BG.create}</Link>
                 </Row>
                 }
-
-                {this.state.news.length === 0 && <div className="loader"/> }
 
                 <Row className="show-grid top-sellers">
                     {newsList}
                 </Row>
 
-                {this.state.size !== '0' && this.state.ordersCount !== 0 &&
+                {this.state.size !== '0' && this.state.newsCount !== 0 &&
                 <Paging
                     active={Number(this.state.page)}
                     pagesCount={Number(this.state.pagesCount)}

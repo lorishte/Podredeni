@@ -10,7 +10,7 @@ import { RESOLUTIONS } from '../../../data/constants/componentConstants';
 import FormTextareaField from "../../common/formComponents/FormTextareaField";
 import FormInputField from "../../common/formComponents/FormInputField";
 
-import { TOASTR_MESSAGES, REDIRECT_DELAY } from '../../../data/constants/componentConstants';
+import { TOASTR_MESSAGES, BUTTONS_BG, NEWS_CREATE_INPUTS } from '../../../data/constants/componentConstants';
 
 class NewsEdit extends React.Component {
 
@@ -49,10 +49,6 @@ class NewsEdit extends React.Component {
             .catch(err => {
                 this.props.history.push('/error');
             });
-    };
-
-    updateInfo = (stateProp, data) => {
-        this.setState({[stateProp]: data});
     };
 
     saveChanges = () => {
@@ -97,7 +93,7 @@ class NewsEdit extends React.Component {
                     <Col xs={resolution ? 12 : 6} sm={6} md={7}>
                         <FormInputField
                             type="text"
-                            label="Заглавие"
+                            label={NEWS_CREATE_INPUTS.title}
                             name="title"
                             value={this.state.title}
                             required={true}
@@ -105,15 +101,15 @@ class NewsEdit extends React.Component {
                             disabled={false}/>
 
                         <FormTextareaField
-                            label={"Съдържание"}
-                            name={"content"}
+                            label={NEWS_CREATE_INPUTS.content}
+                            name="content"
                             value={this.state.content}
                             required={true}
                             onChange={this.handleChange}/>
 
                         <FormTextareaField
-                            label={"Картинка URL"}
-                            name={"imageUrl"}
+                            label={NEWS_CREATE_INPUTS.imageUrl}
+                            name="imageUrl"
                             value={this.state.imageUrl}
                             required={true}
                             onChange={this.handleChange}/>
@@ -121,9 +117,9 @@ class NewsEdit extends React.Component {
                 </Row>
 
                 <Col xs={12} className="text-center">
-                    <Link className={"btn-custom default md"} to={{pathname: '/news'}} > Назад </Link>
+                    <Link className={"btn-custom default md"} to={{pathname: '/news'}} >{BUTTONS_BG.back}</Link>
 
-                    <Button onClick={this.saveChanges}>Промени</Button>
+                    <Button onClick={this.saveChanges}>{BUTTONS_BG.edit}</Button>
                 </Col>
             </Grid>
         );

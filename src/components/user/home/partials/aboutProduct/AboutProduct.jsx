@@ -1,23 +1,45 @@
 import React from 'react';
 
-import { Grid, Col, Clearfix } from 'react-bootstrap';
+import { Grid, Clearfix } from 'react-bootstrap';
+
+import homeContentService from '../../../../../services/homeContent/homeContentService';
 
 class AboutProduct extends React.Component {
 	constructor (props) {
 		super(props);
+
+		this.state = {
+
+		}
 	}
+
+    componentDidMount () {
+        this.loadHomeContent();
+    }
+
+    loadHomeContent = () => {
+        homeContentService
+            .loadHomeContent()
+            .then(res => {
+                this.setState({
+					sectionHeading: res.content.sectionHeading,
+                    sectionContent: res.content.sectionContent,
+                    articleHeading: res.content.articleHeading,
+                    articleContent: res.content.articleContent
+                })
+            })
+            .catch(err => {
+                console.log(err.Message)
+                });
+    };
 
 	render () {
 
 		return (
 			<Grid fluid id="home-about" className="bg-white">
 				<Grid>
-					<h2 className="section-heading">Винаги под ръка!</h2>
-					<div className="home-text">
-						<p>Никога не откривате очилата си?</p>
-						<p>Търсите ги в чантата си, но там е пълен хаос?</p>
-						<p>Поставяте ги на деколтето на дрехата си, но се навеждате и те падат?</p>
-						<p>КРАЙ НА ТОВА!</p>
+					<h2 className="section-heading">{this.state.sectionHeading}</h2>
+					<div className="home-text" dangerouslySetInnerHTML={{__html: this.state.sectionContent}}>
 					</div>
 				</Grid>
 
@@ -32,16 +54,8 @@ class AboutProduct extends React.Component {
 							</div>
 
 							<div className="article-content bg-white">
-								<h4>Oчилата ви са винаги на ТОЧНОТО МЯСТО. Стилно и удобно!</h4>
-								<p>
-									Практични и елегантни, в различен стил и цветове, те са неотменим аксесоар към вашия
-									тоалет и най-големият ви помощник.
-									На ризата, на сакото, на блузата, роклята или чантата, винаги стилно и удобно.
-									Когато спортувате и/или слушате музика - фиксирайте слушалките си, когато сте на
-									плажа –
-									спокойно “закачете” слънчевите си очила… на банските. За бизнеса или свободно време,
-									магнитните клипсове са вашия задължителен аксесоар.
-								</p>
+								<h4>{this.state.articleHeading}</h4>
+								<div dangerouslySetInnerHTML={{__html: this.state.articleContent}}></div>
 							</div>
 						</article>
 					</div>

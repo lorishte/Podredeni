@@ -169,9 +169,13 @@ class Header extends React.Component {
 							Продукти
 						</NavLink>
 
-						{/*<NavLink to="/news" activeClassName="active" className='nav-link'>*/}
-							{/*Новини*/}
-						{/*</NavLink>*/}
+						<NavLink to="/news" activeClassName="active" className='nav-link'>
+							Новини
+						</NavLink>
+
+						<NavLink to="/home-content" activeClassName="active" className='nav-link'>
+							Съдържание
+						</NavLink>
 
 						<NavLink to="/home"
 						         id="logout-btn"

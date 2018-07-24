@@ -6,6 +6,7 @@ import ControlledCarousel from './partials/carousel/ControlledCarousel';
 import AboutProduct from './partials/aboutProduct/AboutProduct';
 import TopSellers from './partials/topSellers/TopSellers';
 import Testimonials from './partials/testimonials/Testimonials';
+import NewsCarousel from './partials/news/NewsCarousel';
 
 class Home extends React.Component {
 	constructor (props) {
@@ -24,6 +25,8 @@ class Home extends React.Component {
 				<ControlledCarousel />
 
 				<TopSellers/>
+
+                {/*<NewsCarousel/>*/}
 
 				<AboutProduct/>
 

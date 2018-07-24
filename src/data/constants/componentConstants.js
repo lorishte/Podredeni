@@ -86,6 +86,12 @@ const NOT_REQUIRED_ORDER_INPUTS = {
 	apartment: 'апартамент',
 };
 
+const NEWS_CREATE_INPUTS = {
+	title: 'Заглавие',
+	content: 'Съдържание',
+	imageUrl: 'Картинка URL'
+};
+
 const BUTTONS_BG = {
 	confirm: 'Потвърди',
 	cancel: 'Отказ',
@@ -95,6 +101,10 @@ const BUTTONS_BG = {
 	yes: 'Да',
 	no: 'Не',
 	send: 'Изпрати',
+	delete: 'Изтрий',
+	edit: 'Редактиране',
+	more: 'Повече',
+	create: 'Създай',
 
 	//Cart
 	saveChanges: 'Запази промените',
@@ -130,7 +140,9 @@ const TOASTR_MESSAGES = {
 	productAddedToCart: 'Продуктът е добавен в кошницата Ви.',
 	successOrderEdit: 'Успешна редакция.',
 	successNewsEdit: 'Новината е редактирана успешно.',
+	successHomeContentModification: 'Съдържанието на началната страница беше променено.',
 	successNewsCreate: 'Новината е създадена успешно.',
+    successNewsDelete: 'Новината е изтрита успешно.',
 	successCancelOrder: 'Поръчката е отказана.',
 	messageSent: 'Вашето съобщение беше изпратено!'
 };
@@ -138,7 +150,8 @@ const TOASTR_MESSAGES = {
 const CONFIRM_DIALOGS = {
 	cancelOrder: 'Желаете ли да откажете поръчката?',
 	deleteOrder: 'Сигурни ли сте, че искате да откажете поръчката?',
-	deleteProduct: 'Сигурни ли сте, че искате да изтриете този продукт?'
+	deleteProduct: 'Сигурни ли сте, че искате да изтриете този продукт?',
+	deleteNews: 'Сигурни ли сте, че искате да изтриете тази новина?'
 };
 
 const RESOLUTIONS = {
@@ -160,6 +173,10 @@ const HOME = {
 
 const TERMS_AND_CONDITIONS = {
 	terms: 'Общи условия и поверителност'
+};
+
+const NEWS = {
+	published: 'Публикуван на: '
 };
 
 const CURRENCY = 'лв.';
@@ -213,6 +230,7 @@ export {
 	TOASTR_MESSAGES,
 	ORDER_DELIVERY_INPUTS,
 	NOT_REQUIRED_ORDER_INPUTS,
+    NEWS_CREATE_INPUTS,
 	BUTTONS_BG,
 	RESOLUTIONS,
 	REDIRECT_DELAY,
@@ -224,5 +242,6 @@ export {
 	CONTACT_FORM,
 	CART,
 	FACEBOOK_VIDEOS,
+	NEWS
 };
 

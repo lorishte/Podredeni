@@ -46,5 +46,13 @@ export default {
 
         return requesterService
             .post(newsEndPoint, auth, news);
+    },
+
+    deleteNews: (newsId) => {
+
+        let endPointId = newsEndPoint + '/' + newsId;
+
+        return requesterService
+            .remove(endPointId);
     }
 };

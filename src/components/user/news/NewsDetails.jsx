@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 
 import newsService from '../../../services/news/newsService';
 
-import { RESOLUTIONS } from '../../../data/constants/componentConstants';
+import { RESOLUTIONS, BUTTONS_BG } from '../../../data/constants/componentConstants';
 
 class News extends React.Component {
     constructor (props) {
@@ -64,7 +64,7 @@ class News extends React.Component {
                 </Row>
 
                 <Col xs={12} className="text-center">
-                    <Link className={"btn-custom default md"} to={{pathname: '/news'}} > Назад </Link>
+                    <Link className={"btn-custom default md"} to={{pathname: '/news'}} >{BUTTONS_BG.back}</Link>
                 </Col>
             </Grid>
         );
