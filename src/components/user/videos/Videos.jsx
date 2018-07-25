@@ -10,22 +10,15 @@ class Videos extends React.Component {
 
 	constructor (props) {
 		super(props);
-
 	}
-
-	handleSelect = (selectedIndex, e) => {
-		this.setState({
-			index: selectedIndex,
-			direction: e.direction
-		});
-	};
 
 	render () {
 
 		let videos = FACEBOOK_VIDEOS.map((v, i) => {
+			console.log(v);
 			return (
 				<Col key={i} xs={6}>
-					<Video src={v} className="video"/>
+					<Video src={v}/>
 				</Col>);
 		});
 

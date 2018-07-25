@@ -2,30 +2,31 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 class NewsCard extends React.Component {
-    constructor (props) {
-        super(props);
-    }
+	constructor (props) {
+		super(props);
+	}
 
-    render () {
+	render () {
 
-        const data = this.props.data;
+		const data = this.props.data;
 
-        return (
+		return (
 
-            <Link to={'/news/' + data.id}>
-                <div className="news-card" style={{padding: 250 + 'px'}}>
-                    <div className="news-image">
-                        <img className="" src={data.imageUrl} alt="News image"/>
-                    </div>
-                    <div className="news-body">
-                        <h4 className="news-title">{data.title}</h4>
-                        <p className="news-publishedOn">{data.creationDate}</p>
-                    </div>
-                </div>
-            </Link>
+			<Link to={'/news/' + data.id} className="news-card">
 
-        );
-    }
+				<div className="news-image-container">
+					<img className="image" src={data.imageUrl} alt="News image"/>
+				</div>
+
+				<div className="news-body">
+					<h4 className="news-title">{data.title}</h4>
+					<p className="news-publishedOn">{data.creationDate}</p>
+				</div>
+
+			</Link>
+
+		);
+	}
 }
 
 export default NewsCard;

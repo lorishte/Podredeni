@@ -19,6 +19,9 @@ class Footer extends React.Component {
                         <a className="icon" target="_blank" href="https://www.facebook.com/moiteochila/">
                             <i className="fa fa-facebook-official" aria-hidden="true"/>
                         </a>
+                        <a className="icon" target="_blank" href="https://www.instagram.com/podredeni.eu">
+                            <i className="fa fa-instagram" aria-hidden="true"/>
+                        </a>
                     </div>
 
                     <div className="copy">

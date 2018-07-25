@@ -36,7 +36,6 @@ class CreateProduct extends React.Component {
 		}
 
 		this.loadProductData();
-
 	}
 
 	loadProductData = () => {

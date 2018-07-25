@@ -43,6 +43,12 @@ class NewsCreate extends React.Component {
                 this.toastContainer.success(TOASTR_MESSAGES.successNewsCreate, '', {
                     closeButton: false,
                 });
+
+	            this.setState({
+		            title: '',
+		            imageUrl: '',
+		            content: ''
+                })
             })
             .catch(err => {
                 this.toastContainer.error(err.responseText, TOASTR_MESSAGES.error, {

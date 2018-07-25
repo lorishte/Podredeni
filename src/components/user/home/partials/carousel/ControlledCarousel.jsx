@@ -66,10 +66,10 @@ class ControlledCarousel extends React.Component {
 
 				<Carousel.Item >
 					<img className="carousel-img" alt="slider_01" src="images/banners/podredeni_banner_03.jpg"/>
-					{/*<Carousel.Caption>*/}
-						{/*<h3>First slide label</h3>*/}
+					<Carousel.Caption>
+						{/*<h1>Магнитни клипсове</h1>*/}
 						{/*<p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>*/}
-					{/*</Carousel.Caption>*/}
+					</Carousel.Caption>
 				</Carousel.Item>
 
 				<Carousel.Item>

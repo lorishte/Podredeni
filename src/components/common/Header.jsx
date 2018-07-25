@@ -69,6 +69,7 @@ class Header extends React.Component {
 				</div>
 				}
 
+
 				{!isAdmin &&
 				<button type="button"
 				        className="navbar-toggle collapsed"
@@ -87,6 +88,9 @@ class Header extends React.Component {
 					<a className="icon" target="_blank" href="https://www.facebook.com/moiteochila/">
 						<i className="fa fa-facebook-official" aria-hidden="true"/>
 					</a>
+					{/*<a className="icon" target="_blank" href="https://www.instagram.com/podredeni.eu">*/}
+						{/*<i className="fa fa-instagram" aria-hidden="true"/>*/}
+					{/*</a>*/}
 				</div>
 				}
 
