@@ -40,7 +40,7 @@ import OrderLog from '../admin/order/log/OrderLog';
 import OrderEdit from '../admin/order/edit/OrderEdit';
 
 // Admin Home content
-import HomeContent from '../admin/homeContent/homeContent';
+import HomeContent from '../admin/homeContent/HomeContent';
 
 // ERRORS and CONFIRMATIONS
 import OrderReceived from '../common/confirmation/OrderReceived';

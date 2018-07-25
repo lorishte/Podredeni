@@ -22,7 +22,7 @@ class AboutProduct extends React.Component {
 
     loadHomeContent = () => {
         homeContentService
-            .loadHomeContent()
+            .loadArticle()
             .then(res => {
                 this.setState({
 					sectionHeading: res.content.sectionHeading,

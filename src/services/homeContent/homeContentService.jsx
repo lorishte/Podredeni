@@ -1,6 +1,7 @@
 import requesterService from '../requester';
 
-const homeContentEndPoint = '/homeContent';
+const articleEndPoint = '/homeContent/articles';
+const carouselItemsEndPoint = '/homeContent/carousel/items';
 const auth = 'admin';
 
 function generateHomeContentDetails(state){
@@ -16,17 +17,21 @@ function generateHomeContentDetails(state){
 
 export default {
 
-    loadHomeContent: () => {
+    loadArticle: () => {
 
-        return requesterService.get(homeContentEndPoint);
+        return requesterService.get(articleEndPoint);
 
     },
 
-    modifyHomeContent: (state) => {
+    modifyArticle: (state) => {
 
         let content = generateHomeContentDetails(state);
 
         return requesterService
-            .post(homeContentEndPoint, auth, content);
+            .post(articleEndPoint, auth, content);
     },
+
+    loadCarouselItems: () => {
+        return requesterService.get(carouselItemsEndPoint);
+    }
 };
