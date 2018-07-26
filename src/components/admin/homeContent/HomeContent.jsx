@@ -2,8 +2,8 @@ import React from 'react';
 import { ToastContainer } from 'react-toastr';
 
 // Partials
-import ArticleManage from './partials/ArticleManage';
-import CarouselManage from './partials/CarouselManage';
+import ArticleManage from './article/ArticleManage';
+import CarouselManage from './carousel/CarouselManage';
 import { TOASTR_MESSAGES } from '../../../data/constants/componentConstants';
 
 // Helpers
@@ -67,8 +67,6 @@ class HomeContent extends React.Component {
 
     render () {
 
-        //let article = new ArticleManage(this.state, this.handleChange).render();
-
         return (
             <Grid id="homeContent">
 
@@ -78,7 +76,7 @@ class HomeContent extends React.Component {
                 />
 
                 <Tabs defaultActiveKey={1} id="homeContent-tabs">
-                    <Tab eventKey={1} title="Банер">
+                    <Tab eventKey={1} title="Карусел">
 
                         <CarouselManage
                             data={this.state}

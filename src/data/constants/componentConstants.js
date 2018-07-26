@@ -86,7 +86,7 @@ const NOT_REQUIRED_ORDER_INPUTS = {
 	apartment: 'апартамент',
 };
 
-const NEWS_CREATE_INPUTS = {
+const CREATE_INPUTS = {
 	title: 'Заглавие',
 	content: 'Съдържание',
 	imageUrl: 'Картинка URL'
@@ -142,6 +142,8 @@ const TOASTR_MESSAGES = {
 	successNewsEdit: 'Новината е редактирана успешно.',
 	successHomeContentModification: 'Съдържанието на началната страница беше променено.',
 	successNewsCreate: 'Новината е създадена успешно.',
+    successCarouselItemCreate: 'Съдържанието беше добавено успешно.',
+    successCarouselItemEdit: 'Съдържанието беше редактирано успешно успешно.',
     successNewsDelete: 'Новината е изтрита успешно.',
 	successCancelOrder: 'Поръчката е отказана.',
 	messageSent: 'Вашето съобщение беше изпратено!'
@@ -230,7 +232,7 @@ export {
 	TOASTR_MESSAGES,
 	ORDER_DELIVERY_INPUTS,
 	NOT_REQUIRED_ORDER_INPUTS,
-    NEWS_CREATE_INPUTS,
+    CREATE_INPUTS,
 	BUTTONS_BG,
 	RESOLUTIONS,
 	REDIRECT_DELAY,

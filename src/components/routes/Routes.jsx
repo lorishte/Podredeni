@@ -41,6 +41,8 @@ import OrderEdit from '../admin/order/edit/OrderEdit';
 
 // Admin Home content
 import HomeContent from '../admin/homeContent/HomeContent';
+import CarouselItemCreate from '../admin/homeContent/carousel/partials/CarouselItemCreate'
+import CarouselItemEdit from '../admin/homeContent/carousel/partials/CarouselItemEdit';
 
 // ERRORS and CONFIRMATIONS
 import OrderReceived from '../common/confirmation/OrderReceived';
@@ -85,6 +87,8 @@ let Routes = () => {
 			<PrivateRoute path='/order/edit/:id' component={OrderEdit}/>
 
 			<PrivateRoute exact path='/home-content' component={HomeContent}/>
+			<PrivateRoute exact path='/carousel-item/create' component={CarouselItemCreate}/>
+			<PrivateRoute exact path='/carousel-item/edit/:id' component={CarouselItemEdit}/>
 
 
 			/*Errors and Confirmations*/

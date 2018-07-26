@@ -14,7 +14,7 @@ class ReadMoreButton extends React.Component {
     render () {
 
         return (
-            <Grid>
+            <Grid id="news-readMoreButton">
                 <Row>
                     <Link className={"btn-custom default md"} to={'/news/' + this.props.newsId} >{BUTTONS_BG.more}</Link>
                 </Row>

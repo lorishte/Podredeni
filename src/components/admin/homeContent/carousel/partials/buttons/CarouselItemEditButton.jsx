@@ -4,7 +4,7 @@ import { Grid, Row} from 'react-bootstrap';
 
 import { Link } from 'react-router-dom';
 
-import {BUTTONS_BG} from '../../../../data/constants/componentConstants';
+import {BUTTONS_BG} from '../../../../../../data/constants/componentConstants';
 
 class CarouselItemEditButton extends React.Component {
     constructor (props) {
@@ -14,7 +14,7 @@ class CarouselItemEditButton extends React.Component {
     render () {
 
         return (
-            <Grid>
+            <Grid id="carouselItem-editButton">
                 <Row>
                     <Link className={"btn-custom default md"} to={'/carousel-item/edit/' + this.props.id} >{BUTTONS_BG.edit}</Link>
                 </Row>

@@ -1,16 +1,17 @@
 import React from 'react';
 import { ToastContainer } from 'react-toastr';
-import { Link } from 'react-router-dom'
 
 // Helpers
 import { Grid, Row, Col, Button } from 'react-bootstrap';
 
-import homeContentService from '../../../../services/homeContent/homeContentService';
-
 // Partials
-import { TOASTR_MESSAGES, BUTTONS_BG } from '../../../../data/constants/componentConstants';
 import FormInputField from "../../../common/formComponents/FormInputField";
 import FormTextareaField from "../../../common/formComponents/FormTextareaField";
+
+// Constants
+import { TOASTR_MESSAGES, BUTTONS_BG } from '../../../../data/constants/componentConstants';
+
+import homeContentService from '../../../../services/homeContent/homeContentService';
 
 class ArticleManage extends React.Component {
     constructor (props) {
@@ -65,7 +66,6 @@ class ArticleManage extends React.Component {
                         value={sectionContent}
                         onChange={this.props.handleChange}
                         required={true}
-
                     />
 
                     <FormInputField
@@ -85,13 +85,10 @@ class ArticleManage extends React.Component {
                         value={articleContent}
                         onChange={this.props.handleChange}
                         required={true}
-
                     />
                 </Row>
 
                 <Col xs={12} className="text-center">
-                    <Link className={"btn-custom default md"} to={{pathname: '/order/list'}} >{BUTTONS_BG.cancel}</Link>
-
                     <Button onClick={this.saveChanges}>{BUTTONS_BG.saveChanges}</Button>
                 </Col>
 

@@ -33,5 +33,36 @@ export default {
 
     loadCarouselItems: () => {
         return requesterService.get(carouselItemsEndPoint);
+    },
+
+    loadCarouselItem: (itemId) => {
+
+        let endPoint = carouselItemsEndPoint + '/'  + itemId;
+
+        return requesterService.get(endPoint);
+    },
+
+    createCarouselItem: (state) => {
+
+        let data = {
+            Heading: state.heading,
+            ImageUrl: state.imageUrl,
+            Content: state.content
+        };
+
+        return requesterService.post(carouselItemsEndPoint, auth, data);
+    },
+
+    editCarouselItem: (itemId, state) => {
+
+        let endPoint = carouselItemsEndPoint + '/'  + itemId;
+
+        let data = {
+            Heading: state.heading,
+            ImageUrl: state.imageUrl,
+            Content: state.content
+        };
+
+        return requesterService.update(endPoint, auth, data);
     }
 };

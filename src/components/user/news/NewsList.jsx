@@ -89,7 +89,7 @@ class NewsList extends React.Component {
         });
 
         return (
-            <Grid>
+            <Grid id="news">
                 <ToastContainer
                     ref={ref => this.toastContainer = ref}
                     className="toast-bottom-right"
