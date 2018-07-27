@@ -14,7 +14,7 @@ class EditButton extends React.Component {
     render () {
 
         return (
-            <Grid>
+            <Grid id="news-editButton">
                 <Row>
                     <Link className={"btn-custom default md"} to={'/news/edit/' + this.props.newsId} >{BUTTONS_BG.edit}</Link>
                 </Row>

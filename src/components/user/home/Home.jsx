@@ -7,7 +7,7 @@ import AboutProduct from './partials/aboutProduct/AboutProduct';
 import TopSellers from './partials/topSellers/TopSellers';
 import Testimonials from './partials/testimonials/Testimonials';
 import News from './partials/news/News';
-import HomeBannerTwo from './partials/homeBannerTwo/HomeBannerTwo';
+//import HomeBannerTwo from './partials/homeBannerTwo/HomeBannerTwo';
 
 class Home extends React.Component {
 	constructor (props) {

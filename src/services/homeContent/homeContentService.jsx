@@ -1,6 +1,7 @@
 import requesterService from '../requester';
 
-const homeContentEndPoint = '/homeContent';
+const articleEndPoint = '/homeContent/articles';
+const carouselItemsEndPoint = '/homeContent/carousel/items';
 const auth = 'admin';
 
 function generateHomeContentDetails(state){
@@ -16,17 +17,52 @@ function generateHomeContentDetails(state){
 
 export default {
 
-    loadHomeContent: () => {
+    loadArticle: () => {
 
-        return requesterService.get(homeContentEndPoint);
+        return requesterService.get(articleEndPoint);
 
     },
 
-    modifyHomeContent: (state) => {
+    modifyArticle: (state) => {
 
         let content = generateHomeContentDetails(state);
 
         return requesterService
-            .post(homeContentEndPoint, auth, content);
+            .post(articleEndPoint, auth, content);
     },
+
+    loadCarouselItems: () => {
+        return requesterService.get(carouselItemsEndPoint);
+    },
+
+    loadCarouselItem: (itemId) => {
+
+        let endPoint = carouselItemsEndPoint + '/'  + itemId;
+
+        return requesterService.get(endPoint);
+    },
+
+    createCarouselItem: (state) => {
+
+        let data = {
+            Heading: state.heading,
+            ImageUrl: state.imageUrl,
+            Content: state.content
+        };
+
+        return requesterService.post(carouselItemsEndPoint, auth, data);
+    },
+
+    editCarouselItem: (itemId, state) => {
+
+        let endPoint = carouselItemsEndPoint + '/'  + itemId;
+
+        let data = {
+            Heading: state.heading,
+            ImageUrl: state.imageUrl,
+            Content: state.content
+        };
+
+        return requesterService.update(endPoint, auth, data);
+    }
 };

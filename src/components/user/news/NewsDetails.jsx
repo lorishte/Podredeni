@@ -52,7 +52,7 @@ class News extends React.Component {
         let resolution = this.state.resolution < RESOLUTIONS.xs;
 
         return (
-            <Grid id="news">
+            <Grid id="news-details">
                 <Row>
                     <Col xs={resolution ? 12 : 6} sm={6} md={5}>
                         <Image src={this.state.imageUrl}/>

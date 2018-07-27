@@ -52,7 +52,7 @@ class DeleteButton extends React.Component {
     render() {
 
         return (
-            <Grid>
+            <Grid id="news-deleteButton">
 
                 <ToastContainer
                     ref={ref => this.toastContainer = ref}

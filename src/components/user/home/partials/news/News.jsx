@@ -42,9 +42,8 @@ class News extends React.Component {
 
 			news = this.state.news.map(e => {
 
-				return <Carousel.Item>
+				return <Carousel.Item key={e.id}>
 					<NewsCard
-						key={e.id}
 						data={e}/>
 				</Carousel.Item>;
 			});

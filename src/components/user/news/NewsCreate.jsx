@@ -10,7 +10,7 @@ import { RESOLUTIONS } from '../../../data/constants/componentConstants';
 import FormTextareaField from "../../common/formComponents/FormTextareaField";
 import FormInputField from "../../common/formComponents/FormInputField";
 
-import { TOASTR_MESSAGES, BUTTONS_BG, NEWS_CREATE_INPUTS } from '../../../data/constants/componentConstants';
+import { TOASTR_MESSAGES, BUTTONS_BG, CREATE_INPUTS } from '../../../data/constants/componentConstants';
 
 class NewsCreate extends React.Component {
 
@@ -70,7 +70,7 @@ class NewsCreate extends React.Component {
         let resolution = this.state.resolution < RESOLUTIONS.xs;
 
         return (
-            <Grid id="news">
+            <Grid id="news-create">
 
                 <ToastContainer
                     ref={ref => this.toastContainer = ref}
@@ -84,7 +84,7 @@ class NewsCreate extends React.Component {
                     <Col xs={resolution ? 12 : 6} sm={6} md={7}>
                         <FormInputField
                             type="text"
-                            label={NEWS_CREATE_INPUTS.title}
+                            label={CREATE_INPUTS.title}
                             name="title"
                             value={this.state.title}
                             required={true}
@@ -92,14 +92,14 @@ class NewsCreate extends React.Component {
                             disabled={false}/>
 
                         <FormTextareaField
-                            label={NEWS_CREATE_INPUTS.content}
+                            label={CREATE_INPUTS.content}
                             name="content"
                             value={this.state.content}
                             required={true}
                             onChange={this.handleChange}/>
 
                         <FormTextareaField
-                            label={NEWS_CREATE_INPUTS.imageUrl}
+                            label={CREATE_INPUTS.imageUrl}
                             name="imageUrl"
                             value={this.state.imageUrl}
                             required={true}

@@ -1,6 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
+import utils from '../../../../../../utils/utils'
+
 class NewsCard extends React.Component {
 	constructor (props) {
 		super(props);
@@ -20,7 +22,7 @@ class NewsCard extends React.Component {
 
 				<div className="news-body">
 					<h4 className="news-title">{data.title}</h4>
-					<p className="news-publishedOn">{data.creationDate}</p>
+					<p className="news-publishedOn">{utils.formatDateAndTime(data.creationDate)}</p>
 				</div>
 
 			</Link>

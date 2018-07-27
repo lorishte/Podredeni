@@ -1,26 +1,23 @@
 import React from 'react';
 import { ToastContainer } from 'react-toastr';
-
 import { Grid, Row, Col, Image, Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
-import newsService from '../../../services/news/newsService';
+//Partials
+import FormTextareaField from "../../../../common/formComponents/FormTextareaField";
+import FormInputField from "../../../../common/formComponents/FormInputField";
 
-import { RESOLUTIONS } from '../../../data/constants/componentConstants';
-import FormTextareaField from "../../common/formComponents/FormTextareaField";
-import FormInputField from "../../common/formComponents/FormInputField";
+import homeContentService from '../../../../../services/homeContent/homeContentService';
 
-import { TOASTR_MESSAGES, BUTTONS_BG, CREATE_INPUTS } from '../../../data/constants/componentConstants';
+import { TOASTR_MESSAGES, BUTTONS_BG, CREATE_INPUTS, RESOLUTIONS } from '../../../../../data/constants/componentConstants';
 
-class NewsEdit extends React.Component {
-
-    newsId = this.props.match.params.id;
+class CarouselItemCreate extends React.Component {
 
     constructor (props) {
         super(props);
 
         this.state = {
-            title: '',
+            heading: '',
             imageUrl: '',
             content: '',
             resolution: window.innerWidth
@@ -31,8 +28,6 @@ class NewsEdit extends React.Component {
         window.scrollTo(0, 0);
         window.addEventListener('orientationchange',  this.handleResolutionChange );
         window.addEventListener('resize', this.handleResolutionChange);
-
-        this.loadNewsData();
     }
 
     componentWillUnmount () {
@@ -40,25 +35,23 @@ class NewsEdit extends React.Component {
         window.removeEventListener('resize', this.handleResolutionChange);
     }
 
-    loadNewsData = () => {
-        newsService
-            .loadNews(this.newsId)
+    submit = () => {
+
+        console.log(this.state)
+
+        homeContentService.createCarouselItem(this.state)
             .then(res => {
-                this.setState({title: res.news.title, imageUrl: res.news.imageUrl, content: res.news.content});
+
+                this.toastContainer.success(TOASTR_MESSAGES.successCarouselItemCreate, '', {
+                    closeButton: false,
+                });
+
+                this.setState({
+                    heading: '',
+                    imageUrl: '',
+                    content: ''
+                })
             })
-            .catch(err => {
-                this.props.history.push('/error');
-            });
-    };
-
-    saveChanges = () => {
-        newsService.updateNews(this.state, this.newsId)
-            .then(res => {
-
-            this.toastContainer.success(TOASTR_MESSAGES.successNewsEdit, '', {
-                closeButton: false,
-            });
-        })
             .catch(err => {
                 this.toastContainer.error(err.responseText, TOASTR_MESSAGES.error, {
                     closeButton: false,
@@ -79,7 +72,7 @@ class NewsEdit extends React.Component {
         let resolution = this.state.resolution < RESOLUTIONS.xs;
 
         return (
-            <Grid id="news-edit">
+            <Grid id="carouselItem-edit">
 
                 <ToastContainer
                     ref={ref => this.toastContainer = ref}
@@ -94,8 +87,8 @@ class NewsEdit extends React.Component {
                         <FormInputField
                             type="text"
                             label={CREATE_INPUTS.title}
-                            name="title"
-                            value={this.state.title}
+                            name="heading"
+                            value={this.state.heading}
                             required={true}
                             onChange={this.handleChange}
                             disabled={false}/>
@@ -117,13 +110,13 @@ class NewsEdit extends React.Component {
                 </Row>
 
                 <Col xs={12} className="text-center">
-                    <Link className={"btn-custom default md"} to={{pathname: '/news'}} >{BUTTONS_BG.back}</Link>
+                    <Link className={"btn-custom default md"} to={{pathname: '/home-content'}} >{BUTTONS_BG.back}</Link>
 
-                    <Button onClick={this.saveChanges}>{BUTTONS_BG.edit}</Button>
+                    <Button onClick={this.submit}>{BUTTONS_BG.create}</Button>
                 </Col>
             </Grid>
         );
     }
 }
 
-export default NewsEdit;
+export default CarouselItemCreate;

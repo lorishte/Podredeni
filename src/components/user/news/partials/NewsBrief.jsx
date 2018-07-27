@@ -20,7 +20,7 @@ class NewsBrief extends React.Component {
         let news = this.props.data;
 
         return (
-            <Grid id="newsBrief">
+            <Grid id="news-brief">
                 <Row>
                     <Col>
                         <Image src={news.imageUrl}/>

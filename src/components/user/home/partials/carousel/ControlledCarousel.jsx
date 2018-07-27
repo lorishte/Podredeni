@@ -1,133 +1,110 @@
 import React from 'react';
 
-import { Grid, Carousel } from 'react-bootstrap';
+// Helpers
+import {Grid, Carousel} from 'react-bootstrap';
 
-import { MAIN_CAROUSEL_TIMER_INTERVAL } from '../../../../../data/constants/componentConstants';
+import homeContentService from '../../../../../services/homeContent/homeContentService';
+
+import {MAIN_CAROUSEL_TIMER_INTERVAL} from '../../../../../data/constants/componentConstants';
 
 class ControlledCarousel extends React.Component {
-	constructor (props, context) {
-		super(props, context);
+    constructor(props, context) {
+        super(props, context);
 
-		this.state = {
-			index: 0,
-			direction: null
-		};
+        this.state = {
+            carouselItems: [],
+            index: 0,
+            direction: null
+        };
 
-		this.carousel = React.createRef();
-		this.timer = null;
-	}
+        this.carousel = React.createRef();
+        this.timer = null;
+    }
 
-	componentDidMount () {
-		this.startTimer();
-	};
+    loadCarouselItems = () => {
+        homeContentService
+            .loadCarouselItems()
+            .then(res => {
+                this.setState({carouselItems: res.carouselItems})
+            })
+            .catch(err => {
+                console.log(err)
+            })
 
-	componentWillUnmount () {
-		clearInterval(this.timer);
-	}
+    };
 
-	startTimer = () => {
-		this.timer = setInterval(this.changeSlide, MAIN_CAROUSEL_TIMER_INTERVAL);
-	};
+    componentDidMount() {
+        this.loadCarouselItems();
+        this.startTimer();
+    };
 
-	changeSlide = () => {
-		let index = this.state.index + 1;
-		if (this.state.index === this.carousel.current.props.children.length - 1) {
-			index = 0
-		}
+    componentWillUnmount() {
+        clearInterval(this.timer);
+    }
 
-		this.setState({
-			index: index,
-			direction: 'next'
-		});
-	};
+    startTimer = () => {
+        this.timer = setInterval(this.changeSlide, MAIN_CAROUSEL_TIMER_INTERVAL);
+    };
 
-	handleSelect = (selectedIndex, e) => {
-		clearInterval(this.timer);
+    changeSlide = () => {
+        let index = this.state.index + 1;
+        if (this.state.index === this.carousel.current.props.children.length - 1) {
+            index = 0
+        }
 
-		this.setState({
-			index: selectedIndex,
-			direction: e.direction
-		});
+        this.setState({
+            index: index,
+            direction: 'next'
+        });
+    };
 
-		this.startTimer();
-	};
+    handleSelect = (selectedIndex, e) => {
+        clearInterval(this.timer);
+
+        this.setState({
+            index: selectedIndex,
+            direction: e.direction
+        });
+
+        this.startTimer();
+    };
 
 
-	render () {
-		const {index, direction} = this.state;
+    render() {
+        const {index, direction} = this.state;
 
-		return (
-			<Grid fluid id="home-main-carousel">
-			<Carousel
-				ref={this.carousel}
-				activeIndex={index}
-				direction={direction}
-				onSelect={this.handleSelect}>
+        let items = [];
 
-				<Carousel.Item >
-					<img className="carousel-img" alt="slider_01" src="images/banners/podredeni_banner_03.jpg"/>
-					<Carousel.Caption>
-						{/*<h1>Магнитни клипсове</h1>*/}
-						{/*<p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>*/}
-					</Carousel.Caption>
-				</Carousel.Item>
+        for (let i = 0; i < this.state.carouselItems.length; i++) {
 
-				<Carousel.Item>
-					<img className="carousel-img" alt="slider_02" src="images/banners/BM6V1596.jpg"/>
-					{/*<Carousel.Caption>*/}
-						{/*<h3>Second slide label</h3>*/}
-						{/*<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>*/}
-					{/*</Carousel.Caption>*/}
-				</Carousel.Item>
+            let item = this.state.carouselItems[i];
 
-				<Carousel.Item>
-					<img className="carousel-img" alt="slider_03" src="images/banners/Reader-Rest-04051811926.jpg"/>
-					{/*<Carousel.Caption>*/}
-						{/*<h3>Third slide label</h3>*/}
-						{/*<p>*/}
-							{/*Praesent commodo cursus magna, vel scelerisque nisl consectetur.*/}
-						{/*</p>*/}
-					{/*</Carousel.Caption>*/}
-				</Carousel.Item>
+            items.push(
+                <Carousel.Item key={item.id}>
+                    <img className="carousel-img" alt={item.heading} src={item.imageUrl}/>
+                    <Carousel.Caption>
+                        <h3>{item.heading}</h3>
+                        <p>{item.content}</p>
+                    </Carousel.Caption>
+                </Carousel.Item>
+            );
 
-				<Carousel.Item>
-					<img className="carousel-img" alt="slider_04" src="images/banners/Reader-Rest-04051811966.jpg"/>
-                    {/*<Carousel.Caption>*/}
-                    {/*<h3>Second slide label</h3>*/}
-                    {/*<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>*/}
-                    {/*</Carousel.Caption>*/}
-				</Carousel.Item>
+        }
 
-				<Carousel.Item>
-					<img className="carousel-img" alt="slider_05" src="images/banners/Reader-Rest-04051812172.jpg"/>
-                    {/*<Carousel.Caption>*/}
-                    {/*<h3>Second slide label</h3>*/}
-                    {/*<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>*/}
-                    {/*</Carousel.Caption>*/}
-				</Carousel.Item>
+        return (
+            <Grid fluid id="home-main-carousel">
+                <Carousel
+                    ref={this.carousel}
+                    activeIndex={index}
+                    direction={direction}
+                    onSelect={this.handleSelect}>
 
-				<Carousel.Item>
-					<img className="carousel-img" alt="slider_06" src="images/banners/Reader-Rest-04051812085.jpg"/>
-                    {/*<Carousel.Caption>*/}
-                    {/*<h3>Second slide label</h3>*/}
-                    {/*<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>*/}
-                    {/*</Carousel.Caption>*/}
-				</Carousel.Item>
+                    {items}
 
-				<Carousel.Item>
-					<img className="carousel-img" alt="slider_07" src="images/banners/bag.jpg"/>
-					{/*<Carousel.Caption>*/}
-						{/*<h3>Third slide label</h3>*/}
-						{/*<p>*/}
-							{/*Praesent commodo cursus magna, vel scelerisque nisl consectetur.*/}
-						{/*</p>*/}
-					{/*</Carousel.Caption>*/}
-				</Carousel.Item>
-
-			</Carousel>
-			</Grid>
-		);
-	}
+                </Carousel>
+            </Grid>
+        );
+    }
 }
 
 export default ControlledCarousel;
