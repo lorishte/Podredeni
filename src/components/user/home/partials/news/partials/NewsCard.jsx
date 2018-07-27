@@ -1,7 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-import utils from '../../../../../../utils/utils'
+import { Col } from 'react-bootstrap';
+
+import utils from '../../../../../../utils/utils';
+import CartTableFooter from '../../../../cart/products/partials/CartTableFooter';
 
 class NewsCard extends React.Component {
 	constructor (props) {
@@ -14,16 +17,20 @@ class NewsCard extends React.Component {
 
 		return (
 
-			<Link to={'/news/' + data.id} className="news-card">
 
-				<div className="news-image-container">
-					<img className="image" src={data.imageUrl} alt="News image"/>
-				</div>
+			<Link to={'/news/' + data.id}>
 
-				<div className="news-body">
-					<h4 className="news-title">{data.title}</h4>
-					<p className="news-publishedOn">{utils.formatDateAndTime(data.creationDate)}</p>
-				</div>
+				<Col xs={this.props.xsRes} sm={6} md={4} lg={4} className="news-card">
+
+					<div className="news-image-container">
+						<img className="news-image" src={data.imageUrl} alt="News image"/>
+					</div>
+
+					<div className="news-body">
+						<h4 className="news-title">{data.title}</h4>
+						<p className="news-date">{utils.formatDate(data.creationDate)}</p>
+					</div>
+				</Col>
 
 			</Link>
 

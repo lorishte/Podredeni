@@ -50,7 +50,7 @@ class News extends React.Component {
 		}
 
 		return (
-			<Grid fluid id="home-news">
+			<Grid id="home-news">
 
 				<h1 className="section-heading">НОВИНИ</h1>
 				<div id="news-container">

@@ -60,12 +60,13 @@ class News extends React.Component {
                     <Col xs={resolution ? 12 : 6} sm={6} md={7}>
                         <h2>{this.state.title}</h2>
                         <p>{this.state.content}</p>
+
+                        <div className="buttons-container">
+                            <Link className={"btn-custom light md"} to={{pathname: '/news'}} >{BUTTONS_BG.back}</Link>
+                        </div>
+
                     </Col>
                 </Row>
-
-                <Col xs={12} className="text-center">
-                    <Link className={"btn-custom default md"} to={{pathname: '/news'}} >{BUTTONS_BG.back}</Link>
-                </Col>
             </Grid>
         );
     }

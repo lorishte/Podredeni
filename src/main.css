@@ -81,8 +81,10 @@ input[type=checkbox], input[type=radio] {
   padding: .3em .6em;
   font-weight: 400; }
 
-.buttons-container .btn {
-  margin-bottom: 5px; }
+.buttons-container {
+  padding-top: 15px; }
+  .buttons-container .btn {
+    margin-bottom: 5px; }
 
 .icon {
   font-size: 1.8em;
@@ -124,10 +126,15 @@ input[type=checkbox], input[type=radio] {
     background-color: #7b715d; }
     .btn-custom.default:hover, .btn-custom.default:active {
       background-color: #615540; }
+  .btn-custom.light {
+    background-color: #ffffff; }
+    .btn-custom.light:hover, .btn-custom.light:active {
+      color: #ffffff;
+      background-color: #b49543; }
   .btn-custom:hover {
     cursor: pointer; }
   .btn-custom.xs {
-    padding: 5px 5px;
+    padding: 3px 7px;
     border-radius: 2px; }
   .btn-custom.sm {
     padding: 5px 10px;
@@ -459,26 +466,6 @@ nav {
     top: -60px;
     height: auto;
     min-height: 0; }
-  #home #news-container {
-    display: -webkit-box;
-    display: -webkit-flex;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-pack: center;
-    -moz-box-pack: center;
-    -ms-flex-pack: center;
-    -webkit-justify-content: center;
-    justify-content: center; }
-    #home #news-container .news-card {
-      margin: 15px;
-      display: block; }
-      #home #news-container .news-card .news-image-container {
-        width: 100%;
-        height: 200px;
-        overflow: hidden; }
-        #home #news-container .news-card .news-image-container .image {
-          width: 100%;
-          height: auto; }
   #home #testimonials {
     padding-bottom: 50px;
     min-height: 250px;
@@ -648,8 +635,33 @@ nav {
     font-size: 1.3em;
     display: inline-block; }
 
-.news-card {
-  width: 300px; }
+#news-container .news-card {
+  height: 300px;
+  margin: 10px 0 30px 0; }
+  #news-container .news-card .news-image-container {
+    -webkit-flex-basis: 100%;
+    flex-basis: 100%;
+    width: 100%;
+    height: 200px;
+    overflow: hidden; }
+    #news-container .news-card .news-image-container .news-image {
+      width: 100%;
+      height: 100%; }
+  #news-container .news-card .news-body {
+    position: relative;
+    background-color: #ffffff;
+    min-height: 60px;
+    padding: 10px 25px; }
+    #news-container .news-card .news-body .news-date {
+      position: absolute;
+      top: -210px;
+      left: 13px;
+      padding: 3px 10px;
+      background-color: #ffffff; }
+  #news-container .news-card .news-buttons-container {
+    height: 40px;
+    padding: 0 25px 20px 25px;
+    background-color: #ffffff; }
 
 #product .label {
   display: inline;

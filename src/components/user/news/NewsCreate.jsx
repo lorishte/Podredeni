@@ -68,6 +68,7 @@ class NewsCreate extends React.Component {
 
     render () {
         let resolution = this.state.resolution < RESOLUTIONS.xs;
+	    let isAdmin = sessionStorage.getItem('role') === 'admin';
 
         return (
             <Grid id="news-create">
@@ -81,6 +82,7 @@ class NewsCreate extends React.Component {
                     <Col xs={resolution ? 12 : 6} sm={6} md={5}>
                         <Image src={this.state.imageUrl}/>
                     </Col>
+
                     <Col xs={resolution ? 12 : 6} sm={6} md={7}>
                         <FormInputField
                             type="text"
@@ -104,14 +106,24 @@ class NewsCreate extends React.Component {
                             value={this.state.imageUrl}
                             required={true}
                             onChange={this.handleChange}/>
+
+                        <div className="text-center">
+		                    {!isAdmin &&
+                            <Link className={"btn-custom default md"} to={{pathname: '/news'}}>{BUTTONS_BG.back}</Link>
+		                    }
+
+		                    {isAdmin &&
+                            <Link className={"btn btn-default"} to={{pathname: '/news'}} >{BUTTONS_BG.back}</Link>
+		                    }
+
+                            <button className="btn btn-primary" onClick={this.submit}>{BUTTONS_BG.create}</button>
+                        </div>
                     </Col>
+
+
                 </Row>
 
-                <Col xs={12} className="text-center">
-                    <Link className={"btn-custom default md"} to={{pathname: '/news'}} >{BUTTONS_BG.back}</Link>
 
-                    <Button onClick={this.submit}>{BUTTONS_BG.create}</Button>
-                </Col>
             </Grid>
         );
     }
