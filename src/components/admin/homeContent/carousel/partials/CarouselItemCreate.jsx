@@ -37,8 +37,6 @@ class CarouselItemCreate extends React.Component {
 
     submit = () => {
 
-        console.log(this.state)
-
         homeContentService.createCarouselItem(this.state)
             .then(res => {
 
@@ -46,11 +44,8 @@ class CarouselItemCreate extends React.Component {
                     closeButton: false,
                 });
 
-                this.setState({
-                    heading: '',
-                    imageUrl: '',
-                    content: ''
-                })
+                setTimeout(() => this.props.history.goBack(), 3000)
+
             })
             .catch(err => {
                 this.toastContainer.error(err.responseText, TOASTR_MESSAGES.error, {

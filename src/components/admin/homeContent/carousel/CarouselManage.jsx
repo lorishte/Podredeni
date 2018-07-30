@@ -3,10 +3,12 @@ import {ToastContainer} from 'react-toastr';
 
 // Helpers
 import {Grid, Row, Col, Button, Table} from 'react-bootstrap';
+import {Link} from 'react-router-dom';
 
 // Partials
 import CarouselItem from './partials/CarouselItem';
-import CarouselItemCreateButton from './partials/buttons/CarouselItemCreateButton'
+
+import {BUTTONS_BG} from '../../../../data/constants/componentConstants';
 
 class CarouselManage extends React.Component {
     constructor(props) {
@@ -42,19 +44,12 @@ class CarouselManage extends React.Component {
 
                 <Row style={{paddingTop: 20 + 'px'}}>
 
-                    <CarouselItemCreateButton/>
+                    <Link className={"btn-custom default md"} to={'/carousel-item/create/'}>{BUTTONS_BG.create}</Link>
                 </Row>
                 <Row>
 
                     <Col>
-                        <Table bordered hover style={{marginTop: 20 + 'px'}}>
-                            <thead>
-                            <tr>
-                                <th>Картинка</th>
-                                <th>Заглавие</th>
-                                <th>Редакция</th>
-                            </tr>
-                            </thead>
+                        <Table responsive hover style={{marginTop: 20 + 'px'}}>
                             <tbody>
                             {items}
                             </tbody>

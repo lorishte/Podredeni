@@ -144,6 +144,7 @@ const TOASTR_MESSAGES = {
 	successNewsCreate: 'Новината е създадена успешно.',
     successCarouselItemCreate: 'Съдържанието беше добавено успешно.',
     successCarouselItemEdit: 'Съдържанието беше редактирано успешно успешно.',
+    successCarouselItemDelete: 'Съдържанието беше изтрито успешно успешно.',
     successNewsDelete: 'Новината е изтрита успешно.',
 	successCancelOrder: 'Поръчката е отказана.',
 	messageSent: 'Вашето съобщение беше изпратено!'

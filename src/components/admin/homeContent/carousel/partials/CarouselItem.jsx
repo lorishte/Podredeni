@@ -1,10 +1,13 @@
 import React from 'react';
+import {ToastContainer} from 'react-toastr';
+
+import homeContentService from '../../../../../services/homeContent/homeContentService'
 
 // Helpers
-import {Grid, Row} from 'react-bootstrap';
+import {Button, Grid} from 'react-bootstrap';
+import {Link} from 'react-router-dom';
 
-//Partials
-import CarouselItemEditButton from './buttons/CarouselItemEditButton';
+import {TOASTR_MESSAGES} from '../../../../../data/constants/componentConstants';
 
 class CarouselItem extends React.Component {
     constructor(props) {
@@ -12,24 +15,47 @@ class CarouselItem extends React.Component {
 
     }
 
+    deleteItem = (itemId) => {
+
+        homeContentService
+            .deleteCarouselItem(itemId)
+            .then(res => {
+                this.toastContainer.success(TOASTR_MESSAGES.successCarouselItemDelete, '', {
+                    closeButton: false,
+                });
+
+                setTimeout(() => window.location.reload(), 3000)
+
+            })
+            .catch(err => {
+                this.toastContainer.error(err.responseText, TOASTR_MESSAGES.error, {
+                    closeButton: false,
+                });
+            });
+    };
+
     render() {
 
-        const {id, imageUrl, heading} = this.props.item;
+        const {id, imageUrl} = this.props.item;
 
         return (
 
             <tr>
                 <td>
+                    <ToastContainer
+                        ref={ref => this.toastContainer = ref}
+                        className="toast-bottom-right"
+                    />
                     <img src={imageUrl} alt="carouselItem-image"/>
                 </td>
                 <td>
-                    {heading}
-                </td>
-                <td>
-                    <CarouselItemEditButton
+                    <span>
+                        <Link className={"btn-custom md"} to={'/carousel-item/edit/' + id}>
+                            <span className="glyphicon glyphicon-pencil"></span></Link>
+                        <Button className={"default md"} style={{margin: 5 + 'px'}} onClick={() => this.deleteItem(id)}>
+                            <span className="glyphicon glyphicon-erase"></span></Button>
+                    </span>
 
-                        id={id}
-                    />
                 </td>
             </tr>
 

@@ -64,5 +64,12 @@ export default {
         };
 
         return requesterService.update(endPoint, auth, data);
+    },
+
+    deleteCarouselItem: (itemId) => {
+
+        let endPoint = carouselItemsEndPoint + '/'  + itemId;
+
+        return requesterService.remove(endPoint, auth)
     }
 };

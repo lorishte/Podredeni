@@ -65,7 +65,7 @@ class CarouselItemEdit extends React.Component {
                     closeButton: false,
                 });
 
-                this.props.history.goBack()
+                setTimeout(() => this.props.history.goBack(), 3000)
             })
             .catch(err => {
                 this.toastContainer.error(err.responseText, TOASTR_MESSAGES.error, {

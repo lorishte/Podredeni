@@ -99,6 +99,8 @@ class OrdersList extends React.Component {
 	handleSelect = (key) => {
 		console.log(ORDER_STATUS_EN[key]);
 
+		this.setState({orders: ''});
+
 		this.setState({
 			filterProperty: 'status',
 			filterValue: ORDER_STATUS_EN[key]
