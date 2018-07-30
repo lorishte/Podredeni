@@ -27,11 +27,11 @@ class Home extends React.Component {
 
 				<TopSellers/>
 
-				<News/>
-
 				<AboutProduct/>
 
 				<Testimonials/>
+
+				<News/>
 
 				{/*<HomeBannerTwo/>*/}
 			</div>

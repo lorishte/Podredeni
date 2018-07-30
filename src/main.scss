@@ -426,8 +426,11 @@ input[type=checkbox], input[type=radio] {
   background-color: $white;
 }
 
+.bg-dark {
+  background-color: $dark-bg;
+}
+
 .section-heading {
-  //font-family: "Garamond", serif;
   text-align: center;
   font-size: 3em;
   padding: 25px 15px;
@@ -572,14 +575,13 @@ nav {
 
         .item {
           height: 100%;
+          width: auto;
         }
 
         .carousel-img {
-          width: 100%;
+          width: auto !important;
           height: auto;
           min-height: 100%;
-          position: absolute;
-          z-index: -1;
         }
       }
 
@@ -648,150 +650,119 @@ nav {
   #home-about {
     text-align: center;
 
-    .content-text {
-      padding: 25px;
+    .section-heading {
+      border-top: 0px solid $dark-grey;
+      border-bottom: 0px solid $dark-grey;
+      padding-bottom: 10px;
+    }
+
+    .home-text {
+      padding: 25px 10% 50px 10%;
       font-size: 1.3em;
-    }
-  }
-
-  #home-banner-1,
-  #home-banner-2 {
-    .wrapper {
-      padding-top: 50px;
-      width: 100%;
-    }
-
-    .article-box {
-      position: relative;
-      @include flex;
-      @include flex-direction(flex-end);
-      height: 500px;
-      background-color: $dark-bg;
-      text-align: left;
-    }
-
-    .article-image {
-      img {
-        width: 100%;
-        height: auto;
-      }
-    }
-
-    .article-content {
-      position: absolute;
-      top: 0;
-      left: 0;
-      padding: 50px;
-      width: 30%;
-      height: 100%;
-      min-width: 400px;
-      z-index: 1;
-      background-color: $dark-bg;
       color: $medium-grey;
+    }
 
-      h4 {
-        color: $primary;
-        font-weight: 300;
-        text-transform: uppercase;
-        font-size: 1.5em;
+    #about-product {
+      background-color: $dark-grey;
+
+      .article-box {
+        display: flex;
+        height: 400px;
+        text-align: left;
+        overflow: hidden;
       }
-    }
-  }
 
-  #home-banner-1 {
-
-    .article-image {
-      position: absolute;
-      top: 10%;
-      left: 30%;
-      @include flex;
-      @include align-items(center);
-
-      width: 65%;
-      height: 80%;
-      overflow: hidden;
-
-      img {
-        width: 100%;
-        height: auto;
-      }
-    }
-  }
-
-  #home-banner-2 {
-
-    .article-box {
-      height: 450px;
-    }
-
-    .article-image {
-      width: 100%;
-      height: 100%;
-      overflow: hidden;
-      display: flex;
-      align-items: center;
-    }
-
-    .article-content {
-      position: absolute;
-      left: 100px;
-      top: -60px;
-      height: auto;
-      min-height: 0;
-    }
-  }
-
-  #testimonials {
-    padding-bottom: 50px;
-    min-height: 250px;
-    background-color: $warm-light-grey;
-
-    .testimonial {
-      .testimonial-body {
-
-        .testimonial-text {
-          margin-top: 25px;
-          font-style: italic;
-          font-size: 1.2em;
-          text-align: left;
-          margin-bottom: 15px;
-        }
-
-        .testimonial-author {
-          font-weight: 600;
-          text-align: right;
-        }
-
-        &::before {
-          content: open-quote;
-          font-size: 5em;
-          color: $primary;
-          line-height: 1em;
-        }
-      }
-    }
-
-    .avatar {
-      width: 100px;
-      height: 100px;
-      border: 6px solid $warm-light-grey;
-    }
-
-    .carousel {
-      min-height: 130px;
-      @include transition;
-
-      .carousel-inner {
-        height: auto;
+      .article-image {
+        @include flex-basis(60%);
         position: relative;
+        overflow: hidden;
+
+        img {
+          position: absolute;
+          top: 65%;
+          transform: translateY(-50%);
+          width: 100%;
+          height: auto;
+        }
       }
 
-      .carousel-indicators {
-        display: none;
+      .article-content {
+        @include flex-basis(40%);
+        padding: 50px;
+
+        .article-heading {
+          color: $primary-hover;
+          font-weight: 300;
+          text-transform: uppercase;
+          font-size: 1.5em;
+        }
       }
     }
-
   }
+
+  #home-news {
+    .container {
+      padding-top: 25px;
+    }
+
+    .news-card {
+      .news-date {
+        background-color: $warm-light-grey;
+      }
+    }
+  }
+}
+
+#testimonials {
+  padding-bottom: 50px;
+  min-height: 250px;
+  background-color: $warm-light-grey;
+
+  .testimonial {
+    .testimonial-body {
+
+      .testimonial-text {
+        margin-top: 25px;
+        font-style: italic;
+        font-size: 1.2em;
+        text-align: left;
+        margin-bottom: 15px;
+      }
+
+      .testimonial-author {
+        font-weight: 600;
+        text-align: right;
+      }
+
+      &::before {
+        content: open-quote;
+        font-size: 5em;
+        color: $primary;
+        line-height: 1em;
+      }
+    }
+  }
+
+  .avatar {
+    width: 100px;
+    height: 100px;
+    border: 6px solid $warm-light-grey;
+  }
+
+  .carousel {
+    min-height: 130px;
+    @include transition;
+
+    .carousel-inner {
+      height: auto;
+      position: relative;
+    }
+
+    .carousel-indicators {
+      display: none;
+    }
+  }
+
 }
 
 .card,
@@ -918,6 +889,7 @@ nav {
 }
 
 #news-container {
+
   .news-card {
     height: 300px;
     margin: 10px 0 30px 0;
@@ -1283,55 +1255,39 @@ footer {
 }
 
 //Queries
+
+@media screen and (max-width: 1100px) {
+
+  #home {
+    #home-about {
+      #about-product {
+        .article-image {
+          @include flex-basis(50%);
+          position: relative;
+        }
+
+        .article-content {
+          @include flex-basis(50%);
+        }
+      }
+    }
+  }
+}
+
 @media screen and (max-width: 1000px) {
-  #home-main-carousel {
-    .carousel {
-      height: 400px;
-      margin-top: -35px;
+
+  #home {
+    #home-main-carousel {
+      .carousel {
+        height: 400px;
+        margin-top: -35px;
+      }
     }
   }
 
   .section-heading {
     letter-spacing: 5px;
     font-size: 2.2em;
-  }
-
-  #home-banner-1 {
-    .article-content {
-      padding: 30px 50px;
-      height: 83%;
-    }
-
-    .article-image {
-      left: 24%;
-      bottom: 5%;
-      width: 70%;
-      height: 80%;
-
-      img {
-        width: 100%;
-        height: auto;
-      }
-    }
-  }
-
-  #home-banner-2 {
-    .wrapper {
-      padding-top: 0;
-    }
-    .article-content {
-      left: 6%;
-      top: 10%;
-      height: 80%;
-
-    }
-
-    .article-image {
-      img {
-        width: auto;
-        height: 100%;
-      }
-    }
   }
 
   #videos {
@@ -1341,10 +1297,26 @@ footer {
   }
 
   //Admin
-
   #orders {
     .order-info {
       width: 80%;
+    }
+  }
+}
+
+@media screen and (max-width: 850px) {
+
+  #home {
+    #home-about {
+      #about-product {
+        .article-image {
+          @include flex-basis(40%);
+        }
+
+        .article-content {
+          @include flex-basis(60%);
+        }
+      }
     }
   }
 }
@@ -1363,6 +1335,34 @@ footer {
   h2, h3 {
     font-size: 1.4em;
     margin: 30px 0 12px 0;
+  }
+
+  #home {
+    #home-about {
+
+      #about-product {
+
+        .article-box {
+          @include flex-wrap(wrap);
+          height: auto;
+        }
+
+        .article-image,
+        .article-content {
+          @include flex-basis(100%);
+        }
+
+        .article-image {
+          height: 150px;
+        }
+
+        .article-content {
+          order: 1;
+          padding: 25px 50px;
+          height: auto;
+        }
+      }
+    }
   }
 
   #admin-products-table,
@@ -1489,109 +1489,49 @@ footer {
     .nav {
       @include flex-direction(row);
     }
-
   }
 
-  #home-main-carousel {
-    .carousel {
-      height: 300px;
-      margin-top: -35px;
-    }
-
-    .carousel-inner {
-      .carousel-img {
-        width: auto;
-        height: 100%;
+  #home {
+    #home-main-carousel {
+      .carousel {
+        height: 300px;
+        margin-top: -35px;
       }
     }
-  }
 
-  .section-heading {
-    letter-spacing: 3px;
-    font-size: 1.8em;
-  }
-
-  #home-banner-1 {
-    .article-content {
-      top: 6%;
-      left: 6%;
-      background-color: rgba(255, 255, 255, .8);
-      height: 88%;
-      color: $dark-grey;
+    .section-heading {
+      letter-spacing: 3px;
+      font-size: 1.8em;
     }
 
-    .article-image {
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
+    //Admin
+
+    .table-sorting-buttons {
+      margin-left: 2px;
     }
-  }
 
-  #home-banner-2 {
-    .article-content {
-      background-color: rgba(255, 255, 255, .7);
+    #orders {
+      .order-info {
+        width: 95%;
+        top: 5%;
+      }
     }
-  }
 
-  #top-sellers {
-    padding-bottom: 0;
-  }
-
-  #testimonials {
-    padding: 30px 0;
-  }
-
-  //Admin
-
-  .table-sorting-buttons {
-    margin-left: 2px;
-  }
-
-  #orders {
-    .order-info {
-      width: 95%;
-      top: 5%;
+    #videos {
+      .video {
+        height: 150px;
+      }
     }
-  }
 
-  #videos {
-    .video {
-      height: 150px;
-    }
   }
-
 }
 
 @media screen and (max-width: 520px) {
-  #home-banner-1 {
 
-    .article-box {
-      height: 600px;
-    }
-
-    .article-content {
-      left: 5%;
-      padding: 35px;
-      min-width: 0;
-      width: 90%;
-      height: 87%;
-
-      h4 {
-        margin-top: 5px;
-      }
-    }
-
-    .article-image {
-      img {
-        height: 100%;
-        width: auto;
-      }
-    }
-  }
 }
 
 @media screen and (max-width: 480px) {
+
   #order-list-tabs {
     .tab-content {
       background-color: #fff;
@@ -1652,14 +1592,6 @@ footer {
     .carousel {
       height: 250px;
       margin-top: -35px;
-
-      .carousel-inner {
-
-        .carousel-img {
-          width: auto;
-          height: 100%;
-        }
-      }
     }
   }
 
@@ -1700,6 +1632,16 @@ footer {
     font-size: 1.5em;
   }
 
+  #home-banner-1,
+  #home-banner-2 {
+    .article-content {
+      left: 5%;
+      padding: 35px;
+      min-width: 0;
+      width: 90%;
+
+    }
+  }
 }
 
 

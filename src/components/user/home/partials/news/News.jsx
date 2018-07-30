@@ -42,20 +42,21 @@ class News extends React.Component {
 
 			news = this.state.news.map(e => {
 
-				return <Carousel.Item key={e.id}>
-					<NewsCard
-						data={e}/>
-				</Carousel.Item>;
+				return <NewsCard key={e.id}
+				                 data={e}/>;
+
 			});
 		}
 
 		return (
-			<Grid id="home-news">
+			<Grid fluid id="home-news" className="bg-white">
 
-				<h1 className="section-heading">НОВИНИ</h1>
-				<div id="news-container">
-					{news}
-				</div>
+				<Grid id="news-container">
+					{/*<h2 className="section-heading">НОВИНИ</h2>*/}
+					<div className="container">
+						{news}
+					</div>
+				</Grid>
 
 			</Grid>
 		);

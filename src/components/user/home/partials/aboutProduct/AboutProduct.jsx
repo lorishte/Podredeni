@@ -39,8 +39,8 @@ class AboutProduct extends React.Component {
 	render () {
 
 		return (
-			<Grid fluid id="home-about" className="bg-white">
-				<Grid>
+			<Grid fluid id="home-about" className="bg-dark">
+				<Grid >
 					<h2 className="section-heading">{this.state.sectionHeading}</h2>
 					<div className="home-text" dangerouslySetInnerHTML={{__html: this.state.sectionContent}}/>
 				</Grid>
@@ -48,11 +48,11 @@ class AboutProduct extends React.Component {
 				<Clearfix/>
 
 
-				<div id="home-banner-1">
+				<div id="about-product">
 					<div className="wrapper">
 						<article className="article-box">
 							<div className="article-content bg-white">
-								<h4>{this.state.articleHeading}</h4>
+								<h4 className="article-heading">{this.state.articleHeading}</h4>
 								<div dangerouslySetInnerHTML={{__html: this.state.articleContent}}/>
 							</div>
 
