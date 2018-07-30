@@ -407,14 +407,11 @@ nav {
       #home #home-about #about-product .article-image {
         -webkit-flex-basis: 60%;
         flex-basis: 60%;
-        position: relative;
         overflow: hidden; }
         #home #home-about #about-product .article-image img {
-          position: absolute;
-          top: 65%;
-          transform: translateY(-50%);
           width: 100%;
-          height: auto; }
+          height: auto;
+          transform: translateY(-15%); }
       #home #home-about #about-product .article-content {
         -webkit-flex-basis: 40%;
         flex-basis: 40%;
@@ -879,8 +876,9 @@ footer {
 @media screen and (max-width: 1100px) {
   #home #home-about #about-product .article-image {
     -webkit-flex-basis: 50%;
-    flex-basis: 50%;
-    position: relative; }
+    flex-basis: 50%; }
+    #home #home-about #about-product .article-image img {
+      transform: translateY(0); }
   #home #home-about #about-product .article-content {
     -webkit-flex-basis: 50%;
     flex-basis: 50%; } }
@@ -902,6 +900,9 @@ footer {
   #home #home-about #about-product .article-image {
     -webkit-flex-basis: 40%;
     flex-basis: 40%; }
+    #home #home-about #about-product .article-image img {
+      height: 100%;
+      width: auto; }
   #home #home-about #about-product .article-content {
     -webkit-flex-basis: 60%;
     flex-basis: 60%; } }
@@ -928,6 +929,10 @@ footer {
     flex-basis: 100%; }
   #home #home-about #about-product .article-image {
     height: 150px; }
+    #home #home-about #about-product .article-image img {
+      height: auto;
+      width: 100%;
+      transform: translateY(-30%); }
   #home #home-about #about-product .article-content {
     order: 1;
     padding: 25px 50px;

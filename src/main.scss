@@ -674,15 +674,14 @@ nav {
 
       .article-image {
         @include flex-basis(60%);
-        position: relative;
         overflow: hidden;
 
         img {
-          position: absolute;
-          top: 65%;
-          transform: translateY(-50%);
           width: 100%;
           height: auto;
+
+          transform: translateY(-15%);
+
         }
       }
 
@@ -1263,7 +1262,10 @@ footer {
       #about-product {
         .article-image {
           @include flex-basis(50%);
-          position: relative;
+
+          img {
+            transform: translateY(0);
+          }
         }
 
         .article-content {
@@ -1311,6 +1313,11 @@ footer {
       #about-product {
         .article-image {
           @include flex-basis(40%);
+
+          img {
+            height: 100%;
+            width: auto;
+          }
         }
 
         .article-content {
@@ -1354,6 +1361,12 @@ footer {
 
         .article-image {
           height: 150px;
+
+          img {
+            height: auto;
+            width: 100%;
+            transform: translateY(-30%);
+          }
         }
 
         .article-content {
