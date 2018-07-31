@@ -83,8 +83,9 @@ class ControlledCarousel extends React.Component {
 				<Carousel.Item key={item.id}>
 					<img className="carousel-img" alt={item.heading} src={item.imageUrl}/>
 					<Carousel.Caption>
-						<h3>{item.heading}</h3>
-						<p>{item.content}</p>
+						<h1 className="carousel-heading">{item.heading}</h1>
+						{/*<hr/>*/}
+						<p className="carousel-text">{item.content}Магнитните клипсове ReadeREST: елегантен аксесоар, благодарение на който очилата Ви са винаги под ръка. Стилно и елегантно.</p>
 					</Carousel.Caption>
 				</Carousel.Item>
 			);
@@ -93,6 +94,7 @@ class ControlledCarousel extends React.Component {
 
 		return (
 			<Grid fluid id="home-main-carousel">
+				<img src="/images/readerest.png" className="logo"/>
 				<Carousel
 					ref={this.carousel}
 					activeIndex={index}
