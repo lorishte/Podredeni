@@ -48,7 +48,7 @@ class CreateProduct extends React.Component {
 					name: p.name,
 					description: p.description,
 					price: p.price,
-					imageUrls: p.images,
+					imageUrls: p.images.reverse(),
 					isTopSeller: p.isTopSeller,
 					isBlocked: p.isBlocked
 				});
@@ -105,6 +105,7 @@ class CreateProduct extends React.Component {
 	};
 
 	removeImage = (e) => {
+        e.preventDefault();
 		this.setState({ imageUrls: this.state.imageUrls.filter(el => el !== e.target.name)});
 	};
 

@@ -41,6 +41,8 @@ class Product extends React.Component {
 		productsService
 			.getProduct(id)
 			.then(res => {
+
+				console.log(res);
 				res.product.images.reverse();
 				this.setState({product: res.product});
 			})
