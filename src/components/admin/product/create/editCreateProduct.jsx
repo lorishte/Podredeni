@@ -232,8 +232,7 @@ class CreateProduct extends React.Component {
 
 				</form>
 			</Grid>
-		)
-			;
+		);
 	}
 }
 

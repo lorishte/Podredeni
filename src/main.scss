@@ -671,8 +671,8 @@ nav {
     text-align: center;
 
     .section-heading {
-      border-top: 0px solid $dark-grey;
-      border-bottom: 0px solid $dark-grey;
+      //border-top: 0px solid $dark-grey;
+      //border-bottom: 0px solid $dark-grey;
       padding-bottom: 10px;
 
       font-weight: 600;
@@ -682,11 +682,11 @@ nav {
     .home-text {
       padding: 25px 10% 50px 10%;
       font-size: 1.3em;
-      color: $medium-grey;
+      //color: $medium-grey;
     }
 
     #about-product {
-      background-color: $dark-grey;
+      //background-color: $dark-grey;
 
       .article-box {
         display: flex;

@@ -404,39 +404,34 @@ nav {
   #home #home-about {
     text-align: center; }
     #home #home-about .section-heading {
-      border-top: 0px solid #5b5b5b;
-      border-bottom: 0px solid #5b5b5b;
       padding-bottom: 10px;
       font-weight: 600;
       letter-spacing: 0; }
     #home #home-about .home-text {
       padding: 25px 10% 50px 10%;
-      font-size: 1.3em;
-      color: #c6c6c6; }
-    #home #home-about #about-product {
-      background-color: #5b5b5b; }
-      #home #home-about #about-product .article-box {
-        display: flex;
-        height: 400px;
-        text-align: left;
-        overflow: hidden; }
-      #home #home-about #about-product .article-image {
-        -webkit-flex-basis: 60%;
-        flex-basis: 60%;
-        overflow: hidden; }
-        #home #home-about #about-product .article-image img {
-          width: 100%;
-          height: auto;
-          transform: translateY(-15%); }
-      #home #home-about #about-product .article-content {
-        -webkit-flex-basis: 40%;
-        flex-basis: 40%;
-        padding: 50px; }
-        #home #home-about #about-product .article-content .article-heading {
-          color: #896e36;
-          font-weight: 300;
-          text-transform: uppercase;
-          font-size: 1.5em; }
+      font-size: 1.3em; }
+    #home #home-about #about-product .article-box {
+      display: flex;
+      height: 400px;
+      text-align: left;
+      overflow: hidden; }
+    #home #home-about #about-product .article-image {
+      -webkit-flex-basis: 60%;
+      flex-basis: 60%;
+      overflow: hidden; }
+      #home #home-about #about-product .article-image img {
+        width: 100%;
+        height: auto;
+        transform: translateY(-15%); }
+    #home #home-about #about-product .article-content {
+      -webkit-flex-basis: 40%;
+      flex-basis: 40%;
+      padding: 50px; }
+      #home #home-about #about-product .article-content .article-heading {
+        color: #896e36;
+        font-weight: 300;
+        text-transform: uppercase;
+        font-size: 1.5em; }
   #home #home-news .container {
     padding-top: 25px; }
   #home #home-news .news-card .news-date {

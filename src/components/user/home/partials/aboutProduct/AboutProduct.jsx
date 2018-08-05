@@ -39,7 +39,7 @@ class AboutProduct extends React.Component {
 	render () {
 
 		return (
-			<Grid fluid id="home-about" className="bg-dark">
+			<Grid fluid id="home-about" className="">
 				<Grid >
 					<h2 className="section-heading">{this.state.sectionHeading}</h2>
 					<div className="home-text" dangerouslySetInnerHTML={{__html: this.state.sectionContent}}/>
