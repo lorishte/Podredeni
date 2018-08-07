@@ -909,11 +909,17 @@ nav {
   }
 }
 
+#news {
+  .buttons-container {
+    padding-bottom: 20px;
+  }
+}
+
 #news-container {
 
   .news-card {
     height: 320px;
-    margin: 10px 0 30px 0;
+    margin: 10px 0 20px 0;
     border-radius: 5px;
 
 

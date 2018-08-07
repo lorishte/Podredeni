@@ -97,7 +97,11 @@ class NewsList extends React.Component {
 				/>
 
 				{isAdmin &&
-				<Link className={'btn btn-success'} to={'/news/create'}>{BUTTONS_BG.create}</Link>
+				<Row>
+					<Col xs={12} className="buttons-container">
+						<Link className={'btn btn-success'} to={'/news/create'}>{BUTTONS_BG.create}</Link>
+					</Col>
+				</Row>
 				}
 
 				{this.state.news.length === 0 && <div className="loader"/> }
