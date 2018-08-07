@@ -1,98 +1,93 @@
 import React from 'react';
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
-import {Col} from 'react-bootstrap';
+import { Col } from 'react-bootstrap';
 
-
-import {confirmAlert} from 'react-confirm-alert';
+import { confirmAlert } from 'react-confirm-alert';
 
 import newsService from '../../../../services/news/newsService';
 
 import Utils from '../../../../utils/utils';
 
-import {BUTTONS_BG, CONFIRM_DIALOGS} from '../../../../data/constants/componentConstants';
-import {TOASTR_MESSAGES, REDIRECT_DELAY} from '../../../../data/constants/componentConstants';
-import {NEWS} from '../../../../data/constants/componentConstants';
+import { BUTTONS_BG, CONFIRM_DIALOGS } from '../../../../data/constants/componentConstants';
+import { TOASTR_MESSAGES, REDIRECT_DELAY } from '../../../../data/constants/componentConstants';
+import { NEWS } from '../../../../data/constants/componentConstants';
 
 class NewsBrief extends React.Component {
 
-    news = this.props.data;
+	news = this.props.data;
 
-    constructor(props) {
-        super(props);
-    }
+	constructor (props) {
+		super(props);
+	}
 
-    confirmDeleteNews = () => {
-        confirmAlert({
-            title: '',
-            message: CONFIRM_DIALOGS.deleteNews,
-            buttons: [{
-                label: BUTTONS_BG.yes,
-                onClick: this.deleteNews
-            },
-                {label: BUTTONS_BG.no}]
-        });
+	confirmDeleteNews = () => {
+		confirmAlert({
+			title: '',
+			message: CONFIRM_DIALOGS.deleteNews,
+			buttons: [{
+				label: BUTTONS_BG.yes,
+				onClick: this.deleteNews
+			},
+				{label: BUTTONS_BG.no}]
+		});
 
-    };
+	};
 
-    deleteNews = () => {
+	deleteNews = () => {
 
-        newsService.deleteNews(this.news.id)
-            .then(res => {
+		newsService.deleteNews(this.news.id)
+			.then(res => {
 
-                window.location.reload();
+				window.location.reload();
 
-            })
-            .catch(err => {
-                this.toastContainer.error(err.responseText, TOASTR_MESSAGES.error, {
-                    closeButton: false,
-                });
-            });
+			})
+			.catch(err => {
+				this.toastContainer.error(err.responseText, TOASTR_MESSAGES.error, {
+					closeButton: false,
+				});
+			});
 
-    };
+	};
 
-    render() {
+	render () {
 
-        let isAdmin = sessionStorage.getItem('role') === 'admin';
+		let isAdmin = sessionStorage.getItem('role') === 'admin';
+		let date = this.news.creationDate;
 
-        return (
-
-
-            <Col xs={this.props.xsRes} sm={6} md={4} lg={4} className="news-card">
-
-                <div className="news-image-container">
-                    <img className="news-image" src={this.news.imageUrl} alt="News image"/>
-                </div>
-
-                <div className="news-body">
-                    <h4 className="news-title">{this.news.title}</h4>
-                    <p className="news-date">{Utils.formatDate(this.news.creationDate)}</p>
-                </div>
-
-                <div className="news-buttons-container">
-
-                    {isAdmin &&
-                    <Link className={'btn btn-primary btn-sm'}
-                          to={'/news/edit/' + this.news.id}>{BUTTONS_BG.edit}</Link>
-                    }
-
-                    {isAdmin &&
-                    <button className={'btn btn-danger btn-sm'}
-                            onClick={this.confirmDeleteNews}>{BUTTONS_BG.delete}</button>
-                    }
-
-                    {!isAdmin &&
-                    <Link className={'btn-custom primary sm'} to={'/news/' + this.news.id}>{BUTTONS_BG.more}</Link>
-                    }
-                </div>
+		return (
+			<Link to={'/news/' + this.news.id}>
 
 
-            </Col>
+				<Col xs={this.props.xsRes} sm={6} md={4} lg={4} className="news-card">
 
+					<div className="news-image-container">
+						<img className="news-image" src={this.news.imageUrl} alt="News image"/>
+					</div>
 
+					<div className="news-body">
+						<h4 className="news-title">{this.news.title}</h4>
+						<p className="news-date">
+							<span className="day">{Utils.getDay(date)}</span>
+							<span className="month">{Utils.getMonth(date)} &nbsp;</span>
+							<span className="year">{Utils.getYear(date)}</span>
+						</p>
+					</div>
 
-        );
-    }
+					{isAdmin &&
+					<div className="news-buttons-container">
+						<Link className={'btn btn-primary btn-sm'}
+						      to={'/news/edit/' + this.news.id}>{BUTTONS_BG.edit}</Link>
+
+						<button className={'btn btn-danger btn-sm'}
+						        onClick={this.confirmDeleteNews}>{BUTTONS_BG.delete}</button>
+					</div>
+					}
+
+				</ Col >
+			</ Link >
+		);
+	}
 }
 
 export default NewsBrief;

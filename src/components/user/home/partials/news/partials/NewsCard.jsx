@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 import { Col } from 'react-bootstrap';
 
-import utils from '../../../../../../utils/utils';
+import Utils from '../../../../../../utils/utils';
 import CartTableFooter from '../../../../cart/products/partials/CartTableFooter';
 
 class NewsCard extends React.Component {
@@ -14,6 +14,7 @@ class NewsCard extends React.Component {
 	render () {
 
 		const data = this.props.data;
+		let date = data.creationDate;
 
 		return (
 
@@ -28,7 +29,11 @@ class NewsCard extends React.Component {
 
 					<div className="news-body">
 						<h4 className="news-title">{data.title}</h4>
-						<p className="news-date">{utils.formatDate(data.creationDate)}</p>
+						<p className="news-date">
+							<span className="day">{Utils.getDay(date)}</span>
+							<span className="month">{Utils.getMonth(date)} &nbsp;</span>
+							<span className="year">{Utils.getYear(date)}</span>
+						</p>
 					</div>
 				</Col>
 

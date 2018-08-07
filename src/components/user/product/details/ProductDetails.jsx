@@ -99,12 +99,15 @@ class Product extends React.Component {
 		let product = this.state.product;
 		let resolution = this.state.resolution < RESOLUTIONS.xs;
 
+
 		return (
 			<Grid id="product">
 				<ToastContainer
 					ref={ref => this.toastContainer = ref}
 					className="toast-bottom-right"
 				/>
+
+				{this.state.product === '' && <div className="loader"/> }
 
 				{this.state.product !== '' &&
 				<Row>

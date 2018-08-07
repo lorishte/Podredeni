@@ -607,32 +607,62 @@ nav {
     display: inline-block; }
 
 #news-container .news-card {
-  height: 300px;
-  margin: 10px 0 30px 0; }
+  height: 320px;
+  margin: 10px 0 30px 0;
+  border-radius: 5px; }
   #news-container .news-card .news-image-container {
     -webkit-flex-basis: 100%;
     flex-basis: 100%;
+    margin: auto;
     width: 100%;
+    max-width: 450px;
     height: 200px;
-    overflow: hidden; }
+    overflow: hidden;
+    border-top-right-radius: 5px;
+    border-top-left-radius: 5px; }
     #news-container .news-card .news-image-container .news-image {
       width: 100%;
-      height: 100%; }
+      height: 100%;
+      -webkit-transition: .4s;
+      -moz-transition: .4s;
+      transition: .4s; }
   #news-container .news-card .news-body {
     position: relative;
     background-color: #ffffff;
     min-height: 60px;
-    padding: 10px 25px; }
+    padding: 10px 25px;
+    border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 5px; }
     #news-container .news-card .news-body .news-date {
       position: absolute;
-      top: -210px;
-      left: 13px;
-      padding: 3px 10px;
-      background-color: #ffffff; }
+      top: -220px;
+      left: 15px;
+      min-width: 60px;
+      padding: 10px 5px 3px 10px;
+      background-color: #ffffff;
+      -webkit-transition: .4s;
+      -moz-transition: .4s;
+      transition: .4s; }
+      #news-container .news-card .news-body .news-date .day {
+        display: block;
+        font-size: 2em;
+        line-height: .85em;
+        font-weight: 600; }
+      #news-container .news-card .news-body .news-date .month, #news-container .news-card .news-body .news-date .year {
+        font-size: .8em;
+        display: block; }
   #news-container .news-card .news-buttons-container {
     height: 40px;
     padding: 0 25px 20px 25px;
-    background-color: #ffffff; }
+    background-color: #ffffff;
+    border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 5px; }
+  #news-container .news-card:hover {
+    cursor: pointer; }
+    #news-container .news-card:hover .news-title {
+      color: #b49543; }
+    #news-container .news-card:hover .news-image {
+      transform: scale(1.1); }
 
 #product .label {
   display: inline;
