@@ -40,6 +40,7 @@ class ProductsList extends React.Component {
 	timer = null;
 
 	componentDidMount () {
+
 		this.loadProducts();
 	}
 

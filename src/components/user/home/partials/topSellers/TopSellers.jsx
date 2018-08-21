@@ -50,6 +50,7 @@ class TopSellers extends React.Component {
 		productsService
 			.loadProducts(this.state)
 			.then(res => {
+
 				res.products.forEach(p => p.images.reverse());
 				let cardWidth = Math.floor(this.container.current.clientWidth / this.state.productsToShow);
 				this.topSellers.current.style.width = (cardWidth * res.products.length) + 'px';

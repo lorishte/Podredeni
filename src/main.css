@@ -14,6 +14,7 @@ body {
   font-family: Montserrat, sans-serif;
   font-size: 14px; }
 
+
 main {
   min-height: calc(100vh - 80px);
   padding-top: 193px;
@@ -1303,3 +1304,9 @@ footer {
     font-size: 1.5em; } }
 
 /*# sourceMappingURL=main.css.map */
+
+/*.DraftEditor-editorContainer{*/
+
+  /*border-style: solid;*/
+  /*background-color: white;*/
+/*}*/

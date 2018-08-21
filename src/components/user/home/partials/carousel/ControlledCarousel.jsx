@@ -1,112 +1,119 @@
 import React from 'react';
 
 // Helpers
-import { Grid, Carousel } from 'react-bootstrap';
+import {Grid, Carousel} from 'react-bootstrap';
 
 import homeContentService from '../../../../../services/homeContent/homeContentService';
 
-import { MAIN_CAROUSEL_TIMER_INTERVAL } from '../../../../../data/constants/componentConstants';
+import {MAIN_CAROUSEL_TIMER_INTERVAL} from '../../../../../data/constants/componentConstants';
 
 class ControlledCarousel extends React.Component {
-	constructor (props, context) {
-		super(props, context);
+    constructor(props, context) {
+        super(props, context);
 
-		this.state = {
-			carouselItems: [],
-			index: 0,
-			direction: null
-		};
+        this.state = {
+            carouselItems: [],
+            index: 0,
+            direction: null
+        };
 
-		this.carousel = React.createRef();
-		this.timer = null;
-	}
+        this.carousel = React.createRef();
+        this.timer = null;
+    }
 
-	componentDidMount () {
-		this.loadCarouselItems();
-		this.startTimer();
-	};
+    componentDidMount() {
+        this.loadCarouselItems();
+        this.startTimer();
+    };
 
-	componentWillUnmount () {
-		clearInterval(this.timer);
-	}
+    componentWillUnmount() {
+        clearInterval(this.timer);
+    }
 
 
-	loadCarouselItems = () => {
-		homeContentService
-			.loadCarouselItems()
-			.then(res => {
-				this.setState({carouselItems: res.carouselItems});
-			})
-			.catch(err => {
-				console.log(err);
-			});
+    loadCarouselItems = () => {
+        homeContentService
+            .loadCarouselItems()
+            .then(res => {
+                this.setState({carouselItems: res.carouselItems});
+            })
+            .catch(err => {
+                console.log(err);
+            });
 
-	};
+    };
 
-	startTimer = () => {
-		this.timer = setInterval(this.changeSlide, MAIN_CAROUSEL_TIMER_INTERVAL);
-	};
+    startTimer = () => {
+        this.timer = setInterval(this.changeSlide, MAIN_CAROUSEL_TIMER_INTERVAL);
+    };
 
-	changeSlide = () => {
-		let index = this.state.index + 1;
-		if (this.state.index === this.carousel.current.props.children.length - 1) {
-			index = 0;
-		}
+    changeSlide = () => {
+        let index = this.state.index + 1;
+        if (this.state.index === this.carousel.current.props.children.length - 1) {
+            index = 0;
+        }
 
-		this.setState({
-			index: index,
-			direction: 'next'
-		});
-	};
+        this.setState({
+            index: index,
+            direction: 'next'
+        });
+    };
 
-	handleSelect = (selectedIndex, e) => {
-		clearInterval(this.timer);
+    handleSelect = (selectedIndex, e) => {
+        clearInterval(this.timer);
 
-		this.setState({
-			index: selectedIndex,
-			direction: e.direction
-		});
+        this.setState({
+            index: selectedIndex,
+            direction: e.direction
+        });
 
-		this.startTimer();
-	};
+        this.startTimer();
+    };
 
-	render () {
-		const {index, direction} = this.state;
+    render() {
+        const {index, direction} = this.state;
 
-		let items = [];
 
-		for (let i = 0; i < this.state.carouselItems.length; i++) {
 
-			let item = this.state.carouselItems[i];
+        let items = [];
 
-			items.push(
-				<Carousel.Item key={item.id}>
-					<img className="carousel-img" alt={item.heading} src={item.imageUrl}/>
-					<Carousel.Caption>
-						<h1 className="carousel-heading">{item.heading}</h1>
-						{/*<hr/>*/}
-						<p className="carousel-text">{item.content}Магнитните клипсове ReadeREST: елегантен аксесоар, благодарение на който очилата Ви са винаги под ръка. Стилно и елегантно.</p>
-					</Carousel.Caption>
-				</Carousel.Item>
-			);
+        for (let i = 0; i < this.state.carouselItems.length; i++) {
 
-		}
+            let item = this.state.carouselItems[i];
 
-		return (
-			<Grid fluid id="home-main-carousel">
-				<img src="/images/readerest.png" className="logo"/>
-				<Carousel
-					ref={this.carousel}
-					activeIndex={index}
-					direction={direction}
-					onSelect={this.handleSelect}>
+            items.push(
+                <Carousel.Item key={item.id}>
+                    <img className="carousel-img" alt={item.heading} src={item.imageUrl}/>
+                    <Carousel.Caption>
+                        <h1 className="carousel-heading">{item.heading}</h1>
+                        {/*<hr/>*/}
+                        {window.innerWidth > 550 &&
 
-					{items}
+                        <p className="carousel-text">{item.content} Магнитните клипсове ReadeREST: елегантен аксесоар,
+                            благодарение на който очилата Ви са винаги под ръка. Стилно и елегантно.</p>
+                        }
 
-				</Carousel>
-			</Grid>
-		);
-	}
+                    </Carousel.Caption>
+                </Carousel.Item>
+            );
+
+        }
+
+        return (
+            <Grid fluid id="home-main-carousel">
+                <img src="/images/readerest.png" className="logo"/>
+                <Carousel
+                    ref={this.carousel}
+                    activeIndex={index}
+                    direction={direction}
+                    onSelect={this.handleSelect}>
+
+                    {items}
+
+                </Carousel>
+            </Grid>
+        );
+    }
 }
 
 export default ControlledCarousel;
