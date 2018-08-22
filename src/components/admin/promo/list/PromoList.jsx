@@ -3,6 +3,8 @@ import {Link} from 'react-router-dom';
 
 import {ToastContainer} from 'react-toastr';
 
+import { confirmAlert } from 'react-confirm-alert';
+
 import {Grid, Row, Col, Table} from 'react-bootstrap';
 
 import TableHead from './partials/TableHead';
@@ -13,6 +15,8 @@ import promosService from '../../../../services/promos/promosService';
 import {
     TOASTR_MESSAGES
 } from '../../../../data/constants/componentConstants';
+
+import { BUTTONS_BG, CONFIRM_DIALOGS } from '../../../../data/constants/componentConstants';
 
 class PromoList extends React.Component {
     constructor(props) {
@@ -25,12 +29,12 @@ class PromoList extends React.Component {
 
     componentDidMount() {
 
-        this.loadPromos();
+        this.loadAll();
     }
 
-    loadPromos = () => {
+    loadAll = () => {
         promosService
-            .loadPromos()
+            .loadAll()
             .then(res => {
 
                 this.setState({
@@ -45,6 +49,33 @@ class PromoList extends React.Component {
             });
     };
 
+    deletePromo = (promoId) => {
+
+        promosService.delete(promoId).then(res => {
+
+            window.location.reload();
+
+        }).catch(err => {
+            this.toastContainer.error(err.responseText, TOASTR_MESSAGES.error, {
+                closeButton: false,
+            });
+        })
+
+    };
+
+    confirmDeletePromo = (promoId) => {
+        confirmAlert({
+            title: '',
+            message: CONFIRM_DIALOGS.deletePromo,
+            buttons: [{
+                label: BUTTONS_BG.yes,
+                onClick: () => this.deletePromo(promoId)
+            },
+                {label: BUTTONS_BG.no}]
+        });
+
+    };
+
     render() {
 
         let promosList;
@@ -52,7 +83,7 @@ class PromoList extends React.Component {
         if(this.state.promos){
 
             promosList = this.state.promos.map(e => {
-                return <PromoTableRow key={e.id} data={e}/>;
+                return <PromoTableRow key={e.id} data={e} confirmDelete={this.confirmDeletePromo}/>;
             });
         }
 

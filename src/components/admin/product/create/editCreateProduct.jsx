@@ -67,7 +67,6 @@ class CreateProduct extends React.Component {
 			productsService
 				.addProduct(this.state)
 				.then(res => {
-					console.log(res);
 					//redirect back
 					this.props.history.go(-1);
 				})

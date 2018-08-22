@@ -10,8 +10,7 @@ import newsService from '../../../../services/news/newsService';
 import Utils from '../../../../utils/utils';
 
 import { BUTTONS_BG, CONFIRM_DIALOGS } from '../../../../data/constants/componentConstants';
-import { TOASTR_MESSAGES, REDIRECT_DELAY } from '../../../../data/constants/componentConstants';
-import { NEWS } from '../../../../data/constants/componentConstants';
+import { TOASTR_MESSAGES } from '../../../../data/constants/componentConstants';
 
 class NewsBrief extends React.Component {
 

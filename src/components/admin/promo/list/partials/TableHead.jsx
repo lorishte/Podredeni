@@ -13,6 +13,7 @@ class TableHead extends React.Component {
                 <th className="text-center">Отстъпка</th>
                 <th className="text-center">Започва на</th>
                 <th className="text-center">Приключва на</th>
+                <th className="text-center"></th>
             </tr>
             </thead>
         );

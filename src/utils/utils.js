@@ -29,6 +29,18 @@ function formatDate(inputDate) {
 
 }
 
+function formatDateYearFirst(inputDate) {
+
+    let date = new Date(inputDate);
+
+    let years = date.getFullYear();
+    let months = date.getMonth() + 1;
+    let day = date.getDate();
+
+    return `${years}-${('0' + months).slice(-2)}-${('0' + day).slice(-2)}`;
+
+}
+
 function formatDateAndTime(inputDate) {
 
     let date = new Date(inputDate);
@@ -66,6 +78,7 @@ function getYear (inputDate) {
 export default {
     formatDate,
     formatDateAndTime,
+    formatDateYearFirst,
     getDay,
 	getMonth,
 	getYear

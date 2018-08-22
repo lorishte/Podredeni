@@ -8,13 +8,16 @@ class FormInputField extends React.Component {
 	}
 
 	render () {
-		const {type, label, name, value, required, onChange, placeholder, disabled} = this.props;
+		const {type, step, min, max, label, name, value, required, onChange, placeholder, disabled} = this.props;
 
 		return (
 			<FormGroup controlId={name}>
 				<ControlLabel>{label}{required && <span className="text-danger">&nbsp;*</span>}</ControlLabel>
 				<FormControl
 					type={type}
+					step={step}
+					min={min}
+					max={max}
 					name={name}
 					value={value}
 					placeholder={placeholder}

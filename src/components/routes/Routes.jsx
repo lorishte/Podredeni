@@ -36,6 +36,7 @@ import AdminProductsList from '../admin/product/list/ProductsList';
 
 // Admin Promos
 import  AdminPromosList from '../admin/promo/list/PromoList';
+import PromoEditCreate from '../admin/promo/create/editCreatePromo';
 
 // Admin Orders
 import AdminOrdersList from '../admin/order/list/OrdersList';
@@ -86,6 +87,8 @@ let Routes = () => {
 			<PrivateRoute path='/product/list' component={AdminProductsList}/>
 
 			<PrivateRoute path='/promos/list' component={AdminPromosList}/>
+			<PrivateRoute path='/promos/edit/:id' component={PromoEditCreate}/>
+			<PrivateRoute path='/promos/create' component={PromoEditCreate}/>
 
 			<PrivateRoute path='/order/list' component={AdminOrdersList}/>
 			<PrivateRoute path='/order/log/:id' component={OrderLog}/>
