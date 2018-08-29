@@ -33,6 +33,7 @@ class PromoList extends React.Component {
     }
 
     loadAll = () => {
+
         promosService
             .loadAll()
             .then(res => {

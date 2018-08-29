@@ -29,7 +29,6 @@ class Login extends React.Component {
 		authService
 			.login(this.state)
 			.then(response => {
-				console.log(response);
 				sessionStorage.setItem('p_token', response.token);
 				sessionStorage.setItem('role', response.role);
 

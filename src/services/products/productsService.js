@@ -4,6 +4,11 @@ const auth = 'admin';
 
 export default {
 
+    // loadProductsList: () => {
+    //     return requesterService
+    //         .get(endPoint, null, query);
+    // },
+
     loadProducts: (state, includeBlocked = false) => {
 
         let query =

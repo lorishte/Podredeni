@@ -4,14 +4,17 @@ import {Grid, Row, Col, Button} from 'react-bootstrap';
 
 import FormInputField from '../../../common/formComponents/FormInputField';
 
+import MultiSelect from './partials/multiSelect';
+
 import promosService from '../../../../services/promos/promosService';
+import productsService from '../../../../services/products/productsService';
 
 import utils from '../../../../utils/utils';
 
 import {TOASTR_MESSAGES} from '../../../../data/constants/componentConstants';
 
 
-class CreatePromo extends React.Component {
+class EditCreatePromo extends React.Component {
     constructor(props) {
         super(props);
 
@@ -19,7 +22,10 @@ class CreatePromo extends React.Component {
             name: '',
             discount: '',
             startDate: '',
-            endDate: []
+            endDate: [],
+            allProducts: [],
+            selectedProductsIds: [],
+            newSelectedProductsIds: []
         };
     }
 
@@ -28,9 +34,28 @@ class CreatePromo extends React.Component {
     componentDidMount() {
 
         if (this.promoId) {
-            this.load();
+            this.loadPromo();
         }
+
+        this.loadProducts();
     }
+
+    loadProducts = () => {
+
+        productsService.loadProducts(this.state).then(res => {
+
+            this.setState({
+                allProducts: res.products
+            })
+        })
+            .catch(err => {
+                this.toastContainer.error(err.responseText, TOASTR_MESSAGES.error, {
+                    closeButton: false,
+                });
+
+            });
+
+    };
 
     loadPromo = () => {
 
@@ -38,11 +63,13 @@ class CreatePromo extends React.Component {
             .then(res => {
 
                 this.setState({
-                        name: res.name,
-                        discount: res.discount,
-                        startDate: utils.formatDateYearFirst(res.startDate),
-                        endDate:  utils.formatDateYearFirst(res.endDate),
-                    });
+                    name: res.name,
+                    discount: res.discount,
+                    startDate: utils.formatDateYearFirst(res.startDate),
+                    endDate: utils.formatDateYearFirst(res.endDate),
+                    selectedProductsIds: res.productsIds,
+                    newSelectedProductsIds: res.productsIds
+                });
             })
             .catch(err => {
                 this.toastContainer.error(err.responseText, TOASTR_MESSAGES.error, {
@@ -57,7 +84,29 @@ class CreatePromo extends React.Component {
     };
 
     handleChange = (e) => {
+
         this.setState({[e.target.name]: e.target.value});
+    };
+
+    addProduct = (e) => {
+
+        this.setState({newSelectedProductsIds: e});
+    };
+
+    manageProductsInPromotion = (promoId) =>{
+
+        let removedProducts = getRemovedProducts(this.state.newSelectedProductsIds, this.state.selectedProductsIds);
+        let assignedProducts = getAssignedProducts(this.state.newSelectedProductsIds, this.state.selectedProductsIds);
+
+        if (assignedProducts.length > 0) {
+
+            promosService.assign(promoId, assignedProducts)
+        }
+
+        if (removedProducts.length > 0) {
+
+            promosService.remove(promoId, removedProducts)
+        }
     };
 
     submitInfo = (e) => {
@@ -67,6 +116,8 @@ class CreatePromo extends React.Component {
         if (this.promoId) {
 
             promosService.edit(this.promoId, this.state).then(res => {
+
+                this.manageProductsInPromotion(this.promoId);
 
                 this.props.history.go(-1);
 
@@ -79,6 +130,8 @@ class CreatePromo extends React.Component {
         } else {
 
             promosService.create(this.state).then(res => {
+
+                this.manageProductsInPromotion(res.promoDiscountId);
 
                 this.props.history.go(-1);
 
@@ -169,6 +222,15 @@ class CreatePromo extends React.Component {
                         </Col>
                     </Row>
 
+                    <Row>
+                        <MultiSelect
+                            name="selectedProductsIds"
+                            onChange={this.addProduct}
+                            allProducts={this.state.allProducts}
+                            selectedProductsIds={this.state.newSelectedProductsIds}
+                        />
+                    </Row>
+
                     <Row className="buttons-container">
                         <Col xs={12}>
                             <Button onClick={this.cancel}>Отказ</Button>
@@ -182,4 +244,40 @@ class CreatePromo extends React.Component {
     }
 }
 
-export default CreatePromo;
+function getRemovedProducts(newSelectedProductsIds, selectedProductsIds) {
+
+    let result = [];
+
+    for (let i = 0; i < selectedProductsIds.length; i++) {
+
+        let currentId = selectedProductsIds[i];
+
+        if (!newSelectedProductsIds.includes(currentId)) {
+
+            result.push(currentId);
+        }
+
+    }
+
+    return result;
+}
+
+function getAssignedProducts(newSelectedProductsIds, selectedProductsIds) {
+
+    let result = [];
+
+    for (let i = 0; i < newSelectedProductsIds.length; i++) {
+
+        let currentId = newSelectedProductsIds[i];
+
+        if (!selectedProductsIds.includes(currentId)) {
+
+            result.push(currentId);
+        }
+
+    }
+
+    return result;
+}
+
+export default EditCreatePromo;
