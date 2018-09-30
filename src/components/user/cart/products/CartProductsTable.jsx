@@ -94,7 +94,7 @@ class CartProductsTable extends React.Component {
 		let sum = 0;
 
 		this.props.products.forEach(e => {
-			let price = utils.calculatePriceAfterDiscount(e.price, e.discount );
+			let price = utils.calculatePriceAfterDiscount(e.price, e.discount ).toFixed(2);
 			sum += price * e.quantity;
 		});
 

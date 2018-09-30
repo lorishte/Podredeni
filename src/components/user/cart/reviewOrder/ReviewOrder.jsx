@@ -9,6 +9,8 @@ import EkontOrderDetailsSummary from './partials/EkontOrderDetailsSummary';
 import AddressOrderDetailsSummary from './partials/AddressOrderDetailsSummary';
 import RecipientDetailsSummary from './partials/RecipientDetailsSummary';
 
+import utils from '../../../../utils/utils'
+
 import { RESOLUTIONS, BUTTONS_BG, LABELS_BG, CART } from '../../../../data/constants/componentConstants';
 
 class ReviewOrder extends React.Component {
@@ -40,7 +42,8 @@ class ReviewOrder extends React.Component {
 		let sum = 0;
 
 		this.props.products.forEach(e => {
-			sum += e.price * e.quantity;
+            let price = utils.calculatePriceAfterDiscount(e.price, e.discount ).toFixed(2);
+            sum += price * e.quantity;
 		});
 
 		return sum.toFixed(2);

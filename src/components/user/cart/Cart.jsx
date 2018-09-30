@@ -4,6 +4,7 @@ import { Grid, Row, Col, Label, Panel } from 'react-bootstrap';
 
 // Helpers
 import { confirmAlert } from 'react-confirm-alert';
+import utils from '../../../utils/utils';
 
 // Partials
 import CartProductsTable from './products/CartProductsTable';
@@ -250,7 +251,7 @@ function generateOrderData (products) {
 			return {
 				ProductId: e.id,
 				Quantity: e.quantity,
-				Price: e.price
+				Price: utils.calculatePriceAfterDiscount(e.price, e.discount).toFixed(2)
 			};
 		}
 	);
