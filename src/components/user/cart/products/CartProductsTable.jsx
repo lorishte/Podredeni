@@ -1,6 +1,5 @@
 import React from 'react';
 
-// Helpers
 import { Table, Button, Row, Col } from 'react-bootstrap';
 import { confirmAlert } from 'react-confirm-alert';
 
@@ -10,6 +9,10 @@ import CartProductRow from './partials/CartProductRow';
 import CartTableFooter from './partials/CartTableFooter'
 
 import { RESOLUTIONS, CONFIRM_DIALOGS, BUTTONS_BG } from '../../../../data/constants/componentConstants';
+
+// Helpers
+import utils from '../../../../utils/utils'
+
 
 class CartProductsTable extends React.Component {
 	constructor (props) {
@@ -32,6 +35,10 @@ class CartProductsTable extends React.Component {
 	componentWillUnmount () {
 		window.removeEventListener('orientationchange', this.handleResolutionChange);
 		window.removeEventListener('resize', this.handleResolutionChange);
+	}
+
+	componentWillReceiveProps () {
+		this.calculateTotalSum();
 	}
 
 	confirmDeletion = (id) => {
@@ -64,6 +71,7 @@ class CartProductsTable extends React.Component {
 	deleteItem = (id) => {
 		let correctedProducts = this.props.products.filter(e => e.id !== id);
 		this.updateParent(correctedProducts);
+
 	};
 
 	editItem = (id, newQuantity) => {
@@ -86,7 +94,8 @@ class CartProductsTable extends React.Component {
 		let sum = 0;
 
 		this.props.products.forEach(e => {
-			sum += e.price * e.quantity;
+			let price = utils.calculatePriceAfterDiscount(e.price, e.discount );
+			sum += price * e.quantity;
 		});
 
 		this.setState({totalSum: sum.toFixed(2)});

@@ -17,6 +17,13 @@ let months = {
 	11: 'декември'
 };
 
+function calculatePriceAfterDiscount (price, discount) {
+	price = Number(price);
+	discount = Number(discount);
+
+	return discount > 0 ? price - discount / 100 * price : price;
+}
+
 function formatDate(inputDate) {
 
     let date = new Date(inputDate);
@@ -54,7 +61,6 @@ function formatDateAndTime(inputDate) {
     return `${('0' + day).slice(-2)}.${('0' + months).slice(-2)}.${years} ${('0' + hours).slice(-2)}:${('0' + minutes).slice(-2)}`;
 }
 
-
 function getDay (inputDate) {
 	let date = new Date(inputDate);
 	let day = date.getDate();
@@ -76,6 +82,7 @@ function getYear (inputDate) {
 }
 
 export default {
+	calculatePriceAfterDiscount,
     formatDate,
     formatDateAndTime,
     formatDateYearFirst,

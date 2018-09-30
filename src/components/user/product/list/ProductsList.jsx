@@ -46,9 +46,6 @@ class ProductsList extends React.Component {
 		productsService
 			.loadProducts(this.state)
 			.then(res => {
-
-				console.log(res.products);
-
 				res.products.forEach(e => e.images.reverse());
 				this.setState({products: res.products});
 			})
@@ -56,7 +53,6 @@ class ProductsList extends React.Component {
 				this.props.history.push('/error');
 			});
 	};
-
 
 
 	render () {
@@ -79,7 +75,7 @@ class ProductsList extends React.Component {
 
 				{this.state.products.length === 0 && <div className="loader"/> }
 
-				<Row className="show-grid top-sellers">
+				<Row>
 					{productsList}
 				</Row>
 			</Grid>

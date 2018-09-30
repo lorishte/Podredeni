@@ -16,9 +16,6 @@ class News extends React.Component {
 			page: 1,      //3 most recent news
 			size: 3       //3 most recent news
 		};
-
-		this.carousel = React.createRef();
-		this.timer = null;
 	}
 
 	componentDidMount () {
@@ -52,7 +49,6 @@ class News extends React.Component {
 			<Grid fluid id="home-news" className="bg-white">
 
 				<Grid id="news-container">
-					{/*<h2 className="section-heading">НОВИНИ</h2>*/}
 					<div className="container">
 						{news}
 					</div>

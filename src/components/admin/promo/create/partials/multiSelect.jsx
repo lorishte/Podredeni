@@ -5,7 +5,6 @@ import { Checkbox, CheckboxGroup } from 'react-checkbox-group';
 class MultiSelect extends React.Component {
 	constructor (props) {
 		super(props);
-
 	}
 
 	render () {

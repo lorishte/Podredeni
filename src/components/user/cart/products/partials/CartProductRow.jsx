@@ -1,5 +1,7 @@
 import React from 'react';
 
+import utils from '../../../../../utils/utils'
+
 import { CURRENCY } from '../../../../../data/constants/componentConstants';
 
 
@@ -35,6 +37,8 @@ class CartProductRow extends React.Component {
 	render () {
 		let p = this.props.data;
 
+		let price = utils.calculatePriceAfterDiscount(p.price, p.discount);
+
 		return (
 			<tr>
 				{this.props.editable &&
@@ -51,6 +55,9 @@ class CartProductRow extends React.Component {
 				</td>
 				<td>
 					{p.name}
+					{p.discount > 0 &&
+					<span className="promo-label">-{p.discount}%</span>
+					}
 					</td>
 				<td className="text-center">
 					<span className="quantity">
@@ -66,11 +73,14 @@ class CartProductRow extends React.Component {
 				</td>
 
 				<td className="text-right">
-					{p.price.toFixed(2) + ' ' + CURRENCY}
-					</td>
+					{p.discount > 0 &&
+					<span className="old-price">{p.price.toFixed(2) + ' ' + CURRENCY}</span>}
+					{price.toFixed(2) + ' ' + CURRENCY}
+				</td>
+
 				<td className="text-right">
-					{(p.price * p.quantity).toFixed(2) + ' ' + CURRENCY}
-					</td>
+					{(price * p.quantity).toFixed(2) + ' ' + CURRENCY}
+				</td>
 			</tr>
 
 		);

@@ -16,11 +16,13 @@ class Header extends React.Component {
 
 		this.mainNav = null;
 		this.userNav = null;
+		this.adminNav = null;
 	}
 
 	componentDidMount () {
 		this.mainNav = document.getElementById('main-menu');
 		this.userNav = document.getElementById('user-nav');
+		this.adminNav = document.getElementById('admin-nav');
 		window.addEventListener('scroll', this.handleScroll, {passive: true});
 	}
 
@@ -48,6 +50,7 @@ class Header extends React.Component {
 
 	hideMenu = () => {
 		if (this.userNav) this.userNav.classList.remove('in');
+		if (this.adminNav) this.adminNav.classList.remove('in');
 	};
 
 	render () {
@@ -69,7 +72,6 @@ class Header extends React.Component {
 				</div>
 				}
 
-
 				{!isAdmin &&
 				<button type="button"
 				        className="navbar-toggle collapsed"
@@ -88,9 +90,9 @@ class Header extends React.Component {
 					<a className="icon" target="_blank" href="https://www.facebook.com/moiteochila/">
 						<i className="fa fa-facebook-official" aria-hidden="true"/>
 					</a>
-					{/*<a className="icon" target="_blank" href="https://www.instagram.com/podredeni.eu">*/}
-						{/*<i className="fa fa-instagram" aria-hidden="true"/>*/}
-					{/*</a>*/}
+					<a className="icon" target="_blank" href="https://www.instagram.com/podredeni.eu">
+						<i className="fa fa-instagram" aria-hidden="true"/>
+					</a>
 				</div>
 				}
 
@@ -158,12 +160,28 @@ class Header extends React.Component {
 				</div>
 				}
 
+				{/*//Admin Nav*/}
+				{isAdmin && <div className="navbar-brand admin">
+					<span>P</span>
+				</div>}
+
 				{isAdmin &&
-				<div id="admin-nav">
-					<ul className="nav navbar-nav">
-						<div className="navbar-brand admin">
-							<span>P</span>
-						</div>
+				<button type="button"
+				        className="navbar-toggle collapsed"
+				        data-toggle="collapse"
+				        data-target="#admin-nav"
+				        aria-expanded="false">
+					<span className="sr-only">Toggle navigation</span>
+					<span className="icon-bar"/>
+					<span className="icon-bar"/>
+					<span className="icon-bar"/>
+				</button>
+				}
+
+
+				{isAdmin &&
+				<div id="admin-nav" className="collapse navbar-collapse">
+					<ul className="nav navbar-nav navbar-right" onClick={this.hideMenu}>
 
 						<NavLink to="/order/list" activeClassName="active" className='nav-link'>
 							Поръчки
@@ -195,6 +213,7 @@ class Header extends React.Component {
 					</ul>
 				</div>
 				}
+
 			</nav>
 		);
 	}

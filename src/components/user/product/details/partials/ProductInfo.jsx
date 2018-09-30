@@ -10,16 +10,30 @@ class ProductInfo extends React.Component {
 	}
 
 	render () {
-		const product = this.props.data;
+		const p = this.props.data;
 
 		return (
 			<Row>
 				<Col xs={12}>
 					<PageHeader>
-						{product.name + ' '}
+						{p.discount > 0 &&
+						<span className="promo-label">-{p.discount}%</span>
+						}
+						{p.name + ' '}
 					</PageHeader>
-					<p>{product.description}</p>
-					<p>{PRODUCT.price} <span className="price">{product.price.toFixed(2)} {CURRENCY}</span></p>
+					<p>{p.description}</p>
+
+					{p.discount === 0 &&
+					<p>{PRODUCT.price} <span className="price">{p.price.toFixed(2)} {CURRENCY}</span></p>}
+
+					{p.discount > 0 &&
+					<p>
+						{PRODUCT.price}
+						<span className="old-price">{p.price.toFixed(2)} {CURRENCY}</span>
+						<span className="price">{(p.price - p.discount / 100 * p.price).toFixed(2)} {CURRENCY}</span>
+					</p>
+					}
+
 				</Col>
 			</Row>
 		);

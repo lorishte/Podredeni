@@ -42,7 +42,6 @@ class Product extends React.Component {
 			.getProduct(id)
 			.then(res => {
 
-				console.log(res);
 				res.product.images.reverse();
 				this.setState({product: res.product});
 			})
@@ -72,7 +71,8 @@ class Product extends React.Component {
 				name: p.name,
 				image: p.images[0],
 				price: p.price,
-				quantity: this.state.quantity
+				quantity: this.state.quantity,
+				discount: p.discount
 			};
 
 			addedProducts.push(product);

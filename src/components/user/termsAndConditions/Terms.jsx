@@ -158,7 +158,7 @@ class Terms extends React.Component {
 
 
                     <Col xs={12} className="text-center">
-                        <Link className={"btn-custom default md"} to={{pathname: '/cart', goToOrderDetailsView: true}} > Назад </Link>
+                        <button className={"btn-custom default md"} onClick={() => this.props.history.go(-1)} > Назад </button>
                     </Col>
 
 

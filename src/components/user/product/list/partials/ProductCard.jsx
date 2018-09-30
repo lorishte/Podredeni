@@ -4,8 +4,9 @@ import { withRouter } from 'react-router-dom';
 
 import { Col } from 'react-bootstrap';
 
-import { TOASTR_MESSAGES, CURRENCY } from '../../../../../data/constants/componentConstants';
+import utils from '../../../../../utils/utils'
 
+import { TOASTR_MESSAGES, CURRENCY } from '../../../../../data/constants/componentConstants';
 
 class ProductCard extends React.Component {
 	constructor (props) {
@@ -40,7 +41,8 @@ class ProductCard extends React.Component {
 			name: p.name,
 			image: p.images[0],
 			price: p.price,
-			quantity: 1
+			quantity: 1,
+			discount: p.discount
 		};
 
 		addedProducts.push(product);
@@ -66,6 +68,11 @@ class ProductCard extends React.Component {
 
 				<div className="card">
 
+					{p.discount > 0 &&
+					<span className="promo-label">-{p.discount}%</span>
+					}
+
+
 					<div className="product-image">
 						<img className="card-img-top" src={p.images[0]} alt="Card image cap"/>
 					</div>
@@ -74,7 +81,17 @@ class ProductCard extends React.Component {
 					<div className="card-body">
 						<h4 className="card-title">{p.name}</h4>
 						<p className="card-text">{p.description.substring(0, 80) + ' ...'}</p>
-						<p className="price">{p.price.toFixed(2)} {CURRENCY}</p>
+
+						{p.discount === 0 &&
+							<p className="price">{p.price.toFixed(2)} {CURRENCY}</p>}
+
+						{p.discount > 0 &&
+							<p className="price">
+								<span className="old-price">{p.price.toFixed(2)} {CURRENCY}</span>
+								<span>{(utils.calculatePriceAfterDiscount(p.price, p.discount)).toFixed(2)} {CURRENCY}</span>
+							</p>
+						}
+
 						<button className="add-to-cart-btn" onClick={this.addToCart}>
 							<i className="fa fa-shopping-cart" aria-hidden="true"/>
 						</button>
