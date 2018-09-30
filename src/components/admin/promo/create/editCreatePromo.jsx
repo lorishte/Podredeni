@@ -113,6 +113,8 @@ class EditCreatePromo extends React.Component {
 
         e.preventDefault();
 
+        console.log(this.state);
+
         if (this.promoId) {
 
             promosService.edit(this.promoId, this.state).then(res => {

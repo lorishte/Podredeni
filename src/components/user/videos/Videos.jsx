@@ -17,7 +17,7 @@ class Videos extends React.Component {
 		let videos = FACEBOOK_VIDEOS.map((v, i) => {
 			console.log(v);
 			return (
-				<Col key={i} xs={6}>
+				<Col key={i} sm={6} xs={12}>
 					<Video src={v}/>
 				</Col>);
 		});

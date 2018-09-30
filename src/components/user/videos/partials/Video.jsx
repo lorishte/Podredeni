@@ -15,7 +15,7 @@ class Video extends React.Component {
                        data-show-text="false"
                        allowtransparency="false"
                        allow="encrypted-media"
-                       allowFullScreen="false">
+                       allowFullScreen="true">
         </iframe>
     }
 }

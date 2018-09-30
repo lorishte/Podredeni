@@ -952,23 +952,23 @@ nav {
 
       .news-date {
         position: absolute;
-        top: -220px;
+        top: -215px;
         left: 15px;
         min-width: 60px;
-        padding: 10px 5px 3px 10px;
+        padding: 10px 10px 3px 10px;
         background-color: $white;
         @include transition;
 
         .day {
           display: block;
-          font-size: 2em;
+          font-size: 1.5em;
           line-height: .85em;
           font-weight: 600;
         }
 
         .month, .year {
           font-size: .8em;
-          display: block;
+          //display: block;
         }
 
       }
@@ -1269,7 +1269,6 @@ nav {
 }
 
 //Admin: Orders
-
 #orders {
 
   .filters-container {
@@ -1385,6 +1384,33 @@ footer {
 
   .icon {
     margin: 0 3px;
+  }
+}
+
+
+//Admin: Promos
+#create-edit-promo {
+
+  .product-tab {
+    position: relative;
+    height: 100px;
+    font-weight: 400;
+    padding: 2px;
+    padding-left: 110px;
+    margin: 0 5px 5px 0;
+  }
+
+  .selected {
+    border: 1px solid $admin-primary;
+  }
+
+  .image-thumbnail {
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    height: 96px;
+    width: 96px;
+    z-index: 0;
   }
 }
 
