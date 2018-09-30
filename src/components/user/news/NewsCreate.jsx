@@ -1,16 +1,20 @@
 import React from 'react';
-import { ToastContainer } from 'react-toastr';
 
-import { Grid, Row, Col, Image, Button } from 'react-bootstrap';
+//external components
+import { ToastContainer } from 'react-toastr';
+import { Grid, Row, Col, Image } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
-import newsService from '../../../services/news/newsService';
-
-import { RESOLUTIONS } from '../../../data/constants/componentConstants';
+//internal components
 import FormTextareaField from "../../common/formComponents/FormTextareaField";
 import FormInputField from "../../common/formComponents/FormInputField";
+import NewsContentEditor from "./partials/NewsContentEditor";
 
-import { TOASTR_MESSAGES, BUTTONS_BG, CREATE_INPUTS } from '../../../data/constants/componentConstants';
+//services
+import newsService from '../../../services/news/newsService';
+
+//constants
+import { TOASTR_MESSAGES, BUTTONS_BG, CREATE_INPUTS, RESOLUTIONS, NEWS_CONTENT_EMPTY } from '../../../data/constants/componentConstants';
 
 class NewsCreate extends React.Component {
 
@@ -20,7 +24,7 @@ class NewsCreate extends React.Component {
         this.state = {
             title: '',
             imageUrl: '',
-            content: '',
+            content: NEWS_CONTENT_EMPTY,
             resolution: window.innerWidth
         };
     }
@@ -47,7 +51,7 @@ class NewsCreate extends React.Component {
 	            this.setState({
 		            title: '',
 		            imageUrl: '',
-		            content: ''
+		            content: NEWS_CONTENT_EMPTY
                 })
             })
             .catch(err => {
@@ -66,6 +70,15 @@ class NewsCreate extends React.Component {
         this.setState({[e.target.name]: e.target.value});
     };
 
+
+    handleChangeContent = (e) => {
+        this.setState({"content": e.value})
+
+        const content = JSON.stringify(e.value.toJSON())
+        localStorage.setItem('content', content)
+
+    };
+
     render () {
         let resolution = this.state.resolution < RESOLUTIONS.xs;
 	    let isAdmin = sessionStorage.getItem('role') === 'admin';
@@ -79,6 +92,7 @@ class NewsCreate extends React.Component {
                 />
 
                 <Row>
+
                     <Col xs={resolution ? 12 : 6} sm={6} md={5}>
                         <Image src={this.state.imageUrl}/>
                     </Col>
@@ -93,12 +107,10 @@ class NewsCreate extends React.Component {
                             onChange={this.handleChange}
                             disabled={false}/>
 
-                        <FormTextareaField
-                            label={CREATE_INPUTS.content}
-                            name="content"
+                        <NewsContentEditor
                             value={this.state.content}
-                            required={true}
-                            onChange={this.handleChange}/>
+                            onChange={this.handleChangeContent}
+                        />
 
                         <FormTextareaField
                             label={CREATE_INPUTS.imageUrl}

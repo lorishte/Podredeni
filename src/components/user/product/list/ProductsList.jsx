@@ -46,6 +46,9 @@ class ProductsList extends React.Component {
 		productsService
 			.loadProducts(this.state)
 			.then(res => {
+
+				console.log(res.products);
+
 				res.products.forEach(e => e.images.reverse());
 				this.setState({products: res.products});
 			})

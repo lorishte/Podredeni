@@ -1,3 +1,5 @@
+import {Value} from 'slate'
+
 const FILTER_INPUT_WAIT_INTERVAL = 2000;
 
 const REDIRECT_DELAY = 2000;
@@ -50,6 +52,27 @@ const FACEBOOK_VIDEOS = [
     "https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2Fmoiteochila%2Fvideos%2F185537282147987%2F",
 	"https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2Fmoiteochila%2Fvideos%2F229243904443991"
 ];
+
+const NEWS_CONTENT_EMPTY = Value.fromJSON({
+    document: {
+        nodes: [
+            {
+                object: 'block',
+                type: 'paragraph',
+                nodes: [
+                    {
+                        object: 'text',
+                        leaves: [
+                            {
+                                text: '',
+                            },
+                        ],
+                    },
+                ],
+            },
+        ],
+    },
+});
 
 const ORDER_DELIVERY_INPUTS = {
 
@@ -247,6 +270,7 @@ export {
 	CONTACT_FORM,
 	CART,
 	FACEBOOK_VIDEOS,
-	NEWS
+	NEWS,
+    NEWS_CONTENT_EMPTY
 };
 

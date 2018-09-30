@@ -1,34 +1,41 @@
 import React from 'react';
 
-import { Grid, Row, Col, Image } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
+//external components
+import {Grid, Row, Col, Image} from 'react-bootstrap';
+import {Link} from 'react-router-dom';
+import {Value} from 'slate'
 
+//internal components
+import NewsContent from "./partials/NewsContent";
+
+//services
 import newsService from '../../../services/news/newsService';
 
-import { RESOLUTIONS, BUTTONS_BG } from '../../../data/constants/componentConstants';
+//constants
+import {RESOLUTIONS, BUTTONS_BG, NEWS_CONTENT_EMPTY} from '../../../data/constants/componentConstants';
 
 class News extends React.Component {
-    constructor (props) {
+    constructor(props) {
         super(props);
 
         this.state = {
             title: '',
             imageUrl: '',
-            content: '',
+            content: NEWS_CONTENT_EMPTY,
             resolution: window.innerWidth
         };
     }
 
-    componentDidMount () {
+    componentDidMount() {
         window.scrollTo(0, 0);
-        window.addEventListener('orientationchange',  this.handleResolutionChange );
+        window.addEventListener('orientationchange', this.handleResolutionChange);
         window.addEventListener('resize', this.handleResolutionChange);
 
         this.loadNewsData();
     }
 
-    componentWillUnmount () {
-        window.removeEventListener('orientationchange', this.handleResolutionChange );
+    componentWillUnmount() {
+        window.removeEventListener('orientationchange', this.handleResolutionChange);
         window.removeEventListener('resize', this.handleResolutionChange);
     }
 
@@ -37,18 +44,22 @@ class News extends React.Component {
         newsService
             .loadNews(id)
             .then(res => {
-                this.setState({title: res.news.title, imageUrl: res.news.imageUrl, content: res.news.content});
+                this.setState({
+                    title: res.news.title,
+                    imageUrl: res.news.imageUrl,
+                    content: Value.fromJSON(JSON.parse(res.news.content))
+                });
             })
             .catch(err => {
                 this.props.history.push('/error');
             });
     };
 
-     handleResolutionChange = () => {
+    handleResolutionChange = () => {
         this.setState({resolution: window.innerWidth})
     };
 
-    render () {
+    render() {
         let resolution = this.state.resolution < RESOLUTIONS.xs;
 
         return (
@@ -59,10 +70,14 @@ class News extends React.Component {
                     </Col>
                     <Col xs={resolution ? 12 : 6} sm={6} md={7}>
                         <h2>{this.state.title}</h2>
-                        <p>{this.state.content}</p>
+
+                        <NewsContent
+                            value={this.state.content}
+                        />
+
 
                         <div className="buttons-container">
-                            <Link className={"btn-custom light md"} to={{pathname: '/news'}} >{BUTTONS_BG.back}</Link>
+                            <Link className={"btn-custom light md"} to={{pathname: '/news'}}>{BUTTONS_BG.back}</Link>
                         </div>
 
                     </Col>

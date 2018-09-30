@@ -1,16 +1,21 @@
 import React from 'react';
+
+//external components
+//internal components
+//services
+//constants
+
+//external components
 import { Link } from 'react-router-dom';
-
 import { Col } from 'react-bootstrap';
-
 import { confirmAlert } from 'react-confirm-alert';
 
+//services
 import newsService from '../../../../services/news/newsService';
-
 import Utils from '../../../../utils/utils';
 
-import { BUTTONS_BG, CONFIRM_DIALOGS } from '../../../../data/constants/componentConstants';
-import { TOASTR_MESSAGES } from '../../../../data/constants/componentConstants';
+//constants
+import { BUTTONS_BG, CONFIRM_DIALOGS, TOASTR_MESSAGES } from '../../../../data/constants/componentConstants';
 
 class NewsBrief extends React.Component {
 
@@ -38,7 +43,7 @@ class NewsBrief extends React.Component {
 		newsService.deleteNews(this.news.id)
 			.then(res => {
 
-				window.location.reload();
+				window.history.back(-1);
 
 			})
 			.catch(err => {

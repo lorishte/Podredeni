@@ -7,12 +7,13 @@
     "bootstrap": "^4.1.0",
     "draft-js": "^0.10.5",
     "es6-shim": "^0.35.3",
+    "immutable": "^3.8.2",
     "jquery": "^3.3.1",
-    "react": "^16.4.2",
+    "react": "^16.5.2",
     "react-bootstrap": "^0.32.1",
     "react-checkbox-group": "^4.0.1",
     "react-confirm-alert": "^2.0.2",
-    "react-dom": "^16.4.2",
+    "react-dom": "^16.5.2",
     "react-facebook": "^5.0.3",
     "react-fb-like": "^0.5.0",
     "react-player": "^1.6.2",
@@ -24,7 +25,9 @@
     "react-youtube": "^7.6.0",
     "reactjs": "^1.0.0",
     "reactstrap": "^5.0.0-beta.3",
-    "selectly": "^0.5.0"
+    "selectly": "^0.5.0",
+    "slate": "^0.41.1",
+    "slate-react": "^0.18.9"
   },
   "scripts": {
     "start": "react-scripts start",

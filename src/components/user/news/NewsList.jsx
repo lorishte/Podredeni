@@ -1,15 +1,18 @@
 import React from 'react';
 
+//external components
 import { Link } from 'react-router-dom';
-
 import { Col, Row, Grid } from 'react-bootstrap';
 import { ToastContainer } from 'react-toastr';
 
+//internal components
 import NewsBrief from './partials/NewsBrief';
 import Paging from '../../common/pagination/Paging';
 
+//services
 import newsService from '../../../services/news/newsService';
 
+//constants
 import { RESOLUTIONS, BUTTONS_BG } from '../../../data/constants/componentConstants';
 
 class NewsList extends React.Component {
@@ -48,9 +51,6 @@ class NewsList extends React.Component {
 		newsService
 			.loadNewsList(this.state)
 			.then(res => {
-
-				console.log(res);
-
 				let newsCount = Number(res.newsCount);
 				let size = Number(this.state.size);
 

@@ -1,12 +1,15 @@
 import requesterService from '../requester';
 
+import Plain from 'slate-plain-serializer'
+
 const newsEndPoint = '/news';
 const auth = 'admin';
 
 function generateNewsDetails (state) {
+
     return {
         Title: state.title,
-        Content: state.content,
+        Content: JSON.stringify(state.content.toJSON()),
         ImageUrl: state.imageUrl
     }
 };
