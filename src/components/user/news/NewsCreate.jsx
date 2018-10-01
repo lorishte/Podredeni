@@ -8,11 +8,10 @@ import { Link } from 'react-router-dom';
 //internal components
 import FormTextareaField from '../../common/formComponents/FormTextareaField';
 import FormInputField from '../../common/formComponents/FormInputField';
-import NewsContentEditor from './partials/NewsContentEditor';
+import TextEditor from './partials/TextEditor'
 
 //services
 import newsService from '../../../services/news/newsService';
-
 
 //constants
 import {
@@ -31,7 +30,7 @@ class NewsCreate extends React.Component {
 		this.state = {
 			title: '',
 			imageUrl: '',
-			content: NEWS_CONTENT_EMPTY,
+			content: '',
 			resolution: window.innerWidth
 		};
 	}
@@ -78,11 +77,11 @@ class NewsCreate extends React.Component {
 	};
 
 	handleChangeContent = (e) => {
-		this.setState({'content': e.value});
+		console.log(e);
+		this.setState({content: e});
 
-		const content = JSON.stringify(e.value.toJSON());
+		const content = JSON.stringify(e);
 		localStorage.setItem('content', content);
-
 	};
 
 	render () {
@@ -99,11 +98,11 @@ class NewsCreate extends React.Component {
 
 				<Row>
 
-					<Col xs={resolution ? 12 : 6} sm={6} md={5}>
+					<Col xs={resolution ? 12 : 6} sm={6} md={4}>
 						<Image src={this.state.imageUrl}/>
 					</Col>
 
-					<Col xs={resolution ? 12 : 6} sm={6} md={7}>
+					<Col xs={12} sm={6} md={8}>
 						<FormInputField
 							type="text"
 							label={CREATE_INPUTS.title}
@@ -113,10 +112,10 @@ class NewsCreate extends React.Component {
 							onChange={this.handleChange}
 							disabled={false}/>
 
-						<NewsContentEditor
-						value={this.state.content}
-						onChange={this.handleChangeContent}
-						/>
+
+						<TextEditor
+							value={this.state.content}
+							onChange={this.handleChangeContent}/>
 
 
 						<FormTextareaField

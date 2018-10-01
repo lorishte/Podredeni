@@ -9,7 +9,7 @@ function generateNewsDetails (state) {
 
     return {
         Title: state.title,
-        Content: JSON.stringify(state.content.toJSON()),
+        Content: state.content,
         ImageUrl: state.imageUrl
     }
 };

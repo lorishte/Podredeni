@@ -21,7 +21,7 @@ class News extends React.Component {
         this.state = {
             title: '',
             imageUrl: '',
-            content: NEWS_CONTENT_EMPTY,
+            content: '',
             resolution: window.innerWidth
         };
     }
@@ -44,13 +44,15 @@ class News extends React.Component {
         newsService
             .loadNews(id)
             .then(res => {
+
                 this.setState({
                     title: res.news.title,
                     imageUrl: res.news.imageUrl,
-                    content: Value.fromJSON(JSON.parse(res.news.content))
+                    content: res.news.content
                 });
             })
             .catch(err => {
+                console.log(err);
                 this.props.history.push('/error');
             });
     };
@@ -71,10 +73,7 @@ class News extends React.Component {
                     <Col xs={resolution ? 12 : 6} sm={6} md={7}>
                         <h2>{this.state.title}</h2>
 
-                        <NewsContent
-                            value={this.state.content}
-                        />
-
+                        <div dangerouslySetInnerHTML={{ __html: this.state.content }} />
 
                         <div className="buttons-container">
                             <Link className={"btn-custom light md"} to={{pathname: '/news'}}>{BUTTONS_BG.back}</Link>
