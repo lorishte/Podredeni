@@ -109,7 +109,7 @@ class Header extends React.Component {
 							Продукти
 						</NavLink>
 
-						<NavLink to="/news" activeClassName="active" className='nav-link'>
+						<NavLink to="/news/list" activeClassName="active" className='nav-link'>
 							Новини
 						</NavLink>
 
