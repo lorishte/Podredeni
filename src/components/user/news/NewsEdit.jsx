@@ -137,11 +137,11 @@ class NewsEdit extends React.Component {
 
 						<div className="text-center">
 							{!isAdmin &&
-							<Link className={'btn-custom default md'} to={{pathname: '/news'}}>{BUTTONS_BG.back}</Link>
+							<Link className={'btn-custom default md'} to={{pathname: '/news/list'}}>{BUTTONS_BG.back}</Link>
 							}
 
 							{isAdmin &&
-							<Link className={'btn btn-default'} to={{pathname: '/news'}}>{BUTTONS_BG.back}</Link>
+							<Link className={'btn btn-default'} to={{pathname: '/news/list'}}>{BUTTONS_BG.back}</Link>
 							}
 
 							<button className="btn btn-primary" onClick={this.saveChanges}>{BUTTONS_BG.confirm}</button>

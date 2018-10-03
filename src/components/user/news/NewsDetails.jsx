@@ -76,7 +76,7 @@ class News extends React.Component {
                         <div dangerouslySetInnerHTML={{ __html: this.state.content }} />
 
                         <div className="buttons-container">
-                            <Link className={"btn-custom light md"} to={{pathname: '/news'}}>{BUTTONS_BG.back}</Link>
+                            <Link className={"btn-custom light md"} to={{pathname: '/news/list'}}>{BUTTONS_BG.back}</Link>
                         </div>
 
                     </Col>
