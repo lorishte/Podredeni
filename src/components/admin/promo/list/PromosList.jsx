@@ -7,8 +7,8 @@ import { confirmAlert } from 'react-confirm-alert';
 
 import {Grid, Row, Col, Table} from 'react-bootstrap';
 
-import TableHead from './partials/TableHead';
-import PromoTableRow from './partials/PromoTableRow';
+import TableHead from './partials/PromosTableHead';
+import PromoTableRow from './partials/PromosTableRow';
 
 import promosService from '../../../../services/promos/promosService';
 

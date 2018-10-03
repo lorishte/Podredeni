@@ -27,6 +27,7 @@ class TextEditor extends Component {
 	};
 
 	render () {
+
 		return (
 			<RichTextEditor
 				value={this.state.value}

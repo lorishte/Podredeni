@@ -8,5 +8,5 @@ export default {
 
         return requesterService
             .get(endPoint);
-    }
+    },
 };

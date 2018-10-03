@@ -4,7 +4,7 @@ import { Grid, Row, Col, Button } from 'react-bootstrap';
 
 import FormInputField from '../../../common/formComponents/FormInputField';
 
-import MultiSelect from './partials/multiSelect';
+import MultiSelect from './partials/MultiSelect';
 
 import promosService from '../../../../services/promos/promosService';
 import productsService from '../../../../services/products/productsService';
@@ -111,8 +111,6 @@ class EditCreatePromo extends React.Component {
 	submitInfo = (e) => {
 
 		e.preventDefault();
-
-		console.log(this.state);
 
 		if (this.promoId) {
 

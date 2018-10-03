@@ -31,12 +31,16 @@ import Cart from '../user/cart/Cart';
 
 // ADMIN
 // Admin Products
-import CreateProduct from '../admin/product/create/editCreateProduct';
+import CreateProduct from '../admin/product/create/EditCreateProduct';
 import AdminProductsList from '../admin/product/list/ProductsList';
 
 // Admin Promos
-import  AdminPromosList from '../admin/promo/list/PromoList';
-import PromoEditCreate from '../admin/promo/create/editCreatePromo';
+import  AdminPromosList from '../admin/promo/list/PromosList';
+import PromoEditCreate from '../admin/promo/create/EditCreatePromo';
+
+// Admin Partners
+import AdminPartnersList from '../admin/partner/list/PartnersList'
+import PartnerEditCreate from '../admin/partner/create/EditCreatePartner';
 
 // Admin Orders
 import AdminOrdersList from '../admin/order/list/OrdersList';
@@ -68,7 +72,7 @@ let Routes = () => {
 			<Route path='/products/:id' component={ProductDetails}/>
 
 			<Route exact path='/news/create' component={NewsCreate}/>
-			<Route exact path='/news' component={NewsList}/>
+			<Route exact path='/news/list' component={NewsList}/>
 			<Route exact path='/news/:id' component={NewsDetails}/>
 			<Route exact path='/news/edit/:id' component={NewsEdit}/>
 
@@ -89,6 +93,10 @@ let Routes = () => {
 			<PrivateRoute path='/promos/list' component={AdminPromosList}/>
 			<PrivateRoute path='/promos/edit/:id' component={PromoEditCreate}/>
 			<PrivateRoute path='/promos/create' component={PromoEditCreate}/>
+
+			<PrivateRoute path='/partners/list' component={AdminPartnersList}/>
+			<PrivateRoute path='/partners/edit/:id' component={PartnerEditCreate}/>
+			<PrivateRoute path='/partners/create' component={PartnerEditCreate}/>
 
 			<PrivateRoute path='/order/list' component={AdminOrdersList}/>
 			<PrivateRoute path='/order/log/:id' component={OrderLog}/>

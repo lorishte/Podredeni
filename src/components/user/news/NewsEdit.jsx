@@ -8,7 +8,7 @@ import { Link } from 'react-router-dom';
 //internal components
 import FormTextareaField from '../../common/formComponents/FormTextareaField';
 import FormInputField from '../../common/formComponents/FormInputField';
-import TextEditor from './partials/TextEditor';
+import TextEditor from '../../common/textEditor/TextEditor';
 
 //services
 import newsService from '../../../services/news/newsService';
