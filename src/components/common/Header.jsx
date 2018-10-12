@@ -203,6 +203,10 @@ class Header extends React.Component {
 							Партньори
 						</NavLink>
 
+						<NavLink to="/videos/list" activeClassName="active" className='nav-link'>
+							Видео
+						</NavLink>
+
 						<NavLink to="/home-content" activeClassName="active" className='nav-link'>
 							Съдържание
 						</NavLink>

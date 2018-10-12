@@ -18,6 +18,11 @@ class Videos extends React.Component {
         }
     }
 
+    componentDidMount() {
+
+        this.loadVideos();
+    }
+
     loadVideos = () => {
 
         videos.loadAll()
@@ -39,7 +44,7 @@ class Videos extends React.Component {
         videos = videos.map((v, i) => {
             return (
                 <Col key={i} sm={6} xs={12}>
-                    <Video src={v}/>
+                    <Video src={v.url}/>
                 </Col>);
         });
 

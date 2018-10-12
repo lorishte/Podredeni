@@ -47,6 +47,9 @@ import AdminOrdersList from '../admin/order/list/OrdersList';
 import OrderLog from '../admin/order/log/OrderLog';
 import OrderEdit from '../admin/order/edit/OrderEdit';
 
+//Admin Videos
+import VideosList from '../admin/video/list/VideosList';
+
 // Admin Home content
 import HomeContent from '../admin/homeContent/HomeContent';
 import CarouselItemCreate from '../admin/homeContent/carousel/partials/CarouselItemCreate'
@@ -79,7 +82,7 @@ let Routes = () => {
 
 			<Route path='/cart' component={Cart}/>
 
-			<Route path='/videos' component={Videos}/>
+			<Route exact path='/videos' component={Videos}/>
 
 			<Route path='/contact' component={Contact}/>
 
@@ -93,6 +96,8 @@ let Routes = () => {
 			<PrivateRoute path='/promos/list' component={AdminPromosList}/>
 			<PrivateRoute path='/promos/edit/:id' component={PromoEditCreate}/>
 			<PrivateRoute path='/promos/create' component={PromoEditCreate}/>
+
+			<PrivateRoute path='/videos/list' component={VideosList}/>
 
 			<PrivateRoute path='/partners/list' component={AdminPartnersList}/>
 			<PrivateRoute path='/partners/edit/:id' component={PartnerEditCreate}/>

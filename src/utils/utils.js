@@ -81,6 +81,16 @@ function getYear (inputDate) {
 	return year;
 }
 
+function getVideoDescription (input) {
+	let indexOfDescriptionFirstLetter = getPosition(input, ' ', 2) + 1;
+
+	return input.substr(indexOfDescriptionFirstLetter);
+}
+
+function getPosition(string, subString, index) {
+    return string.split(subString, index).join(subString).length;
+}
+
 export default {
 	calculatePriceAfterDiscount,
     formatDate,
@@ -88,5 +98,6 @@ export default {
     formatDateYearFirst,
     getDay,
 	getMonth,
-	getYear
+	getYear,
+	getVideoDescription
 }

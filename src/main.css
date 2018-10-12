@@ -1409,3 +1409,15 @@ footer {
     font-size: 1.5em; } }
 
 /*# sourceMappingURL=main.css.map */
+
+.sortable-list {
+    display: inline-block;
+}
+
+.sortable-video {
+    height: auto;
+    margin: 20px auto 20px 20px;
+    background: #bbb;
+    color: #000;
+
+}

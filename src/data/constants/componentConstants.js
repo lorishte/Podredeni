@@ -129,6 +129,7 @@ const BUTTONS_BG = {
 	edit: 'Редактиране',
 	more: 'Повече',
 	create: 'Създай',
+	add: 'Добави',
 
 	//Cart
 	saveChanges: 'Запази промените',
@@ -171,7 +172,8 @@ const TOASTR_MESSAGES = {
     successCarouselItemDelete: 'Съдържанието беше изтрито успешно успешно.',
     successNewsDelete: 'Новината е изтрита успешно.',
 	successCancelOrder: 'Поръчката е отказана.',
-	messageSent: 'Вашето съобщение беше изпратено!'
+	messageSent: 'Вашето съобщение беше изпратено!',
+    videoAdded: 'Видеото беше добавено!'
 };
 
 const CONFIRM_DIALOGS = {
