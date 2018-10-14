@@ -117,15 +117,13 @@ class Header extends React.Component {
 							Видео
 						</NavLink>
 
+						<NavLink to="/partners" activeClassName="active" className='nav-link'>
+							Партньори
+						</NavLink>
+
 						<NavLink to="/contact" activeClassName="active" className='nav-link'>
 							Контакт
 						</NavLink>
-
-						{/*{!isLoggedInUser &&*/}
-						{/*<NavLink to="/login" activeClassName="active" className='nav-link'>*/}
-						{/*Вход*/}
-						{/*</NavLink>*/}
-						{/*}*/}
 
 						{isLoggedInUser &&
 						<NavLink to="/" className="btn btn-default"

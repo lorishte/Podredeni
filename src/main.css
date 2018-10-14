@@ -191,6 +191,12 @@ input[type=checkbox], input[type=radio] {
 .bg-dark {
   background-color: #353535; }
 
+.bg-light-grey {
+  background-color: #e6e6e6; }
+
+.bg-medium-grey {
+  background-color: #c6c6c6; }
+
 .section-heading {
   text-align: center;
   font-size: 3em;
@@ -849,6 +855,20 @@ nav {
   height: 300px;
   margin-bottom: 25px; }
 
+#partners .partner-card .image-container {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -moz-box-align: center;
+  -ms-flex-align: center;
+  -webkit-align-items: center;
+  align-items: center;
+  overflow: hidden; }
+  #partners .partner-card .image-container .img-thumbnail {
+    width: 60%; }
+
 #cart .active-tab {
   color: #b49543; }
 #cart .panel-body .info-text {
@@ -1102,6 +1122,50 @@ footer {
   width: 92px;
   z-index: 0; }
 
+.sortable-video {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -moz-box-align: center;
+  -ms-flex-align: center;
+  -webkit-align-items: center;
+  align-items: center;
+  -webkit-box-pack: justify;
+  -moz-box-pack: justify;
+  -ms-flex-pack: justify;
+  -webkit-justify-content: space-between;
+  justify-content: space-between;
+  -webkit-touch-callout: none;
+  /* iOS Safari */
+  -webkit-user-select: none;
+  /* Safari */
+  -khtml-user-select: none;
+  /* Konqueror HTML */
+  -moz-user-select: none;
+  /* Firefox */
+  -ms-user-select: none;
+  /* Internet Explorer/Edge */
+  user-select: none;
+  /* Non-prefixed version, currently
+               supported by Chrome and Opera */
+  padding: 5px 10px;
+  margin-bottom: 8px;
+  background: #ffffff; }
+  .sortable-video:last-of-type {
+    margin-bottom: 0; }
+  .sortable-video:hover {
+    cursor: grab; }
+
+#videos-container {
+  padding: 10px;
+  margin-bottom: 15px; }
+
+#admin-partners .image-thumbnail {
+  width: auto;
+  max-height: 60px; }
+
 .loader {
   border: 1px solid #b49543;
   border-top: 1px solid #ffffff;
@@ -1323,7 +1387,7 @@ footer {
   #admin-nav .nav .nav-link {
     border-bottom: none; }
     #admin-nav .nav .nav-link:last-child {
-      margin-t: 25px; }
+      margin-top: 25px; }
 
   #home #home-main-carousel .carousel {
     height: 300px;
@@ -1409,15 +1473,3 @@ footer {
     font-size: 1.5em; } }
 
 /*# sourceMappingURL=main.css.map */
-
-.sortable-list {
-    display: inline-block;
-}
-
-.sortable-video {
-    height: auto;
-    margin: 20px auto 20px 20px;
-    background: #bbb;
-    color: #000;
-
-}

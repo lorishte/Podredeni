@@ -59,12 +59,14 @@ class ProductsList extends React.Component {
 		let resolution = this.state.resolution < RESOLUTIONS.xs;
 
 		let productsList;
-		productsList = this.state.products.map(e => {
-			return <ProductCard key={e.id}
-			                    data={e}
-			                    toastContainer={this.toastContainer}
-								xsRes={resolution ? 12 : 6}/>;
-		});
+		if (this.state.products.length > 0) {
+			productsList = this.state.products.map(e => {
+				return <ProductCard key={e.id}
+				                    data={e}
+				                    toastContainer={this.toastContainer}
+				                    xsRes={resolution ? 12 : 6}/>;
+			});
+		}
 
 		return (
 			<Grid>

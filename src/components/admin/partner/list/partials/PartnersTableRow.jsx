@@ -21,11 +21,11 @@ class PartnersTableRow extends React.Component {
                     {p.name}
                 </td>
                 <td>
-                    <Image src={p.logoUrl} thumbnail />
+                    <img className="image-thumbnail" src={p.logoUrl}  />
                 </td>
                 <td>
                     <a href={p.webUrl} target="blank">
-                        Уеб сайт
+                        {p.webUrl}
                     </a>
                 </td>
                 <td>
@@ -37,7 +37,7 @@ class PartnersTableRow extends React.Component {
                     </Link>
 
                     <button className={'btn btn-danger btn-xs'}
-                            onClick={() => this.confirmDelete(p.id)}><i className="fa fa-eraser" aria-hidden="true"/></button>
+                            onClick={() => this.confirmDelete(p.id)}><i className="fa fa-trash" aria-hidden="true"/></button>
                 </td>
             </tr>
 

@@ -1,6 +1,6 @@
 import React from 'react';
 import {ToastContainer} from 'react-toastr';
-import {Grid} from 'react-bootstrap';
+import {Grid, Row, Col} from 'react-bootstrap';
 
 import CreatePopup from './partials/CreatePopup'
 
@@ -21,11 +21,12 @@ class VideosList extends React.Component {
             description: '',
             videos: [],
             orderedVideoIds: []
-        }
+        };
+
+	    this.videosContainer = React.createRef();
     }
 
     componentDidMount() {
-
         this.loadVideos();
     }
 
@@ -93,7 +94,9 @@ class VideosList extends React.Component {
 
         videosService.saveNewOrder(videoIds)
             .then(res => {
-
+	            this.toastContainer.success("", TOASTR_MESSAGES.successOrderEdit, {
+		            closeButton: false,
+	            });
             })
             .catch(err => {
                 this.toastContainer.error(err.responseText, TOASTR_MESSAGES.error, {
@@ -111,6 +114,17 @@ class VideosList extends React.Component {
     handleOrderChange = (reorderedItems) => {
 
         this.setState({orderedVideoIds: reorderedItems});
+
+    };
+
+	changeStyle = () => {
+		let element = this.videosContainer.current;
+
+		if (element.classList.contains('bg-light-grey')) {
+			element.classList.toggle('bg-medium-grey')
+        } else {
+			element.classList.toggle('bg-light-grey')
+        }
 
     };
 
@@ -148,26 +162,37 @@ class VideosList extends React.Component {
                     className="toast-bottom-right"
                 />
 
-                <CreatePopup
-                    buttonLabel={BUTTONS_BG.add}
-                    position="right center"
-                    content={content}
-                    onSubmit={this.submitInfo}
-                    triggerButtonLabel={BUTTONS_BG.add}
-                    triggerButtonClass="add-video-trigger-button"
-                />
+                <Row>
+                    <Col xs={12} className="buttons-container">
+                        <CreatePopup
+                            buttonLabel={BUTTONS_BG.add}
+                            position="right center"
+                            content={content}
+                            onSubmit={this.submitInfo}
+                            triggerButtonLabel={BUTTONS_BG.add}
+                            triggerButtonClass="btn btn-primary btn-sm"
+                        />
+                    </Col>
+                </Row>
 
-                <button onClick={this.saveNewOrder}>
-                    {BUTTONS_BG.saveChanges}
+
+               <div id="videos-container" className="bg-light-grey" ref={this.videosContainer}>
+	               {this.state.videos.length > 0 &&
+                   <SortableVideos
+                       sortableItems={this.state.orderedVideoIds}
+                       handleOrderChange={this.handleOrderChange}
+                       deleteVideo={this.deleteVideo}
+                   />
+	               }
+               </div>
+
+                <button className="btn btn-primary btn-sm"
+                        onMouseEnter={this.changeStyle}
+                        onMouseLeave={this.changeStyle}
+                        onClick={this.saveNewOrder}>
+		            {BUTTONS_BG.saveOrder}
                 </button>
 
-                {this.state.videos.length > 0 &&
-                <SortableVideos
-                    sortableItems={this.state.orderedVideoIds}
-                    handleOrderChange={this.handleOrderChange}
-                    deleteVideo={this.deleteVideo}
-                />
-                }
             </Grid>
         );
     }

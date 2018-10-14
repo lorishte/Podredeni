@@ -3,10 +3,6 @@ import React from 'react';
 //external components
 import {Grid, Row, Col, Image} from 'react-bootstrap';
 import {Link} from 'react-router-dom';
-import {Value} from 'slate'
-
-//internal components
-import NewsContent from "./partials/NewsContent";
 
 //services
 import newsService from '../../../services/news/newsService';

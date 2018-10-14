@@ -1,7 +1,5 @@
 import requesterService from '../requester';
 
-import Plain from 'slate-plain-serializer'
-
 const newsEndPoint = '/news';
 const auth = 'admin';
 

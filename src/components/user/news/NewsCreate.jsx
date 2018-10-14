@@ -18,8 +18,7 @@ import {
 	TOASTR_MESSAGES,
 	BUTTONS_BG,
 	CREATE_INPUTS,
-	RESOLUTIONS,
-	NEWS_CONTENT_EMPTY
+	RESOLUTIONS
 } from '../../../data/constants/componentConstants';
 
 class NewsCreate extends React.Component {
@@ -57,7 +56,7 @@ class NewsCreate extends React.Component {
 				this.setState({
 					title: '',
 					imageUrl: '',
-					content: NEWS_CONTENT_EMPTY
+					content: ''
 				});
 			})
 			.catch(err => {
@@ -77,7 +76,6 @@ class NewsCreate extends React.Component {
 	};
 
 	handleChangeContent = (e) => {
-		console.log(e);
 		this.setState({content: e});
 
 		const content = JSON.stringify(e);

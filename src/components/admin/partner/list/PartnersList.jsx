@@ -91,7 +91,7 @@ class PartnersList extends React.Component {
 
 
         return (
-            <Grid>
+            <Grid id="admin-partners">
 
                 <ToastContainer
                     ref={ref => this.toastContainer = ref}

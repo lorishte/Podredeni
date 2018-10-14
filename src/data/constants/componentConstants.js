@@ -1,5 +1,3 @@
-import {Value} from 'slate'
-
 const FILTER_INPUT_WAIT_INTERVAL = 2000;
 
 const REDIRECT_DELAY = 2000;
@@ -45,34 +43,16 @@ const LABELS_BG = {
 };
 
 const FACEBOOK_VIDEOS = [
-	"https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2Fmoiteochila%2Fvideos%2F180041719364210%2F",
-    "https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2Fmoiteochila%2Fvideos%2F176997756335273%2F",
+	"https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2Fmoiteochila%2Fvideos%2F1810413359013020%2F",
+	"https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2Fmoiteochila%2Fvideos%2F1798411130207027%2F",
+	"https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2Fmoiteochila%2Fvideos%2F1080324425467690%2F",
+	"https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2Fmoiteochila%2Fvideos%2F229243904443991%2F",
+	"https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2Fmoiteochila%2Fvideos%2F185537282147987%2F",
+	"https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2Fmoiteochila%2Fvideos%2F185212032180512%2F",
 	"https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2Fmoiteochila%2Fvideos%2F183209762380739%2F",
-    "https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2Fmoiteochila%2Fvideos%2F185212032180512%2F",
-    "https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2Fmoiteochila%2Fvideos%2F185537282147987%2F",
-	"https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2Fmoiteochila%2Fvideos%2F229243904443991%2F"
+	"https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2Fmoiteochila%2Fvideos%2F176997756335273%2F",
+	"https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2Fmoiteochila%2Fvideos%2F180041719364210%2F"
 ];
-
-const NEWS_CONTENT_EMPTY = Value.fromJSON({
-    document: {
-        nodes: [
-            {
-                object: 'block',
-                type: 'paragraph',
-                nodes: [
-                    {
-                        object: 'text',
-                        leaves: [
-                            {
-                                text: '',
-                            },
-                        ],
-                    },
-                ],
-            },
-        ],
-    },
-});
 
 const ORDER_DELIVERY_INPUTS = {
 
@@ -130,6 +110,7 @@ const BUTTONS_BG = {
 	more: 'Повече',
 	create: 'Създай',
 	add: 'Добави',
+	saveOrder: 'Запази подреждането',
 
 	//Cart
 	saveChanges: 'Запази промените',
@@ -247,6 +228,22 @@ const CART = {
 	noComment: 'Няма добавени забележки.',
 };
 
+const PARTNERS = {
+	city: 'град',
+	address: 'адрес',
+	logoUrl: 'лого',
+	name: 'име',
+	webUrl: 'уеб сайт',
+	category: 'категория'
+};
+
+const PARTNER_CATEGORIES = {
+	optics: 'оптики',
+	others: 'други',
+	gsm: 'GSM аксесоари',
+	fishing: 'лов и риболов'
+};
+
 
 export {
 	FILTER_INPUT_WAIT_INTERVAL,
@@ -274,6 +271,7 @@ export {
 	CART,
 	FACEBOOK_VIDEOS,
 	NEWS,
-    NEWS_CONTENT_EMPTY
+	PARTNERS,
+	PARTNER_CATEGORIES
 };
 

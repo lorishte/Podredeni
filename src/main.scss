@@ -166,6 +166,16 @@ $header-height: 65px;
   align-self: $value;
 }
 
+@mixin no-text-select {
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none; /* Safari */
+  -khtml-user-select: none; /* Konqueror HTML */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome and Opera */
+}
+
 * {
   box-sizing: border-box;
   margin: 0;
@@ -428,6 +438,14 @@ input[type=checkbox], input[type=radio] {
 
 .bg-dark {
   background-color: $dark-bg;
+}
+
+.bg-light-grey{
+  background-color: $light-grey;
+}
+
+.bg-medium-grey{
+  background-color: $medium-grey;
 }
 
 .section-heading {
@@ -953,7 +971,6 @@ nav {
     margin: 10px 0 20px 0;
     border-radius: 5px;
 
-
     .news-image-container {
       @include flex-basis(100%);
       margin: auto;
@@ -1176,6 +1193,25 @@ nav {
     height: 300px;
     margin-bottom: 25px;
   }
+}
+
+//User: Partners
+#partners {
+
+  .partner-card {
+
+    .image-container {
+      @include flex;
+      @include align-items(center);
+      
+      overflow: hidden;
+
+      .img-thumbnail {
+        width: 60%;
+      }
+    }
+  }
+
 }
 
 //User: Cart
@@ -1466,7 +1502,6 @@ footer {
   }
 }
 
-
 //Admin: Promos
 #create-edit-promo {
 
@@ -1492,6 +1527,43 @@ footer {
     height: 92px;
     width: 92px;
     z-index: 0;
+  }
+}
+
+//Admin: Videos
+.sortable-video {
+
+  @include flex;
+  @include align-items(center);
+  @include justify-content(space-between);
+
+  @include no-text-select;
+
+  padding: 5px 10px;
+  margin-bottom: 8px;
+  background: $white;
+
+
+
+  &:last-of-type {
+    margin-bottom: 0;
+  }
+
+  &:hover {
+    cursor: grab;
+  }
+}
+
+#videos-container {
+  padding: 10px;
+  margin-bottom: 15px;
+}
+
+//Admin: Partners
+#admin-partners {
+  .image-thumbnail {
+    width: auto;
+    max-height: 60px;
   }
 }
 
@@ -1970,7 +2042,3 @@ footer {
     font-size: 1.5em;
   }
 }
-
-
-
-

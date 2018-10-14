@@ -12,6 +12,7 @@ import Register from '../auth/Register';
 // USER
 import Home from '../user/home/Home';
 import Videos from '../user/videos/Videos';
+import Partners from '../user/partners/Partners';
 import Contact from '../user/contact/Contact';
 import Terms from '../user/termsAndConditions/Terms';
 
@@ -83,6 +84,8 @@ let Routes = () => {
 			<Route path='/cart' component={Cart}/>
 
 			<Route exact path='/videos' component={Videos}/>
+
+			<Route exact path='/partners' component={Partners}/>
 
 			<Route path='/contact' component={Contact}/>
 

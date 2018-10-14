@@ -15,6 +15,8 @@ export default {
 
         let data = generatePartnerData(state);
 
+        console.log(data)
+
         return requesterService.post(endPoint, auth, data);
 
     },
@@ -42,6 +44,7 @@ function generatePartnerData(state) {
         Name: state.name,
         LogoUrl: state.logoUrl,
         WebUrl: state.webUrl,
-        Details: state.details
+        Category: state.category,
+        Addresses: state.addresses
     };
 }

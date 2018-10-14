@@ -21,7 +21,7 @@ class NewsList extends React.Component {
 
 		this.state = {
 			news: [],
-			size: 6,
+			size: 30,
 			page: 1,
 			resolution: window.innerWidth,
 
