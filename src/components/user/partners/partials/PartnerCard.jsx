@@ -11,12 +11,25 @@ class PartnerCard extends React.Component {
 
 		let p = this.props.partner;
 
+		let addresses;
+
+		if (p.addresses.length > 0) {
+			addresses = p.addresses.map((a, i) => {
+				return (
+					<p key={i} className="partner-address">{a.address}</p>
+				)
+			})
+		}
+
 		return (
 			<div className="partner-card">
-				<div className="image-container">
+				<span className="image-container">
 					<img src={p.logoUrl} className="img-thumbnail"/>
-				</div>
-				<p>{p.name}</p>
+				</span>
+				<h4>{p.name}</h4>
+
+				{addresses}
+
 			</div>
 		);
 	}
