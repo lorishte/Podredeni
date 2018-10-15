@@ -11,11 +11,16 @@ export default {
         return requesterService.get(url, null);
     },
 
+    loadGroupedByCity: () => {
+
+        let url = endPoint + '/groupedbycity';
+
+        return requesterService.get(url, null);
+    },
+
     create: (state) => {
 
         let data = generatePartnerData(state);
-
-        console.log(data)
 
         return requesterService.post(endPoint, auth, data);
 
@@ -45,6 +50,6 @@ function generatePartnerData(state) {
         LogoUrl: state.logoUrl,
         WebUrl: state.webUrl,
         Category: state.category,
-        Addresses: state.addresses
+        PartnerLocations: state.addresses
     };
 }

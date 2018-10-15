@@ -13,8 +13,8 @@ class PartnerCard extends React.Component {
 
 		let addresses;
 
-		if (p.addresses.length > 0) {
-			addresses = p.addresses.map((a, i) => {
+		if (p.partnerLocations) {
+			addresses = p.partnerLocations.map((a, i) => {
 				return (
 					<p key={i} className="partner-address">{a.address}</p>
 				)

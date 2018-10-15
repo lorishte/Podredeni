@@ -37,7 +37,6 @@ class PartnersList extends React.Component {
         partnersService
             .load()
             .then(res => {
-
                 this.setState({
                     partners: res
                 });
@@ -81,7 +80,7 @@ class PartnersList extends React.Component {
 
         let partnersList;
 
-        if(this.state.partners){
+        if(this.state.partners.length > 0){
 
             partnersList = this.state.partners.map(e => {
                 return <PartnersTableRow key={e.id} data={e} confirmDelete={this.confirmDeletePartner}/>;

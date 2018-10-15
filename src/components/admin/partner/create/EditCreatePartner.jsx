@@ -20,7 +20,8 @@ class EditCreatePartner extends React.Component {
 			name: '',
 			logoUrl: '',
 			webUrl: '',
-			addresses: [],
+			category: '',
+			addresses: []
 		};
 	}
 
@@ -33,6 +34,7 @@ class EditCreatePartner extends React.Component {
 	}
 
 	loadPartner = () => {
+
 		partnersService.load(this.partnerId)
 			.then(res => {
 
@@ -40,7 +42,8 @@ class EditCreatePartner extends React.Component {
 					name: res.name,
 					logoUrl: res.logoUrl,
 					webUrl: res.webUrl,
-					details: res.details
+					category: res.category,
+					addresses: res.partnerLocations
 				});
 			})
 			.catch(err => {

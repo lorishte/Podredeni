@@ -29,7 +29,7 @@ class PartnersTableRow extends React.Component {
                     </a>
                 </td>
                 <td>
-                    <div dangerouslySetInnerHTML={{ __html: p.details }} />
+                    <div dangerouslySetInnerHTML={{ __html: p.category }} />
                 </td>
                 <td className="text-center">
                     <Link to={'/partners/edit/' + p.id} className="btn btn-success btn-xs">
