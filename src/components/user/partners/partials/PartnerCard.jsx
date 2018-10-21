@@ -17,7 +17,6 @@ class PartnerCard extends React.Component {
 
 		let p = this.props.partner;
 		let webPage = p.webUrl.split('//')[1];
-		console.log(webPage)
 
 		let addresses;
 
