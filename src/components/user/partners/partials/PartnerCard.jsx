@@ -1,5 +1,7 @@
 import React from 'react';
 
+import { Link } from 'react-router-dom';
+
 import { PARTNER_CATEGORIES } from '../../../../data/constants/componentConstants';
 
 class PartnerCard extends React.Component {
@@ -14,6 +16,8 @@ class PartnerCard extends React.Component {
 	render () {
 
 		let p = this.props.partner;
+		let webPage = p.webUrl.split('//')[1];
+		console.log(webPage)
 
 		let addresses;
 
@@ -32,8 +36,11 @@ class PartnerCard extends React.Component {
 				</span>
 				<h4 className="partner-name">{p.name}</h4>
 				<p className="category">{PARTNER_CATEGORIES[p.category]}</p>
-
+				<hr/>
 				{addresses}
+
+				{webPage !== undefined && <hr/>}
+				{webPage !== undefined && <a href={p.webUrl} target="blank" className="text-sm text-primary">{webPage}</a>}
 
 			</div>
 		);

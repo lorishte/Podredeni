@@ -870,11 +870,9 @@ nav {
 #partners .city-name {
   color: #5b5b5b; }
 #partners .partner-card {
+  background-color: #ffffff;
+  padding: 15px;
   margin-bottom: 35px; }
-  #partners .partner-card .group {
-    content: "";
-    display: table;
-    clear: both; }
   #partners .partner-card .image-container {
     display: -webkit-box;
     display: -webkit-flex;
@@ -886,16 +884,13 @@ nav {
     -webkit-align-items: center;
     align-items: center;
     margin-bottom: 15px;
-    width: 120px;
-    height: 120px;
+    width: 100%;
     background-color: #ffffff;
-    border: 1px solid #e6e6e6;
     overflow: hidden; }
     #partners .partner-card .image-container .img-thumbnail {
-      padding: 8px;
       border: none;
-      height: 100%;
-      width: auto;
+      height: auto;
+      width: 60%;
       -webkit-box-shadow: none;
       box-shadow: none; }
   #partners .partner-card .partner-name {
@@ -904,10 +899,15 @@ nav {
   #partners .partner-card .category {
     font-size: .9em;
     font-style: italic;
-    color: #5b5b5b; }
+    color: #c6c6c6;
+    margin-top: 5px; }
   #partners .partner-card .partner-address {
     font-size: .9em;
     line-height: 1.3em; }
+  #partners .partner-card hr {
+    width: 5%;
+    margin: 0 0 8px 0;
+    border-top: 2px solid #e6e6e6; }
 
 #cart .active-tab {
   color: #b49543; }
@@ -1189,7 +1189,7 @@ footer {
   /* Internet Explorer/Edge */
   user-select: none;
   /* Non-prefixed version, currently
-               supported by Chrome and Opera */
+                                   supported by Chrome and Opera */
   padding: 5px 10px;
   margin-bottom: 8px;
   background: #ffffff; }
@@ -1215,7 +1215,7 @@ footer {
   /* Internet Explorer/Edge */
   user-select: none;
   /* Non-prefixed version, currently
-               supported by Chrome and Opera */
+                                   supported by Chrome and Opera */
   height: 40px; }
   #admin-partners .partner-row:hover {
     cursor: grab; }
@@ -1232,6 +1232,9 @@ footer {
 
 .text-sm {
   font-size: .9em; }
+
+.text-primary {
+  color: #b49543; }
 
 .loader {
   border: 1px solid #b49543;

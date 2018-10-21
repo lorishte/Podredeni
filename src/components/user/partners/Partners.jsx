@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Grid, Col, Row, Clearfix } from 'react-bootstrap';
+import { Grid, Col, Clearfix } from 'react-bootstrap';
 
 import { ToastContainer } from 'react-toastr';
 
@@ -84,7 +84,7 @@ class Partners extends React.Component {
 				return (
 
 					<Col key={i} xs={12}>
-						<h3 className="city-name">{el.key === 'n/a' ? 'Онлайн' : el.key}</h3>
+						<h4 className="city-name">{el.key === 'n/a' ? 'Онлайн' : el.key}</h4>
 						<hr/>
 
 						{resultsRender}

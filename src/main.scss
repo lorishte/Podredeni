@@ -172,8 +172,9 @@ $header-height: 65px;
   -khtml-user-select: none; /* Konqueror HTML */
   -moz-user-select: none; /* Firefox */
   -ms-user-select: none; /* Internet Explorer/Edge */
-  user-select: none; /* Non-prefixed version, currently
-                                  supported by Chrome and Opera */
+  user-select: none;
+  /* Non-prefixed version, currently
+                                   supported by Chrome and Opera */
 }
 
 * {
@@ -440,11 +441,11 @@ input[type=checkbox], input[type=radio] {
   background-color: $dark-bg;
 }
 
-.bg-light-grey{
+.bg-light-grey {
   background-color: $light-grey;
 }
 
-.bg-medium-grey{
+.bg-medium-grey {
   background-color: $medium-grey;
 }
 
@@ -1208,32 +1209,27 @@ nav {
   }
 
   .partner-card {
-
+    background-color: $white;
+    padding: 15px;
     margin-bottom: 35px;
-
-    .group {
-      content: "";
-      display: table;
-      clear: both;
-    }
 
     .image-container {
       @include flex;
       @include align-items(center);
       margin-bottom: 15px;
-      width: 120px;
-      height: 120px;
+      width: 100%;
+      //height: 120px;
       background-color: $white;
-      border: 1px solid $light-grey;
-      
+      //border: 1px solid $light-grey;
+
       overflow: hidden;
 
       .img-thumbnail {
-        padding: 8px;
+        //padding: 8px;
 
         border: none;
-        height: 100%;
-        width: auto;
+        height: auto;
+        width: 60%;
 
         -webkit-box-shadow: none;
         box-shadow: none;
@@ -1247,12 +1243,19 @@ nav {
     .category {
       font-size: .9em;
       font-style: italic;
-      color: $dark-grey;
+      color: $medium-grey;
+      margin-top: 5px;
     }
 
     .partner-address {
       font-size: .9em;
       line-height: 1.3em;
+    }
+
+    hr {
+      width: 5%;
+      margin: 0 0 8px 0;
+      border-top: 2px solid $light-grey;
     }
   }
 
@@ -1587,8 +1590,6 @@ footer {
   margin-bottom: 8px;
   background: $white;
 
-
-
   &:last-of-type {
     margin-bottom: 0;
   }
@@ -1633,6 +1634,10 @@ footer {
 
 .text-sm {
   font-size: .9em;
+}
+
+.text-primary {
+  color: $primary;
 }
 
 //Loaders
