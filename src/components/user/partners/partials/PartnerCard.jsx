@@ -1,11 +1,15 @@
 import React from 'react';
 
+import { PARTNER_CATEGORIES } from '../../../../data/constants/componentConstants';
+
 class PartnerCard extends React.Component {
 
 	constructor (props) {
 		super(props);
 
 	}
+
+
 
 	render () {
 
@@ -26,7 +30,8 @@ class PartnerCard extends React.Component {
 				<span className="image-container">
 					<img src={p.logoUrl} className="img-thumbnail"/>
 				</span>
-				<h4>{p.name}</h4>
+				<h4 className="partner-name">{p.name}</h4>
+				<p className="category">{PARTNER_CATEGORIES[p.category]}</p>
 
 				{addresses}
 

@@ -73,8 +73,6 @@ class ControlledCarousel extends React.Component {
     render() {
         const {index, direction} = this.state;
 
-
-
         let items = [];
 
         for (let i = 0; i < this.state.carouselItems.length; i++) {
@@ -88,9 +86,7 @@ class ControlledCarousel extends React.Component {
                         <h1 className="carousel-heading">{item.heading}</h1>
                         {/*<hr/>*/}
                         {window.innerWidth > 550 &&
-
-                        <p className="carousel-text">{item.content} Магнитните клипсове ReadeREST: елегантен аксесоар,
-                            благодарение на който очилата Ви са винаги под ръка. Стилно и елегантно.</p>
+                        <p className="carousel-text">{item.content}</p>
                         }
 
                     </Carousel.Caption>

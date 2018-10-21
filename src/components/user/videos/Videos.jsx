@@ -6,7 +6,7 @@ import Video from './partials/Video';
 
 import videos from '../../../services/videos/videosService';
 
-import {FACEBOOK_VIDEOS} from '../../../data/constants/componentConstants';
+
 
 class Videos extends React.Component {
 
@@ -19,7 +19,6 @@ class Videos extends React.Component {
     }
 
     componentDidMount() {
-
         this.loadVideos();
     }
 
@@ -37,20 +36,22 @@ class Videos extends React.Component {
 
     render() {
 
-        let videos = FACEBOOK_VIDEOS;
+        let videos;
+        if (this.state.videos.length > 0) {
+	        videos = this.state.videos.map((v, i) => {
+		        return (
+                    <Col key={i} sm={6} xs={12}>
+                        <Video src={v.url}/>
+                    </Col>);
+	        });
 
-        if (this.state.videos.length > 0) videos = this.state.videos;
-
-        videos = videos.map((v, i) => {
-            return (
-                <Col key={i} sm={6} xs={12}>
-                    <Video src={v.url}/>
-                </Col>);
-        });
+        }
 
 
         return (
             <Grid id="videos">
+
+	            {this.state.videos.length === 0 && <div className="loader"/>}
                 {videos}
             </Grid>
         );

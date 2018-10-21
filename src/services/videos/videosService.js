@@ -12,8 +12,6 @@ export default {
 
     create: (url, description) => {
 
-        console.log('' + url + ' ' + description);
-
         let data =  {
             url: url,
             description: description
@@ -34,8 +32,6 @@ export default {
       let data = {
           orderedVideoIds: orderedIds
       };
-
-      console.log(data);
 
       let url = endPoint + '/reorder';
 

@@ -655,6 +655,11 @@ nav {
       position: relative;
       overflow: hidden;
 
+      .top-sellers {
+        @include flex;
+        @include flex-direction(row);
+      }
+
       button {
         &:disabled {
           cursor: default !important;
@@ -1204,28 +1209,50 @@ nav {
 
   .partner-card {
 
-    margin-bottom: 25px;
+    margin-bottom: 35px;
+
+    .group {
+      content: "";
+      display: table;
+      clear: both;
+    }
 
     .image-container {
       @include flex;
       @include align-items(center);
       margin-bottom: 15px;
-      min-width: 150px;
-      max-width: 200px;
-      //height: 100px;
+      width: 120px;
+      height: 120px;
+      background-color: $white;
+      border: 1px solid $light-grey;
       
       overflow: hidden;
 
       .img-thumbnail {
-        width: 60%;
-        padding: 25px;
-        background-color: transparent;
+        padding: 8px;
+
+        border: none;
+        height: 100%;
+        width: auto;
+
+        -webkit-box-shadow: none;
+        box-shadow: none;
       }
+    }
+
+    .partner-name {
+      font-size: 1.2em;
+      margin-bottom: 0;
+    }
+    .category {
+      font-size: .9em;
+      font-style: italic;
+      color: $dark-grey;
     }
 
     .partner-address {
       font-size: .9em;
-      line-height: 1em;
+      line-height: 1.3em;
     }
   }
 

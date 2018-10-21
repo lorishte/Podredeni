@@ -170,6 +170,9 @@ const RESOLUTIONS = {
 	xs: 450,
 	sm: 680,
 	md: 980,
+	bootstrapXS: 768,
+	bootstrapSM: 992,
+	bootstrapMD: 1200,
 	smTopSellers: 640,
 	mdTopSellers: 1000,
 };

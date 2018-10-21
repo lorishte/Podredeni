@@ -13,14 +13,14 @@ class TopSellers extends React.Component {
 		super(props);
 
 		this.state = {
-			products: '',
+			products: [],
 			size: 50,
 			page: 1,
 			filterProperty: 'IsTopSeller',
 			filterValue: true,
 			translateValue: 0,
 			cardWidth: 0,
-			productsToShow: 1
+			productsToShow: 0
 		};
 
 		this.topSellers = React.createRef();
@@ -29,32 +29,51 @@ class TopSellers extends React.Component {
 
 	componentDidMount () {
 		this.loadProducts();
-		window.addEventListener('resize', this.loadProducts);
-		window.addEventListener('orientationchange', this.loadProducts);
+		this.handleResolutionChange();
+		window.addEventListener('resize', this.handleResolutionChange);
+		window.addEventListener('orientationchange', this.handleResolutionChange);
 	}
 
 	componentWillUnmount () {
-		window.removeEventListener('resize', this.loadProducts);
-		window.removeEventListener('orientationchange', this.loadProducts);
+		window.removeEventListener('resize', this.handleResolutionChange);
+		window.removeEventListener('orientationchange', this.handleResolutionChange);
 	}
 
-	loadProducts = () => {
+	handleResolutionChange = () => {
+
 		if (window.innerWidth < RESOLUTIONS.smTopSellers) {
-			this.setState({productsToShow: 1});
+			this.setState({productsToShow: 1}, () => {
+				this.getCardWidth();
+			});
 		} else if (window.innerWidth < RESOLUTIONS.mdTopSellers) {
-			this.setState({productsToShow: 2});
+			this.setState({productsToShow: 2}, () => {
+				this.getCardWidth();
+			});
 		} else {
-			this.setState({productsToShow: 3});
+			this.setState({productsToShow: 3}, () => {
+				this.getCardWidth();
+			});
+		}
+	};
+
+	getCardWidth = () => {
+		let cardWidth = Math.floor(this.container.current.clientWidth / this.state.productsToShow);
+
+		if (this.state.products.length > 0) {
+			this.topSellers.current.style.width = (cardWidth * this.state.products.length) + 'px';
+		} else {
+			this.topSellers.current.style.width = window.innerWidth + 'px';
 		}
 
+		this.setState({cardWidth: cardWidth});
+	};
+
+	loadProducts = () => {
 		productsService
 			.loadProducts(this.state)
 			.then(res => {
-
 				res.products.forEach(p => p.images.reverse());
-				let cardWidth = Math.floor(this.container.current.clientWidth / this.state.productsToShow);
-				this.topSellers.current.style.width = (cardWidth * res.products.length) + 'px';
-				this.setState({products: res.products, cardWidth: cardWidth});
+				this.setState({products: res.products});
 			})
 			.catch(err => {
 				this.toastContainer.error(err.responseText, TOASTR_MESSAGES.error, {
@@ -77,25 +96,28 @@ class TopSellers extends React.Component {
 
 	moveCarousel = (translateValue) => {
 
-		let element = this.topSellers.current;
+		let translateMaxValue = (this.state.products.length - this.state.productsToShow ) * this.state.cardWidth;
+		if (translateValue < 0 || translateValue > translateMaxValue ) return;
 
-		if (translateValue < 0 || translateValue > (Math.floor(element.clientWidth) - this.state.productsToShow * this.state.cardWidth)) return;
 		this.setState({translateValue});
 
+		let topSellersContainer = this.topSellers.current;
 		window.requestAnimationFrame(function () {
-			element.style.transform = `translateX(-${translateValue}px)`;
-			element.style.transition = '.5s';
+			topSellersContainer.style.transform = `translateX(-${translateValue}px)`;
+			topSellersContainer.style.transition = '.5s';
 		});
 	};
 
 	render () {
 
 		let cards;
-		if (this.state.products !== '') {
+		if (this.state.products.length > 0) {
 			cards = this.state.products.map(product => {
 				return <TopSellerProductCard key={product.id} data={product} width={this.state.cardWidth}/>;
 			});
 		}
+
+		let translateMaxValue = (this.state.products.length - this.state.productsToShow ) * this.state.cardWidth;
 
 		return (
 			<Grid fluid id="top-sellers" className="bg-white">
@@ -116,9 +138,10 @@ class TopSellers extends React.Component {
 							<span className="glyphicon glyphicon-chevron-left"/>
 							<span className="sr-only">Prev</span>
 						</button>
+
 						{this.topSellers.current !== null &&
 						<button
-							disabled={this.state.translateValue >= Math.floor(this.topSellers.current.clientWidth) - this.state.productsToShow * this.state.cardWidth - 10}
+							disabled={this.state.translateValue >= translateMaxValue}
 							className="carousel-control right"
 							onClick={this.loadNext}>
 							<span className="glyphicon glyphicon-chevron-right"/>

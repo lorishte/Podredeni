@@ -386,6 +386,18 @@ nav {
     #home #top-sellers .top-sellers-carousel {
       position: relative;
       overflow: hidden; }
+      #home #top-sellers .top-sellers-carousel .top-sellers {
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-direction: normal;
+        -webkit-box-orient: horizontal;
+        -moz-box-direction: normal;
+        -moz-box-orient: horizontal;
+        -webkit-flex-direction: row;
+        -ms-flex-direction: row;
+        flex-direction: row; }
       #home #top-sellers .top-sellers-carousel button:disabled {
         cursor: default !important; }
         #home #top-sellers .top-sellers-carousel button:disabled:hover {
@@ -858,7 +870,11 @@ nav {
 #partners .city-name {
   color: #5b5b5b; }
 #partners .partner-card {
-  margin-bottom: 25px; }
+  margin-bottom: 35px; }
+  #partners .partner-card .group {
+    content: "";
+    display: table;
+    clear: both; }
   #partners .partner-card .image-container {
     display: -webkit-box;
     display: -webkit-flex;
@@ -870,16 +886,28 @@ nav {
     -webkit-align-items: center;
     align-items: center;
     margin-bottom: 15px;
-    min-width: 150px;
-    max-width: 200px;
+    width: 120px;
+    height: 120px;
+    background-color: #ffffff;
+    border: 1px solid #e6e6e6;
     overflow: hidden; }
     #partners .partner-card .image-container .img-thumbnail {
-      width: 60%;
-      padding: 25px;
-      background-color: transparent; }
+      padding: 8px;
+      border: none;
+      height: 100%;
+      width: auto;
+      -webkit-box-shadow: none;
+      box-shadow: none; }
+  #partners .partner-card .partner-name {
+    font-size: 1.2em;
+    margin-bottom: 0; }
+  #partners .partner-card .category {
+    font-size: .9em;
+    font-style: italic;
+    color: #5b5b5b; }
   #partners .partner-card .partner-address {
     font-size: .9em;
-    line-height: 1em; }
+    line-height: 1.3em; }
 
 #cart .active-tab {
   color: #b49543; }
