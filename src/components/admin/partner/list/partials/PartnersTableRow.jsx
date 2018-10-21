@@ -1,8 +1,6 @@
 import React from 'react';
-import {Image, NavItem} from 'react-bootstrap';
-import {Link} from 'react-router-dom';
 
-import utils from '../../../../../utils/utils';
+import {Link} from 'react-router-dom';
 
 class PartnersTableRow extends React.Component {
     constructor (props) {

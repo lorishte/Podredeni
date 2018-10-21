@@ -11,11 +11,12 @@ class PartnersTableHead extends React.Component {
         return (
             <thead>
             <tr>
+                <th className="text-center">No</th>
                 <th className="text-center">{PARTNERS.name}</th>
                 <th className="text-center">{PARTNERS.logoUrl}</th>
                 <th className="text-center">{PARTNERS.webUrl}</th>
                 <th className="text-center">{PARTNERS.category}</th>
-                <th className="text-center"></th>
+                <th className="text-center"/>
             </tr>
             </thead>
         );

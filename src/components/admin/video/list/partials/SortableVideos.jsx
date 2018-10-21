@@ -6,11 +6,11 @@ import { SortableContainer, SortableElement, arrayMove } from 'react-sortable-ho
 
 import { BUTTONS_BG } from '../../../../../data/constants/componentConstants';
 
-const SortableItem = SortableElement(({value, itemIndex, deleteVideo}) =>
+const SortableItem = SortableElement( ({value, itemIndex, deleteVideo}) =>
 
 	<div className="sortable-video">
 		<div>
-			{itemIndex}. {utils.getVideoDescription(value)}
+			{itemIndex}.{utils.getVideoDescription(value)}
 		</div>
 
 		<div>
@@ -26,7 +26,11 @@ const SortableList = SortableContainer(({items, deleteVideo}) => {
 	return (
 		<ul>
 			{items.map((value, index) => (
-				<SortableItem key={`item-${index}`} itemIndex={itemIndex++} index={index} value={value} deleteVideo={deleteVideo}/>
+				<SortableItem key={`item-${index}`}
+				              itemIndex={itemIndex++}
+				              index={index}
+				              value={value}
+				              deleteVideo={deleteVideo}/>
 			))}
 		</ul>
 	);

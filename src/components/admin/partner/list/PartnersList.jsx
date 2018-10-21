@@ -9,6 +9,7 @@ import {Grid, Row, Col, Table} from 'react-bootstrap';
 
 import PartnersTableHead from './partials/PartnersTableHead';
 import PartnersTableRow from './partials/PartnersTableRow';
+import SortablePartners from './partials/SortablePartners';
 
 import partnersService from '../../../../services/partners/partnersService';
 
@@ -23,7 +24,8 @@ class PartnersList extends React.Component {
         super(props);
 
         this.state = {
-            partners: ''
+            partners: [],
+	        newPartnersOrder: []
         };
     }
 
@@ -33,7 +35,6 @@ class PartnersList extends React.Component {
     }
 
     loadAll = () => {
-
         partnersService
             .load()
             .then(res => {
@@ -49,21 +50,22 @@ class PartnersList extends React.Component {
             });
     };
 
+	handleOrderChange = (reorderedItems) => {
+		this.setState({newPartnersOrder: reorderedItems});
+	};
+
     deletePartner = (partnerId) => {
-
         partnersService.delete(partnerId).then(res => {
-
             window.location.reload();
-
         }).catch(err => {
             this.toastContainer.error(err.responseText, TOASTR_MESSAGES.error, {
                 closeButton: false,
             });
         })
-
     };
 
     confirmDeletePartner = (partnerId) => {
+        console.log('here')
         confirmAlert({
             title: '',
             message: CONFIRM_DIALOGS.deletePartner,
@@ -81,12 +83,10 @@ class PartnersList extends React.Component {
         let partnersList;
 
         if(this.state.partners.length > 0){
-
             partnersList = this.state.partners.map(e => {
                 return <PartnersTableRow key={e.id} data={e} confirmDelete={this.confirmDeletePartner}/>;
             });
         }
-
 
 
         return (
@@ -104,12 +104,23 @@ class PartnersList extends React.Component {
                     </Col>
                 </Row>
 
+                {/*<Table striped bordered condensed hover id="admin-partners-table">*/}
+                    {/*<PartnersTableHead/>*/}
+                    {/*<tbody>*/}
+                    {/*{partnersList}*/}
+                    {/*</tbody>*/}
+                {/*</Table>*/}
+
                 <Table striped bordered condensed hover id="admin-partners-table">
                     <PartnersTableHead/>
-                    <tbody>
-                    {partnersList}
-                    </tbody>
+
+	                {this.state.partners.length > 0 &&
+                    <SortablePartners sortableItems={this.state.partners}
+                                      handleOrderChange={this.handleOrderChange}
+                                      confirmDeletePartner={this.confirmDeletePartner}/>
+	                }
                 </Table>
+
 
             </Grid>
         );

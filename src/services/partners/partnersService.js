@@ -41,6 +41,7 @@ export default {
 
         return requesterService.remove(url, auth);
     },
+
 };
 
 function generatePartnerData(state) {
