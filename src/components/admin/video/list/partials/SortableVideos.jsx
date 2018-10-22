@@ -56,7 +56,7 @@ class SortableVideos extends React.Component {
 
 		let deleteVideo = this.props.deleteVideo;
 
-		return <SortableList items={this.state.items} deleteVideo={deleteVideo} onSortEnd={this.onSortEnd}/>;
+		return <SortableList getContainer={() => document.getElementById('videos-container')} items={this.state.items} deleteVideo={deleteVideo} onSortEnd={this.onSortEnd}/>;
 	}
 }
 

@@ -29,10 +29,6 @@ export default {
 
     saveNewOrder: (orderedIds) => {
 
-      let data = {
-          orderedVideoIds: orderedIds
-      };
-
       let url = endPoint + '/reorder';
 
       return requesterService.post(url, auth, orderedIds)

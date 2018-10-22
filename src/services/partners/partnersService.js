@@ -42,6 +42,14 @@ export default {
         return requesterService.remove(url, auth);
     },
 
+
+    saveNewOrder: (orderedIds) => {
+
+        let url = endPoint + '/reorder';
+
+        return requesterService.post(url, auth, orderedIds)
+    }
+
 };
 
 function generatePartnerData(state) {

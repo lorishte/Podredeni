@@ -1201,8 +1201,10 @@ footer {
     cursor: grab; }
 
 #videos-container {
+  height: 60%;
+  overflow: hidden scroll;
   padding: 10px;
-  margin-bottom: 15px; }
+  margin-bottom: 15px;  }
 
 #admin-partners .partner-row {
   -webkit-touch-callout: none;
@@ -1224,6 +1226,13 @@ footer {
   #admin-partners .partner-row .image-thumbnail {
     width: auto;
     max-height: 20px; }
+
+#admin-sortable {
+  height: 450px;
+  overflow: hidden scroll;
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
 
 .partner-image-thumbnail {
   width: auto;

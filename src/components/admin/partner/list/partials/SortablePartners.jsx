@@ -77,6 +77,7 @@ class SortablePartners extends React.Component {
 		let confirmDeletePartner = this.props.confirmDeletePartner;
 
 		return <SortableList
+			getContainer={() => document.getElementById('admin-sortable')}
 			items={this.state.items}
 			confirmDeletePartner={confirmDeletePartner}
 			distance={10}

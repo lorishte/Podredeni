@@ -1601,9 +1601,10 @@ footer {
 }
 
 #videos-container {
+  height: 60%;
+  overflow: hidden scroll;
   padding: 10px;
-  margin-bottom: 15px;
-}
+  margin-bottom: 15px;  }
 
 //Admin: Partners
 #admin-partners {
@@ -1621,6 +1622,13 @@ footer {
       max-height: 20px;
     }
   }
+}
+
+#admin-sortable {
+  height: 450px;
+  overflow: hidden scroll;
+  margin-top: 15px;
+  margin-bottom: 15px;
 }
 
 // When sorting table
