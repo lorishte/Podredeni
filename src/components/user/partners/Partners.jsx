@@ -18,38 +18,63 @@ class Partners extends React.Component {
 		this.state = {
 			partners: [],
 			cardsToDisplayOnRow: 0,
+			resolution: window.innerWidth
 		};
 	}
 
 	componentDidMount () {
 		this.loadPartners();
 		this.calculateCardsOnRow();
-		window.addEventListener('resize', this.calculateCardsOnRow);
-		window.addEventListener('orientationchange', this.calculateCardsOnRow);
+		window.addEventListener('resize', this.handleResolutionChange);
+		window.addEventListener('orientationchange', this.handleResolutionChange);
 	}
 
 	componentWillUnmount () {
-		window.removeEventListener('resize', this.calculateCardsOnRow);
-		window.removeEventListener('orientationchange', this.calculateCardsOnRow);
+		window.removeEventListener('resize', this.handleResolutionChange);
+		window.removeEventListener('orientationchange', this.handleResolutionChange);
 	}
 
 	calculateCardsOnRow = () => {
-		if (window.innerWidth < RESOLUTIONS.bootstrapXS) {
+
+		let resolution = this.state.resolution;
+
+		if (resolution < RESOLUTIONS.bootstrapXS) {
+			if (resolution < RESOLUTIONS.xs) {
+				this.setState({cardsToDisplayOnRow: 1});
+			} else {
+				this.setState({cardsToDisplayOnRow: 2});
+			}
+
+		} else if (resolution < RESOLUTIONS.bootstrapSM) {
 			this.setState({cardsToDisplayOnRow: 2});
-		} else if (window.innerWidth < RESOLUTIONS.bootstrapSM) {
+		} else if (resolution < RESOLUTIONS.bootstrapMD) {
 			this.setState({cardsToDisplayOnRow: 3});
 		} else {
 			this.setState({cardsToDisplayOnRow: 4});
 		}
 	};
 
+	handleResolutionChange = () => {
+		this.setState({resolution: window.innerWidth}, () => {
+			this.calculateCardsOnRow();
+		});
+	};
+
 	loadPartners = () => {
 		partnersService.loadGroupedByCity()
 			.then(res => {
 
-				let sorted = res.sort((a, b) => b.key === 'София');
+				let sofiaCity = res.filter((a) => a.key === 'София');
+				let otherCities = res.filter((a) => a.key !== 'София');
+				let ordered = [];
 
-				this.setState({partners: sorted});
+				ordered.push(sofiaCity[0]);
+
+				otherCities.forEach(e => {
+					ordered.push(e);
+				});
+
+				this.setState({partners: ordered});
 			})
 			.catch(err => {
 				this.props.history.push('/error');
@@ -61,6 +86,8 @@ class Partners extends React.Component {
 		let partners;
 		let cartsOnRow = this.state.cardsToDisplayOnRow;
 
+		let resolution = this.state.resolution < RESOLUTIONS.xs;
+
 		if (this.state.partners.length > 0) {
 			partners = this.state.partners.map((el, i) => {
 
@@ -68,7 +95,7 @@ class Partners extends React.Component {
 
 				let partnerCards = el.value.map(p => {
 					return (
-						<Col key={p.id} md={3} sm={4} xs={6}>
+						<Col key={p.id} lg={3} md={4} sm={6} xs={resolution ? 12 : 6}>
 							<PartnerCard partner={p}/>
 						</Col>);
 				});

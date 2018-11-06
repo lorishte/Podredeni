@@ -8,7 +8,6 @@ class PartnerCard extends React.Component {
 
 	constructor (props) {
 		super(props);
-
 	}
 
 
@@ -35,7 +34,8 @@ class PartnerCard extends React.Component {
 				</span>
 				<h4 className="partner-name">{p.name}</h4>
 				<p className="category">{PARTNER_CATEGORIES[p.category]}</p>
-				<hr/>
+
+				{addresses!== undefined && <hr/>}
 				{addresses}
 
 				{webPage !== undefined && <hr/>}

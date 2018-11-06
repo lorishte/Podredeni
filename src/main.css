@@ -1204,7 +1204,7 @@ footer {
   height: 60%;
   overflow: hidden scroll;
   padding: 10px;
-  margin-bottom: 15px;  }
+  margin-bottom: 15px; }
 
 #admin-partners .partner-row {
   -webkit-touch-callout: none;
@@ -1228,11 +1228,10 @@ footer {
     max-height: 20px; }
 
 #admin-sortable {
-  height: 450px;
+  height: 60vh;
   overflow: hidden scroll;
   margin-top: 15px;
-  margin-bottom: 15px;
-}
+  margin-bottom: 15px; }
 
 .partner-image-thumbnail {
   width: auto;
