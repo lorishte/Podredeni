@@ -84,7 +84,6 @@ class ControlledCarousel extends React.Component {
                     <img className="carousel-img" alt={item.heading} src={item.imageUrl}/>
                     <Carousel.Caption>
                         <h1 className="carousel-heading">{item.heading}</h1>
-                        {/*<hr/>*/}
                         {window.innerWidth > 550 &&
                         <p className="carousel-text">{item.content}</p>
                         }

@@ -39,7 +39,6 @@ class NewsBrief extends React.Component {
 	};
 
 	deleteNews = () => {
-
 		newsService.deleteNews(this.news.id)
 			.then(res => {
 
@@ -60,10 +59,10 @@ class NewsBrief extends React.Component {
 		let date = this.news.creationDate;
 
 		return (
+
 			<Link to={'/news/' + this.news.id}>
 
-
-				<Col xs={this.props.xsRes} sm={6} md={4} lg={4} className="news-card">
+				<div className="news-card">
 
 					<div className="news-image-container">
 						<img className="news-image" src={this.news.imageUrl} alt="News image"/>
@@ -72,7 +71,7 @@ class NewsBrief extends React.Component {
 					<div className="news-body">
 						<h4 className="news-title">{this.news.title}</h4>
 						<p className="news-date">
-							<span className="day">{Utils.getDay(date)}</span>
+							<span className="day">{Utils.getDay(date)} &nbsp;</span>
 							<span className="month">{Utils.getMonth(date)} &nbsp;</span>
 							<span className="year">{Utils.getYear(date)}</span>
 						</p>
@@ -87,9 +86,9 @@ class NewsBrief extends React.Component {
 						        onClick={this.confirmDeleteNews}>{BUTTONS_BG.delete}</button>
 					</div>
 					}
+				</div>
 
-				</ Col >
-			</ Link >
+			</Link>
 		);
 	}
 }

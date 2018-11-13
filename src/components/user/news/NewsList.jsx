@@ -2,7 +2,7 @@ import React from 'react';
 
 //external components
 import { Link } from 'react-router-dom';
-import { Col, Row, Grid } from 'react-bootstrap';
+import { Col, Row, Grid, Clearfix } from 'react-bootstrap';
 import { ToastContainer } from 'react-toastr';
 
 //internal components
@@ -23,10 +23,12 @@ class NewsList extends React.Component {
 			news: [],
 			size: 30,
 			page: 1,
-			resolution: window.innerWidth,
 
 			newsCount: '',
-			pagesCount: ''
+			pagesCount: '',
+
+			cardsToDisplayOnRow: 0,
+			resolution: window.innerWidth
 		};
 	}
 
@@ -36,16 +38,13 @@ class NewsList extends React.Component {
 		window.addEventListener('resize', this.handleResolutionChange);
 
 		this.loadNews();
+		this.calculateCardsOnRow();
 	}
 
 	componentWillUnmount () {
 		window.removeEventListener('orientationchange', this.handleResolutionChange);
 		window.removeEventListener('resize', this.handleResolutionChange);
 	}
-
-	handleResolutionChange = () => {
-		this.setState({resolution: window.innerWidth});
-	};
 
 	loadNews = () => {
 		newsService
@@ -65,6 +64,30 @@ class NewsList extends React.Component {
 			});
 	};
 
+	handleResolutionChange = () => {
+		this.setState({resolution: window.innerWidth}, () => {
+			this.calculateCardsOnRow();
+		});
+	};
+
+	calculateCardsOnRow = () => {
+
+		let resolution = this.state.resolution;
+
+		if (resolution < RESOLUTIONS.bootstrapXS) {
+			if (resolution < RESOLUTIONS.xs) {
+				this.setState({cardsToDisplayOnRow: 1});
+			} else {
+				this.setState({cardsToDisplayOnRow: 2});
+			}
+
+		} else if (resolution < RESOLUTIONS.bootstrapSM) {
+			this.setState({cardsToDisplayOnRow: 2});
+		} else {
+			this.setState({cardsToDisplayOnRow: 3});
+		}
+	};
+
 	goToPage = (page) => {
 		this.setState({page: page}, () => this.loadNews());
 	};
@@ -78,16 +101,24 @@ class NewsList extends React.Component {
 
 		let isAdmin = sessionStorage.getItem('role') === 'admin';
 
+		let cardsOnRow = this.state.cardsToDisplayOnRow;
 		let resolution = this.state.resolution < RESOLUTIONS.xs;
 
-		let newsList;
-		newsList = this.state.news.map(e => {
-			return <NewsBrief key={e.id}
-			                  data={e}
-			                  toastContainer={this.toastContainer}
-			                  xsRes={resolution ? 12 : 6}/>;
+		let newsList = [];
 
-		});
+		if (this.state.news.length > 0) {
+			this.state.news.map((el, i) => {
+				newsList.push(
+					<Col xs={resolution ? 12 : 6} sm={6} md={4} key={el.id}>
+						<NewsBrief data={el}
+						           toastContainer={this.toastContainer}/>
+					</Col>);
+
+				if ((i + 1) % cardsOnRow === 0) {
+					newsList.push(<Clearfix key={i}/>);
+				}
+			});
+		}
 
 		return (
 			<Grid id="news">

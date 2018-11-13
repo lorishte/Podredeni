@@ -663,49 +663,44 @@ nav {
   padding-bottom: 20px; }
 
 #news-container .news-card {
-  height: 320px;
+  min-height: 303px;
   margin: 10px 0 20px 0;
-  border-radius: 5px; }
+  background-color: #ffffff; }
   #news-container .news-card .news-image-container {
     -webkit-flex-basis: 100%;
     flex-basis: 100%;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -moz-box-align: center;
+    -ms-flex-align: center;
+    -webkit-align-items: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    -moz-box-pack: center;
+    -ms-flex-pack: center;
+    -webkit-justify-content: center;
+    justify-content: center;
     margin: auto;
     width: 100%;
-    max-width: 450px;
     height: 200px;
-    overflow: hidden;
-    border-top-right-radius: 5px;
-    border-top-left-radius: 5px; }
+    overflow: hidden; }
     #news-container .news-card .news-image-container .news-image {
       width: 100%;
-      height: 100%;
       -webkit-transition: .4s;
       -moz-transition: .4s;
       transition: .4s; }
   #news-container .news-card .news-body {
     position: relative;
-    background-color: #ffffff;
-    min-height: 60px;
-    padding: 10px 25px;
-    border-bottom-right-radius: 5px;
-    border-bottom-left-radius: 5px; }
+    padding: 10px 25px; }
+    #news-container .news-card .news-body .news-title {
+      font-size: 1em;
+      line-height: 1.3em; }
     #news-container .news-card .news-body .news-date {
-      position: absolute;
-      top: -215px;
-      left: 15px;
-      min-width: 60px;
-      padding: 10px 10px 3px 10px;
-      background-color: #ffffff;
-      -webkit-transition: .4s;
-      -moz-transition: .4s;
-      transition: .4s; }
-      #news-container .news-card .news-body .news-date .day {
-        display: block;
-        font-size: 1.5em;
-        line-height: .85em;
-        font-weight: 600; }
-      #news-container .news-card .news-body .news-date .month, #news-container .news-card .news-body .news-date .year {
-        font-size: .8em; }
+      font-size: .9em;
+      color: #c6c6c6; }
   #news-container .news-card .news-buttons-container {
     height: 40px;
     padding: 0 25px 20px 25px;
@@ -786,9 +781,7 @@ nav {
     overflow: hidden;
     margin-right: 30px; }
     #image-gallery .main-image-container .main-image {
-      margin: auto;
-      height: 100%;
-      width: auto; }
+      margin: auto; }
   #image-gallery .gallery-thumbnails {
     width: 100%;
     display: -webkit-box;

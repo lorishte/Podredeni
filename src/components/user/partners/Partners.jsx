@@ -84,7 +84,7 @@ class Partners extends React.Component {
 	render () {
 
 		let partners;
-		let cartsOnRow = this.state.cardsToDisplayOnRow;
+		let cardsOnRow = this.state.cardsToDisplayOnRow;
 
 		let resolution = this.state.resolution < RESOLUTIONS.xs;
 
@@ -103,7 +103,7 @@ class Partners extends React.Component {
 				for (let j = 1; j <= partnerCards.length; j++) {
 					resultsRender.push(partnerCards[j - 1]);
 
-					if (j % cartsOnRow === 0) {
+					if (j % cardsOnRow === 0) {
 						resultsRender.push(<Clearfix key={j}/>);
 					}
 				}
