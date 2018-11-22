@@ -717,22 +717,23 @@ nav {
         height: 400px;
         text-align: left;
         overflow: hidden;
+        padding: 0 10%;
       }
 
       .article-image {
-        @include flex-basis(60%);
+        @include flex-basis(40%);
         overflow: hidden;
 
         img {
-          width: 100%;
-          height: auto;
+          height: 100%;
+          width: auto;
 
-          transform: translateY(-15%);
+          //transform: translateY(-15%);
         }
       }
 
       .article-content {
-        @include flex-basis(40%);
+        @include flex-basis(60%);
         padding: 50px;
 
         .article-heading {
@@ -752,16 +753,16 @@ nav {
 
     .news-card {
       .news-date {
-        background-color: $warm-light-grey;
+        //background-color: $warm-light-grey;
       }
     }
   }
 }
 
 #testimonials {
-  padding-bottom: 50px;
-  min-height: 250px;
-  background-color: $warm-light-grey;
+  margin-top: 50px;
+  background-color: $dark-grey;
+  color: $medium-grey;
 
   .testimonial {
     .testimonial-body {
@@ -795,7 +796,7 @@ nav {
   }
 
   .carousel {
-    min-height: 130px;
+    height: 250px;;
     @include transition;
 
     .carousel-inner {
@@ -1831,7 +1832,7 @@ footer {
 
       .carousel {
         .carousel-caption {
-          top: 17%;
+          top: 28%;
           width: 75% !important;
         }
       }

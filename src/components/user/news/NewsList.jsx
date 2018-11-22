@@ -108,6 +108,7 @@ class NewsList extends React.Component {
 
 		if (this.state.news.length > 0) {
 			this.state.news.map((el, i) => {
+
 				newsList.push(
 					<Col xs={resolution ? 12 : 6} sm={6} md={4} key={el.id}>
 						<NewsBrief data={el}

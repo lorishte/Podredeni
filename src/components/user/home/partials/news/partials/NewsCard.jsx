@@ -30,7 +30,7 @@ class NewsCard extends React.Component {
 					<div className="news-body">
 						<h4 className="news-title">{data.title}</h4>
 						<p className="news-date">
-							<span className="day">{Utils.getDay(date)}</span>
+							<span className="day">{Utils.getDay(date)}&nbsp;</span>
 							<span className="month">{Utils.getMonth(date)} &nbsp;</span>
 							<span className="year">{Utils.getYear(date)}</span>
 						</p>

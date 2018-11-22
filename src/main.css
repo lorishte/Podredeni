@@ -432,18 +432,18 @@ nav {
       display: flex;
       height: 400px;
       text-align: left;
-      overflow: hidden; }
+      overflow: hidden;
+      padding: 0 10%; }
     #home #home-about #about-product .article-image {
-      -webkit-flex-basis: 60%;
-      flex-basis: 60%;
-      overflow: hidden; }
-      #home #home-about #about-product .article-image img {
-        width: 100%;
-        height: auto;
-        transform: translateY(-15%); }
-    #home #home-about #about-product .article-content {
       -webkit-flex-basis: 40%;
       flex-basis: 40%;
+      overflow: hidden; }
+      #home #home-about #about-product .article-image img {
+        height: 100%;
+        width: auto; }
+    #home #home-about #about-product .article-content {
+      -webkit-flex-basis: 60%;
+      flex-basis: 60%;
       padding: 50px; }
       #home #home-about #about-product .article-content .article-heading {
         color: #896e36;
@@ -452,13 +452,11 @@ nav {
         font-size: 1.5em; }
   #home #home-news .container {
     padding-top: 25px; }
-  #home #home-news .news-card .news-date {
-    background-color: #f6f5f3; }
 
 #testimonials {
-  padding-bottom: 50px;
-  min-height: 250px;
-  background-color: #f6f5f3; }
+  margin-top: 50px;
+  background-color: #5b5b5b;
+  color: #c6c6c6; }
   #testimonials .testimonial .testimonial-body .testimonial-text {
     margin-top: 25px;
     font-style: italic;
@@ -478,7 +476,7 @@ nav {
     height: 100px;
     border: 6px solid #f6f5f3; }
   #testimonials .carousel {
-    min-height: 130px;
+    height: 250px;
     -webkit-transition: .4s;
     -moz-transition: .4s;
     transition: .4s; }
@@ -1344,7 +1342,7 @@ footer {
     min-width: 120px;
     z-index: 100; }
   #home #home-main-carousel .carousel .carousel-caption {
-    top: 17%;
+    top: 28%;
     width: 75% !important; }
 
   #admin-products-table td:last-child, #admin-products-table .table th:last-child,

@@ -184,6 +184,7 @@ const PRODUCT = {
 
 const HOME = {
 	topSellers: 'Най-продавани',
+	news: 'Новини'
 };
 
 const TERMS_AND_CONDITIONS = {

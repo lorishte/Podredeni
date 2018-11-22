@@ -1,8 +1,8 @@
 import React from 'react';
 
-import { Grid, Carousel } from 'react-bootstrap';
+import { Grid } from 'react-bootstrap';
 
-import { MAIN_CAROUSEL_TIMER_INTERVAL } from '../../../../../data/constants/componentConstants';
+import { HOME } from '../../../../../data/constants/componentConstants';
 
 import newsService from '../../../../../services/news/newsService';
 import NewsCard from './partials/NewsCard';
@@ -49,6 +49,9 @@ class News extends React.Component {
 			<Grid fluid id="home-news" className="bg-white">
 
 				<Grid id="news-container">
+
+					<h1 className="section-heading">{HOME.news}</h1>
+
 					<div className="container">
 						{news}
 					</div>

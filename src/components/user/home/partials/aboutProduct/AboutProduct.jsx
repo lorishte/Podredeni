@@ -45,9 +45,6 @@ class AboutProduct extends React.Component {
 					<div className="home-text" dangerouslySetInnerHTML={{__html: this.state.sectionContent}}/>
 				</Grid>
 
-				<Clearfix/>
-
-
 				<div id="about-product">
 					<div className="wrapper">
 						<article className="article-box">
@@ -57,7 +54,7 @@ class AboutProduct extends React.Component {
 							</div>
 
 							<div className="article-image">
-								<img src="/images/show/image_02.jpg"/>
+								<img src="/images/show/christmas.png"/>
 							</div>
 						</article>
 					</div>
