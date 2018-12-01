@@ -80,7 +80,7 @@ class VideosList extends React.Component {
 		let videoIds = this.state.orderedVideoIds.map(v => v.split(' ')[0]);
 		videosService.saveNewOrder(videoIds)
 			.then(res => {
-				this.toastContainer.success('', TOASTR_MESSAGES.successOrderEdit, {
+				this.toastContainer.success('', TOASTR_MESSAGES.successEdit, {
 					closeButton: false,
 				});
 			})

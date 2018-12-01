@@ -19,7 +19,7 @@ class AddImageForm extends React.Component {
 	addImage = () => {
 		if(this.state.imageUrl === '') return;
 
-		this.props.addImage((this.state.imageUrl)   );
+		this.props.addImage((this.state.imageUrl));
 		this.setState({imageUrl: ''});
 	};
 

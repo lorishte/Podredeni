@@ -10,9 +10,6 @@ class CartTableHeader extends React.Component {
 		return (
 			<thead>
 			<tr>
-				{this.props.editable &&
-				<th/>
-				}
 				<th colSpan={2}>{CART.product}</th>
 				<th className="text-center">{CART.quantity}</th>
 				<th className="text-right">{CART.price}</th>

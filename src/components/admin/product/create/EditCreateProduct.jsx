@@ -7,7 +7,7 @@ import FormTextareaField from '../../../common/formComponents/FormTextareaField'
 import AddImageForm from './partials/AddImageFrom';
 
 import productsService from '../../../../services/products/productsService';
-import promosService from '../../../../services/promos/promosService';
+import promosService from '../../../../services/promos/discountPromosService';
 
 import {TOASTR_MESSAGES, REDIRECT_DELAY} from '../../../../data/constants/componentConstants';
 
@@ -104,7 +104,7 @@ class CreateProduct extends React.Component {
             .updateProduct(this.state, this.productId)
             .then(res => {
                 //redirect back
-                this.toastContainer.success(TOASTR_MESSAGES.successOrderEdit, '', {
+                this.toastContainer.success(TOASTR_MESSAGES.successEdit, '', {
                     closeButton: false,
                 });
                 setTimeout(() => this.props.history.go(-1), REDIRECT_DELAY)

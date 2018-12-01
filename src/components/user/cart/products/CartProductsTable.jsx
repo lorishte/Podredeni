@@ -74,15 +74,15 @@ class CartProductsTable extends React.Component {
 
 	};
 
-	editItem = (id, newQuantity) => {
-		let correctedProducts = this.props.products;
-		correctedProducts.forEach(e => {
+	editItemQuantity = (id, newQuantity) => {
+		let products = this.props.products;
+		products.forEach(e => {
 			if (e.id === id) {
 				e.quantity = newQuantity;
 			}
 		});
 
-		this.updateParent(correctedProducts);
+		this.updateParent(products);
 	};
 
 	updateParent = (correctedProducts) => {
@@ -119,7 +119,7 @@ class CartProductsTable extends React.Component {
 					editable={true}
 					data={p}
 					delete={this.confirmDeletion}
-					edit={this.editItem}/>;
+					edit={this.editItemQuantity}/>;
 			});
 		}
 
@@ -133,13 +133,11 @@ class CartProductsTable extends React.Component {
 					{products}
 					</tbody>
 
-					<CartTableFooter resolution={resolution} totalSum={this.state.totalSum} colSpan={5}/>
+					<CartTableFooter resolution={resolution} totalSum={this.state.totalSum} colSpan={4}/>
 				</Table>
 
 				<Row className="buttons-container">
 					<Col xs={12} className="text-center">
-						<button className={isAdmin ? "btn btn-default" : "btn-custom default md"}
-						        onClick={this.props.cancel}>{BUTTONS_BG.cancel}</button>
 						<button className={isAdmin ? "btn btn-primary" : "btn-custom primary md"}
 						        onClick={this.props.continue}>{BUTTONS_BG.next}</button>
 					</Col>

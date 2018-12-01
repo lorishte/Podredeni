@@ -4,16 +4,16 @@ import { Grid, Row, Col, Button } from 'react-bootstrap';
 
 import FormInputField from '../../../common/formComponents/FormInputField';
 
-import MultiSelect from './partials/MultiSelect';
+import MultiSelect from '../partials/MultiSelect';
 
-import promosService from '../../../../services/promos/promosService';
+import promosService from '../../../../services/promos/discountPromosService';
 import productsService from '../../../../services/products/productsService';
 
 import utils from '../../../../utils/utils';
 
 import { TOASTR_MESSAGES } from '../../../../data/constants/componentConstants';
 
-class EditCreatePromo extends React.Component {
+class EditCreateDiscountPromo extends React.Component {
 	constructor (props) {
 		super(props);
 
@@ -157,7 +157,7 @@ class EditCreatePromo extends React.Component {
 
 				<Row>
 					<Col sm={12}>
-						{!this.promoId && <h3>Създаване на промоция</h3>}
+						{!this.promoId && <h3>Създаване на промоция с отстъпка</h3>}
 						{this.promoId && <h3>Редакция</h3>}
 						<hr/>
 					</Col>
@@ -280,4 +280,4 @@ function getAssignedProducts (newSelectedProductsIds, selectedProductsIds) {
 	return result;
 }
 
-export default EditCreatePromo;
+export default EditCreateDiscountPromo;

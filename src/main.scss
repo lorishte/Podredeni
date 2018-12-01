@@ -134,6 +134,14 @@ $header-height: 65px;
   flex-wrap: $value;
 }
 
+@mixin flex-grow($int: 1) {
+  -webkit-box-flex: $int;
+  -moz-box-flex: $int;
+  -webkit-flex-grow: $int;
+  -ms-flex: $int;
+  flex-grow: $int;
+}
+
 @mixin flex-flow($values: (row nowrap)) {
   // No Webkit/FF Box fallback.
   -webkit-flex-flow: $values;
@@ -207,6 +215,11 @@ main {
   padding: 0;
 }
 
+.container {
+  width: 80%;
+  margin: auto;
+}
+
 button {
   border: none;
   outline: none;
@@ -223,6 +236,8 @@ a {
     text-decoration: none;
   }
 }
+
+
 
 img {
   width: 100%;
@@ -366,6 +381,7 @@ input[type=checkbox], input[type=radio] {
   &.xs {
     padding: 3px 7px;
     border-radius: 2px;
+    font-size: .8em;
   }
 
   &.sm {
@@ -422,6 +438,7 @@ input[type=checkbox], input[type=radio] {
   vertical-align: middle;
   //border-top: 1px solid #ddd;
   height: 50px;
+  min-width: 150px;
 }
 
 .table > thead {
@@ -1259,26 +1276,46 @@ nav {
 
 //User: Cart
 #cart {
-  .active-tab {
-    color: $primary;
-  }
 
-  .panel-body {
-    .info-text {
-      display: inline-block;
+  .panel {
+    position: relative;
+    padding: 25px;
 
-      margin: 35px 15% 20px 20px;
+    .panel-body {
+      padding-top: 35px;
     }
   }
 
-  .cart-view-name {
-    border-bottom: 1px solid $light-grey;
-    padding-bottom: 15px;
+  .tabs {
+    @include flex;
+
+    .tab {
+      @include flex-grow(1);
+
+      @include flex;
+      @include align-items(center);
+      @include justify-content(center);
+
+      padding: 20px;
+      text-align: center;
+      border-bottom: 2px solid $default;
+
+      &.active {
+        background-color: $default;
+        color: $white;
+      }
+    }
+  }
+
+
+  .info-text {
+    display: inline-block;
+    margin: 35px 15% 20px 20px;
   }
 
   .image-thumbnail {
-    height: 35px;
-    width: 35px;
+    height: 100px;
+    width: 100px;
   }
 
   .promo-label {
@@ -1333,23 +1370,34 @@ nav {
   #cart-products-table {
     margin-top: 35px;
 
+    .quantity-row {
+      min-width: 105px;
+    }
+
+    .btn-custom {
+      margin-right: 0;
+
+      &:first-of-type {
+        border-bottom-right-radius: 0;
+        border-top-right-radius: 0;
+      }
+
+      &:nth-of-type(2){
+        border-bottom-left-radius: 0;
+        border-top-left-radius: 0;
+      }
+    }
+
     .quantity {
-      padding-right: 8px;
+      display: inline-block;
+      width: 30px;
+      border: 1px solid $default;
+      padding: 4px;
     }
 
-    .arrows-container {
-      width: 25px;
-      @include inline-flex;
-      @include flex-wrap(wrap);
-      @include align-items(center);
-    }
-
-    .btn-xs {
-      width: 25px;
-      height: 15px;
-      padding: 0;
-      margin: 2px 0;
-      line-height: 0;
+    .price {
+      font-size: 1.2em;
+      font-weight: 600;
     }
   }
 
@@ -1528,8 +1576,8 @@ footer {
     @include align-items(center);
 
     * {
-      flex-basis: 33%;
-      flex-grow: 1;
+      @include flex-basis(33%);
+      @include flex-grow(1);
     }
   }
 
@@ -1552,27 +1600,39 @@ footer {
 //Admin: Promos
 #create-edit-promo {
 
+  h3 {
+    margin-top: 25px;
+  }
+  .smaller {
+    font-size: 1.5em;
+  }
+
+  #inclusive-checkbox {
+    margin-top: 35px;
+  }
+
   .product-tab {
     position: relative;
-    height: 100px;
+    height: 68px;
     font-weight: 400;
-    padding: 2px;
-    padding-left: 110px;
+    font-size: .8em;
+    padding: 8px 5px 8px 70px;
     margin: 0 5px 5px 0;
     background-color: $white;
   }
 
   .selected {
     //border: 1px solid $admin-primary;
-    background-color: $light-grey;
+    background-color: $danger;
+    color: $white;
   }
 
   .image-thumbnail {
     position: absolute;
     top: 4px;
     left: 4px;
-    height: 92px;
-    width: 92px;
+    height: 60px;
+    width: 60px;
     z-index: 0;
   }
 }
@@ -1681,6 +1741,10 @@ footer {
 //Queries
 
 @media screen and (max-width: 1100px) {
+
+  .container {
+    width: 100%;
+  }
 
   #home {
     #home-about {
@@ -2039,11 +2103,23 @@ footer {
   }
 
   #cart {
-    #cart-products-table {
-      .btn-xs {
-        width: 20px;
+
+    .panel {
+      padding: 0;
+
+      .panel-body {
+        padding: 0;
+        padding-top: 35px;
       }
     }
+
+    .tabs {
+      .tab {
+        padding: 8px 5px;
+        font-size: .8em;
+      }
+    }
+
 
     .table > tbody > tr > td,
     .table > tbody > tr > th,
@@ -2052,6 +2128,7 @@ footer {
     .table > thead > tr > td,
     .table > thead > tr > th {
       padding: 8px 4px;
+      min-width: inherit;
     }
   }
 

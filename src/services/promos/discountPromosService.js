@@ -40,29 +40,15 @@ export default {
         return requesterService.remove(url, auth);
     },
 
-    assign: (promoId, assignedProducts) => {
-
-        let url = endPoint + '/assign/' + promoId;
-
-        return requesterService.update(url, auth, assignedProducts);
-    },
-
-    remove: (promoId, removedProducts) => {
-
-        let url = endPoint + '/remove/' + promoId;
-
-        return requesterService.update(url, auth, removedProducts);
-    }
-
 };
 
 function generateProductDetails(state) {
 
-    return {
-        Name: state.name,
-        Discount: state.discount,
-        StartDate: state.startDate,
-        EndDate: state.endDate
-    };
+	return {
+		Name: state.name,
+		Discount: state.discount,
+		StartDate: state.startDate,
+		EndDate: state.endDate
+	};
 }
 

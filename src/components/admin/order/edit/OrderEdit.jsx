@@ -118,7 +118,7 @@ class OrderEdit extends React.Component {
 				ordersService
 					.editOrder(this.state.orderId, products)
 					.then(res => {
-						this.toastContainer.success(TOASTR_MESSAGES.successOrderEdit, '', {
+						this.toastContainer.success(TOASTR_MESSAGES.successEdit, '', {
 							closeButton: true,
 						});
 						setTimeout(() => this.props.history.push('/order/list'), REDIRECT_DELAY);

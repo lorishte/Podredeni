@@ -83,7 +83,7 @@ class PartnersList extends React.Component {
         let partnerIds = this.state.newPartnersOrder.map(p => p.id);
         partnersService.saveNewOrder(partnerIds)
             .then(res => {
-                this.toastContainer.success('', TOASTR_MESSAGES.successOrderEdit, {
+                this.toastContainer.success('', TOASTR_MESSAGES.successEdit, {
                     closeButton: false,
                 });
             })

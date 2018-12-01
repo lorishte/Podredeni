@@ -124,7 +124,7 @@ class OrderDetails extends React.Component {
 		let isAdmin = sessionStorage.getItem('role') === 'admin';
 
 		return (
-			<form onSubmit={(e) => this.submitInfo(e)}>
+			<form onSubmit={(e) => this.submitInfo(e)} id="order-details-form">
 
 				<ToastContainer
 					ref={ref => this.toastContainer = ref}
@@ -184,12 +184,6 @@ class OrderDetails extends React.Component {
 
 				<Row className="buttons-container">
 					<Col xs={12} className="text-center">
-						<button className={isAdmin ? 'btn btn-default' : 'btn-custom default md'}
-						        onClick={e => {
-							        e.preventDefault();
-							        this.props.cancel();
-						        }}>{BUTTONS_BG.cancel}
-						</button>
 						<button className={isAdmin ? 'btn btn-default' : 'btn-custom default md'}
 						        onClick={ e => {
 							        e.preventDefault();

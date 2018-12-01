@@ -105,11 +105,6 @@ class ReviewOrder extends React.Component {
 
 
 				<Col xs={12} className="text-center buttons-container">
-
-					<button className={isAdmin ? 'btn btn-default' : 'btn-custom default md'}
-					        onClick={this.props.cancel}>{BUTTONS_BG.cancel}
-					</button>
-
 					<button className={isAdmin ? 'btn btn-default' : 'btn-custom default md'}
 					        onClick={this.props.goBack}>{BUTTONS_BG.back}
 					</button>

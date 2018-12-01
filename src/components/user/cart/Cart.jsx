@@ -11,8 +11,11 @@ import CartProductsTable from './products/CartProductsTable';
 import OrderDetailsForm from './orderDetails/OrderDetailsForm';
 import ReviewOrder from './reviewOrder/ReviewOrder';
 
+// Services
 import orderService from '../../../services/orders/ordersService';
+import productService from '../../../services/products/productsService';
 
+// Constants
 import { BUTTONS_BG, CONFIRM_DIALOGS, CART } from '../../../data/constants/componentConstants';
 
 class Cart extends React.Component {
@@ -21,6 +24,7 @@ class Cart extends React.Component {
 
 		this.state = {
 			products: [],
+			productsCount: JSON.parse(sessionStorage.getItem('products')).length,
 			orderDetails: {},
 			productsView: true,
 			orderDetailsView: false,
@@ -68,16 +72,34 @@ class Cart extends React.Component {
 		this.setState({orderDetails: storedOrderDetails});
 		this.loadProducts();
 
-        if(this.props.location.goToOrderDetailsView) {
+		if (this.props.location.goToOrderDetailsView) {
 
-            this.showDeliveryDetailsForm();
-        }
+			this.showDeliveryDetailsForm();
+		}
 	}
 
 	loadProducts = () => {
 		let addedProducts = JSON.parse(sessionStorage.getItem('products'));
+
+		console.log(222)
+
 		if (addedProducts === null) return;
-		this.setState({products: addedProducts});
+
+		for (let i = 0; i < addedProducts.length; i++) {
+			productService
+				.getProduct(addedProducts[i].id)
+				.then(res => {
+					let product = res.product;
+					product.quantity = addedProducts[i].quantity;
+					product.image = product.images.reverse()[0];
+
+					this.setState({products: [...this.state.products, product]});
+
+				})
+				.catch(err => {
+					console.log(err);
+				})
+		}
 	};
 
 	updateInfo = (stateProp, data) => {
@@ -154,30 +176,29 @@ class Cart extends React.Component {
 	};
 
 	render () {
+
+		let isAdmin = sessionStorage.getItem('role') === 'admin';
+
 		return (
 			<Grid id="cart">
+				{this.state.products.length > 0 &&
+				<Col className="text-right">
+					<button className={isAdmin ? 'btn btn-default sm' : 'btn-custom primary sm'}
+					        onClick={this.confirmCancel}>{BUTTONS_BG.cancel}</button>
+				</Col>
+				}
 
-				<Row>
-					<Col xs={12}>
-						<p>
-							<span className={this.state.productsView ? '' : 'text-grey'}>{CART.edit}</span>
-							<span className="text-grey">&nbsp; &#10231; &nbsp;</span>
-							<span className={this.state.orderDetailsView ? '' : 'text-grey'}>{CART.deliveryData}</span>
-							<span className="text-grey">&nbsp; &#10231; &nbsp;</span>
-							<span className={this.state.reviewView ? '' : 'text-grey'}>{CART.confirm}</span>
-						</p>
-					</Col>
-				</Row>
+				<Panel>
 
+					<div className="tabs">
+						<span className={this.state.productsView ? 'tab active' : 'tab'}>{CART.edit}</span>
+						<span className={this.state.orderDetailsView ? 'tab active' : 'tab'}>{CART.deliveryData}</span>
+						<span className={this.state.reviewView ? 'tab active' : 'tab'}>{CART.confirm}</span>
+					</div>
 
-				<Row>
-					<Col xs={12}>
-					<Panel>
-						{this.state.products.length > 0 && this.state.productsView &&
+					<Panel.Body>
+						{this.state.products.length === this.state.productsCount && this.state.productsView &&
 						<Col xs={12}>
-							<h2 className="cart-view-name">
-								<Label>{CART.step1}</Label> {CART.edit}
-							</h2>
 							<CartProductsTable
 								products={this.state.products}
 								onChange={this.updateInfo}
@@ -195,9 +216,6 @@ class Cart extends React.Component {
 
 						{this.state.orderDetailsView &&
 						<Col xs={12}>
-							<h2 className="cart-view-name">
-								<Label>{CART.step2}</Label> {CART.deliveryData}
-							</h2>
 							<OrderDetailsForm
 								data={this.state.orderDetails}
 								onChange={this.updateInfo}
@@ -209,9 +227,6 @@ class Cart extends React.Component {
 
 						{this.state.reviewView &&
 						<Col xs={12}>
-							<h2 className="cart-view-name">
-								<Label>{CART.step3}</Label>{CART.confirm}
-							</h2>
 							<ReviewOrder
 								products={this.state.products}
 								orderDetails={this.state.orderDetails}
@@ -221,24 +236,20 @@ class Cart extends React.Component {
 							/>
 						</Col>
 						}
+					</Panel.Body>
 
 
+					{this.state.products.length > 0 &&
+					<small className="info-text">
+						ВАЖНО!<br/>
+						Доставката се осъществява до 2 дни след направена заявка по куриерска фирма Еконт.
+						Разходите са за сметка на получателя, като при заявка над 60 лв, разходите са за
+						наша
+						сметка. Заплащането се извършва с наложен платеж.
+					</small>
+					}
 
-						<Panel.Body>
-							{this.state.products.length > 0 &&
-							<small className="info-text">
-								ВАЖНО!<br/>
-								Доставката се осъществява до 2 дни след направена заявка по куриерска фирма Еконт.
-								Разходите са за сметка на получателя, като при заявка над 60 лв, разходите са за наша
-								сметка. Заплащането се извършва с наложен платеж.
-							</small>
-							}
-						</Panel.Body>
-
-					</Panel>
-					</Col>
-
-				</Row>
+				</Panel>
 			</Grid>
 		);
 	}

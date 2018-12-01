@@ -87,10 +87,10 @@ class Header extends React.Component {
 
 				{!isAdmin &&
 				<div className="social-media-icons hidden-xs">
-					<a className="icon" target="_blank" href="https://www.facebook.com/moiteochila/">
+					<a className="icon" target="_blank" rel="noopener noreferrer" href="https://www.facebook.com/moiteochila/">
 						<i className="fa fa-facebook-official" aria-hidden="true"/>
 					</a>
-					<a className="icon" target="_blank" href="https://www.instagram.com/podredeni.eu">
+					<a className="icon" target="_blank" rel="noopener noreferrer" href="https://www.instagram.com/podredeni.eu">
 						<i className="fa fa-instagram" aria-hidden="true"/>
 					</a>
 				</div>
@@ -139,7 +139,7 @@ class Header extends React.Component {
 						</NavLink>
 
 						<div className="social-media-icons visible-xs">
-							<a className="icon" target="_blank" href="https://www.facebook.com/moiteochila/">
+							<a className="icon" target="_blank" rel="noopener noreferrer" href="https://www.facebook.com/moiteochila/">
 								<i className="fa fa-facebook-official" aria-hidden="true"/>
 							</a>
 						</div>

@@ -10,7 +10,7 @@ import {Grid, Row, Col, Table} from 'react-bootstrap';
 import TableHead from './partials/PromosTableHead';
 import PromoTableRow from './partials/PromosTableRow';
 
-import promosService from '../../../../services/promos/promosService';
+import promosService from '../../../../services/promos/discountPromosService';
 
 import {
     TOASTR_MESSAGES
@@ -84,7 +84,8 @@ class PromoList extends React.Component {
         if(this.state.promos){
 
             promosList = this.state.promos.map(e => {
-                return <PromoTableRow key={e.id} data={e} confirmDelete={this.confirmDeletePromo}/>;
+	            let isProductPromo = e.promoCode;
+	            return <PromoTableRow key={e.id} isProductPromo={isProductPromo} data={e} confirmDelete={this.confirmDeletePromo}/>;
             });
         }
 
@@ -101,7 +102,8 @@ class PromoList extends React.Component {
 
                 <Row>
                     <Col xs={12} className="buttons-container">
-                        <Link to="/promos/create" className="btn btn-sm btn-primary">Нова Промоция</Link>
+                        <Link to="/promos/create-discount-promo" className="btn btn-sm btn-primary">Нова Промоция с намаление</Link>
+                        <Link to="/promos/create-product-promo" className="btn btn-sm btn-primary">Нова Промоция с продукти</Link>
                     </Col>
                 </Row>
 

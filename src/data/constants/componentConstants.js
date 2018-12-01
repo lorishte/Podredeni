@@ -143,16 +143,24 @@ const TOASTR_MESSAGES = {
 	editQuantityFromCart: 'За редакция, моля, отидете в кошница.',
 
 	//Success
+	successEdit: 'Успешна редакция.',
+
 	productAddedToCart: 'Продуктът е добавен в кошницата Ви.',
-	successOrderEdit: 'Успешна редакция.',
-	successNewsEdit: 'Новината е редактирана успешно.',
+
 	successHomeContentModification: 'Съдържанието на началната страница беше променено.',
+
+	successNewsEdit: 'Новината е редактирана успешно.',
 	successNewsCreate: 'Новината е създадена успешно.',
+	successNewsDelete: 'Новината е изтрита успешно.',
+
     successCarouselItemCreate: 'Съдържанието беше добавено успешно.',
     successCarouselItemEdit: 'Съдържанието беше редактирано успешно успешно.',
     successCarouselItemDelete: 'Съдържанието беше изтрито успешно успешно.',
-    successNewsDelete: 'Новината е изтрита успешно.',
+
 	successCancelOrder: 'Поръчката е отказана.',
+
+	successPromotionCreate: 'Промоцията е създадена успешно.',
+
 	messageSent: 'Вашето съобщение беше изпратено!',
     videoAdded: 'Видеото беше добавено!'
 };

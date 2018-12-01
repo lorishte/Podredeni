@@ -1,9 +1,8 @@
 import React from 'react';
 
-import utils from '../../../../../utils/utils'
+import utils from '../../../../../utils/utils';
 
 import { CURRENCY } from '../../../../../data/constants/componentConstants';
-
 
 class CartProductRow extends React.Component {
 	constructor (props) {
@@ -22,8 +21,12 @@ class CartProductRow extends React.Component {
 		let currentQuantity = Number(this.state.quantity);
 
 		switch (method) {
-			case 'increment' : currentQuantity += 1; break;
-			case 'decrement' : currentQuantity -= 1; break;
+			case 'increment' :
+				currentQuantity += 1;
+				break;
+			case 'decrement' :
+				currentQuantity -= 1;
+				break;
 		}
 
 		if (currentQuantity < 1 || currentQuantity > 10) return;
@@ -41,34 +44,35 @@ class CartProductRow extends React.Component {
 
 		return (
 			<tr>
-				{this.props.editable &&
-					<td>
-						<button onClick={() => this.props.delete(p.id)}
-						        className="btn btn-default btn-xs">
 
-							x
-						</button>
-					</td>
-				}
-				<td >
+				<td className="text-center">
 					<img className="image-thumbnail" src={p.image}/>
 				</td>
 				<td>
-					{p.name}
+					<p>{p.name}
 					{p.discount > 0 &&
 					<span className="promo-label">-{p.discount}%</span>
 					}
-					</td>
-				<td className="text-center">
-					<span className="quantity">
-						{this.state.quantity}
-					</span>
+					</p>
 
 					{this.props.editable &&
-					<span className="arrows-container">
-							<button className="btn btn-default btn-xs" onClick={() => this.changeQuantity('increment')}>+</button>
-							<button className="btn btn-default btn-xs" onClick={() => this.changeQuantity('decrement')}>-</button>
-						</span>
+					<button onClick={() => this.props.delete(p.id)}
+					        className="btn-custom default xs">изтрий
+					</button>
+					}
+				</td>
+				<td className="text-center quantity-row">
+
+					{this.props.editable &&
+					<button className="btn-custom default sm"
+					        onClick={() => this.changeQuantity('decrement')}>-</button>
+					}
+
+					<span className="quantity"> {this.state.quantity} </span>
+
+					{this.props.editable &&
+					<button className="btn-custom default sm"
+					        onClick={() => this.changeQuantity('increment')}>+</button>
 					}
 				</td>
 
@@ -78,7 +82,7 @@ class CartProductRow extends React.Component {
 					{price.toFixed(2) + ' ' + CURRENCY}
 				</td>
 
-				<td className="text-right">
+				<td className="text-right price">
 					{(price * p.quantity).toFixed(2) + ' ' + CURRENCY}
 				</td>
 			</tr>
