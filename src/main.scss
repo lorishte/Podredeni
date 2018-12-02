@@ -215,11 +215,6 @@ main {
   padding: 0;
 }
 
-.container {
-  width: 80%;
-  margin: auto;
-}
-
 button {
   border: none;
   outline: none;
@@ -236,8 +231,6 @@ a {
     text-decoration: none;
   }
 }
-
-
 
 img {
   width: 100%;
@@ -438,7 +431,6 @@ input[type=checkbox], input[type=radio] {
   vertical-align: middle;
   //border-top: 1px solid #ddd;
   height: 50px;
-  min-width: 150px;
 }
 
 .table > thead {
@@ -982,13 +974,13 @@ nav {
   }
 }
 
-
 //User News
 #news {
   .buttons-container {
     padding-bottom: 20px;
   }
 }
+
 #news-container {
 
   .news-card {
@@ -1287,58 +1279,73 @@ nav {
   }
 
   .tabs {
+
     @include flex;
 
+    $arrow-size: 10px;
+    $tab-height: 60px;
+
+    @mixin arrow-before($value: color) {
+
+      &:before {
+        position: absolute;
+        left: 2px;
+        content: "";
+        border-top: 30px solid transparent;
+        border-left: $arrow-size solid $value;
+        border-bottom: 30px solid transparent;
+
+        z-index: 199;
+      }
+    }
+
+    @mixin arrow-after($value: color) {
+
+      &:after {
+        position: absolute;
+        right: -$arrow-size;
+        content: "";
+        border-top: 30px solid transparent;
+        border-left: $arrow-size solid $value;
+        border-bottom: 30px solid transparent;
+
+        z-index: 200;
+      }
+    }
+
     .tab {
+      position: relative;
       @include flex-grow(1);
 
       @include flex;
       @include align-items(center);
       @include justify-content(center);
 
+      @include arrow-before($white);
+      @include arrow-after($warm-light-grey);
+
+      height: 60px;
       padding: 20px;
       text-align: center;
       border-bottom: 2px solid $default;
+      background-color: $warm-light-grey;
 
       &.active {
         background-color: $default;
         color: $white;
+        @include arrow-before(transparent);
+        @include arrow-after($default);
+      }
+
+      &:first-of-type {
+        @include arrow-before(transparent);
       }
     }
   }
 
-
   .info-text {
     display: inline-block;
     margin: 35px 15% 20px 20px;
-  }
-
-  .image-thumbnail {
-    height: 100px;
-    width: 100px;
-  }
-
-  .promo-label {
-    @include inline-flex;
-    @include align-items(center);
-    @include justify-content(center);
-
-    margin-left: 5px;
-    padding: 3px 5px;
-
-    background-color: $danger;
-    color: $white;
-    border-radius: 10%;
-
-    font-size: .9em;
-  }
-
-  .old-price {
-    text-decoration: line-through;
-    font-size: .8em;
-    color: $dark-grey;
-    font-weight: 400;
-    margin-right: 15px;
   }
 
   .buttons-container {
@@ -1368,36 +1375,151 @@ nav {
   }
 
   #cart-products-table {
-    margin-top: 35px;
+    width: 100%;
 
-    .quantity-row {
-      min-width: 105px;
-    }
+    .table-header {
+      @include flex;
+      @include align-items(center);
+      border-bottom: 1px solid $light-grey;
+      min-width: 100%;
+      padding: 10px 0;
+      //background-color: $default;
+      //color: $white;
 
-    .btn-custom {
-      margin-right: 0;
 
-      &:first-of-type {
-        border-bottom-right-radius: 0;
-        border-top-right-radius: 0;
+      .product {
+        @include flex-basis(55%);
+        padding-left: 25px;
       }
 
-      &:nth-of-type(2){
-        border-bottom-left-radius: 0;
-        border-top-left-radius: 0;
+      .quantity {
+        @include flex-basis(15%);
+      }
+
+      .price,
+      .sum {
+        @include flex-basis(15%);
+        text-align: right;
+        padding-right: 25px;
       }
     }
 
-    .quantity {
-      display: inline-block;
-      width: 30px;
-      border: 1px solid $default;
-      padding: 4px;
+    .products-table-row {
+      @include flex;
+      @include align-items(center);
+      border-bottom: 1px solid $light-grey;
+      min-width: 100%;
+      padding: 5px 0;
+
+      .img-col {
+        @include flex-basis(15%);
+
+        .image-thumbnail {
+          height: 100px;
+          width: 100px;
+        }
+      }
+
+      .product-data {
+        @include flex-basis(85%);
+        @include flex-grow(1);
+
+        @include flex;
+        @include align-items(center);
+
+        .product-col {
+
+          @include flex-basis(40%);
+          @include flex-grow(.5);
+          padding-left: 10px;
+
+          .promo-label {
+            @include inline-flex;
+            @include align-items(center);
+            @include justify-content(center);
+
+            margin-left: 5px;
+            padding: 3px 5px;
+
+            background-color: $danger;
+            color: $white;
+            border-radius: 10%;
+
+            font-size: .9em;
+          }
+        }
+
+        .quantity-col {
+
+          @include flex-basis(20%);
+          @include flex-grow(.5);
+          min-width: 100px;
+          padding-left: 10px;
+
+          .quantity {
+            display: inline-block;
+            width: 30px;
+            border: 1px solid $default;
+            padding: 4px;
+            text-align: center;
+          }
+
+          .btn-custom {
+            margin-right: 0;
+
+            &:first-of-type {
+              border-bottom-right-radius: 0;
+              border-top-right-radius: 0;
+            }
+
+            &:nth-of-type(2) {
+              border-bottom-left-radius: 0;
+              border-top-left-radius: 0;
+            }
+          }
+
+        }
+
+        .price-col {
+
+          @include flex-basis(15%);
+          min-width: 100px;
+
+          .old-price {
+            text-decoration: line-through;
+            font-size: .8em;
+            color: $dark-grey;
+            font-weight: 400;
+            margin-right: 15px;
+          }
+
+          .price {
+            font-size: 1.2em;
+            font-weight: 600;
+          }
+
+          text-align: right;
+          padding-right: 25px;
+        }
+
+      }
+
+      .sum-col {
+        @include flex-basis(15%);
+        min-width: 100px;
+        text-align: right;
+
+        font-weight: 600;
+        padding-right: 25px;
+      }
+
     }
 
-    .price {
-      font-size: 1.2em;
+    .table-footer {
+      font-size: 2em;
       font-weight: 600;
+      text-align: right;
+      padding: 25px;
     }
   }
 
@@ -1431,8 +1553,6 @@ nav {
     }
   }
 }
-
-
 
 //ADMIN
 
@@ -1663,7 +1783,8 @@ footer {
   height: 60%;
   overflow: hidden scroll;
   padding: 10px;
-  margin-bottom: 15px;  }
+  margin-bottom: 15px;
+}
 
 //Admin: Partners
 #admin-partners {
@@ -1741,10 +1862,6 @@ footer {
 //Queries
 
 @media screen and (max-width: 1100px) {
-
-  .container {
-    width: 100%;
-  }
 
   #home {
     #home-about {
@@ -1834,7 +1951,7 @@ footer {
   }
 }
 
-@media screen and (max-width: 767px) {
+@media screen and (max-width: 768px) {
 
   main {
     padding-top: 80px;
@@ -1899,6 +2016,99 @@ footer {
           top: 28%;
           width: 75% !important;
         }
+      }
+    }
+  }
+
+  #cart {
+    #cart-products-table {
+
+      .table-header {
+        .sum {
+          @include flex-grow(1);
+        }
+      }
+
+
+      .products-table-row {
+        @include flex-wrap(wrap);
+        @include align-items(flex-start);
+        padding: 30px 0 0 0;
+
+        .img-col {
+          @include flex-basis(20%);
+          margin-right: 15px;
+
+          .image-thumbnail {
+            //height: 60px;
+            //width: 60px;
+          }
+        }
+
+        .product-data {
+
+          @include flex-basis(30%);
+
+          @include flex-wrap(wrap);
+          padding: 0 0 30px 0;
+
+          .product-col {
+            @include flex-basis(80%);
+
+            @include flex;
+            @include flex-direction(column);
+            @include flex-grow(1);
+
+            position: relative;
+            padding: 0;
+            padding-right: 20%;
+
+            .btn-custom {
+              position: absolute;
+              top: -20px;
+              left: -100px;
+            }
+          }
+
+          .quantity-col {
+            padding: 0;
+            order: 2;
+
+            .quantity {
+              padding: 2px;
+            }
+
+            .btn-custom {
+              &.sm {
+                padding: 3px 10px;
+              }
+            }
+          }
+
+          .price-col {
+            padding: 0;
+            text-align: left;
+            margin-bottom: 7px;
+            order: 1;
+          }
+        }
+
+        .sum-col {
+          @include flex-basis(10%);
+          @include flex-grow(.5);
+          min-width: 75px;
+          padding: 0;
+        }
+
+
+      }
+
+      .table-footer {
+        background-color: $default;
+        color: $white;
+        font-size: 1.5em;
+        text-align: center;
+        padding: 15px 0;
       }
     }
   }
@@ -2119,17 +2329,6 @@ footer {
         font-size: .8em;
       }
     }
-
-
-    .table > tbody > tr > td,
-    .table > tbody > tr > th,
-    .table > tfoot > tr > td,
-    .table > tfoot > tr > th,
-    .table > thead > tr > td,
-    .table > thead > tr > th {
-      padding: 8px 4px;
-      min-width: inherit;
-    }
   }
 
   #terms {
@@ -2192,6 +2391,25 @@ footer {
       font-size: 12px;
       top: -5px;
       margin-right: 10px;
+    }
+
+
+  }
+
+  #cart {
+    #cart-products-table {
+
+      .products-table-row {
+
+        .img-col {
+          padding-top: 30px;
+
+          .image-thumbnail {
+            height: 70px;
+            width: 70px;
+          }
+        }
+      }
     }
   }
 

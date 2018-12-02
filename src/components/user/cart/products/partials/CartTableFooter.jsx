@@ -13,14 +13,11 @@ class CartTableFooter extends React.Component {
 		let colSpan = this.props.colSpan;
 
 		return (
-			<tfoot>
-			<tr className="lead">
-				{!resolution && <th colSpan={colSpan} className="text-right">{CART.totalSum}</th>}
-				{!resolution && <th className="text-right">{totalSum + ' ' + CURRENCY}</th>}
+			<div className="table-footer">
 
-				{resolution && <th colSpan={colSpan + 1} className="text-center">{CART.totalSum} {totalSum}</th>}
-			</tr>
-			</tfoot>
+				{CART.totalSum}&nbsp;{totalSum}&nbsp;{CURRENCY}
+
+			</div>
 		);
 	}
 }

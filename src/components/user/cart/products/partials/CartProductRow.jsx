@@ -43,49 +43,54 @@ class CartProductRow extends React.Component {
 		let price = utils.calculatePriceAfterDiscount(p.price, p.discount);
 
 		return (
-			<tr>
+			<div className="products-table-row">
 
-				<td className="text-center">
+				<div className="img-col">
 					<img className="image-thumbnail" src={p.image}/>
-				</td>
-				<td>
-					<p>{p.name}
-					{p.discount > 0 &&
-					<span className="promo-label">-{p.discount}%</span>
-					}
-					</p>
+				</div>
 
-					{this.props.editable &&
-					<button onClick={() => this.props.delete(p.id)}
-					        className="btn-custom default xs">изтрий
-					</button>
-					}
-				</td>
-				<td className="text-center quantity-row">
+				<div className="product-data">
 
-					{this.props.editable &&
-					<button className="btn-custom default sm"
-					        onClick={() => this.changeQuantity('decrement')}>-</button>
-					}
+					<div className="product-col">
+						<p>{p.name}
+							{p.discount > 0 &&
+							<span className="promo-label">-{p.discount}%</span>
+							}
+						</p>
 
-					<span className="quantity"> {this.state.quantity} </span>
+						{this.props.editable &&
+						<button onClick={() => this.props.delete(p.id)}
+						        className="btn-custom default xs">изтрий
+						</button>
+						}
+					</div>
 
-					{this.props.editable &&
-					<button className="btn-custom default sm"
-					        onClick={() => this.changeQuantity('increment')}>+</button>
-					}
-				</td>
+					<div className="quantity-col">
 
-				<td className="text-right">
-					{p.discount > 0 &&
-					<span className="old-price">{p.price.toFixed(2) + ' ' + CURRENCY}</span>}
-					{price.toFixed(2) + ' ' + CURRENCY}
-				</td>
+						{this.props.editable &&
+						<button className="btn-custom default sm"
+						        onClick={() => this.changeQuantity('decrement')}>-</button>
+						}
 
-				<td className="text-right price">
+						<span className="quantity"> {this.state.quantity} </span>
+
+						{this.props.editable &&
+						<button className="btn-custom default sm"
+						        onClick={() => this.changeQuantity('increment')}>+</button>
+						}
+					</div>
+
+					<div className="price-col">
+						{p.discount > 0 &&
+						<span className="old-price">{p.price.toFixed(2) + ' ' + CURRENCY}</span>}
+						{price.toFixed(2) + ' ' + CURRENCY}
+					</div>
+				</div>
+
+				<div className="sum-col">
 					{(price * p.quantity).toFixed(2) + ' ' + CURRENCY}
-				</td>
-			</tr>
+				</div>
+			</div>
 
 		);
 	}

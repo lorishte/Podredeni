@@ -105,7 +105,7 @@ class CartProductsTable extends React.Component {
 	};
 
 	render () {
-		let resolution = this.state.resolution < RESOLUTIONS.xs;
+		let resolution = this.state.resolution > RESOLUTIONS.bootstrapXS;
 
 		let isAdmin = sessionStorage.getItem('role') === 'admin';
 
@@ -124,16 +124,15 @@ class CartProductsTable extends React.Component {
 
 		return (
 			<div>
-				<Table condensed id="cart-products-table">
+				<div id="cart-products-table">
 
-					<CartTableHeader editable={true}/>
 
-					<tbody>
+					<CartTableHeader resolution={resolution}/>
+
 					{products}
-					</tbody>
 
-					<CartTableFooter resolution={resolution} totalSum={this.state.totalSum} colSpan={4}/>
-				</Table>
+					<CartTableFooter totalSum={this.state.totalSum}/>
+				</div>
 
 				<Row className="buttons-container">
 					<Col xs={12} className="text-center">

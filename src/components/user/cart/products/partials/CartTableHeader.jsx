@@ -6,16 +6,27 @@ class CartTableHeader extends React.Component {
 	constructor (props) {
 		super(props);
 	}
-	render() {
+
+	render () {
+
+		let resolutionBig = this.props.resolution;
 		return (
-			<thead>
-			<tr>
-				<th colSpan={2}>{CART.product}</th>
-				<th className="text-center">{CART.quantity}</th>
-				<th className="text-right">{CART.price}</th>
-				<th className="text-right">{CART.sum}</th>
-			</tr>
-			</thead>
+			<div className="table-header">
+
+				<div className="product">{CART.product}</div>
+
+				{resolutionBig &&
+				<div className="quantity">{CART.quantity}</div>
+				}
+
+				{resolutionBig &&
+				<div className="price">{CART.price}</div>
+				}
+
+
+				<div className="sum">{CART.sum}</div>
+
+			</div>
 		);
 	}
 }
