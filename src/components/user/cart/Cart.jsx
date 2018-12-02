@@ -24,7 +24,7 @@ class Cart extends React.Component {
 
 		this.state = {
 			products: [],
-			productsCount: JSON.parse(sessionStorage.getItem('products')).length,
+			productsCount: null,
 			orderDetails: {},
 			productsView: true,
 			orderDetailsView: false,
@@ -70,10 +70,10 @@ class Cart extends React.Component {
 		}
 
 		this.setState({orderDetails: storedOrderDetails});
+
 		this.loadProducts();
 
 		if (this.props.location.goToOrderDetailsView) {
-
 			this.showDeliveryDetailsForm();
 		}
 	}
@@ -81,9 +81,12 @@ class Cart extends React.Component {
 	loadProducts = () => {
 		let addedProducts = JSON.parse(sessionStorage.getItem('products'));
 
-		console.log(222)
+		if (addedProducts === null) {
+			this.updateProductsCount([]);
+			return;
+		}
 
-		if (addedProducts === null) return;
+		this.updateProductsCount(addedProducts);
 
 		for (let i = 0; i < addedProducts.length; i++) {
 			productService
@@ -98,7 +101,7 @@ class Cart extends React.Component {
 				})
 				.catch(err => {
 					console.log(err);
-				})
+				});
 		}
 	};
 
@@ -107,10 +110,15 @@ class Cart extends React.Component {
 			sessionStorage.setItem([stateProp], JSON.stringify(this.state[stateProp]));
 
 			if (stateProp === 'products') {
+				this.updateProductsCount(data);
 				this.props.history.push('/cart'); // to refresh products count in header
 				this.props.history.go(-1); // step back to fix history logic
 			}
 		});
+	};
+
+	updateProductsCount = (productsArr) => {
+		this.setState({productsCount: productsArr.length}, () => console.log(this.state.productsCount));
 	};
 
 	cancelOrder = () => {
@@ -181,23 +189,50 @@ class Cart extends React.Component {
 
 		return (
 			<Grid id="cart">
-				{this.state.products.length > 0 &&
-				<Col className="text-right">
-					<button className={isAdmin ? 'btn btn-default sm' : 'btn-custom primary sm'}
-					        onClick={this.confirmCancel}>{BUTTONS_BG.cancel}</button>
+
+
+				{/*// No products added*/}
+				{this.state.productsCount === 0 && this.state.productsView &&
+				<Col xs={12} className="text-center">
+					<h3>{CART.noProductAdded}</h3>
 				</Col>
 				}
 
+				{this.state.productsCount !== 0 &&
+
+				// Cancel Button
+				<Col className="text-right">
+					<button className={isAdmin ? 'btn btn-default sm' : 'btn-custom primary sm'}
+					        onClick={this.confirmCancel}>{BUTTONS_BG.cancel}
+					</button>
+				</Col>
+				}
+
+				{this.state.productsCount !== 0 &&
+
 				<Panel>
 
+					{/*// Tabs*/}
 					<div className="tabs">
 						<span className={this.state.productsView ? 'tab active' : 'tab'}>{CART.edit}</span>
 						<span className={this.state.orderDetailsView ? 'tab active' : 'tab'}>{CART.deliveryData}</span>
 						<span className={this.state.reviewView ? 'tab active' : 'tab'}>{CART.confirm}</span>
 					</div>
 
+
 					<Panel.Body>
-						{this.state.products.length === this.state.productsCount && this.state.productsView &&
+
+						{/*// Loader*/}
+						{this.state.products.length !== this.state.productsCount
+						&& this.state.productsView
+						&&
+						<div className="loader"/>
+						}
+
+						{/*// Products table*/}
+						{this.state.products.length === this.state.productsCount
+						&& this.state.productsView
+						&&
 						<Col xs={12}>
 							<CartProductsTable
 								products={this.state.products}
@@ -208,12 +243,7 @@ class Cart extends React.Component {
 						</Col>
 						}
 
-						{this.state.products.length === 0 && this.state.productsView &&
-						<Col xs={12}>
-							<h3>{CART.noProductAdded}</h3>
-						</Col>
-						}
-
+						{/*// Order details*/}
 						{this.state.orderDetailsView &&
 						<Col xs={12}>
 							<OrderDetailsForm
@@ -225,6 +255,8 @@ class Cart extends React.Component {
 						</Col>
 						}
 
+
+						{/*// Order review*/}
 						{this.state.reviewView &&
 						<Col xs={12}>
 							<ReviewOrder
@@ -250,6 +282,8 @@ class Cart extends React.Component {
 					}
 
 				</Panel>
+				}
+
 			</Grid>
 		);
 	}

@@ -71,7 +71,6 @@ class CartProductsTable extends React.Component {
 	deleteItem = (id) => {
 		let correctedProducts = this.props.products.filter(e => e.id !== id);
 		this.updateParent(correctedProducts);
-
 	};
 
 	editItemQuantity = (id, newQuantity) => {
