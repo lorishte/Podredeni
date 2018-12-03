@@ -85,9 +85,9 @@ class ReviewOrder extends React.Component {
 
 
 				<Col xs={12}>
-					<Table condensed id="cart-products-table">
+					<div id="cart-products-table">
 						<CartTableHeader editable={false}/>
-						<tbody>
+
 						{this.props.products.map((e, i) => {
 							return <CartProductRow
 								key={e.id}
@@ -96,10 +96,10 @@ class ReviewOrder extends React.Component {
 								data={e}/>;
 						})
 						}
-						</tbody>
+
 
 						<CartTableFooter resolution={resolution} totalSum={totalSum} colSpan={4}/>
-					</Table>
+					</div>
 				</Col>
 
 

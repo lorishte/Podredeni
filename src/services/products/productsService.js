@@ -4,68 +4,69 @@ const auth = 'admin';
 
 export default {
 
-    // loadProductsList: () => {
-    //     return requesterService
-    //         .get(endPoint, null, query);
-    // },
+	// loadProductsList: () => {
+	//     return requesterService
+	//         .get(endPoint, null, query);
+	// },
 
-    loadProducts: (state, includeBlocked = false) => {
+	loadProducts: (state, includeBlocked = false) => {
 
-        let query =
-            '?page=' + state.page +
-            '&size=' + state.size +
-            '&filterElement=' + state.filterProperty +
-            '&filterValue=' + state.filterValue +
-            '&sortElement=' + state.sortProperty +
-            '&sortDesc=' + state.descending +
-            '&includeBlocked=' + includeBlocked;
+		let query =
+			'?page=' + state.page +
+			'&size=' + state.size +
+			'&filterElement=' + state.filterProperty +
+			'&filterValue=' + state.filterValue +
+			'&sortElement=' + state.sortProperty +
+			'&sortDesc=' + state.descending +
+			'&includeBlocked=' + includeBlocked;
 
-        return requesterService
-            .get(endPoint, null, query);
-    },
+		return requesterService
+			.get(endPoint, null, query);
+	},
 
-    addProduct: (state) => {
+	addProduct: (state) => {
 
-        let product = generateProductDetails(state);
+		let product = generateProductDetails(state);
 
-        return requesterService
-            .post(endPoint, auth, product);
-    },
+		return requesterService
+			.post(endPoint, auth, product);
+	},
 
-    getProduct: (id) => {
+	getProduct: (id) => {
 
-        let endPointId = endPoint + `/${id}`;
+		let endPointId = endPoint + `/${id}`;
 
-        return requesterService
-            .get(endPointId, null);
-    },
+		return requesterService
+			.get(endPointId, null);
+	},
 
-    updateProduct: (state, id) => {
+	updateProduct: (state, id) => {
 
-        let endPointId = endPoint + '/' + id;
+		let endPointId = endPoint + '/' + id;
 
-        let product = generateProductDetails(state);
+		let product = generateProductDetails(state);
 
-        product.IsBlocked = state.isBlocked;
+		product.IsBlocked = state.isBlocked;
 
-        return requesterService
-            .update(endPointId, auth, product);
-    },
+		return requesterService
+			.update(endPointId, auth, product);
+	},
 
-    seedProducts: (product) => {
+	seedProducts: (product) => {
 
-        return requesterService
-            .post(endPoint, null, product);
-    },
+		return requesterService
+			.post(endPoint, null, product);
+	}
 };
 
-function generateProductDetails(state) {
+function generateProductDetails (state) {
 
-    return {
-        Name: state.name,
-        Description: state.description,
-        Price: state.price,
-        ImageUrls: state.imageUrls,
-        IsTopSeller: state.isTopSeller
-    };
+	return {
+		Name: state.name,
+		Description: state.description,
+		Price: state.price,
+		ImageUrls: state.imageUrls,
+		IsTopSeller: state.isTopSeller
+	};
 }
+

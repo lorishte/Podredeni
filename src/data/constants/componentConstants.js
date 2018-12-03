@@ -26,7 +26,7 @@ const LABELS_BG = {
 	amount: 'Сума',
 	quantity: 'Брой',
 	price: 'Цена',
-	total: 'Общо',
+	total: 'Сума общо',
 	edit: 'Редакция',
 	address: 'Адрес',
 	office: 'Офис',
@@ -39,8 +39,13 @@ const LABELS_BG = {
 	blockShort: 'бл.',
 	entranceShort: 'вх.',
 	floorShort: 'ет.',
-	apartmentShort: 'ап.'
+	apartmentShort: 'ап.',
+	promoCode: 'За да се възползвате от актуална промоция, моля, валидирайте промо код:'
 };
+
+const PLACEHOLDERS = {
+	enterPromoCode: 'Въведете промо код'
+}
 
 const FACEBOOK_VIDEOS = [
 	"https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2Fmoiteochila%2Fvideos%2F1810413359013020%2F",
@@ -93,7 +98,7 @@ const NOT_REQUIRED_ORDER_INPUTS = {
 const CREATE_INPUTS = {
 	title: 'Заглавие',
 	content: 'Съдържание',
-	imageUrl: 'Картинка URL'
+	imageUrl: 'Изображение (URL)'
 };
 
 const BUTTONS_BG = {
@@ -102,6 +107,7 @@ const BUTTONS_BG = {
 	continue: 'Продължи',
 	next: 'Напред',
 	back: 'Назад',
+	correct: 'Корекция',
 	yes: 'Да',
 	no: 'Не',
 	send: 'Изпрати',
@@ -115,6 +121,7 @@ const BUTTONS_BG = {
 	//Cart
 	saveChanges: 'Запази промените',
 	sendOrder: 'Изпрати',
+	validate: 'Валидирай',
 
 	// Order
 	received: 'Получена',
@@ -136,6 +143,8 @@ const TOASTR_MESSAGES = {
 	//Errors
 	error: 'Грешка',
 	passwordsMismatch: 'Паролите не съвпадат.',
+	invalidPromoCode: 'Невалиден промо код.',
+	invalidPromoProducts: 'Избраните продукти или количества не съответстват на въведения промо код.',
 
 	//Warnings
 	requestEmptyFields: 'Моля, попълнете следните полета:',
@@ -227,7 +236,7 @@ const CART = {
 	quantity: 'Брой',
 	price: 'Цена',
 	sum: 'Сума',
-	totalSum: 'Общо:',
+	totalSum: 'Обща стойност: ',
 
 	//Delivery details
 
@@ -266,6 +275,7 @@ export {
 	ORDER_STATUS_BG,
 	ORDER_STATUS_EN,
 	LABELS_BG,
+	PLACEHOLDERS,
 	USER_ACCOUNT,
 	TOASTR_MESSAGES,
 	ORDER_DELIVERY_INPUTS,

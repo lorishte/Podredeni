@@ -112,8 +112,6 @@ class EditCreateProductPromo extends React.Component {
 
 	submitInfo = (e) => {
 
-		console.log(this.state);
-
 		e.preventDefault();
 
 		if (this.promoId) {

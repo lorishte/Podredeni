@@ -1386,7 +1386,6 @@ nav {
       //background-color: $default;
       //color: $white;
 
-
       .product {
         @include flex-basis(55%);
         padding-left: 25px;
@@ -1481,16 +1480,18 @@ nav {
         }
 
         .price-col {
-
           @include flex-basis(15%);
           min-width: 100px;
 
+          letter-spacing: .5px;
+
           .old-price {
             text-decoration: line-through;
-            font-size: .8em;
+            text-decoration-color: $danger;
+            font-size: .85em;
             color: $dark-grey;
             font-weight: 400;
-            margin-right: 15px;
+            display: block;
           }
 
           .price {
@@ -1506,10 +1507,11 @@ nav {
 
       .sum-col {
         @include flex-basis(15%);
-        min-width: 100px;
+        min-width: 105px;
         text-align: right;
 
         font-weight: 600;
+        letter-spacing: .5px;
         padding-right: 25px;
       }
 
@@ -2029,28 +2031,21 @@ footer {
         }
       }
 
-
       .products-table-row {
         @include flex-wrap(wrap);
         @include align-items(flex-start);
-        padding: 30px 0 0 0;
+        padding: 20px 0;
 
         .img-col {
           @include flex-basis(20%);
           margin-right: 15px;
-
-          .image-thumbnail {
-            //height: 60px;
-            //width: 60px;
-          }
         }
 
         .product-data {
-
           @include flex-basis(30%);
-
           @include flex-wrap(wrap);
-          padding: 0 0 30px 0;
+          padding-right: 10px;
+          border-right: 1px solid $light-grey;
 
           .product-col {
             @include flex-basis(80%);
@@ -2061,7 +2056,6 @@ footer {
 
             position: relative;
             padding: 0;
-            padding-right: 20%;
 
             .btn-custom {
               position: absolute;
@@ -2071,6 +2065,7 @@ footer {
           }
 
           .quantity-col {
+            @include flex-basis(100%);
             padding: 0;
             order: 2;
 
@@ -2086,26 +2081,30 @@ footer {
           }
 
           .price-col {
+            @include flex-basis(100%);
+
             padding: 0;
             text-align: left;
             margin-bottom: 7px;
             order: 1;
+
+            .old-price {
+              display: inline-block;
+              margin-right: 15px;
+            }
           }
         }
 
         .sum-col {
           @include flex-basis(10%);
           @include flex-grow(.5);
-          min-width: 75px;
-          padding: 0;
+          min-width: 95px;
+          padding: 0 0 0 15px;
         }
-
 
       }
 
       .table-footer {
-        background-color: $default;
-        color: $white;
         font-size: 1.5em;
         text-align: center;
         padding: 15px 0;
@@ -2293,6 +2292,33 @@ footer {
   }
 }
 
+@media screen and (max-width: 520px) {
+
+  #cart {
+    #cart-products-table {
+
+      .products-table-row {
+
+        .img-col {
+          .image-thumbnail {
+            height: 60px;
+            width: 60px;
+          }
+        }
+
+        .product-data {
+
+          .price-col {
+            .old-price {
+              display: block;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
 @media screen and (max-width: 480px) {
 
   #order-list-tabs {
@@ -2393,20 +2419,32 @@ footer {
       margin-right: 10px;
     }
 
-
   }
 
   #cart {
     #cart-products-table {
 
       .products-table-row {
+        padding: 10px 0 20px 0;
 
         .img-col {
-          padding-top: 30px;
+          @include flex-basis(100%);
+          margin-bottom: 10px;
+        }
 
-          .image-thumbnail {
-            height: 70px;
-            width: 70px;
+        .product-data {
+
+          .product-col {
+            .btn-custom {
+              left: 122%;
+              top: -70px;
+            }
+          }
+
+          .price-col {
+            .old-price {
+              display: block;
+            }
           }
         }
       }

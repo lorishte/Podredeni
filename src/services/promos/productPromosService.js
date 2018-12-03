@@ -42,18 +42,21 @@ export default {
 		return requesterService.remove(url, auth);
 	},
 
-	assign: (promoId, assignedProducts) => {
-
-		let url = endPoint + '/assign/' + promoId;
-
-		return requesterService.update(url, auth, assignedProducts);
-	},
-
 	remove: (promoId, removedProducts) => {
 
 		let url = endPoint + '/remove/' + promoId;
 
 		return requesterService.update(url, auth, removedProducts);
+	},
+
+	checkPromotion: (promoCode, state) => {
+
+		let endPointPromos = endPoint + '/check';
+
+		let products = generatePromoDetails(promoCode, state);
+
+		return requesterService
+			.post(endPointPromos, null, products)
 	}
 
 };
@@ -82,9 +85,33 @@ function generateProductDetails(state) {
 
 		Quota: state.quota,
 
-		IsInclusive: state.isInclusive,
+		IsInclusive: !state.isInclusive,
 		IsAccumulative: state.isAccumulative,
 		IncludePriceDiscounts: state.includePriceDiscounts,
 
+	};
+}
+
+function generatePromoDetails (promoCode, state) {
+
+	let products = Object.assign([], state.products);
+	console.log(products)
+	let requestProducts = [];
+
+
+	for (let i = 0; i < products.length; i++) {
+
+		requestProducts[i] = {
+			Id: products[i].id,
+			Quantity: products[i].quantity,
+			Discount: products[i].discount,
+			Price: products[i].price
+		};
+	}
+
+
+	return {
+		PromoCode:promoCode,
+		Products: requestProducts
 	};
 }

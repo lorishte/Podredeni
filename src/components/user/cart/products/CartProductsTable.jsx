@@ -1,18 +1,18 @@
 import React from 'react';
 
-import { Table, Button, Row, Col } from 'react-bootstrap';
+import { Col } from 'react-bootstrap';
 import { confirmAlert } from 'react-confirm-alert';
 
 // Partials
 import CartTableHeader from './partials/CartTableHeader';
 import CartProductRow from './partials/CartProductRow';
-import CartTableFooter from './partials/CartTableFooter'
+import CartTableFooter from './partials/CartTableFooter';
+import FormInputField from '../../../common/formComponents/FormInputField';
 
-import { RESOLUTIONS, CONFIRM_DIALOGS, BUTTONS_BG } from '../../../../data/constants/componentConstants';
+import { RESOLUTIONS, CONFIRM_DIALOGS, BUTTONS_BG , TOASTR_MESSAGES, PLACEHOLDERS, LABELS_BG } from '../../../../data/constants/componentConstants';
 
 // Helpers
-import utils from '../../../../utils/utils'
-
+import utils from '../../../../utils/utils';
 
 class CartProductsTable extends React.Component {
 	constructor (props) {
@@ -20,6 +20,7 @@ class CartProductsTable extends React.Component {
 
 		this.state = {
 			totalSum: 0,
+			promoCode: '',
 			resolution: window.innerWidth
 		};
 	}
@@ -70,7 +71,7 @@ class CartProductsTable extends React.Component {
 
 	deleteItem = (id) => {
 		let correctedProducts = this.props.products.filter(e => e.id !== id);
-		this.updateParent(correctedProducts);
+		this.updateParent('products', correctedProducts);
 	};
 
 	editItemQuantity = (id, newQuantity) => {
@@ -81,11 +82,11 @@ class CartProductsTable extends React.Component {
 			}
 		});
 
-		this.updateParent(products);
+		this.updateParent('products', products);
 	};
 
-	updateParent = (correctedProducts) => {
-		this.props.onChange('products', correctedProducts);
+	updateParent = (stateProp, value) => {
+		this.props.onChange(stateProp, value);
 		this.calculateTotalSum();
 	};
 
@@ -93,15 +94,24 @@ class CartProductsTable extends React.Component {
 		let sum = 0;
 
 		this.props.products.forEach(e => {
-			let price = utils.calculatePriceAfterDiscount(e.price, e.discount ).toFixed(2);
+			let price = utils.calculatePriceAfterDiscount(e.price, e.discount).toFixed(2);
 			sum += price * e.quantity;
 		});
 
 		this.setState({totalSum: sum.toFixed(2)});
 	};
 
+	handleChange = (e) => {
+		this.setState({[e.target.name]: e.target.value});
+	};
+
 	handleResolutionChange = () => {
 		this.setState({resolution: window.innerWidth});
+	};
+
+	checkPromotion = () => {
+		this.props.checkPromotion(this.state.promoCode);
+		this.setState({promoCode: ''});
 	};
 
 	render () {
@@ -124,23 +134,32 @@ class CartProductsTable extends React.Component {
 
 		return (
 			<div>
-				<div id="cart-products-table">
-
-
+				<Col id="cart-products-table">
 					<CartTableHeader resolution={resolution}/>
-
 					{products}
-
 					<CartTableFooter totalSum={this.state.totalSum}/>
-				</div>
+				</Col>
 
-				<Row className="buttons-container">
-					<Col xs={12} className="text-center">
-						<button className={isAdmin ? "btn btn-primary" : "btn-custom primary md"}
-						        onClick={this.props.continue}>{BUTTONS_BG.next}</button>
-					</Col>
-				</Row>
+				<Col>
+					<FormInputField
+						label={LABELS_BG.promoCode}
+						type='text'
+						name='promoCode'
+						value={this.state.promoCode}
+						placeholder={PLACEHOLDERS.enterPromoCode}
+						required={false}
+						disabled={false}
+						onChange={this.handleChange}/>
+					<button className="btn-custom default lg"
+					        onClick={this.checkPromotion}>{BUTTONS_BG.validate}
+					</button>
+				</Col>
 
+				<Col className="buttons-container text-center">
+					<button className={isAdmin ? 'btn btn-primary' : 'btn-custom primary md'}
+					        onClick={this.props.continue}>{BUTTONS_BG.next}
+					</button>
+				</Col>
 			</div>
 		);
 

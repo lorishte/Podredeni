@@ -1123,23 +1123,26 @@ nav {
         -webkit-flex-basis: 15%;
         flex-basis: 15%;
         min-width: 100px;
+        letter-spacing: .5px;
         text-align: right;
         padding-right: 25px; }
         #cart #cart-products-table .products-table-row .product-data .price-col .old-price {
           text-decoration: line-through;
-          font-size: .8em;
+          text-decoration-color: #ea445b;
+          font-size: .85em;
           color: #5b5b5b;
           font-weight: 400;
-          margin-right: 15px; }
+          display: block; }
         #cart #cart-products-table .products-table-row .product-data .price-col .price {
           font-size: 1.2em;
           font-weight: 600; }
     #cart #cart-products-table .products-table-row .sum-col {
       -webkit-flex-basis: 15%;
       flex-basis: 15%;
-      min-width: 100px;
+      min-width: 105px;
       text-align: right;
       font-weight: 600;
+      letter-spacing: .5px;
       padding-right: 25px; }
   #cart #cart-products-table .table-footer {
     font-size: 2em;
@@ -1538,7 +1541,7 @@ footer {
     -ms-flex-align: start;
     -webkit-align-items: flex-start;
     align-items: flex-start;
-    padding: 30px 0 0 0; }
+    padding: 20px 0; }
     #cart #cart-products-table .products-table-row .img-col {
       -webkit-flex-basis: 20%;
       flex-basis: 20%;
@@ -1549,7 +1552,8 @@ footer {
       -webkit-flex-wrap: wrap;
       -ms-flex-wrap: wrap;
       flex-wrap: wrap;
-      padding: 0 0 30px 0; }
+      padding-right: 10px;
+      border-right: 1px solid #e6e6e6; }
       #cart #cart-products-table .products-table-row .product-data .product-col {
         -webkit-flex-basis: 80%;
         flex-basis: 80%;
@@ -1570,13 +1574,14 @@ footer {
         -ms-flex: 1;
         flex-grow: 1;
         position: relative;
-        padding: 0;
-        padding-right: 20%; }
+        padding: 0; }
         #cart #cart-products-table .products-table-row .product-data .product-col .btn-custom {
           position: absolute;
           top: -20px;
           left: -100px; }
       #cart #cart-products-table .products-table-row .product-data .quantity-col {
+        -webkit-flex-basis: 100%;
+        flex-basis: 100%;
         padding: 0;
         order: 2; }
         #cart #cart-products-table .products-table-row .product-data .quantity-col .quantity {
@@ -1584,10 +1589,15 @@ footer {
         #cart #cart-products-table .products-table-row .product-data .quantity-col .btn-custom.sm {
           padding: 3px 10px; }
       #cart #cart-products-table .products-table-row .product-data .price-col {
+        -webkit-flex-basis: 100%;
+        flex-basis: 100%;
         padding: 0;
         text-align: left;
         margin-bottom: 7px;
         order: 1; }
+        #cart #cart-products-table .products-table-row .product-data .price-col .old-price {
+          display: inline-block;
+          margin-right: 15px; }
     #cart #cart-products-table .products-table-row .sum-col {
       -webkit-flex-basis: 10%;
       flex-basis: 10%;
@@ -1596,11 +1606,9 @@ footer {
       -webkit-flex-grow: 0.5;
       -ms-flex: 0.5;
       flex-grow: 0.5;
-      min-width: 75px;
-      padding: 0; }
+      min-width: 95px;
+      padding: 0 0 0 15px; }
   #cart #cart-products-table .table-footer {
-    background-color: #7b715d;
-    color: #ffffff;
     font-size: 1.5em;
     text-align: center;
     padding: 15px 0; }
@@ -1740,6 +1748,12 @@ footer {
     top: 5%; }
   #home #videos .video {
     height: 150px; } }
+@media screen and (max-width: 520px) {
+  #cart #cart-products-table .products-table-row .img-col .image-thumbnail {
+    height: 60px;
+    width: 60px; }
+  #cart #cart-products-table .products-table-row .product-data .price-col .old-price {
+    display: block; } }
 @media screen and (max-width: 480px) {
   #order-list-tabs .tab-content {
     background-color: #fff; }
@@ -1798,11 +1812,17 @@ footer {
     top: -5px;
     margin-right: 10px; }
 
-  #cart #cart-products-table .products-table-row .img-col {
-    padding-top: 30px; }
-    #cart #cart-products-table .products-table-row .img-col .image-thumbnail {
-      height: 70px;
-      width: 70px; }
+  #cart #cart-products-table .products-table-row {
+    padding: 10px 0 20px 0; }
+    #cart #cart-products-table .products-table-row .img-col {
+      -webkit-flex-basis: 100%;
+      flex-basis: 100%;
+      margin-bottom: 10px; }
+    #cart #cart-products-table .products-table-row .product-data .product-col .btn-custom {
+      left: 122%;
+      top: -70px; }
+    #cart #cart-products-table .products-table-row .product-data .price-col .old-price {
+      display: block; }
 
   .section-heading {
     letter-spacing: 0;

@@ -8,12 +8,14 @@ import utils from '../../../utils/utils';
 
 // Partials
 import CartProductsTable from './products/CartProductsTable';
+import ValidPromo from './validPromo/ValidPromo';
 import OrderDetailsForm from './orderDetails/OrderDetailsForm';
 import ReviewOrder from './reviewOrder/ReviewOrder';
 
 // Services
 import orderService from '../../../services/orders/ordersService';
 import productService from '../../../services/products/productsService';
+import productPromoService from '../../../services/promos/productPromosService';
 
 // Constants
 import { BUTTONS_BG, CONFIRM_DIALOGS, CART } from '../../../data/constants/componentConstants';
@@ -24,9 +26,11 @@ class Cart extends React.Component {
 
 		this.state = {
 			products: [],
+			promotionProducts: [],
 			productsCount: null,
 			orderDetails: {},
 			productsView: true,
+			validPromoView: false,
 			orderDetailsView: false,
 			reviewView: false
 		};
@@ -92,11 +96,13 @@ class Cart extends React.Component {
 			productService
 				.getProduct(addedProducts[i].id)
 				.then(res => {
+
 					let product = res.product;
+
 					product.quantity = addedProducts[i].quantity;
 					product.image = product.images.reverse()[0];
 
-					this.setState({products: [...this.state.products, product]});
+					this.setState({products: [...this.state.products, product]}, () => console.log(this.state.products));
 
 				})
 				.catch(err => {
@@ -106,7 +112,9 @@ class Cart extends React.Component {
 	};
 
 	updateInfo = (stateProp, data) => {
+
 		this.setState({[stateProp]: data}, () => {
+
 			sessionStorage.setItem([stateProp], JSON.stringify(this.state[stateProp]));
 
 			if (stateProp === 'products') {
@@ -117,8 +125,40 @@ class Cart extends React.Component {
 		});
 	};
 
+	checkPromotion = (promoCode) => {
+
+		productPromoService
+			.checkPromotion(promoCode, this.state)
+			.then(res => {
+
+				let products = this.state.products;
+				console.log(this.state.products)
+				console.log(this.state.promotionProducts)
+
+				let promoProducts = res.products.products;
+
+				for (let i = 0; i < promoProducts.length; i++) {
+
+					let discount;
+					if (promoProducts[i].price !== products[i].price) {
+						discount =  promoProducts[i].price / products[i].price * 100;
+					}
+
+					promoProducts[i] = products[i];
+					promoProducts[i].discount = discount
+				}
+
+				this.setState({promotionProducts: promoProducts}, () => this.showView('validPromoView'));
+
+
+			})
+			.catch(err => {
+				console.log(err);
+			});
+	};
+
 	updateProductsCount = (productsArr) => {
-		this.setState({productsCount: productsArr.length}, () => console.log(this.state.productsCount));
+		this.setState({productsCount: productsArr.length});
 	};
 
 	cancelOrder = () => {
@@ -139,28 +179,13 @@ class Cart extends React.Component {
 		});
 	};
 
-	showProducts = () => {
-		this.setState({
-			productsView: true,
-			orderDetailsView: false,
-			reviewView: false
-		});
-	};
-
-	showDeliveryDetailsForm = () => {
+	showView = (view) => {
 		this.setState({
 			productsView: false,
-			orderDetailsView: true,
-			reviewView: false
-		});
-	};
-
-	showReview = () => {
-		this.setState({
-			productsView: false,
+			validPromoView: false,
 			orderDetailsView: false,
-			reviewView: true
-		});
+			reviewView: false
+		}, () => this.setState({[view]: true}));
 	};
 
 	submitOrder = () => {
@@ -214,7 +239,7 @@ class Cart extends React.Component {
 
 					{/*// Tabs*/}
 					<div className="tabs">
-						<span className={this.state.productsView ? 'tab active' : 'tab'}>{CART.edit}</span>
+						<span className={this.state.productsView || this.state.validPromoView ? 'tab active' : 'tab'}>{CART.edit}</span>
 						<span className={this.state.orderDetailsView ? 'tab active' : 'tab'}>{CART.deliveryData}</span>
 						<span className={this.state.reviewView ? 'tab active' : 'tab'}>{CART.confirm}</span>
 					</div>
@@ -237,11 +262,21 @@ class Cart extends React.Component {
 							<CartProductsTable
 								products={this.state.products}
 								onChange={this.updateInfo}
-								continue={this.showDeliveryDetailsForm}
-								cancel={this.confirmCancel}
-							/>
+								checkPromotion={this.checkPromotion}
+								continue={() => this.showView('orderDetailsView')}/>
 						</Col>
 						}
+
+						{/*// Validated Promo*/}
+						{this.state.validPromoView &&
+						<Col xs={12}>
+							<ValidPromo
+								products={this.state.promotionProducts}
+								goBack={() => this.showView('productsView')}
+								continue={() => this.showView('orderDetailsView')}/>
+						</Col>
+						}
+
 
 						{/*// Order details*/}
 						{this.state.orderDetailsView &&
@@ -249,9 +284,8 @@ class Cart extends React.Component {
 							<OrderDetailsForm
 								data={this.state.orderDetails}
 								onChange={this.updateInfo}
-								goBack={this.showProducts}
-								continue={this.showReview}
-								cancel={this.confirmCancel}/>
+								goBack={() => this.showView('productsView')}
+								continue={() => this.showView('reviewView')}/>
 						</Col>
 						}
 
@@ -262,10 +296,8 @@ class Cart extends React.Component {
 							<ReviewOrder
 								products={this.state.products}
 								orderDetails={this.state.orderDetails}
-								goBack={this.showDeliveryDetailsForm}
-								continue={this.submitOrder}
-								cancel={this.confirmCancel}
-							/>
+								goBack={() => this.showView('orderDetailsView')}
+								continue={this.submitOrder}/>
 						</Col>
 						}
 					</Panel.Body>
