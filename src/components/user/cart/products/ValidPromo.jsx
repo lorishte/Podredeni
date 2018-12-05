@@ -6,9 +6,8 @@ import { confirmAlert } from 'react-confirm-alert';
 // Partials
 import CartTableHeader from './partials/CartTableHeader';
 import CartProductRow from './partials/CartProductRow';
+import CartProductRowPresent from './partials/CartProductRowPresent';
 import CartTableFooter from './partials/CartTableFooter';
-
-import FormSelectField from '../../../common/formComponents/FormSelectField';
 
 import {
 	RESOLUTIONS,
@@ -31,8 +30,10 @@ class ValidPromo extends React.Component {
 			cartProducts: this.props.products.cart,
 			discountedProducts: this.props.products.discountedProducts,
 			discountedProductsCount: this.props.products.discountedProductsCount,
-			selectedPresents: [],
+
+			selectedPresents: this.props.selectedPresents,
 			selectedPresentsCount: 0,
+
 			totalSum: 0,
 			resolution: window.innerWidth
 		};
@@ -72,23 +73,30 @@ class ValidPromo extends React.Component {
 
 	addPresent = (product) => {
 
-		let selectedPresents = this.state.selectedPresents;
 		let selectedPresentsCount = this.state.selectedPresentsCount;
 
 		if (selectedPresentsCount >= this.state.discountedProductsCount) return;
 
-		selectedPresents.forEach(selectedPresent => {
-			if (selectedPresent.id === product.id) {
-				selectedPresent.quantity += 1;
-			}
-		});
-
 		product.quantity = 1;
 		selectedPresentsCount++;
 
-		this.setState({
-			selectedPresents: ([...this.state.selectedPresents, product]),
-			selectedPresentsCount: selectedPresentsCount
+		let selectedProducts = this.state.selectedPresents;
+		selectedProducts.push(product);
+
+		this.setState({selectedPresentsCount: selectedPresentsCount}, () => {
+			this.props.onChange('selectedPresents', selectedProducts);
+		});
+	};
+
+	deleteItem = (id, quantity) => {
+
+		let correctedProducts = this.state.selectedPresents.filter(e => e.id !== id);
+
+		let selectedPresentsCount = this.state.selectedPresentsCount;
+		selectedPresentsCount -= quantity;
+
+		this.setState({ selectedPresentsCount: selectedPresentsCount}, () => {
+			this.props.onChange('selectedPresents', correctedProducts);
 		});
 	};
 
@@ -114,30 +122,26 @@ class ValidPromo extends React.Component {
 					p.image = p.images.slice(-1)[0];
 					return (
 						<div key={p.id} className="present">
-
 							<div className="image-container">
 								<img src={p.image}/>
 							</div>
-
 							<p className="present-name">{p.name}</p>
-
 							<button className="btn-custom default xs"
 							        onClick={() => this.addPresent(p)}>Избери
 							</button>
-
 						</div>);
 				});
-
 			}
 		}
 
 		let selectedPresents;
 		if (this.state.selectedPresents.length > 0) {
 			selectedPresents = this.state.selectedPresents.map((p, i) => {
-				return <CartProductRow
+				return <CartProductRowPresent
 					key={p.id}
 					index={i + 1}
-					editable={true}
+					editable={this.state.selectedPresentsCount <= this.state.discountedProductsCount}
+					delete={this.deleteItem}
 					data={p}/>;
 			});
 		}
@@ -153,11 +157,13 @@ class ValidPromo extends React.Component {
 					<CartTableFooter totalSum={this.state.totalSum}/>
 				</Col>
 
-				<h3>Имате право на {this.state.discountedProductsCount} подарък</h3>
+				<h3>Имате право на {this.state.discountedProductsCount - this.state.selectedPresentsCount} подарък</h3>
 
+				{this.state.selectedPresentsCount < this.state.discountedProductsCount &&
 				<div className="presents">
 					{availablePresents}
 				</div>
+				}
 
 
 				<Col className="buttons-container text-center">

@@ -29,7 +29,11 @@ class Cart extends React.Component {
 			products: [],
 			promotionProducts: [],
 			productsCount: null,
+
+			selectedPresents: [],
+
 			orderDetails: {},
+
 			productsView: true,
 			validPromoView: false,
 			orderDetailsView: false,
@@ -115,6 +119,10 @@ class Cart extends React.Component {
 	updateInfo = (stateProp, data) => {
 
 		this.setState({[stateProp]: data}, () => {
+
+			console.log(this.state)
+
+			if (stateProp === 'selectedPresents') return;
 
 			sessionStorage.setItem([stateProp], JSON.stringify(this.state[stateProp]));
 
@@ -240,7 +248,8 @@ class Cart extends React.Component {
 
 					{/*// Tabs*/}
 					<div className="tabs">
-						<span className={this.state.productsView || this.state.validPromoView ? 'tab active' : 'tab'}>{CART.edit}</span>
+						<span
+							className={this.state.productsView || this.state.validPromoView ? 'tab active' : 'tab'}>{CART.edit}</span>
 						<span className={this.state.orderDetailsView ? 'tab active' : 'tab'}>{CART.deliveryData}</span>
 						<span className={this.state.reviewView ? 'tab active' : 'tab'}>{CART.confirm}</span>
 					</div>
@@ -274,6 +283,8 @@ class Cart extends React.Component {
 						<Col xs={12}>
 							<ValidPromo
 								products={this.state.promotionProducts}
+								selectedPresents={this.state.selectedPresents}
+								onChange={this.updateInfo}
 								goBack={() => this.showView('productsView')}
 								continue={() => this.showView('orderDetailsView')}/>
 						</Col>
