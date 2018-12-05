@@ -1149,6 +1149,25 @@ nav {
     font-weight: 600;
     text-align: right;
     padding: 25px; }
+  #cart #cart-products-table .presents .present {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -moz-box-align: center;
+    -ms-flex-align: center;
+    -webkit-align-items: center;
+    align-items: center;
+    border-bottom: 1px solid #e6e6e6;
+    padding: 5px 0; }
+    #cart #cart-products-table .presents .present .image-container {
+      -webkit-flex-basis: 8%;
+      flex-basis: 8%;
+      margin-right: 30px; }
+    #cart #cart-products-table .presents .present .present-name {
+      -webkit-flex-basis: 70%;
+      flex-basis: 70%; }
 #cart .delivery-options {
   display: -webkit-box;
   display: -webkit-flex;

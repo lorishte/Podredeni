@@ -3,7 +3,6 @@ import { ToastContainer } from 'react-toastr';
 import { Grid, Row, Col, FormControl, FormGroup, ControlLabel, Button } from 'react-bootstrap';
 
 import FormInputField from '../../../common/formComponents/FormInputField';
-import FormSelectField from '../../../common/formComponents/FormSelectField';
 
 import PartnerAddressInput from './partials/PartnerAddressInput';
 

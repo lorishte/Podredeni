@@ -123,6 +123,8 @@ class OrderDetails extends React.Component {
 
 		let isAdmin = sessionStorage.getItem('role') === 'admin';
 
+		console.log('from order details')
+
 		return (
 			<form onSubmit={(e) => this.submitInfo(e)} id="order-details-form">
 

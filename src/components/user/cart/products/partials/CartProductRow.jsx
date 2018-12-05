@@ -38,6 +38,7 @@ class CartProductRow extends React.Component {
 	};
 
 	render () {
+
 		let p = this.props.data;
 
 		let price = utils.calculatePriceAfterDiscount(p.price, p.discount);

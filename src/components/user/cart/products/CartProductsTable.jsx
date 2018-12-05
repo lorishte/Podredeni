@@ -33,14 +33,12 @@ class CartProductsTable extends React.Component {
 		this.calculateTotalSum();
 	}
 
+
 	componentWillUnmount () {
 		window.removeEventListener('orientationchange', this.handleResolutionChange);
 		window.removeEventListener('resize', this.handleResolutionChange);
 	}
 
-	componentWillReceiveProps () {
-		this.calculateTotalSum();
-	}
 
 	confirmDeletion = (id) => {
 
@@ -115,12 +113,14 @@ class CartProductsTable extends React.Component {
 	};
 
 	render () {
+
 		let resolution = this.state.resolution > RESOLUTIONS.bootstrapXS;
 
 		let isAdmin = sessionStorage.getItem('role') === 'admin';
 
 		let products;
 		if (this.props.products.length > 0) {
+
 			products = this.props.products.map((p, i) => {
 				return <CartProductRow
 					key={p.id}
@@ -150,6 +150,7 @@ class CartProductsTable extends React.Component {
 						required={false}
 						disabled={false}
 						onChange={this.handleChange}/>
+
 					<button className="btn-custom default lg"
 					        onClick={this.checkPromotion}>{BUTTONS_BG.validate}
 					</button>

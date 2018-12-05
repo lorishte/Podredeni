@@ -1,14 +1,15 @@
 import React from 'react';
 
 import { Grid, Row, Col, Label, Panel } from 'react-bootstrap';
+import { ToastContainer } from 'react-toastr';
+import { confirmAlert } from 'react-confirm-alert';
 
 // Helpers
-import { confirmAlert } from 'react-confirm-alert';
 import utils from '../../../utils/utils';
 
 // Partials
 import CartProductsTable from './products/CartProductsTable';
-import ValidPromo from './validPromo/ValidPromo';
+import ValidPromo from './products/ValidPromo';
 import OrderDetailsForm from './orderDetails/OrderDetailsForm';
 import ReviewOrder from './reviewOrder/ReviewOrder';
 
@@ -18,7 +19,7 @@ import productService from '../../../services/products/productsService';
 import productPromoService from '../../../services/promos/productPromosService';
 
 // Constants
-import { BUTTONS_BG, CONFIRM_DIALOGS, CART } from '../../../data/constants/componentConstants';
+import { BUTTONS_BG, CONFIRM_DIALOGS, CART, TOASTR_MESSAGES } from '../../../data/constants/componentConstants';
 
 class Cart extends React.Component {
 	constructor (props) {
@@ -102,7 +103,7 @@ class Cart extends React.Component {
 					product.quantity = addedProducts[i].quantity;
 					product.image = product.images.reverse()[0];
 
-					this.setState({products: [...this.state.products, product]}, () => console.log(this.state.products));
+					this.setState({products: [...this.state.products, product]});
 
 				})
 				.catch(err => {
@@ -127,33 +128,29 @@ class Cart extends React.Component {
 
 	checkPromotion = (promoCode) => {
 
+		let stateCopy = Object.assign({}, this.state);
+
 		productPromoService
-			.checkPromotion(promoCode, this.state)
+			.checkPromotion(promoCode, stateCopy)
 			.then(res => {
+				console.log(res);
+				let promoProducts = res;
 
-				let products = this.state.products;
-				console.log(this.state.products)
-				console.log(this.state.promotionProducts)
-
-				let promoProducts = res.products.products;
-
-				for (let i = 0; i < promoProducts.length; i++) {
-
-					let discount;
-					if (promoProducts[i].price !== products[i].price) {
-						discount =  promoProducts[i].price / products[i].price * 100;
-					}
-
-					promoProducts[i] = products[i];
-					promoProducts[i].discount = discount
-				}
+				promoProducts.cart.forEach(e => {
+					e.image = e.imageUrl;
+				});
 
 				this.setState({promotionProducts: promoProducts}, () => this.showView('validPromoView'));
 
-
+				this.toastContainer.success(TOASTR_MESSAGES.validPromoCode, '', {
+					closeButton: true,
+				});
 			})
 			.catch(err => {
 				console.log(err);
+				this.toastContainer.error(TOASTR_MESSAGES[err.responseJSON], '', {
+					closeButton: true,
+				});
 			});
 	};
 
@@ -215,6 +212,10 @@ class Cart extends React.Component {
 		return (
 			<Grid id="cart">
 
+				<ToastContainer
+					ref={ref => this.toastContainer = ref}
+					className="toast-bottom-right"
+				/>
 
 				{/*// No products added*/}
 				{this.state.productsCount === 0 && this.state.productsView &&
@@ -258,6 +259,7 @@ class Cart extends React.Component {
 						{this.state.products.length === this.state.productsCount
 						&& this.state.productsView
 						&&
+
 						<Col xs={12}>
 							<CartProductsTable
 								products={this.state.products}

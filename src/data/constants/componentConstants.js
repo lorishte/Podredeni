@@ -143,8 +143,10 @@ const TOASTR_MESSAGES = {
 	//Errors
 	error: 'Грешка',
 	passwordsMismatch: 'Паролите не съвпадат.',
-	invalidPromoCode: 'Невалиден промо код.',
-	invalidPromoProducts: 'Избраните продукти или количества не съответстват на въведения промо код.',
+
+	'Promotion is not active': 'Промоцията не е активна',
+	'No promotion available for selected products/ products quantity': 'Избраните продукти или количества не съответстват на въведения промо код.',
+	'Object reference not set to an instance of an object.' : 'Невалиден промо код.',
 
 	//Warnings
 	requestEmptyFields: 'Моля, попълнете следните полета:',
@@ -155,6 +157,8 @@ const TOASTR_MESSAGES = {
 	successEdit: 'Успешна редакция.',
 
 	productAddedToCart: 'Продуктът е добавен в кошницата Ви.',
+
+	validPromoCode: 'Валиден промо код.',
 
 	successHomeContentModification: 'Съдържанието на началната страница беше променено.',
 

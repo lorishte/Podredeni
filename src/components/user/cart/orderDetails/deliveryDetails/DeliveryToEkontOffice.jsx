@@ -87,6 +87,7 @@ class EkontInfoInputs extends React.Component {
 				officeCode: '',
 				officeName: '',
 			});
+
 		} else if (e.target.name === 'officeName') {
 
 			if (e.target.value === '') {

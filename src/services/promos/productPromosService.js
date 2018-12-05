@@ -94,10 +94,9 @@ function generateProductDetails(state) {
 
 function generatePromoDetails (promoCode, state) {
 
-	let products = Object.assign([], state.products);
-	console.log(products)
-	let requestProducts = [];
+	let products = state.products;
 
+	let requestProducts = [];
 
 	for (let i = 0; i < products.length; i++) {
 
@@ -108,7 +107,6 @@ function generatePromoDetails (promoCode, state) {
 			Price: products[i].price
 		};
 	}
-
 
 	return {
 		PromoCode:promoCode,

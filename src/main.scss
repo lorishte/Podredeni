@@ -1523,6 +1523,24 @@ nav {
       text-align: right;
       padding: 25px;
     }
+
+    .presents {
+      .present {
+        @include flex;
+        @include align-items(center);
+        border-bottom: 1px solid $light-grey;
+        padding: 5px 0;
+
+        .image-container {
+          @include flex-basis(8%);
+          margin-right: 30px;
+        }
+
+        .present-name {
+          @include flex-basis(70%);
+        }
+      }
+    }
   }
 
   .delivery-options {
