@@ -31,7 +31,6 @@ class ValidPromo extends React.Component {
 			discountedProducts: this.props.products.discountedProducts,
 			discountedProductsCount: this.props.products.discountedProductsCount,
 
-			selectedPresents: this.props.selectedPresents,
 			selectedPresentsCount: 0,
 
 			totalSum: 0,
@@ -80,7 +79,7 @@ class ValidPromo extends React.Component {
 		product.quantity = 1;
 		selectedPresentsCount++;
 
-		let selectedProducts = this.state.selectedPresents;
+		let selectedProducts = this.props.selectedPresents;
 		selectedProducts.push(product);
 
 		this.setState({selectedPresentsCount: selectedPresentsCount}, () => {
@@ -90,7 +89,7 @@ class ValidPromo extends React.Component {
 
 	deleteItem = (id, quantity) => {
 
-		let correctedProducts = this.state.selectedPresents.filter(e => e.id !== id);
+		let correctedProducts = this.props.selectedPresents.filter(e => e.id !== id);
 
 		let selectedPresentsCount = this.state.selectedPresentsCount;
 		selectedPresentsCount -= quantity;
@@ -135,8 +134,8 @@ class ValidPromo extends React.Component {
 		}
 
 		let selectedPresents;
-		if (this.state.selectedPresents.length > 0) {
-			selectedPresents = this.state.selectedPresents.map((p, i) => {
+		if (this.props.selectedPresents.length > 0) {
+			selectedPresents = this.props.selectedPresents.map((p, i) => {
 				return <CartProductRowPresent
 					key={p.id}
 					index={i + 1}
