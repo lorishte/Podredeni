@@ -47,7 +47,7 @@ class CreateProduct extends React.Component {
             .then(res => {
 
                 this.setState({
-                    promos: res.filter(p => promoDiscountsIds.includes(p.id))
+                    discountPromos: res.filter(p => promoDiscountsIds.includes(p.id))
                 });
             })
             .catch(err => {
@@ -150,8 +150,8 @@ class CreateProduct extends React.Component {
             if (priceAfterDiscount < 0) priceAfterDiscount = 0;
         }
 
-        if (this.state.promos.length > 0) {
-            promos = this.state.promos.map(p => {
+        if (this.state.discountPromos.length > 0) {
+            promos = this.state.discountPromos.map(p => {
                 return <p key={p.id}>
                     {p.name} - {p.discount}%
                 </p>

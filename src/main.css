@@ -1001,6 +1001,31 @@ nav {
   margin-right: 15px; }
 #cart #cart-review p {
   margin-bottom: 0; }
+#cart .form-add-on {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-wrap: wrap;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap; }
+  #cart .form-add-on .control-label {
+    -webkit-flex-basis: 100%;
+    flex-basis: 100%;
+    color: #ea445b;
+    font-weight: 500;
+    margin-bottom: 10px; }
+  #cart .form-add-on .form-control {
+    -webkit-flex-basis: 50%;
+    flex-basis: 50%;
+    max-width: 250px;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    height: 50px; }
+  #cart .form-add-on button {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    height: 50px; }
 #cart #cart-products-table {
   width: 100%; }
   #cart #cart-products-table .table-header {

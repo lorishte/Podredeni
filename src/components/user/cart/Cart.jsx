@@ -157,7 +157,6 @@ class Cart extends React.Component {
 					promotionProducts: promoProducts,
 					promoCode: promoCode
 				}, () => {
-					console.log(this.state)
 					this.showView('validPromoView')
 				});
 
@@ -220,28 +219,41 @@ class Cart extends React.Component {
 
 		let products;
 
-		if (stateCopy.promotionProducts.length > 0) {
+		// If
+
+		if (Object.keys(this.state.promotionProducts).length > 0) {
+
 			products = stateCopy.promotionProducts.cart;
+
+			if (this.state.selectedPresents.length > 0) {
+				this.state.selectedPresents.forEach(el => {
+					products.push(el)
+				})
+			}
+
+		} else {
+			products = this.state.products;
 		}
 
 		console.log(products);
 
-		// orderService
-		// 	.addDeliveryData(stateCopy.orderDetails)
-		// 	.then(res => {
-		// 		let deliveryId = res.deliveryDataId;
-		// 		let products = generateOrderData(stateCopy.products);
-		//
-		// 		orderService
-		// 			.addOrder(deliveryId, products)
-		// 			.then(res => {
-		// 				sessionStorage.removeItem('products');
-		// 				this.props.history.push('/order/confirmation');
-		// 			});
-		// 	})
-		// 	.catch(err => {
-		// 		this.props.history.push('/error');
-		// 	});
+		orderService
+			.addDeliveryData(stateCopy.orderDetails)
+			.then(res => {
+				let deliveryId = res.deliveryDataId;
+				let productsForSubmit = generateOrderData(products);
+				let promoCode = stateCopy.promoCode;
+
+				orderService
+					.addOrder(deliveryId, productsForSubmit, promoCode)
+					.then(res => {
+						sessionStorage.removeItem('products');
+						this.props.history.push('/order/confirmation');
+					});
+			})
+			.catch(err => {
+				this.props.history.push('/error');
+			});
 
 	};
 
@@ -331,7 +343,6 @@ class Cart extends React.Component {
 								data={this.state.orderDetails}
 								onChange={this.updateInfo}
 								goBack={() => {
-									console.log(this.state.promotionProducts)
 									if (Object.keys(this.state.promotionProducts).length > 0) this.showView('validPromoView');
 									else this.showView('productsView');
 								}}

@@ -2,16 +2,16 @@ import React from 'react';
 
 import { FormGroup, FormControl, ControlLabel  } from 'react-bootstrap';
 
-class FormInputField extends React.Component {
+class FormInputWithAddOn extends React.Component {
 	constructor (props) {
 		super(props);
 	}
 
 	render () {
-		const {type, step, min, max, label, name, value, required, onChange, placeholder, disabled, className} = this.props;
+		const {type, step, min, max, label, name, value, required, onChange, placeholder, disabled, btnClass, btnText} = this.props;
 
 		return (
-			<FormGroup controlId={name} className={className}>
+			<FormGroup controlId={name} className='form-add-on'>
 				<ControlLabel>{label}{required && <span className="text-danger">&nbsp;*</span>}</ControlLabel>
 				<FormControl
 					type={type}
@@ -25,9 +25,12 @@ class FormInputField extends React.Component {
 					disabled={disabled}
 					onChange={onChange}
 				/>
+				<button className={btnClass}
+				        onClick={this.props.onClick}>{btnText}
+				</button>
 			</FormGroup>
 		);
 	}
 }
 
-export default FormInputField;
+export default FormInputWithAddOn;

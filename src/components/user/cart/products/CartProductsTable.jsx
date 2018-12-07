@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Col } from 'react-bootstrap';
+import { Col, FormControl, ControlLabel, FormGroup, InputGroup, Button } from 'react-bootstrap';
 import { confirmAlert } from 'react-confirm-alert';
 
 // Partials
@@ -8,8 +8,16 @@ import CartTableHeader from './partials/CartTableHeader';
 import CartProductRow from './partials/CartProductRow';
 import CartTableFooter from './partials/CartTableFooter';
 import FormInputField from '../../../common/formComponents/FormInputField';
+import FormInputWithAddOn from '../../../common/formComponents/FormInputWithAddOn';
 
-import { RESOLUTIONS, CONFIRM_DIALOGS, BUTTONS_BG , TOASTR_MESSAGES, PLACEHOLDERS, LABELS_BG } from '../../../../data/constants/componentConstants';
+import {
+	RESOLUTIONS,
+	CONFIRM_DIALOGS,
+	BUTTONS_BG,
+	TOASTR_MESSAGES,
+	PLACEHOLDERS,
+	LABELS_BG
+} from '../../../../data/constants/componentConstants';
 
 // Helpers
 import utils from '../../../../utils/utils';
@@ -33,12 +41,10 @@ class CartProductsTable extends React.Component {
 		this.calculateTotalSum();
 	}
 
-
 	componentWillUnmount () {
 		window.removeEventListener('orientationchange', this.handleResolutionChange);
 		window.removeEventListener('resize', this.handleResolutionChange);
 	}
-
 
 	confirmDeletion = (id) => {
 
@@ -76,7 +82,7 @@ class CartProductsTable extends React.Component {
 		let products = this.props.products;
 
 		// Change presents count
-		
+
 		products.forEach(e => {
 			if (e.id === id) {
 				e.quantity = newQuantity;
@@ -150,21 +156,36 @@ class CartProductsTable extends React.Component {
 					<CartTableFooter totalSum={this.state.totalSum}/>
 				</Col>
 
-				<Col>
-					<FormInputField
-						label={LABELS_BG.promoCode}
-						type='text'
-						name='promoCode'
-						value={this.state.promoCode}
-						placeholder={PLACEHOLDERS.enterPromoCode}
-						required={false}
-						disabled={false}
-						onChange={this.handleChange}/>
 
-					<button className="btn-custom default lg"
-					        onClick={this.checkPromotion}>{BUTTONS_BG.validate}
-					</button>
-				</Col>
+				{/*<FormInputField*/}
+					{/*className='form-add-on'*/}
+					{/*label={LABELS_BG.promoCode}*/}
+					{/*type='text'*/}
+					{/*name='promoCode'*/}
+					{/*value={this.state.promoCode}*/}
+					{/*placeholder={PLACEHOLDERS.enterPromoCode}*/}
+					{/*required={false}*/}
+					{/*disabled={false}*/}
+					{/*onChange={this.handleChange}/>*/}
+
+				{/*<button className="btn-custom default lg"*/}
+				        {/*onClick={this.checkPromotion}>{BUTTONS_BG.validate}*/}
+				{/*</button>*/}
+
+				<FormInputWithAddOn
+					label={LABELS_BG.promoCode}
+					type='text'
+					name='promoCode'
+					value={this.state.promoCode}
+					placeholder={PLACEHOLDERS.enterPromoCode}
+					required={false}
+					disabled={false}
+					onChange={this.handleChange}
+
+					btnClass="btn-custom default lg"
+					btnText={BUTTONS_BG.validate}
+					onClick={this.checkPromotion} />
+
 
 				<Col className="buttons-container text-center">
 					<button className={isAdmin ? 'btn btn-primary' : 'btn-custom primary md'}

@@ -1374,8 +1374,38 @@ nav {
     }
   }
 
+  .form-add-on {
+
+    $height: 50px;
+
+    @include flex;
+    @include flex-wrap(wrap);
+
+    .control-label {
+      @include flex-basis(100%);
+      color: $danger;
+      font-weight: 500;
+      margin-bottom: 10px;
+    }
+
+    .form-control {
+      @include flex-basis(50%);
+      max-width: 250px;
+      border-top-right-radius: 0;
+      border-bottom-right-radius: 0;
+      height: $height;
+    }
+
+    button {
+      border-top-left-radius: 0;
+      border-bottom-left-radius: 0;
+      height: $height;
+    }
+  }
+
   #cart-products-table {
     width: 100%;
+
 
     .table-header {
       @include flex;

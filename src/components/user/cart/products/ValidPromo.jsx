@@ -187,7 +187,9 @@ class ValidPromo extends React.Component {
 					<CartTableFooter totalSum={this.state.totalSum}/>
 				</Col>
 
-				{discountedProductsCount > 0 &&
+				{discountedProductsCount > 0
+				&& selectedPresentsCount < discountedProductsCount
+				&&
 				<h3>Имате право на {discountedProductsCount - selectedPresentsCount} подарък</h3>
 				}
 
