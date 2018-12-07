@@ -74,6 +74,9 @@ class CartProductsTable extends React.Component {
 
 	editItemQuantity = (id, newQuantity) => {
 		let products = this.props.products;
+
+		// Change presents count
+		
 		products.forEach(e => {
 			if (e.id === id) {
 				e.quantity = newQuantity;
@@ -108,6 +111,12 @@ class CartProductsTable extends React.Component {
 	};
 
 	checkPromotion = () => {
+		if (this.state.promoCode.trim().length === 0) {
+			this.props.toastContainer.warning(TOASTR_MESSAGES.enterPromoCode);
+			return;
+		}
+
+		this.props.toastContainer.warning(TOASTR_MESSAGES.validatingPromo);
 		this.props.checkPromotion(this.state.promoCode);
 		this.setState({promoCode: ''});
 	};
@@ -124,7 +133,6 @@ class CartProductsTable extends React.Component {
 			products = this.props.products.map((p, i) => {
 				return <CartProductRow
 					key={p.id}
-					index={i + 1}
 					editable={true}
 					data={p}
 					delete={this.confirmDeletion}
@@ -136,7 +144,9 @@ class CartProductsTable extends React.Component {
 			<div>
 				<Col id="cart-products-table">
 					<CartTableHeader resolution={resolution}/>
+
 					{products}
+
 					<CartTableFooter totalSum={this.state.totalSum}/>
 				</Col>
 

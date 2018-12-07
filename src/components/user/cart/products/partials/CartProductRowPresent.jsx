@@ -13,12 +13,21 @@ class CartProductRowPresent extends React.Component {
 		};
 	}
 
+	componentWillReceiveProps (nextProps) {
+		if(nextProps.data.quantity !== this.state.quantity){
+			this.setState({quantity: nextProps.data.quantity });
+		}
+	}
+
 	handleChange = (e) => {
 		this.setState({[e.target.name]: e.target.value});
 	};
 
 	changeQuantity = (method) => {
+
 		let currentQuantity = Number(this.state.quantity);
+
+		if (currentQuantity < 1 ) return;
 
 		switch (method) {
 			case 'increment' :
@@ -29,9 +38,8 @@ class CartProductRowPresent extends React.Component {
 				break;
 		}
 
-		if (currentQuantity < 1 || currentQuantity > 10) return;
-
 		let productId = this.props.data.id;
+
 		this.setState({quantity: currentQuantity}, () => {
 			this.props.edit(productId, this.state.quantity);
 		});
@@ -59,7 +67,7 @@ class CartProductRowPresent extends React.Component {
 							}
 						</p>
 
-						<button onClick={() => this.props.delete(p.id, p.quantity)}
+						<button onClick={() => this.props.delete(p.id)}
 						        className="btn-custom default xs">изтрий
 						</button>
 

@@ -27,12 +27,7 @@ class ValidPromo extends React.Component {
 		super(props);
 
 		this.state = {
-			cartProducts: this.props.products.cart,
-			discountedProducts: this.props.products.discountedProducts,
-			discountedProductsCount: this.props.products.discountedProductsCount,
-
 			selectedPresentsCount: 0,
-
 			totalSum: 0,
 			resolution: window.innerWidth
 		};
@@ -44,6 +39,7 @@ class ValidPromo extends React.Component {
 		window.addEventListener('resize', this.handleResolutionChange);
 
 		this.calculateTotalSum();
+		this.calculatePresentsCount(this.props.selectedPresents);
 	}
 
 	componentWillUnmount () {
@@ -51,14 +47,14 @@ class ValidPromo extends React.Component {
 		window.removeEventListener('resize', this.handleResolutionChange);
 	}
 
-	componentWillReceiveProps () {
-		this.calculateTotalSum();
-	}
+
 
 	calculateTotalSum = () => {
 		let sum = 0;
 
-		this.state.cartProducts.forEach(e => {
+		let cartProducts = this.props.products.cart;
+
+		cartProducts.forEach(e => {
 			let price = utils.calculatePriceAfterDiscount(e.price, e.discount).toFixed(2);
 			sum += price * e.quantity;
 		});
@@ -72,53 +68,88 @@ class ValidPromo extends React.Component {
 
 	addPresent = (product) => {
 
+		let selectedPresents = this.props.selectedPresents;
 		let selectedPresentsCount = this.state.selectedPresentsCount;
 
 		if (selectedPresentsCount >= this.state.discountedProductsCount) return;
 
-		product.quantity = 1;
-		selectedPresentsCount++;
+		let isIncluded = selectedPresents.find(e => e.id === product.id);
 
-		let selectedProducts = this.props.selectedPresents;
-		selectedProducts.push(product);
+		if (isIncluded) {
+			isIncluded.quantity++;
+		} else {
+			product.quantity = 1;
+			selectedPresents.push(product);
+		}
 
-		this.setState({selectedPresentsCount: selectedPresentsCount}, () => {
-			this.props.onChange('selectedPresents', selectedProducts);
-		});
+		this.calculatePresentsCount(selectedPresents);
+
+		this.updateParent('selectedPresents', selectedPresents);
+
 	};
 
-	deleteItem = (id, quantity) => {
+	editItemQuantity = (id, newQuantity) => {
+		let presents = this.props.selectedPresents;
 
-		let correctedProducts = this.props.selectedPresents.filter(e => e.id !== id);
-
-		let selectedPresentsCount = this.state.selectedPresentsCount;
-		selectedPresentsCount -= quantity;
-
-		this.setState({ selectedPresentsCount: selectedPresentsCount}, () => {
-			this.props.onChange('selectedPresents', correctedProducts);
+		presents.forEach(e => {
+			if (e.id === id) {
+				e.quantity = newQuantity;
+			}
 		});
+
+		this.calculatePresentsCount(presents);
+
+		this.updateParent('selectedPresents', presents);
+	};
+
+	deleteItem = (id) => {
+
+		let correctedPresents = this.props.selectedPresents.filter(e => e.id !== id);
+
+		this.updateParent('selectedPresents', correctedPresents);
+
+		this.calculatePresentsCount(correctedPresents);
+	};
+
+	calculatePresentsCount = (arr) => {
+
+		let selectedPresentsCount = 0;
+
+		if (arr.length > 0) {
+			selectedPresentsCount = arr
+				.map(item => item.quantity)
+				.reduce((prev, next) => prev + next);
+		}
+
+		this.setState({selectedPresentsCount});
+	};
+
+	updateParent = (stateProp, data) => {
+		this.props.onChange(stateProp, data);
 	};
 
 	render () {
 		let resolution = this.state.resolution > RESOLUTIONS.bootstrapXS;
+		let discountedProducts = this.props.products.discountedProducts;
+		let discountedProductsCount = this.props.products.discountedProductsCount;
+		let cartProducts = this.props.products.cart;
 
-		let cartProducts;
-		if (this.state.cartProducts.length > 0) {
-			cartProducts = this.state.cartProducts.map((p, i) => {
-				return <CartProductRow
-					key={p.id}
-					index={i + 1}
-					editable={false}
-					data={p}/>;
-			});
-		}
+		let selectedPresentsCount = this.state.selectedPresentsCount;
+
+		cartProducts = cartProducts.map((p, i) => {
+			return <CartProductRow
+				key={p.id + i}
+				editable={false}
+				data={p}/>;
+		});
 
 		let availablePresents;
-		if (this.state.discountedProductsCount > 0) {
+		if (discountedProductsCount > 0) {
+			for (let i = 0; i < discountedProducts.length; i++) {
 
-			for (let i = 0; i < this.state.discountedProducts.length; i++) {
-				availablePresents = this.state.discountedProducts.map(p => {
+				availablePresents = discountedProducts.map(p => {
 					p.image = p.images.slice(-1)[0];
+
 					return (
 						<div key={p.id} className="present">
 							<div className="image-container">
@@ -137,9 +168,9 @@ class ValidPromo extends React.Component {
 		if (this.props.selectedPresents.length > 0) {
 			selectedPresents = this.props.selectedPresents.map((p, i) => {
 				return <CartProductRowPresent
-					key={p.id}
-					index={i + 1}
-					editable={this.state.selectedPresentsCount <= this.state.discountedProductsCount}
+					key={p.id + i}
+					editable={selectedPresentsCount < discountedProductsCount}
+					edit={this.editItemQuantity}
 					delete={this.deleteItem}
 					data={p}/>;
 			});
@@ -156,9 +187,11 @@ class ValidPromo extends React.Component {
 					<CartTableFooter totalSum={this.state.totalSum}/>
 				</Col>
 
-				<h3>Имате право на {this.state.discountedProductsCount - this.state.selectedPresentsCount} подарък</h3>
+				{discountedProductsCount > 0 &&
+				<h3>Имате право на {discountedProductsCount - selectedPresentsCount} подарък</h3>
+				}
 
-				{this.state.selectedPresentsCount < this.state.discountedProductsCount &&
+				{selectedPresentsCount < discountedProductsCount &&
 				<div className="presents">
 					{availablePresents}
 				</div>

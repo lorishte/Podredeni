@@ -27,8 +27,11 @@ class Cart extends React.Component {
 
 		this.state = {
 			products: [],
-			promotionProducts: [],
 			productsCount: null,
+
+			promoCode: '',
+
+			promotionProducts: {},
 
 			selectedPresents: [],
 
@@ -87,6 +90,10 @@ class Cart extends React.Component {
 		}
 	}
 
+	componentDidUpdate () {
+		// console.log(this.state)
+	}
+
 	loadProducts = () => {
 		let addedProducts = JSON.parse(sessionStorage.getItem('products'));
 
@@ -120,8 +127,6 @@ class Cart extends React.Component {
 
 		this.setState({[stateProp]: data}, () => {
 
-			console.log(this.state)
-
 			if (stateProp === 'selectedPresents') return;
 
 			sessionStorage.setItem([stateProp], JSON.stringify(this.state[stateProp]));
@@ -141,14 +146,20 @@ class Cart extends React.Component {
 		productPromoService
 			.checkPromotion(promoCode, stateCopy)
 			.then(res => {
-				console.log(res);
+
 				let promoProducts = res;
 
 				promoProducts.cart.forEach(e => {
 					e.image = e.imageUrl;
 				});
 
-				this.setState({promotionProducts: promoProducts}, () => this.showView('validPromoView'));
+				this.setState({
+					promotionProducts: promoProducts,
+					promoCode: promoCode
+				}, () => {
+					console.log(this.state)
+					this.showView('validPromoView')
+				});
 
 				this.toastContainer.success(TOASTR_MESSAGES.validPromoCode, '', {
 					closeButton: true,
@@ -185,6 +196,16 @@ class Cart extends React.Component {
 	};
 
 	showView = (view) => {
+
+		// Clear promos data
+		if (view === 'productsView') {
+			this.setState({
+				selectedPresents: [],
+				promoCode: '',
+				promotionProducts: {}
+			});
+		}
+
 		this.setState({
 			productsView: false,
 			validPromoView: false,
@@ -194,22 +215,33 @@ class Cart extends React.Component {
 	};
 
 	submitOrder = () => {
-		orderService
-			.addDeliveryData(this.state.orderDetails)
-			.then(res => {
-				let deliveryId = res.deliveryDataId;
-				let products = generateOrderData(this.state.products);
 
-				orderService
-					.addOrder(deliveryId, products)
-					.then(res => {
-						sessionStorage.removeItem('products');
-						this.props.history.push('/order/confirmation');
-					});
-			})
-			.catch(err => {
-				this.props.history.push('/error');
-			});
+		let stateCopy = Object.assign({}, this.state);
+
+		let products;
+
+		if (stateCopy.promotionProducts.length > 0) {
+			products = stateCopy.promotionProducts.cart;
+		}
+
+		console.log(products);
+
+		// orderService
+		// 	.addDeliveryData(stateCopy.orderDetails)
+		// 	.then(res => {
+		// 		let deliveryId = res.deliveryDataId;
+		// 		let products = generateOrderData(stateCopy.products);
+		//
+		// 		orderService
+		// 			.addOrder(deliveryId, products)
+		// 			.then(res => {
+		// 				sessionStorage.removeItem('products');
+		// 				this.props.history.push('/order/confirmation');
+		// 			});
+		// 	})
+		// 	.catch(err => {
+		// 		this.props.history.push('/error');
+		// 	});
 
 	};
 
@@ -272,6 +304,7 @@ class Cart extends React.Component {
 						<Col xs={12}>
 							<CartProductsTable
 								products={this.state.products}
+								toastContainer={this.toastContainer}
 								onChange={this.updateInfo}
 								checkPromotion={this.checkPromotion}
 								continue={() => this.showView('orderDetailsView')}/>
@@ -297,7 +330,11 @@ class Cart extends React.Component {
 							<OrderDetailsForm
 								data={this.state.orderDetails}
 								onChange={this.updateInfo}
-								goBack={() => this.showView('productsView')}
+								goBack={() => {
+									console.log(this.state.promotionProducts)
+									if (Object.keys(this.state.promotionProducts).length > 0) this.showView('validPromoView');
+									else this.showView('productsView');
+								}}
 								continue={() => this.showView('reviewView')}/>
 						</Col>
 						}
@@ -308,6 +345,8 @@ class Cart extends React.Component {
 						<Col xs={12}>
 							<ReviewOrder
 								products={this.state.products}
+								promotionProducts={this.state.promotionProducts}
+								selectedPresents={this.state.selectedPresents}
 								orderDetails={this.state.orderDetails}
 								goBack={() => this.showView('orderDetailsView')}
 								continue={this.submitOrder}/>

@@ -5,11 +5,12 @@ import { Table, Row, Col } from 'react-bootstrap';
 import CartTableHeader from '../products/partials/CartTableHeader';
 import CartTableFooter from '../products/partials/CartTableFooter';
 import CartProductRow from '../products/partials/CartProductRow';
+
 import EkontOrderDetailsSummary from './partials/EkontOrderDetailsSummary';
 import AddressOrderDetailsSummary from './partials/AddressOrderDetailsSummary';
 import RecipientDetailsSummary from './partials/RecipientDetailsSummary';
 
-import utils from '../../../../utils/utils'
+import utils from '../../../../utils/utils';
 
 import { RESOLUTIONS, BUTTONS_BG, LABELS_BG, CART } from '../../../../data/constants/componentConstants';
 
@@ -41,10 +42,27 @@ class ReviewOrder extends React.Component {
 	calculateTotalSum = () => {
 		let sum = 0;
 
-		this.props.products.forEach(e => {
-            let price = utils.calculatePriceAfterDiscount(e.price, e.discount ).toFixed(2);
-            sum += price * e.quantity;
-		});
+		// Check if promotion
+		if (Object.keys(this.props.promotionProducts).length > 0) {
+			this.props.promotionProducts.cart.forEach(e => {
+				let price = utils.calculatePriceAfterDiscount(e.price, e.discount).toFixed(2);
+				sum += price * e.quantity;
+			});
+
+			// Check if promotion has presents
+			if (this.props.selectedPresents.length > 0) {
+				this.props.selectedPresents.forEach(e => {
+					let price = utils.calculatePriceAfterDiscount(e.price, e.discount).toFixed(2);
+					sum += price * e.quantity;
+				});
+			}
+
+		} else {
+			this.props.products.forEach(e => {
+				let price = utils.calculatePriceAfterDiscount(e.price, e.discount).toFixed(2);
+				sum += price * e.quantity;
+			});
+		}
 
 		return sum.toFixed(2);
 	};
@@ -59,8 +77,40 @@ class ReviewOrder extends React.Component {
 		let recipient = this.props.orderDetails.recipientInfo;
 
 		let deliveryDetails = this.props.orderDetails.ekontDetails;
+
 		if (this.props.orderDetails.toAddress) {
 			deliveryDetails = this.props.orderDetails.addressDetails;
+		}
+
+		let products;
+		let presents;
+
+		// Check if promotion
+		if (Object.keys(this.props.promotionProducts).length > 0) {
+			products = this.props.promotionProducts.cart.map((e, i) => {
+				return <CartProductRow
+					key={e.id  + i}
+					editable={false}
+					data={e}/>;
+			});
+
+			// Check if promotion has presents
+			if (this.props.selectedPresents.length > 0) {
+				presents = this.props.selectedPresents.map((e, i) => {
+					return <CartProductRow
+						key={e.id}
+						editable={false}
+						data={e}/>;
+				});
+			}
+
+		} else {
+			products = this.props.products.map((e, i) => {
+				return <CartProductRow
+					key={e.id}
+					editable={false}
+					data={e}/>;
+			});
 		}
 
 		return (
@@ -88,20 +138,12 @@ class ReviewOrder extends React.Component {
 					<div id="cart-products-table">
 						<CartTableHeader editable={false}/>
 
-						{this.props.products.map((e, i) => {
-							return <CartProductRow
-								key={e.id}
-								index={i + 1}
-								editable={false}
-								data={e}/>;
-						})
-						}
-
+						{products}
+						{presents}
 
 						<CartTableFooter resolution={resolution} totalSum={totalSum} colSpan={4}/>
 					</div>
 				</Col>
-
 
 
 				<Col xs={12} className="text-center buttons-container">

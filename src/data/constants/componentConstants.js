@@ -148,10 +148,16 @@ const TOASTR_MESSAGES = {
 	'No promotion available for selected products/ products quantity': 'Избраните продукти или количества не съответстват на въведения промо код.',
 	'Object reference not set to an instance of an object.' : 'Невалиден промо код.',
 
+	'Invalid PromoCode': 'Невалиден промо код.',
+
 	//Warnings
 	requestEmptyFields: 'Моля, попълнете следните полета:',
 	productAlreadyInCart: 'Този продукт вече е добавен.',
 	editQuantityFromCart: 'За редакция, моля, отидете в кошница.',
+	enterPromoCode: 'Моля. въведете промо код',
+	validatingPromo: 'Валидираме Вашия промо код',
+
+
 
 	//Success
 	successEdit: 'Успешна редакция.',
