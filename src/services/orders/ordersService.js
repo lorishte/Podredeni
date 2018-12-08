@@ -1,5 +1,7 @@
 import requesterService from '../requester';
 
+import utils from '../../utils/utils';
+
 const deliveryDataEndPoint = '/deliveryData';
 const orderEndPoint = '/orders';
 const auth = 'admin';
@@ -46,7 +48,7 @@ export default {
 
 	editDeliveryData: (deliveryDataId, data) => {
 
-		let details = generateDeliveryDataDetails(data);
+		let details = generateDeliveryDetailsData(data);
 
 		let endPoint = deliveryDataEndPoint + '/' + deliveryDataId;
 
@@ -56,17 +58,21 @@ export default {
 
 	addDeliveryData: (data) => {
 
-		let details = generateDeliveryDataDetails(data);
+		let details = generateDeliveryDetailsData(data);
 
 		return requesterService
 			.post(deliveryDataEndPoint, null, details);
 	},
 
 	addOrder: (deliveryId, products) => {
+
+		let productsForSubmit = generateProductsData(products);
+
 		let order = {
-			Products: products,
+			Products: productsForSubmit,
 			DeliveryDataId: deliveryId
 		};
+
 
 		return requesterService
 			.post(orderEndPoint, null, order);
@@ -92,7 +98,18 @@ export default {
 	}
 };
 
-function generateDeliveryDataDetails (data) {
+function generateProductsData (products) {
+	return products.map(e => {
+			return {
+				ProductId: e.id,
+				Quantity: e.quantity,
+				Price: utils.calculatePriceAfterDiscount(e.price, e.discount).toFixed(2)
+			};
+		}
+	);
+}
+
+function generateDeliveryDetailsData (data) {
 
 	let recipientInfo = data.recipientInfo;
 	let ekontDetails = data.ekontDetails;

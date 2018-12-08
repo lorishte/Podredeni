@@ -11,24 +11,18 @@ class PromoTableRow extends React.Component {
 		super(props);
 	}
 
-	confirmDelete = this.props.confirmDelete;
-
 	render () {
 
 		let p = this.props.data;
 
-		let discountType = this.props.isProductPromo ? 'product' : 'discount';
+		let promoType = this.props.promoType;
 
-		let editBtn = (
-			<Link to={'/promos/edit-' + discountType +'-promo/' + p.id} className="btn btn-success btn-xs">
-				<i className="fa fa-pencil" aria-hidden="true"/>
-			</Link>
-		);
+		let editRoute = '/promos/edit-' + promoType +'-promo/' + p.id;
 
 		return (
 			<tr className="text-center">
 				<td>
-					{p.name} <label>{discountType}</label>
+					{p.name}
 				</td>
 				<td>
 					{p.discount}
@@ -41,11 +35,13 @@ class PromoTableRow extends React.Component {
 				</td>
 				<td className="text-center">
 
-					{editBtn }
-
+					<Link to={editRoute} className="btn btn-success btn-xs">
+						<i className="fa fa-pencil" aria-hidden="true"/>
+					</Link>
 
 					<button className={'btn btn-danger btn-xs'}
-					        onClick={() => this.confirmDelete(p.id)}><i className="fa fa-eraser" aria-hidden="true"/>
+					        onClick={() => this.props.confirmDelete(p.id, promoType)}>
+						<i className="fa fa-eraser" aria-hidden="true"/>
 					</button>
 				</td>
 			</tr>

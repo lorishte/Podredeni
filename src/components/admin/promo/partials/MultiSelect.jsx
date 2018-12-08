@@ -26,13 +26,14 @@ class MultiSelect extends React.Component {
 					style += ' selected';
 				}
 
-				return <label key={e.id} className='col-xs-12 col-sm-4 col-md-3 '>
-					<p className={style}>
-						<Checkbox value={e.id} hidden/>
-						<img className="image-thumbnail" src={e.images[imageIndex]}/>
-						{e.name}
-					</p>
-					</label>;
+				return (
+					<label key={e.id} className='col-xs-12 col-sm-4 col-md-3 '>
+						<p className={style}>
+							<Checkbox value={e.id} hidden/>
+							<img className="image-thumbnail" src={e.images[imageIndex]}/>
+							{e.name}
+						</p>
+					</label>);
 
 			});
 		}
@@ -50,6 +51,5 @@ class MultiSelect extends React.Component {
 		);
 	}
 }
-;
 
 export default MultiSelect;

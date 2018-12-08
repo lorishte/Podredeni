@@ -4,9 +4,6 @@ import { Grid, Row, Col, Label, Panel } from 'react-bootstrap';
 import { ToastContainer } from 'react-toastr';
 import { confirmAlert } from 'react-confirm-alert';
 
-// Helpers
-import utils from '../../../utils/utils';
-
 // Partials
 import CartProductsTable from './products/CartProductsTable';
 import ValidPromo from './products/ValidPromo';
@@ -232,28 +229,29 @@ class Cart extends React.Component {
 			}
 
 		} else {
-			products = this.state.products;
+			products = stateCopy.products;
 		}
 
 		console.log(products);
 
-		orderService
-			.addDeliveryData(stateCopy.orderDetails)
-			.then(res => {
-				let deliveryId = res.deliveryDataId;
-				let productsForSubmit = generateOrderData(products);
-				let promoCode = stateCopy.promoCode;
+		alert('submit stopped');
 
-				orderService
-					.addOrder(deliveryId, productsForSubmit, promoCode)
-					.then(res => {
-						sessionStorage.removeItem('products');
-						this.props.history.push('/order/confirmation');
-					});
-			})
-			.catch(err => {
-				this.props.history.push('/error');
-			});
+		// orderService
+		// 	.addDeliveryData(stateCopy.orderDetails)
+		// 	.then(res => {
+		// 		let deliveryId = res.deliveryDataId;
+		// 		let promoCode = stateCopy.promoCode;
+		//
+		// 		orderService
+		// 			.addOrder(deliveryId, products, promoCode)
+		// 			.then(res => {
+		// 				sessionStorage.removeItem('products');
+		// 				this.props.history.push('/order/confirmation');
+		// 			});
+		// 	})
+		// 	.catch(err => {
+		// 		this.props.history.push('/error');
+		// 	});
 
 	};
 
@@ -385,14 +383,3 @@ class Cart extends React.Component {
 }
 
 export default Cart;
-
-function generateOrderData (products) {
-	return products.map(e => {
-			return {
-				ProductId: e.id,
-				Quantity: e.quantity,
-				Price: utils.calculatePriceAfterDiscount(e.price, e.discount).toFixed(2)
-			};
-		}
-	);
-}

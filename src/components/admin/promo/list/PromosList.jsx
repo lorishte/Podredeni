@@ -2,21 +2,19 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 import { ToastContainer } from 'react-toastr';
-
 import { confirmAlert } from 'react-confirm-alert';
-
 import { Grid, Row, Col, Table, Tabs, Tab } from 'react-bootstrap';
 
+// Partials
 import TableHead from './partials/PromosTableHead';
 import PromoTableRow from './partials/PromosTableRow';
 
+// Services
 import discountPromosService from '../../../../services/promos/discountPromosService';
 import productPromosService from '../../../../services/promos/productPromosService';
 
-import {
-	TOASTR_MESSAGES
-} from '../../../../data/constants/componentConstants';
-
+// Messages & text
+import { TOASTR_MESSAGES } from '../../../../data/constants/componentConstants';
 import { BUTTONS_BG, CONFIRM_DIALOGS } from '../../../../data/constants/componentConstants';
 
 class PromoList extends React.Component {
@@ -25,12 +23,12 @@ class PromoList extends React.Component {
 
 		this.state = {
 			discountPromos: [],
-			productPromos: []
+			productPromos: [],
+			key: 1
 		};
 	}
 
 	componentDidMount () {
-
 		this.loadAll();
 	}
 
@@ -42,6 +40,7 @@ class PromoList extends React.Component {
 				this.setState({discountPromos: res});
 			})
 			.catch(err => {
+				console.log(err)
 				this.toastContainer.error(err.responseText, TOASTR_MESSAGES.error, {
 					closeButton: false,
 				});
@@ -53,6 +52,7 @@ class PromoList extends React.Component {
 				this.setState({productPromos: res});
 			})
 			.catch(err => {
+				console.log(err)
 				this.toastContainer.error(err.responseText, TOASTR_MESSAGES.error, {
 					closeButton: false,
 				});
@@ -60,23 +60,35 @@ class PromoList extends React.Component {
 
 	};
 
-	deletePromo = (promoId) => {
-		// discountPromosService.delete(promoId).then(res => {
-		// 	window.location.reload();
-		// }).catch(err => {
-		// 	this.toastContainer.error(err.responseText, TOASTR_MESSAGES.error, {
-		// 		closeButton: false,
-		// 	});
-		// });
+	handleSelect = (key) => {
+		this.setState({key});
 	};
 
-	confirmDeletePromo = (promoId) => {
+	deletePromo = (promoId, promoType) => {
+
+		let serviceToUse = promoType === 'products' ? productPromosService : discountPromosService;
+
+		serviceToUse
+			.delete(promoId)
+			.then(res => {
+				window.location.reload();
+			})
+			.catch(err => {
+				console.log(err);
+				this.toastContainer.error(err.responseText, TOASTR_MESSAGES.error, {
+					closeButton: false,
+				});
+			});
+	};
+
+	confirmDeletePromo = (promoId, promoType) => {
+
 		confirmAlert({
 			title: '',
 			message: CONFIRM_DIALOGS.deletePromo,
 			buttons: [{
 				label: BUTTONS_BG.yes,
-				onClick: () => this.deletePromo(promoId)
+				onClick: () => this.deletePromo(promoId, promoType)
 			},
 				{label: BUTTONS_BG.no}]
 		});
@@ -89,22 +101,19 @@ class PromoList extends React.Component {
 
 		if (this.state.discountPromos.length > 0) {
 			discountPromosList = this.state.discountPromos.map(e => {
-				let isProductPromo = e.promoCode;
 				return <PromoTableRow key={e.id}
-				                      isProductPromo={isProductPromo}
+				                      promoType='discount'
 				                      data={e}
 				                      confirmDelete={this.confirmDeletePromo}/>;
 			});
 		}
 
-
 		let productPromosList;
 
 		if (this.state.productPromos.length > 0) {
 			productPromosList = this.state.productPromos.map(e => {
-				let isProductPromo = e.promoCode;
 				return <PromoTableRow key={e.id}
-				                      isProductPromo={isProductPromo}
+				                      promoType='product'
 				                      data={e}
 				                      confirmDelete={this.confirmDeletePromo}/>;
 			});
@@ -119,16 +128,15 @@ class PromoList extends React.Component {
 				/>
 
 
-				<Row>
-					<Col xs={12} className="buttons-container">
-						<Link to="/promos/create-discount-promo" className="btn btn-sm btn-primary">Нова Промоция с
-							намаление</Link>
-						<Link to="/promos/create-product-promo" className="btn btn-sm btn-primary">Нова Промоция с
-							продукти</Link>
-					</Col>
-				</Row>
+				<div className="buttons-container">
+					<Link to="/promos/create-discount-promo" className="btn btn-sm btn-primary">Нова Промоция с
+						намаление</Link>
+					<Link to="/promos/create-product-promo" className="btn btn-sm btn-primary">Нова Промоция с
+						продукти</Link>
+				</div>
 
-				<Tabs defaultActiveKey={0}
+
+				<Tabs defaultActiveKey={this.state.key}
 				      id="admin-promos-table"
 				      onSelect={this.handleSelect}>
 

@@ -1410,7 +1410,8 @@ nav {
     .table-header {
       @include flex;
       @include align-items(center);
-      border-bottom: 1px solid $light-grey;
+      border: 1px solid $light-grey;
+      background-color: $warm-light-grey;
       min-width: 100%;
       padding: 10px 0;
       //background-color: $default;
@@ -1441,7 +1442,7 @@ nav {
       padding: 5px 0;
 
       .img-col {
-        @include flex-basis(15%);
+        border: 1px solid $light-grey;
 
         .image-thumbnail {
           height: 100px;
@@ -1548,10 +1549,20 @@ nav {
     }
 
     .table-footer {
-      font-size: 2em;
-      font-weight: 600;
       text-align: right;
-      padding: 25px;
+      padding:  10px 25px;
+      border: 1px solid $light-grey;
+      border-top: none;
+      margin-bottom: 30px;
+      background-color: $warm-light-grey;
+
+      .total-sum {
+        display: inline-block;
+        //background-color: $default;
+        //color: $white;
+        padding-left: 15px;
+        font-size: 1.5em;
+      }
     }
 
     .presents {
@@ -1603,6 +1614,8 @@ nav {
     }
   }
 }
+
+
 
 //ADMIN
 
@@ -1768,6 +1781,10 @@ footer {
 }
 
 //Admin: Promos
+
+#admin-promos-table {
+  margin-top: 15px;
+}
 #create-edit-promo {
 
   h3 {
@@ -2085,7 +2102,6 @@ footer {
         padding: 20px 0;
 
         .img-col {
-          @include flex-basis(20%);
           margin-right: 15px;
         }
 
@@ -2107,7 +2123,7 @@ footer {
 
             .btn-custom {
               position: absolute;
-              top: -20px;
+              top: -10px;
               left: -100px;
             }
           }
@@ -2153,9 +2169,17 @@ footer {
       }
 
       .table-footer {
-        font-size: 1.5em;
         text-align: center;
         padding: 15px 0;
+      }
+
+      .presents {
+        .present {
+          .image-container {
+            @include flex-basis(12%);
+            margin-right: 10px;
+          }
+        }
       }
     }
   }
@@ -2475,17 +2499,18 @@ footer {
       .products-table-row {
         padding: 10px 0 20px 0;
 
-        .img-col {
-          @include flex-basis(100%);
-          margin-bottom: 10px;
-        }
-
         .product-data {
+          border-right: none;
+          padding-bottom: 10px;
 
           .product-col {
+            padding-right: 55px;
+
             .btn-custom {
-              left: 122%;
-              top: -70px;
+              top: 0;
+              left: auto;
+              right: -5px;
+              max-width: 65px;
             }
           }
 
@@ -2493,6 +2518,22 @@ footer {
             .old-price {
               display: block;
             }
+          }
+        }
+
+        .sum-col {
+          @include flex-basis(100%);
+          border-left: none;
+          border-top: 1px solid $light-grey;
+          padding-top: 10px;
+        }
+      }
+
+      .presents {
+        .present {
+          .image-container {
+            @include flex-basis(30%);
+
           }
         }
       }

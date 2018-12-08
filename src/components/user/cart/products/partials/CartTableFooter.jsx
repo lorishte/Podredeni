@@ -15,7 +15,7 @@ class CartTableFooter extends React.Component {
 		return (
 			<div className="table-footer">
 
-				{CART.totalSum}&nbsp;{totalSum}&nbsp;{CURRENCY}
+				{CART.totalSum}<span className="total-sum">{totalSum}&nbsp;{CURRENCY}</span>
 
 			</div>
 		);

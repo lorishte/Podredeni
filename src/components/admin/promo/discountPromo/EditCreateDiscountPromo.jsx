@@ -6,7 +6,7 @@ import FormInputField from '../../../common/formComponents/FormInputField';
 
 import MultiSelect from '../partials/MultiSelect';
 
-import promosService from '../../../../services/promos/discountPromosService';
+import discountPromosService from '../../../../services/promos/discountPromosService';
 import productsService from '../../../../services/products/productsService';
 
 import utils from '../../../../utils/utils';
@@ -58,7 +58,7 @@ class EditCreateDiscountPromo extends React.Component {
 
 	loadPromo = () => {
 
-		promosService.load(this.promoId)
+		discountPromosService.load(this.promoId)
 			.then(res => {
 
 				this.setState({
@@ -99,12 +99,12 @@ class EditCreateDiscountPromo extends React.Component {
 
 		if (assignedProducts.length > 0) {
 
-			promosService.assign(promoId, assignedProducts);
+			discountPromosService.assign(promoId, assignedProducts);
 		}
 
 		if (removedProducts.length > 0) {
 
-			promosService.remove(promoId, removedProducts);
+			discountPromosService.remove(promoId, removedProducts);
 		}
 	};
 
@@ -114,27 +114,29 @@ class EditCreateDiscountPromo extends React.Component {
 
 		if (this.promoId) {
 
-			promosService.edit(this.promoId, this.state).then(res => {
+			discountPromosService.edit(this.promoId, this.state).then(res => {
 
 				this.manageProductsInPromotion(this.promoId);
 
 				this.props.history.go(-1);
 
 			}).catch(err => {
+
 				this.toastContainer.error(err.responseText, TOASTR_MESSAGES.error, {
 					closeButton: false,
 				});
-
 			});
+
 		} else {
 
-			promosService.create(this.state).then(res => {
+			discountPromosService.create(this.state).then(res => {
 
 				this.manageProductsInPromotion(res.promoDiscountId);
 
 				this.props.history.go(-1);
 
 			}).catch(err => {
+
 				this.toastContainer.error(err.responseText, TOASTR_MESSAGES.error, {
 					closeButton: false,
 				});

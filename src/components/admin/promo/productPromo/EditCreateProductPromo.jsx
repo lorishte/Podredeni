@@ -1,6 +1,6 @@
 import React from 'react';
 import { ToastContainer } from 'react-toastr';
-import { Grid, Row, Col, Button } from 'react-bootstrap';
+import { Grid, Row, Col, Button, Checkbox } from 'react-bootstrap';
 
 import FormInputField from '../../../common/formComponents/FormInputField';
 
@@ -19,15 +19,19 @@ class EditCreateProductPromo extends React.Component {
 
 		this.state = {
 			name: '',
+			promoCode: '',
+
 			startDate: '',
 			endDate: '',
-			promoCode: '',
-			isInclusive: false,
+
 			isAccumulative: false,
+			includePriceDiscounts: false,
+			isInclusive: false,
+
 			productsCount: 0,
 			discountedProductsCount: 0,
 			discount: 0,
-			includePriceDiscounts: false,
+
 			quota: 100,
 			discountedProducts: [],
 			newDiscountedProducts: [],
@@ -71,7 +75,7 @@ class EditCreateProductPromo extends React.Component {
 					startDate: utils.formatDateYearFirst(res.startDate),
 					endDate: utils.formatDateYearFirst(res.endDate),
 					promoCode: res.promoCode,
-					isInclusive: res.isInclusive,
+					isInclusive: !res.isInclusive,
 					isAccumulative: res.isAccumulative,
 					productsCount: res.productsCount,
 					discountedProductsCount: res.discountedProductsCount,
@@ -80,13 +84,13 @@ class EditCreateProductPromo extends React.Component {
 					quota: res.quota,
 					discountedProducts: res.discountedProducts,
 					products: res.products
-				});
+				}, () => console.log(this.state));
 			})
 			.catch(err => {
+
 				this.toastContainer.error(err.responseText, TOASTR_MESSAGES.error, {
 					closeButton: false,
 				});
-
 			});
 	};
 
@@ -119,26 +123,30 @@ class EditCreateProductPromo extends React.Component {
 			productPromosService
 				.edit(this.promoId, this.state)
 				.then(res => {
+
 					this.toastContainer.success('', TOASTR_MESSAGES.successEdit, {
 						closeButton: false,
 					});
-					// this.props.history.go(-1);
+					this.props.history.go(-1);
 
-				}).catch(err => {
+				})
+				.catch(err => {
 
-				this.toastContainer.error(err.responseText, TOASTR_MESSAGES.error, {
-					closeButton: false,
+					this.toastContainer.error(err.responseText, TOASTR_MESSAGES.error, {
+						closeButton: false,
+					});
 				});
-			});
 		} else {
 
-			productPromosService.create(this.state).then(res => {
+			let stateCopy = Object.assign({}, this.state);
+
+			productPromosService.create(stateCopy).then(res => {
 				console.log(res);
 
 				this.toastContainer.success('', TOASTR_MESSAGES.successPromotionCreate, {
 					closeButton: false,
 				});
-				// this.props.history.go(-1);
+				setTimeout(() => this.props.history.go(-1), 3000);
 
 			}).catch(err => {
 				console.log(err);
@@ -152,6 +160,7 @@ class EditCreateProductPromo extends React.Component {
 	};
 
 	render () {
+		console.log(this.state);
 
 		return (
 			<Grid id="create-edit-promo">
@@ -278,63 +287,63 @@ class EditCreateProductPromo extends React.Component {
 
 					<Row>
 						<Col xs={12}>
-							<label>
-								<input type="checkbox"
-								       name="isAccumulative"
-								       defaultChecked={this.state.isAccumulative}
-								       onChange={this.handleCheckBox}/>
-
+							<Checkbox checked={this.state.isAccumulative}
+							          name="isAccumulative"
+							          onChange={this.handleCheckBox}
+							          readOnly>
 								Натрупване на подаръци в една поръчка
-							</label>
+							</Checkbox>
 						</Col>
 
 						<Col xs={12}>
-							<label>
-								<input type="checkbox"
-								       name="isAccumulative"
-								       defaultChecked={this.state.isAccumulative}
-								       onChange={this.handleCheckBox}/>
-
+							<Checkbox checked={this.state.includePriceDiscounts}
+							          name="includePriceDiscounts"
+							          onChange={this.handleCheckBox}
+							          readOnly>
 								Включвай отстъпки от други промоции
-							</label>
+							</Checkbox>
 						</Col>
 					</Row>
 
-					<Col>
-						<h3 className="col-xs-12 smaller">Избери продукти в промоция</h3>
+					<Row>
+						<Col xs={12}>
+							<h3 className="col-xs-12 smaller">Избери продукти в промоция</h3>
 
-						<MultiSelect
-							name="productsIds"
-							onChange={this.addProduct}
-							allProducts={this.state.products}
-							selectedProductsIds={this.state.newProducts}
-						/>
-					</Col>
-
-					<Col>
-						<label id="inclusive-checkbox">
-							<input type="checkbox"
-							       name="isInclusive"
-							       defaultChecked={this.state.isInclusive}
-							       onChange={this.handleCheckBox}/>
-
-							Ще подарявам различен продукт
-						</label>
-
-						{this.state.isInclusive &&
-						<div>
-
-							<h3 className="col-xs-12 smaller">Избери продукти за подарък</h3>
 							<MultiSelect
-								name="discountedProductsIds"
-								onChange={this.addDiscountedProduct}
-								allProducts={this.state.discountedProducts}
-								selectedProductsIds={this.state.newDiscountedProducts}
+								name="productsIds"
+								onChange={this.addProduct}
+								allProducts={this.state.products}
+								selectedProductsIds={this.state.newProducts}
 							/>
-						</div>
+						</Col>
+					</Row>
 
-						}
-					</Col>
+					<Row>
+						<Col xs={12} id="inclusive-checkbox">
+							<Checkbox
+								checked={this.state.isInclusive}
+								name="isInclusive"
+								onChange={this.handleCheckBox}
+								readOnly>
+								Ще подарявам различен продукт
+							</Checkbox>
+
+
+							{this.state.isInclusive &&
+							<Col>
+
+								<h3 className="col-xs-12 smaller">Избери продукти за подарък</h3>
+								<MultiSelect
+									name="discountedProductsIds"
+									onChange={this.addDiscountedProduct}
+									allProducts={this.state.discountedProducts}
+									selectedProductsIds={this.state.newDiscountedProducts}
+								/>
+							</Col>
+							}
+						</Col>
+					</Row >
+
 
 					<Row className="buttons-container">
 						<Col xs={12}>
