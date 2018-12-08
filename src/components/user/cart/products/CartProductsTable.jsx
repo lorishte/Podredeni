@@ -157,21 +157,6 @@ class CartProductsTable extends React.Component {
 				</Col>
 
 
-				{/*<FormInputField*/}
-					{/*className='form-add-on'*/}
-					{/*label={LABELS_BG.promoCode}*/}
-					{/*type='text'*/}
-					{/*name='promoCode'*/}
-					{/*value={this.state.promoCode}*/}
-					{/*placeholder={PLACEHOLDERS.enterPromoCode}*/}
-					{/*required={false}*/}
-					{/*disabled={false}*/}
-					{/*onChange={this.handleChange}/>*/}
-
-				{/*<button className="btn-custom default lg"*/}
-				        {/*onClick={this.checkPromotion}>{BUTTONS_BG.validate}*/}
-				{/*</button>*/}
-
 				<FormInputWithAddOn
 					label={LABELS_BG.promoCode}
 					type='text'

@@ -311,7 +311,7 @@ class Cart extends React.Component {
 						&& this.state.productsView
 						&&
 
-						<Col xs={12}>
+						<Col xs={12} id="products">
 							<CartProductsTable
 								products={this.state.products}
 								toastContainer={this.toastContainer}
@@ -323,7 +323,7 @@ class Cart extends React.Component {
 
 						{/*// Validated Promo*/}
 						{this.state.validPromoView &&
-						<Col xs={12}>
+						<Col xs={12} id="promo">
 							<ValidPromo
 								products={this.state.promotionProducts}
 								selectedPresents={this.state.selectedPresents}
@@ -336,7 +336,7 @@ class Cart extends React.Component {
 
 						{/*// Order details*/}
 						{this.state.orderDetailsView &&
-						<Col xs={12}>
+						<Col xs={12} id="order-details">
 							<OrderDetailsForm
 								data={this.state.orderDetails}
 								onChange={this.updateInfo}
@@ -351,7 +351,7 @@ class Cart extends React.Component {
 
 						{/*// Order review*/}
 						{this.state.reviewView &&
-						<Col xs={12}>
+						<Col xs={12} id="order-review">
 							<ReviewOrder
 								products={this.state.products}
 								promotionProducts={this.state.promotionProducts}

@@ -68,7 +68,7 @@ class ReviewOrder extends React.Component {
 	};
 
 	render () {
-		let resolution = this.state.resolution < RESOLUTIONS.xs;
+		let resolution = this.state.resolution > RESOLUTIONS.bootstrapXS;
 
 		let isAdmin = sessionStorage.getItem('role') === 'admin';
 
@@ -89,7 +89,7 @@ class ReviewOrder extends React.Component {
 		if (Object.keys(this.props.promotionProducts).length > 0) {
 			products = this.props.promotionProducts.cart.map((e, i) => {
 				return <CartProductRow
-					key={e.id  + i}
+					key={e.id + i}
 					editable={false}
 					data={e}/>;
 			});
@@ -114,16 +114,16 @@ class ReviewOrder extends React.Component {
 		}
 
 		return (
-			<Row id="cart-review">
-				<Col sm={3}>
-					<RecipientDetailsSummary recipient={recipient}/>
-				</Col>
-				<Col sm={5}>
-					{this.props.orderDetails.toAddress ?
-						<AddressOrderDetailsSummary deliveryDetails={deliveryDetails}/> :
-						<EkontOrderDetailsSummary deliveryDetails={deliveryDetails}/>
-					}
-				</Col>
+			<Row>
+
+
+				<RecipientDetailsSummary recipient={recipient}/>
+
+
+				{this.props.orderDetails.toAddress ? <AddressOrderDetailsSummary deliveryDetails={deliveryDetails}/> :
+					<EkontOrderDetailsSummary deliveryDetails={deliveryDetails}/>
+				}
+
 				<Col sm={4}>
 					<Row>
 						{this.props.orderDetails.comment ? <Col xs={12}><h4>{CART.comment}</h4>
@@ -136,7 +136,7 @@ class ReviewOrder extends React.Component {
 
 				<Col xs={12}>
 					<div id="cart-products-table">
-						<CartTableHeader editable={false}/>
+						<CartTableHeader editable={false} resolution={resolution}/>
 
 						{products}
 						{presents}

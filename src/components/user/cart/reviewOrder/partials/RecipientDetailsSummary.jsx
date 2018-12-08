@@ -13,12 +13,12 @@ class RecipientDetailsSummary extends React.Component {
 		let recipient = this.props.recipient;
 
 		return (
-			<div>
+			<Col sm={3}>
 				<h4>{CART.recipient}</h4>
 				<p><strong>{recipient.firstName + ' ' + recipient.lastName}</strong></p>
 				<p>{recipient.phone}</p>
 				<p>{recipient.email}</p>
-			</div>
+			</Col>
 		);
 	}
 }

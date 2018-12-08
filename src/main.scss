@@ -1368,12 +1368,6 @@ nav {
     margin-right: 15px;
   }
 
-  #cart-review {
-    p {
-      margin-bottom: 0;
-    }
-  }
-
   .form-add-on {
 
     $height: 50px;
@@ -1445,8 +1439,8 @@ nav {
         border: 1px solid $light-grey;
 
         .image-thumbnail {
-          height: 100px;
-          width: 100px;
+          height: 85px;
+          width: 85px;
         }
       }
 
@@ -1579,6 +1573,37 @@ nav {
 
         .present-name {
           @include flex-basis(70%);
+        }
+      }
+    }
+  }
+
+  #order-review {
+    p {
+      line-height: 1em;
+    }
+
+    .delivery-info {
+      background-color: $warm-light-grey;
+    }
+
+    #cart-products-table {
+      margin-top: 25px;
+
+      .products-table-row {
+
+        .img-col {
+          .image-thumbnail {
+            width: 50px;
+            height: 50px;
+          }
+        }
+        .product-data {
+          .quantity-col {
+            .quantity {
+              border: none;
+            }
+          }
         }
       }
     }

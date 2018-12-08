@@ -13,7 +13,7 @@ class AddressOrderDetailsSummary extends React.Component {
 		let orderDetails = this.props.deliveryDetails;
 
 		return (
-			<div>
+			<Col sm={5}>
 				<h4>{CART.toAddress}</h4>
 				<p>{orderDetails.country}</p>
 				<p>{orderDetails.postalCode},&nbsp;{orderDetails.city}</p>
@@ -37,7 +37,7 @@ class AddressOrderDetailsSummary extends React.Component {
 					<span>{LABELS_BG.apartmentShort} {orderDetails.apartment}</span>
 					}
 				</p>
-			</div>
+			</Col>
 
 		);
 	}
