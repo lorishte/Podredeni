@@ -70,6 +70,8 @@ class EditCreateProductPromo extends React.Component {
 		productPromosService.load(this.promoId)
 			.then(res => {
 
+				console.log(res);
+
 				this.setState({
 					name: res.name,
 					startDate: utils.formatDateYearFirst(res.startDate),
@@ -82,8 +84,8 @@ class EditCreateProductPromo extends React.Component {
 					discount: res.discount,
 					includePriceDiscounts: res.includePriceDiscounts,
 					quota: res.quota,
-					discountedProducts: res.discountedProducts,
-					products: res.products
+					newDiscountedProducts: res.discountedProductsIds,
+					newProducts: res.productsIds
 				}, () => console.log(this.state));
 			})
 			.catch(err => {
@@ -160,7 +162,6 @@ class EditCreateProductPromo extends React.Component {
 	};
 
 	render () {
-		console.log(this.state);
 
 		return (
 			<Grid id="create-edit-promo">

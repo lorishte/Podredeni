@@ -36,7 +36,7 @@ class OrderDetails extends React.Component {
 			products = o.products.map(e => {
 				totalSum += e.price * e.quantity;
 				return (
-					<Col xs={12} key={e.id}>
+					<Col xs={12} key={e.productOrderId}>
 						<Row >
 							<Col xs={4}><p>{e.name}</p></Col>
 							<Col xs={2} className="text-right">{e.quantity}</Col>

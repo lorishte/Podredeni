@@ -64,13 +64,14 @@ export default {
 			.post(deliveryDataEndPoint, null, details);
 	},
 
-	addOrder: (deliveryId, products) => {
+	addOrder: (deliveryId, products, promoCode) => {
 
 		let productsForSubmit = generateProductsData(products);
 
 		let order = {
 			Products: productsForSubmit,
-			DeliveryDataId: deliveryId
+			DeliveryDataId: deliveryId,
+			PromoCode: promoCode
 		};
 
 
@@ -103,7 +104,8 @@ function generateProductsData (products) {
 			return {
 				ProductId: e.id,
 				Quantity: e.quantity,
-				Price: utils.calculatePriceAfterDiscount(e.price, e.discount).toFixed(2)
+				Price: e.price,
+				Discount: e.discount
 			};
 		}
 	);
