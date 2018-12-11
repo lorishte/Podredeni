@@ -15,6 +15,9 @@ import orderService from '../../../services/orders/ordersService';
 import productService from '../../../services/products/productsService';
 import productPromoService from '../../../services/promos/productPromosService';
 
+// Utils
+import Utils from '../../../utils/utils'
+
 // Constants
 import { BUTTONS_BG, CONFIRM_DIALOGS, CART, TOASTR_MESSAGES } from '../../../data/constants/componentConstants';
 
@@ -87,9 +90,6 @@ class Cart extends React.Component {
 		}
 	}
 
-	componentDidUpdate () {
-		// console.log(this.state)
-	}
 
 	loadProducts = () => {
 		let addedProducts = JSON.parse(sessionStorage.getItem('products'));
@@ -212,44 +212,45 @@ class Cart extends React.Component {
 
 	submitOrder = () => {
 
-		let stateCopy = Object.assign({}, this.state);
+		let stateCopy = Utils.createStateCopy(this.state);
 
 		let products;
 
-		// If
-
-		if (Object.keys(this.state.promotionProducts).length > 0) {
+		// If promotion
+		if (Object.keys(stateCopy.promotionProducts).length > 0) {
 
 			products = stateCopy.promotionProducts.cart;
 
-			if (this.state.selectedPresents.length > 0) {
-				this.state.selectedPresents.forEach(el => {
+			if (stateCopy.selectedPresents.length > 0) {
+				stateCopy.selectedPresents.forEach(el => {
 					products.push(el)
 				})
 			}
+
+			console.log(this.state)
 
 		} else {
 			products = stateCopy.products;
 		}
 
-		//alert('submit stopped');
+		alert('submit stopped');
 
-		orderService
-			.addDeliveryData(stateCopy.orderDetails)
-			.then(res => {
-				let deliveryId = res.deliveryDataId;
-				let promoCode = stateCopy.promoCode;
-
-				orderService
-					.addOrder(deliveryId, products, promoCode)
-					.then(res => {
-						sessionStorage.removeItem('products');
-						this.props.history.push('/order/confirmation');
-					});
-			})
-			.catch(err => {
-				this.props.history.push('/error');
-			});
+		// orderService
+		// 	.addDeliveryData(stateCopy.orderDetails)
+		// 	.then(res => {
+		// 		let deliveryId = res.deliveryDataId;
+		// 		let promoCode = stateCopy.promoCode;
+		//
+		// 		orderService
+		// 			.addOrder(deliveryId, products, promoCode)
+		// 			.then(res => {
+		// 				sessionStorage.removeItem('products');
+		// 				this.props.history.push('/order/confirmation');
+		// 			});
+		// 	})
+		// 	.catch(err => {
+		// 		this.props.history.push('/error');
+		// 	});
 
 	};
 

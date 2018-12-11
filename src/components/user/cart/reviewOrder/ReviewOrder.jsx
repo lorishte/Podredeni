@@ -120,29 +120,28 @@ class ReviewOrder extends React.Component {
 				<RecipientDetailsSummary recipient={recipient}/>
 
 
-				{this.props.orderDetails.toAddress ? <AddressOrderDetailsSummary deliveryDetails={deliveryDetails}/> :
-					<EkontOrderDetailsSummary deliveryDetails={deliveryDetails}/>
+				{this.props.orderDetails.toAddress
+					? <AddressOrderDetailsSummary deliveryDetails={deliveryDetails}/>
+					: <EkontOrderDetailsSummary deliveryDetails={deliveryDetails}/>
 				}
 
 				<Col sm={4}>
-					<Row>
-						{this.props.orderDetails.comment ? <Col xs={12}><h4>{CART.comment}</h4>
-							<p>{this.props.orderDetails.comment}</p>
-						</Col> : <Col xs={12}><h4>{CART.noComment}</h4></Col>
-						}
-					</Row>
+					{this.props.orderDetails.comment
+						? <Col xs={12}><h4>{CART.comment}</h4> <p>{this.props.orderDetails.comment}</p></Col>
+						: <Col xs={12}><h4>{CART.noComment}</h4></Col>
+					}
 				</Col>
 
 
-				<Col xs={12}>
-					<div id="cart-products-table">
-						<CartTableHeader editable={false} resolution={resolution}/>
+				<Col xs={12} id="cart-products-table">
 
-						{products}
-						{presents}
+					<CartTableHeader editable={false} resolution={resolution}/>
 
-						<CartTableFooter resolution={resolution} totalSum={totalSum} colSpan={4}/>
-					</div>
+					{products}
+					{presents}
+
+					<CartTableFooter resolution={resolution} totalSum={totalSum} colSpan={4}/>
+
 				</Col>
 
 

@@ -27,7 +27,7 @@ class ValidPromo extends React.Component {
 		super(props);
 
 		this.state = {
-			selectedPresentsCount: 0,
+			selectedPresentsCount: this.props.selectedPresents.length,
 			totalSum: 0,
 			resolution: window.innerWidth
 		};
@@ -40,6 +40,9 @@ class ValidPromo extends React.Component {
 
 		this.calculateTotalSum();
 		this.calculatePresentsCount(this.props.selectedPresents);
+
+		console.log(this.state)
+		console.log(this.props)
 	}
 
 	componentWillUnmount () {
@@ -53,8 +56,14 @@ class ValidPromo extends React.Component {
 		let sum = 0;
 
 		let cartProducts = this.props.products.cart;
+		let selectedPresents = this.props.selectedPresents;
 
 		cartProducts.forEach(e => {
+			let price = utils.calculatePriceAfterDiscount(e.price, e.discount).toFixed(2);
+			sum += price * e.quantity;
+		});
+
+		selectedPresents.forEach(e => {
 			let price = utils.calculatePriceAfterDiscount(e.price, e.discount).toFixed(2);
 			sum += price * e.quantity;
 		});
@@ -83,6 +92,8 @@ class ValidPromo extends React.Component {
 		}
 
 		this.calculatePresentsCount(selectedPresents);
+
+		this.calculateTotalSum();
 
 		this.updateParent('selectedPresents', selectedPresents);
 

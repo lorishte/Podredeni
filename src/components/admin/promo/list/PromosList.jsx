@@ -97,12 +97,14 @@ class PromoList extends React.Component {
 
 	render () {
 
+		let promoType = this.state.key === 1 ? 'product' : 'discount';
+
 		let discountPromosList;
 
 		if (this.state.discountPromos.length > 0) {
 			discountPromosList = this.state.discountPromos.map(e => {
 				return <PromoTableRow key={e.id}
-				                      promoType='discount'
+				                      promoType={promoType}
 				                      data={e}
 				                      confirmDelete={this.confirmDeletePromo}/>;
 			});
@@ -113,7 +115,7 @@ class PromoList extends React.Component {
 		if (this.state.productPromos.length > 0) {
 			productPromosList = this.state.productPromos.map(e => {
 				return <PromoTableRow key={e.id}
-				                      promoType='product'
+				                      promoType={promoType}
 				                      data={e}
 				                      confirmDelete={this.confirmDeletePromo}/>;
 			});
@@ -145,7 +147,7 @@ class PromoList extends React.Component {
 					     title='Промоции с намаление'>
 
 						<Table striped bordered condensed hover>
-							<TableHead/>
+							<TableHead promoType={promoType}/>
 							<tbody>
 							{discountPromosList}
 							</tbody>
@@ -156,7 +158,7 @@ class PromoList extends React.Component {
 					     title='Продуктови промоции'>
 
 						<Table striped bordered condensed hover>
-							<TableHead/>
+							<TableHead promoType={promoType}/>
 							<tbody>
 							{productPromosList}
 							</tbody>

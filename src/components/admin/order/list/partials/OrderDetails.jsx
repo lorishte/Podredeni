@@ -4,8 +4,7 @@ import { Row, Col, Label, Button } from 'react-bootstrap';
 
 import utils from '../../../../../utils/utils';
 
-import { LABELS_BG, ORDER_STATUS_BG } from '../../../../../data/constants/componentConstants';
-
+import { LABELS_BG, ORDER_STATUS_BG, CURRENCY } from '../../../../../data/constants/componentConstants';
 
 class OrderDetails extends React.Component {
 	constructor (props) {
@@ -35,12 +34,25 @@ class OrderDetails extends React.Component {
 		if (o !== '') {
 			products = o.products.map(e => {
 				totalSum += e.price * e.quantity;
+
+				let price = utils.calculatePriceAfterDiscount(e.price, e.discount);
+
 				return (
 					<Col xs={12} key={e.productOrderId}>
 						<Row >
-							<Col xs={4}><p>{e.name}</p></Col>
+							<Col xs={4}><p>{e.name}</p>
+								{e.discount > 0 &&
+								<span className="promo-label">-{e.discount}%</span>
+								}
+							</Col>
 							<Col xs={2} className="text-right">{e.quantity}</Col>
-							<Col xs={3} className="text-right">{e.price.toFixed(2)}</Col>
+							<Col xs={3} className="text-right">
+								{e.discount > 0 &&
+								<span className="old-price">{e.price.toFixed(2) + ' ' + CURRENCY}</span>}
+								{price.toFixed(2) + ' ' + CURRENCY}
+							</Col>
+
+
 							<Col xs={3} className="text-right">{(e.price * e.quantity).toFixed(2)}</Col>
 						</Row>
 					</Col>
@@ -124,17 +136,17 @@ class OrderDetails extends React.Component {
 
 					<Row>
 						<Col xs={12} className="buttons-container">
-							<p>{LABELS_BG.markAs + ' :'}</p>
-							<Button className="btn btn-sm"
-							        onClick={() => this.changeStatus('reset')}>{ORDER_STATUS_BG['0']}</Button>
 
 							<Button className={o.status === 0 ? 'btn btn-sm btn-success' : 'btn btn-sm'}
-							        onClick={() => this.changeStatus('confirm')}>{ORDER_STATUS_BG['1']}</Button>
+							        onClick={() => this.changeStatus('reset')}>{ORDER_STATUS_BG['0']}</Button>
 
 							<Button className={o.status === 1 ? 'btn btn-sm btn-success' : 'btn btn-sm'}
+							        onClick={() => this.changeStatus('confirm')}>{ORDER_STATUS_BG['1']}</Button>
+
+							<Button className={o.status === 2 ? 'btn btn-sm btn-success' : 'btn btn-sm'}
 							        onClick={() => this.changeStatus('dispatch')}>{ORDER_STATUS_BG['2']}</Button>
 
-							<Button className="btn btn-sm btn-light"
+							<Button className={o.status === 3 ? 'btn btn-sm btn-success' : 'btn btn-sm'}
 							        onClick={() => this.changeStatus('cancel')}>{ORDER_STATUS_BG['3']}</Button>
 						</Col>
 					</Row>

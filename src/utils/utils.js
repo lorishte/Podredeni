@@ -91,6 +91,10 @@ function getPosition(string, subString, index) {
     return string.split(subString, index).join(subString).length;
 }
 
+function createStateCopy (state) {
+	return JSON.parse(JSON.stringify(state))
+}
+
 export default {
 	calculatePriceAfterDiscount,
     formatDate,
@@ -99,5 +103,6 @@ export default {
     getDay,
 	getMonth,
 	getYear,
-	getVideoDescription
+	getVideoDescription,
+	createStateCopy
 }

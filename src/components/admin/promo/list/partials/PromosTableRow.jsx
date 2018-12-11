@@ -24,9 +24,19 @@ class PromoTableRow extends React.Component {
 				<td>
 					{p.name}
 				</td>
+
+				{promoType === 'discount' &&
 				<td>
 					{p.discount}
 				</td>
+				}
+
+				{promoType === 'product' &&
+				<td>
+					{p.usedQuota + " / " + p.quota}
+				</td>
+				}
+
 				<td>
 					{utils.formatDate(p.startDate)}
 				</td>

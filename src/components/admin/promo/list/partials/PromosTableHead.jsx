@@ -6,11 +6,22 @@ class TableHead extends React.Component {
     }
 
     render () {
+
+	    let promoType = this.props.promoType;
+
         return (
             <thead>
             <tr>
                 <th className="text-center">Име</th>
-                <th className="text-center">Отстъпка</th>
+
+	            {promoType === 'discount' &&
+                <th> Отстъпка </th>
+	            }
+
+	            {promoType === 'product' &&
+                <th> Квота </th>
+	            }
+
                 <th className="text-center">Започва на</th>
                 <th className="text-center">Приключва на</th>
                 <th className="text-center"></th>

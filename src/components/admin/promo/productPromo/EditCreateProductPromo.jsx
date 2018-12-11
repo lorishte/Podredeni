@@ -3,7 +3,7 @@ import { ToastContainer } from 'react-toastr';
 import { Grid, Row, Col, Button, Checkbox } from 'react-bootstrap';
 
 import FormInputField from '../../../common/formComponents/FormInputField';
-
+import FormTextareaField from '../../../common/formComponents/FormTextareaField';
 import MultiSelect from '../partials/MultiSelect';
 
 import productPromosService from '../../../../services/promos/productPromosService';
@@ -20,6 +20,8 @@ class EditCreateProductPromo extends React.Component {
 		this.state = {
 			name: '',
 			promoCode: '',
+
+			description: '',
 
 			startDate: '',
 			endDate: '',
@@ -74,6 +76,7 @@ class EditCreateProductPromo extends React.Component {
 
 				this.setState({
 					name: res.name,
+					description: res.description,
 					startDate: utils.formatDateYearFirst(res.startDate),
 					endDate: utils.formatDateYearFirst(res.endDate),
 					promoCode: res.promoCode,
@@ -106,6 +109,12 @@ class EditCreateProductPromo extends React.Component {
 
 	handleCheckBox = (e) => {
 		this.setState({[e.target.name]: e.target.checked});
+
+		if (e.target.name === 'isInclusive') {
+
+			this.state.newDiscountedProducts = [];
+
+		}
 	};
 
 	addDiscountedProduct = (e) => {
@@ -121,6 +130,8 @@ class EditCreateProductPromo extends React.Component {
 		e.preventDefault();
 
 		if (this.promoId) {
+
+			console.log(this.state)
 
 			productPromosService
 				.edit(this.promoId, this.state)
@@ -203,6 +214,15 @@ class EditCreateProductPromo extends React.Component {
 								value={this.state.promoCode}
 								required={true}
 								disabled={false}
+								onChange={this.handleChange}/>
+						</Col>
+
+						<Col sm={8} xs={12}>
+							<FormTextareaField
+								label="Описание"
+								name="description"
+								value={this.state.description}
+								required={false}
 								onChange={this.handleChange}/>
 						</Col>
 					</Row>

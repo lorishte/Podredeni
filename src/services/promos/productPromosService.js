@@ -72,6 +72,8 @@ function generateProductDetails(state) {
 		Name: state.name,
 		PromoCode: state.promoCode,
 
+		Description: state.description,
+
 		StartDate: state.startDate,
 		EndDate: state.endDate,
 
