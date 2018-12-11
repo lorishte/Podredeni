@@ -102,7 +102,7 @@ export default {
 function generateProductsData (products) {
 	return products.map(e => {
 			return {
-				ProductId: e.id,
+				Id: e.id,
 				Quantity: e.quantity,
 				Price: e.price,
 				Discount: e.discount
