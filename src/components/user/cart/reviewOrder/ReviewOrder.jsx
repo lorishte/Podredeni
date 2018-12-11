@@ -43,7 +43,7 @@ class ReviewOrder extends React.Component {
 		let sum = 0;
 
 		// Check if promotion
-		if (Object.keys(this.props.promotionProducts).length > 0) {
+		if (this.props.promotionProducts && Object.keys(this.props.promotionProducts).length > 0) {
 			this.props.promotionProducts.cart.forEach(e => {
 				let price = utils.calculatePriceAfterDiscount(e.price, e.discount).toFixed(2);
 				sum += price * e.quantity;
@@ -86,7 +86,7 @@ class ReviewOrder extends React.Component {
 		let presents;
 
 		// Check if promotion
-		if (Object.keys(this.props.promotionProducts).length > 0) {
+		if (this.props.promotionProducts && Object.keys(this.props.promotionProducts).length > 0) {
 			products = this.props.promotionProducts.cart.map((e, i) => {
 				return <CartProductRow
 					key={e.id + i}
