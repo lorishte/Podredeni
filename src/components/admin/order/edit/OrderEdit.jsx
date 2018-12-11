@@ -113,10 +113,8 @@ class OrderEdit extends React.Component {
 			.editDeliveryData(this.state.deliveryDataId, this.state.orderDetails)
 			.then(res => {
 
-				let products = generateOrderData(this.state.products);
-
 				ordersService
-					.editOrder(this.state.orderId, products)
+					.editOrder(this.state.orderId, this.state.products)
 					.then(res => {
 						this.toastContainer.success(TOASTR_MESSAGES.successEdit, '', {
 							closeButton: true,
@@ -205,14 +203,3 @@ class OrderEdit extends React.Component {
 }
 
 export default OrderEdit;
-
-function generateOrderData (products) {
-	return products.map(e => {
-			return {
-				ProductId: e.id,
-				Quantity: e.quantity,
-				Price: e.price
-			};
-		}
-	);
-}
