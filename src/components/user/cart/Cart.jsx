@@ -233,26 +233,26 @@ class Cart extends React.Component {
 			products = stateCopy.products;
 		}
 
-		//alert('submit stopped');
+		alert('submit stopped');
 
-		orderService
-			.addDeliveryData(stateCopy.orderDetails)
-			.then(res => {
-				let deliveryId = res.deliveryDataId;
-				let promoCode = stateCopy.promoCode;
-
-				orderService
-					.addOrder(deliveryId, products, promoCode)
-					.then(res => {
-						sessionStorage.removeItem('products');
-						this.props.history.push('/order/confirmation');
-					});
-			})
-			.catch(err => {
-				this.props.history.push('/error');
-			});
-
-	};
+	// 	orderService
+	// 		.addDeliveryData(stateCopy.orderDetails)
+	// 		.then(res => {
+	// 			let deliveryId = res.deliveryDataId;
+	// 			let promoCode = stateCopy.promoCode;
+    //
+	// 			orderService
+	// 				.addOrder(deliveryId, products, promoCode)
+	// 				.then(res => {
+	// 					sessionStorage.removeItem('products');
+	// 					this.props.history.push('/order/confirmation');
+	// 				});
+	// 		})
+	// 		.catch(err => {
+	// 			this.props.history.push('/error');
+	// 		});
+    //
+	// };
 
 	render () {
 

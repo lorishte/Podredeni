@@ -150,6 +150,8 @@ const TOASTR_MESSAGES = {
 
 	'Invalid PromoCode': 'Невалиден промо код.',
 
+	'Quota exceeded': 'Промоцията не е активна',
+
 	//Warnings
 	requestEmptyFields: 'Моля, попълнете следните полета:',
 	productAlreadyInCart: 'Този продукт вече е добавен.',
