@@ -66,7 +66,7 @@ class PromoList extends React.Component {
 
 	deletePromo = (promoId, promoType) => {
 
-		let serviceToUse = promoType === 'products' ? productPromosService : discountPromosService;
+		let serviceToUse = promoType === 'product' ? productPromosService : discountPromosService;
 
 		serviceToUse
 			.delete(promoId)
