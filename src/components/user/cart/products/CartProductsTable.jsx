@@ -156,20 +156,21 @@ class CartProductsTable extends React.Component {
 					<CartTableFooter totalSum={this.state.totalSum}/>
 				</Col>
 
+				{!isAdmin &&
+					<FormInputWithAddOn
+						label={LABELS_BG.promoCode}
+						type='text'
+						name='promoCode'
+						value={this.state.promoCode}
+						placeholder={PLACEHOLDERS.enterPromoCode}
+						required={false}
+						disabled={false}
+						onChange={this.handleChange}
 
-				<FormInputWithAddOn
-					label={LABELS_BG.promoCode}
-					type='text'
-					name='promoCode'
-					value={this.state.promoCode}
-					placeholder={PLACEHOLDERS.enterPromoCode}
-					required={false}
-					disabled={false}
-					onChange={this.handleChange}
-
-					btnClass="btn-custom default lg"
-					btnText={BUTTONS_BG.validate}
-					onClick={this.checkPromotion} />
+						btnClass="btn-custom default lg"
+						btnText={BUTTONS_BG.validate}
+						onClick={this.checkPromotion} />
+				}
 
 
 				<Col className="buttons-container text-center">

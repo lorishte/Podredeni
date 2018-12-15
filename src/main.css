@@ -129,8 +129,7 @@ input[type=checkbox], input[type=radio] {
   .btn-custom.light {
     background-color: #ffffff; }
     .btn-custom.light:hover, .btn-custom.light:active {
-      color: #ffffff;
-      background-color: #b49543; }
+      background-color: #e6e6e6; }
   .btn-custom:hover {
     cursor: pointer; }
   .btn-custom.xs {
@@ -1178,25 +1177,53 @@ nav {
       display: inline-block;
       padding-left: 15px;
       font-size: 1.5em; }
-  #cart #cart-products-table .presents .present {
+  #cart #cart-products-table .valid-promo-headline {
+    margin-top: 0; }
+  #cart #cart-products-table .presents {
     display: -webkit-box;
     display: -webkit-flex;
     display: -ms-flexbox;
     display: flex;
-    -webkit-box-align: center;
-    -moz-box-align: center;
-    -ms-flex-align: center;
-    -webkit-align-items: center;
-    align-items: center;
-    border-bottom: 1px solid #e6e6e6;
-    padding: 5px 0; }
-    #cart #cart-products-table .presents .present .image-container {
-      -webkit-flex-basis: 8%;
-      flex-basis: 8%;
-      margin-right: 30px; }
-    #cart #cart-products-table .presents .present .present-name {
-      -webkit-flex-basis: 70%;
-      flex-basis: 70%; }
+    -webkit-flex-wrap: wrap;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    background-color: #f6f5f3;
+    padding: 15px; }
+    #cart #cart-products-table .presents .present {
+      -webkit-flex-basis: 45%;
+      flex-basis: 45%;
+      margin: 3px 2.5% 3px 2.5%;
+      background-color: #ffffff;
+      display: -webkit-box;
+      display: -webkit-flex;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-align: center;
+      -moz-box-align: center;
+      -ms-flex-align: center;
+      -webkit-align-items: center;
+      align-items: center;
+      padding: 5px 15px; }
+      #cart #cart-products-table .presents .present .image-container {
+        -webkit-flex-basis: 15%;
+        flex-basis: 15%; }
+      #cart #cart-products-table .presents .present .present-name {
+        -webkit-flex-basis: 70%;
+        flex-basis: 70%;
+        padding: 0 15px;
+        margin-bottom: 0;
+        font-size: .85em; }
+#cart #promo .presents-number {
+  display: inline-block;
+  text-align: center;
+  padding: 3px 8px;
+  background-color: #b49543;
+  color: #ffffff;
+  border-radius: 3px; }
+#cart small {
+  display: block;
+  margin-top: 8px;
+  line-height: 1.2em; }
 #cart #order-review p {
   line-height: 1em; }
 #cart #order-review .delivery-info {
@@ -1326,6 +1353,40 @@ nav {
   background-color: #D8ECF6;
   padding: 10px 0;
   margin-bottom: 10px; }
+#orders .promo-label {
+  display: -moz-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-box-align: center;
+  -moz-box-align: center;
+  -ms-flex-align: center;
+  -webkit-align-items: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -moz-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  margin-left: 5px;
+  padding: 3px 5px;
+  background-color: #ea445b;
+  color: #ffffff;
+  border-radius: 10%;
+  font-size: .9em; }
+#orders .old-price {
+  text-decoration: line-through;
+  text-decoration-color: #ea445b;
+  font-size: .85em;
+  color: #5b5b5b;
+  font-weight: 400;
+  display: block; }
+#orders .label {
+  margin-right: 5px;
+  display: inline-block;
+  white-space: pre-wrap;
+  text-align: left;
+  line-height: 1.3em; }
 
 .hidden-link {
   color: inherit;
@@ -1671,10 +1732,15 @@ footer {
   #cart #cart-products-table .table-footer {
     text-align: center;
     padding: 15px 0; }
-  #cart #cart-products-table .presents .present .image-container {
-    -webkit-flex-basis: 12%;
-    flex-basis: 12%;
-    margin-right: 10px; }
+  #cart #cart-products-table .presents .present {
+    -webkit-flex-basis: 100%;
+    flex-basis: 100%; }
+    #cart #cart-products-table .presents .present .image-container {
+      -webkit-flex-basis: 12%;
+      flex-basis: 12%;
+      margin-right: 10px; }
+    #cart #cart-products-table .presents .present .present-name {
+      padding: 0 8px; }
 
   #admin-products-table td:last-child, #admin-products-table .table th:last-child,
   #admin-orders-table td:last-child,

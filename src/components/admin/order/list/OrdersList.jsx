@@ -10,8 +10,12 @@ import Paging from '../../../common/pagination/Paging';
 
 import ordersService from '../../../../services/orders/ordersService';
 
-import { ORDER_STATUS_EN, ORDER_STATUS_BG, ELEMENTS_ON_PAGE, TOASTR_MESSAGES } from '../../../../data/constants/componentConstants';
-
+import {
+	ORDER_STATUS_EN,
+	ORDER_STATUS_BG,
+	ELEMENTS_ON_PAGE,
+	TOASTR_MESSAGES
+} from '../../../../data/constants/componentConstants';
 
 class OrdersList extends React.Component {
 	constructor (props) {
@@ -126,11 +130,16 @@ class OrdersList extends React.Component {
 			});
 	};
 
+
+
 	render () {
+
 		let ordersList;
 		if (this.state.orders !== '') {
 			ordersList = this.state.orders.map(e => {
-				return <OrderTableRow key={e.id} data={e} showDetails={this.showDetails}/>;
+				return <OrderTableRow key={e.id}
+				                      data={e}
+				                      showDetails={this.showDetails}/>;
 			});
 		}
 

@@ -107,7 +107,7 @@ const BUTTONS_BG = {
 	continue: 'Продължи',
 	next: 'Напред',
 	back: 'Назад',
-	correct: 'Корекция',
+	correct: 'Корекция на поръчката',
 	yes: 'Да',
 	no: 'Не',
 	send: 'Изпрати',
@@ -165,6 +165,8 @@ const TOASTR_MESSAGES = {
 	successEdit: 'Успешна редакция.',
 
 	productAddedToCart: 'Продуктът е добавен в кошницата Ви.',
+
+	orderSent: 'Поръчката Ви е изпратена.',
 
 	validPromoCode: 'Валиден промо код.',
 

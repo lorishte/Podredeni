@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Table, Row, Col } from 'react-bootstrap';
+import { Row, Col } from 'react-bootstrap';
 
 import CartTableHeader from '../products/partials/CartTableHeader';
 import CartTableFooter from '../products/partials/CartTableFooter';

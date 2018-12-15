@@ -1,7 +1,6 @@
 import React from 'react';
 
-import { Col, } from 'react-bootstrap';
-import { confirmAlert } from 'react-confirm-alert';
+import { Col } from 'react-bootstrap';
 
 // Partials
 import CartTableHeader from './partials/CartTableHeader';
@@ -40,9 +39,6 @@ class ValidPromo extends React.Component {
 
 		this.calculateTotalSum();
 		this.calculatePresentsCount(this.props.selectedPresents);
-
-		console.log(this.state)
-		console.log(this.props)
 	}
 
 	componentWillUnmount () {
@@ -141,6 +137,7 @@ class ValidPromo extends React.Component {
 
 	render () {
 		let resolution = this.state.resolution > RESOLUTIONS.bootstrapXS;
+		let promotion = this.props.promotion;
 		let discountedProducts = this.props.products.discountedProducts;
 		let discountedProductsCount = this.props.products.discountedProductsCount;
 		let cartProducts = this.props.products.cart;
@@ -153,6 +150,7 @@ class ValidPromo extends React.Component {
 				editable={false}
 				data={p}/>;
 		});
+
 
 		let availablePresents;
 		if (discountedProductsCount > 0) {
@@ -189,7 +187,12 @@ class ValidPromo extends React.Component {
 
 		return (
 			<div id="cart-products-table">
-				<h1>Валидна промоция</h1>
+				<h2 className="valid-promo-headline">Валидна промоция</h2>
+
+				{promotion && <p>{promotion.description}</p>}
+				{!promotion && <p>При покупка на всеки 2 броя магнитни клипса, получавате подарък по избор от серия стандартни клипсове.</p>}
+
+
 
 				<Col>
 					<CartTableHeader resolution={resolution}/>
@@ -198,10 +201,22 @@ class ValidPromo extends React.Component {
 					<CartTableFooter totalSum={this.state.totalSum}/>
 				</Col>
 
+
+
 				{discountedProductsCount > 0
 				&& selectedPresentsCount < discountedProductsCount
 				&&
-				<h3>Имате право на {discountedProductsCount - selectedPresentsCount} подарък</h3>
+				<h4>Можете да изберете <span className="presents-number">{discountedProductsCount - selectedPresentsCount}</span>
+					{discountedProductsCount - selectedPresentsCount > 1 && <span>&nbsp;продукта с отстъпка.</span>}
+					{discountedProductsCount - selectedPresentsCount === 1 && <span>&nbsp;продукт с отстъпка.</span>}
+				</h4>
+				}
+
+				{discountedProductsCount > 0
+				&& selectedPresentsCount === discountedProductsCount
+				&&
+				<h4>Успешно добавихте намалените продукти, които предоставя промоцията.
+				<small>За да промените избора си, моля, изтрийте от таблицата някой от добавените подаръци.</small></h4>
 				}
 
 				{selectedPresentsCount < discountedProductsCount &&
@@ -212,7 +227,7 @@ class ValidPromo extends React.Component {
 
 
 				<Col className="buttons-container text-center">
-					<button className='btn-custom default md'
+					<button className='btn-custom light md'
 					        onClick={this.props.goBack}>{BUTTONS_BG.correct}
 					</button>
 					<button className='btn-custom primary md'
@@ -221,7 +236,6 @@ class ValidPromo extends React.Component {
 				</Col>
 			</div>
 		);
-
 	}
 }
 

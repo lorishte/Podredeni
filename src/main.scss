@@ -356,14 +356,14 @@ input[type=checkbox], input[type=radio] {
     }
   }
 
+
   &.light {
-    //color: #ffffff;
     background-color: $white;
+
 
     &:hover,
     &:active {
-      color: $white;
-      background-color: $primary;
+      background-color: $light-grey;
     }
   }
 
@@ -1401,6 +1401,7 @@ nav {
     width: 100%;
 
 
+
     .table-header {
       @include flex;
       @include align-items(center);
@@ -1544,7 +1545,7 @@ nav {
 
     .table-footer {
       text-align: right;
-      padding:  10px 25px;
+      padding: 10px 25px;
       border: 1px solid $light-grey;
       border-top: none;
       margin-bottom: 30px;
@@ -1559,23 +1560,55 @@ nav {
       }
     }
 
+    .valid-promo-headline {
+      margin-top: 0;
+    }
+
     .presents {
+      @include flex;
+      @include flex-wrap(wrap);
+      background-color: $warm-light-grey;
+      padding: 15px;
+
       .present {
+        @include flex-basis(45%);
+        margin: 3px 2.5% 3px 2.5%;
+        background-color: $white;
+
         @include flex;
         @include align-items(center);
-        border-bottom: 1px solid $light-grey;
-        padding: 5px 0;
+        //border-bottom: 1px solid $light-grey;
+        padding: 5px 15px;
 
         .image-container {
-          @include flex-basis(8%);
-          margin-right: 30px;
+          @include flex-basis(15%);
         }
 
         .present-name {
           @include flex-basis(70%);
+          padding: 0 15px;
+          margin-bottom: 0;
+          font-size: .85em;
         }
       }
     }
+  }
+
+  #promo {
+    .presents-number {
+      display: inline-block;
+      text-align: center;
+      padding: 3px 8px;
+      background-color: $primary;
+      color: $white;
+      border-radius: 3px;
+    }
+  }
+
+  small {
+    display: block;
+    margin-top: 8px;
+    line-height: 1.2em;
   }
 
   #order-review {
@@ -1639,8 +1672,6 @@ nav {
     }
   }
 }
-
-
 
 //ADMIN
 
@@ -1759,6 +1790,38 @@ nav {
     margin-bottom: 10px;
   }
 
+  .promo-label {
+    @include inline-flex;
+    @include align-items(center);
+    @include justify-content(center);
+
+    margin-left: 5px;
+    padding: 3px 5px;
+
+    background-color: $danger;
+    color: $white;
+    border-radius: 10%;
+
+    font-size: .9em;
+  }
+
+  .old-price {
+    text-decoration: line-through;
+    text-decoration-color: $danger;
+    font-size: .85em;
+    color: $dark-grey;
+    font-weight: 400;
+    display: block;
+  }
+
+  .label {
+    margin-right: 5px;
+    display: inline-block;
+    white-space: pre-wrap;
+    text-align: left;
+    line-height: 1.3em;
+  }
+
 }
 
 .hidden-link {
@@ -1810,6 +1873,7 @@ footer {
 #admin-promos-table {
   margin-top: 15px;
 }
+
 #create-edit-promo {
 
   h3 {
@@ -2200,9 +2264,15 @@ footer {
 
       .presents {
         .present {
+          @include flex-basis(100%);
+
           .image-container {
             @include flex-basis(12%);
             margin-right: 10px;
+          }
+
+          .present-name {
+            padding: 0 8px;
           }
         }
       }

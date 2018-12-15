@@ -11,7 +11,7 @@ import ReviewOrder from '../../../user/cart/reviewOrder/ReviewOrder';
 
 import ordersService from '../../../../services/orders/ordersService';
 
-import { REDIRECT_DELAY, TOASTR_MESSAGES } from '../../../../data/constants/componentConstants';
+import { REDIRECT_DELAY, TOASTR_MESSAGES, BUTTONS_BG} from '../../../../data/constants/componentConstants';
 
 class OrderEdit extends React.Component {
 	constructor (props) {
@@ -131,26 +131,6 @@ class OrderEdit extends React.Component {
 			});
 	};
 
-	cancelOrder = () => {
-		ordersService
-			.changeStatus(this.state.orderId, 'cancel')
-			.then(() => {
-				this.toastContainer.success( TOASTR_MESSAGES.successCancelOrder, '', {
-					closeButton: false,
-				});
-
-				setTimeout(() => this.cancel(), 2000);
-			})
-			.catch(err => {
-				this.toastContainer.error(err.responseText, TOASTR_MESSAGES.error, {
-					closeButton: false,
-				});
-			});
-	};
-
-	cancel = () => {
-		this.props.history.go(-1);
-	};
 
 	render () {
 		return (
@@ -161,13 +141,18 @@ class OrderEdit extends React.Component {
 					className="toast-bottom-right"
 				/>
 
+				<Col className="text-right">
+					<button className={'btn btn-default sm'}
+					        onClick={this.props.history.goBack}>{BUTTONS_BG.cancel}
+					</button>
+				</Col>
+
 				<Row>
 					{this.state.products.length > 0 && this.state.productsView &&
 					<Col xs={12}>
 						<CartProductsTable
 							products={this.state.products}
 							onChange={this.updateInfo}
-							cancelOrder={this.cancelOrder}
 							continue={this.showDeliveryDetailsForm}
 							cancel={this.cancel}
 						/>
@@ -182,8 +167,7 @@ class OrderEdit extends React.Component {
 							toastContainer={this.toastContainer}
 							onChange={this.updateInfo}
 							goBack={this.showProducts}
-							continue={this.showReview}
-							cancel={this.cancel}/>
+							continue={this.showReview}/>
 					</Col>
 					}
 
@@ -194,8 +178,7 @@ class OrderEdit extends React.Component {
 							products={this.state.products}
 							orderDetails={this.state.orderDetails}
 							goBack={this.showDeliveryDetailsForm}
-							continue={this.submitOrder}
-							cancel={this.cancel}/>
+							continue={this.submitOrder}/>
 					</Col>
 					}
 				</Row>

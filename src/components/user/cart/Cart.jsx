@@ -138,7 +138,7 @@ class Cart extends React.Component {
 
 	checkPromotion = (promoCode) => {
 
-		let stateCopy = Object.assign({}, this.state);
+		let stateCopy = Utils.createStateCopy(this.state);
 
 		productPromoService
 			.checkPromotion(promoCode, stateCopy)
@@ -241,6 +241,10 @@ class Cart extends React.Component {
 				let deliveryId = res.deliveryDataId;
 				let promoCode = stateCopy.promoCode;
 
+				this.toastContainer.success(TOASTR_MESSAGES.orderSent, '', {
+					closeButton: true,
+				});
+
 				orderService
 					.addOrder(deliveryId, products, promoCode)
 					.then(res => {
@@ -326,6 +330,7 @@ class Cart extends React.Component {
 							<ValidPromo
 								products={this.state.promotionProducts}
 								selectedPresents={this.state.selectedPresents}
+								promotion={this.state.promotionProducts.promotion}
 								onChange={this.updateInfo}
 								goBack={() => this.showView('productsView')}
 								continue={() => this.showView('orderDetailsView')}/>

@@ -28,22 +28,27 @@ class OrderDetails extends React.Component {
 		let o = this.props.order;
 		let d = this.props.delivery;
 
+		console.log(this.props);
+
 		let products;
 		let totalSum = 0; //order total sum
 
 		if (o !== '') {
 			products = o.products.map(e => {
-				totalSum += e.price * e.quantity;
 
 				let price = utils.calculatePriceAfterDiscount(e.price, e.discount);
+
+				totalSum += price * e.quantity;
 
 				return (
 					<Col xs={12} key={e.productOrderId}>
 						<Row >
-							<Col xs={4}><p>{e.name}</p>
-								{e.discount > 0 &&
-								<span className="promo-label">-{e.discount}%</span>
-								}
+							<Col xs={4}>
+								<p>{e.name}
+									{e.discount > 0 &&
+									<span className="promo-label">-{e.discount}%</span>
+									}
+								</p>
 							</Col>
 							<Col xs={2} className="text-right">{e.quantity}</Col>
 							<Col xs={3} className="text-right">
@@ -53,7 +58,7 @@ class OrderDetails extends React.Component {
 							</Col>
 
 
-							<Col xs={3} className="text-right">{(e.price * e.quantity).toFixed(2)}</Col>
+							<Col xs={3} className="text-right">{(price * e.quantity).toFixed(2)}</Col>
 						</Row>
 					</Col>
 				);
@@ -67,11 +72,11 @@ class OrderDetails extends React.Component {
 				<div className={this.state.showDetails ? 'order-info visible' : 'order-info'}>
 					<Row>
 						<Col xs={12}>
-							<h4>{LABELS_BG.orderNumber} <Label bsStyle="success">{o.number}</Label></h4>
+							<h4>{LABELS_BG.orderNumber} <Label bsStyle="success">{o.number}</Label><Label bsStyle="info">Промо: ReadeREST</Label></h4>
 							<p className="">
 								<small className="text-grey">{LABELS_BG.lastModification}:</small>
 								&nbsp;{utils.formatDate(o.lastModificationDate)}
-								&nbsp;<Label>{ORDER_STATUS_BG[o.status]}</Label>
+								{/*&nbsp;<Label>{ORDER_STATUS_BG[o.status]}</Label>*/}
 							</p>
 							<hr />
 						</Col>
