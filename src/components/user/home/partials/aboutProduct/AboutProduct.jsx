@@ -13,28 +13,28 @@ class AboutProduct extends React.Component {
 			sectionContent: '',
 			articleHeading: '',
 			articleContent: ''
-		}
+		};
 	}
 
-    componentDidMount () {
-        this.loadHomeContent();
-    }
+	componentDidMount () {
+		this.loadHomeContent();
+	}
 
-    loadHomeContent = () => {
-        homeContentService
-            .loadArticle()
-            .then(res => {
-                this.setState({
+	loadHomeContent = () => {
+		homeContentService
+			.loadArticle()
+			.then(res => {
+				this.setState({
 					sectionHeading: res.content.sectionHeading,
-                    sectionContent: res.content.sectionContent,
-                    articleHeading: res.content.articleHeading,
-                    articleContent: res.content.articleContent
-                })
-            })
-            .catch(err => {
-                console.log(err.Message)
-                });
-    };
+					sectionContent: res.content.sectionContent,
+					articleHeading: res.content.articleHeading,
+					articleContent: res.content.articleContent
+				});
+			})
+			.catch(err => {
+				console.log(err.Message);
+			});
+	};
 
 	render () {
 
@@ -46,18 +46,18 @@ class AboutProduct extends React.Component {
 				</Grid>
 
 				<div id="about-product">
-					<div className="wrapper">
-						<article className="article-box">
-							<div className="article-content bg-white">
-								<h4 className="article-heading">{this.state.articleHeading}</h4>
-								<div dangerouslySetInnerHTML={{__html: this.state.articleContent}}/>
-							</div>
 
-							<div className="article-image">
-								<img src="/images/show/christmas.png"/>
-							</div>
-						</article>
-					</div>
+					<article className="article-box">
+						<div className="article-content bg-white">
+							<h4 className="article-heading">{this.state.articleHeading}</h4>
+							<div dangerouslySetInnerHTML={{__html: this.state.articleContent}}/>
+						</div>
+
+						<div className="article-image">
+							<img src="/images/show/image_02.jpg"/>
+						</div>
+					</article>
+
 				</div>
 			</Grid>
 		);

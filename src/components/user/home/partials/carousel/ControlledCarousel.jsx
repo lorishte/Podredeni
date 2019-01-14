@@ -96,7 +96,7 @@ class ControlledCarousel extends React.Component {
 
         return (
             <Grid fluid id="home-main-carousel">
-                <img src="/images/readerest_logo_christmas.png" className="logo"/>
+                <img src="/images/readerest_logo.png" className="logo"/>
                 <Carousel
                     ref={this.carousel}
                     activeIndex={index}

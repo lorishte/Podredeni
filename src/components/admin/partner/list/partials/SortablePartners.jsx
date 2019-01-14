@@ -2,8 +2,6 @@ import React from 'react';
 
 import { Link } from 'react-router-dom';
 
-import utils from '../../../../../utils/utils';
-
 import { SortableContainer, SortableElement, arrayMove } from 'react-sortable-hoc';
 
 import { PARTNER_CATEGORIES } from '../../../../../data/constants/componentConstants';

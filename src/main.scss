@@ -78,6 +78,19 @@ $header-height: 65px;
   justify-content: $value;
 }
 
+@mixin align-content($value: stretch) {
+  // No Webkit Box Fallback.
+  -webkit-align-content: $value;
+  @if $value == flex-start {
+    -ms-flex-line-pack: start;
+  } @else if $value == flex-end {
+    -ms-flex-line-pack: end;
+  } @else {
+    -ms-flex-line-pack: $value;
+  }
+  align-content: $value;
+}
+
 @mixin align-items($value: stretch) {
   @if $value == flex-start {
     -webkit-box-align: start;
@@ -234,6 +247,8 @@ a {
 
 img {
   width: 100%;
+
+  object-fit: cover;
 }
 
 h1, h2, h3 {
@@ -726,30 +741,35 @@ nav {
         height: 400px;
         text-align: left;
         overflow: hidden;
-        padding: 0 10%;
+        //padding: 0 10%;
       }
 
       .article-image {
-        @include flex-basis(40%);
+        @include flex-basis(50%);
         overflow: hidden;
 
         img {
           height: 100%;
-          width: auto;
+          width: 100%;
+          object-fit: cover;
 
           //transform: translateY(-15%);
         }
       }
 
       .article-content {
-        @include flex-basis(60%);
-        padding: 50px;
+        @include flex-basis(50%);
+        padding: 0 50px;
+        @include flex;
+        @include flex-wrap(wrap);
+        @include align-content(center);
 
         .article-heading {
           color: $primary-hover;
           font-weight: 300;
           text-transform: uppercase;
           font-size: 1.5em;
+          @include flex-basis(100%);
         }
       }
     }
@@ -769,7 +789,7 @@ nav {
 }
 
 #testimonials {
-  margin-top: 50px;
+  //margin-top: 50px;
   background-color: $dark-grey;
   color: $medium-grey;
 
