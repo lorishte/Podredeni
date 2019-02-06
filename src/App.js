@@ -4,8 +4,10 @@ import Header from './components/common/Header';
 import Footer from './components/common/Footer';
 import Routes from './components/routes/Routes';
 
-import './main.css';
+import './styles/main.css';
 import 'react-confirm-alert/src/react-confirm-alert.css';
+
+// require('dotenv').config()
 
 
 class App extends React.Component {

@@ -1305,28 +1305,28 @@ nav {
     $arrow-size: 10px;
     $tab-height: 60px;
 
-    @mixin arrow-before($value: color) {
+    @mixin arrow-before($color: $primary) {
 
       &:before {
         position: absolute;
         left: 2px;
         content: "";
         border-top: 30px solid transparent;
-        border-left: $arrow-size solid $value;
+        border-left: $arrow-size solid $color;
         border-bottom: 30px solid transparent;
 
         z-index: 199;
       }
     }
 
-    @mixin arrow-after($value: color) {
+    @mixin arrow-after($color: $warm-light-grey) {
 
       &:after {
         position: absolute;
         right: -$arrow-size;
         content: "";
         border-top: 30px solid transparent;
-        border-left: $arrow-size solid $value;
+        border-left: $arrow-size solid $color;
         border-bottom: 30px solid transparent;
 
         z-index: 200;

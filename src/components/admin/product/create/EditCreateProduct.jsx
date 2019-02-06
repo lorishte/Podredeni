@@ -23,7 +23,7 @@ class CreateProduct extends React.Component {
             imageUrls: [],
             isTopSeller: false,
             isBlocked: false,
-            promos: [],
+	        discountPromos: [],
             discount: ''
         };
     }
@@ -170,6 +170,8 @@ class CreateProduct extends React.Component {
                 </div>
             );
         });
+
+
         return (
             <Grid id="create-edit-product">
 

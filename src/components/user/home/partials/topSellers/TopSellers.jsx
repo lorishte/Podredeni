@@ -117,6 +117,8 @@ class TopSellers extends React.Component {
 			});
 		}
 
+		console.log('card width', this.state.cardWidth)
+
 		let translateMaxValue = (this.state.products.length - this.state.productsToShow ) * this.state.cardWidth;
 
 		return (
@@ -128,9 +130,6 @@ class TopSellers extends React.Component {
 					{this.state.products === '' && <div className="loader"/> }
 
 					<div className="top-sellers-carousel" ref={this.container}>
-						<div className="top-sellers" ref={this.topSellers}>
-							{cards}
-						</div>
 
 						<button disabled={this.state.translateValue <= 10}
 						        className="carousel-control left"
@@ -147,6 +146,12 @@ class TopSellers extends React.Component {
 							<span className="glyphicon glyphicon-chevron-right"/>
 							<span className="sr-only">Next</span>
 						</button>}
+
+						<div className="top-sellers" ref={this.topSellers}>
+							{cards}
+						</div>
+
+
 					</div>
 				</Grid>
 			</Grid>
