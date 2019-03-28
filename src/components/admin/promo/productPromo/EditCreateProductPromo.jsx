@@ -89,7 +89,7 @@ class EditCreateProductPromo extends React.Component {
 					quota: res.quota,
 					newDiscountedProducts: res.discountedProductsIds,
 					newProducts: res.productsIds
-				}, () => console.log(this.state));
+				});
 			})
 			.catch(err => {
 
@@ -131,7 +131,6 @@ class EditCreateProductPromo extends React.Component {
 
 		if (this.promoId) {
 
-			console.log(this.state)
 
 			productPromosService
 				.edit(this.promoId, this.state)
@@ -153,9 +152,9 @@ class EditCreateProductPromo extends React.Component {
 
 			let stateCopy = Object.assign({}, this.state);
 
-			productPromosService.create(stateCopy).then(res => {
-				console.log(res);
-
+			productPromosService
+				.create(stateCopy)
+				.then(res => {
 				this.toastContainer.success('', TOASTR_MESSAGES.successPromotionCreate, {
 					closeButton: false,
 				});

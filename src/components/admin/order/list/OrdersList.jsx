@@ -120,6 +120,7 @@ class OrdersList extends React.Component {
 				this.toastContainer.success('Поръчката е обработена.', '', {
 					closeButton: false,
 				});
+				console.log('from change status')
 				setTimeout(() => this.hideDetails(), 2000);
 				this.loadOrders();
 			})
@@ -133,6 +134,7 @@ class OrdersList extends React.Component {
 
 
 	render () {
+
 
 		let ordersList;
 		if (this.state.orders !== '') {
@@ -149,6 +151,7 @@ class OrdersList extends React.Component {
 					ref={ref => this.toastContainer = ref}
 					className="toast-bottom-right"
 				/>
+
 
 				<Row>
 					<Col xs={12}>

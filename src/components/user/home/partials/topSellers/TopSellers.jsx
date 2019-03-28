@@ -117,8 +117,6 @@ class TopSellers extends React.Component {
 			});
 		}
 
-		console.log('card width', this.state.cardWidth)
-
 		let translateMaxValue = (this.state.products.length - this.state.productsToShow ) * this.state.cardWidth;
 
 		return (

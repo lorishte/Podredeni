@@ -7,8 +7,10 @@ class OrdersTable extends React.Component {
 		super(props);
 	}
 
-
 	render () {
+
+		if (this.props.ordersList === undefined) {return <div className="admin-loader"/>; }
+
 		return (
 			<Table striped bordered condensed hover id="admin-orders-table">
 				<OrderListTableHead

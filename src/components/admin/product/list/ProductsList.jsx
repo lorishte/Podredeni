@@ -109,6 +109,8 @@ class ProductsList extends React.Component {
 			return <ProductTableRow key={e.id} data={e}/>;
 		});
 
+		if (this.state.products.length === 0) {return <div className="admin-loader"/>; }
+
 		return (
 			<Grid>
 

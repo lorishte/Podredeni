@@ -227,7 +227,7 @@ class Cart extends React.Component {
 				})
 			}
 
-			console.log(this.state)
+			// console.log(this.state)
 
 		} else {
 			products = stateCopy.products;
@@ -248,9 +248,11 @@ class Cart extends React.Component {
 				orderService
 					.addOrder(deliveryId, products, promoCode)
 					.then(res => {
+
 						sessionStorage.removeItem('products');
 						this.props.history.push('/order/confirmation');
-					});
+					})
+					.catch(err => console.log(err));
 			})
 			.catch(err => {
 				this.props.history.push('/error');

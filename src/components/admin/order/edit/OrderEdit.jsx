@@ -113,8 +113,6 @@ class OrderEdit extends React.Component {
 			.editDeliveryData(this.state.deliveryDataId, this.state.orderDetails)
 			.then(res => {
 
-				console.log(this.state.products);
-
 				ordersService
 					.editOrder(this.state.orderId, this.state.products)
 					.then(res => {

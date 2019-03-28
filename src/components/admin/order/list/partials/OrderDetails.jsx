@@ -28,8 +28,6 @@ class OrderDetails extends React.Component {
 		let o = this.props.order;
 		let d = this.props.delivery;
 
-		console.log(this.props);
-
 		let products;
 		let totalSum = 0; //order total sum
 

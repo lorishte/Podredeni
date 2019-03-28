@@ -21,8 +21,6 @@ export default {
 
 		let data = generateProductDetails(state);
 
-		console.log(data);
-
 		return requesterService.post(endPoint, auth, data);
 	},
 

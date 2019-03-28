@@ -74,9 +74,7 @@ export default {
 			PromoCode: promoCode
 		};
 
-
-		return requesterService
-			.post(orderEndPoint, null, order);
+		return requesterService.post(orderEndPoint, null, order);
 
 	},
 

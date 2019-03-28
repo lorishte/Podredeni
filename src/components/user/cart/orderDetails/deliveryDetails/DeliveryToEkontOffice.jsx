@@ -43,7 +43,6 @@ class EkontInfoInputs extends React.Component {
 	loadEkontOffices = () => {
 		ekontService.getOffices()
 			.then(response => {
-
 				let data = ekontDataParser.transformXml(response.offices);
 				this.setState({ekontData: data});
 			})

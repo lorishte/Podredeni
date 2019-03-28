@@ -33,8 +33,12 @@ class OrderTableRow extends React.Component {
 		let o = this.props.data; //order
 
 		let totalSum = 0; //order total sum
-		this.props.data.products
-			.forEach(p => totalSum += p.price * p.quantity);
+
+		o.products
+			.forEach(p => {
+				let price = utils.calculatePriceAfterDiscount(p.price, p.discount);
+				totalSum += price * p.quantity
+			});
 
 		return (
 			<tr className="order">
