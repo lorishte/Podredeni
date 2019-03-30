@@ -10,7 +10,7 @@ const SortableItem = SortableElement( ({value, itemIndex, deleteVideo}) =>
 
 	<div className="sortable-video">
 		<div>
-			{itemIndex}.{utils.getVideoDescription(value)}
+			{itemIndex}. {utils.getVideoDescription(value)}
 		</div>
 
 		<div>
@@ -37,9 +37,11 @@ const SortableList = SortableContainer(({items, deleteVideo}) => {
 });
 
 class SortableVideos extends React.Component {
+
 	state = {
 		items: this.props.sortableItems
 	};
+
 	onSortEnd = ({oldIndex, newIndex}) => {
 		this.setState({
 			items: arrayMove(this.state.items, oldIndex, newIndex),
@@ -56,7 +58,10 @@ class SortableVideos extends React.Component {
 
 		let deleteVideo = this.props.deleteVideo;
 
-		return <SortableList getContainer={() => document.getElementById('videos-container')} items={this.state.items} deleteVideo={deleteVideo} onSortEnd={this.onSortEnd}/>;
+		return <SortableList getContainer={() => document.getElementById('videos-container')}
+		                     items={this.state.items}
+		                     deleteVideo={deleteVideo}
+		                     onSortEnd={this.onSortEnd}/>;
 	}
 }
 

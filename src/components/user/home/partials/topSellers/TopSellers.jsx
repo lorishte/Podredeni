@@ -125,7 +125,7 @@ class TopSellers extends React.Component {
 
 					<h1 className="section-heading">{HOME.topSellers}</h1>
 
-					{this.state.products === '' && <div className="loader"/> }
+					{this.state.products.length === 0 && <div className="loader"/> }
 
 					<div className="top-sellers-carousel" ref={this.container}>
 

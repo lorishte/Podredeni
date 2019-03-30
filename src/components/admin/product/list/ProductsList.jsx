@@ -33,14 +33,14 @@ class ProductsList extends React.Component {
 			filterProperty: 'name',
 			filterValue: '',
 			productsCount: '',
-			pagesCount: ''
+			pagesCount: '',
+			loading: true
 		};
 	}
 
 	timer = null;
 
 	componentDidMount () {
-
 		this.loadProducts();
 	}
 
@@ -54,7 +54,8 @@ class ProductsList extends React.Component {
 				this.setState({
 					products: res.products,
 					productsCount: productsCount,
-					pagesCount: Math.ceil(productsCount / size)
+					pagesCount: Math.ceil(productsCount / size),
+					loading: false
 				});
 
 			})
@@ -68,7 +69,8 @@ class ProductsList extends React.Component {
 	sort = (sortProperty, descending) => {
 		this.setState({
 			sortProperty: sortProperty,
-			descending: descending
+			descending: descending,
+			loading: true
 		}, () => this.loadProducts());
 	};
 
@@ -82,7 +84,10 @@ class ProductsList extends React.Component {
 	};
 
 	goToPage = (page) => {
-		this.setState({page: page}, () => this.loadProducts());
+		this.setState({
+			page: page,
+			loading: true
+		}, () => this.loadProducts());
 	};
 
 	handleSizeChange = (e) => {
@@ -109,7 +114,7 @@ class ProductsList extends React.Component {
 			return <ProductTableRow key={e.id} data={e}/>;
 		});
 
-		if (this.state.products.length === 0) {return <div className="admin-loader"/>; }
+		// if (this.state.products.length === 0) {return <div className="admin-loader"/>; }
 
 		return (
 			<Grid>
@@ -152,6 +157,8 @@ class ProductsList extends React.Component {
 							optionsList={ADMIN_PRODUCTS_FILTER_OPTIONS}/>
 					</Col>
 				</Row>
+
+				{this.state.loading && <div className="admin-loader"/> }
 
 				<Table striped bordered condensed hover id="admin-products-table">
 					<TableHead

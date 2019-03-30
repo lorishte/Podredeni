@@ -141,15 +141,19 @@ class OrderDetails extends React.Component {
 						<Col xs={12} className="buttons-container">
 
 							<Button className={o.status === 0 ? 'btn btn-sm btn-success' : 'btn btn-sm'}
+							        disabled={o.status === 0}
 							        onClick={() => this.changeStatus('reset')}>{ORDER_STATUS_BG['0']}</Button>
 
 							<Button className={o.status === 1 ? 'btn btn-sm btn-success' : 'btn btn-sm'}
+							        disabled={o.status === 1}
 							        onClick={() => this.changeStatus('confirm')}>{ORDER_STATUS_BG['1']}</Button>
 
 							<Button className={o.status === 2 ? 'btn btn-sm btn-success' : 'btn btn-sm'}
+							        disabled={o.status === 2}
 							        onClick={() => this.changeStatus('dispatch')}>{ORDER_STATUS_BG['2']}</Button>
 
 							<Button className={o.status === 3 ? 'btn btn-sm btn-success' : 'btn btn-sm'}
+							        disabled={o.status === 3}
 							        onClick={() => this.changeStatus('cancel')}>{ORDER_STATUS_BG['3']}</Button>
 						</Col>
 					</Row>

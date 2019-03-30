@@ -1,5 +1,5 @@
 import React from 'react';
-
+import PropTypes from 'prop-types';
 import { FormGroup, FormControl, ControlLabel } from 'react-bootstrap';
 
 class FormTextareaField extends React.Component {
@@ -17,7 +17,7 @@ class FormTextareaField extends React.Component {
 
 
 	render () {
-		const {label, name, value, required, onChange, defaultValue} = this.props;
+		const {label, name, value, required, onChange, defaultValue, rows, cols, placeholder} = this.props;
 
 		return (
 			<FormGroup controlId={name}>
@@ -25,6 +25,8 @@ class FormTextareaField extends React.Component {
 				<FormControl
 					defaultValue={defaultValue}
 					componentClass="textarea"
+					rows={rows}
+					cols={cols}
 					name={name}
 					value={this.state.description}
 					onChange={onChange}
@@ -37,3 +39,14 @@ class FormTextareaField extends React.Component {
 }
 
 export default FormTextareaField;
+
+FormTextareaField.propTypes = {
+	label: PropTypes.string,
+	name: PropTypes.string,
+	value: PropTypes.string,
+	defaultValue: PropTypes.string,
+	placeholder: PropTypes.string,
+	rows: PropTypes.number,
+	cols: PropTypes.number,
+	onChange: PropTypes.func
+};

@@ -25,7 +25,8 @@ class PartnersList extends React.Component {
 
         this.state = {
             partners: [],
-	        newPartnersOrder: []
+	        newPartnersOrder: [],
+            loading: true
         };
     }
 
@@ -40,7 +41,8 @@ class PartnersList extends React.Component {
             .then(res => {
 
                 this.setState({
-                    partners: res
+                    partners: res,
+                    loading: false
                 });
 
             })
@@ -120,17 +122,9 @@ class PartnersList extends React.Component {
                     </Col>
                 </Row>
 
-                {/*<Table striped bordered condensed hover id="admin-partners-table">*/}
-                    {/*<PartnersTableHead/>*/}
-                    {/*<tbody>*/}
-                    {/*{partnersList}*/}
-                    {/*</tbody>*/}
-                {/*</Table>*/}
-
+	            {this.state.loading && <div className="admin-loader"/> }
 
                 <div id="admin-sortable">
-
-
                     <Table striped bordered condensed hover id="admin-partners-table">
 
                         <PartnersTableHead/>

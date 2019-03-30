@@ -1,4 +1,4 @@
-const FILTER_INPUT_WAIT_INTERVAL = 2000;
+const FILTER_INPUT_WAIT_INTERVAL = 1000;
 
 const REDIRECT_DELAY = 2000;
 
@@ -194,7 +194,8 @@ const CONFIRM_DIALOGS = {
 	deleteProduct: 'Сигурни ли сте, че искате да изтриете този продукт?',
 	deleteNews: 'Сигурни ли сте, че искате да изтриете тази новина?',
 	deletePromo: 'Сигурни ли сте, че искате да изтриете промоцията?',
-    deletePartner: 'Сигурни ли сте, че искате да изтриете партньора?'
+    deletePartner: 'Сигурни ли сте, че искате да изтриете партньора?',
+	deleteCarouselItem: 'Сигурни ли сте, че искате да изтриете банера?'
 };
 
 const RESOLUTIONS = {

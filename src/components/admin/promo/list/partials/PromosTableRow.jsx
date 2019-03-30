@@ -27,7 +27,7 @@ class PromoTableRow extends React.Component {
 
 				{promoType === 'discount' &&
 				<td>
-					{p.discount}
+					{p.discount} %
 				</td>
 				}
 

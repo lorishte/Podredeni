@@ -9,10 +9,13 @@ class OrdersTable extends React.Component {
 
 	render () {
 
-		if (this.props.ordersList === undefined) {return <div className="admin-loader"/>; }
+		if (this.props.loading) {return <div className="admin-loader"/>; }
+
+		if (this.props.ordersList.length === 0) {return <h4>Няма {this.props.tabName} поръчки</h4>}
 
 		return (
 			<Table striped bordered condensed hover id="admin-orders-table">
+
 				<OrderListTableHead
 					changeClass={this.props.changeClass}
 					sort={this.props.sort}/>
@@ -20,6 +23,7 @@ class OrdersTable extends React.Component {
 				{this.props.ordersList}
 				</tbody>
 			</Table>
+
 		);
 	}
 }

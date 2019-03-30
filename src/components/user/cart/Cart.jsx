@@ -227,8 +227,6 @@ class Cart extends React.Component {
 				})
 			}
 
-			// console.log(this.state)
-
 		} else {
 			products = stateCopy.products;
 		}

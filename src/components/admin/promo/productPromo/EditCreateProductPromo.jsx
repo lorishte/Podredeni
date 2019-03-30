@@ -72,8 +72,6 @@ class EditCreateProductPromo extends React.Component {
 		productPromosService.load(this.promoId)
 			.then(res => {
 
-				console.log(res);
-
 				this.setState({
 					name: res.name,
 					description: res.description,

@@ -63,16 +63,74 @@ class Header extends React.Component {
 			productsCount = JSON.parse(sessionStorage.getItem('products')).length;
 		}
 
+		if (isAdmin) {
+			return (
+				<nav className="navbar navbar-default navbar-fixed-top admin" id="main-menu">
+					<span className="navbar-brand admin">
+						<span>P</span>
+					</span>
+
+					<button type="button"
+					        className="navbar-toggle collapsed"
+					        data-toggle="collapse"
+					        data-target="#admin-nav"
+					        aria-expanded="false">
+						<span className="sr-only">Toggle navigation</span>
+						<span className="icon-bar"/>
+						<span className="icon-bar"/>
+						<span className="icon-bar"/>
+					</button>
+
+					<div id="admin-nav" className="collapse navbar-collapse">
+						<ul className="nav navbar-nav navbar-right" onClick={this.hideMenu}>
+
+							<NavLink to="/order/list" activeClassName="active" className='nav-link'>
+								Поръчки
+							</NavLink>
+
+							<NavLink to="/product/list" activeClassName="active" className='nav-link'>
+								Продукти
+							</NavLink>
+
+							<NavLink to="/promos/list" activeClassName="active" className='nav-link'>
+								Промоции
+							</NavLink>
+
+							<NavLink to="/news/list" activeClassName="active" className='nav-link'>
+								Новини
+							</NavLink>
+
+							<NavLink to="/partners/list" activeClassName="active" className='nav-link'>
+								Партньори
+							</NavLink>
+
+							<NavLink to="/videos/list" activeClassName="active" className='nav-link'>
+								Видео
+							</NavLink>
+
+							<NavLink to="/home-content" activeClassName="active" className='nav-link'>
+								Съдържание
+							</NavLink>
+
+							<NavLink to="/home"
+							         id="logout-btn"
+							         activeClassName="active"
+							         className='btn btn-default btn-xs'
+							         onClick={this.logout}>Изход
+							</NavLink>
+
+						</ul>
+					</div>
+				</nav>);
+		}
+
 		return (
 			<nav className="navbar navbar-default navbar-fixed-top" id="main-menu">
 
-				{!isAdmin &&
 				<div className="navbar-brand">
 					<Link to="/home">Podredeni</Link>
 				</div>
-				}
 
-				{!isAdmin &&
 				<button type="button"
 				        className="navbar-toggle collapsed"
 				        data-toggle="collapse"
@@ -83,20 +141,18 @@ class Header extends React.Component {
 					<span className="icon-bar"/>
 					<span className="icon-bar"/>
 				</button>
-				}
 
-				{!isAdmin &&
 				<div className="social-media-icons hidden-xs">
-					<a className="icon" target="_blank" rel="noopener noreferrer" href="https://www.facebook.com/moiteochila/">
+					<a className="icon" target="_blank" rel="noopener noreferrer"
+					   href="https://www.facebook.com/moiteochila/">
 						<i className="fa fa-facebook-official" aria-hidden="true"/>
 					</a>
-					<a className="icon" target="_blank" rel="noopener noreferrer" href="https://www.instagram.com/podredeni.eu">
+					<a className="icon" target="_blank" rel="noopener noreferrer"
+					   href="https://www.instagram.com/podredeni.eu">
 						<i className="fa fa-instagram" aria-hidden="true"/>
 					</a>
 				</div>
-				}
 
-				{!isAdmin &&
 				<div id="user-nav" className="collapse navbar-collapse">
 
 					<ul className="nav navbar-nav navbar-right" onClick={this.hideMenu}>
@@ -139,15 +195,14 @@ class Header extends React.Component {
 						</NavLink>
 
 						<div className="social-media-icons visible-xs">
-							<a className="icon" target="_blank" rel="noopener noreferrer" href="https://www.facebook.com/moiteochila/">
+							<a className="icon" target="_blank" rel="noopener noreferrer"
+							   href="https://www.facebook.com/moiteochila/">
 								<i className="fa fa-facebook-official" aria-hidden="true"/>
 							</a>
 						</div>
 					</ul>
 				</div>
-				}
 
-				{!isAdmin &&
 				<div className="cart-xs">
 					<NavLink to="/cart" activeClassName="active" className='nav-link cart visible-xs'>
 						<i className="fa fa-cart-arrow-down" aria-hidden="true"/>
@@ -156,69 +211,6 @@ class Header extends React.Component {
 						}
 					</NavLink>
 				</div>
-				}
-
-				{/*//Admin Nav*/}
-				{isAdmin && <div className="navbar-brand admin">
-					<span>P</span>
-				</div>}
-
-				{isAdmin &&
-				<button type="button"
-				        className="navbar-toggle collapsed"
-				        data-toggle="collapse"
-				        data-target="#admin-nav"
-				        aria-expanded="false">
-					<span className="sr-only">Toggle navigation</span>
-					<span className="icon-bar"/>
-					<span className="icon-bar"/>
-					<span className="icon-bar"/>
-				</button>
-				}
-
-
-				{isAdmin &&
-				<div id="admin-nav" className="collapse navbar-collapse">
-					<ul className="nav navbar-nav navbar-right" onClick={this.hideMenu}>
-
-						<NavLink to="/order/list" activeClassName="active" className='nav-link'>
-							Поръчки
-						</NavLink>
-
-						<NavLink to="/product/list" activeClassName="active" className='nav-link'>
-							Продукти
-						</NavLink>
-
-						<NavLink to="/promos/list" activeClassName="active" className='nav-link'>
-							Промоции
-						</NavLink>
-
-						<NavLink to="/news/list" activeClassName="active" className='nav-link'>
-							Новини
-						</NavLink>
-
-						<NavLink to="/partners/list" activeClassName="active" className='nav-link'>
-							Партньори
-						</NavLink>
-
-						<NavLink to="/videos/list" activeClassName="active" className='nav-link'>
-							Видео
-						</NavLink>
-
-						<NavLink to="/home-content" activeClassName="active" className='nav-link'>
-							Съдържание
-						</NavLink>
-
-						<NavLink to="/home"
-						         id="logout-btn"
-						         activeClassName="active"
-						         className='btn btn-default'
-						         onClick={this.logout}>Изход
-						</NavLink>
-
-					</ul>
-				</div>
-				}
 
 			</nav>
 		);
@@ -226,3 +218,4 @@ class Header extends React.Component {
 }
 
 export default Header;
+

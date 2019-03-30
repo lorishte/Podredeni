@@ -15,11 +15,11 @@ class TableHead extends React.Component {
                 <th className="text-center">Име</th>
 
 	            {promoType === 'discount' &&
-                <th> Отстъпка </th>
+                <th className="text-center"> Отстъпка </th>
 	            }
 
 	            {promoType === 'product' &&
-                <th> Квота </th>
+                <th className="text-center"> Квота </th>
 	            }
 
                 <th className="text-center">Започва на</th>

@@ -22,7 +22,7 @@ class OrdersList extends React.Component {
 		super(props);
 
 		this.state = {
-			orders: '',
+			orders: [],
 			size: 10,
 			page: 1,
 			sortProperty: 'number',
@@ -35,7 +35,9 @@ class OrdersList extends React.Component {
 			deliveryInfo: '',
 
 			ordersCount: '',
-			pagesCount: ''
+			pagesCount: '',
+
+			loading: true
 		};
 	}
 
@@ -44,29 +46,35 @@ class OrdersList extends React.Component {
 	}
 
 	loadOrders = () => {
-		ordersService
-			.loadOrders(this.state)
-			.then(res => {
-				let ordersCount = Number(res.ordersCount);
-				let size = Number(this.state.size);
 
-				this.setState({
-					orders: res.orders,
-					ordersCount: ordersCount,
-					pagesCount: Math.ceil(ordersCount / size)
+		this.setState({orders: []}, () => {
+			ordersService
+				.loadOrders(this.state)
+				.then(res => {
+
+					let ordersCount = Number(res.ordersCount);
+					let size = Number(this.state.size);
+
+					this.setState({
+						orders: res.orders,
+						ordersCount: ordersCount,
+						pagesCount: Math.ceil(ordersCount / size),
+						loading: false
+					});
+				})
+				.catch(err => {
+					this.toastContainer.error(err.responseText, TOASTR_MESSAGES.error, {
+						closeButton: false,
+					});
 				});
-			})
-			.catch(err => {
-				this.toastContainer.error(err.responseText, TOASTR_MESSAGES.error, {
-					closeButton: false,
-				});
-			});
+		});
 	};
 
 	sort = (sortProperty, descending) => {
 		this.setState({
 			sortProperty: sortProperty,
-			descending: descending
+			descending: descending,
+			loading: true
 		}, () => this.loadOrders());
 	};
 
@@ -80,7 +88,7 @@ class OrdersList extends React.Component {
 	};
 
 	goToPage = (page) => {
-		this.setState({page: page}, () => this.loadOrders());
+		this.setState({page: page, loading: true}, () => this.loadOrders());
 	};
 
 	handleSizeChange = (e) => {
@@ -102,11 +110,12 @@ class OrdersList extends React.Component {
 
 	handleSelect = (key) => {
 
-		this.setState({orders: ''});
+		this.setState({orders: []});
 
 		this.setState({
 			filterProperty: 'status',
-			filterValue: ORDER_STATUS_EN[key]
+			filterValue: ORDER_STATUS_EN[key],
+			loading: true
 		}, () => {
 			this.loadOrders();
 			this.goToPage(1);
@@ -120,9 +129,11 @@ class OrdersList extends React.Component {
 				this.toastContainer.success('Поръчката е обработена.', '', {
 					closeButton: false,
 				});
-				console.log('from change status')
 				setTimeout(() => this.hideDetails(), 2000);
-				this.loadOrders();
+
+				// Filter orders, not reload, to save some time
+				let correctedOrdersList = this.state.orders.filter(e => e.id !== orderId);
+				this.setState({orders: correctedOrdersList});
 			})
 			.catch(err => {
 				this.toastContainer.error(err.responseText, 'Грешка', {
@@ -131,13 +142,11 @@ class OrdersList extends React.Component {
 			});
 	};
 
-
-
 	render () {
 
+		let ordersList = [];
 
-		let ordersList;
-		if (this.state.orders !== '') {
+		if (this.state.orders.length > 0) {
 			ordersList = this.state.orders.map(e => {
 				return <OrderTableRow key={e.id}
 				                      data={e}
@@ -185,41 +194,57 @@ class OrdersList extends React.Component {
 								     title={<span>
 									     <i className="fa fa-arrow-down text-info" aria-hidden="true"/>
 									     <span className="text-hidden-xs">Получени</span>
-									     </span>}>
+									     </span>}
+								     disabled={this.state.loading}>
+
 									<OrdersTable
 										changeClass={this.changeClass}
 										sort={this.sort}
-										ordersList={ordersList}/>
+										ordersList={ordersList}
+										tabName="получени"
+										loading={this.state.loading}/>
 								</Tab>
 
 								<Tab eventKey={1} title={<span>
 									     <i className="fa fa-check text-success" aria-hidden="true"/>
 									     <span className="text-hidden-xs">Потвърдени</span>
-									     </span>}>
+									     </span>}
+								     disabled={this.state.loading}>
+
 									<OrdersTable
 										changeClass={this.changeClass}
 										sort={this.sort}
-										ordersList={ordersList}/>
+										ordersList={ordersList}
+										loading={this.state.loading}
+										tabName="потвърдени"/>
 								</Tab>
 
 								<Tab eventKey={2} title={<span>
 									     <i className="fa fa-arrow-up  text-warning" aria-hidden="true"/>
 									     <span className="text-hidden-xs">Изпратени</span>
-									     </span>}>
+									     </span>}
+								     disabled={this.state.loading}>
+
 									<OrdersTable
 										changeClass={this.changeClass}
 										sort={this.sort}
-										ordersList={ordersList}/>
+										ordersList={ordersList}
+										loading={this.state.loading}
+										tabName="изпратени"/>
 								</Tab>
 
 								<Tab eventKey={3} title={<span>
 									     <i className="fa fa-close text-danger" aria-hidden="true"/>
 									     <span className="text-hidden-xs">Отказани</span>
-									     </span>}>
+									     </span>}
+								     disabled={this.state.loading}>
+
 									<OrdersTable
 										changeClass={this.changeClass}
 										sort={this.sort}
-										ordersList={ordersList}/>
+										ordersList={ordersList}
+										loading={this.state.loading}
+										tabName="отказани"/>
 								</Tab>
 
 								{this.state.size !== '0' && this.state.ordersCount !== 0 &&

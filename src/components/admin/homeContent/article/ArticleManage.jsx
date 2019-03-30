@@ -1,100 +1,73 @@
 import React from 'react';
-import { ToastContainer } from 'react-toastr';
 
 // Helpers
-import { Grid, Row, Col, Button } from 'react-bootstrap';
+import { Button } from 'react-bootstrap';
 
 // Partials
-import FormInputField from "../../../common/formComponents/FormInputField";
-import FormTextareaField from "../../../common/formComponents/FormTextareaField";
+import FormInputField from '../../../common/formComponents/FormInputField';
+import FormTextareaField from '../../../common/formComponents/FormTextareaField';
 
 // Constants
-import { TOASTR_MESSAGES, BUTTONS_BG } from '../../../../data/constants/componentConstants';
-
-import homeContentService from '../../../../services/homeContent/homeContentService';
-
-class ArticleManage extends React.Component {
-    constructor (props) {
-        super(props);
-    }
-
-    saveChanges = () => {
-
-        homeContentService
-            .modifyArticle(this.props.data)
-            .then(res => {
-                this.toastContainer.success(TOASTR_MESSAGES.successHomeContentModification, '', {
-                    closeButton: false,
-                });
-            })
-            .catch(err => {
-            this.toastContainer.error(err.responseText, TOASTR_MESSAGES.error, {
-                closeButton: false,
-            });
-        });
-
-    };
+import { BUTTONS_BG } from '../../../../data/constants/componentConstants';
 
 
-    render () {
 
-        const {sectionHeading, sectionContent, articleHeading, articleContent} = this.props.data;
+function ArticleManage (props) {
 
-        return (
-            <Grid id="article-modify">
+	const {sectionHeading, sectionContent, articleHeading, articleContent} = props.data;
 
-                <ToastContainer
-                    ref={ref => this.toastContainer = ref}
-                    className="toast-bottom-right"
-                />
+	return (
 
-                <Row>
-                    <FormInputField
-                        type='text'
-                        name='sectionHeading'
-                        label='Заглавие на секция'
-                        value={sectionHeading}
-                        required={true}
-                        disabled={false}
-                        onChange={this.props.handleChange}
-                    />
+		<div>
+			<FormInputField
+				type='text'
+				name='sectionHeading'
+				label='Заглавие на секция'
+				value={sectionHeading}
+				required={true}
+				disabled={false}
+				onChange={props.handleChange}
+			/>
 
-                    <FormTextareaField
-                        componentClass='textarea'
-                        label='Съдържание на секция'
-                        name='sectionContent'
-                        value={sectionContent}
-                        onChange={this.props.handleChange}
-                        required={true}
-                    />
+			<FormTextareaField
+				componentClass='textarea'
+				label='Съдържание на секция'
+				rows={10}
+				name='sectionContent'
+				value={sectionContent}
+				onChange={props.handleChange}
+				required={true}
+			/>
 
-                    <FormInputField
-                        type='text'
-                        name='articleHeading'
-                        label='Заглавие на статия'
-                        value={articleHeading}
-                        required={true}
-                        disabled={false}
-                        onChange={this.props.handleChange}
-                    />
+			<FormInputField
+				type='text'
+				name='articleHeading'
+				label='Заглавие на статия'
+				value={articleHeading}
+				required={true}
+				disabled={false}
+				onChange={props.handleChange}
+			/>
 
-                    <FormTextareaField
-                        componentClass='textarea'
-                        label='Съдържание на статия'
-                        name='articleContent'
-                        value={articleContent}
-                        onChange={this.props.handleChange}
-                        required={true}
-                    />
-                </Row>
+			<FormTextareaField
+				componentClass='textarea'
+				label='Съдържание на статия'
+				rows={10}
+				name='articleContent'
+				value={articleContent}
+				onChange={props.handleChange}
+				required={true}
+			/>
 
-                <Col xs={12} className="text-center">
-                    <Button onClick={this.saveChanges}>{BUTTONS_BG.saveChanges}</Button>
-                </Col>
 
-            </Grid>
-        );
-    }
+			<div className="text-center buttons-container">
+				<button className="btn btn-success" onClick={props.saveChanges}>{BUTTONS_BG.saveChanges}</button>
+			</div>
+
+		</div>
+
+	);
+
 }
 
 export default ArticleManage;

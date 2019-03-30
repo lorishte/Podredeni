@@ -4,32 +4,30 @@ import Header from './components/common/Header';
 import Footer from './components/common/Footer';
 import Routes from './components/routes/Routes';
 
+import './styles/colors.css';
+import './styles/mixins.css';
 import './styles/main.css';
+import './styles/admin-styles.css';
+import './styles/queries.css';
+
 import 'react-confirm-alert/src/react-confirm-alert.css';
 
 // require('dotenv').config()
 
+function App () {
 
-class App extends React.Component {
-	constructor (props) {
-		super(props);
-	}
+	return (
+		<div>
+			<Header/>
 
-	render () {
-		return (
+			<main>
+				<Routes />
+			</main>
 
-			<div>
-				<Header/>
+			<Footer/>
+		</div>
+	);
 
-				<main>
-					<Routes />
-				</main>
-
-				<Footer/>
-			</div>
-
-		);
-	}
 }
 
 export default App;
