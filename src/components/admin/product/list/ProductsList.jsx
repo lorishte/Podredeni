@@ -128,7 +128,10 @@ class ProductsList extends React.Component {
 				<Row>
 					<Col xs={12} className="buttons-container">
 						<Link to="/product/create" className="btn btn-sm btn-primary">Нов Продукт</Link>
+
+						<Link to="/category/list" className="btn btn-sm btn-primary">Мениджър категории</Link>
 					</Col>
+
 				</Row>
 
 				<Row>

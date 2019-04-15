@@ -57,6 +57,9 @@ import HomeContent from '../admin/homeContent/HomeContent';
 import CarouselItemCreate from '../admin/homeContent/carousel/partials/CarouselItemCreate'
 import CarouselItemEdit from '../admin/homeContent/carousel/partials/CarouselItemEdit';
 
+// Admin Categories
+import CategoriesList from '../admin/category/list/CategoriesList';
+
 // ERRORS and CONFIRMATIONS
 import OrderReceived from '../common/confirmation/OrderReceived';
 import Error from '../common/errors/Error';
@@ -96,6 +99,8 @@ let Routes = () => {
 			<PrivateRoute path='/product/create' component={CreateProduct}/>
 			<PrivateRoute path='/product/edit/:id' component={CreateProduct}/>
 			<PrivateRoute path='/product/list' component={AdminProductsList}/>
+
+			<PrivateRoute path='/category/list' component={CategoriesList}/>
 
 			<PrivateRoute path='/promos/list' component={AdminPromosList}/>
 			<PrivateRoute path='/promos/edit-discount-promo/:id' component={EditCreateDiscountPromo}/>

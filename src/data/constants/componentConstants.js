@@ -8,11 +8,15 @@ const MAIN_CAROUSEL_TIMER_INTERVAL = 5000;
 
 const ADMIN_PRODUCTS_FILTER_OPTIONS = {'name': 'име', 'number': 'номер'};
 
+const ADMIN_CATEGORIES_FILTER_OPTIONS = {'name': 'име'};
+
 const ELEMENTS_ON_PAGE = {10: 10, 20: 20, 30: 30, 40: 40, 50: 50};
 
 const ORDER_STATUS_BG = {0: 'Получена', 1: 'Потвърдена', 2: 'Изпратена', 3: 'Отказана'};
 
 const ORDER_STATUS_EN = {0: 'ordered', 1: 'confirmed', 2: 'dispatched', 3: 'cancelled'};
+
+const CATEGORY_OR_SUBCATEGORY = {'Категория': false, 'Подкатегория': true};
 
 const LABELS_BG = {
 	number: '#',
@@ -286,6 +290,8 @@ export {
 	MAIN_CAROUSEL_TIMER_INTERVAL,
 	TESTIMONIALS_TIMER_INTERVAL,
 	ADMIN_PRODUCTS_FILTER_OPTIONS,
+    ADMIN_CATEGORIES_FILTER_OPTIONS,
+    CATEGORY_OR_SUBCATEGORY,
 	ELEMENTS_ON_PAGE,
 	ORDER_STATUS_BG,
 	ORDER_STATUS_EN,
