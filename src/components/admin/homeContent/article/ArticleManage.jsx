@@ -1,8 +1,5 @@
 import React from 'react';
 
-// Helpers
-import { Button } from 'react-bootstrap';
-
 // Partials
 import FormInputField from '../../../common/formComponents/FormInputField';
 import FormTextareaField from '../../../common/formComponents/FormTextareaField';

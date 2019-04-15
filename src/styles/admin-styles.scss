@@ -1,0 +1,299 @@
+@import "colors";
+@import "mixins";
+
+.tab-content {
+  background-color: #fff;
+  padding: 6px 20px;
+  border: 1px solid #ddd;
+  border-top: none;
+}
+
+// Admin: Create - Edit product
+#create-edit-product {
+  .buttons-container {
+    padding: 10px 0 50px 0;
+  }
+
+  .image-container {
+    position: relative;
+    display: inline-block;
+    margin: 0 20px 10px 0;
+
+    .image-thumbnail {
+      height: 80px;
+      width: auto;
+    }
+
+    .deleteImgBtn {
+      position: absolute;
+      @include flex;
+      @include align-items(center);
+      @include justify-content(center);
+
+      width: 25px;
+      height: 25px;
+      border: 1px solid $light-grey;
+      color: $dark-grey;
+      background-color: $white;
+      border-radius: 50%;
+      right: -8px;
+      top: -8px;
+      font-size: .8em;
+      font-weight: 600;
+      @include transition;
+
+      &:hover {
+        background-color: $light-grey;
+      }
+    }
+  }
+
+}
+
+//Admin: Orders
+#orders {
+
+  .filters-container {
+    @include flex;
+    @include align-items(center);
+    @include flex-wrap(wrap);
+    background: #fff;
+    padding: 10px;
+    border: 1px solid $light-grey;
+  }
+
+  #order-list-tabs {
+    .nav-tabs {
+      li {
+        width: auto;
+        min-width: 80px;
+        text-align: center;
+      }
+    }
+  }
+
+  .order-info {
+    display: none;
+    position: absolute;
+    width: 60%;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+
+    background-color: $white;
+    border-radius: 3px;
+    padding: 20px 30px;
+
+    -webkit-box-shadow: 10px 10px 5px -5px rgba(0, 0, 0, 0.3);
+    -moz-box-shadow: 10px 10px 5px -5px rgba(0, 0, 0, 0.3);
+    box-shadow: 10px 10px 5px -5px rgba(0, 0, 0, 0.3);
+
+    z-index: 2001;
+  }
+
+  .visible {
+    display: block;
+  }
+
+  .overlay {
+    width: 100%;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, .3);
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 2000;
+  }
+
+  .close-btn {
+    position: absolute;
+    top: 10px;
+    right: 5px;
+  }
+
+  .order-info-table-header {
+    background-color: #D8ECF6;
+    padding: 10px 0;
+    margin-bottom: 10px;
+  }
+
+  .promo-label {
+    @include inline-flex;
+    @include align-items(center);
+    @include justify-content(center);
+
+    margin-left: 5px;
+    padding: 3px 5px;
+
+    background-color: $danger;
+    color: $white;
+    border-radius: 10%;
+
+    font-size: .9em;
+  }
+
+  .old-price {
+    text-decoration: line-through;
+    text-decoration-color: $danger;
+    font-size: .85em;
+    color: $dark-grey;
+    font-weight: 400;
+    display: block;
+  }
+
+  .label {
+    margin-right: 5px;
+    display: inline-block;
+    white-space: pre-wrap;
+    text-align: left;
+    line-height: 1.3em;
+  }
+
+}
+
+//Admin: Promos
+#admin-promos-table {
+  margin-top: 15px;
+}
+
+#create-edit-promo {
+
+  h3 {
+    margin-top: 25px;
+  }
+  .smaller {
+    font-size: 1.5em;
+  }
+
+  #inclusive-checkbox {
+    margin-top: 35px;
+  }
+
+  .product-tab {
+    position: relative;
+    height: 68px;
+    font-weight: 400;
+    font-size: .8em;
+    padding: 8px 5px 8px 70px;
+    margin: 0 5px 5px 0;
+    background-color: $white;
+  }
+
+  .selected {
+    //border: 1px solid $admin-primary;
+    background-color: $danger;
+    color: $white;
+  }
+
+  .image-thumbnail {
+    position: absolute;
+    top: 4px;
+    left: 4px;
+    height: 60px;
+    width: 60px;
+    z-index: 0;
+  }
+}
+
+//Admin: Videos
+.sortable-video {
+
+  @include flex;
+  @include align-items(center);
+  @include justify-content(space-between);
+
+  @include no-text-select;
+
+  padding: 5px 10px;
+  margin-bottom: 8px;
+  background: $white;
+
+  &:last-of-type {
+    margin-bottom: 0;
+  }
+
+  &:hover {
+    cursor: grab;
+  }
+}
+
+#videos-container {
+  height: 60%;
+  overflow: hidden scroll;
+  padding: 10px;
+  margin-bottom: 15px;
+}
+
+//Admin: Partners
+#admin-partners {
+  .partner-row {
+    @include no-text-select;
+
+    height: 40px;
+
+    &:hover {
+      cursor: grab;
+    }
+
+    .image-thumbnail {
+      width: auto;
+      max-height: 20px;
+    }
+  }
+}
+
+#admin-sortable {
+  height: 60vh;
+  overflow: hidden scroll;
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+
+// When sorting table
+.partner-image-thumbnail {
+  width: auto;
+  max-height: 20px;
+}
+
+// Carousel
+
+#carouselItem-edit {
+  .carousel-image {
+    margin-bottom: 25px;
+  }
+}
+
+#carousel-content {
+
+  #carousel-items-list {
+    @include flex;
+    @include flex-wrap(wrap);
+
+    .carousel-item {
+      position: relative;
+      width: 250px;
+      height: 150px;
+      margin: 0 25px 25px 0;
+
+      .carousel-image {
+        height: 100%;
+        overflow: hidden;
+
+        .img-fit {
+          object-fit: cover;
+          height: 100%;
+        }
+      }
+
+      .controls {
+        position: absolute;
+        bottom: 10px;
+        right: 10px;
+        @include flex;
+        @include align-items(center);
+      }
+    }
+  }
+}
