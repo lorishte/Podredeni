@@ -1,15 +1,15 @@
 import React from 'react';
-import {Link} from 'react-router-dom';
 
 import {ToastContainer} from 'react-toastr';
 
-import {Grid, Row, Col, Table} from 'react-bootstrap';
+import {Button, Grid, Row, Col, Table, Tabs, Tab} from 'react-bootstrap';
 
 import TableHead from './partials/TableHead';
 import CategoryTableRow from './partials/CategoryTableRow';
 import Paging from '../../../common/pagination/Paging';
 import FormSelectField from '../../../common/formComponents/FormSelectField';
 import FormInputWithDropdown from '../../../common/formComponents/FormInputWithDropdown';
+import CreateCategoryForm from './partials/CreateCategoryForm'
 
 import categoriesService from '../../../../services/categories/categoryService';
 
@@ -38,8 +38,11 @@ class CategoriesList extends React.Component {
             productsCount: '',
             pagesCount: '',
             loading: true,
-            isSubcategory: false
+            key: 0,
+            newCategoryName: ''
         };
+
+        this.screen = React.createRef();
     }
 
     timer = null;
@@ -50,7 +53,7 @@ class CategoriesList extends React.Component {
 
     loadCategories = () => {
 
-        let isSubcategory = this.state.isSubcategory;
+        let isSubcategory = this.state.key = 0 ? false : true;
 
         categoriesService
             .loadCategories(this.state, isSubcategory)
@@ -104,11 +107,7 @@ class CategoriesList extends React.Component {
 
     handleTypeChange = (e) => {
 
-        if (e.target.value === '') return;
-
-        let isCategory = CATEGORY_OR_SUBCATEGORY[e.target.value];
-
-        this.setState({isSubcategory: isCategory}, () => this.goToPage(1));
+        this.setState({isSubcategory: e}, () => this.goToPage(1));
     };
 
     handleFilterProperty = (е) => {
@@ -124,6 +123,35 @@ class CategoriesList extends React.Component {
         this.timer = setTimeout(() => this.goToPage(1), FILTER_INPUT_WAIT_INTERVAL);
     };
 
+    handleSelect = (key) => {
+        this.setState({key: key, filterValue: '', page: 1},() => this.goToPage(1));
+    };
+
+    updateNewCategoryName = (e) => {
+        this.setState({newCategoryName: e.target.value});
+	};
+    
+	createCategory = () => {
+
+        let isSubcategory = this.state.key = 0 ? false : true;
+
+		categoriesService.createCategory(isSubcategory, this.state.newCategoryName)
+		.then(res => {
+
+
+            this.setState({newCategoryName: '', loading: true}, () => this.goToPage(1))
+
+		})
+		.catch(err => {
+
+            this.setState({newCategoryName: ''})
+            
+			this.toastContainer.error(err.responseText, TOASTR_MESSAGES.error, {
+				closeButton: false,
+			});
+        })
+	}
+
     render() {
 
         let categoriesList = [];
@@ -135,9 +163,6 @@ class CategoriesList extends React.Component {
             });
         }
 
-
-        let isCategoryValue = this.state.isSubcategory ? "Подкатегория" : "Категория";
-
         return (
             <Grid>
 
@@ -146,73 +171,125 @@ class CategoriesList extends React.Component {
                     className="toast-bottom-right"
                 />
 
+                <Tabs defaultActiveKey={this.state.key}
+				      id="admin-category-table"
+				      onSelect={this.handleSelect}>
 
-                <Row>
+                                      
+                    <CreateCategoryForm
+                    text={this.state.newCategoryName}
+                    createCategory={this.createCategory}
+                    updateNewCategoryName={this.updateNewCategoryName}
+                    ></CreateCategoryForm>
 
-                    <h5>
-                        Покажи:
 
-                        <FormSelectField
-                            name="isSubcategory"
-                            value={isCategoryValue}
-                            optionsList={CATEGORY_OR_SUBCATEGORY}
-                            required={false}
-                            onChange={this.handleTypeChange}/>
-                    </h5>
+					<Tab eventKey={0}
+					     title='Категория'>
+                        <Row>
 
-                </Row>
-                <Row>
-                    <Col xs={12} className="buttons-container">
-                        <Link to="/category/create" className="btn btn-sm btn-primary">Новa
-                            категория/подкатегория</Link>
-                    </Col>
+                        </Row>
 
-                </Row>
+                        <Row>
+                            <Col xs={4} sm={3} md={2}>
+                                <FormSelectField
+                                    name="size"
+                                    value={this.state.size}
+                                    optionsList={ELEMENTS_ON_PAGE}
+                                    required={false}
+                                    onChange={this.handleSizeChange}/>
+                            </Col>
 
-                <Row>
-                    <Col xs={4} sm={3} md={2}>
-                        <FormSelectField
-                            name="size"
-                            value={this.state.size}
-                            optionsList={ELEMENTS_ON_PAGE}
-                            required={false}
-                            onChange={this.handleSizeChange}/>
-                    </Col>
+                            <Col xs={8} sm={6}>
+                                <FormInputWithDropdown
+                                    // input
+                                    inputName="filterValue"
+                                    filterValue={this.state.filterValue}
+                                    placeholder="филтър по"
+                                    onChange={this.handleFilterValue}
+                                    onKeyDown={this.handleKeyDown}
+                                    // dropdown
+                                    filterProperty={this.state.filterProperty}
+                                    dropdownName="filterProperty"
+                                    onSelect={this.handleFilterProperty}
+                                    // dropdown options
+                                    optionsList={ADMIN_CATEGORIES_FILTER_OPTIONS}/>
+                            </Col>
+                        </Row>
 
-                    <Col xs={8} sm={6}>
-                        <FormInputWithDropdown
-                            // input
-                            inputName="filterValue"
-                            filterValue={this.state.filterValue}
-                            placeholder="филтър по"
-                            onChange={this.handleFilterValue}
-                            onKeyDown={this.handleKeyDown}
-                            // dropdown
-                            filterProperty={this.state.filterProperty}
-                            dropdownName="filterProperty"
-                            onSelect={this.handleFilterProperty}
-                            // dropdown options
-                            optionsList={ADMIN_CATEGORIES_FILTER_OPTIONS}/>
-                    </Col>
-                </Row>
+                        {this.state.loading && <div className="admin-loader"/> }
 
-                {this.state.loading && <div className="admin-loader"/> }
+                        <Table striped bordered condensed hover id="admin-categories-table">
+                            <TableHead
+                                changeClass={this.changeClass}
+                                sort={this.sort}
+                                handleChange={this.handleSizeChange}/>
+                            <tbody>
+                            {categoriesList}
+                            </tbody>
+                        </Table>
 
-                <Table striped bordered condensed hover id="admin-categories-table">
-                    <TableHead
-                        changeClass={this.changeClass}
-                        sort={this.sort}
-                        handleChange={this.handleSizeChange}/>
-                    <tbody>
-                    {categoriesList}
-                    </tbody>
-                </Table>
+                        {this.state.size !== '0' &&
+                        <Paging
+                            active={Number(this.state.page)}
+                            pagesCount={Number(this.state.pagesCount)}
+                            goToPage={this.goToPage}/>}
 
-                {this.state.size !== '0' &&
-                <Paging
-                    active={Number(this.state.page)}
-                    pagesCount={Number(this.state.pagesCount)}
-                    goToPage={this.goToPage}/>}
+					</Tab>
+
+					<Tab eventKey={1}
+					     title='Подкатегория'>
+                        <Row>
+
+
+                        </Row>
+
+                        <Row>
+                            <Col xs={4} sm={3} md={2}>
+                                <FormSelectField
+                                    name="size"
+                                    value={this.state.size}
+                                    optionsList={ELEMENTS_ON_PAGE}
+                                    required={false}
+                                    onChange={this.handleSizeChange}/>
+                            </Col>
+
+                            <Col xs={8} sm={6}>
+                                <FormInputWithDropdown
+                                    // input
+                                    inputName="filterValue"
+                                    filterValue={this.state.filterValue}
+                                    placeholder="филтър по"
+                                    onChange={this.handleFilterValue}
+                                    onKeyDown={this.handleKeyDown}
+                                    // dropdown
+                                    filterProperty={this.state.filterProperty}
+                                    dropdownName="filterProperty"
+                                    onSelect={this.handleFilterProperty}
+                                    // dropdown options
+                                    optionsList={ADMIN_CATEGORIES_FILTER_OPTIONS}/>
+                            </Col>
+                        </Row>
+
+                        {this.state.loading && <div className="admin-loader"/> }
+
+                        <Table striped bordered condensed hover id="admin-categories-table">
+                            <TableHead
+                                changeClass={this.changeClass}
+                                sort={this.sort}
+                                handleChange={this.handleSizeChange}/>
+                            <tbody>
+                            {categoriesList}
+                            </tbody>
+                        </Table>
+
+                        {this.state.size !== '0' &&
+                        <Paging
+                            active={Number(this.state.page)}
+                            pagesCount={Number(this.state.pagesCount)}
+                            goToPage={this.goToPage}/>}
+                            </Tab>
+
+				</Tabs>
             </Grid>
         );
     }
