@@ -8,8 +8,11 @@ import AddImageForm from './partials/AddImageFrom';
 
 import productsService from '../../../../services/products/productsService';
 import promosService from '../../../../services/promos/discountPromosService';
+import categoriesService from '../../../../services/categories/categoryService'
 
 import {TOASTR_MESSAGES, REDIRECT_DELAY} from '../../../../data/constants/componentConstants';
+import MultiSelect from "./partials/MultiSelect";
+
 
 
 class CreateProduct extends React.Component {
@@ -24,7 +27,11 @@ class CreateProduct extends React.Component {
             isTopSeller: false,
             isBlocked: false,
 	        discountPromos: [],
-            discount: ''
+            discount: '',
+            selectedCategories: [],
+            selectedSubcategories: [],
+            categories: [],
+            subcategories: []
         };
     }
 
@@ -39,7 +46,37 @@ class CreateProduct extends React.Component {
         }
 
         this.loadProductData();
+
+        this.loadCategories();
+
+        this.loadSubcategories();
     }
+
+    loadCategories = () => {
+        categoriesService.loadCategories()
+            .then(res => {
+
+                this.setState({categories: res});
+            })
+            .catch(err => {
+                this.toastContainer.error(err.responseText, TOASTR_MESSAGES.error, {
+                    closeButton: false,
+                });
+            });
+    };
+
+    loadSubcategories = () => {
+        categoriesService.loadCategories(null, true)
+            .then(res => {
+
+                this.setState({subcategories: res});
+            })
+            .catch(err => {
+                this.toastContainer.error(err.responseText, TOASTR_MESSAGES.error, {
+                    closeButton: false,
+                });
+            });
+    };
 
     loadPromoDiscounts = (promoDiscountsIds) => {
 
@@ -70,10 +107,14 @@ class CreateProduct extends React.Component {
                     imageUrls: p.images.reverse(),
                     isTopSeller: p.isTopSeller,
                     isBlocked: p.isBlocked,
-                    discount: p.discount
+                    discount: p.discount,
+                    selectedCategories: p.categories,
+                    selectedSubcategories: p.subcategories
                 });
 
                 this.loadPromoDiscounts(p.promoDiscountsIds);
+
+                console.log(this.state)
             })
             .catch(err => {
                 this.toastContainer.error(err.responseText, TOASTR_MESSAGES.error, {
@@ -226,56 +267,71 @@ class CreateProduct extends React.Component {
                         </Col>
                     </Row>
 
-                    <Row>
-                        <Col md={5} sm={8}>
-                            <FormTextareaField
-                                label="Описание"
-                                name="description"
-                                value={this.state.description}
-                                required={true}
-                                disabled={false}
-                                onChange={this.handleChange}/>
-                        </Col>
-                    </Row>
+                    <Col lg={8} md={8} sm={12}>
+                        <Row>
+                            <Col md={5} sm={8}>
+                                <FormTextareaField
+                                    label="Описание"
+                                    name="description"
+                                    value={this.state.description}
+                                    required={true}
+                                    disabled={false}
+                                    onChange={this.handleChange}/>
+                            </Col>
+                        </Row>
 
 
-                    <Row>
-                        <Col md={2} sm={5} xs={6}>
-                            <FormInputField
-                                label="Цена"
-                                name="price"
-                                type="number"
-                                step="0.1"
-                                value={this.state.price}
-                                required={false}
-                                disabled={false}
-                                onChange={this.handleChange}/>
-                        </Col>
-                    </Row>
+                        <Row>
+                            <Col md={2} sm={5} xs={6}>
+                                <FormInputField
+                                    label="Цена"
+                                    name="price"
+                                    type="number"
+                                    step="0.1"
+                                    value={this.state.price}
+                                    required={false}
+                                    disabled={false}
+                                    onChange={this.handleChange}/>
+                            </Col>
+                        </Row>
 
-                    <Row>
-                        <h4 className="text-danger">Активни промоции</h4>
+                        <Row>
+                            <h4 className="text-danger">Активни промоции</h4>
 
-                        {promos}
+                            {promos}
 
-                        <h4 className="text-danger">Цена след отстъпки</h4>
-                        <p>
-                            {priceAfterDiscount}
-                        </p>
-                    </Row>
+                            <h4 className="text-danger">Цена след отстъпки</h4>
+                            <p>
+                                {priceAfterDiscount}
+                            </p>
+                        </Row>
 
-                    <Row>
-                        <Col xs={12}>
-                            {images}
-                        </Col>
+                        <Row>
+                            <Col xs={12}>
+                                {images}
+                            </Col>
 
-                        <Col xs={12} md={6} sm={12}>
-                            <AddImageForm
-                                label="Добави снимка"
-                                addImage={this.addImage}/>
-                        </Col>
-                    </Row>
+                            <Col xs={12} md={6} sm={12}>
+                                <AddImageForm
+                                    label="Добави снимка"
+                                    addImage={this.addImage}/>
+                            </Col>
+                        </Row>
+                    </Col>
 
+                    <Col lg={4} md={4} sm={12}>
+                        <Row>
+
+
+
+
+                            <MultiSelect/>
+
+
+
+
+                        </Row>
+                    </Col>
 
                     <Row className="buttons-container">
                         <Col xs={12}>
@@ -283,7 +339,6 @@ class CreateProduct extends React.Component {
                             <Button bsStyle='primary' type="submit">Потвърди</Button>
                         </Col>
                     </Row>
-
                 </form>
             </Grid>
         );

@@ -1,5 +1,5 @@
 import React from 'react';
-import {Link} from 'react-router-dom';
+import {Button} from 'react-bootstrap';
 
 class CategoryTableRow extends React.Component {
     constructor (props) {
@@ -8,18 +8,22 @@ class CategoryTableRow extends React.Component {
 
     render () {
 
-        let c = this.props.data;
+        const {data, onEditButtonClick, onDeleteButtonClick} = this.props;
+
         return (
             <tr className="text-center">
 
                 <td className="text-left">
-                    {c.name}
+                    {data.name}
                 </td>
 
                 <td className="text-center">
-                    <Link to={'/category/edit/' + c.id} className="btn btn-success btn-xs">
+                    <Button onClick={() => onEditButtonClick(data.id, data.name)} className="btn btn-success btn-xs">
                         <i className="fa fa-pencil" aria-hidden="true"/>
-                    </Link>
+                    </Button>
+                    <Button onClick={() => onDeleteButtonClick(data.id)} className="btn btn-danger btn-xs">
+                        <i className="fa fa-eraser" aria-hidden="true"/>
+                    </Button>
                 </td>
             </tr>
 

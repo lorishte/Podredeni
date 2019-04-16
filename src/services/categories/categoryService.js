@@ -10,6 +10,14 @@ export default {
 
         let endPoint = GetEndPoint(isSubcategory);
 
+        if(!state) {
+
+            endPoint += '/all';
+
+            return requesterService
+                .get(endPoint);
+        }
+
         let query =
             '?page=' + state.page +
             '&size=' + state.size +
@@ -44,6 +52,15 @@ export default {
 
         return requesterService
             .post(endPoint, auth, categoryDetails);
+    },
+
+    deleteCategory: (isSubcategory, categoryId) => {
+        let endPointId = GetEndPoint(isSubcategory) + '/' + categoryId;
+
+        console.log(endPointId);
+
+        return requesterService
+            .remove(endPointId);
     }
 };
 

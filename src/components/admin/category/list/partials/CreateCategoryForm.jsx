@@ -8,7 +8,7 @@ class CreateCategoryForm extends React.Component {
 	}
 
 	render () {
-		const {text, label, createCategory, updateNewCategoryName } = this.props;
+		const {btnLabel, text, label, createCategory, updateNewCategoryName } = this.props;
 
 		return (
 			<FormGroup>
@@ -16,7 +16,7 @@ class CreateCategoryForm extends React.Component {
 				<InputGroup>
 					<FormControl onChange={updateNewCategoryName} type="text" value={text}/>
 					< InputGroup.Button >
-						< Button className={'btn btn-primary'} onClick={createCategory}>Създай</Button>
+						< Button className={'btn btn-primary'} onClick={createCategory}>{btnLabel}</Button>
 					</InputGroup.Button>
 				</InputGroup>
 			</FormGroup>

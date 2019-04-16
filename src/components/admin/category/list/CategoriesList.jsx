@@ -38,11 +38,10 @@ class CategoriesList extends React.Component {
             productsCount: '',
             pagesCount: '',
             loading: true,
-            key: 0,
-            newCategoryName: ''
+            key: false,
+            newCategoryName: '',
+            currentCategoryId: ''
         };
-
-        this.screen = React.createRef();
     }
 
     timer = null;
@@ -53,7 +52,7 @@ class CategoriesList extends React.Component {
 
     loadCategories = () => {
 
-        let isSubcategory = this.state.key = 0 ? false : true;
+        let isSubcategory = this.state.key;
 
         categoriesService
             .loadCategories(this.state, isSubcategory)
@@ -105,11 +104,6 @@ class CategoriesList extends React.Component {
         this.setState({size: e.target.value}, () => this.goToPage(1));
     };
 
-    handleTypeChange = (e) => {
-
-        this.setState({isSubcategory: e}, () => this.goToPage(1));
-    };
-
     handleFilterProperty = (е) => {
         this.setState({filterValue: '', filterProperty: е});
     };
@@ -124,67 +118,105 @@ class CategoriesList extends React.Component {
     };
 
     handleSelect = (key) => {
-        this.setState({key: key, filterValue: '', page: 1},() => this.goToPage(1));
+        this.setState({key: key, filterValue: '', page: 1}, () => this.goToPage(1));
     };
 
     updateNewCategoryName = (e) => {
         this.setState({newCategoryName: e.target.value});
-	};
-    
-	createCategory = () => {
+    };
 
-        let isSubcategory = this.state.key = 0 ? false : true;
+    createCategory = () => {
 
-		categoriesService.createCategory(isSubcategory, this.state.newCategoryName)
-		.then(res => {
+        let isSubcategory = this.state.key;
 
+        if (this.state.currentCategoryId === '') {
+            categoriesService.createCategory(isSubcategory, this.state.newCategoryName)
+                .then(res => {
 
-            this.setState({newCategoryName: '', loading: true}, () => this.goToPage(1))
+                    this.setState({newCategoryName: '', loading: true}, () => this.goToPage(1))
 
-		})
-		.catch(err => {
+                })
+                .catch(err => {
 
-            this.setState({newCategoryName: ''})
-            
-			this.toastContainer.error(err.responseText, TOASTR_MESSAGES.error, {
-				closeButton: false,
-			});
-        })
-	}
+                    this.setState({newCategoryName: ''});
+
+                    this.toastContainer.error(err.responseText, TOASTR_MESSAGES.error, {
+                        closeButton: false,
+                    });
+                })
+        } else{
+            categoriesService.updateCategory(isSubcategory, this.state.currentCategoryId, this.state.newCategoryName)
+                .then(res => {
+                    this.setState({newCategoryName: '', currentCategoryId: '', loading: true}, () => this.goToPage(1))
+                })
+                .catch(err => {
+
+                    this.setState({newCategoryName: '', currentCategoryId: ''});
+
+                    this.toastContainer.error(err.responseText, TOASTR_MESSAGES.error, {
+                        closeButton: false,
+                    });
+                })
+        }
+    };
+
+    setEdit = (id, name) => {
+
+        this.setState({newCategoryName: name, currentCategoryId: id});
+    };
+
+    deleteCategory = (id) => {
+
+        let isSubcategory = this.state.key;
+
+        categoriesService.deleteCategory(isSubcategory, id)
+            .then(res => {
+
+                this.setState({loading: true}, () => this.goToPage(1))
+
+            })
+            .catch(err => {
+
+                this.toastContainer.error(err.responseText, TOASTR_MESSAGES.error, {
+                    closeButton: false,
+                });
+            })
+    };
 
     render() {
 
         let categoriesList = [];
 
+        let btnLabel = this.state.currentCategoryId === '' ? 'Създай' : 'Промени';
+
         if (this.state.categories) {
 
             categoriesList = this.state.categories.map(e => {
-                return <CategoryTableRow key={e.id} data={e}/>;
+                return <CategoryTableRow onDeleteButtonClick={this.deleteCategory} onEditButtonClick={this.setEdit} key={e.id} data={e}/>;
             });
         }
 
         return (
             <Grid>
-
                 <ToastContainer
                     ref={ref => this.toastContainer = ref}
                     className="toast-bottom-right"
                 />
 
                 <Tabs defaultActiveKey={this.state.key}
-				      id="admin-category-table"
-				      onSelect={this.handleSelect}>
+                      id="admin-category-table"
+                      onSelect={this.handleSelect}>
 
-                                      
+
                     <CreateCategoryForm
-                    text={this.state.newCategoryName}
-                    createCategory={this.createCategory}
-                    updateNewCategoryName={this.updateNewCategoryName}
-                    ></CreateCategoryForm>
+                        btnLabel={btnLabel}
+                        text={this.state.newCategoryName}
+                        createCategory={this.createCategory}
+                        updateNewCategoryName={this.updateNewCategoryName}/>
 
 
-					<Tab eventKey={0}
-					     title='Категория'>
+                    <Tab eventKey={false}
+                         title='Категория'>
                         <Row>
 
                         </Row>
@@ -234,10 +266,10 @@ class CategoriesList extends React.Component {
                             pagesCount={Number(this.state.pagesCount)}
                             goToPage={this.goToPage}/>}
 
-					</Tab>
+                    </Tab>
 
-					<Tab eventKey={1}
-					     title='Подкатегория'>
+                    <Tab eventKey={true}
+                         title='Подкатегория'>
                         <Row>
 
 
@@ -287,9 +319,9 @@ class CategoriesList extends React.Component {
                             active={Number(this.state.page)}
                             pagesCount={Number(this.state.pagesCount)}
                             goToPage={this.goToPage}/>}
-                            </Tab>
+                    </Tab>
 
-				</Tabs>
+                </Tabs>
             </Grid>
         );
     }
