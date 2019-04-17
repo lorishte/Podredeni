@@ -6,7 +6,7 @@ const TESTIMONIALS_TIMER_INTERVAL = 8000;
 
 const MAIN_CAROUSEL_TIMER_INTERVAL = 5000;
 
-const ADMIN_PRODUCTS_FILTER_OPTIONS = {'name': 'име', 'number': 'номер'};
+const ADMIN_PRODUCTS_FILTER_OPTIONS = {'name': 'име', 'number': 'номер', 'category': 'категория', 'subcategory': 'подкатегория'};
 
 const ADMIN_CATEGORIES_FILTER_OPTIONS = {'name': 'име'};
 

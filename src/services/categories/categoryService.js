@@ -10,7 +10,7 @@ export default {
 
         let endPoint = GetEndPoint(isSubcategory);
 
-        if(!state) {
+        if(state === null) {
 
             endPoint += '/all';
 

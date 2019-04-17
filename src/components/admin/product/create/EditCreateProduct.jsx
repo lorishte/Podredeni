@@ -40,23 +40,26 @@ class CreateProduct extends React.Component {
     productId = this.props.match.params.id;
 
     componentDidMount() {
+       
+        this.loadCategories();
+
+        this.loadSubcategories();
+
         if (this.requestPath === '/product/create') {
             this.fromCreate = true;
             return;
         }
 
         this.loadProductData();
-
-        this.loadCategories();
-
-        this.loadSubcategories();
     }
 
     loadCategories = () => {
-        categoriesService.loadCategories()
+        categoriesService.loadCategories(null, false)
             .then(res => {
 
-                this.setState({categories: res});
+                let result = res.map((c) => ({value: c.id, label: c.name}));
+
+                this.setState({categories: result});
             })
             .catch(err => {
                 this.toastContainer.error(err.responseText, TOASTR_MESSAGES.error, {
@@ -69,7 +72,9 @@ class CreateProduct extends React.Component {
         categoriesService.loadCategories(null, true)
             .then(res => {
 
-                this.setState({subcategories: res});
+                let result = res.map((c) => ({value: c.id, label: c.name}));
+
+                this.setState({subcategories: result});
             })
             .catch(err => {
                 this.toastContainer.error(err.responseText, TOASTR_MESSAGES.error, {
@@ -99,7 +104,7 @@ class CreateProduct extends React.Component {
             .getProduct(this.productId)
             .then(res => {
                 let p = res.product;
-
+                
                 this.setState({
                     name: p.name,
                     description: p.description,
@@ -108,13 +113,11 @@ class CreateProduct extends React.Component {
                     isTopSeller: p.isTopSeller,
                     isBlocked: p.isBlocked,
                     discount: p.discount,
-                    selectedCategories: p.categories,
-                    selectedSubcategories: p.subcategories
+                    selectedCategories: p.categories.map((c) => ({value: c.id, label: c.name})),
+                    selectedSubcategories: p.subcategories.map((c) => ({value: c.id, label: c.name}))
                 });
 
                 this.loadPromoDiscounts(p.promoDiscountsIds);
-
-                console.log(this.state)
             })
             .catch(err => {
                 this.toastContainer.error(err.responseText, TOASTR_MESSAGES.error, {
@@ -179,6 +182,22 @@ class CreateProduct extends React.Component {
         this.setState({[e.target.name]: !this.state[e.target.name]});
     };
 
+
+
+
+    handleCategoryChange = (selectedCategories) => {
+    this.setState({ selectedCategories });
+    };
+
+
+    handleSubcategoryChange = (selectedSubcategories) => {
+    this.setState({ selectedSubcategories });
+    }
+    
+
+
+
+
     render() {
 
         let promos = [];
@@ -211,7 +230,7 @@ class CreateProduct extends React.Component {
                 </div>
             );
         });
-
+        
 
         return (
             <Grid id="create-edit-product">
@@ -320,17 +339,28 @@ class CreateProduct extends React.Component {
                     </Col>
 
                     <Col lg={4} md={4} sm={12}>
-                        <Row>
+                        {!(this.state.selectedCategories.length > 0 && this.state.selectedCategories[0].label == ' ') &&
+                        <Row className="product-category-select">
+                        <h4>Категория</h4>
+                            <MultiSelect
+                            handleChange={this.handleCategoryChange}
+                            options={this.state.categories}
+                            selectedOption={this.state.selectedCategories}
+                            />
 
+                        </Row>}
 
+                        {!(this.state.selectedSubcategories.length > 0 && this.state.selectedSubcategories[0].label == ' ') &&
+                        <Row className="product-category-select">
+                        <h4>Подкатегория</h4>
+                            <MultiSelect
+                            handleChange={this.handleSubcategoryChange}
+                            options={this.state.subcategories}
+                            selectedOption={this.state.selectedSubcategories}
+                            />
 
-
-                            <MultiSelect/>
-
-
-
-
-                        </Row>
+                        </Row>}
+                       
                     </Col>
 
                     <Row className="buttons-container">

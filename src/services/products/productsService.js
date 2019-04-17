@@ -11,6 +11,8 @@ export default {
 
 	loadProducts: (state, includeBlocked = false) => {
 
+		console.log(state);
+
 		let query =
 			'?page=' + state.page +
 			'&size=' + state.size +
@@ -66,7 +68,9 @@ function generateProductDetails (state) {
 		Description: state.description,
 		Price: state.price,
 		ImageUrls: state.imageUrls,
-		IsTopSeller: state.isTopSeller
+		IsTopSeller: state.isTopSeller,
+		Categories: state.selectedCategories.map(c => c.value),
+		Subcategories: state.selectedSubcategories.map(sc => sc.value)
 	};
 }
 
