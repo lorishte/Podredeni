@@ -96,7 +96,7 @@ class ProductsList extends React.Component {
 	};
 
 	handleFilterProperty = (е) => {
-		this.setState({filterValue: '', filterProperty: е});
+		this.setState({filterValue: '', filterProperty: е}, () => this.goToPage(1));
 	};
 
 	handleFilterValue = (e) => {
@@ -161,8 +161,6 @@ class ProductsList extends React.Component {
 					</Col>
 				</Row>
 
-				{this.state.loading && <div className="admin-loader"/> }
-
 				<Table striped bordered condensed hover id="admin-products-table">
 					<TableHead
 						changeClass={this.changeClass}
@@ -178,6 +176,8 @@ class ProductsList extends React.Component {
 					active={Number(this.state.page)}
 					pagesCount={Number(this.state.pagesCount)}
 					goToPage={this.goToPage}/>}
+
+				{this.state.loading && <div className="admin-loader"/> }		
 			</Grid>
 		);
 	}

@@ -59,7 +59,7 @@ class CategoriesList extends React.Component {
             .then(res => {
                 let categoriesCount = Number(res.categoriesCount);
                 let size = Number(this.state.size);
-
+                
                 this.setState({
                     categories: res.categories,
                     categoriesCount: categoriesCount,

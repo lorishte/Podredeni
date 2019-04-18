@@ -21,7 +21,9 @@ class ProductsList extends React.Component {
 			descending: true,
 			filterProperty: 'name',
 			filterValue: '',
-			resolution: window.innerWidth
+			resolution: window.innerWidth,
+			categories: [],
+			subcategories: []
 		};
 	}
 

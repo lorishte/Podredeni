@@ -4,14 +4,10 @@ const auth = 'admin';
 
 export default {
 
-	// loadProductsList: () => {
-	//     return requesterService
-	//         .get(endPoint, null, query);
-	// },
-
 	loadProducts: (state, includeBlocked = false) => {
 
-		console.log(state);
+		if(state.categories==null) state.categories=[];
+		if(state.subcategories==null) state.subcategories=[];
 
 		let query =
 			'?page=' + state.page +
@@ -20,7 +16,9 @@ export default {
 			'&filterValue=' + state.filterValue +
 			'&sortElement=' + state.sortProperty +
 			'&sortDesc=' + state.descending +
-			'&includeBlocked=' + includeBlocked;
+			'&includeBlocked=' + includeBlocked +
+			'&categoriesString=' + state.categories.join(',') + 
+			'&subcategoriesString=' + state.subcategories.join(',');
 
 		return requesterService
 			.get(endPoint, null, query);
