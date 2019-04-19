@@ -112,6 +112,10 @@ class Header extends React.Component {
 								Съдържание
 							</NavLink>
 
+							<NavLink to="/settings" activeClassName="active" className='nav-link'>
+								Настройки
+							</NavLink>
+
 							<NavLink to="/home"
 							         id="logout-btn"
 							         activeClassName="active"

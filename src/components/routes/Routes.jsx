@@ -60,6 +60,9 @@ import CarouselItemEdit from '../admin/homeContent/carousel/partials/CarouselIte
 // Admin Categories
 import CategoriesList from '../admin/category/list/CategoriesList';
 
+// Admin Settings
+import Settings from '../admin/settings/settings';
+
 // ERRORS and CONFIRMATIONS
 import OrderReceived from '../common/confirmation/OrderReceived';
 import Error from '../common/errors/Error';
@@ -122,6 +125,8 @@ let Routes = () => {
 			<PrivateRoute exact path='/home-content' component={HomeContent}/>
 			<PrivateRoute exact path='/carousel-item/create' component={CarouselItemCreate}/>
 			<PrivateRoute exact path='/carousel-item/edit/:id' component={CarouselItemEdit}/>
+
+			<PrivateRoute exact path='/settings' component={Settings}/>
 
 
 			/*Errors and Confirmations*/
