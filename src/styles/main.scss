@@ -1,11 +1,9 @@
 @import url('https://fonts.googleapis.com/css?family=Montserrat:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i&subset=cyrillic');
 @import "https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css";
-
 @import "colors";
 @import "mixins";
 
 $header-height: 65px;
-
 
 * {
   box-sizing: border-box;
@@ -180,10 +178,8 @@ input[type=checkbox], input[type=radio] {
     }
   }
 
-
   &.light {
     background-color: $white;
-
 
     &:hover,
     &:active {
@@ -894,6 +890,62 @@ nav {
   }
 }
 
+// Products List
+#products {
+  .filters-container {
+
+    background-color: $white;
+    padding: 15px;
+    margin-bottom: 12px;
+    border-radius: 5px;
+
+    .category {
+      position: relative;
+
+      &.disabled {
+        //pointer-events: none;
+        opacity: .3;
+      }
+
+      &:hover {
+        cursor: pointer;
+      }
+
+      .check-box {
+        display: inline-block;
+        width: 15px;
+        height: 15px;
+        margin-right: 7px;
+        border: 1px solid $medium-grey;
+        border-radius: 3px;
+        @include transition;
+
+        &.selected {
+          position: relative;
+          border-color: $danger;
+          background-color: $danger;
+
+          &:before {
+            content: 'o';
+            color: $white;
+            top: -5px;
+            position: absolute;
+            left: 2px
+          }
+        }
+      }
+
+      .over {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+      }
+    }
+  }
+}
+
 //User Product Details
 #product {
   position: relative;
@@ -1232,8 +1284,6 @@ nav {
 
   #cart-products-table {
     width: 100%;
-
-
 
     .table-header {
       @include flex;

@@ -2,12 +2,20 @@ import requesterService from '../requester';
 const endPoint = '/products';
 const auth = 'admin';
 
+class FilterObject {
+    constructor() {
+        this.original = [];
+        this.selected = [];
+        this.matched = [];
+    }
+}
+
 export default {
 
 	loadProducts: (state, includeBlocked = false) => {
 
-		if(state.categories==null) state.categories=[];
-		if(state.subcategories==null) state.subcategories=[];
+		if(state.categories==null) state.categories= new FilterObject();
+		if(state.subcategories==null) state.subcategories= new FilterObject();
 
 		let query =
 			'?page=' + state.page +
@@ -17,8 +25,8 @@ export default {
 			'&sortElement=' + state.sortProperty +
 			'&sortDesc=' + state.descending +
 			'&includeBlocked=' + includeBlocked +
-			'&categoriesString=' + state.categories.join(',') + 
-			'&subcategoriesString=' + state.subcategories.join(',');
+			'&categoriesString=' + state.categories.selected.join(',') +
+			'&subcategoriesString=' + state.subcategories.selected.join(',');
 
 		return requesterService
 			.get(endPoint, null, query);

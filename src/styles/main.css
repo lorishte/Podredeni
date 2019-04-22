@@ -748,6 +748,45 @@ nav {
     #news-container .news-card:hover .news-image {
       transform: scale(1.1); }
 
+#products .filters-container {
+  background-color: #ffffff;
+  padding: 15px;
+  margin-bottom: 12px;
+  border-radius: 5px; }
+  #products .filters-container .category {
+    position: relative; }
+    #products .filters-container .category.disabled {
+      opacity: .3; }
+    #products .filters-container .category:hover {
+      cursor: pointer; }
+    #products .filters-container .category .check-box {
+      display: inline-block;
+      width: 15px;
+      height: 15px;
+      margin-right: 7px;
+      border: 1px solid #c6c6c6;
+      border-radius: 3px;
+      -webkit-transition: .4s;
+      -moz-transition: .4s;
+      -o-transition: .4s;
+      transition: .4s; }
+      #products .filters-container .category .check-box.selected {
+        position: relative;
+        border-color: #ea445b;
+        background-color: #ea445b; }
+        #products .filters-container .category .check-box.selected:before {
+          content: 'o';
+          color: #ffffff;
+          top: -5px;
+          position: absolute;
+          left: 2px; }
+    #products .filters-container .category .over {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%; }
+
 #product {
   position: relative; }
   #product .promo-label {
