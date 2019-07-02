@@ -101,7 +101,7 @@ class HomeContent extends React.Component {
 
 	saveArticleChanges = () => {
 		homeContentService
-			.modifyArticle(this.props.data)
+			.modifyArticle(this.state)
 			.then(res => {
 				this.toastContainer.success(TOASTR_MESSAGES.successHomeContentModification, '', {
 					closeButton: false,

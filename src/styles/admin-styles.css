@@ -6,6 +6,8 @@
 
 #create-edit-product .buttons-container {
   padding: 10px 0 50px 0; }
+#create-edit-product .product-category-select {
+  margin-bottom: 30px; }
 #create-edit-product .image-container {
   position: relative;
   display: inline-block;

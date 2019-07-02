@@ -1,235 +1,299 @@
 import React from 'react';
 
-import {Col, Row, Grid} from 'react-bootstrap';
-import {ToastContainer} from 'react-toastr';
-
+import { Col, Row, Grid } from 'react-bootstrap';
+import { ToastContainer } from 'react-toastr';
 
 // Partials
 import ProductCard from './partials/ProductCard';
-
 
 // Services
 import productsService from '../../../../services/products/productsService';
 import categoryService from '../../../../services/categories/categoryService';
 
-
 // Constants
-import {RESOLUTIONS} from '../../../../data/constants/componentConstants';
+import { RESOLUTIONS, PRODUCT } from '../../../../data/constants/componentConstants';
 
 class FilterObject {
-    constructor() {
-        this.original = [];
-        this.selected = [];
-        this.matched = [];
-    }
+	constructor () {
+		this.original = [];
+		this.selected = [];
+		this.matched = [];
+	}
 }
 
 class ProductsList extends React.Component {
-    constructor(props) {
-        super(props);
+	constructor (props) {
+		super(props);
 
-        this.state = {
-            products: [],
+		this.state = {
+			products: [],
 
-            categories: new FilterObject(),
-            subcategories: new FilterObject(),
+			categories: new FilterObject(),
+			subcategories: new FilterObject(),
 
-            size: 50,
-            page: 1,
-            sortProperty: 'number',
-            descending: true,
-            filterProperty: 'name',
-            filterValue: '',
+			filtersVisible: [],
 
-            resolution: window.innerWidth,
+			size: 50,
+			page: 1,
+			sortProperty: 'number',
+			descending: true,
+			filterProperty: 'name',
+			filterValue: '',
 
-            loading: true,
-            filtering: false
-        };
-    }
+			resolution: window.innerWidth,
 
-    componentDidMount() {
-        window.scrollTo(0, 0);
-        window.addEventListener('orientationchange', this.handleResolutionChange);
-        window.addEventListener('resize', this.handleResolutionChange);
+			loading: true,
+			filtering: false
+		};
+	}
 
-        this.loadProducts();
+	componentDidMount () {
+		window.scrollTo(0, 0);
+		window.addEventListener('orientationchange', this.handleResolutionChange);
+		window.addEventListener('resize', this.handleResolutionChange);
 
-        this.loadCategories();
-    }
+		this.loadProducts();
 
-    componentWillUnmount() {
-        window.removeEventListener('orientationchange', this.handleResolutionChange);
-        window.removeEventListener('resize', this.handleResolutionChange);
-    }
+		this.loadCategories();
+	}
 
-    handleResolutionChange = () => {
-        this.setState({resolution: window.innerWidth});
-    };
+	componentWillUnmount () {
+		window.removeEventListener('orientationchange', this.handleResolutionChange);
+		window.removeEventListener('resize', this.handleResolutionChange);
+	}
 
-    loadCategories = () => {
-        categoryService
-            .loadCategories(null, false)
-            .then(res => {
+	handleResolutionChange = () => {
+		this.setState({resolution: window.innerWidth});
+	};
 
-                    let categories = Object.assign({}, this.state.categories);      //creating copy of object
-                    categories.original = res;                                      //updating value
-                    this.setState({categories});
+	loadCategories = () => {
+		categoryService
+			.loadCategories(null, false)
+			.then(res => {
 
-                    categoryService
-                        .loadCategories(null, true)
-                        .then(res => {
-                            let subcategories = Object.assign({}, this.state.subcategories);      //creating copy of object
-                            subcategories.original = res;                                      //updating value
-                            this.setState({subcategories});
-                            this.loadProducts();
-                        })
-                }
-            )
-            .catch(err => console.log(err))
-    };
+					let categories = Object.assign({}, this.state.categories);      //creating copy of object
+					categories.original = res;                                      //updating value
+					this.setState({categories});
 
-    loadProducts = () => {
-        this.setState({filtering: true});
+					categoryService
+						.loadCategories(null, true)
+						.then(res => {
+							let subcategories = Object.assign({}, this.state.subcategories);      //creating copy of object
+							subcategories.original = res;                                      //updating value
+							this.setState({subcategories});
+							this.loadProducts();
+						});
+				}
+			)
+			.catch(err => console.log(err));
+	};
 
-        productsService
-            .loadProducts(this.state)
-            .then(res => {
+	loadProducts = () => {
+		this.setState({filtering: true});
 
-                res.products.forEach(e => e.images.reverse());
-                this.setState({
-                    products: res.products,
-                    loading: false,
-                    filtering: false
-                });
+		productsService
+			.loadProducts(this.state)
+			.then(res => {
 
-                let categories = Object.assign({}, this.state.categories);
-                categories.matched = res.categories;
+				let products = res.products;
 
-                let subcategories = Object.assign({}, this.state.subcategories);
-                subcategories.matched = res.subcategories;
+				products.forEach(e => e.images.reverse());
 
-                this.setState({categories, subcategories}, () => console.log(this.state));
+				products.sort(function () {
+					return .5 - Math.random();
+				});
 
-            })
-            .catch(err => {
-                this.props.history.push('/error');
-            });
-    };
+				this.setState({
+					products: products,
+					loading: false,
+					filtering: false
+				});
 
-    selectFilterCategory = (e) => {
+				let categories = Object.assign({}, this.state.categories);
+				categories.matched = res.categories;
 
-        let stateProp = e.target.getAttribute('name');
+				let subcategories = Object.assign({}, this.state.subcategories);
+				subcategories.matched = res.subcategories;
 
-        let id = e.target.getAttribute('id');
+				this.setState({categories, subcategories});
+
+			})
+			.catch(err => {
+				this.props.history.push('/error');
+			});
+	};
+
+	selectFilterCategory = (e) => {
+		this.setState({filtering: true});
+
+		let stateProp = e.target.getAttribute('data-target-name');
+
+		let id = e.target.getAttribute('id');
+
+		if (this.state[stateProp].selected.includes(id)) {
+
+			let selectedStateProp = Object.assign({}, this.state[stateProp]);
+			let test = selectedStateProp.selected.filter(e => e !== id);
+			selectedStateProp.selected = test;
+			this.setState({[stateProp]: selectedStateProp});
+
+		} else {
+
+			let selectedStateProp = Object.assign({}, this.state[stateProp]);
+			selectedStateProp.selected.push(id);
+			this.setState({[stateProp]: selectedStateProp});
+		}
+
+		setTimeout(() => {
+			this.loadProducts();
+		}, 2000);
+	};
+
+	toggleSection = (e) => {
+
+		let filterType = e.target.name;
+
+		if (this.state.filtersVisible.includes(filterType)) {
+			this.setState({
+				filtersVisible: this.state.filtersVisible.filter(el => el !== filterType)
+			});
+		} else {
+			this.setState({
+				filtersVisible: [...this.state.filtersVisible, filterType]
+			});
+		}
+	};
+
+	render () {
+
+		if (this.state.loading) return <div className='loader'/>;
+
+		let resolution = this.state.resolution < RESOLUTIONS.xs;
+
+		let productsList = this.state.products.map(e => {
+			return <ProductCard key={e.id}
+			                    data={e}
+			                    toastContainer={this.toastContainer}
+			                    xsRes={resolution ? 12 : 6}/>;
+		});
+
+		let categories = this.state.categories.original.map(c => {
+
+			if (c.name === 'Default') return;
+
+			let catStyle = this.state.categories.matched.map(e => e.id).includes(c.id) ? 'category' : 'category disabled';
+
+			let style = this.state.categories.selected.includes(c.id) ? 'check-box selected' : 'check-box';
+
+			return (
+				<div key={c.id} className={catStyle}>
+					<span className={style}/>
+					<span className='category-name'>{c.name}</span>
+					<span className="over"
+					      id={c.id}
+					      data-target-name="categories"
+					      onClick={this.selectFilterCategory}/>
+				</div>
+			);
+		});
+
+		let subCategories = this.state.subcategories.original.map(sc => {
+
+			let catStyle = this.state.subcategories.matched.map(e => e.id).includes(sc.id) ? 'category' : 'category disabled';
+
+			let style = this.state.subcategories.selected.includes(sc.id) ? 'check-box selected' : 'check-box';
+
+			return <div key={sc.id} className={catStyle}>
+				<span className={style}/>
+				<span className='category-name'>{sc.name}</span>
+				<span className="over"
+				      id={sc.id}
+				      data-target-name="subcategories"
+				      onClick={this.selectFilterCategory}/>
+			</div>;
+		});
+
+		let filters = [];
+
+		this.state.categories.selected.forEach(e => {
+			let categoryName = this.state.categories.original.filter(c => c.id === e)[0].name;
+			filters.push(categoryName);
+		});
+
+		this.state.subcategories.selected.forEach(e => {
+			let subcategoryName = this.state.subcategories.original.filter(c => c.id === e)[0].name;
+			filters.push(subcategoryName);
+		});
+
+		let results = filters.map(e => {
+			return (<span className='result'>{e}</span>);
+		});
+
+		return (
+			<Grid id="products" bsClass={'container-fluid'}>
+
+				<ToastContainer
+					ref={ref => this.toastContainer = ref}
+					className="toast-bottom-right"/>
 
 
-        if (this.state[stateProp].selected.includes(id)) {
+				<Col xs={12}>
+					<Col xs={12} sm={3}>
 
-            let selectedStateProp = Object.assign({}, this.state[stateProp]);
-            let test = selectedStateProp.selected.filter(e => e !== id);
-            selectedStateProp.selected = test;
-            this.setState({[stateProp]: selectedStateProp});
+						<aside>
+							<div className="filters-container">
+								<div className='header'>
+									<h4>{PRODUCT.category}</h4>
+									<div
+										className={this.state.filtersVisible.includes('category') ? 'toggle-menu clicked' : 'toggle-menu'}>
+										<span className="toggle"/>
+										<span className="toggle"/>
+										<button className="over" name='category'
+										        onClick={this.toggleSection}/>
+									</div>
+								</div>
 
-        } else {
+								<div
+									className={this.state.filtersVisible.includes('category') ? 'body visible' : 'body'}>
+									{categories}
+								</div>
+							</div>
 
-            let selectedStateProp = Object.assign({}, this.state[stateProp]);
-            selectedStateProp.selected.push(id);
-            this.setState({[stateProp]: selectedStateProp});
-        }
+							<div className="filters-container">
 
-        setTimeout(() => {
-            this.loadProducts();
-        }, 2000)
-    };
+								<div className='header'>
+									<h4>{PRODUCT.subCategory}</h4>
+									<div
+										className={this.state.filtersVisible.includes('subCategory') ? 'toggle-menu clicked' : 'toggle-menu'}>
+										<span className="toggle"/>
+										<span className="toggle"/>
+										<button className="over" name='subCategory'
+										        onClick={this.toggleSection}/>
+									</div>
+								</div>
+								<div
+									className={this.state.filtersVisible.includes('subCategory') ? 'body visible' : 'body'}>
+									{subCategories}
+								</div>
+							</div>
+						</aside>
 
+					</Col>
 
-    render() {
+					<Col xs={12} sm={9}>
 
-        if (this.state.loading) return <div className='loader'/>;
+						{filters.length > 0 && <p id='filter-info'> {PRODUCT.resultsFor}: {results} </p>}
+						<Row>
+							{this.state.filtering && <div className="loader"/>}
 
+							{!this.state.filtering && productsList}
+						</Row>
+					</Col>
+				</Col>
 
-        let resolution = this.state.resolution < RESOLUTIONS.xs;
-
-        let productsList = this.state.products.map(e => {
-            return <ProductCard key={e.id}
-                                data={e}
-                                toastContainer={this.toastContainer}
-                                xsRes={resolution ? 12 : 6}/>;
-        });
-
-
-        let categories = this.state.categories.original.map(c => {
-
-            if (c.name === 'Default') return;
-
-            let catStyle = this.state.categories.matched.map(e => e.id).includes(c.id) ? 'category' : 'category disabled';
-
-            let style = this.state.categories.selected.includes(c.id) ? 'check-box selected' : 'check-box';
-
-            return <div key={c.id} className={catStyle}>
-                <span className={style}/>{c.name}
-                <span className="over"
-                      id={c.id}
-                      name="categories"
-                      onClick={this.selectFilterCategory}/>
-            </div>
-        });
-
-
-        let subCategories = this.state.subcategories.original.map(sc => {
-
-            let catStyle = this.state.subcategories.matched.map(e => e.id).includes(sc.id) ? 'category' : 'category disabled';
-
-            let style = this.state.subcategories.selected.includes(sc.id) ? 'check-box selected' : 'check-box';
-
-            return <div key={sc.id} className={catStyle}>
-                <span className={style}/>{sc.name}
-                <span className="over"
-                      id={sc.id}
-                      name="subcategories"
-                      onClick={this.selectFilterCategory}/>
-            </div>
-        });
-
-
-        return (
-            <Grid id="products">
-
-                <ToastContainer
-                    ref={ref => this.toastContainer = ref}
-                    className="toast-bottom-right"
-                />
-
-
-                <Row>
-                    <Col xs={2}>
-                        <aside>
-                            <div className="filters-container">
-                                <h4>Categories</h4>
-                                {categories}
-                            </div>
-
-                            <div className="filters-container">
-                                <h4>Subcategories</h4>
-                                {subCategories}
-                            </div>
-                        </aside>
-                    </Col>
-
-                    <Col xs={10}>
-
-                        {this.state.filtering &&
-                        <div className="loader"/>
-                        }
-                        {!this.state.filtering &&
-                        productsList
-                        }
-                    </Col>
-                </Row>
-            </Grid>
-        );
-    }
+			</Grid>
+		);
+	}
 }
 
 export default ProductsList;

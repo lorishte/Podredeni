@@ -48,13 +48,15 @@ class AboutProduct extends React.Component {
 				<div id="about-product">
 
 					<article className="article-box">
+
+
+						<div className="article-image">
+							<img src="/images/show/home-content.png"/>
+						</div>
+
 						<div className="article-content bg-white">
 							<h4 className="article-heading">{this.state.articleHeading}</h4>
 							<div dangerouslySetInnerHTML={{__html: this.state.articleContent}}/>
-						</div>
-
-						<div className="article-image">
-							<img src="/images/show/image_02.jpg"/>
 						</div>
 					</article>
 

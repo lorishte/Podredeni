@@ -15,6 +15,15 @@ class TopSellerProductCard extends React.Component {
 
 		const p = this.props.data;
 
+		p.categories.forEach(e => {
+			if (e.id === '92e8f56e-1a18-46bb-be40-633559284cdc') {
+				console.log(e.id);
+				p.new = true;
+			} else {
+				p.new = false;
+			}
+		});
+
 		return (
 
 				<Link to={'/products/' + p.id}>
@@ -22,6 +31,8 @@ class TopSellerProductCard extends React.Component {
 						{p.discount > 0 &&
 							<span className="promo-label">-{p.discount}%</span>
 						}
+
+						{p.new && <span className={'new-label'}>НОВО!</span>}
 
 						<div className="product-image">
 							<img className="card-img-top" src={p.images[0]} alt="Card image cap"/>

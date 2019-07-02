@@ -129,6 +129,11 @@ class TopSellers extends React.Component {
 
 					<div className="top-sellers-carousel" ref={this.container}>
 
+
+						<div className="top-sellers" ref={this.topSellers}>
+							{cards}
+						</div>
+
 						<button disabled={this.state.translateValue <= 10}
 						        className="carousel-control left"
 						        onClick={this.loadPrevious}>
@@ -144,11 +149,6 @@ class TopSellers extends React.Component {
 							<span className="glyphicon glyphicon-chevron-right"/>
 							<span className="sr-only">Next</span>
 						</button>}
-
-						<div className="top-sellers" ref={this.topSellers}>
-							{cards}
-						</div>
-
 
 					</div>
 				</Grid>

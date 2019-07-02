@@ -1,26 +1,14 @@
 @media screen and (max-width: 1100px) {
-  #home #home-about #about-product .article-image {
-    -webkit-flex-basis: 50%;
-    flex-basis: 50%; }
-    #home #home-about #about-product .article-image img {
-      transform: translateY(0); }
   #home #home-about #about-product .article-content {
-    -webkit-flex-basis: 50%;
-    flex-basis: 50%; } }
+    text-align: left; } }
 @media screen and (max-width: 1000px) {
-  #home #home-main-carousel .carousel {
-    height: 400px;
-    margin-top: -35px; }
-    #home #home-main-carousel .carousel .carousel-caption {
-      position: absolute;
-      top: 0;
-      left: 13%;
-      width: 450px; }
-      #home #home-main-carousel .carousel .carousel-caption .carousel-heading {
-        font-size: 2.5em;
-        line-height: 1em; }
-      #home #home-main-carousel .carousel .carousel-caption .carousel-text {
-        font-size: 1.1em; }
+  #home #home-main-carousel .carousel .carousel-caption {
+    width: 450px; }
+    #home #home-main-carousel .carousel .carousel-caption .carousel-heading {
+      font-size: 2.2em;
+      line-height: 1em; }
+    #home #home-main-carousel .carousel .carousel-caption .carousel-text {
+      font-size: 1.1em; }
 
   .section-heading {
     letter-spacing: 5px;
@@ -32,15 +20,8 @@
   #orders .order-info {
     width: 80%; } }
 @media screen and (max-width: 850px) {
-  #home #home-about #about-product .article-image {
-    -webkit-flex-basis: 40%;
-    flex-basis: 40%; }
-    #home #home-about #about-product .article-image img {
-      height: 100%;
-      width: auto; }
-  #home #home-about #about-product .article-content {
-    -webkit-flex-basis: 60%;
-    flex-basis: 60%; } }
+  #home #home-main-carousel {
+    margin-top: -35px; } }
 @media screen and (max-width: 768px) {
   main {
     padding-top: 80px; }
@@ -53,35 +34,22 @@
     font-size: 1.4em;
     margin: 30px 0 12px 0; }
 
-  #home #home-about #about-product .article-box {
-    -webkit-flex-wrap: wrap;
-    -ms-flex-wrap: wrap;
-    flex-wrap: wrap;
-    height: auto; }
-  #home #home-about #about-product .article-image,
-  #home #home-about #about-product .article-content {
-    -webkit-flex-basis: 100%;
-    flex-basis: 100%; }
-  #home #home-about #about-product .article-image {
-    height: 150px; }
-    #home #home-about #about-product .article-image img {
-      height: auto;
-      width: 100%;
-      transform: translateY(-30%); }
-  #home #home-about #about-product .article-content {
-    order: 1;
-    padding: 25px 50px;
-    height: auto; }
-  #home #home-main-carousel .logo {
-    position: absolute;
-    top: 2%;
-    left: 13%;
-    width: 15%;
-    min-width: 120px;
-    z-index: 100; }
-  #home #home-main-carousel .carousel .carousel-caption {
-    top: 28%;
-    width: 75% !important; }
+  #home #home-main-carousel {
+    margin-top: -17px; }
+    #home #home-main-carousel .logo {
+      position: absolute;
+      top: 2%;
+      left: 13%;
+      width: 15%;
+      min-width: 120px;
+      z-index: 100; }
+    #home #home-main-carousel .carousel .carousel-caption {
+      width: 75% !important; }
+      #home #home-main-carousel .carousel .carousel-caption .carousel-heading {
+        font-size: 1.8em;
+        line-height: 1em; }
+      #home #home-main-carousel .carousel .carousel-caption .carousel-text {
+        font-size: 1.1em; }
 
   #cart #cart-products-table .table-header .sum {
     -webkit-box-flex: 1;
@@ -178,7 +146,9 @@
 
   #admin-products-table td:last-child, #admin-products-table .table th:last-child,
   #admin-orders-table td:last-child,
-  #admin-orders-table .table th:last-child {
+  #admin-orders-table .table th:last-child,
+  #admin-categories-table td:last-child,
+  #admin-categories-table .table th:last-child {
     padding-right: 4px; }
 
   #orders .order-info {
@@ -256,7 +226,7 @@
 
   .card .add-to-cart-btn,
   .top-seller-card .add-to-cart-btn {
-    padding: 8px 35px;
+    padding: 8px 22px;
     height: 34px;
     margin-right: 10px; } }
 @media screen and (max-width: 650px) {
@@ -293,16 +263,15 @@
     #admin-nav .nav .nav-link:last-child {
       margin-top: 25px; }
 
-  #home #home-main-carousel .carousel {
-    height: 300px;
-    margin-top: -35px; }
-  #home #home-main-carousel .carousel-caption {
+  #home #home-main-carousel .carousel .carousel-caption {
     width: 85% !important; }
-    #home #home-main-carousel .carousel-caption .carousel-heading {
+    #home #home-main-carousel .carousel .carousel-caption .carousel-heading {
       font-size: 1.5em !important; }
-    #home #home-main-carousel .carousel-caption .carousel-text {
+    #home #home-main-carousel .carousel .carousel-caption .carousel-text {
       font-size: .9em !important;
       line-height: 1em !important; }
+  #home #home-about #about-product .article-content {
+    padding: 25px; }
   #home .section-heading {
     letter-spacing: 3px;
     font-size: 1.8em; }
@@ -314,6 +283,14 @@
   #home #videos .video {
     height: 150px; } }
 @media screen and (max-width: 520px) {
+  #home #home-main-carousel .carousel .carousel-caption {
+    top: -12%; }
+    #home #home-main-carousel .carousel .carousel-caption .carousel-heading {
+      font-size: 1.25em !important; }
+    #home #home-main-carousel .carousel .carousel-caption .carousel-text {
+      font-size: .9em !important;
+      line-height: 1em !important; }
+
   #cart #cart-products-table .products-table-row .img-col .image-thumbnail {
     height: 60px;
     width: 60px; }
@@ -348,10 +325,6 @@
 @media screen and (max-width: 400px) {
   .text-hidden-xs {
     display: none; }
-
-  #home #home-main-carousel .carousel {
-    height: 250px;
-    margin-top: -35px; }
 
   nav {
     -webkit-box-align: start;
