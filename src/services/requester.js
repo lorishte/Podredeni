@@ -1,7 +1,5 @@
 import $ from 'jquery';
-// const host = 'http://localhost:55516/api';
-// const host = 'http://localhost:30337/api';
-// const host = 'https://rest.podredeni.eu/api';
+
 const host = 'https://podredeni.eu/api/api';
 
 let token = () => {
