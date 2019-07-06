@@ -788,7 +788,8 @@ nav {
   #products .filters-container .toggle-menu {
     display: inline-block;
     background-color: #ffffff;
-    position: relative; }
+    position: absolute;
+    right: 5px; }
     #products .filters-container .toggle-menu .over {
       position: absolute;
       top: 0;
@@ -827,26 +828,28 @@ nav {
     #products .filters-container .body.visible {
       max-height: 1000px;
       transition: max-height 0.25s ease-in; }
-  #products .filters-container .category {
+  #products .filters-container .category,
+  #products .filters-container .sub-category {
     position: relative;
     padding: 10px;
     border-bottom: 1px solid #e6e6e6;
+    font-weight: 600;
     display: -webkit-box;
     display: -webkit-flex;
     display: -ms-flexbox;
     display: flex; }
-    #products .filters-container .category.disabled .category-name {
-      color: #c6c6c6; }
-    #products .filters-container .category.disabled .check-box.selected {
-      opacity: .3; }
-    #products .filters-container .category:hover {
+    #products .filters-container .category:hover,
+    #products .filters-container .sub-category:hover {
       cursor: pointer; }
-    #products .filters-container .category:last-child {
+    #products .filters-container .category:last-of-type,
+    #products .filters-container .sub-category:last-of-type {
       border-bottom: none; }
-    #products .filters-container .category .category-name {
+    #products .filters-container .category .name,
+    #products .filters-container .sub-category .name {
       -webkit-flex-basis: 80%;
       flex-basis: 80%; }
-    #products .filters-container .category .check-box {
+    #products .filters-container .category .check-box,
+    #products .filters-container .sub-category .check-box {
       -webkit-flex-basis: 15px;
       flex-basis: 15px;
       display: inline-block;
@@ -858,23 +861,34 @@ nav {
       -webkit-transition: .4s;
       -moz-transition: .4s;
       -o-transition: .4s;
-      transition: .4s; }
-      #products .filters-container .category .check-box.selected {
-        position: relative;
+      transition: .4s;
+      position: relative; }
+      #products .filters-container .category .check-box .fa,
+      #products .filters-container .sub-category .check-box .fa {
+        display: none;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%); }
+      #products .filters-container .category .check-box.selected,
+      #products .filters-container .sub-category .check-box.selected {
         border-color: #ea445b;
         background-color: #ea445b; }
-        #products .filters-container .category .check-box.selected:before {
-          content: 'o';
-          color: #ffffff;
-          top: -5px;
-          position: absolute;
-          left: 2px; }
-    #products .filters-container .category .over {
+        #products .filters-container .category .check-box.selected .fa,
+        #products .filters-container .sub-category .check-box.selected .fa {
+          display: inline-block;
+          color: #ffffff; }
+    #products .filters-container .category .over,
+    #products .filters-container .sub-category .over {
       position: absolute;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%; }
+  #products .filters-container .sub-category {
+    margin-left: 15px;
+    font-weight: 400;
+    font-size: .85em; }
 #products .result {
   display: inline-block;
   padding: 2px 8px;

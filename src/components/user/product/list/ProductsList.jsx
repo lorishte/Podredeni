@@ -30,8 +30,9 @@ class ProductsList extends React.Component {
 
 			categories: new FilterObject(),
 			subcategories: new FilterObject(),
+			nestedFilters: [],
 
-			filtersVisible: [],
+			filtersVisible: [], // For show and hide filters
 
 			size: 50,
 			page: 1,
@@ -52,9 +53,9 @@ class ProductsList extends React.Component {
 		window.addEventListener('orientationchange', this.handleResolutionChange);
 		window.addEventListener('resize', this.handleResolutionChange);
 
-		this.loadProducts();
-
 		this.loadCategories();
+
+		this.loadNestedCategories();
 	}
 
 	componentWillUnmount () {
@@ -85,6 +86,25 @@ class ProductsList extends React.Component {
 						});
 				}
 			)
+			.catch(err => console.log(err));
+	};
+
+	loadNestedCategories = () => {
+		categoryService
+			.loadNestedCategories(null)
+			.then(res => {
+
+				// Make category filters visible on large devices
+				if (this.state.resolution >= RESOLUTIONS.bootstrapSM) {
+					let filtersVisible = [];
+					res.forEach(c => {
+						filtersVisible.push(c.name);
+					});
+					this.setState({filtersVisible});
+				}
+
+				this.setState({nestedFilters: res});
+			})
 			.catch(err => console.log(err));
 	};
 
@@ -133,8 +153,7 @@ class ProductsList extends React.Component {
 		if (this.state[stateProp].selected.includes(id)) {
 
 			let selectedStateProp = Object.assign({}, this.state[stateProp]);
-			let test = selectedStateProp.selected.filter(e => e !== id);
-			selectedStateProp.selected = test;
+			selectedStateProp.selected = selectedStateProp.selected.filter(e => e !== id);
 			this.setState({[stateProp]: selectedStateProp});
 
 		} else {
@@ -177,40 +196,60 @@ class ProductsList extends React.Component {
 			                    xsRes={resolution ? 12 : 6}/>;
 		});
 
-		let categories = this.state.categories.original.map(c => {
+		let categories = this.state.nestedFilters.map(c => {
 
-			if (c.name === 'Default') return;
+			if (c.count === 0 || c.name === 'Default') return;
+
+			let subCategories = c.subcategories.map(sc => {
+				let catStyle = this.state.subcategories.matched.map(e => e.id).includes(sc.id) ? 'sub-category' : 'sub-category disabled';
+
+				let checked = this.state.subcategories.selected.includes(sc.id) ? 'check-box selected' : 'check-box';
+
+				return <div key={sc.id} className={catStyle}>
+					<span className={checked}>
+						<i className="fa fa-check" aria-hidden="true"/>
+					</span>
+					<span className='name'>{sc.name}</span>
+					<span className="over"
+					      id={sc.id}
+					      data-target-name="subcategories"
+					      onClick={this.selectFilterCategory}/>
+				</div>;
+			});
 
 			let catStyle = this.state.categories.matched.map(e => e.id).includes(c.id) ? 'category' : 'category disabled';
 
-			let style = this.state.categories.selected.includes(c.id) ? 'check-box selected' : 'check-box';
+			let checked = this.state.categories.selected.includes(c.id) ? 'check-box selected' : 'check-box';
+
+			let isVisible = this.state.filtersVisible.includes(c.name) ? 'body visible' : 'body';
 
 			return (
-				<div key={c.id} className={catStyle}>
-					<span className={style}/>
-					<span className='category-name'>{c.name}</span>
-					<span className="over"
-					      id={c.id}
-					      data-target-name="categories"
-					      onClick={this.selectFilterCategory}/>
-				</div>
-			);
-		});
 
-		let subCategories = this.state.subcategories.original.map(sc => {
+				<div key={c.id}>
+					<div className={catStyle}>
+						<span className={checked}>
+							<i className="fa fa-check" aria-hidden="true"/>
+						</span>
+						<span className='name'>{c.name}</span>
+						<span className="over"
+						      id={c.id}
+						      data-target-name="categories"
+						      onClick={this.selectFilterCategory}/>
 
-			let catStyle = this.state.subcategories.matched.map(e => e.id).includes(sc.id) ? 'category' : 'category disabled';
+						<span
+							className={this.state.filtersVisible.includes(c.name) ? 'toggle-menu clicked' : 'toggle-menu'}>
+						<span className="toggle"/>
+						<span className="toggle"/>
+						<button className="over" name={c.name}
+						        onClick={this.toggleSection}/>
+					</span>
+					</div>
 
-			let style = this.state.subcategories.selected.includes(sc.id) ? 'check-box selected' : 'check-box';
+					<div className={isVisible}>
 
-			return <div key={sc.id} className={catStyle}>
-				<span className={style}/>
-				<span className='category-name'>{sc.name}</span>
-				<span className="over"
-				      id={sc.id}
-				      data-target-name="subcategories"
-				      onClick={this.selectFilterCategory}/>
-			</div>;
+						{subCategories}
+					</div>
+				</div>);
 		});
 
 		let filters = [];
@@ -225,8 +264,8 @@ class ProductsList extends React.Component {
 			filters.push(subcategoryName);
 		});
 
-		let results = filters.map(e => {
-			return (<span className='result'>{e}</span>);
+		let results = filters.map((e, i) => {
+			return (<span key={i} className='result'>{e}</span>);
 		});
 
 		return (
@@ -238,46 +277,8 @@ class ProductsList extends React.Component {
 
 
 				<Col xs={12}>
-					<Col xs={12} sm={3}>
-
-						<aside>
-							<div className="filters-container">
-								<div className='header'>
-									<h4>{PRODUCT.category}</h4>
-									<div
-										className={this.state.filtersVisible.includes('category') ? 'toggle-menu clicked' : 'toggle-menu'}>
-										<span className="toggle"/>
-										<span className="toggle"/>
-										<button className="over" name='category'
-										        onClick={this.toggleSection}/>
-									</div>
-								</div>
-
-								<div
-									className={this.state.filtersVisible.includes('category') ? 'body visible' : 'body'}>
-									{categories}
-								</div>
-							</div>
-
-							<div className="filters-container">
-
-								<div className='header'>
-									<h4>{PRODUCT.subCategory}</h4>
-									<div
-										className={this.state.filtersVisible.includes('subCategory') ? 'toggle-menu clicked' : 'toggle-menu'}>
-										<span className="toggle"/>
-										<span className="toggle"/>
-										<button className="over" name='subCategory'
-										        onClick={this.toggleSection}/>
-									</div>
-								</div>
-								<div
-									className={this.state.filtersVisible.includes('subCategory') ? 'body visible' : 'body'}>
-									{subCategories}
-								</div>
-							</div>
-						</aside>
-
+					<Col xs={12} sm={3} className="filters-container">
+						{categories}
 					</Col>
 
 					<Col xs={12} sm={9}>

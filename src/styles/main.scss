@@ -916,7 +916,8 @@ nav {
     .toggle-menu {
       display: inline-block;
       background-color: $white;
-      position: relative;
+      position: absolute;
+      right: 5px;
 
       .over {
         position: absolute;
@@ -980,22 +981,25 @@ nav {
       }
     }
 
-    .category {
+
+    .category,
+    .sub-category {
       position: relative;
       padding: 10px;
       border-bottom: 1px solid $light-grey;
+      font-weight: 600;
       @include flex;
 
       &.disabled {
         //pointer-events: none;
 
-        .category-name {
-          color: $medium-grey;
+        .name {
+          //color: $medium-grey;
         }
 
         .check-box {
           &.selected {
-            opacity: .3;
+            //opacity: .3;
           }
         }
       }
@@ -1004,11 +1008,11 @@ nav {
         cursor: pointer;
       }
 
-      &:last-child {
+      &:last-of-type {
         border-bottom: none;
       }
 
-      .category-name {
+      .name {
         @include flex-basis(80%);
       }
 
@@ -1021,18 +1025,24 @@ nav {
         border: 1px solid $medium-grey;
         border-radius: 3px;
         @include transition;
+        position: relative;
+
+
+        .fa {
+          display: none;
+          position: absolute;
+          left: 50%;
+          top: 50%;
+          transform: translate(-50%, -50%);
+        }
 
         &.selected {
-          position: relative;
           border-color: $danger;
           background-color: $danger;
 
-          &:before {
-            content: 'o';
+          .fa {
+            display: inline-block;
             color: $white;
-            top: -5px;
-            position: absolute;
-            left: 2px
           }
         }
       }
@@ -1045,6 +1055,13 @@ nav {
         height: 100%;
       }
     }
+
+    .sub-category {
+      margin-left: 15px;
+      font-weight: 400;
+      font-size: .85em;
+    }
+
   }
 
   .result {
@@ -1240,6 +1257,7 @@ nav {
       font-size: 1.2em;
       margin-bottom: 0;
     }
+
     .category {
       font-size: .9em;
       font-style: italic;
@@ -1624,6 +1642,7 @@ nav {
             height: 50px;
           }
         }
+
         .product-data {
           .quantity-col {
             .quantity {
@@ -1646,6 +1665,7 @@ nav {
     margin: 35px 10% 0 10%;
     font-weight: 600;
   }
+
   ol {
     margin: 15px 10% 80px 10%;
 
