@@ -1022,7 +1022,8 @@ nav {
         width: 15px;
         height: 15px;
         margin-right: 7px;
-        border: 1px solid $medium-grey;
+        border: 1px solid $light-grey;
+        //background-color: $warm-light-grey;
         border-radius: 3px;
         @include transition;
         position: relative;

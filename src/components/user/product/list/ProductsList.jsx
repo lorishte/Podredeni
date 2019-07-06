@@ -183,6 +183,7 @@ class ProductsList extends React.Component {
 		}
 	};
 
+
 	render () {
 
 		if (this.state.loading) return <div className='loader'/>;
