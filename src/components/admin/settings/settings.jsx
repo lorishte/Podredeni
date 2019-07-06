@@ -12,8 +12,10 @@ class Settings extends React.Component {
     constructor(props) {
         super(props);
 
+        //each setting should be added to the state and page markup as an input field
         this.state = {
-             showOutOfStock: false
+            showTestimonials: true,
+            showNewsOnFrontPage: true
         };
     }
 
@@ -27,10 +29,6 @@ class Settings extends React.Component {
         settingsService.load()
         .then(res => {
             
-            // to be deleted when API func implemented!!!
-            console.log(res);
-            //
-
             for(var propertyName in res) {
 
                 this.setState({[`${propertyName}`]: res[propertyName]})
@@ -87,10 +85,20 @@ class Settings extends React.Component {
             <Row>
                 <Col>
                     <Checkbox readOnly
-                            name="showOutOfStock"
-                            checked={this.state.showOutOfStock}
+                            name="showTestimonials"
+                            checked={this.state.showTestimonials}
                             onChange={this.handleCheckBox}>
-                    Покажи "Изчерпан"
+                    Покажи "Отзиви"
+                    </Checkbox>
+                </Col>
+            </Row>
+            <Row>
+                <Col>
+                    <Checkbox readOnly
+                            name="showNewsOnFrontPage"
+                            checked={this.state.showNewsOnFrontPage}
+                            onChange={this.handleCheckBox}>
+                    Покажи "Новини на начална страница"
                     </Checkbox>
                 </Col>
             </Row>

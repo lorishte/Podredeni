@@ -1,5 +1,5 @@
 import $ from 'jquery';
-// const host = 'http://localhost:55516/api';
+// const host = 'http://localhost:51899/api';
 // const host = 'http://localhost:30337/api';
 // const host = 'https://rest.podredeni.eu/api';
 const host = 'https://podredeni.eu/api/api';
@@ -37,12 +37,25 @@ export default {
     get: (endPoint, auth, query) => {
         let url = query !== undefined ? host + endPoint + query : host + endPoint;
 
+        $.ajax(
+            {
+                url: url,
+                type: 'GET'
+
+            }).done(function(response, textStatus, xhr){
+
+            let settingsHeader = xhr.getResponseHeader("ApiSettings");
+
+            sessionStorage.setItem('apiSettings', settingsHeader);
+        });
+
         return $.ajax(
             {
                 url: url,
                 type: 'GET',
-                headers: createHeader(auth)
-            });
+                headers: createHeader(auth),
+
+            })
     },
 
     remove: (endPoint, auth) => {

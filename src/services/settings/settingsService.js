@@ -9,21 +9,44 @@ export default {
         return requesterService.get(endPoint, null);
     },
 
+    getCurrentSetting: (settingName) => {
+
+        let apiSettings = JSON.parse(sessionStorage.getItem('apiSettings'));
+
+        if(!apiSettings){
+            
+        }
+
+
+        return apiSettings[settingName];
+    },
+
     edit: (state) => {
 
-        console.log(state);
+        let queryString = generateSettingsDetails(state);
 
-        let data = generateSettingsDetails(state);
+        let url = "" + endPoint + queryString.result + "&";
 
-        return requesterService.update(endPoint, auth, data);
+        console.log(url);
+
+        return requesterService.update(url, auth, null);
     },
 
 };
 
 function generateSettingsDetails(state) {
 
+    let result = "?";
+
+    for (var key in state) {
+
+        if(state[key] == false) state[key] = 0;
+        else if(state[key] == true) state[key] = 1;
+
+        result += key + "=" + state[key] + "&";
+    }
+
 	return {
-		ShowOutOfStock: state.showOutOfStock
+        result
 	};
 }
-
