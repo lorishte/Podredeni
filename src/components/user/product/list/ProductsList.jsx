@@ -56,6 +56,8 @@ class ProductsList extends React.Component {
 		this.loadCategories();
 
 		this.loadNestedCategories();
+
+
 	}
 
 	componentWillUnmount () {
@@ -109,41 +111,62 @@ class ProductsList extends React.Component {
 	};
 
 	loadProducts = () => {
-		this.setState({filtering: true});
 
-		productsService
-			.loadProducts(this.state)
-			.then(res => {
+        this.setState({filtering: true});
 
-				let products = res.products;
+        let productsListState = sessionStorage.getItem('productsListState');
 
-				products.forEach(e => e.images.reverse());
+        if (productsListState === null) {
 
-				products.sort(function () {
-					return .5 - Math.random();
-				});
+            sessionStorage.setItem('firstTimeProductsLoad', true);
 
-				this.setState({
-					products: products,
-					loading: false,
-					filtering: false
-				});
+        } else {
 
-				let categories = Object.assign({}, this.state.categories);
-				categories.matched = res.categories;
+            let parsedState = JSON.parse(productsListState);
 
-				let subcategories = Object.assign({}, this.state.subcategories);
-				subcategories.matched = res.subcategories;
+            for (let event in parsedState) {
 
-				this.setState({categories, subcategories});
+                this.setState({[event]: parsedState[event]});
 
-			})
-			.catch(err => {
-				this.props.history.push('/error');
-			});
+            }
+        }
+
+        productsService
+            .loadProducts(this.state)
+            .then(res => {
+
+                res.products.forEach(e => e.images.reverse());
+                this.setState({
+                    products: res.products,
+                    loading: false,
+                    filtering: false
+                });
+
+                let categories = Object.assign({}, this.state.categories);
+                categories.matched = res.categories;
+
+                let subcategories = Object.assign({}, this.state.subcategories);
+                subcategories.matched = res.subcategories;
+
+                this.setState({categories, subcategories});
+
+                if (sessionStorage.getItem('firstTimeProductsLoad')) {
+
+                    let stringifiedState = JSON.stringify(this.state);
+
+                    sessionStorage.setItem('productsListState', stringifiedState);
+
+                    sessionStorage.setItem('firstTimeProductsLoad', false);
+                }
+
+            })
+            .catch(err => {
+                this.props.history.push('/error');
+            });
 	};
 
 	selectFilterCategory = (e) => {
+
 		this.setState({filtering: true});
 
 		let stateProp = e.target.getAttribute('data-target-name');
@@ -164,6 +187,12 @@ class ProductsList extends React.Component {
 		}
 
 		setTimeout(() => {
+
+			//from here
+
+            sessionStorage.setItem('productsListState', JSON.stringify(this.state));
+
+			//up to here
 			this.loadProducts();
 		}, 2000);
 	};

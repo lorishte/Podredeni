@@ -9,8 +9,6 @@ import Testimonials from './partials/testimonials/Testimonials';
 import News from './partials/news/News';
 //import HomeBannerTwo from './partials/homeBannerTwo/HomeBannerTwo';
 
-import settingsService from "../../../services/settings/settingsService";
-
 class Home extends React.Component {
 	constructor (props) {
 		super(props);
@@ -24,10 +22,6 @@ class Home extends React.Component {
 
 	render () {
 
-		let showTestiomonials = settingsService.getCurrentSetting('showTestimonials');
-
-		let showNewsOnFrontPage = settingsService.getCurrentSetting('showNewsOnFrontPage');
-
 		return (
 			<div id="home">
 
@@ -37,13 +31,9 @@ class Home extends React.Component {
 
 				<AboutProduct/>
 
-				{showTestiomonials && 
-					<Testimonials/>
-				}
+				<Testimonials/>
 
-				{showNewsOnFrontPage &&
-					<News/>
-				}
+				<News/>
 				
 				{/*<HomeBannerTwo/>*/}
 			</div>

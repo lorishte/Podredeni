@@ -17,7 +17,7 @@ class TopSellerProductCard extends React.Component {
 
 		p.categories.forEach(e => {
 			if (e.id === '92e8f56e-1a18-46bb-be40-633559284cdc') {
-				console.log(e.id);
+
 				p.new = true;
 			} else {
 				p.new = false;
