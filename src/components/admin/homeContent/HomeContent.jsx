@@ -84,7 +84,10 @@ class HomeContent extends React.Component {
 		homeContentService
 			.loadArticle()
 			.then(res => {
+
+                console.log(res.content);
 				this.setState({
+
 					sectionHeading: res.content.sectionHeading,
 					sectionContent: res.content.sectionContent,
 					articleHeading: res.content.articleHeading,
@@ -101,7 +104,7 @@ class HomeContent extends React.Component {
 
 	saveArticleChanges = () => {
 		homeContentService
-			.modifyArticle(this.props.data)
+			.modifyArticle(this.state)
 			.then(res => {
 				this.toastContainer.success(TOASTR_MESSAGES.successHomeContentModification, '', {
 					closeButton: false,

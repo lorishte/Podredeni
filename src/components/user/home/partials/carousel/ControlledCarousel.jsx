@@ -85,7 +85,7 @@ class ControlledCarousel extends React.Component {
                     <Carousel.Caption>
                         <h1 className="carousel-heading">{item.heading}</h1>
                         {window.innerWidth > 550 &&
-                        <p className="carousel-text">{item.content}</p>
+                        <h2 className="carousel-text">{item.content}</h2>
                         }
 
                     </Carousel.Caption>
