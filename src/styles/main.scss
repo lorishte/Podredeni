@@ -38,6 +38,7 @@ main {
 button {
   border: none;
   outline: none;
+  background: none;
 }
 
 a {
@@ -416,7 +417,7 @@ nav {
   margin-bottom: -50px;
 
   #home-main-carousel {
-    position: relative;
+    margin-top: -35px;
 
     .logo {
       position: absolute;
@@ -428,30 +429,17 @@ nav {
     }
 
     .carousel {
-      height: 550px;
-      margin-top: -35px;
+      //height: 550px;
 
       .carousel-inner {
-        height: 100%;
-        position: relative;
-
-        .item {
-          height: 100%;
-          width: auto;
-        }
-
         .carousel-img {
-          width: auto !important;
-          height: auto;
-          min-height: 100%;
-
           filter: brightness(80%);
         }
       }
 
       .carousel-caption {
         position: absolute;
-        top: 10%;
+        top: 0;
         left: 13%;
         //width: 40%;
         width: 550px;
@@ -547,14 +535,13 @@ nav {
 
       .article-box {
         display: flex;
-        height: 400px;
         text-align: left;
         overflow: hidden;
-        //padding: 0 10%;
+        @include flex-wrap(wrap);
       }
 
       .article-image {
-        @include flex-basis(50%);
+        @include flex-basis(100%);
         overflow: hidden;
 
         img {
@@ -567,11 +554,12 @@ nav {
       }
 
       .article-content {
-        @include flex-basis(50%);
-        padding: 0 50px;
+        @include flex-basis(100%);
+        padding: 50px 10%;
         @include flex;
         @include flex-wrap(wrap);
         @include align-content(center);
+        text-align: center;
 
         .article-heading {
           color: $primary-hover;
@@ -704,6 +692,26 @@ nav {
     border-radius: 50%;
 
     font-size: 1.2em;
+    font-weight: 600;
+    z-index: 5;
+  }
+
+  .new-label {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+
+    @include flex;
+    @include align-items(center);
+    @include justify-content(center);
+
+    padding: 5px 12px;
+
+    background-color: $success;
+    color: $white;
+    //border-radius: 50%;
+
+    font-size: 1em;
     font-weight: 600;
     z-index: 5;
   }
@@ -899,38 +907,143 @@ nav {
     margin-bottom: 12px;
     border-radius: 5px;
 
-    .category {
+    .header {
+      @include flex;
+      @include align-items(center);
+      @include justify-content(space-between);
+    }
+
+    .toggle-menu {
+      display: inline-block;
+      background-color: $white;
+      position: absolute;
+      right: 5px;
+
+      .over {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+
+        &:hover {
+          cursor: pointer;
+        }
+      }
+
+      .toggle {
+        display: block;
+        height: 1px;
+        width: 15px;
+        background-color: $dark-grey;
+        //background-color: $primary;
+        margin: 4px auto;
+
+        @include transition;
+
+        &:first-of-type {
+          transform: rotate(90deg);
+          position: relative;
+          top: 5px;
+        }
+
+        &:last-of-type {
+          transform: rotate(0deg);
+          position: relative;
+        }
+      }
+
+      &.clicked {
+
+        .toggle {
+          background-color: $primary;
+
+          &:first-of-type {
+            transform: rotate(45deg);
+          }
+
+          &:last-of-type {
+            transform: rotate(-45deg);
+          }
+        }
+
+      }
+    }
+
+    .body {
+      max-height: 0;
+      transition: max-height 0.25s ease-out;
+      overflow: hidden;
+
+      &.visible {
+        max-height: 1000px;
+        transition: max-height 0.25s ease-in;
+      }
+    }
+
+
+    .category,
+    .sub-category {
       position: relative;
+      padding: 10px;
+      border-bottom: 1px solid $light-grey;
+      font-weight: 600;
+      @include flex;
 
       &.disabled {
         //pointer-events: none;
-        opacity: .3;
+
+        .name {
+          //color: $medium-grey;
+        }
+
+        .check-box {
+          &.selected {
+            //opacity: .3;
+          }
+        }
       }
 
       &:hover {
         cursor: pointer;
       }
 
+      &:last-of-type {
+        border-bottom: none;
+      }
+
+      .name {
+        @include flex-basis(80%);
+      }
+
       .check-box {
+        @include flex-basis(15px);
         display: inline-block;
         width: 15px;
         height: 15px;
         margin-right: 7px;
-        border: 1px solid $medium-grey;
+        border: 1px solid $light-grey;
+        //background-color: $warm-light-grey;
         border-radius: 3px;
         @include transition;
+        position: relative;
+
+
+        .fa {
+          display: none;
+          position: absolute;
+          left: 50%;
+          top: 50%;
+          transform: translate(-50%, -50%);
+        }
 
         &.selected {
-          position: relative;
           border-color: $danger;
           background-color: $danger;
 
-          &:before {
-            content: 'o';
+          .fa {
+            display: inline-block;
             color: $white;
-            top: -5px;
-            position: absolute;
-            left: 2px
           }
         }
       }
@@ -943,6 +1056,21 @@ nav {
         height: 100%;
       }
     }
+
+    .sub-category {
+      margin-left: 15px;
+      font-weight: 400;
+      font-size: .85em;
+    }
+
+  }
+
+  .result {
+    display: inline-block;
+    padding: 2px 8px;
+    background-color: $white;
+    margin: 0 5px 8px;
+    border-radius: 5px;
   }
 }
 
@@ -1130,6 +1258,7 @@ nav {
       font-size: 1.2em;
       margin-bottom: 0;
     }
+
     .category {
       font-size: .9em;
       font-style: italic;
@@ -1514,6 +1643,7 @@ nav {
             height: 50px;
           }
         }
+
         .product-data {
           .quantity-col {
             .quantity {
@@ -1536,6 +1666,7 @@ nav {
     margin: 35px 10% 0 10%;
     font-weight: 600;
   }
+
   ol {
     margin: 15px 10% 80px 10%;
 

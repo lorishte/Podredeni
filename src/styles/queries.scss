@@ -6,16 +6,9 @@
   #home {
     #home-about {
       #about-product {
-        .article-image {
-          @include flex-basis(50%);
-
-          img {
-            transform: translateY(0);
-          }
-        }
 
         .article-content {
-          @include flex-basis(50%);
+          text-align: left;
         }
       }
     }
@@ -27,18 +20,13 @@
   #home {
     #home-main-carousel {
       .carousel {
-        height: 400px;
-        margin-top: -35px;
+        //height: 400px;
 
         .carousel-caption {
-          position: absolute;
-          top: 0;
-          left: 13%;
-          //width: 55%;
           width: 450px;
 
           .carousel-heading {
-            font-size: 2.5em;
+            font-size: 2.2em;
             line-height: 1em;
           }
 
@@ -72,21 +60,8 @@
 @media screen and (max-width: 850px) {
 
   #home {
-    #home-about {
-      #about-product {
-        .article-image {
-          @include flex-basis(40%);
-
-          img {
-            height: 100%;
-            width: auto;
-          }
-        }
-
-        .article-content {
-          @include flex-basis(60%);
-        }
-      }
+    #home-main-carousel {
+      margin-top: -35px;
     }
   }
 }
@@ -109,38 +84,8 @@
 
   #home {
 
-    #home-about {
-      #about-product {
-
-        .article-box {
-          @include flex-wrap(wrap);
-          height: auto;
-        }
-
-        .article-image,
-        .article-content {
-          @include flex-basis(100%);
-        }
-
-        .article-image {
-          height: 150px;
-
-          img {
-            height: auto;
-            width: 100%;
-            transform: translateY(-30%);
-          }
-        }
-
-        .article-content {
-          order: 1;
-          padding: 25px 50px;
-          height: auto;
-        }
-      }
-    }
-
     #home-main-carousel {
+      margin-top: -17px;
 
       .logo {
         position: absolute;
@@ -153,8 +98,17 @@
 
       .carousel {
         .carousel-caption {
-          top: 28%;
+          //top: 28%;
           width: 75% !important;
+
+          .carousel-heading {
+            font-size: 1.8em;
+            line-height: 1em;
+          }
+
+          .carousel-text {
+            font-size: 1.1em;
+          }
         }
       }
     }
@@ -351,7 +305,7 @@
   .card,
   .top-seller-card {
     .add-to-cart-btn {
-      padding: 8px 35px;
+      padding: 8px 22px;
       height: 34px;
       margin-right: 10px;
     }
@@ -399,23 +353,32 @@
   #home {
     #home-main-carousel {
       .carousel {
-        height: 300px;
-        margin-top: -35px;
-      }
+        //height: 300px;
 
-      .carousel-caption {
-        width: 85% !important;
+        .carousel-caption {
+          width: 85% !important;
 
-        .carousel-heading {
-          font-size: 1.5em !important;
-        }
+          .carousel-heading {
+            font-size: 1.5em !important;
+          }
 
-        .carousel-text {
-          font-size: .9em !important;
-          line-height: 1em !important;
+          .carousel-text {
+            font-size: .9em !important;
+            line-height: 1em !important;
+          }
         }
       }
     }
+
+
+      #home-about {
+        #about-product {
+          .article-content {
+            padding: 25px;
+          }
+        }
+      }
+
 
     .section-heading {
       letter-spacing: 3px;
@@ -445,6 +408,27 @@
 }
 
 @media screen and (max-width: 520px) {
+
+  #home {
+    #home-main-carousel {
+      .carousel {
+
+        .carousel-caption {
+
+          top: -12%;
+
+          .carousel-heading {
+            font-size: 1.25em !important;
+          }
+
+          .carousel-text {
+            font-size: .9em !important;
+            line-height: 1em !important;
+          }
+        }
+      }
+    }
+  }
 
   #cart {
     #cart-products-table {
@@ -534,8 +518,7 @@
   #home {
     #home-main-carousel {
       .carousel {
-        height: 250px;
-        margin-top: -35px;
+        //height: 250px;
       }
     }
   }

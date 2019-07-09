@@ -1,3 +1,5 @@
+import { Col } from 'react-bootstrap';
+
 const FILTER_INPUT_WAIT_INTERVAL = 1000;
 
 const REDIRECT_DELAY = 2000;
@@ -203,7 +205,7 @@ const CONFIRM_DIALOGS = {
 };
 
 const RESOLUTIONS = {
-	xs: 450,
+	xs: 480,
 	sm: 680,
 	md: 980,
 	bootstrapXS: 768,
@@ -215,7 +217,10 @@ const RESOLUTIONS = {
 
 const PRODUCT = {
 	price: 'Цена:',
-	addToCart: 'Добави'
+	addToCart: 'Добави',
+	category: 'Категория',
+	subCategory: 'Подкатегория',
+	resultsFor: 'Резултати за'
 };
 
 const HOME = {

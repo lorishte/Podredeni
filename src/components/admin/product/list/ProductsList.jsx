@@ -1,16 +1,17 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-
 import { ToastContainer } from 'react-toastr';
-
 import { Grid, Row, Col, Table } from 'react-bootstrap';
 
+// Partials
 import TableHead from './partials/TableHead';
 import ProductTableRow from './partials/ProductTableRow';
 import Paging from '../../../common/pagination/Paging';
 import FormSelectField from '../../../common/formComponents/FormSelectField';
 import FormInputWithDropdown from '../../../common/formComponents/FormInputWithDropdown';
 
+
+// Services
 import productsService from '../../../../services/products/productsService';
 
 import {
@@ -20,12 +21,17 @@ import {
 	TOASTR_MESSAGES
 } from '../../../../data/constants/componentConstants';
 
+import SortableProducts from './partials/SortableProducts';
+
 class ProductsList extends React.Component {
 	constructor (props) {
 		super(props);
 
 		this.state = {
 			products: [],
+
+			newProductsOrder: [],
+
 			size: 10,
 			page: 1,
 			sortProperty: 'number',
@@ -108,6 +114,10 @@ class ProductsList extends React.Component {
 		this.timer = setTimeout(() => this.goToPage(1), FILTER_INPUT_WAIT_INTERVAL);
 	};
 
+	handleOrderChange = (reorderedItems) => {
+		this.setState({newProductsOrder: reorderedItems});
+	};
+
 	render () {
 
 		let productsList = this.state.products.map(e => {
@@ -161,15 +171,24 @@ class ProductsList extends React.Component {
 					</Col>
 				</Row>
 
-				<Table striped bordered condensed hover id="admin-products-table">
-					<TableHead
-						changeClass={this.changeClass}
-						sort={this.sort}
-						handleChange={this.handleSizeChange}/>
-					<tbody>
-					{productsList}
-					</tbody>
-				</Table>
+				<div id="admin-sortable">
+
+					<Table striped bordered condensed hover id="admin-products-table">
+						<TableHead
+							changeClass={this.changeClass}
+							sort={this.sort}
+							handleChange={this.handleSizeChange}/>
+
+						<tbody>
+						{productsList}
+						</tbody>
+
+						{/*{this.state.products.length > 0 &&*/}
+						{/*<SortableProducts sortableItems={this.state.products}*/}
+						{/*                  handleOrderChange={this.handleOrderChange}/>*/}
+						{/*}*/}
+					</Table>
+				</div>
 
 				{this.state.size !== '0' &&
 				<Paging
@@ -177,7 +196,7 @@ class ProductsList extends React.Component {
 					pagesCount={Number(this.state.pagesCount)}
 					goToPage={this.goToPage}/>}
 
-				{this.state.loading && <div className="admin-loader"/> }		
+				{this.state.loading && <div className="admin-loader"/>}
 			</Grid>
 		);
 	}

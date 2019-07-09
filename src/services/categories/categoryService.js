@@ -30,6 +30,28 @@ export default {
             .get(endPoint, null, query);
     },
 
+    loadNestedCategories: (state) => {
+
+        let endPoint = categoryEndPoint + '/all?arenested=true';
+
+        if(state === null) {
+
+            return requesterService
+                .get(endPoint);
+        }
+
+        let query =
+            '?page=' + state.page +
+            '&size=' + state.size +
+            '&filterElement=' + state.filterProperty +
+            '&filterValue=' + state.filterValue +
+            '&sortElement=' + state.sortProperty +
+            '&sortDesc=' + state.descending;
+
+        return requesterService
+            .get(endPoint, null, query);
+    },
+
     updateCategory: (isSubcategory, categoryId, categoryName) => {
 
         let endPoint = GetEndPoint(isSubcategory) + '/' + categoryId;
