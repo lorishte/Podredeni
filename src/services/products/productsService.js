@@ -1,21 +1,22 @@
 import requesterService from '../requester';
+
 const endPoint = '/products';
 const auth = 'admin';
 
 class FilterObject {
-    constructor() {
-        this.original = [];
-        this.selected = [];
-        this.matched = [];
-    }
+	constructor () {
+		this.original = [];
+		this.selected = [];
+		this.matched = [];
+	}
 }
 
 export default {
 
 	loadProducts: (state, includeBlocked = false) => {
 
-		if(state.categories==null) state.categories= new FilterObject();
-		if(state.subcategories==null) state.subcategories= new FilterObject();
+		if (state.categories == null) state.categories = new FilterObject();
+		if (state.subcategories == null) state.subcategories = new FilterObject();
 
 		let query =
 			'?page=' + state.page +

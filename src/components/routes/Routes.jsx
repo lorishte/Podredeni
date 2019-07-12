@@ -59,6 +59,7 @@ import CarouselItemEdit from '../admin/homeContent/carousel/partials/CarouselIte
 
 // Admin Categories
 import CategoriesList from '../admin/category/list/CategoriesList';
+import ReorderProductsInCategory from '../admin/category/reOrder/ReorderProductsInCategory'
 
 // ERRORS and CONFIRMATIONS
 import OrderReceived from '../common/confirmation/OrderReceived';
@@ -101,6 +102,7 @@ let Routes = () => {
 			<PrivateRoute path='/product/list' component={AdminProductsList}/>
 
 			<PrivateRoute path='/category/list' component={CategoriesList}/>
+			<PrivateRoute path='/category/reorder-products-in-category' component={ReorderProductsInCategory}/>
 
 			<PrivateRoute path='/promos/list' component={AdminPromosList}/>
 			<PrivateRoute path='/promos/edit-discount-promo/:id' component={EditCreateDiscountPromo}/>

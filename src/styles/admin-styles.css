@@ -233,6 +233,16 @@
   overflow: hidden scroll;
   margin-top: 15px;
   margin-bottom: 15px; }
+  #admin-sortable .image-thumbnail {
+    width: auto;
+    max-height: 40px; }
+
+.image-thumbnail {
+  width: auto;
+  max-height: 40px; }
+
+#reorder-products h3 {
+  margin-top: 0; }
 
 .partner-image-thumbnail {
   width: auto;

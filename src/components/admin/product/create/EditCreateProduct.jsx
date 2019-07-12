@@ -251,6 +251,7 @@ class CreateProduct extends React.Component {
 							{!this.state.isBlocked && 'Блокиране'}
 							{this.state.isBlocked && 'Отблокиране'}
 						</Button>
+						<hr/>
 					</Col>
 					}
 

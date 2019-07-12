@@ -13,9 +13,7 @@ import SortablePartners from './partials/SortablePartners';
 
 import partnersService from '../../../../services/partners/partnersService';
 
-import {
-    TOASTR_MESSAGES
-} from '../../../../data/constants/componentConstants';
+import { TOASTR_MESSAGES } from '../../../../data/constants/componentConstants';
 
 import { BUTTONS_BG, CONFIRM_DIALOGS } from '../../../../data/constants/componentConstants';
 

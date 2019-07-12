@@ -21,7 +21,7 @@ import {
 	TOASTR_MESSAGES
 } from '../../../../data/constants/componentConstants';
 
-import SortableProducts from './partials/SortableProducts';
+import SortableProducts from '../../category/reOrder/partials/SortableProducts';
 
 class ProductsList extends React.Component {
 	constructor (props) {
@@ -40,6 +40,7 @@ class ProductsList extends React.Component {
 			filterValue: '',
 			productsCount: '',
 			pagesCount: '',
+
 			loading: true
 		};
 	}
@@ -140,8 +141,9 @@ class ProductsList extends React.Component {
 						<Link to="/product/create" className="btn btn-sm btn-primary">Нов Продукт</Link>
 
 						<Link to="/category/list" className="btn btn-sm btn-primary">Мениджър категории</Link>
-					</Col>
 
+						<Link to="/category/reorder-products-in-category" className="btn btn-sm btn-primary">Подреждане на продукти по категории</Link>
+					</Col>
 				</Row>
 
 				<Row>
@@ -182,11 +184,6 @@ class ProductsList extends React.Component {
 						<tbody>
 						{productsList}
 						</tbody>
-
-						{/*{this.state.products.length > 0 &&*/}
-						{/*<SortableProducts sortableItems={this.state.products}*/}
-						{/*                  handleOrderChange={this.handleOrderChange}/>*/}
-						{/*}*/}
 					</Table>
 				</div>
 
