@@ -75,6 +75,7 @@ function generateProductDetails (state) {
 		Price: state.price,
 		ImageUrls: state.imageUrls,
 		IsTopSeller: state.isTopSeller,
+		IsNewProduct: state.isNewProduct,
 		Categories: state.selectedCategories.map(c => c.value),
 		Subcategories: state.selectedSubcategories.map(sc => sc.value)
 	};
