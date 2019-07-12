@@ -10,7 +10,6 @@ import Paging from '../../../common/pagination/Paging';
 import FormSelectField from '../../../common/formComponents/FormSelectField';
 import FormInputWithDropdown from '../../../common/formComponents/FormInputWithDropdown';
 
-
 // Services
 import productsService from '../../../../services/products/productsService';
 
@@ -142,7 +141,8 @@ class ProductsList extends React.Component {
 
 						<Link to="/category/list" className="btn btn-sm btn-primary">Мениджър категории</Link>
 
-						<Link to="/category/reorder-products-in-category" className="btn btn-sm btn-primary">Подреждане на продукти по категории</Link>
+						<Link to="/category/reorder-products-in-category" className="btn btn-sm btn-primary">Подреждане
+							на продукти по категории</Link>
 					</Col>
 				</Row>
 
@@ -173,19 +173,18 @@ class ProductsList extends React.Component {
 					</Col>
 				</Row>
 
-				<div id="admin-sortable">
 
-					<Table striped bordered condensed hover id="admin-products-table">
-						<TableHead
-							changeClass={this.changeClass}
-							sort={this.sort}
-							handleChange={this.handleSizeChange}/>
+				<Table striped bordered condensed hover id="admin-products-table">
+					<TableHead
+						changeClass={this.changeClass}
+						sort={this.sort}
+						handleChange={this.handleSizeChange}/>
 
-						<tbody>
-						{productsList}
-						</tbody>
-					</Table>
-				</div>
+					<tbody>
+					{productsList}
+					</tbody>
+				</Table>
+
 
 				{this.state.size !== '0' &&
 				<Paging

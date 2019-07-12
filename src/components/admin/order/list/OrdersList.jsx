@@ -63,7 +63,8 @@ class OrdersList extends React.Component {
 					});
 				})
 				.catch(err => {
-					this.toastContainer.error(err.responseText, TOASTR_MESSAGES.error, {
+					this.setState({loading: false});
+					this.toastContainer.error(err.statusText, TOASTR_MESSAGES.error, {
 						closeButton: false,
 					});
 				});

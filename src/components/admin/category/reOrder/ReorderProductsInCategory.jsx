@@ -3,7 +3,6 @@ import { ToastContainer } from 'react-toastr';
 import { Grid, Row, Col, Table } from 'react-bootstrap';
 
 // Partials
-import ProductTableRow from '../../product/list/partials/ProductTableRow';
 import FormSelectField from '../../../common/formComponents/FormSelectField_2';
 import SortableProducts from './partials/SortableProducts';
 
@@ -11,6 +10,7 @@ import SortableProducts from './partials/SortableProducts';
 import productsService from '../../../../services/products/productsService';
 import categoriesService from '../../../../services/categories/categoryService';
 
+// Constants
 import { TOASTR_MESSAGES } from '../../../../data/constants/componentConstants';
 
 class FilterObject {
@@ -97,7 +97,7 @@ class ReorderProductsInCategory extends React.Component {
 	};
 
 	saveNewOrder = () => {
-		console.log('from save')
+		console.log('from save');
 	};
 
 	render () {
@@ -113,36 +113,36 @@ class ReorderProductsInCategory extends React.Component {
 
 				<h3>Подреждане на продукти в категория</h3>
 
-				<hr/>
+				<FormSelectField
+					value={this.state.categories.selected.id}
+					optionsList={this.state.categories.original}
+					onChange={this.handleChange}/>
 
+				{this.state.loading && <div className="admin-loader"/>}
 
-				<Row>
-					<Col xs={12} className="buttons-container">
-						<FormSelectField
-							value={this.state.categories.selected.id}
-							optionsList={this.state.categories.original}
-							onChange={this.handleChange}/>
+				{!this.state.loading && this.state.products.length === 0 &&
+				<h4> Няма продукти в избраната категория </h4>
+				}
 
-					</Col>
-				</Row>
+				{!this.state.loading && this.state.products.length > 0 &&
+				<div>
+					<div id="admin-sortable">
 
+						{!this.state.loading && this.state.products.length > 0 &&
+						<Table striped bordered condensed hover id="admin-products-table">
+							<SortableProducts sortableItems={this.state.products}
+							                  handleOrderChange={this.handleOrderChange}/>
+						</Table>}
+					</div>
 
-				<div id="admin-sortable">
-
-					{this.state.loading && <div className="admin-loader"/>}
-
-					{!this.state.loading && this.state.products.length === 0 &&
-					<h3> Няма продукти в избраната категория </h3>
-					}
-
-					{!this.state.loading && this.state.products.length > 0 &&
-					<Table striped bordered condensed hover id="admin-products-table">
-						<SortableProducts sortableItems={this.state.products}
-						                  handleOrderChange={this.handleOrderChange}/>
-					</Table>}
+					<div className='buttons-container'>
+						<button className='btn btn-default' onClick={() => this.props.history.go(-1)}>Назад</button>
+						<button className='btn btn-primary' onClick={this.saveNewOrder}>Запази подреждането</button>
+					</div>
 				</div>
+				}
 
-				<button className='btn btn-primary' onClick={this.saveNewOrder}>Запази подреждането</button>
+
 			</Grid>
 		);
 	}

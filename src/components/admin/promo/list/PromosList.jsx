@@ -40,8 +40,7 @@ class PromoList extends React.Component {
 				this.setState({discountPromos: res});
 			})
 			.catch(err => {
-				console.log(err)
-				this.toastContainer.error(err.responseText, TOASTR_MESSAGES.error, {
+				this.toastContainer.error(err.statusText, TOASTR_MESSAGES.error, {
 					closeButton: false,
 				});
 			});

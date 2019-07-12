@@ -229,10 +229,11 @@
     max-height: 20px; }
 
 #admin-sortable {
-  height: 60vh;
+  height: 55vh;
   overflow: hidden scroll;
   margin-top: 15px;
-  margin-bottom: 15px; }
+  margin-bottom: 15px;
+  border: 1px solid #e6e6e6; }
   #admin-sortable .image-thumbnail {
     width: auto;
     max-height: 40px; }

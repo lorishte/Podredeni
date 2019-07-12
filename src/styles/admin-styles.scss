@@ -252,10 +252,12 @@
 }
 
 #admin-sortable {
-  height: 60vh;
+  height: 55vh;
   overflow: hidden scroll;
   margin-top: 15px;
   margin-bottom: 15px;
+
+  border: 1px solid $light-grey;
 
   .image-thumbnail {
     width: auto;
