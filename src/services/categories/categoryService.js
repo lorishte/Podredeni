@@ -30,6 +30,21 @@ export default {
             .get(endPoint, null, query);
     },
 
+    saveUpdatedProductsOrder: (productsIds, categoryId) => {
+        let endPoint = categoryEndPoint + '/reorder/' + categoryId;
+
+        console.log(endPoint);
+
+        let data = {
+            Products: productsIds
+        };
+
+        console.log(data);
+
+        return requesterService
+            .update(endPoint, auth, data);
+    },
+
     loadNestedCategories: (state) => {
 
         let endPoint = categoryEndPoint + '/all?arenested=true';

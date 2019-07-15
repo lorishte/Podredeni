@@ -98,6 +98,18 @@ class ReorderProductsInCategory extends React.Component {
 
 	saveNewOrder = () => {
 		console.log('from save');
+
+		console.log(this.state);
+
+        categoriesService.saveUpdatedProductsOrder(this.state.newProductsOrder.map(p => p.id), this.state.categories.selected[0])
+			.then(res => {
+
+			})
+			.catch(err => {
+            this.toastContainer.error(err.responseText, TOASTR_MESSAGES.error, {
+                closeButton: false,
+            });
+        });
 	};
 
 	render () {
