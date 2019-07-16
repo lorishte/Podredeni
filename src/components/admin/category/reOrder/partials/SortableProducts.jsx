@@ -1,8 +1,7 @@
 import React from 'react';
+import { Table } from 'react-bootstrap';
 
 import { SortableContainer, SortableElement, arrayMove } from 'react-sortable-hoc';
-
-
 
 const SortableItem = SortableElement(({itemIndex, value}) =>
 
@@ -36,10 +35,17 @@ const SortableList = SortableContainer(({items}) => {
 });
 
 class SortableProducts extends React.Component {
-	state = {
-		items: this.props.sortableItems
-	};
+	constructor (props) {
+		super(props);
 
+		this.state = {
+			items: []
+		}
+	}
+
+	componentDidMount () {
+		this.setState({items: this.props.sortableItems})
+	}
 
 	onSortEnd = ({oldIndex, newIndex}) => {
 		this.setState({
@@ -49,14 +55,19 @@ class SortableProducts extends React.Component {
 		this.props.handleOrderChange(this.state.items);
 	};
 
-
 	render () {
 
-		return <SortableList
-			getContainer={() => document.getElementById('admin-sortable')}
-			items={this.state.items}
-			distance={10}
-			onSortEnd={this.onSortEnd}/>;
+		let products;
+
+		if(this.state.items.length > 0){
+			products = (<SortableList
+				getContainer={() => document.getElementById('admin-sortable')}
+				items={this.state.items}
+				distance={10}
+				onSortEnd={this.onSortEnd}/>);
+		}
+
+		return <Table striped bordered condensed hover id="admin-products-table">{products}</Table>;
 	}
 }
 

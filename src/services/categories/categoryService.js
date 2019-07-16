@@ -33,21 +33,16 @@ export default {
     saveUpdatedProductsOrder: (productsIds, categoryId) => {
         let endPoint = categoryEndPoint + '/reorder/' + categoryId;
 
-        console.log(endPoint);
-
         let data = {
             Products: productsIds
         };
-
-        console.log(data);
-
         return requesterService
             .update(endPoint, auth, data);
     },
 
     loadNestedCategories: (state) => {
 
-        let endPoint = categoryEndPoint + '/all?arenested=true';
+        let endPoint = categoryEndPoint + '/all?arenested=true&numberofproducts=1000';
 
         if(state === null) {
 

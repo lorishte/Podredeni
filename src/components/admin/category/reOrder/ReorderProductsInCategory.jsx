@@ -1,95 +1,66 @@
 import React from 'react';
 import { ToastContainer } from 'react-toastr';
-import { Grid, Row, Col, Table } from 'react-bootstrap';
+import { Grid  } from 'react-bootstrap';
 
 // Partials
 import FormSelectField from '../../../common/formComponents/FormSelectField_2';
 import SortableProducts from './partials/SortableProducts';
 
 // Services
-import productsService from '../../../../services/products/productsService';
 import categoriesService from '../../../../services/categories/categoryService';
 
 // Constants
 import { TOASTR_MESSAGES } from '../../../../data/constants/componentConstants';
-
-class FilterObject {
-	constructor () {
-		this.original = [];
-		this.selected = [];
-		this.matched = [];
-	}
-}
 
 class ReorderProductsInCategory extends React.Component {
 	constructor (props) {
 		super(props);
 
 		this.state = {
+			nestedCategories: [],
+			currentCategoryId: "",
 			products: [],
-
 			newProductsOrder: [],
-
-			categories: new FilterObject(),
-
 			loading: true
 		};
 	}
 
 	componentDidMount () {
-		this.loadCategories();
+		this.loadNestedCategories();
 	}
 
-	loadCategories = () => {
+	loadNestedCategories = () => {
 		categoriesService
-			.loadCategories(null,)
-			.then(res => {
-				let categories = Object.assign({}, this.state.categories);      //creating copy of object
-				categories.original = res;                                                    //updating value
-				categories.selected = [res[0].id];
+		.loadNestedCategories(this.state)
+		.then(res => {
+			let currentCategoryId = res[0].id;
+			let products = res.filter(c => c.id == currentCategoryId)[0].products;
 
-				this.setState({
-					categories: categories,
-					selectedCategoryName: res[0].name
-				}, () => {
-					this.loadProducts();
-				});
-			})
-			.catch(err => {
-				this.toastContainer.error(err.responseText, TOASTR_MESSAGES.error, {
-					closeButton: false,
-				});
+			this.setState({
+				nestedCategories: res, 
+				currentCategoryId: currentCategoryId,  
+				loading: false}, () => this.loadProducts(products))			
+		})			
+		.catch(err => {
+			this.toastContainer.error(err.responseText, TOASTR_MESSAGES.error, {
+				closeButton: false,
 			});
-	};
+		});
+	}
 
-	loadProducts = () => {
-
-		productsService
-			.loadProducts(this.state, true)
-			.then(res => {
-
-				res.products.forEach(p => p.images.reverse());
-
-				this.setState({
-					products: res.products,
-					loading: false
-				});
-			})
-			.catch(err => {
-				this.toastContainer.error(err.responseText, TOASTR_MESSAGES.error, {
-					closeButton: false,
-				});
-			});
+	loadProducts = (products) => {
+		this.setState({products: products, loading: false})
 	};
 
 	handleChange = (e) => {
 
-		let newCategoryId = this.state.categories.original.filter(cat => cat.name === e.target.value)[0].id;
+		let selectedCategoryName = e.target.value;
 
-		let categories = Object.assign({}, this.state.categories);      //creating copy of object
-		categories.selected = [newCategoryId];  //updating value
+		let selectedCategoryId = this.state.nestedCategories.filter(c => c.name == selectedCategoryName)[0].id;
 
-		this.setState({categories: categories, loading: true}, () => this.loadProducts());
+		let products = this.state.nestedCategories.filter(c => c.id == selectedCategoryId)[0].products;
+
+		this.setState({currentCategoryId: selectedCategoryId, loading: true}, () => this.loadProducts(products));
 	};
 
 	handleOrderChange = (reorderedItems) => {
@@ -97,13 +68,9 @@ class ReorderProductsInCategory extends React.Component {
 	};
 
 	saveNewOrder = () => {
-		console.log('from save');
-
-		console.log(this.state);
-
-        categoriesService.saveUpdatedProductsOrder(this.state.newProductsOrder.map(p => p.id), this.state.categories.selected[0])
+        categoriesService.saveUpdatedProductsOrder(this.state.newProductsOrder.map(p => p.id), this.state.currentCategoryId)
 			.then(res => {
-
+				this.loadNestedCategories();	
 			})
 			.catch(err => {
             this.toastContainer.error(err.responseText, TOASTR_MESSAGES.error, {
@@ -113,6 +80,17 @@ class ReorderProductsInCategory extends React.Component {
 	};
 
 	render () {
+
+		let selectForm;
+		
+
+		if(this.state.nestedCategories.length > 0){
+
+			selectForm = (<FormSelectField
+				selected={this.state.currentCategoryId}
+				optionsList={this.state.nestedCategories}
+				onChange={this.handleChange}/>)
+		}
 
 		return (
 			<Grid id='reorder-products'>
@@ -125,10 +103,7 @@ class ReorderProductsInCategory extends React.Component {
 
 				<h3>Подреждане на продукти в категория</h3>
 
-				<FormSelectField
-					value={this.state.categories.selected.id}
-					optionsList={this.state.categories.original}
-					onChange={this.handleChange}/>
+				{selectForm}
 
 				{this.state.loading && <div className="admin-loader"/>}
 
@@ -141,10 +116,10 @@ class ReorderProductsInCategory extends React.Component {
 					<div id="admin-sortable">
 
 						{!this.state.loading && this.state.products.length > 0 &&
-						<Table striped bordered condensed hover id="admin-products-table">
+						
 							<SortableProducts sortableItems={this.state.products}
 							                  handleOrderChange={this.handleOrderChange}/>
-						</Table>}
+						}
 					</div>
 
 					<div className='buttons-container'>

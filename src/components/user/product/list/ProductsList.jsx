@@ -96,6 +96,8 @@ class ProductsList extends React.Component {
 			.loadNestedCategories(null)
 			.then(res => {
 
+				console.log(res);
+
 				// Make category filters visible on large devices
 				if (this.state.resolution >= RESOLUTIONS.bootstrapSM) {
 					let filtersVisible = [];
