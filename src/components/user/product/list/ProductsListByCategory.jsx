@@ -182,10 +182,13 @@ class ProductsListByCategory extends React.Component {
 
 
 				<Col xs={12}>
-					<Col xs={12} sm={3} className="filters-container">
+					<Col xs={12} sm={3} >
 
-						<h4 className='category'>{this.state.categoryName}</h4>
-						{subcategories}
+						<Col xs={12} className="filters-container">
+							<h4 className='category'>{this.state.categoryName}</h4>
+							{subcategories}
+						</Col>
+
 					</Col>
 
 					<Col xs={12} sm={9}>
