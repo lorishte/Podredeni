@@ -123,6 +123,7 @@ const BUTTONS_BG = {
 	create: 'Създай',
 	add: 'Добави',
 	saveOrder: 'Запази подреждането',
+	all: 'Всички',
 
 	//Cart
 	saveChanges: 'Запази промените',

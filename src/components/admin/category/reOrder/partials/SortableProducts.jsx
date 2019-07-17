@@ -11,7 +11,7 @@ const SortableItem = SortableElement(({itemIndex, value}) =>
 		</td>
 
 		<td>
-			<img src={value.images[0]}  className='image-thumbnail' />
+			<img src={value.images[0]}  className='image-thumbnail-small' />
 		</td>
 
 		<td className="text-left">

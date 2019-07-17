@@ -17,7 +17,8 @@ import Contact from '../user/contact/Contact';
 import Terms from '../user/termsAndConditions/Terms';
 
 // User Products
-import ProductsList from '../user/product/list/ProductsList';
+import ProductsListNew from '../user/product/list/ProductsListNew';
+import ProductsListByCategory from '../user/product/list/ProductsListByCategory';
 import ProductDetails from '../user/product/details/ProductDetails';
 
 // User News
@@ -28,7 +29,6 @@ import NewsCreate from '../user/news/NewsCreate';
 
 // User Cart
 import Cart from '../user/cart/Cart';
-
 
 // ADMIN
 // Admin Products
@@ -41,7 +41,7 @@ import EditCreateDiscountPromo from '../admin/promo/discountPromo/EditCreateDisc
 import EditCreateProductPromo from '../admin/promo/productPromo/EditCreateProductPromo';
 
 // Admin Partners
-import AdminPartnersList from '../admin/partner/list/PartnersList'
+import AdminPartnersList from '../admin/partner/list/PartnersList';
 import PartnerEditCreate from '../admin/partner/create/EditCreatePartner';
 
 // Admin Orders
@@ -54,18 +54,17 @@ import VideosList from '../admin/video/list/VideosList';
 
 // Admin Home content
 import HomeContent from '../admin/homeContent/HomeContent';
-import CarouselItemCreate from '../admin/homeContent/carousel/partials/CarouselItemCreate'
+import CarouselItemCreate from '../admin/homeContent/carousel/partials/CarouselItemCreate';
 import CarouselItemEdit from '../admin/homeContent/carousel/partials/CarouselItemEdit';
 
 // Admin Categories
 import CategoriesList from '../admin/category/list/CategoriesList';
-import ReorderProductsInCategory from '../admin/category/reOrder/ReorderProductsInCategory'
+import ReorderProductsInCategory from '../admin/category/reOrder/ReorderProductsInCategory';
 
 // ERRORS and CONFIRMATIONS
 import OrderReceived from '../common/confirmation/OrderReceived';
 import Error from '../common/errors/Error';
 import NotFound from '../common/errors/NotFound';
-
 
 let Routes = () => {
 	return (
@@ -77,8 +76,10 @@ let Routes = () => {
 			<Route path='/login' component={Login}/>
 			<Route path='/register' component={NotFound}/>
 
-			<Route exact path='/products' component={ProductsList}/>
+			<Route exact path='/products' component={ProductsListNew}/>
 			<Route path='/products/:id' component={ProductDetails}/>
+
+			<Route exact path='/category/:id' component={ProductsListByCategory}/>
 
 			<Route exact path='/news/create' component={NewsCreate}/>
 			<Route exact path='/news/list' component={NewsList}/>

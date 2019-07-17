@@ -1016,6 +1016,12 @@ nav {
         @include flex-basis(80%);
       }
 
+      .label {
+        background-color: $warm-light-grey;
+        color: $dark-grey;
+        margin-left: 8px;
+      }
+
       .check-box {
         @include flex-basis(15px);
         display: inline-block;
@@ -1064,6 +1070,21 @@ nav {
     }
 
   }
+
+  .header {
+    margin: 50px 0 15px 0;
+    @include flex;
+    @include justify-content(space-between);
+
+    h2 {
+      margin: 0;
+    }
+
+    .btn {
+      margin-top: 5px;
+    }
+  }
+
 
   .result {
     display: inline-block;

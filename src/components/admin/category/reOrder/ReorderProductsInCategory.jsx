@@ -1,6 +1,6 @@
 import React from 'react';
 import { ToastContainer } from 'react-toastr';
-import { Grid  } from 'react-bootstrap';
+import { Grid } from 'react-bootstrap';
 
 // Partials
 import FormSelectField from '../../../common/formComponents/FormSelectField_2';
@@ -18,7 +18,7 @@ class ReorderProductsInCategory extends React.Component {
 
 		this.state = {
 			nestedCategories: [],
-			currentCategoryId: "",
+			currentCategoryId: '',
 			products: [],
 			newProductsOrder: [],
 			loading: true
@@ -31,34 +31,36 @@ class ReorderProductsInCategory extends React.Component {
 
 	loadNestedCategories = () => {
 		categoriesService
-		.loadNestedCategories(this.state)
-		.then(res => {
-			let currentCategoryId = res[0].id;
-			let products = res.filter(c => c.id == currentCategoryId)[0].products;
+			.loadNestedCategories(this.state)
+			.then(res => {
 
-			this.setState({
-				nestedCategories: res, 
-				currentCategoryId: currentCategoryId,  
-				loading: false}, () => this.loadProducts(products))			
-		})			
-		.catch(err => {
-			this.toastContainer.error(err.responseText, TOASTR_MESSAGES.error, {
-				closeButton: false,
+				let currentCategoryId = res[0].id;
+				let products = res.filter(c => c.id === currentCategoryId)[0].products;
+
+				this.setState({
+					nestedCategories: res,
+					currentCategoryId: currentCategoryId
+				}, () => this.loadProducts(products));
+			})
+			.catch(err => {
+				this.toastContainer.error(err.responseText, TOASTR_MESSAGES.error, {
+					closeButton: false,
+				});
 			});
-		});
-	}
+	};
 
 	loadProducts = (products) => {
-		this.setState({products: products, loading: false})
+		products.forEach(p => p.images.reverse());
+		this.setState({products: products, loading: false});
 	};
 
 	handleChange = (e) => {
 
 		let selectedCategoryName = e.target.value;
 
-		let selectedCategoryId = this.state.nestedCategories.filter(c => c.name == selectedCategoryName)[0].id;
+		let selectedCategoryId = this.state.nestedCategories.filter(c => c.name === selectedCategoryName)[0].id;
 
-		let products = this.state.nestedCategories.filter(c => c.id == selectedCategoryId)[0].products;
+		let products = this.state.nestedCategories.filter(c => c.id === selectedCategoryId)[0].products;
 
 		this.setState({currentCategoryId: selectedCategoryId, loading: true}, () => this.loadProducts(products));
 	};
@@ -68,28 +70,27 @@ class ReorderProductsInCategory extends React.Component {
 	};
 
 	saveNewOrder = () => {
-        categoriesService.saveUpdatedProductsOrder(this.state.newProductsOrder.map(p => p.id), this.state.currentCategoryId)
+		categoriesService.saveUpdatedProductsOrder(this.state.newProductsOrder.map(p => p.id), this.state.currentCategoryId)
 			.then(res => {
-				this.loadNestedCategories();	
+				this.loadNestedCategories();
 			})
 			.catch(err => {
-            this.toastContainer.error(err.responseText, TOASTR_MESSAGES.error, {
-                closeButton: false,
-            });
-        });
+				this.toastContainer.error(err.responseText, TOASTR_MESSAGES.error, {
+					closeButton: false,
+				});
+			});
 	};
 
 	render () {
 
 		let selectForm;
-		
 
-		if(this.state.nestedCategories.length > 0){
+		if (this.state.nestedCategories.length > 0) {
 
 			selectForm = (<FormSelectField
 				selected={this.state.currentCategoryId}
 				optionsList={this.state.nestedCategories}
-				onChange={this.handleChange}/>)
+				onChange={this.handleChange}/>);
 		}
 
 		return (
@@ -116,9 +117,9 @@ class ReorderProductsInCategory extends React.Component {
 					<div id="admin-sortable">
 
 						{!this.state.loading && this.state.products.length > 0 &&
-						
-							<SortableProducts sortableItems={this.state.products}
-							                  handleOrderChange={this.handleOrderChange}/>
+
+						<SortableProducts sortableItems={this.state.products}
+						                  handleOrderChange={this.handleOrderChange}/>
 						}
 					</div>
 

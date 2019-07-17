@@ -848,6 +848,11 @@ nav {
     #products .filters-container .sub-category .name {
       -webkit-flex-basis: 80%;
       flex-basis: 80%; }
+    #products .filters-container .category .label,
+    #products .filters-container .sub-category .label {
+      background-color: #f6f5f3;
+      color: #5b5b5b;
+      margin-left: 8px; }
     #products .filters-container .category .check-box,
     #products .filters-container .sub-category .check-box {
       -webkit-flex-basis: 15px;
@@ -889,6 +894,21 @@ nav {
     margin-left: 15px;
     font-weight: 400;
     font-size: .85em; }
+#products .header {
+  margin: 50px 0 15px 0;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+  -moz-box-pack: justify;
+  -ms-flex-pack: justify;
+  -webkit-justify-content: space-between;
+  justify-content: space-between; }
+  #products .header h2 {
+    margin: 0; }
+  #products .header .btn {
+    margin-top: 5px; }
 #products .result {
   display: inline-block;
   padding: 2px 8px;

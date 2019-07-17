@@ -258,14 +258,9 @@
   margin-bottom: 15px;
 
   border: 1px solid $light-grey;
-
-  .image-thumbnail {
-    width: auto;
-    max-height: 40px;
-  }
 }
 
-.image-thumbnail {
+.image-thumbnail-small {
   width: auto;
   max-height: 40px;
 }
