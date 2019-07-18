@@ -124,6 +124,7 @@ const BUTTONS_BG = {
 	add: 'Добави',
 	saveOrder: 'Запази подреждането',
 	all: 'Всички',
+	reorder: 'Подреждане',
 
 	//Cart
 	saveChanges: 'Запази промените',

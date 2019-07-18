@@ -57,17 +57,20 @@ class SortableProducts extends React.Component {
 
 	render () {
 
-		let products;
+		let itemsList;
+
+		
 
 		if(this.state.items.length > 0){
-			products = (<SortableList
+
+			itemsList = (<SortableList
 				getContainer={() => document.getElementById('admin-sortable')}
 				items={this.state.items}
 				distance={10}
 				onSortEnd={this.onSortEnd}/>);
 		}
 
-		return <Table striped bordered condensed hover id="admin-products-table">{products}</Table>;
+		return <Table striped bordered condensed hover id="admin-products-table">{itemsList}</Table>;
 	}
 }
 

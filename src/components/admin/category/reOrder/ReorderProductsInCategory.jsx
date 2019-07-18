@@ -31,11 +31,13 @@ class ReorderProductsInCategory extends React.Component {
 
 	loadNestedCategories = () => {
 		categoriesService
-			.loadNestedCategories(this.state)
+			.loadNestedCategories(null, 1000)
 			.then(res => {
 
 				let currentCategoryId = res[0].id;
 				let products = res.filter(c => c.id === currentCategoryId)[0].products;
+
+				console.log(res);
 
 				this.setState({
 					nestedCategories: res,

@@ -1,6 +1,7 @@
 import React from 'react';
 
 import {ToastContainer} from 'react-toastr';
+import { Link } from 'react-router-dom';
 
 import {Button, Grid, Row, Col, Table, Tabs, Tab} from 'react-bootstrap';
 
@@ -18,7 +19,8 @@ import {
     ADMIN_CATEGORIES_FILTER_OPTIONS,
     FILTER_INPUT_WAIT_INTERVAL,
     TOASTR_MESSAGES,
-    CATEGORY_OR_SUBCATEGORY
+    CATEGORY_OR_SUBCATEGORY,
+    BUTTONS_BG
 } from '../../../../data/constants/componentConstants';
 
 import Header from "../../../common/Header";
@@ -202,6 +204,8 @@ class CategoriesList extends React.Component {
                     ref={ref => this.toastContainer = ref}
                     className="toast-bottom-right"
                 />
+
+                <Link to={'/category/reorder'} className='btn btn-primary'>{BUTTONS_BG.reorder} </Link>
 
                 <Tabs defaultActiveKey={this.state.key}
                       id="admin-category-table"

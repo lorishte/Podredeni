@@ -53,7 +53,7 @@ class ProductsListNew extends React.Component {
 
 	loadNestedCategories = () => {
 		categoryService
-			.loadNestedCategories(null)
+			.loadNestedCategories(null, 3)
 			.then(res => {
 				res.forEach(cat => {
 					cat.products.forEach(p => p.images.reverse());
@@ -84,7 +84,7 @@ class ProductsListNew extends React.Component {
 
 					<div className='header'>
 						<h2>{cat.name}</h2>
-						<Link to={'/category/' + cat.id} className='btn btn-custom primary xs'>{BUTTONS_BG.all} </Link>
+						<Link to={'/products-by-category/' + cat.id} className='btn btn-custom primary xs'>{BUTTONS_BG.all} </Link>
 					</div>
 
 					<Row>{products}</Row>

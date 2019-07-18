@@ -34,15 +34,28 @@ export default {
         let endPoint = categoryEndPoint + '/reorder/' + categoryId;
 
         let data = {
-            Products: productsIds
+            IdList: productsIds
         };
         return requesterService
             .update(endPoint, auth, data);
     },
 
-    loadNestedCategories: (state) => {
+    saveUpdatedCategoryOrder: (categoryIds) => {
+        let endPoint = categoryEndPoint + '/reorder';
 
-        let endPoint = categoryEndPoint + '/all?arenested=true&numberofproducts=1000';
+        let data = {
+            IdList: categoryIds
+        };
+
+        console.log(data);
+        
+        return requesterService
+            .update(endPoint, auth, data);
+    },
+
+    loadNestedCategories: (state, numberofproducts) => {
+
+        let endPoint = categoryEndPoint + '/all?arenested=true&numberofproducts=' + numberofproducts;
 
         if(state === null) {
 

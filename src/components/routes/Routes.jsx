@@ -60,6 +60,7 @@ import CarouselItemEdit from '../admin/homeContent/carousel/partials/CarouselIte
 // Admin Categories
 import CategoriesList from '../admin/category/list/CategoriesList';
 import ReorderProductsInCategory from '../admin/category/reOrder/ReorderProductsInCategory';
+import ReorderCategory from '../admin/category/reOrder/ReorderCategory'
 
 // ERRORS and CONFIRMATIONS
 import OrderReceived from '../common/confirmation/OrderReceived';
@@ -78,8 +79,8 @@ let Routes = () => {
 
 			<Route exact path='/products' component={ProductsListNew}/>
 			<Route path='/products/:id' component={ProductDetails}/>
-
-			<Route exact path='/category/:id' component={ProductsListByCategory}/>
+			
+			<Route path='/products-by-category/:id' component={ProductsListByCategory}/>
 
 			<Route exact path='/news/create' component={NewsCreate}/>
 			<Route exact path='/news/list' component={NewsList}/>
@@ -102,8 +103,9 @@ let Routes = () => {
 			<PrivateRoute path='/product/edit/:id' component={CreateProduct}/>
 			<PrivateRoute path='/product/list' component={AdminProductsList}/>
 
-			<PrivateRoute path='/category/list' component={CategoriesList}/>
-			<PrivateRoute path='/category/reorder-products-in-category' component={ReorderProductsInCategory}/>
+			<PrivateRoute exact path='/category/list' component={CategoriesList}/>
+			<PrivateRoute exact path='/category/reorder-products-in-category' component={ReorderProductsInCategory}/>
+			<PrivateRoute exact path='/category/reorder' component={ReorderCategory}/>
 
 			<PrivateRoute path='/promos/list' component={AdminPromosList}/>
 			<PrivateRoute path='/promos/edit-discount-promo/:id' component={EditCreateDiscountPromo}/>

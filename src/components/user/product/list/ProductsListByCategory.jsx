@@ -60,7 +60,7 @@ class ProductsListByCategory extends React.Component {
 
 	loadNestedCategories = () => {
 		categoryService
-			.loadNestedCategories(null)
+			.loadNestedCategories(null, 1000)
 			.then(res => {
 
 				let catId = this.props.match.params.id;
@@ -68,8 +68,6 @@ class ProductsListByCategory extends React.Component {
 				let selectedCategory = res.filter(c => c.id === catId)[0];
 
 				selectedCategory.products.forEach(p => p.images.reverse());
-
-				console.log(selectedCategory);
 
 				this.setState({
 					categoryName: selectedCategory.name,
