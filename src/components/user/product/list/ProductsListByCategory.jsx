@@ -57,6 +57,8 @@ class ProductsListByCategory extends React.Component {
 
 	checkFilters = () => {
 
+		console.log(222)
+
 		let subCategories = JSON.parse(sessionStorage.getItem('selectedSubcategoryIds'));
 
 		if (subCategories) {
