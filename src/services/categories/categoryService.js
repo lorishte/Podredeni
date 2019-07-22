@@ -6,116 +6,111 @@ const auth = 'admin';
 
 export default {
 
-    loadCategories: (state, isSubcategory) => {
+	loadCategories: (state, isSubcategory) => {
 
-        let endPoint = GetEndPoint(isSubcategory);
+		let endPoint = GetEndPoint(isSubcategory);
 
-        if(state === null) {
+		if (state === null) {
 
-            endPoint += '/all';
+			endPoint += '/all';
 
-            return requesterService
-                .get(endPoint);
-        }
+			return requesterService
+				.get(endPoint);
+		}
 
-        let query =
-            '?page=' + state.page +
-            '&size=' + state.size +
-            '&filterElement=' + state.filterProperty +
-            '&filterValue=' + state.filterValue +
-            '&sortElement=' + state.sortProperty +
-            '&sortDesc=' + state.descending;
+		let query =
+			'?page=' + state.page +
+			'&size=' + state.size +
+			'&filterElement=' + state.filterProperty +
+			'&filterValue=' + state.filterValue +
+			'&sortElement=' + state.sortProperty +
+			'&sortDesc=' + state.descending;
 
-        return requesterService
-            .get(endPoint, null, query);
-    },
+		return requesterService
+			.get(endPoint, null, query);
+	},
 
-    saveUpdatedProductsOrder: (productsIds, categoryId) => {
-        let endPoint = categoryEndPoint + '/reorder/' + categoryId;
+	saveUpdatedProductsOrder: (productsIds, categoryId) => {
+		let endPoint = categoryEndPoint + '/reorder/' + categoryId;
 
-        let data = {
-            IdList: productsIds
-        };
-        return requesterService
-            .update(endPoint, auth, data);
-    },
+		let data = {
+			IdList: productsIds
+		};
+		return requesterService
+			.update(endPoint, auth, data);
+	},
 
-    saveUpdatedCategoryOrder: (categoryIds) => {
-        let endPoint = categoryEndPoint + '/reorder';
+	saveUpdatedCategoryOrder: (categoryIds) => {
+		let endPoint = categoryEndPoint + '/reorder';
 
-        let data = {
-            IdList: categoryIds
-        };
+		let data = {IdList: categoryIds};
 
-        console.log(data);
-        
-        return requesterService
-            .update(endPoint, auth, data);
-    },
+		return requesterService
+			.update(endPoint, auth, data);
+	},
 
-    loadNestedCategories: (state, numberofproducts) => {
+	loadNestedCategories: (state, numberofproducts) => {
 
-        let endPoint = categoryEndPoint + '/all?arenested=true&numberofproducts=' + numberofproducts;
+		let endPoint = categoryEndPoint + '/all?arenested=true&numberofproducts=' + numberofproducts;
 
-        if(state === null) {
+		if (state === null) {
 
-            return requesterService
-                .get(endPoint);
-        }
+			return requesterService
+				.get(endPoint);
+		}
 
-        let query =
-            '?page=' + state.page +
-            '&size=' + state.size +
-            '&filterElement=' + state.filterProperty +
-            '&filterValue=' + state.filterValue +
-            '&sortElement=' + state.sortProperty +
-            '&sortDesc=' + state.descending;
+		let query =
+			'?page=' + state.page +
+			'&size=' + state.size +
+			'&filterElement=' + state.filterProperty +
+			'&filterValue=' + state.filterValue +
+			'&sortElement=' + state.sortProperty +
+			'&sortDesc=' + state.descending;
 
-        return requesterService
-            .get(endPoint, null, query);
-    },
+		return requesterService
+			.get(endPoint, null, query);
+	},
 
-    updateCategory: (isSubcategory, categoryId, categoryName) => {
+	updateCategory: (isSubcategory, categoryId, categoryName) => {
 
-        let endPoint = GetEndPoint(isSubcategory) + '/' + categoryId;
+		let endPoint = GetEndPoint(isSubcategory) + '/' + categoryId;
 
-        let categoryDetails = {
-            Name: categoryName
-        };
+		let categoryDetails = {
+			Name: categoryName
+		};
 
-        return requesterService
-            .update(endPoint, auth, categoryDetails);
-    },
+		return requesterService
+			.update(endPoint, auth, categoryDetails);
+	},
 
-    createCategory: (isSubcategory, categoryName) => {
+	createCategory: (isSubcategory, categoryName) => {
 
-        let endPoint = GetEndPoint(isSubcategory);
+		let endPoint = GetEndPoint(isSubcategory);
 
-        let categoryDetails = {
-            Name: categoryName
-        };
+		let categoryDetails = {
+			Name: categoryName
+		};
 
-        return requesterService
-            .post(endPoint, auth, categoryDetails);
-    },
+		return requesterService
+			.post(endPoint, auth, categoryDetails);
+	},
 
-    deleteCategory: (isSubcategory, categoryId) => {
-        let endPointId = GetEndPoint(isSubcategory) + '/' + categoryId;
+	deleteCategory: (isSubcategory, categoryId) => {
+		let endPointId = GetEndPoint(isSubcategory) + '/' + categoryId;
 
-        console.log(endPointId);
+		console.log(endPointId);
 
-        return requesterService
-            .remove(endPointId);
-    }
+		return requesterService
+			.remove(endPointId);
+	}
 };
-
 
 /**
  * @returns {string}
  */
-function GetEndPoint(isSubcategory) {
+function GetEndPoint (isSubcategory) {
 
-    return isSubcategory ? subcategoryEndPoint : categoryEndPoint;
+	return isSubcategory ? subcategoryEndPoint : categoryEndPoint;
 }
 
 

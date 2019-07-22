@@ -30,6 +30,7 @@ class Header extends React.Component {
 		window.removeEventListener('scroll', this.handleScroll);
 	}
 
+
 	handleScroll = () => {
 
 		if (window.innerWidth >= RESOLUTIONS.sm) return;

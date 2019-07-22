@@ -141,7 +141,7 @@ class ProductsList extends React.Component {
 
 						<Link to="/category/list" className="btn btn-sm btn-primary">Мениджър категории</Link>
 
-						<Link to="/category/reorder-products-in-category" className="btn btn-sm btn-primary">Подреждане
+						<Link to="/category/reorder-products-in-category" className="btn btn-sm btn-success">Подреждане
 							на продукти по категории</Link>
 					</Col>
 				</Row>

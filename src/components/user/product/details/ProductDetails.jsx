@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Grid, Row, Col, Image, PageHeader } from 'react-bootstrap';
+import { Grid, Row, Col } from 'react-bootstrap';
 import { ToastContainer } from 'react-toastr';
 
 import ImageGallery from './partials/ImageGallery';
@@ -10,7 +10,7 @@ import ProductTabs from './partials/ProductTabs';
 
 import productsService from '../../../../services/products/productsService';
 
-import { RESOLUTIONS, TOASTR_MESSAGES } from '../../../../data/constants/componentConstants';
+import { RESOLUTIONS, TOASTR_MESSAGES, BUTTONS_BG } from '../../../../data/constants/componentConstants';
 
 class Product extends React.Component {
 	constructor (props) {
@@ -25,14 +25,14 @@ class Product extends React.Component {
 
 	componentDidMount () {
 		window.scrollTo(0, 0);
-		window.addEventListener('orientationchange',  this.handleResolutionChange );
+		window.addEventListener('orientationchange', this.handleResolutionChange);
 		window.addEventListener('resize', this.handleResolutionChange);
 
 		this.loadProductData();
 	}
 
 	componentWillUnmount () {
-		window.removeEventListener('orientationchange', this.handleResolutionChange );
+		window.removeEventListener('orientationchange', this.handleResolutionChange);
 		window.removeEventListener('resize', this.handleResolutionChange);
 	}
 
@@ -92,13 +92,12 @@ class Product extends React.Component {
 	};
 
 	handleResolutionChange = () => {
-		this.setState({resolution: window.innerWidth})
+		this.setState({resolution: window.innerWidth});
 	};
 
 	render () {
 		let product = this.state.product;
 		let resolution = this.state.resolution < RESOLUTIONS.xs;
-
 
 		return (
 			<Grid id="product">
@@ -107,7 +106,7 @@ class Product extends React.Component {
 					className="toast-bottom-right"
 				/>
 
-				{this.state.product === '' && <div className="loader"/> }
+				{this.state.product === '' && <div className="loader"/>}
 
 				{this.state.product !== '' &&
 				<Row>
@@ -120,8 +119,13 @@ class Product extends React.Component {
 					</Col>
 				</Row>
 				}
+
+				<div className="buttons-container text-center">
+					<button className='btn btn-custom default sm'
+					        onClick={() => this.props.history.go(-1) }>{BUTTONS_BG.back}</button>
+				</div>
 				{/*<Row>*/}
-					{/*<ProductTabs/>*/}
+				{/*<ProductTabs/>*/}
 				{/*</Row>*/}
 			</Grid>
 		);

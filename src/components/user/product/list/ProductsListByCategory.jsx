@@ -18,7 +18,7 @@ class ProductsListByCategory extends React.Component {
 		super(props);
 
 		this.state = {
-
+			categoryId: '',
 			categoryName: '',
 			allProducts: [],
 			filteredProducts: [],
@@ -46,13 +46,28 @@ class ProductsListByCategory extends React.Component {
 		window.addEventListener('resize', this.handleResolutionChange);
 
 		this.loadNestedCategories();
-
 	}
 
 	componentWillUnmount () {
 		window.removeEventListener('orientationchange', this.handleResolutionChange);
 		window.removeEventListener('resize', this.handleResolutionChange);
+
+		sessionStorage.setItem('selectedSubcategoryIds', JSON.stringify(this.state.selectedSubcategoryIds));
 	}
+
+	checkFilters = () => {
+
+		let subCategories = JSON.parse(sessionStorage.getItem('selectedSubcategoryIds'));
+
+		if (subCategories) {
+			this.setState({selectedSubcategoryIds: subCategories}, () => {
+				this.setState({
+					filteredProducts: this.filterProducts()
+				});
+			});
+		}
+
+	};
 
 	handleResolutionChange = () => {
 		this.setState({resolution: window.innerWidth});
@@ -76,7 +91,7 @@ class ProductsListByCategory extends React.Component {
 					filteredProducts: selectedCategory.products,
 					subcategories: selectedCategory.subcategories,
 					loading: false
-				});
+				}, () => this.checkFilters());
 			})
 			.catch(err => console.log(err));
 	};
@@ -89,31 +104,27 @@ class ProductsListByCategory extends React.Component {
 
 		let subCats = this.state.selectedSubcategoryIds;
 
-		setTimeout(() => {
-			if (subCats.includes(id)) {
+		if (subCats.includes(id)) {
 
+			this.setState({
+				selectedSubcategoryIds: subCats.filter(scId => scId !== id),
+			}, () => {
 				this.setState({
-					selectedSubcategoryIds: subCats.filter(scId => scId !== id),
-				}, () => {
-					this.setState({
-						filteredProducts: this.filterProducts(),
-						filtering: false
-					});
+					filteredProducts: this.filterProducts(),
+					filtering: false
 				});
-			} else {
-
-				let added = subCats.push(id);
-
+			});
+		} else {
+			this.setState({
+				selectedSubcategoryIds: [...this.state.selectedSubcategoryIds, id],
+			}, () => {
 				this.setState({
-					selectedSubcategoryIds: [...this.state.selectedSubcategoryIds, id],
-				}, () => {
-					this.setState({
-						filteredProducts: this.filterProducts(),
-						filtering: false
-					});
+					filteredProducts: this.filterProducts(),
+					filtering: false
 				});
-			}
-		}, 500);
+			});
+		}
+
 	};
 
 	filterProducts = () => {
@@ -180,7 +191,7 @@ class ProductsListByCategory extends React.Component {
 
 
 				<Col xs={12}>
-					<Col xs={12} sm={3} >
+					<Col xs={12} sm={3}>
 
 						<Col xs={12} className="filters-container">
 							<h4 className='category'>{this.state.categoryName}</h4>

@@ -59,6 +59,9 @@ class CategoriesList extends React.Component {
         categoriesService
             .loadCategories(this.state, isSubcategory)
             .then(res => {
+
+                res.categories.sort((a, b) => a.place - b.place)
+
                 let categoriesCount = Number(res.categoriesCount);
                 let size = Number(this.state.size);
                 
@@ -205,7 +208,6 @@ class CategoriesList extends React.Component {
                     className="toast-bottom-right"
                 />
 
-                <Link to={'/category/reorder'} className='btn btn-primary'>{BUTTONS_BG.reorder} </Link>
 
                 <Tabs defaultActiveKey={this.state.key}
                       id="admin-category-table"
@@ -219,11 +221,9 @@ class CategoriesList extends React.Component {
                         updateNewCategoryName={this.updateNewCategoryName}/>
 
 
-                    <Tab eventKey={false}
-                         title='Категория'>
-                        <Row>
+                    <Tab eventKey={false} title='Категория'>
 
-                        </Row>
+                        <Link to={'/category/reorder'} className='btn btn-success'>{BUTTONS_BG.reorder}</Link>
 
                         <Row>
                             <Col xs={4} sm={3} md={2}>
@@ -326,6 +326,11 @@ class CategoriesList extends React.Component {
                     </Tab>
 
                 </Tabs>
+
+                <div className='buttons-container'>
+                    <Link to='/product/list' className='btn btn-default' > Към продукти </Link>
+                </div>
+
             </Grid>
         );
     }

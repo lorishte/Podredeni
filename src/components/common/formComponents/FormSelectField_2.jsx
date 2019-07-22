@@ -1,14 +1,15 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import { FormGroup, FormControl, ControlLabel } from 'react-bootstrap';
 
 class FormSelectField_2 extends React.Component {
 
 	render () {
-		const {label, value, name, required, onChange, optionsList } = this.props;
+		const {label, required, optionsList, onChange} = this.props;
 
 		let optionElements = optionsList.map(e => {
-			return <option key={e.id} name={e.id}>{e.name}</option>;
+			return <option key={e.id}  name={e.id}>{e.name}</option>;
 		});
 
 		return (
@@ -16,10 +17,7 @@ class FormSelectField_2 extends React.Component {
 				<ControlLabel>{label}{required && <label className="text-danger">&nbsp;*</label>}</ControlLabel>
 				<FormControl
 					componentClass="select"
-					name={name}
-					value={value}
-					onChange={onChange}
-					required={required}>
+					onChange={onChange}>
 
 					{optionElements}
 
@@ -30,3 +28,10 @@ class FormSelectField_2 extends React.Component {
 }
 
 export default FormSelectField_2;
+
+FormSelectField_2.propTypes = {
+	label: PropTypes.string,
+	required: PropTypes.bool,
+	optionsList: PropTypes.array,
+	onChange: PropTypes.func,
+};

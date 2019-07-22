@@ -38,14 +38,16 @@ class ProductsListNew extends React.Component {
 		window.addEventListener('orientationchange', this.handleResolutionChange);
 		window.addEventListener('resize', this.handleResolutionChange);
 
-		this.loadNestedCategories();
+		sessionStorage.removeItem('selectedSubcategoryIds');
 
+		this.loadNestedCategories();
 	}
 
 	componentWillUnmount () {
 		window.removeEventListener('orientationchange', this.handleResolutionChange);
 		window.removeEventListener('resize', this.handleResolutionChange);
 	}
+
 
 	handleResolutionChange = () => {
 		this.setState({resolution: window.innerWidth});
@@ -104,6 +106,8 @@ class ProductsListNew extends React.Component {
 				<Col xs={12}>
 					{productsList}
 				</Col>
+
+
 
 			</Grid>
 		);

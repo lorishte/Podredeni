@@ -20,7 +20,7 @@ const SortableList = SortableContainer(({items}) => {
 
 	return (
 		<tbody>
-		{items.map((value, index ) => (
+		{items.map((value, index) => (
 			<SortableItem key={`item-${index}`}
 			              itemIndex={itemIndex++}
 			              index={index}
@@ -36,11 +36,11 @@ class SortableCategories extends React.Component {
 
 		this.state = {
 			items: []
-		}
+		};
 	}
 
 	componentDidMount () {
-		this.setState({items: this.props.sortableItems})
+		this.setState({items: this.props.sortableItems});
 	}
 
 	onSortEnd = ({oldIndex, newIndex}) => {
@@ -55,12 +55,7 @@ class SortableCategories extends React.Component {
 
 		let itemsList;
 
-		
-
-		if(this.state.items.length > 0){
-
-			console.log(this.state.items);
-			
+		if (this.state.items.length > 0) {
 			itemsList = (<SortableList
 				getContainer={() => document.getElementById('admin-sortable')}
 				items={this.state.items}
