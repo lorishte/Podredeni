@@ -44,11 +44,12 @@ class EkontInfoInputs extends React.Component {
 		ekontService
 			.getOffices()
 			.then(response => {
+				console.log(response)
 				let data = ekontDataParser.transformXml(response.offices);
 				this.setState({ekontData: data});
 			})
 			.catch(err => {
-				console.log(err);
+
 				this.toastContainer.error(err.statusText, TOASTR_MESSAGES.error, {
 					closeButton: false,
 				});
