@@ -125,6 +125,7 @@ const BUTTONS_BG = {
 	saveOrder: 'Запази подреждането',
 	all: 'Всички',
 	reorder: 'Подреждане',
+	goToCategory: 'Към категорията',
 
 	//Cart
 	saveChanges: 'Запази промените',
@@ -151,6 +152,9 @@ const TOASTR_MESSAGES = {
 	//Errors
 	error: 'Грешка',
 	passwordsMismatch: 'Паролите не съвпадат.',
+
+	errorLoadingEkontOffices: 'Грешка. Неуспешно зареждане на офисите на Еконт. ',
+	contactUs: 'Моля, изберете доставка до адрес или се свържете с нас.',
 
 	'Promotion is not active': 'Промоцията не е активна',
 	'No promotion available for selected products/ products quantity': 'Избраните продукти или количества не съответстват на въведения промо код.',

@@ -81,8 +81,9 @@ class ProductsListNew extends React.Component {
 				let products = cat.products.map(e => {
 
 					return <ProductCard key={e.id}
-					                    data={e}
+					                    product={e}
 					                    showMessage={this.showMessage}
+					                    size={''}
 					                    xsRes={resolution ? 12 : 6}/>;
 				});
 
@@ -90,7 +91,7 @@ class ProductsListNew extends React.Component {
 
 					<div className='header'>
 						<Link to={'/products-by-category/' + cat.id} className=''><h2>{cat.name}</h2></Link>
-						<Link to={'/products-by-category/' + cat.id} className='btn btn-custom primary sm'>{BUTTONS_BG.all} </Link>
+						<Link to={'/products-by-category/' + cat.id} className='btn btn-custom primary sm'>{BUTTONS_BG.goToCategory} </Link>
 					</div>
 
 					<Row>{products}</Row>

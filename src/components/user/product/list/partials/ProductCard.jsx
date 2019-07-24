@@ -3,10 +3,12 @@ import { Link } from 'react-router-dom';
 import { withRouter } from 'react-router-dom';
 
 import { Col } from 'react-bootstrap';
+import PropTypes from 'prop-types';
 
 import utils from '../../../../../utils/utils';
 
 import { TOASTR_MESSAGES, CURRENCY } from '../../../../../data/constants/componentConstants';
+import FormTextareaField from '../../../../common/formComponents/FormTextareaField';
 
 class ProductCard extends React.Component {
 	constructor (props) {
@@ -33,7 +35,7 @@ class ProductCard extends React.Component {
 			return;
 		}
 
-		let p = this.props.data;
+		let p = this.props.product;
 		let product = {
 			id: p.id,
 			name: p.name,
@@ -56,39 +58,39 @@ class ProductCard extends React.Component {
 	};
 
 	checkIfProductIsInCart = (array) => {
-		return (array.filter(e => e.id === this.props.data.id).length > 0);
+		return (array.filter(e => e.id === this.props.product.id).length > 0);
 	};
 
 	render () {
-		const p = this.props.data;
+		const {product, size} = this.props;
 
 		return (
-			<Col xs={this.state.xsRes} sm={6} lg={4}>
+			<Col xs={this.state.xsRes} sm={6} md={size === 'smaller' ? 3 : 4}>
 
 				<div className="card">
 
-					{p.discount > 0 &&
-					<span className="promo-label">-{p.discount}%</span>
+					{product.discount > 0 &&
+					<span className="promo-label">-{product.discount}%</span>
 					}
 
-					{p.isNewProduct && <span className={'new-label'}>НОВО!</span>}
+					{product.isNewProduct && <span className={'new-label'}>НОВО!</span>}
 
 					<div className="product-image">
-						<img className="card-img-top" src={p.images[0]} alt="Card image cap"/>
+						<img className="card-img-top" src={product.images[0]} alt="Card image cap"/>
 					</div>
 
 
 					<div className="card-body">
-						<h4 className="card-title">{p.name}</h4>
-						<p className="card-text">{p.description.substring(0, 80) + ' ...'}</p>
+						<h4 className="card-title">{product.name}</h4>
+						<p className="card-text">{product.description.substring(0, 80) + ' ...'}</p>
 
-						{p.discount === 0 &&
-						<p className="price">{p.price.toFixed(2)} {CURRENCY}</p>}
+						{product.discount === 0 &&
+						<p className="price">{product.price.toFixed(2)} {CURRENCY}</p>}
 
-						{p.discount > 0 &&
+						{product.discount > 0 &&
 						<p className="price">
-							<span className="old-price">{p.price.toFixed(2)} {CURRENCY}</span>
-							<span>{(utils.calculatePriceAfterDiscount(p.price, p.discount)).toFixed(2)} {CURRENCY}</span>
+							<span className="old-price">{product.price.toFixed(2)} {CURRENCY}</span>
+							<span>{(utils.calculatePriceAfterDiscount(product.price, product.discount)).toFixed(2)} {CURRENCY}</span>
 						</p>
 						}
 
@@ -96,7 +98,7 @@ class ProductCard extends React.Component {
 							<i className="fa fa-shopping-cart" aria-hidden="true"/>
 						</button>
 
-						<Link to={'/products/' + p.id} className="add-to-cart-btn">
+						<Link to={'/products/' + product.id} className="add-to-cart-btn">
 							<i className="fa fa-search" aria-hidden="true"/>
 						</Link>
 
@@ -110,3 +112,10 @@ class ProductCard extends React.Component {
 }
 
 export default withRouter(ProductCard);
+
+ProductCard.propTypes = {
+	product: PropTypes.object,
+	showMessage: PropTypes.func,
+	size: PropTypes.string,
+	xsRes: PropTypes.number
+};

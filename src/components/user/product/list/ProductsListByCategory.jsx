@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Col, Row, Grid } from 'react-bootstrap';
+import { Col, Row, Grid, Breadcrumb, Accordion, Button } from 'react-bootstrap';
 import { ToastContainer } from 'react-toastr';
 
 // Partials
@@ -56,7 +56,7 @@ class ProductsListByCategory extends React.Component {
 	}
 
 	checkFilters = () => {
-		
+
 		let subCategories = JSON.parse(sessionStorage.getItem('selectedSubcategoryIds'));
 
 		if (subCategories) {
@@ -82,7 +82,11 @@ class ProductsListByCategory extends React.Component {
 
 				let selectedCategory = res.filter(c => c.id === catId)[0];
 
+				// Reverse images to get the first
 				selectedCategory.products.forEach(p => p.images.reverse());
+
+				// Sort subcategories by alphabetical order
+				selectedCategory.subcategories.sort((a, b) => a.name.localeCompare(b.name));
 
 				this.setState({
 					categoryName: selectedCategory.name,
@@ -147,7 +151,7 @@ class ProductsListByCategory extends React.Component {
 	};
 
 	showMessage = (type, header, message) => {
-		this.toastContainer[type](header, message)
+		this.toastContainer[type](header, message);
 	};
 
 	render () {
@@ -159,7 +163,7 @@ class ProductsListByCategory extends React.Component {
 		let productsList = this.state.filteredProducts.map(e => {
 
 			return <ProductCard key={e.id}
-			                    data={e}
+			                    product={e}
 			                    showMessage={this.showMessage}
 			                    xsRes={resolution ? 12 : 6}/>;
 
@@ -195,16 +199,24 @@ class ProductsListByCategory extends React.Component {
 
 
 				<Col xs={12}>
-					<Col xs={12} sm={3}>
+
+					<Breadcrumb>
+						<Breadcrumb.Item href="/">Начало</Breadcrumb.Item>
+						<Breadcrumb.Item href="/products">
+							Продукти
+						</Breadcrumb.Item>
+						<Breadcrumb.Item active>{this.state.categoryName}</Breadcrumb.Item>
+					</Breadcrumb>
+
+					<Col xs={12} sm={4} md={3}>
 
 						<Col xs={12} className="filters-container">
 							<h4 className='category'>{this.state.categoryName}</h4>
 							{subcategories}
 						</Col>
-
 					</Col>
 
-					<Col xs={12} sm={9}>
+					<Col xs={12} sm={8} md={9}>
 
 						<Row>
 							{this.state.filtering && <div className="loader"/>}
