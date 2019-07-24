@@ -85,7 +85,6 @@ class HomeContent extends React.Component {
 			.loadArticle()
 			.then(res => {
 
-                console.log(res.content);
 				this.setState({
 
 					sectionHeading: res.content.sectionHeading,

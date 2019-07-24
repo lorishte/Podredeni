@@ -56,8 +56,6 @@ class ProductsList extends React.Component {
 		this.loadCategories();
 
 		this.loadNestedCategories();
-
-
 	}
 
 	componentWillUnmount () {
@@ -95,8 +93,6 @@ class ProductsList extends React.Component {
 		categoryService
 			.loadNestedCategories(null)
 			.then(res => {
-
-				console.log(res);
 
 				// Make category filters visible on large devices
 				if (this.state.resolution >= RESOLUTIONS.bootstrapSM) {

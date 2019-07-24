@@ -65,6 +65,10 @@ class ProductsListNew extends React.Component {
 			.catch(err => console.log(err));
 	};
 
+	showMessage = (type, header, message) => {
+		this.toastContainer[type](header, message)
+	};
+
 	render () {
 
 		if (this.state.loading) return <div className='loader'/>;
@@ -78,15 +82,15 @@ class ProductsListNew extends React.Component {
 
 					return <ProductCard key={e.id}
 					                    data={e}
-					                    toastContainer={this.toastContainer}
+					                    showMessage={this.showMessage}
 					                    xsRes={resolution ? 12 : 6}/>;
 				});
 
 				return <Col xs={12} key={cat.id}>
 
 					<div className='header'>
-						<h2>{cat.name}</h2>
-						<Link to={'/products-by-category/' + cat.id} className='btn btn-custom primary xs'>{BUTTONS_BG.all} </Link>
+						<Link to={'/products-by-category/' + cat.id} className=''><h2>{cat.name}</h2></Link>
+						<Link to={'/products-by-category/' + cat.id} className='btn btn-custom primary sm'>{BUTTONS_BG.all} </Link>
 					</div>
 
 					<Row>{products}</Row>
@@ -102,12 +106,9 @@ class ProductsListNew extends React.Component {
 					ref={ref => this.toastContainer = ref}
 					className="toast-bottom-right"/>
 
-
 				<Col xs={12}>
 					{productsList}
 				</Col>
-
-
 
 			</Grid>
 		);

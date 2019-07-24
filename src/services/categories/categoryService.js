@@ -98,8 +98,6 @@ export default {
 	deleteCategory: (isSubcategory, categoryId) => {
 		let endPointId = GetEndPoint(isSubcategory) + '/' + categoryId;
 
-		console.log(endPointId);
-
 		return requesterService
 			.remove(endPointId);
 	}

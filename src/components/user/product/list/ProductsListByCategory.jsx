@@ -56,9 +56,7 @@ class ProductsListByCategory extends React.Component {
 	}
 
 	checkFilters = () => {
-
-		console.log(222)
-
+		
 		let subCategories = JSON.parse(sessionStorage.getItem('selectedSubcategoryIds'));
 
 		if (subCategories) {
@@ -148,6 +146,10 @@ class ProductsListByCategory extends React.Component {
 		return filteredProducts;
 	};
 
+	showMessage = (type, header, message) => {
+		this.toastContainer[type](header, message)
+	};
+
 	render () {
 
 		if (this.state.loading) return <div className='loader'/>;
@@ -158,7 +160,7 @@ class ProductsListByCategory extends React.Component {
 
 			return <ProductCard key={e.id}
 			                    data={e}
-			                    toastContainer={this.toastContainer}
+			                    showMessage={this.showMessage}
 			                    xsRes={resolution ? 12 : 6}/>;
 
 		});
@@ -213,8 +215,7 @@ class ProductsListByCategory extends React.Component {
 				</Col>
 
 			</Grid>
-		)
-			;
+		);
 	}
 }
 

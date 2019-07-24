@@ -29,9 +29,7 @@ class ProductCard extends React.Component {
 		let addedProducts = JSON.parse(sessionStorage.getItem('products'));
 
 		if (this.checkIfProductIsInCart(addedProducts)) {
-			this.props.toastContainer.warning(TOASTR_MESSAGES.editQuantityFromCart, TOASTR_MESSAGES.productAlreadyInCart, {
-				closeButton: false,
-			});
+			this.props.showMessage('warning', TOASTR_MESSAGES.editQuantityFromCart, TOASTR_MESSAGES.productAlreadyInCart);
 			return;
 		}
 
@@ -48,11 +46,12 @@ class ProductCard extends React.Component {
 		addedProducts.push(product);
 		sessionStorage.products = JSON.stringify(addedProducts);
 
-		this.props.toastContainer.success(TOASTR_MESSAGES.productAddedToCart, '', {
-			closeButton: true,
-		});
+		this.props.showMessage('success', TOASTR_MESSAGES.productAddedToCart, '');
 
-		this.props.history.push('/products');// to refresh products count in header
+		// Paths are different if added from category list or all products
+		let path = this.props.match.path;
+
+		this.props.history.push(path);// to refresh products count in header
 		this.props.history.go(-1); // step back to fix history logic
 	};
 
