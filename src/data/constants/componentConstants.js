@@ -292,7 +292,8 @@ const PARTNER_CATEGORIES = {
 	optics: 'оптики',
 	others: 'други',
 	gsm: 'GSM аксесоари',
-	fishing: 'лов и риболов'
+	fishing: 'лов и риболов',
+	bookStore: 'книжарници'
 };
 
 
