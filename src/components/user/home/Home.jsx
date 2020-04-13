@@ -1,13 +1,13 @@
 import React from 'react';
 
-import { Grid } from 'react-bootstrap';
-
+// Partials
 import ControlledCarousel from './partials/carousel/ControlledCarousel';
 import AboutProduct from './partials/aboutProduct/AboutProduct';
 import TopSellers from './partials/topSellers/TopSellers';
 import Testimonials from './partials/testimonials/Testimonials';
 import News from './partials/news/News';
-//import HomeBannerTwo from './partials/homeBannerTwo/HomeBannerTwo';
+import About from './partials/about/About'
+
 
 class Home extends React.Component {
 	constructor (props) {
@@ -16,8 +16,6 @@ class Home extends React.Component {
 
 	componentDidMount () {
 		window.scrollTo(0, 0);
-
-		
 	}
 
 	render () {
@@ -29,13 +27,14 @@ class Home extends React.Component {
 
 				<TopSellers/>
 
-				<AboutProduct/>
+				{/*<AboutProduct/>*/}
+
+				<About/>
 
 				<Testimonials/>
 
 				<News/>
-				
-				{/*<HomeBannerTwo/>*/}
+
 			</div>
 		);
 	}

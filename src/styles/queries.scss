@@ -112,6 +112,26 @@
         }
       }
     }
+
+    #home-about {
+
+      .article-image {
+        @include flex-basis(40%);
+
+        img {
+          height: auto;
+        }
+      }
+
+      .article-content {
+        @include flex-basis(60%);
+        padding: 15px 5%;
+
+        .article-text {
+          color: $primary-hover;
+        }
+      }
+    }
   }
 
   #cart {
@@ -426,6 +446,26 @@
             line-height: 1em !important;
           }
         }
+      }
+    }
+
+    #home-about {
+
+      .article-box {
+
+        &:nth-of-type(odd) {
+          .article-image {
+            order: 0;
+          }
+        }
+      }
+
+      .article-image {
+        @include flex-basis(100%);
+      }
+
+      .article-content {
+        @include flex-basis(100%);
       }
     }
   }

@@ -512,62 +512,74 @@ nav {
     }
   }
 
+
   #home-about {
+
     text-align: center;
 
     .section-heading {
-      //border-top: 0px solid $dark-grey;
-      //border-bottom: 0px solid $dark-grey;
-      padding-bottom: 10px;
-
-      font-weight: 600;
+      padding: 2em 0 .5em 0;
       letter-spacing: 0;
     }
 
     .home-text {
-      padding: 25px 10% 50px 10%;
+      padding: 50px 10%;
       font-size: 1.3em;
-      //color: $medium-grey;
     }
 
-    #about-product {
-      //background-color: $dark-grey;
+    .article-box {
+      display: flex;
+      @include flex-wrap(wrap);
+      text-align: left;
+      overflow: hidden;
+      background-color: $white;
+      margin: 2em 0;
+      border: 20px solid $white;
 
-      .article-box {
-        display: flex;
-        text-align: left;
-        overflow: hidden;
-        @include flex-wrap(wrap);
-      }
-
-      .article-image {
-        @include flex-basis(100%);
-        overflow: hidden;
-
-        img {
-          height: 100%;
-          width: 100%;
-          object-fit: cover;
-
-          //transform: translateY(-15%);
+      &:nth-of-type(odd) {
+        .article-image {
+          order: 1;
         }
       }
+    }
 
-      .article-content {
+    .article-image {
+      @include flex-basis(30%);
+      overflow: hidden;
+
+
+      img {
+        width: 100%;
+        object-fit: cover;
+
+        //transform: translateY(-15%);
+      }
+    }
+
+    .article-content {
+      @include flex-basis(70%);
+
+      padding: 0 10%;
+      @include flex;
+      @include flex-wrap(wrap);
+      @include align-content(center);
+      @include justify-content(center);
+      text-align: center;
+
+      .article-heading {
+        color: $primary-hover;
+        font-weight: 300;
+        text-transform: uppercase;
+        font-size: 1.5em;
         @include flex-basis(100%);
-        padding: 50px 10%;
-        @include flex;
-        @include flex-wrap(wrap);
-        @include align-content(center);
-        text-align: center;
+      }
 
-        .article-heading {
-          color: $primary-hover;
-          font-weight: 300;
-          text-transform: uppercase;
-          font-size: 1.5em;
-          @include flex-basis(100%);
-        }
+      .article-text {
+        color: $primary-hover;
+      }
+
+      .btn {
+        margin-top: .8em;
       }
     }
   }

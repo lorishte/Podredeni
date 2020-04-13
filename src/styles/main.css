@@ -428,31 +428,34 @@ nav {
   #home #home-about {
     text-align: center; }
     #home #home-about .section-heading {
-      padding-bottom: 10px;
-      font-weight: 600;
+      padding: 2em 0 .5em 0;
       letter-spacing: 0; }
     #home #home-about .home-text {
-      padding: 25px 10% 50px 10%;
+      padding: 50px 10%;
       font-size: 1.3em; }
-    #home #home-about #about-product .article-box {
+    #home #home-about .article-box {
       display: flex;
-      text-align: left;
-      overflow: hidden;
       -webkit-flex-wrap: wrap;
       -ms-flex-wrap: wrap;
-      flex-wrap: wrap; }
-    #home #home-about #about-product .article-image {
-      -webkit-flex-basis: 100%;
-      flex-basis: 100%;
+      flex-wrap: wrap;
+      text-align: left;
+      overflow: hidden;
+      background-color: #ffffff;
+      margin: 2em 0;
+      border: 20px solid #ffffff; }
+      #home #home-about .article-box:nth-of-type(odd) .article-image {
+        order: 1; }
+    #home #home-about .article-image {
+      -webkit-flex-basis: 30%;
+      flex-basis: 30%;
       overflow: hidden; }
-      #home #home-about #about-product .article-image img {
-        height: 100%;
+      #home #home-about .article-image img {
         width: 100%;
         object-fit: cover; }
-    #home #home-about #about-product .article-content {
-      -webkit-flex-basis: 100%;
-      flex-basis: 100%;
-      padding: 50px 10%;
+    #home #home-about .article-content {
+      -webkit-flex-basis: 70%;
+      flex-basis: 70%;
+      padding: 0 10%;
       display: -webkit-box;
       display: -webkit-flex;
       display: -ms-flexbox;
@@ -463,14 +466,23 @@ nav {
       -webkit-align-content: center;
       -ms-flex-line-pack: center;
       align-content: center;
+      -webkit-box-pack: center;
+      -moz-box-pack: center;
+      -ms-flex-pack: center;
+      -webkit-justify-content: center;
+      justify-content: center;
       text-align: center; }
-      #home #home-about #about-product .article-content .article-heading {
+      #home #home-about .article-content .article-heading {
         color: #896e36;
         font-weight: 300;
         text-transform: uppercase;
         font-size: 1.5em;
         -webkit-flex-basis: 100%;
         flex-basis: 100%; }
+      #home #home-about .article-content .article-text {
+        color: #896e36; }
+      #home #home-about .article-content .btn {
+        margin-top: .8em; }
   #home #home-news .container {
     padding-top: 25px; }
 
