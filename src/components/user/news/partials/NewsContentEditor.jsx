@@ -78,4 +78,4 @@ class NewsContentEditor extends React.Component {
     }
 }
 
-export default NewsContentEditor;
+// export default NewsContentEditor;

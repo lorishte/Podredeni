@@ -127,6 +127,7 @@ const BUTTONS_BG = {
 	reorder: 'Подреждане',
 	goToCategory: 'Към категорията',
 	seeProducts: 'Разгледай',
+	addSection: 'Добави секция',
 
 	//Cart
 	saveChanges: 'Запази промените',

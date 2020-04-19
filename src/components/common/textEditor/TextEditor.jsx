@@ -1,40 +1,50 @@
 import React, {Component} from 'react';
 import RichTextEditor from 'react-rte';
+import PropTypes from 'prop-types';
 
 class TextEditor extends Component {
 
-	constructor(props) {
-		super(props);
+    constructor(props) {
+        super(props);
 
-		this.state = {
-			value: RichTextEditor.createValueFromString(this.props.value, 'html')
-		}
-	}
+        this.state = {
+            value: RichTextEditor.createValueFromString(this.props.value, 'html')
+        }
+    }
 
-	onChange = (value) => {
+    onChange = (value) => {
 
-		this.setState({value});
+        this.setState({value});
 
-		if (this.props.onChange) {
-			// Send the changes up to the parent component as an HTML string.
-			// This is here to demonstrate using `.toString()` but in a real app it
-			// would be better to avoid generating a string on each change.
+        if (this.props.onChange) {
+            // Send the changes up to the parent component as an HTML string.
+            // This is here to demonstrate using `.toString()` but in a real app it
+            // would be better to avoid generating a string on each change.
 
-			this.props.onChange(
-				value.toString('html')
-			);
-		}
-	};
+            this.props.onChange(value.toString('html'), this.props.name);
+        }
+    };
 
-	render () {
+    render() {
 
-		return (
-			<RichTextEditor
-				value={this.state.value}
-				onChange={this.onChange}
-			/>
-		);
-	}
+        let value = this.state.value;
+
+        return (
+            <div>
+                <RichTextEditor
+                    value={value}
+                    onChange={this.onChange}
+                />
+            </div>
+
+        );
+    }
 }
 
 export default TextEditor;
+
+TextEditor.propTypes = {
+    value: PropTypes.string,
+    onChange: PropTypes.func,
+    name: PropTypes.string
+}

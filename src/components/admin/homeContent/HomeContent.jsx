@@ -3,8 +3,11 @@ import { ToastContainer } from 'react-toastr';
 import { confirmAlert } from 'react-confirm-alert';
 
 // Partials
-import ArticleManage from './article/ArticleManage';
+// import ArticleManage from './article/ArticleManage';
+import ArticleManageNew from './article/ArticleManageNew';
 import CarouselContent from './carousel/CarouselContent';
+
+// Constants
 import { TOASTR_MESSAGES, CONFIRM_DIALOGS, BUTTONS_BG } from '../../../data/constants/componentConstants';
 
 // Helpers
@@ -135,7 +138,7 @@ class HomeContent extends React.Component {
 					</Tab>
 
 					<Tab eventKey={2} title="Статия">
-						<ArticleManage
+						<ArticleManageNew
 							data={this.state}
 							handleChange={this.handleChange}
 							saveChanges={this.saveArticleChanges}/>

@@ -86,6 +86,7 @@ class NewsCreate extends React.Component {
 		let resolution = this.state.resolution < RESOLUTIONS.xs;
 		let isAdmin = sessionStorage.getItem('role') === 'admin';
 
+
 		return (
 			<Grid id="news-create">
 

@@ -13,7 +13,10 @@ class About extends React.Component {
 
     render() {
 
-        let teasers = teasersText.map(e => {
+        let teasers = Object.keys(teasersText).map(key => {
+
+            let e = teasersText[key];
+
             return <Teaser key={e.imageUrl} imageUrl={e.imageUrl} heading={e.heading} text={e.text} buttonLink={e.buttonLink}/>
         })
 
