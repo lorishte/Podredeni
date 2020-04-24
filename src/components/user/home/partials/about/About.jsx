@@ -6,16 +6,14 @@ import {Grid} from 'react-bootstrap';
 import Teaser from "./partials/Teaser";
 
 // Constants
-import {teasersText, aboutText} from '../../../../../data/teasers';
+import {teasersText, aboutText, teasersTextArr} from '../../../../../data/teasers';
 
 
 class About extends React.Component {
 
     render() {
 
-        let teasers = Object.keys(teasersText).map(key => {
-
-            let e = teasersText[key];
+        let teasers = teasersTextArr.map(e => {
 
             return <Teaser key={e.imageUrl} imageUrl={e.imageUrl} heading={e.heading} text={e.text} buttonLink={e.buttonLink}/>
         })
