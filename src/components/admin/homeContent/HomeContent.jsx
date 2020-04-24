@@ -4,7 +4,8 @@ import { confirmAlert } from 'react-confirm-alert';
 
 // Partials
 // import ArticleManage from './article/ArticleManage';
-import ArticleManageNew from './article/ArticleManageNew';
+// import ArticleManageNew from './article/ArticleManageNew';
+import ArticleManageNew from './article/ArticleManageNewArr';
 import CarouselContent from './carousel/CarouselContent';
 
 // Constants
@@ -129,7 +130,7 @@ class HomeContent extends React.Component {
 					className="toast-bottom-right"
 				/>
 
-				<Tabs defaultActiveKey={1} id="homeContent-tabs">
+				<Tabs defaultActiveKey={2} id="homeContent-tabs">
 
 					<Tab eventKey={1} title="Карусел">
 						<CarouselContent

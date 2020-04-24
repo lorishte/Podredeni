@@ -33,14 +33,16 @@ class ArticleManageNew extends React.Component {
 
     addSection = () => {
 
+        let sequenceNumber = Object.keys(this.state.teasersText).length + 1;
+
         let newElement = {
+            orderNumber: sequenceNumber,
             imageUrl: '',
             heading: '',
             text: '',
-            buttonLink: ''
+            buttonLink: '',
+            visible: true
         }
-
-        let sequenceNumber = Object.keys(this.state.teasersText).length + 1;
 
         this.changeState(newElement, 'teasersText-' + sequenceNumber)
     }
@@ -48,16 +50,17 @@ class ArticleManageNew extends React.Component {
 
     changeState = (value, name) => {
 
-        let {stateProp, key, id} = this.generateKVP(name)
+        let {stateProp, key, key2} = this.generateKVP(name)
 
-        console.log(value, name)
+        console.log(stateProp, key, key2)
 
         // make state key copy
         let obj = Object.assign({}, this.state[stateProp]);
 
         // add new value
-        if (id) {
-            obj[key][id] = value;
+        if (key2) {
+            console.log(obj[key][key2])
+            obj[key][key2] = value;
         } else {
             obj[key] = value;
         }
@@ -71,43 +74,30 @@ class ArticleManageNew extends React.Component {
 
         let stateProp = info[0];
         let key = info[1];
-        let id = info[2];
+        let key2 = info[2];
 
-        return {stateProp, key, id};
+        return {stateProp, key, key2};
     }
 
-    sortSections = () => {
-        let sorted = [];
-
-        for (const key in this.state.teasersText) {
-
-        }
-    }
 
     render() {
 
 
-        let sorted = Object.assign([], this.state.teasersText).sort((a, b) => a.orderNumber - b.orderNumber);
+        let sections = Object.keys(this.state.teasersText).map(index => {
 
-        let teasers = Object.assign({}, sorted);
+            let teaser = this.state.teasersText[index];
 
-        console.log(teasers)
-
-        let sections = Object.keys(teasers).map(index => {
-
-            let teaser = teasers[index];
-
-            let inputName = 'teasersText-' + index;
+            let inputName = 'teasersText-' + index + '-';
 
             return (
-                <Well>
-                    <Row key={'teaser_' + index}>
+                <Well key={'teaser_' + index}>
+                    <Row>
 
 
                         <Col xs={8}>
                             <FormInputField
                                 type='text'
-                                name={inputName}
+                                name={inputName + 'heading'}
                                 label='Заглавие на секция'
                                 value={teaser.heading}
                                 required={true}
@@ -116,8 +106,8 @@ class ArticleManageNew extends React.Component {
                             />
 
                             <FormInputField
-                                type='text'
-                                name={inputName}
+                                type='number'
+                                name={inputName + 'orderNumber'}
                                 label='Номер'
                                 value={teaser.orderNumber}
                                 required={true}
@@ -127,7 +117,7 @@ class ArticleManageNew extends React.Component {
 
                             <FormInputField
                                 type='text'
-                                name={inputName}
+                                name={inputName + 'imageUrl'}
                                 label='Снимка'
                                 value={teaser.imageUrl}
                                 required={true}
@@ -137,7 +127,7 @@ class ArticleManageNew extends React.Component {
 
                             <FormInputField
                                 type='text'
-                                name={inputName}
+                                name={inputName + 'buttonLink'}
                                 label='Линк за бутона'
                                 value={teaser.buttonLink}
                                 required={true}
@@ -146,7 +136,7 @@ class ArticleManageNew extends React.Component {
                             />
 
                             <TextEditor
-                                name={inputName}
+                                name={inputName + 'text'}
                                 value={teaser.text}
                                 onChange={this.changeState}
                             />
