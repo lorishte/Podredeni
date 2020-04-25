@@ -31,6 +31,11 @@ export default {
             .post(articleEndPoint, auth, content);
     },
 
+    saveTeasersChanges: (data) => {
+        // return requesterService
+        //     .post(articleEndPoint, auth, data);
+    },
+
     loadCarouselItems: () => {
         return requesterService.get(carouselItemsEndPoint);
     },
