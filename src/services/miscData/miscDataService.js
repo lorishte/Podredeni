@@ -7,7 +7,7 @@ export default {
 
     loadMiscData: (key) => {
 
-        let endPoint = miscDataEndPoint + '/' + key;
+        let endPoint = miscDataEndPoint + '?key=' + key;
 
         return requesterService.get(endPoint);
 
