@@ -5,24 +5,62 @@ import {Grid} from 'react-bootstrap';
 // Partials
 import Teaser from "./partials/Teaser";
 
+// Services
+import miscDataService from "../../../../../services/miscData/miscDataService";
+
 // Constants
-import {teasersText, aboutText} from '../../../../../data/teasers';
+import {TOASTR_MESSAGES} from "../../../../../data/constants/componentConstants";
 
 
 class About extends React.Component {
+    constructor (props) {
+        super(props);
+
+        this.state = {
+            aboutText: {},
+            teasersText: [],
+
+            loading: true
+        };
+    }
+
+    componentDidMount () {
+        this.loadHomeContent();
+    }
+
+    loadHomeContent = () => {
+        miscDataService
+            .loadMiscData('homeAboutTeasers')
+            .then(res => {
+
+                let data = JSON.parse(res);
+
+                this.setState({
+                    aboutText: data.aboutText,
+                    teasersText: data.teasersText.filter(e => e.isVisible),
+                    loading: false
+                })
+            })
+            .catch(err => {
+                this.toastContainer.error(err.responseText, TOASTR_MESSAGES.error, {
+                    closeButton: false,
+                });
+            });
+    };
 
     render() {
 
-        let teasers = teasersText.map(e => {
+        if (this.state.loading) return <div className="loader"/>
 
+        let teasers = this.state.teasersText.map(e => {
             return <Teaser key={e.imageUrl} imageUrl={e.imageUrl} heading={e.heading} text={e.text} buttonLink={e.buttonLink}/>
         })
 
         return (
             <Grid id={'home-about'}>
 
-                <div className={'section-heading'} dangerouslySetInnerHTML={{__html: aboutText.heading}}/>
-                <div className={'section-text'} dangerouslySetInnerHTML={{__html: aboutText.text}}/>
+                <div className={'section-heading'} dangerouslySetInnerHTML={{__html: this.state.aboutText.heading}}/>
+                <div className={'section-text'} dangerouslySetInnerHTML={{__html: this.state.aboutText.text}}/>
 
                 {teasers}
             </Grid>
