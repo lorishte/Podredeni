@@ -8,7 +8,7 @@ import FormInputField from '../../../common/formComponents/FormInputField';
 import TextEditor from "../../../common/textEditor/TextEditor";
 
 // Services
-import homeContentService from "../../../../services/homeContent/homeContentService";
+import miscDataService from "../../../../services/miscData/miscDataService";
 
 // Constants
 import {BUTTONS_BG, CONFIRM_DIALOGS, TOASTR_MESSAGES} from '../../../../data/constants/componentConstants';
@@ -21,7 +21,7 @@ class AboutTeasers extends React.Component {
         super(props);
 
         this.state = {
-            aboutText,
+            aboutText: aboutText,
             teasersText: teasersText
         };
     }
@@ -32,18 +32,19 @@ class AboutTeasers extends React.Component {
     }
 
     loadData = () => {
-        homeContentService
-            .modifyArticle(this.state)
-            .then(res => {
-                this.toastContainer.success(TOASTR_MESSAGES.successHomeContentModification, '', {
-                    closeButton: false,
-                });
-            })
-            .catch(err => {
-                this.toastContainer.error(err.responseText, TOASTR_MESSAGES.error, {
-                    closeButton: false,
-                });
-            });
+        // miscDataService
+        //     .loadMiscData('teasers')
+        //     .then(res => {
+        //         console.log(res)
+        //         this.toastContainer.success(TOASTR_MESSAGES.successHomeContentModification, '', {
+        //             closeButton: false,
+        //         });
+        //     })
+        //     .catch(err => {
+        //         this.toastContainer.error(err.responseText, TOASTR_MESSAGES.error, {
+        //             closeButton: false,
+        //         });
+        //     });
     }
 
 
@@ -145,7 +146,7 @@ class AboutTeasers extends React.Component {
 
         confirmAlert({
             title: '',
-            message: CONFIRM_DIALOGS.deleteCarouselItem,
+            message: CONFIRM_DIALOGS.deleteSection,
             buttons: [{
                 label: BUTTONS_BG.yes,
                 onClick: () => this.setState({teasersText: this.state.teasersText.filter(e => e._id !== id)})
@@ -156,111 +157,114 @@ class AboutTeasers extends React.Component {
 
     saveChanges = () => {
 
-        alert('Saving')
+        alert('Not ready yet')
 
-        const data = JSON.stringify(this.state);
-
-        homeContentService
-            .saveTeasersChanges(data)
-            .then(res => {
-                this.toastContainer.success(TOASTR_MESSAGES.successHomeContentModification, '', {
-                    closeButton: false,
-                });
-            })
-            .catch(err => {
-                this.toastContainer.error(err.responseText, TOASTR_MESSAGES.error, {
-                    closeButton: false,
-                });
-            });
+        // const data = JSON.stringify(this.state);
+        //
+        // miscDataService
+        //     .updateMiscData('teasers', data)
+        //     .then(res => {
+        //         console.log(res)
+        //         this.toastContainer.success(TOASTR_MESSAGES.successHomeContentModification, '', {
+        //             closeButton: false,
+        //         });
+        //     })
+        //     .catch(err => {
+        //         this.toastContainer.error(err.responseText, TOASTR_MESSAGES.error, {
+        //             closeButton: false,
+        //         });
+        //     });
     }
 
     render() {
 
+        let sections = [];
 
-        let sections = this.state.teasersText.map(teaser => {
+        if (this.state.teasersText) {
+            sections = this.state.teasersText.map(teaser => {
 
-            let id = teaser._id;
+                let id = teaser._id;
 
-            let inputName = 'teasersText-' + id + '-';
+                let inputName = 'teasersText-' + id + '-';
 
-            let style = teaser.isVisible ? 'success' : 'default';
+                let style = teaser.isVisible ? 'success' : 'default';
 
-            return (
-                <Well key={'teaser_' + id}>
+                return (
+                    <Well key={'teaser_' + id}>
 
-                    <ButtonGroup>
-                        <Button bsStyle={style}
-                                onClick={() => this.changeIsVisible(inputName + 'isVisible', teaser.isVisible)}>
-                            {teaser.isVisible && <i className="fa fa-eye" aria-hidden="true"/>}
-                            {!teaser.isVisible && <i className="fa fa-eye-slash" aria-hidden="true"/>}
+                        <ButtonGroup>
+                            <Button bsStyle={style}
+                                    onClick={() => this.changeIsVisible(inputName + 'isVisible', teaser.isVisible)}>
+                                {teaser.isVisible && <i className="fa fa-eye" aria-hidden="true"/>}
+                                {!teaser.isVisible && <i className="fa fa-eye-slash" aria-hidden="true"/>}
 
-                        </Button>
-                        <Button bsStyle="primary"
-                                onClick={() => this.moveSection('down', id)}>
-                            <i className="fa fa-arrow-down" aria-hidden="true"/>
-                        </Button>
-                        <Button bsStyle="primary"
-                                onClick={() => this.moveSection('up', id)}>
-                            <i className="fa fa-arrow-up" aria-hidden="true"/>
-                        </Button>
-                        <Button bsStyle="danger"
-                                onClick={() => this.deleteSection(id)}>
-                            <i className="fa fa-trash" aria-hidden="true"/>
-                        </Button>
-                    </ButtonGroup>
-
-
-                    <Row>
-
-
-                        <Col xs={8}>
-                            <FormInputField
-                                type='text'
-                                name={inputName + 'heading'}
-                                label='Заглавие на секция'
-                                value={teaser.heading}
-                                required={true}
-                                disabled={false}
-                                onChange={this.handleInputsChange}
-                            />
-
-                            <FormInputField
-                                type='text'
-                                name={inputName + 'imageUrl'}
-                                label='Снимка'
-                                value={teaser.imageUrl}
-                                required={true}
-                                disabled={false}
-                                onChange={this.handleInputsChange}
-                            />
-
-                            <FormInputField
-                                type='text'
-                                name={inputName + 'buttonLink'}
-                                label='Линк за бутона'
-                                value={teaser.buttonLink}
-                                required={false}
-                                disabled={false}
-                                onChange={this.handleInputsChange}
-                            />
-
-                            <TextEditor
-                                name={inputName + 'text'}
-                                value={teaser.text}
-                                onChange={this.changeState}
-                            />
-                        </Col>
-
-                        <Col xs={4}>
-                            <img src={teaser.imageUrl}/>
-                        </Col>
-
-                    </Row>
-                </Well>
+                            </Button>
+                            <Button bsStyle="primary"
+                                    onClick={() => this.moveSection('down', id)}>
+                                <i className="fa fa-arrow-down" aria-hidden="true"/>
+                            </Button>
+                            <Button bsStyle="primary"
+                                    onClick={() => this.moveSection('up', id)}>
+                                <i className="fa fa-arrow-up" aria-hidden="true"/>
+                            </Button>
+                            <Button bsStyle="danger"
+                                    onClick={() => this.deleteSection(id)}>
+                                <i className="fa fa-trash" aria-hidden="true"/>
+                            </Button>
+                        </ButtonGroup>
 
 
-            )
-        })
+                        <Row>
+
+
+                            <Col xs={8}>
+                                <FormInputField
+                                    type='text'
+                                    name={inputName + 'heading'}
+                                    label='Заглавие на секция'
+                                    value={teaser.heading}
+                                    required={true}
+                                    disabled={false}
+                                    onChange={this.handleInputsChange}
+                                />
+
+                                <FormInputField
+                                    type='text'
+                                    name={inputName + 'imageUrl'}
+                                    label='Снимка'
+                                    value={teaser.imageUrl}
+                                    required={true}
+                                    disabled={false}
+                                    onChange={this.handleInputsChange}
+                                />
+
+                                <FormInputField
+                                    type='text'
+                                    name={inputName + 'buttonLink'}
+                                    label='Линк за бутона'
+                                    value={teaser.buttonLink}
+                                    required={false}
+                                    disabled={false}
+                                    onChange={this.handleInputsChange}
+                                />
+
+                                <TextEditor
+                                    name={inputName + 'text'}
+                                    value={teaser.text}
+                                    onChange={this.changeState}
+                                />
+                            </Col>
+
+                            <Col xs={4}>
+                                <img src={teaser.imageUrl}/>
+                            </Col>
+
+                        </Row>
+                    </Well>
+                )
+            })
+        }
+
 
         return (
 

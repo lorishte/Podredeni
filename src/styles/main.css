@@ -508,7 +508,7 @@ nav {
     height: 100px;
     border: 6px solid #f6f5f3; }
   #testimonials .carousel {
-    height: 250px;
+    min-height: 250px;
     -webkit-transition: .4s;
     -moz-transition: .4s;
     -o-transition: .4s;

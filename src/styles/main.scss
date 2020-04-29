@@ -634,7 +634,7 @@ nav {
   }
 
   .carousel {
-    height: 250px;;
+    min-height: 250px;
     @include transition;
 
     .carousel-inner {
