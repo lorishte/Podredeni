@@ -16,6 +16,10 @@ class TopSellerProductCard extends React.Component {
 		const p = this.props.data;
 
 
+		let url = p.images[0];
+
+		if (!url.includes('http')) url = '/images/products/' + p.images[0];
+
 		return (
 
 				<Link to={'/products/' + p.id}>
@@ -27,7 +31,7 @@ class TopSellerProductCard extends React.Component {
 						{p.isNewProduct && <span className={'new-label'}>НОВО!</span>}
 
 						<div className="product-image">
-							<img className="card-img-top" src={p.images[0]} alt="Card image cap"/>
+							<img className="card-img-top" src={url} alt={url}/>
 						</div>
 
 						<div className="card-body">

@@ -64,6 +64,10 @@ class ProductCard extends React.Component {
 	render () {
 		const {product, size} = this.props;
 
+		let url = product.images[0];
+
+		if (!url.includes('http')) url = '/images/products/' + product.images[0];
+
 		return (
 			<Col xs={this.state.xsRes} sm={6} md={size === 'smaller' ? 3 : 4}>
 
@@ -76,7 +80,7 @@ class ProductCard extends React.Component {
 					{product.isNewProduct && <span className={'new-label'}>НОВО!</span>}
 
 					<div className="product-image">
-						<img className="card-img-top" src={product.images[0]} alt="Card image cap"/>
+						<img className="card-img-top" src={url} alt={url}/>
 					</div>
 
 

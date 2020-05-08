@@ -20,7 +20,7 @@ class ImageGallery extends React.Component {
 		let element = this.mainImage.current;
 
 		this.fadeOut(element);
-		setTimeout(() => this.setState({ selected: this.props.images[i], currentIndex: i }), 200);
+		setTimeout(() => this.setState({ selected: this.props.images[i], currentIndex: i }), y);
 		setTimeout(() => this.fadeIn(element), 500);
 	};
 
@@ -42,16 +42,24 @@ class ImageGallery extends React.Component {
 	render () {
 		let images = this.props.images;
 
-		let thumbnails = images.map((e, i) => {
+		let thumbnails = images.map((imageName, i) => {
+
+			let url = imageName;
+
+			if (!url.includes('http')) url = '/images/products/' + imageName;
+
 			return (
 				<Image key={i}
-				       src={e}
-				       alt={e.name + 'picture' + (e.i + 1)}
+				       src={url}
+				       alt={imageName}
 				       thumbnail
 				       className="image-thumbnail"
-				       onClick={(e) => this.changeActive(i, e)}/>
+				       onClick={() => this.changeActive(i)}/>
 			);
 		});
+
+		let selectedImageUrl = this.state.selected;
+		if (!selectedImageUrl.includes('http')) selectedImageUrl = '/images/products/' + selectedImageUrl;
 
 		return (
 
@@ -60,7 +68,7 @@ class ImageGallery extends React.Component {
 				<div className="main-image-container img-thumbnail">
 
 					<img ref={this.mainImage}
-					     src={this.state.selected}
+					     src={selectedImageUrl}
 					     className="main-image"/>
 
 					<div className="gallery-controls">
