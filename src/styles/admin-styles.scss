@@ -3,7 +3,7 @@
 
 .tab-content {
   background-color: #fff;
-  padding: 6px 20px;
+  padding: 20px;
   border: 1px solid #ddd;
   border-top: none;
 }
@@ -315,6 +315,12 @@
         @include align-items(center);
       }
     }
+  }
+}
+
+#homeContent-tabs {
+  img {
+    margin-bottom: 1em;
   }
 }
 

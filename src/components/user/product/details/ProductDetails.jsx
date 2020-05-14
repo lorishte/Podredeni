@@ -121,8 +121,11 @@ class Product extends React.Component {
 				}
 
 				<div className="buttons-container text-center">
+					<hr/>
 					<button className='btn btn-custom default sm'
-					        onClick={() => this.props.history.go(-1) }>{BUTTONS_BG.back}</button>
+					        onClick={() => this.props.history.go(-1) }>
+						<i className="fa fa-long-arrow-left" aria-hidden="true"/>
+						&nbsp;&nbsp;{BUTTONS_BG.back}</button>
 				</div>
 				{/*<Row>*/}
 				{/*<ProductTabs/>*/}

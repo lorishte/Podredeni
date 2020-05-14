@@ -137,6 +137,7 @@ input[type=checkbox], input[type=radio] {
 .btn {
   margin-right: 5px;
 
+
   &.btn-sort {
     padding: 2px;
     color: $light-grey;
@@ -154,6 +155,7 @@ input[type=checkbox], input[type=radio] {
   margin-right: 5px;
   margin-bottom: 5px;
   @include transition;
+  border-radius: 0 !important;
 
   &:last-child {
     margin-right: 0;
@@ -180,11 +182,13 @@ input[type=checkbox], input[type=radio] {
   }
 
   &.light {
-    background-color: $white;
+    color: $white;
+    background-color: transparent;
 
     &:hover,
     &:active {
-      background-color: $light-grey;
+      color: $primary;
+      background-color: $white;
     }
   }
 
@@ -194,23 +198,23 @@ input[type=checkbox], input[type=radio] {
 
   &.xs {
     padding: 3px 7px;
-    border-radius: 2px;
+    //border-radius: 2px;
     font-size: .8em;
   }
 
   &.sm {
     padding: 5px 10px;
-    border-radius: 3px;
+    //border-radius: 3px;
   }
 
   &.md {
     padding: 10px 20px;
-    border-radius: 4px;
+    //border-radius: 4px;
   }
 
   &.lg {
-    padding: 13px 25px;
-    border-radius: 5px;
+    padding: 10px 30px;
+    //border-radius: 5px;
   }
 }
 
@@ -439,19 +443,16 @@ nav {
 
       .carousel-caption {
         position: absolute;
-        top: 0;
+        bottom: 10%;
         left: 13%;
-        //width: 40%;
-        width: 550px;
-
-        padding-top: 20px;
-        padding-bottom: 20px;
+        width: 40%;
 
         z-index: 10;
 
         color: #fff;
         text-align: left;
-        text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
+        //text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
+        text-shadow: none;
 
         .carousel-heading {
           font-size: 3em;
@@ -459,12 +460,25 @@ nav {
           color: #fff;
           //text-transform: uppercase;
           font-weight: 600;
+          text-transform: none;
         }
 
         .carousel-text {
           font-size: 1.2em;
           line-height: 1.3em;
           width: 95%;
+        }
+
+        .btn {
+          margin-top: 2em;
+          text-transform: uppercase;
+          border: 2px solid $white;
+          font-weight: 500;
+          padding: 10px 30px;
+
+          &:hover {
+            color: $black;
+          }
         }
       }
     }
@@ -654,7 +668,7 @@ nav {
 
   @include flex;
   @include align-items(center);
-  @include justify-content(flex-start);
+  @include justify-content(center);
   @include flex-wrap(wrap);
 
   position: relative;
@@ -671,10 +685,11 @@ nav {
   &:hover,
   &:active,
   &:focus {
-    border: 1px solid $light-grey;
+    //border: 1px solid $light-grey;
 
     .product-image {
-      transform: translateY(-20px);
+      //transform: translateY(-10px);
+      animation: jump .4s ease-in-out;
       @include transition;
     }
 
@@ -717,28 +732,22 @@ nav {
     @include align-items(center);
     @include justify-content(center);
 
-    padding: 5px 12px;
+    padding: 5px 18px 5px 12px;
 
     background-color: $success;
     color: $white;
-    //border-radius: 50%;
 
     font-size: 1em;
     font-weight: 600;
     z-index: 5;
+    clip-path: polygon(0% 0%, 90% 0%, 100% 50%, 90% 100%, 0% 100%);
   }
 
   .product-image {
-    width: 100%;
+    width: 200px;
     height: 200px;
     overflow: hidden;
     @include transition;
-
-    .card-img-top {
-      height: 90%;
-      width: auto;
-      border-bottom: 1px solid transparent;
-    }
   }
 
   .card-body {
@@ -748,9 +757,7 @@ nav {
   .card-title {
     font-size: 1.1em;
     height: 35px;
-    //text-transform: uppercase;
-    //letter-spacing: 1px;
-    line-height: 1.1em;
+    line-height: 1.4em;
   }
 
   .card-text {
@@ -803,18 +810,19 @@ nav {
 
 .top-seller-card {
   width: 300px;
-  display: inline-block;
-  padding: 25px;
   margin: 5px 25px;
 
   &:hover {
-    border: 1px solid transparent;
+    //border: 1px solid $light-grey;
 
     .price {
-
       color: $white;
       background-color: $primary;
     }
+  }
+
+  .card-title {
+    height: 40px;
   }
 
   .price {
@@ -1159,9 +1167,6 @@ nav {
     @include flex;
     @include justify-content(center);
     @include align-items(center);
-    width: 400px;
-    height: 400px;
-    overflow: hidden;
     margin-right: 30px;
 
     .main-image {
@@ -1320,7 +1325,7 @@ nav {
     padding: 25px;
 
     .panel-body {
-      padding-top: 35px;
+      //padding-top: 35px;
     }
   }
 
@@ -1330,6 +1335,7 @@ nav {
 
     $arrow-size: 10px;
     $tab-height: 60px;
+
 
     @mixin arrow-before($color: $primary) {
 
@@ -1367,11 +1373,12 @@ nav {
       @include align-items(center);
       @include justify-content(center);
 
+
       @include arrow-before($white);
       @include arrow-after($warm-light-grey);
 
       height: 60px;
-      padding: 20px;
+      //padding: 20px;
       text-align: center;
       border-bottom: 2px solid $default;
       background-color: $warm-light-grey;
@@ -1416,7 +1423,7 @@ nav {
 
   .form-add-on {
 
-    $height: 50px;
+    $height: 40px;
 
     @include flex;
     @include flex-wrap(wrap);
@@ -1802,5 +1809,17 @@ footer {
   }
   100% {
     transform: rotate(360deg);
+  }
+}
+
+@keyframes jump {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+  100% {
+    transform: translateY(0);
   }
 }

@@ -4,11 +4,11 @@ const FILTER_INPUT_WAIT_INTERVAL = 1000;
 
 const REDIRECT_DELAY = 2000;
 
-const TESTIMONIALS_TIMER_INTERVAL = 8000;
+const TESTIMONIALS_TIMER_INTERVAL = 12000;
 
 const TOP_SELLERS_TIMER_INTERVAL = 4000;
 
-const MAIN_CAROUSEL_TIMER_INTERVAL = 5000;
+const MAIN_CAROUSEL_TIMER_INTERVAL = 9000;
 
 const ADMIN_PRODUCTS_FILTER_OPTIONS = {'name': 'име', 'number': 'номер', 'category': 'категория', 'subcategory': 'подкатегория'};
 
@@ -130,10 +130,12 @@ const BUTTONS_BG = {
 	goToCategory: 'Към категорията',
 	seeProducts: 'Разгледай',
 	addSection: 'Добави секция',
+	addSlide: 'Добави слайд',
+	seeMore: 'Виж повече',
 
 	//Cart
 	saveChanges: 'Запази промените',
-	sendOrder: 'Изпрати',
+	sendOrder: 'Изпрати поръчката',
 	validate: 'Валидирай',
 
 	// Order

@@ -1,6 +1,6 @@
 .tab-content {
   background-color: #fff;
-  padding: 6px 20px;
+  padding: 20px;
   border: 1px solid #ddd;
   border-top: none; }
 
@@ -281,6 +281,9 @@
       -ms-flex-align: center;
       -webkit-align-items: center;
       align-items: center; }
+
+#homeContent-tabs img {
+  margin-bottom: 1em; }
 
 .btn-group {
   margin-bottom: 1em; }

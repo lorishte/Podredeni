@@ -20,7 +20,7 @@ class ImageGallery extends React.Component {
 		let element = this.mainImage.current;
 
 		this.fadeOut(element);
-		setTimeout(() => this.setState({ selected: this.props.images[i], currentIndex: i }), y);
+		setTimeout(() => this.setState({ selected: this.props.images[i], currentIndex: i }), 200);
 		setTimeout(() => this.fadeIn(element), 500);
 	};
 

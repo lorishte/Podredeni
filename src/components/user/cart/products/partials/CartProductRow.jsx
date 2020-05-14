@@ -43,11 +43,15 @@ class CartProductRow extends React.Component {
 
 		let price = utils.calculatePriceAfterDiscount(p.price, p.discount);
 
+		let url = p.image;
+
+		if (!url.includes('http')) url = '/images/products/' + p.image;
+
 		return (
 			<div className="products-table-row">
 
 				<div className="img-col">
-					<img className="image-thumbnail" src={p.image}/>
+					<img className="image-thumbnail" src={url}/>
 				</div>
 
 				<div className="product-data">

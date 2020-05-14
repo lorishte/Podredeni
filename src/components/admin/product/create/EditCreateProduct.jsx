@@ -212,7 +212,11 @@ class CreateProduct extends React.Component {
 
 		let images = this.state.imageUrls.map((e, i) => {
 
-			let url = '/images/products/' + e;
+
+			let url = e;
+
+			if (!url.includes('http')) url = '/images/products/' + e;
+
 			return (
 				<div className="image-container" key={i}>
 					<Image

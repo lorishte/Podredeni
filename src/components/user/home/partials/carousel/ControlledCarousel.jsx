@@ -1,11 +1,15 @@
 import React from 'react';
-
-// Helpers
 import {Grid, Carousel} from 'react-bootstrap';
 
+// Services
 import homeContentService from '../../../../../services/homeContent/homeContentService';
+import miscDataService from "../../../../../services/miscData/miscDataService";
 
-import {MAIN_CAROUSEL_TIMER_INTERVAL} from '../../../../../data/constants/componentConstants';
+
+// Constants
+import {MAIN_CAROUSEL_TIMER_INTERVAL, TOASTR_MESSAGES} from '../../../../../data/constants/componentConstants';
+import sliders from "../../../../../data/slider";
+
 
 class ControlledCarousel extends React.Component {
     constructor(props, context) {
@@ -32,14 +36,33 @@ class ControlledCarousel extends React.Component {
 
 
     loadCarouselItems = () => {
-        homeContentService
-            .loadCarouselItems()
+
+        this.setState({carouselItems: sliders});
+
+        miscDataService
+            .loadMiscData('homeSliders')
             .then(res => {
-                this.setState({carouselItems: res.carouselItems});
+
+                let data = JSON.parse(res).filter(e => e.isVisible);
+
+                this.setState({
+                    carouselItems: data
+                })
             })
             .catch(err => {
                 console.log(err);
             });
+
+        // homeContentService
+        //     .loadCarouselItems()
+        //     .then(res => {
+        //         // console.log(res)
+        //
+        //         // this.setState({carouselItems: res.carouselItems});
+        //     })
+        //     .catch(err => {
+        //         console.log(err);
+        //     });
 
     };
 
@@ -79,15 +102,20 @@ class ControlledCarousel extends React.Component {
 
             let item = this.state.carouselItems[i];
 
+            let url = 'images/slider/' + item.imageUrl
+
             items.push(
-                <Carousel.Item key={item.id}>
-                    <img className="carousel-img" alt={item.heading} src={item.imageUrl}/>
+                <Carousel.Item key={item._id}>
+                    <img className="carousel-img" src={url} alt={item.imageUrl}/>
                     <Carousel.Caption>
-                        <h1 className="carousel-heading">{item.heading}</h1>
+                        <h3 className="carousel-heading">{item.heading}</h3>
                         {window.innerWidth > 550 &&
-                        <h2 className="carousel-text">{item.content}</h2>
+                        <p className="carousel-text">{item.text}</p>
                         }
 
+                        {item.buttonLink !== '' &&
+                        <a href={item.buttonLink} className={'btn btn-custom light'}>{item.buttonText}</a>
+                        }
                     </Carousel.Caption>
                 </Carousel.Item>
             );

@@ -17,7 +17,7 @@ class Teaser extends React.Component {
 
             <article className="article-box">
                 <div className="article-image">
-                    <img src={imageUrl}/>
+                    <img src={'images/sections/' + imageUrl}/>
                 </div>
 
                 <div className="article-content">
@@ -26,7 +26,6 @@ class Teaser extends React.Component {
                     {buttonLink &&
                     <Link className={'btn btn-custom primary sm'} to={buttonLink}>{BUTTONS_BG.seeProducts}</Link>
                     }
-
                 </div>
             </article>
         )

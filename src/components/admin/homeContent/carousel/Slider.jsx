@@ -1,7 +1,7 @@
 import React from 'react';
 import {Row, Col, Well, ButtonGroup, Button, Grid} from 'react-bootstrap';
 import {confirmAlert} from 'react-confirm-alert';
-import { ToastContainer } from 'react-toastr';
+import {ToastContainer} from 'react-toastr';
 
 // Partials
 import FormInputField from '../../../common/formComponents/FormInputField';
@@ -12,17 +12,15 @@ import miscDataService from "../../../../services/miscData/miscDataService";
 
 // Constants
 import {BUTTONS_BG, CONFIRM_DIALOGS, TOASTR_MESSAGES} from '../../../../data/constants/componentConstants';
-import {teasersText, aboutText} from '../../../../data/teasers';
 
 
-class AboutTeasers extends React.Component {
+class Slider extends React.Component {
 
     constructor(props) {
         super(props);
 
         this.state = {
-            aboutText: {},
-            teasersText: [],
+            sliders: [],
 
             loading: true
         };
@@ -33,15 +31,15 @@ class AboutTeasers extends React.Component {
     }
 
     loadData = () => {
+
         miscDataService
-            .loadMiscData('homeAboutTeasers')
+            .loadMiscData('homeSliders')
             .then(res => {
 
                 let data = JSON.parse(res);
 
                 this.setState({
-                    aboutText: data.aboutText,
-                    teasersText: data.teasersText,
+                    sliders: data,
                     loading: false
                 })
             })
@@ -63,47 +61,35 @@ class AboutTeasers extends React.Component {
 
     changeState = (value, name) => {
 
-        let {stateProp, key, key2} = this.generateKVP(name)
+
+        let { sliderId, property} = this.generateKVP(name)
 
         let obj = {};
 
         // add new value
-        if (stateProp === 'teasersText') {
+        // make state key copy
+        obj = Object.assign([], this.state.sliders);
 
-            // make state key copy
-            obj = Object.assign([], this.state[stateProp]);
+        obj.forEach(slider => {
+            if (slider._id === Number(sliderId)) {
+                slider[property] = value;
+            }
+        })
 
-            obj.forEach(teaser => {
-                if (teaser._id === Number(key)) {
-                    teaser[key2] = value;
-                }
-            })
-
-        }
-
-        if (stateProp === 'aboutText') {
-            // make state key copy
-            obj = Object.assign({}, this.state[stateProp]);
-
-            // assign new value
-            obj[key] = value;
-        }
-
-        this.setState({[stateProp]: obj});
+        this.setState({sliders: obj});
     }
 
     generateKVP = (inputName) => {
 
         let info = inputName.split('-');
 
-        let stateProp = info[0];
-        let key = info[1];
-        let key2 = info[2];
+        let sliderId = info[0];
+        let property = info[1];
 
-        return {stateProp, key, key2};
+        return { sliderId: sliderId, property: property};
     }
 
-    addSection = () => {
+    addSlide = () => {
 
         let id = new Date().valueOf();
         console.log(id)
@@ -114,15 +100,16 @@ class AboutTeasers extends React.Component {
             heading: '',
             text: '',
             buttonLink: '',
+            buttonText: BUTTONS_BG.seeMore,
             isVisible: false
         }
 
-        this.setState({teasersText: [...this.state.teasersText, newElement]})
+        this.setState({sliders: [...this.state.sliders, newElement]})
     }
 
-    moveSection = (direction, id) => {
+    moveSlide = (direction, id) => {
 
-        let arr = Object.assign([], this.state.teasersText);
+        let arr = Object.assign([], this.state.sliders);
 
         let oldIndex = arr.findIndex(t => t._id === id);
 
@@ -142,17 +129,17 @@ class AboutTeasers extends React.Component {
 
         arr.splice(newIndex, 0, element);
 
-        this.setState({teasersText: arr})
+        this.setState({sliders: arr})
     }
 
-    deleteSection = (id) => {
+    deleteSlide = (id) => {
 
         confirmAlert({
             title: '',
             message: CONFIRM_DIALOGS.deleteSection,
             buttons: [{
                 label: BUTTONS_BG.yes,
-                onClick: () => this.setState({teasersText: this.state.teasersText.filter(e => e._id !== id)})
+                onClick: () => this.setState({sliders: this.state.sliders.filter(e => e._id !== id)})
             },
                 {label: BUTTONS_BG.no}]
         });
@@ -160,10 +147,12 @@ class AboutTeasers extends React.Component {
 
     saveChanges = () => {
 
-        const data = JSON.stringify(this.state);
+        const data = JSON.stringify(this.state.sliders);
+
+        console.log(data)
 
         miscDataService
-            .updateMiscData('homeAboutTeasers', data)
+            .updateMiscData('homeSliders', data)
             .then(res => {
 
                 this.toastContainer.success(TOASTR_MESSAGES.successEdit, '', {
@@ -184,56 +173,63 @@ class AboutTeasers extends React.Component {
 
         if (this.state.loading) return <div className={'admin-loader'}/>
 
-        let sections = [];
+        let sliders = [];
 
-        sections = this.state.teasersText.map(teaser => {
+        sliders = this.state.sliders.map(slider => {
 
-            let id = teaser._id;
+            let id = slider._id;
 
-            let inputName = 'teasersText-' + id + '-';
+            let inputName = id + '-';
 
-            let style = teaser.isVisible ? 'success' : 'default';
+            let style = slider.isVisible ? 'success' : 'default';
 
             return (
-                <Well key={'teaser_' + id}>
-
+                <Well key={'slider_' + id}>
 
                     <ButtonGroup>
                         <Button bsStyle={style}
-                                onClick={() => this.changeIsVisible(inputName + 'isVisible', teaser.isVisible)}>
-                            {teaser.isVisible && <i className="fa fa-eye" aria-hidden="true"/>}
-                            {!teaser.isVisible && <i className="fa fa-eye-slash" aria-hidden="true"/>}
+                                onClick={() => this.changeIsVisible(inputName + 'isVisible', slider.isVisible)}>
+                            {slider.isVisible && <i className="fa fa-eye" aria-hidden="true"/>}
+                            {!slider.isVisible && <i className="fa fa-eye-slash" aria-hidden="true"/>}
 
                         </Button>
                         <Button bsStyle="primary"
-                                onClick={() => this.moveSection('down', id)}>
+                                onClick={() => this.moveSlide('down', id)}>
                             <i className="fa fa-arrow-down" aria-hidden="true"/>
                         </Button>
                         <Button bsStyle="primary"
-                                onClick={() => this.moveSection('up', id)}>
+                                onClick={() => this.moveSlide('up', id)}>
                             <i className="fa fa-arrow-up" aria-hidden="true"/>
                         </Button>
                         <Button bsStyle="danger"
-                                onClick={() => this.deleteSection(id)}>
+                                onClick={() => this.deleteSlide(id)}>
                             <i className="fa fa-trash" aria-hidden="true"/>
                         </Button>
                     </ButtonGroup>
 
 
                     <Row>
-
-                        <Col xs={6}  md={5} mdPush={7}>
-                            <img src={'/images/sections/' + teaser.imageUrl}/>
+                        <Col xs={12} md={6} mdPush={6}>
+                            <img src={'/images/slider/' + slider.imageUrl}/>
                         </Col>
 
-
-                        <Col xs={12} md={7} mdPull={5}>
+                        <Col xs={12} md={6} mdPull={6}>
                             <FormInputField
                                 type='text'
                                 name={inputName + 'heading'}
-                                label='Заглавие на секция'
-                                value={teaser.heading}
+                                label='Заглавие'
+                                value={slider.heading}
                                 required={true}
+                                disabled={false}
+                                onChange={this.handleInputsChange}
+                            />
+
+                            <FormInputField
+                                type='text'
+                                name={inputName + 'text'}
+                                label='Текст'
+                                value={slider.text}
+                                required={false}
                                 disabled={false}
                                 onChange={this.handleInputsChange}
                             />
@@ -242,7 +238,7 @@ class AboutTeasers extends React.Component {
                                 type='text'
                                 name={inputName + 'imageUrl'}
                                 label='Снимка'
-                                value={teaser.imageUrl}
+                                value={slider.imageUrl}
                                 required={true}
                                 disabled={false}
                                 onChange={this.handleInputsChange}
@@ -251,21 +247,24 @@ class AboutTeasers extends React.Component {
                             <FormInputField
                                 type='text'
                                 name={inputName + 'buttonLink'}
-                                label='Линк за бутона'
-                                value={teaser.buttonLink}
+                                label='Линк към страница'
+                                value={slider.buttonLink}
                                 required={false}
                                 disabled={false}
                                 onChange={this.handleInputsChange}
                             />
 
-                            <TextEditor
-                                name={inputName + 'text'}
-                                value={teaser.text}
-                                onChange={this.changeState}
+                            <FormInputField
+                                type='text'
+                                name={inputName + 'buttonText'}
+                                label='Текст на бутона'
+                                value={slider.buttonText}
+                                required={false}
+                                disabled={false}
+                                onChange={this.handleInputsChange}
                             />
+
                         </Col>
-
-
 
                     </Row>
                 </Well>
@@ -282,29 +281,12 @@ class AboutTeasers extends React.Component {
                     className="toast-bottom-right"
                 />
 
-                <Well>
-                    <FormInputField
-                        type='text'
-                        name='aboutText-heading'
-                        label='Заглавие на секция'
-                        value={this.state.aboutText.heading}
-                        required={true}
-                        disabled={false}
-                        onChange={this.handleInputsChange}
-                    />
 
-                    <TextEditor
-                        name={'aboutText-text'}
-                        value={this.state.aboutText.text}
-                        onChange={this.changeState}
-                    />
-                </Well>
-
-                {sections}
+                {sliders}
 
                 <div className="text-center buttons-container">
                     <button className="btn btn-primary"
-                            onClick={this.addSection}>{BUTTONS_BG.addSection}</button>
+                            onClick={this.addSlide}>{BUTTONS_BG.addSlide}</button>
                     <button className="btn btn-success"
                             onClick={this.saveChanges}>{BUTTONS_BG.saveChanges}</button>
                 </div>
@@ -317,5 +299,5 @@ class AboutTeasers extends React.Component {
 }
 
 
-export default AboutTeasers;
+export default Slider;
 
