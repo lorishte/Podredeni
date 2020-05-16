@@ -442,9 +442,25 @@
     }
 
   }
+
+  #products {
+    .header {
+      flex-direction: column;
+      text-align: center;
+
+      h2 {
+        margin-bottom: .3em;
+        font-size: 2em;
+      }
+    }
+  }
 }
 
 @media screen and (max-width: 520px) {
+
+  .breadcrumb li {
+    font-size: .8em;
+  }
 
   #home {
     #home-main-carousel {
@@ -542,7 +558,7 @@
 
     .form-add-on {
       button {
-        padding: 5px 15px ;
+        padding: 5px 15px;
       }
     }
   }
@@ -599,7 +615,7 @@
   }
 
   h4 {
-    margin-top: 20px;
+    //margin-top: 20px;
   }
 
   #cart {

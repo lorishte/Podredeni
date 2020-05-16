@@ -292,8 +292,18 @@
     width: 95%;
     top: 5%; }
   #home #videos .video {
-    height: 150px; } }
+    height: 150px; }
+
+  #products .header {
+    flex-direction: column;
+    text-align: center; }
+    #products .header h2 {
+      margin-bottom: .3em;
+      font-size: 2em; } }
 @media screen and (max-width: 520px) {
+  .breadcrumb li {
+    font-size: .8em; }
+
   #home #home-main-carousel .carousel .carousel-caption {
     top: -12%; }
     #home #home-main-carousel .carousel .carousel-caption .carousel-heading {
@@ -355,9 +365,6 @@
   h2, h3 {
     font-size: 1.3em;
     margin: 15px 0 12px 0; }
-
-  h4 {
-    margin-top: 20px; }
 
   #cart .label {
     font-size: 12px;
