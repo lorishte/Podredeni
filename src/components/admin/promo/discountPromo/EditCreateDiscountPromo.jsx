@@ -1,16 +1,23 @@
 import React from 'react';
 import { ToastContainer } from 'react-toastr';
-import { Grid, Row, Col, Button } from 'react-bootstrap';
+import {Grid, Row, Col, Button, Panel} from 'react-bootstrap';
 
+
+// Partials
+import MultiSelect from '../partials/MultiSelectSortedProducts';
+// import MultiSelect from '../partials/MultiSelect';
 import FormInputField from '../../../common/formComponents/FormInputField';
 
-import MultiSelect from '../partials/MultiSelect';
 
+// Services
 import discountPromosService from '../../../../services/promos/discountPromosService';
 import productsService from '../../../../services/products/productsService';
 
+
+// Utils
 import utils from '../../../../utils/utils';
 
+// Constants
 import { TOASTR_MESSAGES } from '../../../../data/constants/componentConstants';
 
 class EditCreateDiscountPromo extends React.Component {
@@ -22,7 +29,7 @@ class EditCreateDiscountPromo extends React.Component {
 			discount: '',
 			startDate: '',
 			endDate: [],
-			allProducts: [],
+			allProducts: {},
 			selectedProductsIds: [],
 			newSelectedProductsIds: []
 		};
@@ -43,8 +50,27 @@ class EditCreateDiscountPromo extends React.Component {
 
 		productsService.loadProducts(this.state).then(res => {
 
+			// Sort products by category
+			let sortedProducts = {};
+
+			res.categories.forEach(c => {
+
+				let key = c.id
+
+				sortedProducts[key] = {
+					name: c.name,
+					products: []
+				}
+			})
+
+			res.products.forEach(p => {
+				p.categories.forEach(c => {
+					sortedProducts[c.id].products.push(p)
+				})
+			});
+
 			this.setState({
-				allProducts: res.products
+				allProducts: sortedProducts
 			});
 		})
 			.catch(err => {
@@ -222,16 +248,21 @@ class EditCreateDiscountPromo extends React.Component {
 					</Row>
 
 
-					<Row>
-						<label className="col-xs-12">Избрани продукти:</label>
+					<Panel bsStyle="info" defaultExpanded>
+						<Panel.Heading>
+							<Panel.Title toggle componentClass="h4">Избрани продукти:</Panel.Title>
+						</Panel.Heading>
 
-						<MultiSelect
-							name="selectedProductsIds"
-							onChange={this.addProduct}
-							allProducts={this.state.allProducts}
-							selectedProductsIds={this.state.newSelectedProductsIds}
-						/>
-					</Row>
+						<Panel.Body collapsible>
+							<MultiSelect
+								name="selectedProductsIds"
+								onChange={this.addProduct}
+								allProducts={this.state.allProducts}
+								selectedProductsIds={this.state.newSelectedProductsIds}
+							/>
+						</Panel.Body>
+					</Panel>
+
 
 					<Row className="buttons-container">
 						<Col xs={12}>

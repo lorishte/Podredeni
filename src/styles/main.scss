@@ -928,36 +928,22 @@ nav {
     margin-bottom: 12px;
     border-radius: 5px;
 
-    .header {
+    .category-name {
       @include flex;
       @include align-items(center);
       @include justify-content(space-between);
     }
 
     .toggle-menu {
-      display: inline-block;
-      background-color: $white;
-      position: absolute;
-      right: 5px;
+      //background-color: $warm-light-grey;
 
-      .over {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-
-        &:hover {
-          cursor: pointer;
-        }
-      }
 
       .toggle {
         display: block;
         height: 1px;
         width: 15px;
-        background-color: $dark-grey;
-        //background-color: $primary;
+        //background-color: $dark-grey;
+        background-color: $primary;
         margin: 4px auto;
 
         @include transition;
@@ -965,19 +951,20 @@ nav {
         &:first-of-type {
           transform: rotate(90deg);
           position: relative;
-          top: 5px;
+          top: 2px;
         }
 
         &:last-of-type {
           transform: rotate(0deg);
           position: relative;
+          top: -3px
         }
       }
 
       &.clicked {
 
         .toggle {
-          background-color: $primary;
+
 
           &:first-of-type {
             transform: rotate(45deg);

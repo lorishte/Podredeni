@@ -775,7 +775,7 @@ nav {
   padding: 15px;
   margin-bottom: 12px;
   border-radius: 5px; }
-  #products .filters-container .header {
+  #products .filters-container .category-name {
     display: -webkit-box;
     display: -webkit-flex;
     display: -ms-flexbox;
@@ -790,42 +790,28 @@ nav {
     -ms-flex-pack: justify;
     -webkit-justify-content: space-between;
     justify-content: space-between; }
-  #products .filters-container .toggle-menu {
-    display: inline-block;
-    background-color: #ffffff;
-    position: absolute;
-    right: 5px; }
-    #products .filters-container .toggle-menu .over {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%; }
-      #products .filters-container .toggle-menu .over:hover {
-        cursor: pointer; }
-    #products .filters-container .toggle-menu .toggle {
-      display: block;
-      height: 1px;
-      width: 15px;
-      background-color: #5b5b5b;
-      margin: 4px auto;
-      -webkit-transition: .4s;
-      -moz-transition: .4s;
-      -o-transition: .4s;
-      transition: .4s; }
-      #products .filters-container .toggle-menu .toggle:first-of-type {
-        transform: rotate(90deg);
-        position: relative;
-        top: 5px; }
-      #products .filters-container .toggle-menu .toggle:last-of-type {
-        transform: rotate(0deg);
-        position: relative; }
-    #products .filters-container .toggle-menu.clicked .toggle {
-      background-color: #b49543; }
-      #products .filters-container .toggle-menu.clicked .toggle:first-of-type {
-        transform: rotate(45deg); }
-      #products .filters-container .toggle-menu.clicked .toggle:last-of-type {
-        transform: rotate(-45deg); }
+  #products .filters-container .toggle-menu .toggle {
+    display: block;
+    height: 1px;
+    width: 15px;
+    background-color: #b49543;
+    margin: 4px auto;
+    -webkit-transition: .4s;
+    -moz-transition: .4s;
+    -o-transition: .4s;
+    transition: .4s; }
+    #products .filters-container .toggle-menu .toggle:first-of-type {
+      transform: rotate(90deg);
+      position: relative;
+      top: 2px; }
+    #products .filters-container .toggle-menu .toggle:last-of-type {
+      transform: rotate(0deg);
+      position: relative;
+      top: -3px; }
+  #products .filters-container .toggle-menu.clicked .toggle:first-of-type {
+    transform: rotate(45deg); }
+  #products .filters-container .toggle-menu.clicked .toggle:last-of-type {
+    transform: rotate(-45deg); }
   #products .filters-container .body {
     max-height: 0;
     transition: max-height 0.25s ease-out;

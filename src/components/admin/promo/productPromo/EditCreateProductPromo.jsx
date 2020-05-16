@@ -4,7 +4,7 @@ import {Grid, Row, Col, Button, Checkbox, Well, Panel} from 'react-bootstrap';
 
 import FormInputField from '../../../common/formComponents/FormInputField';
 import FormTextareaField from '../../../common/formComponents/FormTextareaField';
-import MultiSelect from '../partials/MultiSelectTest';
+import MultiSelect from '../partials/MultiSelectSortedProducts';
 
 import productPromosService from '../../../../services/promos/productPromosService';
 import productsService from '../../../../services/products/productsService';
@@ -55,8 +55,9 @@ class EditCreateProductPromo extends React.Component {
 
     loadProducts = () => {
         productsService.loadProducts(this.state).then(res => {
-            console.log(res)
 
+
+            // Sort products by category
             let sortedProducts = {};
 
             res.categories.forEach(c => {
@@ -74,8 +75,6 @@ class EditCreateProductPromo extends React.Component {
                     sortedProducts[c.id].products.push(p)
                 })
             })
-
-            console.log(sortedProducts)
 
             this.setState({
                 products: sortedProducts,
@@ -345,51 +344,47 @@ class EditCreateProductPromo extends React.Component {
                         </Col>
                     </Row>
 
-                    <Row>
-                        <Panel>
-                            <Panel.Heading>
-                                <h3>Избери продукти в промоция</h3>
-                            </Panel.Heading>
 
-                            <Panel.Body>
-                                <MultiSelect
-                                    name="productsIds"
-                                    onChange={this.addProduct}
-                                    allProducts={this.state.products}
-                                    selectedProductsIds={this.state.newProducts}
-                                />
-                            </Panel.Body>
-                        </Panel>
-                    </Row>
+                    <Panel bsStyle="info" >
+                        <Panel.Heading>
+                            <Panel.Title toggle componentClass="h4">Избери продукти в промоция</Panel.Title>
+                        </Panel.Heading>
 
-                    <Row>
-                        <Col xs={12} id="inclusive-checkbox">
-                            <Checkbox
-                                checked={this.state.isInclusive}
-                                name="isInclusive"
-                                onChange={this.handleCheckBox}
-                                readOnly>
-                                Ще подарявам различен продукт
-                            </Checkbox>
+                        <Panel.Body collapsible>
+                            <MultiSelect
+                                name="productsIds"
+                                onChange={this.addProduct}
+                                allProducts={this.state.products}
+                                selectedProductsIds={this.state.newProducts}
+                            />
+                        </Panel.Body>
+                    </Panel>
 
 
-                            {this.state.isInclusive &&
-                            <Panel>
-                                <Panel.Heading>
-                                    <h3>Избери продукти за подарък</h3>
-                                </Panel.Heading>
-                                <Panel.Body>
-                                    <MultiSelect
-                                        name="discountedProductsIds"
-                                        onChange={this.addDiscountedProduct}
-                                        allProducts={this.state.discountedProducts}
-                                        selectedProductsIds={this.state.newDiscountedProducts}
-                                    />
-                                </Panel.Body>
-                            </Panel>
-                            }
-                        </Col>
-                    </Row>
+                    <Checkbox
+                        checked={this.state.isInclusive}
+                        name="isInclusive"
+                        onChange={this.handleCheckBox}
+                        readOnly>
+                        Ще подарявам различен продукт
+                    </Checkbox>
+
+
+                    {this.state.isInclusive &&
+                    <Panel bsStyle="success" >
+                        <Panel.Heading>
+                            <Panel.Title toggle componentClass="h4" >Избери продукти за подарък</Panel.Title>
+                        </Panel.Heading>
+                        <Panel.Body collapsible>
+                            <MultiSelect
+                                name="discountedProductsIds"
+                                onChange={this.addDiscountedProduct}
+                                allProducts={this.state.discountedProducts}
+                                selectedProductsIds={this.state.newDiscountedProducts}
+                            />
+                        </Panel.Body>
+                    </Panel>
+                    }
 
 
                     <Row className="buttons-container">

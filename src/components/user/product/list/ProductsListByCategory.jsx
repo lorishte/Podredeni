@@ -1,7 +1,7 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import { Col, Row, Grid, Breadcrumb, Accordion, Button } from 'react-bootstrap';
-import { ToastContainer } from 'react-toastr';
+import {Link} from 'react-router-dom';
+import {Col, Row, Grid, Breadcrumb, Accordion, Button} from 'react-bootstrap';
+import {ToastContainer} from 'react-toastr';
 
 // Partials
 import ProductCard from './partials/ProductCard';
@@ -11,224 +11,236 @@ import productsService from '../../../../services/products/productsService';
 import categoryService from '../../../../services/categories/categoryService';
 
 // Constants
-import { RESOLUTIONS, PRODUCT } from '../../../../data/constants/componentConstants';
+import {RESOLUTIONS, PRODUCT} from '../../../../data/constants/componentConstants';
 
 class ProductsListByCategory extends React.Component {
-	constructor (props) {
-		super(props);
+    constructor(props) {
+        super(props);
 
-		this.state = {
-			categoryId: '',
-			categoryName: '',
-			allProducts: [],
-			filteredProducts: [],
-			subcategories: [],
+        this.state = {
+            categoryId: '',
+            categoryName: '',
+            allProducts: [],
+            filteredProducts: [],
+            subcategories: [],
 
-			selectedSubcategoryIds: [],
+            selectedSubcategoryIds: [],
 
-			size: 50,
-			page: 1,
-			sortProperty: 'number',
-			descending: true,
-			filterProperty: 'name',
-			filterValue: '',
+            size: 50,
+            page: 1,
+            sortProperty: 'number',
+            descending: true,
+            filterProperty: 'name',
+            filterValue: '',
 
-			resolution: window.innerWidth,
+            resolution: window.innerWidth,
 
-			loading: true,
-			filtering: false
-		};
-	}
+            loading: true,
+            filtering: false,
 
-	componentDidMount () {
-		window.scrollTo(0, 0);
-		window.addEventListener('orientationchange', this.handleResolutionChange);
-		window.addEventListener('resize', this.handleResolutionChange);
+            filterOpen: false
+        };
+    }
 
-		this.loadNestedCategories();
-	}
+    componentDidMount() {
+        window.scrollTo(0, 0);
+        window.addEventListener('orientationchange', this.handleResolutionChange);
+        window.addEventListener('resize', this.handleResolutionChange);
 
-	componentWillUnmount () {
-		window.removeEventListener('orientationchange', this.handleResolutionChange);
-		window.removeEventListener('resize', this.handleResolutionChange);
+        this.loadNestedCategories();
+    }
 
-		sessionStorage.setItem('selectedSubcategoryIds', JSON.stringify(this.state.selectedSubcategoryIds));
-	}
+    componentWillUnmount() {
+        window.removeEventListener('orientationchange', this.handleResolutionChange);
+        window.removeEventListener('resize', this.handleResolutionChange);
 
-	checkFilters = () => {
+        sessionStorage.setItem('selectedSubcategoryIds', JSON.stringify(this.state.selectedSubcategoryIds));
+    }
 
-		let subCategories = JSON.parse(sessionStorage.getItem('selectedSubcategoryIds'));
+    checkFilters = () => {
 
-		if (subCategories) {
-			this.setState({selectedSubcategoryIds: subCategories}, () => {
-				this.setState({
-					filteredProducts: this.filterProducts()
-				});
-			});
-		}
+        let subCategories = JSON.parse(sessionStorage.getItem('selectedSubcategoryIds'));
 
-	};
+        if (subCategories) {
+            this.setState({selectedSubcategoryIds: subCategories}, () => {
+                this.setState({
+                    filteredProducts: this.filterProducts()
+                });
+            });
+        }
 
-	handleResolutionChange = () => {
-		this.setState({resolution: window.innerWidth});
-	};
+    };
 
-	loadNestedCategories = () => {
-		categoryService
-			.loadNestedCategories(null, 1000)
-			.then(res => {
+    handleResolutionChange = () => {
+        this.setState({resolution: window.innerWidth});
+    };
 
-				let catId = this.props.match.params.id;
+    loadNestedCategories = () => {
+        categoryService
+            .loadNestedCategories(null, 1000)
+            .then(res => {
 
-				let selectedCategory = res.filter(c => c.id === catId)[0];
+                let catId = this.props.match.params.id;
 
-				// Reverse images to get the first
-				selectedCategory.products.forEach(p => p.images.reverse());
+                let selectedCategory = res.filter(c => c.id === catId)[0];
 
-				// Sort subcategories by alphabetical order
-				selectedCategory.subcategories.sort((a, b) => a.name.localeCompare(b.name));
+                // Reverse images to get the first
+                selectedCategory.products.forEach(p => p.images.reverse());
 
-				this.setState({
-					categoryName: selectedCategory.name,
-					categoryId: selectedCategory.id,
-					allProducts: selectedCategory.products,
-					filteredProducts: selectedCategory.products,
-					subcategories: selectedCategory.subcategories,
-					loading: false
-				}, () => this.checkFilters());
-			})
-			.catch(err => console.log(err));
-	};
+                // Sort subcategories by alphabetical order
+                selectedCategory.subcategories.sort((a, b) => a.name.localeCompare(b.name));
 
-	selectFilterCategory = (e) => {
+                this.setState({
+                    categoryName: selectedCategory.name,
+                    categoryId: selectedCategory.id,
+                    allProducts: selectedCategory.products,
+                    filteredProducts: selectedCategory.products,
+                    subcategories: selectedCategory.subcategories,
+                    loading: false
+                }, () => this.checkFilters());
+            })
+            .catch(err => console.log(err));
+    };
 
-		this.setState({filtering: true});
+    selectFilterCategory = (e) => {
 
-		let id = e.target.getAttribute('id');
+        this.setState({filtering: true});
 
-		let subCats = this.state.selectedSubcategoryIds;
+        let id = e.target.getAttribute('id');
 
-		if (subCats.includes(id)) {
+        let subCats = this.state.selectedSubcategoryIds;
 
-			this.setState({
-				selectedSubcategoryIds: subCats.filter(scId => scId !== id),
-			}, () => {
-				this.setState({
-					filteredProducts: this.filterProducts(),
-					filtering: false
-				});
-			});
-		} else {
-			this.setState({
-				selectedSubcategoryIds: [...this.state.selectedSubcategoryIds, id],
-			}, () => {
-				this.setState({
-					filteredProducts: this.filterProducts(),
-					filtering: false
-				});
-			});
-		}
+        if (subCats.includes(id)) {
 
-	};
+            this.setState({
+                selectedSubcategoryIds: subCats.filter(scId => scId !== id),
+            }, () => {
+                this.setState({
+                    filteredProducts: this.filterProducts(),
+                    filtering: false
+                });
+            });
+        } else {
+            this.setState({
+                selectedSubcategoryIds: [...this.state.selectedSubcategoryIds, id],
+            }, () => {
+                this.setState({
+                    filteredProducts: this.filterProducts(),
+                    filtering: false
+                });
+            });
+        }
 
-	filterProducts = () => {
+    };
 
-		let filteredProducts = [];
+    filterProducts = () => {
 
-		if (this.state.selectedSubcategoryIds.length > 0) {
-			this.state.allProducts.forEach(p => {
-				p.subcategories.forEach(sc => {
-					if (this.state.selectedSubcategoryIds.includes(sc.id)) {
-						filteredProducts.push(p);
-					}
-				});
-			});
-		} else {
-			filteredProducts = this.state.allProducts;
-		}
+        let filteredProducts = [];
 
-		return filteredProducts;
-	};
+        if (this.state.selectedSubcategoryIds.length > 0) {
+            this.state.allProducts.forEach(p => {
+                p.subcategories.forEach(sc => {
+                    if (this.state.selectedSubcategoryIds.includes(sc.id)) {
+                        filteredProducts.push(p);
+                    }
+                });
+            });
+        } else {
+            filteredProducts = this.state.allProducts;
+        }
 
-	showMessage = (type, header, message) => {
-		this.toastContainer[type](header, message);
-	};
+        return filteredProducts;
+    };
 
-	render () {
+    showMessage = (type, header, message) => {
+        this.toastContainer[type](header, message);
+    };
 
-		if (this.state.loading) return <div className='loader'/>;
+    render() {
 
-		let resolution = this.state.resolution < RESOLUTIONS.xs;
+        if (this.state.loading) return <div className='loader'/>;
 
-		let productsList = this.state.filteredProducts.map(e => {
+        let resolution = this.state.resolution < RESOLUTIONS.xs;
 
-			return <ProductCard key={e.id}
-			                    product={e}
-			                    showMessage={this.showMessage}
-			                    xsRes={resolution ? 12 : 6}/>;
+        let productsList = this.state.filteredProducts.map(e => {
 
-		});
+            return <ProductCard key={e.id}
+                                product={e}
+                                showMessage={this.showMessage}
+                                xsRes={resolution ? 12 : 6}/>;
 
-		let subcategories = this.state.subcategories.map(sc => {
+        });
 
-			let catStyle = this.state.selectedSubcategoryIds.map(e => e.id).includes(sc.id) ? 'sub-category' : 'sub-category disabled';
+        let subcategories = this.state.subcategories.map(sc => {
 
-			let checked = this.state.selectedSubcategoryIds.includes(sc.id) ? 'check-box selected' : 'check-box';
+            let catStyle = this.state.selectedSubcategoryIds.map(e => e.id).includes(sc.id) ? 'sub-category' : 'sub-category disabled';
 
-			return (
+            let checked = this.state.selectedSubcategoryIds.includes(sc.id) ? 'check-box selected' : 'check-box';
 
-				<div key={sc.id} className={catStyle}>
+            return (
+
+                <div key={sc.id} className={catStyle}>
 					<span className={checked}>
 						<i className="fa fa-check" aria-hidden="true"/>
 					</span>
-					<span className='name'>{sc.name} <span className='label'>{sc.count}</span></span>
-					<span className="over"
-					      id={sc.id}
-					      onClick={this.selectFilterCategory}/>
-				</div>
-			);
-		});
+                    <span className='name'>{sc.name} <span className='label'>{sc.count}</span></span>
+                    <span className="over"
+                          id={sc.id}
+                          onClick={this.selectFilterCategory}/>
+                </div>
+            );
+        });
 
-		return (
+        return (
 
-			<Grid id="products" bsClass={'container-fluid'}>
+            <Grid id="products" bsClass={'container-fluid'}>
 
-				<ToastContainer
-					ref={ref => this.toastContainer = ref}
-					className="toast-bottom-right"/>
+                <ToastContainer
+                    ref={ref => this.toastContainer = ref}
+                    className="toast-bottom-right"/>
 
 
-				<Col xs={12}>
+                <Col xs={12}>
 
-					<Breadcrumb>
-						<Breadcrumb.Item href="/">Начало</Breadcrumb.Item>
-						<Breadcrumb.Item href="/products">
-							Продукти
-						</Breadcrumb.Item>
-						<Breadcrumb.Item active>{this.state.categoryName}</Breadcrumb.Item>
-					</Breadcrumb>
+                    <Breadcrumb>
+                        <Breadcrumb.Item href="/">Начало</Breadcrumb.Item>
+                        <Breadcrumb.Item href="/products">
+                            Продукти
+                        </Breadcrumb.Item>
+                        <Breadcrumb.Item active>{this.state.categoryName}</Breadcrumb.Item>
+                    </Breadcrumb>
 
-					<Col xs={12} sm={4} md={3}>
+                    <Col xs={12} sm={4} md={3}>
 
-						<Col xs={12} className="filters-container">
-							<h4 className='category'>{this.state.categoryName}</h4>
-							{subcategories}
-						</Col>
-					</Col>
+                        <Col xs={12} className="filters-container">
+                            <div className={'category-name'}>
+                                <h4>{this.state.categoryName}</h4>
+                                <button className={this.state.filterOpen ? 'toggle-menu' : 'toggle-menu clicked'}
+                                        onClick={() => this.setState({filterOpen: !this.state.filterOpen})}>
+                                    <span className={'toggle'}/>
+                                    <span className={'toggle'}/>
+                                </button>
+                            </div>
+                            <div className={this.state.filterOpen ? 'body' : 'body visible'}>
+                                {subcategories}
+                            </div>
 
-					<Col xs={12} sm={8} md={9}>
+                        </Col>
+                    </Col>
 
-						<Row>
-							{this.state.filtering && <div className="loader"/>}
+                    <Col xs={12} sm={8} md={9}>
 
-							{!this.state.filtering && productsList}
-						</Row>
-					</Col>
-				</Col>
+                        <Row>
+                            {this.state.filtering && <div className="loader"/>}
 
-			</Grid>
-		);
-	}
+                            {!this.state.filtering && productsList}
+                        </Row>
+                    </Col>
+                </Col>
+
+            </Grid>
+        );
+    }
 }
 
 export default ProductsListByCategory;
