@@ -37,10 +37,10 @@ class PromoTableRow extends React.Component {
 				</td>
 				}
 
-				<td>
+				<td className={'hidden-xs'}>
 					{utils.formatDate(p.startDate)}
 				</td>
-				<td>
+				<td className={'hidden-xs'}>
 					{utils.formatDate(p.endDate)}
 				</td>
 				<td className="text-center">

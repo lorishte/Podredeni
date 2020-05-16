@@ -106,7 +106,6 @@ class AboutTeasers extends React.Component {
     addSection = () => {
 
         let id = new Date().valueOf();
-        console.log(id)
 
         let newElement = {
             _id: id,

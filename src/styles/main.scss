@@ -65,7 +65,8 @@ h1, h2, h3 {
 
 h3 {
   font-size: 2em;
-  color: #ccc;
+  //color: #ccc;
+  //color: $black;
   text-transform: uppercase;
   font-weight: 300;
 }
@@ -232,7 +233,7 @@ input[type=checkbox], input[type=radio] {
 }
 
 .table-sorting-buttons {
-  margin-left: 15px;
+  //margin-left: 15px;
   display: inline-block;
   margin-right: 0;
 

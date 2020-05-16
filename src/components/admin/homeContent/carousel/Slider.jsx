@@ -92,7 +92,6 @@ class Slider extends React.Component {
     addSlide = () => {
 
         let id = new Date().valueOf();
-        console.log(id)
 
         let newElement = {
             _id: id,
@@ -111,7 +110,7 @@ class Slider extends React.Component {
 
         let arr = Object.assign([], this.state.sliders);
 
-        let oldIndex = arr.findIndex(t => t._id === id);
+        let oldIndex = arr.findIndex(e => e._id === id);
 
         let element = arr[oldIndex];
 

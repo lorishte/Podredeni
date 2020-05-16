@@ -1,77 +1,78 @@
 import React from 'react';
-import { Table } from 'react-bootstrap';
+import {Table} from 'react-bootstrap';
 
-import { SortableContainer, SortableElement, arrayMove } from 'react-sortable-hoc';
+import {SortableContainer, SortableElement, arrayMove} from 'react-sortable-hoc';
 
 const SortableItem = SortableElement(({itemIndex, value}) =>
 
-	<tr className="text-center">
-		<td className="padding">
-			{itemIndex}
-		</td>
 
-		<td>
-			<img src={value.images[0]}  className='image-thumbnail-small' />
-		</td>
+    <tr className="text-center">
+        <td className="padding">
+            {itemIndex}
+        </td>
 
-		<td className="text-left">
-			{value.name}
-		</td>
-	</tr>);
+        <td>
+            <img src={'/images/products/' + value.images[0]} className='image-thumbnail-small'/>
+        </td>
+
+        <td className="text-left">
+            {value.name}
+        </td>
+    </tr>
+);
 
 const SortableList = SortableContainer(({items}) => {
-	let itemIndex = 1;
+    let itemIndex = 1;
 
-	return (
-		<tbody>
-		{items.map((value, index ) => (
-			<SortableItem key={`item-${index}`}
-			              itemIndex={itemIndex++}
-			              index={index}
-			              value={value}/>
-		))}
-		</tbody>
-	);
+    return (
+        <tbody>
+        {items.map((value, index) => (
+            <SortableItem key={`item-${index}`}
+                          itemIndex={itemIndex++}
+                          index={index}
+                          value={value}/>
+        ))}
+        </tbody>
+    );
 });
 
 class SortableProducts extends React.Component {
-	constructor (props) {
-		super(props);
+    constructor(props) {
+        super(props);
 
-		this.state = {
-			items: []
-		}
-	}
+        this.state = {
+            items: []
+        }
+    }
 
-	componentDidMount () {
-		this.setState({items: this.props.sortableItems})
-	}
+    componentDidMount() {
+        this.setState({items: this.props.sortableItems})
+    }
 
-	onSortEnd = ({oldIndex, newIndex}) => {
-		this.setState({
-			items: arrayMove(this.state.items, oldIndex, newIndex),
-		});
+    onSortEnd = ({oldIndex, newIndex}) => {
+        this.setState({
+            items: arrayMove(this.state.items, oldIndex, newIndex),
+        });
 
-		this.props.handleOrderChange(this.state.items);
-	};
+        this.props.handleOrderChange(this.state.items);
+    };
 
-	render () {
+    render() {
 
-		let itemsList;
+        let itemsList;
 
-		
 
-		if(this.state.items.length > 0){
+        if (this.state.items.length > 0) {
 
-			itemsList = (<SortableList
-				getContainer={() => document.getElementById('admin-sortable')}
-				items={this.state.items}
-				distance={10}
-				onSortEnd={this.onSortEnd}/>);
-		}
+            itemsList = (<SortableList
+                getContainer={() => document.getElementById('admin-sortable')}
+                items={this.state.items}
+                distance={10}
+                onSortEnd={this.onSortEnd}/>);
+        }
 
-		return <Table striped bordered condensed hover id="admin-products-table">{itemsList}</Table>;
-	}
+        return <Table striped bordered condensed hover id="admin-products-table">{itemsList}</Table>;
+    }
 }
 
 export default SortableProducts;

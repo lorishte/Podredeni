@@ -1,9 +1,9 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import {Link} from 'react-router-dom';
 
-import { ToastContainer } from 'react-toastr';
-import { confirmAlert } from 'react-confirm-alert';
-import { Grid, Row, Col, Table, Tabs, Tab } from 'react-bootstrap';
+import {ToastContainer} from 'react-toastr';
+import {confirmAlert} from 'react-confirm-alert';
+import {Grid, Row, Col, Table, Tabs, Tab} from 'react-bootstrap';
 
 // Partials
 import TableHead from './partials/PromosTableHead';
@@ -14,161 +14,161 @@ import discountPromosService from '../../../../services/promos/discountPromosSer
 import productPromosService from '../../../../services/promos/productPromosService';
 
 // Messages & text
-import { TOASTR_MESSAGES } from '../../../../data/constants/componentConstants';
-import { BUTTONS_BG, CONFIRM_DIALOGS } from '../../../../data/constants/componentConstants';
+import {TOASTR_MESSAGES} from '../../../../data/constants/componentConstants';
+import {BUTTONS_BG, CONFIRM_DIALOGS} from '../../../../data/constants/componentConstants';
 
 class PromoList extends React.Component {
-	constructor (props) {
-		super(props);
+    constructor(props) {
+        super(props);
 
-		this.state = {
-			discountPromos: [],
-			productPromos: [],
-			key: 1
-		};
-	}
+        this.state = {
+            discountPromos: [],
+            productPromos: [],
+            key: 1
+        };
+    }
 
-	componentDidMount () {
-		this.loadAll();
-	}
+    componentDidMount() {
+        this.loadAll();
+    }
 
-	loadAll = () => {
+    loadAll = () => {
 
-		discountPromosService
-			.loadAll()
-			.then(res => {
-				this.setState({discountPromos: res});
-			})
-			.catch(err => {
-				this.toastContainer.error(err.statusText, TOASTR_MESSAGES.error, {
-					closeButton: false,
-				});
-			});
+        discountPromosService
+            .loadAll()
+            .then(res => {
+                this.setState({discountPromos: res});
+            })
+            .catch(err => {
+                this.toastContainer.error(err.statusText, TOASTR_MESSAGES.error, {
+                    closeButton: false,
+                });
+            });
 
-		productPromosService
-			.loadAll()
-			.then(res => {
-				this.setState({productPromos: res});
-			})
-			.catch(err => {
-				console.log(err)
-				this.toastContainer.error(err.responseText, TOASTR_MESSAGES.error, {
-					closeButton: false,
-				});
-			});
+        productPromosService
+            .loadAll()
+            .then(res => {
+                this.setState({productPromos: res});
+            })
+            .catch(err => {
+                console.log(err)
+                this.toastContainer.error(err.responseText, TOASTR_MESSAGES.error, {
+                    closeButton: false,
+                });
+            });
 
-	};
+    };
 
-	handleSelect = (key) => {
-		this.setState({key});
-	};
+    handleSelect = (key) => {
+        this.setState({key});
+    };
 
-	deletePromo = (promoId, promoType) => {
+    deletePromo = (promoId, promoType) => {
 
-		let serviceToUse = promoType === 'product' ? productPromosService : discountPromosService;
+        let serviceToUse = promoType === 'product' ? productPromosService : discountPromosService;
 
-		serviceToUse
-			.delete(promoId)
-			.then(res => {
-				window.location.reload();
-			})
-			.catch(err => {
-				console.log(err);
-				this.toastContainer.error(err.responseText, TOASTR_MESSAGES.error, {
-					closeButton: false,
-				});
-			});
-	};
+        serviceToUse
+            .delete(promoId)
+            .then(res => {
+                window.location.reload();
+            })
+            .catch(err => {
+                console.log(err);
+                this.toastContainer.error(err.responseText, TOASTR_MESSAGES.error, {
+                    closeButton: false,
+                });
+            });
+    };
 
-	confirmDeletePromo = (promoId, promoType) => {
+    confirmDeletePromo = (promoId, promoType) => {
 
-		confirmAlert({
-			title: '',
-			message: CONFIRM_DIALOGS.deletePromo,
-			buttons: [{
-				label: BUTTONS_BG.yes,
-				onClick: () => this.deletePromo(promoId, promoType)
-			},
-				{label: BUTTONS_BG.no}]
-		});
+        confirmAlert({
+            title: '',
+            message: CONFIRM_DIALOGS.deletePromo,
+            buttons: [{
+                label: BUTTONS_BG.yes,
+                onClick: () => this.deletePromo(promoId, promoType)
+            },
+                {label: BUTTONS_BG.no}]
+        });
 
-	};
+    };
 
-	render () {
+    render() {
 
-		let promoType = this.state.key === 1 ? 'product' : 'discount';
+        let promoType = this.state.key === 1 ? 'product' : 'discount';
 
-		let discountPromosList;
+        let discountPromosList;
 
-		if (this.state.discountPromos.length > 0) {
-			discountPromosList = this.state.discountPromos.map(e => {
-				return <PromoTableRow key={e.id}
-				                      promoType={promoType}
-				                      data={e}
-				                      confirmDelete={this.confirmDeletePromo}/>;
-			});
-		}
+        if (this.state.discountPromos.length > 0) {
+            discountPromosList = this.state.discountPromos.map(e => {
+                return <PromoTableRow key={e.id}
+                                      promoType={promoType}
+                                      data={e}
+                                      confirmDelete={this.confirmDeletePromo}/>;
+            });
+        }
 
-		let productPromosList;
+        let productPromosList;
 
-		if (this.state.productPromos.length > 0) {
-			productPromosList = this.state.productPromos.map(e => {
-				return <PromoTableRow key={e.id}
-				                      promoType={promoType}
-				                      data={e}
-				                      confirmDelete={this.confirmDeletePromo}/>;
-			});
-		}
+        if (this.state.productPromos.length > 0) {
+            productPromosList = this.state.productPromos.map(e => {
+                return <PromoTableRow key={e.id}
+                                      promoType={promoType}
+                                      data={e}
+                                      confirmDelete={this.confirmDeletePromo}/>;
+            });
+        }
 
-		return (
-			<Grid>
+        return (
+            <Grid>
 
-				<ToastContainer
-					ref={ref => this.toastContainer = ref}
-					className="toast-bottom-right"
-				/>
-
-
-				<div className="buttons-container">
-					<Link to="/promos/create-discount-promo" className="btn btn-sm btn-primary">Нова Промоция с
-						намаление</Link>
-					<Link to="/promos/create-product-promo" className="btn btn-sm btn-primary">Нова Промоция с
-						продукти</Link>
-				</div>
+                <ToastContainer
+                    ref={ref => this.toastContainer = ref}
+                    className="toast-bottom-right"
+                />
 
 
-				<Tabs defaultActiveKey={this.state.key}
-				      id="admin-promos-table"
-				      onSelect={this.handleSelect}>
+                <Tabs defaultActiveKey={this.state.key}
+                      id="admin-promos-table"
+                      onSelect={this.handleSelect}>
 
 
-					<Tab eventKey={0}
-					     title='Промоции с намаление'>
+                    <Tab eventKey={0}
+                         title='С намаление'>
 
-						<Table striped bordered condensed hover>
-							<TableHead promoType={promoType}/>
-							<tbody>
-							{discountPromosList}
-							</tbody>
-						</Table>
-					</Tab>
+                        <Link to="/promos/create-discount-promo" className="btn btn-sm btn-primary">Нова Промоция с
+                            намаление</Link>
 
-					<Tab eventKey={1}
-					     title='Продуктови промоции'>
 
-						<Table striped bordered condensed hover>
-							<TableHead promoType={promoType}/>
-							<tbody>
-							{productPromosList}
-							</tbody>
-						</Table>
-					</Tab>
+                        <Table striped bordered condensed hover>
+                            <TableHead promoType={promoType}/>
+                            <tbody>
+                            {discountPromosList}
+                            </tbody>
+                        </Table>
+                    </Tab>
 
-				</Tabs>
+                    <Tab eventKey={1}
+                         title='Продуктови'>
 
-			</Grid>
-		);
-	}
+                        <Link to="/promos/create-product-promo" className="btn btn-sm btn-primary">Нова Промоция с
+                            продукти</Link>
+
+
+                        <Table striped bordered condensed hover>
+                            <TableHead promoType={promoType}/>
+                            <tbody>
+                            {productPromosList}
+                            </tbody>
+                        </Table>
+                    </Tab>
+
+                </Tabs>
+
+            </Grid>
+        );
+    }
 }
 
 export default PromoList;

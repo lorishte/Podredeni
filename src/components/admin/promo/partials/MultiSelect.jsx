@@ -19,6 +19,8 @@ class MultiSelect extends React.Component {
 
             options = allProducts.map(e => {
 
+                console.log(e)
+
                 let imageIndex = e.images.length - 1;
 
                 let url = e.images[imageIndex];

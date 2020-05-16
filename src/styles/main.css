@@ -44,7 +44,6 @@ h1, h2, h3 {
 
 h3 {
   font-size: 2em;
-  color: #ccc;
   text-transform: uppercase;
   font-weight: 300; }
 
@@ -162,7 +161,6 @@ input[type=checkbox], input[type=radio] {
   outline: none; }
 
 .table-sorting-buttons {
-  margin-left: 15px;
   display: inline-block;
   margin-right: 0; }
   .table-sorting-buttons .btn {

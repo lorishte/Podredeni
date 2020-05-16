@@ -11,13 +11,20 @@ class ProductTableRow extends React.Component {
 	render () {
 
 		let p = this.props.data;
+
+		console.log(p)
+
+		let url = p.images[p.images.length - 1]
+		if (!url.includes('http')) url = '/images/products/' + url;
+
 		return (
 			<tr className="text-center">
 				<td>
 					{p.number}
 				</td>
 				<td className="text-left">
-					{p.name}
+					<img src={url} className={'image-thumbnail-small'}/>
+					<span className={'hidden-xs'}>{p.name}</span>
 				</td>
 				<td className="text-right">
 					<p className="price"> {p.price.toFixed(2)}</p>

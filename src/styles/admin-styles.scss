@@ -8,6 +8,26 @@
   border-top: none;
 }
 
+.table {
+  margin: 20px 0;
+}
+
+.image-thumbnail {
+  height: 80px;
+  width: auto;
+}
+
+.image-thumbnail-small {
+  width: auto;
+  max-height: 40px;
+}
+
+// When sorting table
+.partner-image-thumbnail {
+  width: auto;
+  max-height: 20px;
+}
+
 // Admin: Create - Edit product
 #create-edit-product {
 
@@ -25,10 +45,7 @@
     display: inline-block;
     margin: 0 20px 10px 0;
 
-    .image-thumbnail {
-      height: 80px;
-      width: auto;
-    }
+
 
     .deleteImgBtn {
       position: absolute;
@@ -54,6 +71,13 @@
     }
   }
 
+}
+
+//Admin: Products
+#admin-products-table {
+  .image-thumbnail-small {
+    margin-right: 8px;
+  }
 }
 
 //Admin: Orders
@@ -185,7 +209,8 @@
     font-size: .8em;
     padding: 8px 5px 8px 70px;
     margin: 0 5px 5px 0;
-    background-color: $white;
+    //background-color: $white;
+    background-color: $warm-light-grey;
   }
 
   .selected {
@@ -245,7 +270,6 @@
     }
 
     .image-thumbnail {
-      width: auto;
       max-height: 20px;
     }
   }
@@ -260,10 +284,7 @@
   border: 1px solid $light-grey;
 }
 
-.image-thumbnail-small {
-  width: auto;
-  max-height: 40px;
-}
+
 
 #reorder-products {
   h3 {
@@ -271,11 +292,7 @@
   }
 }
 
-// When sorting table
-.partner-image-thumbnail {
-  width: auto;
-  max-height: 20px;
-}
+
 
 // Carousel
 
