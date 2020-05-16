@@ -183,7 +183,8 @@ class ProductsListByCategory extends React.Component {
 					<span className={checked}>
 						<i className="fa fa-check" aria-hidden="true"/>
 					</span>
-                    <span className='name'>{sc.name} <span className='label'>{sc.count}</span></span>
+                    <span className='name'>{sc.name} </span>
+                    <span className='label'>{sc.count}</span>
                     <span className="over"
                           id={sc.id}
                           onClick={this.selectFilterCategory}/>
