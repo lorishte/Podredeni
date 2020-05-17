@@ -361,8 +361,6 @@ nav {
       width: 15%;
       min-width: 150px;
       z-index: 100; }
-    #home #home-main-carousel .carousel .carousel-inner .carousel-img {
-      filter: brightness(80%); }
     #home #home-main-carousel .carousel .carousel-caption {
       position: absolute;
       bottom: 10%;

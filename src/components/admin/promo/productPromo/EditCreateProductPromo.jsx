@@ -137,10 +137,13 @@ class EditCreateProductPromo extends React.Component {
     };
 
     addDiscountedProduct = (e) => {
+
+        console.log(e)
         this.setState({newDiscountedProducts: e});
     };
 
     addProduct = (e) => {
+        console.log(222, e)
         this.setState({newProducts: e});
     };
 

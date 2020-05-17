@@ -202,6 +202,17 @@
     margin-top: 35px;
   }
 
+  .header {
+    display: flex;
+    justify-content: space-between;
+
+    .btn {
+      margin-right: 0;
+    }
+  }
+
+
+
   .product-tab {
     position: relative;
     height: 68px;
@@ -211,12 +222,16 @@
     margin: 0 5px 5px 0;
     //background-color: $white;
     background-color: $warm-light-grey;
+
+    &:hover {
+      cursor: pointer;
+    }
   }
 
   .selected {
     //border: 1px solid $admin-primary;
-    background-color: $danger;
-    color: $white;
+    //background-color: $danger;
+    background-color: $selected;
   }
 
   .image-thumbnail {

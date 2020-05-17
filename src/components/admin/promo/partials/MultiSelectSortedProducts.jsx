@@ -1,12 +1,63 @@
 import React from 'react';
 
 import {Checkbox, CheckboxGroup} from 'react-checkbox-group';
-import {Col} from 'react-bootstrap';
+import {Col, ButtonGroup, Button} from 'react-bootstrap';
 
 
 class MultiSelectSortedProducts extends React.Component {
     constructor(props) {
         super(props);
+    }
+
+    selectCategory = (e) => {
+        e.preventDefault()
+
+        let catId = e.target.name;
+
+        let products = this.props.allProducts[catId].products;
+
+        let selectedProducts = this.props.selectedProductsIds;
+
+        products.map(e => {
+            if (!selectedProducts.includes(e.id)) {
+                selectedProducts.push(e.id)
+            }
+        })
+
+        this.props.onChange(selectedProducts)
+    }
+
+    deselectCategory = (e) => {
+        e.preventDefault()
+        let catId = e.target.name;
+
+        let products = this.props.allProducts[catId].products;
+
+        let selectedProducts = this.props.selectedProductsIds;
+
+        products.map(e => {
+            if (selectedProducts.includes(e.id)) {
+
+                let eIndex = selectedProducts.indexOf(e.id)
+                selectedProducts.splice(eIndex, 1)
+            }
+        })
+
+        this.props.onChange(selectedProducts)
+    }
+
+    checkProductGroup = (categoryId) => {
+        let products = this.props.allProducts[categoryId].products;
+        let selectedProducts = this.props.selectedProductsIds;
+        let allSelected = true;
+
+        products.forEach(p => {
+            if (!selectedProducts.includes(p.id)) {
+                allSelected = false;
+            }
+        })
+
+        return allSelected
     }
 
     render() {
@@ -23,6 +74,25 @@ class MultiSelectSortedProducts extends React.Component {
 
                 let products = allProducts[catId].products;
 
+                let allProductsSelected = this.checkProductGroup(catId)
+
+                let style = allProductsSelected ? 'default' : 'info'
+                let btnText = allProductsSelected ? 'Deselect All' : 'Select All'
+
+                options.push(
+                    <Col xs={12} key={catId} className={'header'}>
+
+                        <h4>{allProducts[catId].name}</h4>
+                        <ButtonGroup bsSize="xsmall">
+                            <Button bsStyle={style}
+                                    name={catId}
+                                    onClick={allProductsSelected ? this.deselectCategory : this.selectCategory}>{btnText}
+                            </Button>
+                        </ButtonGroup>
+                    </Col>
+                )
+
+
                 products.map(p => {
 
                     let imageIndex = p.images.length - 1;
@@ -37,23 +107,12 @@ class MultiSelectSortedProducts extends React.Component {
                         style += ' selected';
                     }
 
-                    if (products.indexOf(p) === 0) {
-                        options.push(
-                            <Col xs={12} key={catId}>
-                                <h4>{allProducts[catId].name}</h4>
-                                {/*<hr/>*/}
-                            </Col>
-
-                        )
-                    }
-
-
                     options.push(
                         <label key={p.id} className='col-xs-12 col-sm-4 col-md-3 '>
                             <p className={style}>
                                 <Checkbox value={p.id} hidden/>
                                 <img className="image-thumbnail" src={url}/>
-                                {p.name}
+                                <span className={''}>{p.name}</span>
                             </p>
                         </label>
                     )

@@ -24,7 +24,7 @@ class PromoList extends React.Component {
         this.state = {
             discountPromos: [],
             productPromos: [],
-            key: 1
+            key: 0
         };
     }
 

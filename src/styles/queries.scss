@@ -542,6 +542,11 @@
     }
   }
 
+  #create-edit-promo {
+    .header {
+      flex-direction: column;
+    }
+  }
 
   #cart {
 

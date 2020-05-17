@@ -332,6 +332,9 @@
     padding: 5px 5px;
     font-size: 1em; }
 
+  #create-edit-promo .header {
+    flex-direction: column; }
+
   #cart .panel {
     padding: 0; }
   #cart .tabs .tab {
