@@ -13,13 +13,19 @@ class PartnersTableRow extends React.Component {
 
         let p = this.props.data;
 
+        let url = p.logoUrl;
+
+        if (!url.includes('http')) url = '/images/partners/' + url;
+
+        console.log(url)
+
         return (
             <tr className="text-center">
                 <td>
                     {p.name}
                 </td>
                 <td>
-                    <img className="image-thumbnail" src={p.logoUrl}  />
+                    <img className="image-thumbnail" src={url} />
                 </td>
                 <td>
                     <a href={p.webUrl} target="blank">

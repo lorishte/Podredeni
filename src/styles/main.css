@@ -132,11 +132,9 @@ input[type=checkbox], input[type=radio] {
     .btn-custom.default:hover, .btn-custom.default:active {
       background-color: #615540; }
   .btn-custom.light {
-    color: #ffffff;
-    background-color: transparent; }
+    background-color: #ffffff; }
     .btn-custom.light:hover, .btn-custom.light:active {
-      color: #b49543;
-      background-color: #ffffff; }
+      background-color: #e6e6e6; }
   .btn-custom:hover {
     cursor: pointer; }
   .btn-custom.xs {
@@ -361,6 +359,8 @@ nav {
       width: 15%;
       min-width: 150px;
       z-index: 100; }
+    #home #home-main-carousel .carousel .carousel-inner .carousel-img {
+      filter: brightness(80%); }
     #home #home-main-carousel .carousel .carousel-caption {
       position: absolute;
       bottom: 10%;
@@ -384,10 +384,12 @@ nav {
         margin-top: 2em;
         text-transform: uppercase;
         border: 2px solid #ffffff;
+        background-color: transparent;
         font-weight: 500;
         padding: 10px 30px; }
         #home #home-main-carousel .carousel .carousel-caption .btn:hover {
-          color: #000; }
+          color: #000;
+          background-color: #ffffff; }
   #home #top-sellers {
     padding-bottom: 30px; }
     #home #top-sellers .top-sellers-carousel {
@@ -428,7 +430,8 @@ nav {
           cursor: pointer;
           color: #b49543; }
   #home #home-about {
-    text-align: center; }
+    text-align: center;
+    padding-bottom: 3em; }
     #home #home-about .section-heading {
       padding: 2em 0 .5em 0;
       letter-spacing: 0; }
@@ -1050,44 +1053,29 @@ nav {
 #partners .partner-card {
   background-color: #ffffff;
   padding: 15px;
-  margin-bottom: 35px;
-  border-radius: 6px; }
-  #partners .partner-card .image-container {
-    display: -webkit-box;
-    display: -webkit-flex;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-align: center;
-    -moz-box-align: center;
-    -ms-flex-align: center;
-    -webkit-align-items: center;
-    align-items: center;
-    margin-bottom: 15px;
-    width: 100%;
-    height: 120px;
-    background-color: #ffffff;
-    overflow: hidden; }
-    #partners .partner-card .image-container .img-thumbnail {
-      border: none;
-      height: auto;
-      width: 60%;
-      -webkit-box-shadow: none;
-      box-shadow: none; }
+  margin-bottom: 2em;
+  border-radius: 6px;
+  text-align: center;
+  border: 1px solid #e6e6e6; }
+  #partners .partner-card .img-thumbnail {
+    margin-bottom: 1em;
+    border: none; }
   #partners .partner-card .partner-name {
     font-size: 1.2em;
-    margin-bottom: 0; }
+    margin-bottom: 0;
+    line-height: 1.35; }
   #partners .partner-card .category {
     font-size: .9em;
     font-style: italic;
-    color: #c6c6c6;
+    color: #00bcd4;
     margin-top: 5px; }
   #partners .partner-card .partner-address {
     font-size: .9em;
     line-height: 1.3em; }
   #partners .partner-card hr {
-    width: 5%;
-    margin: 0 0 8px 0;
-    border-top: 2px solid #e6e6e6; }
+    width: 10%;
+    margin: 0 auto 8px auto;
+    border-top: 1px solid #c6c6c6; }
 
 #cart .panel {
   position: relative;

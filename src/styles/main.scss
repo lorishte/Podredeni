@@ -184,13 +184,11 @@ input[type=checkbox], input[type=radio] {
   }
 
   &.light {
-    color: $white;
-    background-color: transparent;
+    background-color: $white;
 
     &:hover,
     &:active {
-      color: $primary;
-      background-color: $white;
+      background-color: $light-grey;
     }
   }
 
@@ -439,7 +437,7 @@ nav {
 
       .carousel-inner {
         .carousel-img {
-          //filter: brightness(100%);
+          filter: brightness(80%);
         }
       }
 
@@ -475,11 +473,13 @@ nav {
           margin-top: 2em;
           text-transform: uppercase;
           border: 2px solid $white;
+          background-color: transparent;
           font-weight: 500;
           padding: 10px 30px;
 
           &:hover {
             color: $black;
+            background-color: $white;
           }
         }
       }
@@ -532,6 +532,7 @@ nav {
   #home-about {
 
     text-align: center;
+    padding-bottom: 3em;
 
     .section-heading {
       padding: 2em 0 .5em 0;
@@ -1246,41 +1247,27 @@ nav {
   .partner-card {
     background-color: $white;
     padding: 15px;
-    margin-bottom: 35px;
+    margin-bottom: 2em;
     border-radius: 6px;
+    text-align: center;
+    border: 1px solid $light-grey;
 
-    .image-container {
-      @include flex;
-      @include align-items(center);
-      margin-bottom: 15px;
-      width: 100%;
-      height: 120px;
-      background-color: $white;
-      //border: 1px solid $light-grey;
-
-      overflow: hidden;
-
-      .img-thumbnail {
-        //padding: 8px;
-
-        border: none;
-        height: auto;
-        width: 60%;
-
-        -webkit-box-shadow: none;
-        box-shadow: none;
-      }
+    .img-thumbnail {
+      margin-bottom: 1em;
+      border: none;
     }
 
     .partner-name {
       font-size: 1.2em;
       margin-bottom: 0;
+      line-height: 1.35;
     }
 
     .category {
       font-size: .9em;
       font-style: italic;
-      color: $medium-grey;
+      //color: $dark-grey;
+      color: $info-hover;
       margin-top: 5px;
     }
 
@@ -1290,9 +1277,10 @@ nav {
     }
 
     hr {
-      width: 5%;
-      margin: 0 0 8px 0;
-      border-top: 2px solid $light-grey;
+      width: 10%;
+      margin: 0 auto 8px auto;
+      border-top: 1px solid $medium-grey;
+      //color: $medium-grey;
     }
   }
 

@@ -46,7 +46,7 @@ class ImageGallery extends React.Component {
 
 			let url = imageName;
 
-			if (!url.includes('http')) url = '/images/products/' + imageName;
+			if (!url.includes('http')) url = '/images/products/' + url;
 
 			return (
 				<Image key={i}

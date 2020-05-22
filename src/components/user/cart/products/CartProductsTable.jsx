@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Col, FormControl, ControlLabel, FormGroup, InputGroup, Button } from 'react-bootstrap';
+import {Col, FormControl, ControlLabel, FormGroup, InputGroup, Button, Grid} from 'react-bootstrap';
 import { confirmAlert } from 'react-confirm-alert';
 
 // Partials
@@ -21,6 +21,7 @@ import {
 
 // Helpers
 import utils from '../../../../utils/utils';
+import {ToastContainer} from "react-toastr";
 
 class CartProductsTable extends React.Component {
 	constructor (props) {
@@ -118,11 +119,11 @@ class CartProductsTable extends React.Component {
 
 	checkPromotion = () => {
 		if (this.state.promoCode.trim().length === 0) {
-			this.props.toastContainer.warning(TOASTR_MESSAGES.enterPromoCode);
+			this.toastContainer.warning(TOASTR_MESSAGES.enterPromoCode);
 			return;
 		}
 
-		this.props.toastContainer.warning(TOASTR_MESSAGES.validatingPromo);
+		this.toastContainer.warning(TOASTR_MESSAGES.validatingPromo);
 		this.props.checkPromotion(this.state.promoCode);
 		this.setState({promoCode: ''});
 	};
@@ -148,6 +149,12 @@ class CartProductsTable extends React.Component {
 
 		return (
 			<div>
+
+				<ToastContainer
+					ref={ref => this.toastContainer = ref}
+					className="toast-bottom-right"
+				/>
+
 				<Col id="cart-products-table">
 					<CartTableHeader resolution={resolution}/>
 

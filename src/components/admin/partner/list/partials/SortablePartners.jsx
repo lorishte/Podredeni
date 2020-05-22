@@ -16,7 +16,7 @@ const SortableItem = SortableElement(({itemIndex, value, confirmDeletePartner}) 
 			{value.name}
 		</td>
 		<td className="padding">
-			<img className="partner-image-thumbnail" src={value.logoUrl}/>
+			<img className="partner-image-thumbnail" src={'/images/partners/'+value.logoUrl}/>
 		</td>
 		<td className="padding">
 			<a href={value.webUrl} target="blank" className="text-sm">

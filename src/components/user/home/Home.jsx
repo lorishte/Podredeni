@@ -6,6 +6,7 @@ import TopSellers from './partials/topSellers/TopSellers';
 import Testimonials from './partials/testimonials/Testimonials';
 import News from './partials/news/News';
 import About from './partials/about/About'
+import Promotions from "./partials/promotions/Promotions";
 
 
 class Home extends React.Component {
@@ -25,6 +26,8 @@ class Home extends React.Component {
 				<ControlledCarousel />
 
 				<TopSellers/>
+
+				{/*<Promotions/>*/}
 
 				<About/>
 

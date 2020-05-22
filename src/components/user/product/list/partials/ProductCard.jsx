@@ -66,7 +66,7 @@ class ProductCard extends React.Component {
 
 		let url = product.images[0];
 
-		if (!url.includes('http')) url = '/images/products/' + product.images[0];
+		if (!url.includes('http')) url = '/images/products/' + url;
 
 		return (
 			<Col xs={this.state.xsRes} sm={6} md={size === 'smaller' ? 3 : 4}>

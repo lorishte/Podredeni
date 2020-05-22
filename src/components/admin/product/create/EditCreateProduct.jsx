@@ -215,7 +215,7 @@ class CreateProduct extends React.Component {
 
 			let url = e;
 
-			if (!url.includes('http')) url = '/images/products/' + e;
+			if (!url.includes('http')) url = '/images/products/' + url;
 
 			return (
 				<div className="image-container" key={i}>

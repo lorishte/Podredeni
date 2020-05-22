@@ -149,7 +149,7 @@ class Header extends React.Component {
 
                 <div className="social-media-icons hidden-xs">
                     <a className="icon" target="_blank" rel="noopener noreferrer"
-                       href="https://www.facebook.com/moiteochila/">
+                       href="https://www.facebook.com/VakanciaSportOchila/">
                         <i className="fa fa-facebook-official" aria-hidden="true"/>
                     </a>
                     <a className="icon" target="_blank" rel="noopener noreferrer"

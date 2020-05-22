@@ -165,7 +165,7 @@ class EditCreatePartner extends React.Component {
 							<FormInputField
 								label={PARTNERS.logoUrl}
 								name="logoUrl"
-								type="url"
+								type="text"
 								value={this.state.logoUrl}
 								required={false}
 								disabled={false}

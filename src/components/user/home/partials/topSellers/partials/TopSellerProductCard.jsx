@@ -18,7 +18,7 @@ class TopSellerProductCard extends React.Component {
 
 		let url = p.images[0];
 
-		if (!url.includes('http')) url = '/images/products/' + p.images[0];
+		if (!url.includes('http')) url = '/images/products/' + url;
 
 		return (
 

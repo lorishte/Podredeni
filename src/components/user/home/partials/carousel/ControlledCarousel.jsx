@@ -37,21 +37,21 @@ class ControlledCarousel extends React.Component {
 
     loadCarouselItems = () => {
 
-        this.setState({carouselItems: sliders});
+        // this.setState({carouselItems: sliders});
 
-        // miscDataService
-        //     .loadMiscData('homeSliders')
-        //     .then(res => {
-        //
-        //         let data = JSON.parse(res).filter(e => e.isVisible);
-        //
-        //         this.setState({
-        //             carouselItems: sliders
-        //         })
-        //     })
-        //     .catch(err => {
-        //         console.log(err);
-        //     });
+        miscDataService
+            .loadMiscData('homeSliders')
+            .then(res => {
+
+                let data = JSON.parse(res).filter(e => e.isVisible);
+
+                this.setState({
+                    carouselItems: data
+                })
+            })
+            .catch(err => {
+                console.log(err);
+            });
 
         // homeContentService
         //     .loadCarouselItems()
@@ -103,11 +103,10 @@ class ControlledCarousel extends React.Component {
             let item = this.state.carouselItems[i];
 
             let url = 'images/slider/' + item.imageUrl;
-            let brightnessValue = 'brightness(' + item.brightness + '%)'
 
             items.push(
                 <Carousel.Item key={item._id}>
-                    <img style={{filter: brightnessValue}} src={url} alt={item.imageUrl}/>
+                    <img className={'carousel-img'} src={url} alt={item.imageUrl}/>
                     <Carousel.Caption>
                         <h3 className="carousel-heading">{item.heading}</h3>
                         {window.innerWidth > 550 &&
