@@ -15,7 +15,7 @@ class PartnersTableRow extends React.Component {
 
         let url = p.logoUrl;
 
-        if (!url.includes('http')) url = '/images/partners/' + url;
+        if (url && !url.includes('http')) url = '/images/partners/' + url;
 
         console.log(url)
 

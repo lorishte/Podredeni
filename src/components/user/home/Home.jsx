@@ -1,5 +1,8 @@
 import React from 'react';
 
+// SEO
+import SEO_MetaTags from '../../common/SEO/SEO_MetaTags'
+
 // Partials
 import ControlledCarousel from './partials/carousel/ControlledCarousel';
 import TopSellers from './partials/topSellers/TopSellers';
@@ -20,8 +23,12 @@ class Home extends React.Component {
 
 	render () {
 
+		let urlPath = this.props.location.pathname;
+
 		return (
 			<div id="home">
+
+				<SEO_MetaTags activeLanguage={'bg'} pageName={'home'} url={urlPath}/>
 
 				<ControlledCarousel />
 

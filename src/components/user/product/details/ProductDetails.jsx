@@ -1,16 +1,24 @@
 import React from 'react';
-
 import { Grid, Row, Col } from 'react-bootstrap';
 import { ToastContainer } from 'react-toastr';
 
+//SEO
+import SEO_MetaTags_Dynamic from "../../../common/SEO/SEO_MetaTags_Dynamic";
+
+// Partials
 import ImageGallery from './partials/ImageGallery';
 import ProductInfo from './partials/ProductInfo';
 import AddToCartForm from './partials/AddToCartForm';
 import ProductTabs from './partials/ProductTabs';
 
+// Services
 import productsService from '../../../../services/products/productsService';
 
+// Constants
 import { RESOLUTIONS, TOASTR_MESSAGES, BUTTONS_BG } from '../../../../data/constants/componentConstants';
+
+// Utils
+import utils from '../../../../utils/utils'
 
 class Product extends React.Component {
 	constructor (props) {
@@ -21,6 +29,8 @@ class Product extends React.Component {
 			quantity: 0,
 			resolution: window.innerWidth
 		};
+
+		// this.productId = utils.sefUrls[this.props.match.params.categoryName]
 	}
 
 	componentDidMount () {
@@ -37,7 +47,10 @@ class Product extends React.Component {
 	}
 
 	loadProductData = () => {
-		let id = this.props.match.params.id;
+
+		console.log(this.props.match.params)
+
+		let id = this.props.match.params.productId;
 		productsService
 			.getProduct(id)
 			.then(res => {
@@ -99,8 +112,13 @@ class Product extends React.Component {
 		let product = this.state.product;
 		let resolution = this.state.resolution < RESOLUTIONS.xs;
 
+		let urlPath = this.props.location.pathname;
+
 		return (
 			<Grid id="product">
+
+				<SEO_MetaTags_Dynamic activeLanguage={'bg'} pageName={'product'} productName={product.name} url={urlPath} />
+
 				<ToastContainer
 					ref={ref => this.toastContainer = ref}
 					className="toast-bottom-right"

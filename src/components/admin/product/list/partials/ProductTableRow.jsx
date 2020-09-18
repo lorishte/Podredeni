@@ -12,10 +12,9 @@ class ProductTableRow extends React.Component {
 
 		let p = this.props.data;
 
-		console.log(p)
-
 		let url = p.images[p.images.length - 1]
-		if (!url.includes('http')) url = '/images/products/' + url;
+
+		if (url && !url.includes('http')) url = '/images/products/' + url;
 
 		return (
 			<tr className="text-center">

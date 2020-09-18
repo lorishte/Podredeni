@@ -155,7 +155,7 @@ class ValidPromo extends React.Component {
 
                     let url = p.image;
 
-                    if (!url.includes('http')) url = '/images/products/' + url;
+                    if (url && !url.includes('http')) url = '/images/products/' + url;
 
                     return (
                         <div key={p.id} className="present">

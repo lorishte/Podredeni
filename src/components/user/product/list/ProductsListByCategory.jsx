@@ -3,6 +3,9 @@ import {Link} from 'react-router-dom';
 import {Col, Row, Grid, Breadcrumb, Accordion, Button} from 'react-bootstrap';
 import {ToastContainer} from 'react-toastr';
 
+// SEO
+import SEO_MetaTags from '../../../common/SEO/SEO_MetaTags'
+
 // Partials
 import ProductCard from './partials/ProductCard';
 
@@ -12,6 +15,9 @@ import categoryService from '../../../../services/categories/categoryService';
 
 // Constants
 import {RESOLUTIONS, PRODUCT} from '../../../../data/constants/componentConstants';
+
+// Utils
+import utils from '../../../../utils/utils'
 
 class ProductsListByCategory extends React.Component {
     constructor(props) {
@@ -40,6 +46,10 @@ class ProductsListByCategory extends React.Component {
 
             filterOpen: false
         };
+
+        // this.catId = this.props.match.params.id;
+
+        this.catId = utils.sefUrls[this.props.match.params.categoryName];
     }
 
     componentDidMount() {
@@ -76,13 +86,13 @@ class ProductsListByCategory extends React.Component {
     };
 
     loadNestedCategories = () => {
+        console.log(222)
+
         categoryService
             .loadNestedCategories(null, 1000)
             .then(res => {
 
-                let catId = this.props.match.params.id;
-
-                let selectedCategory = res.filter(c => c.id === catId)[0];
+                let selectedCategory = res.filter(c => c.id === this.catId)[0];
 
                 // Reverse images to get the first
                 selectedCategory.products.forEach(p => p.images.reverse());
@@ -192,9 +202,14 @@ class ProductsListByCategory extends React.Component {
             );
         });
 
+        let urlPath = this.props.location.pathname;
+
+
         return (
 
             <Grid id="products" bsClass={'container-fluid'}>
+
+                <SEO_MetaTags activeLanguage={'bg'} pageName={this.catId} url={urlPath}/>
 
                 <ToastContainer
                     ref={ref => this.toastContainer = ref}
@@ -205,9 +220,7 @@ class ProductsListByCategory extends React.Component {
 
                     <Breadcrumb>
                         <Breadcrumb.Item href="/">Начало</Breadcrumb.Item>
-                        <Breadcrumb.Item href="/products">
-                            Продукти
-                        </Breadcrumb.Item>
+                        <Breadcrumb.Item href="/products">Продукти</Breadcrumb.Item>
                         <Breadcrumb.Item active>{this.state.categoryName}</Breadcrumb.Item>
                     </Breadcrumb>
 

@@ -78,9 +78,13 @@ let Routes = () => {
 			<Route path='/register' component={NotFound}/>
 
 			<Route exact path='/products' component={ProductsListNew}/>
-			<Route path='/products/:id' component={ProductDetails}/>
+			<Route exact path='/products/:categoryName' component={ProductsListByCategory}/>
+			<Route path='/products/:categoryName/:productId' component={ProductDetails}/>
+			{/*<Route path='/products/:id' component={ProductDetails}/>*/}
 			
-			<Route path='/products-by-category/:id' component={ProductsListByCategory}/>
+			{/*<Route path='/products-by-category/:id' component={ProductsListByCategory}/>*/}
+
+
 
 			<Route exact path='/news/create' component={NewsCreate}/>
 			<Route exact path='/news/list' component={NewsList}/>

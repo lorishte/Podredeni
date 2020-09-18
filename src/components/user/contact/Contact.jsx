@@ -1,13 +1,18 @@
 import React from 'react';
 import { ToastContainer } from 'react-toastr';
+import { Grid, Row, Col, FormGroup } from 'react-bootstrap';
 
-import { Grid, Row, Col, FormGroup, FormControl, ControlLabel } from 'react-bootstrap';
+// SEO
+import SEO_MetaTags from '../../common/SEO/SEO_MetaTags'
 
+// Partials
 import FormInputField from '../../common/formComponents/FormInputField';
 import FormTextareaField from '../../common/formComponents/FormTextareaField';
 
+// Services
 import contactService from '../../../services/contact/contactService';
 
+// Constants
 import { TOASTR_MESSAGES, CONTACT_FORM, BUTTONS_BG, RESOLUTIONS } from '../../../data/constants/componentConstants';
 
 class Contact extends React.Component {
@@ -100,9 +105,14 @@ class Contact extends React.Component {
 
 		let resolution = this.state.resolution < RESOLUTIONS.xs;
 
+		let urlPath = this.props.location.pathname;
+
 		return (
 
 			<Grid >
+
+				<SEO_MetaTags activeLanguage={'bg'} pageName={'contact'} url={urlPath}/>
+
 				<ToastContainer
 					ref={ref => this.toastContainer = ref}
 					className="toast-bottom-right"

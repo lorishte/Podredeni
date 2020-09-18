@@ -1,14 +1,16 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { withRouter } from 'react-router-dom';
-
 import { Col } from 'react-bootstrap';
 import PropTypes from 'prop-types';
 
+
+// Constants
+import { TOASTR_MESSAGES, CURRENCY } from '../../../../../data/constants/componentConstants';
+
+// Utils
 import utils from '../../../../../utils/utils';
 
-import { TOASTR_MESSAGES, CURRENCY } from '../../../../../data/constants/componentConstants';
-import FormTextareaField from '../../../../common/formComponents/FormTextareaField';
 
 class ProductCard extends React.Component {
 	constructor (props) {
@@ -66,7 +68,10 @@ class ProductCard extends React.Component {
 
 		let url = product.images[0];
 
-		if (!url.includes('http')) url = '/images/products/' + url;
+		if (url && !url.includes('http')) url = '/images/products/' + url;
+
+		let categoryName = utils.generateRouteName(product.categories[0].name)
+
 
 		return (
 			<Col xs={this.state.xsRes} sm={6} md={size === 'smaller' ? 3 : 4}>
@@ -79,10 +84,10 @@ class ProductCard extends React.Component {
 
 					{product.isNewProduct && <span className={'new-label'}>НОВО!</span>}
 
+
 					<div className="product-image">
 						<img className="card-img-top" src={url} alt={url}/>
 					</div>
-
 
 					<div className="card-body">
 						<h4 className="card-title">{product.name}</h4>
@@ -102,7 +107,7 @@ class ProductCard extends React.Component {
 							<i className="fa fa-shopping-cart" aria-hidden="true"/>
 						</button>
 
-						<Link to={'/products/' + product.id} className="add-to-cart-btn">
+						<Link to={'/products/' + categoryName + '/' + product.id} className="add-to-cart-btn">
 							<i className="fa fa-search" aria-hidden="true"/>
 						</Link>
 

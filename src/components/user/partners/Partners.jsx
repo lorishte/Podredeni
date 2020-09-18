@@ -1,13 +1,17 @@
 import React from 'react';
-
 import {Grid, Col, Clearfix, Panel, PanelGroup} from 'react-bootstrap';
-
 import {ToastContainer} from 'react-toastr';
 
+// SEO
+import SEO_MetaTags from '../../common/SEO/SEO_MetaTags'
+
+// Services
 import partnersService from '../../../services/partners/partnersService';
 
+// Partials
 import PartnerCard from './partials/PartnerCard';
 
+// Constants
 import {RESOLUTIONS} from '../../../data/constants/componentConstants';
 
 class Partners extends React.Component {
@@ -137,9 +141,14 @@ class Partners extends React.Component {
             });
         }
 
+        let urlPath = this.props.location.pathname;
+
 
         return (
             <Grid id="partners">
+
+                <SEO_MetaTags activeLanguage={'bg'} pageName={'partners'} url={urlPath}/>
+
                 <ToastContainer
                     ref={ref => this.toastContainer = ref}
                     className="toast-bottom-right"

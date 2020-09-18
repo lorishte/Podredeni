@@ -3,6 +3,9 @@ import { Link } from 'react-router-dom';
 import { Col, Row, Grid } from 'react-bootstrap';
 import { ToastContainer } from 'react-toastr';
 
+// SEO
+import SEO_MetaTags from '../../../common/SEO/SEO_MetaTags'
+
 // Partials
 import ProductCard from './partials/ProductCard';
 
@@ -11,6 +14,9 @@ import categoryService from '../../../../services/categories/categoryService';
 
 // Constants
 import { RESOLUTIONS, BUTTONS_BG } from '../../../../data/constants/componentConstants';
+
+// Utils
+import utils from '../../../../utils/utils'
 
 class ProductsListNew extends React.Component {
 	constructor (props) {
@@ -87,11 +93,13 @@ class ProductsListNew extends React.Component {
 					                    xsRes={resolution ? 12 : 6}/>;
 				});
 
+				let url = utils.generateRouteName(cat.name)
+
 				return <Col xs={12} key={cat.id}>
 
 					<div className='header'>
-						<Link to={'/products-by-category/' + cat.id} className=''><h2>{cat.name}</h2></Link>
-						<Link to={'/products-by-category/' + cat.id} className='btn btn-custom primary sm'>{BUTTONS_BG.goToCategory} </Link>
+						<Link to={'/products/' + url} className=''><h2>{cat.name}</h2></Link>
+						<Link to={'/products/' + url} className='btn btn-custom primary sm'>{BUTTONS_BG.goToCategory} </Link>
 					</div>
 
 					<Row>{products}</Row>
@@ -100,8 +108,14 @@ class ProductsListNew extends React.Component {
 
 		});
 
+		let urlPath = this.props.location.pathname;
+
+
 		return (
+
 			<Grid id="products" bsClass={'container'}>
+
+				<SEO_MetaTags activeLanguage={'bg'} pageName={'products'} url={urlPath}/>
 
 				<ToastContainer
 					ref={ref => this.toastContainer = ref}

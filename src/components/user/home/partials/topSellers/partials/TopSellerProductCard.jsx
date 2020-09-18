@@ -15,14 +15,25 @@ class TopSellerProductCard extends React.Component {
 
 		const p = this.props.data;
 
-
 		let url = p.images[0];
 
-		if (!url.includes('http')) url = '/images/products/' + url;
+		if (url && !url.includes('http')) url = '/images/products/' + url;
+
+		let categoryName = utils.generateRouteName(p.categories[0].name)
+
+		let productName= utils.generateRouteName(p.name)
+
+		// let route = categoryName + '/' + productName
+
+		let route = categoryName + '/' + p.id
+
+
+		console.log(route)
+
 
 		return (
 
-				<Link to={'/products/' + p.id}>
+				<Link to={'/products/' + route}>
 					<div className="top-seller-card" style={{width: this.props.width - 50 + 'px'}}>
 						{p.discount > 0 &&
 							<span className="promo-label">-{p.discount}%</span>

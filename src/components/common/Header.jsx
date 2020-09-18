@@ -160,15 +160,41 @@ class Header extends React.Component {
 
                 <div id="user-nav" className="collapse navbar-collapse">
 
-                    <ul className="nav navbar-nav navbar-right" onClick={this.hideMenu}>
+                    <div className="nav navbar-nav" onClick={this.hideMenu}>
 
                         <NavLink to="/home" activeClassName="active" className='nav-link'>
                             Начало
                         </NavLink>
 
-                        <NavLink to="/products" activeClassName="active" className='nav-link'>
-                            Продукти
-                        </NavLink>
+
+                        <NavDropdown eventKey={3} title="Продукти"
+                                     id="basic-nav-dropdown"
+                                     className=''>
+
+                            <MenuItem href="/products/aksesoari_i_ochila" className='sub-menu nav-link'>
+                                Магнитни клипсове ReadeRest
+                            </MenuItem>
+
+
+                            <MenuItem href="/products/vakantsiya_i_sport" className='sub-menu nav-link'>
+                                Бързосъхнещи кърпи Dock&Bay
+                            </MenuItem>
+
+
+                            <MenuItem href="/products/smart_kuhnenski_uredi" className='sub-menu nav-link'>
+                                Смарт домакински уреди
+                            </MenuItem>
+
+
+                            <MenuItem divider/>
+
+
+                            <MenuItem href="/products" className='sub-menu nav-link'>
+                                Всички категории
+                            </MenuItem>
+
+                        </NavDropdown>
+
 
                         <NavLink to="/news/list" activeClassName="active" className='nav-link'>
                             Новини
@@ -201,11 +227,11 @@ class Header extends React.Component {
 
                         <div className="social-media-icons visible-xs">
                             <a className="icon" target="_blank" rel="noopener noreferrer"
-                               href="https://www.facebook.com/moiteochila/">
+                               href="https://www.facebook.com/VakanciaSportOchila/">
                                 <i className="fa fa-facebook-official" aria-hidden="true"/>
                             </a>
                         </div>
-                    </ul>
+                    </div>
                 </div>
 
                 <div className="cart-xs">

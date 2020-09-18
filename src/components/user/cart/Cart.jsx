@@ -4,6 +4,9 @@ import {Grid, Row, Col, Label, Panel} from 'react-bootstrap';
 import {ToastContainer} from 'react-toastr';
 import {confirmAlert} from 'react-confirm-alert';
 
+// SEO
+import SEO_MetaTags from '../../common/SEO/SEO_MetaTags'
+
 // Partials
 import CartProductsTable from './products/CartProductsTable';
 import ValidPromo from './products/ValidPromo';
@@ -278,6 +281,8 @@ class Cart extends React.Component {
 
         return (
             <Grid id="cart">
+
+                <SEO_MetaTags activeLanguage={'bg'} pageName={'cart'} url={''}/>
 
                 <ToastContainer
                     ref={ref => this.toastContainer = ref}

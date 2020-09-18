@@ -23,7 +23,7 @@ class MultiSelect extends React.Component {
 
                 let url = e.images[imageIndex];
 
-                if (!url.includes('http')) url = '/images/products/' + url;
+                if (url && !url.includes('http')) url = '/images/products/' + url;
 
                 let style = 'product-tab';
 

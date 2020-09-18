@@ -28,7 +28,7 @@ class PartnerCard extends React.Component {
 
         let url = p.logoUrl;
 
-        if (!url.includes('http')) url = '/images/partners/' + url;
+        if (url && !url.includes('http')) url = '/images/partners/' + url;
 
         return (
             <div className="partner-card">
@@ -47,7 +47,7 @@ class PartnerCard extends React.Component {
 
                 {webPage !== undefined && <hr/>}
                 {webPage !== undefined &&
-                <a href={p.webUrl} target="blank" className="text-sm text-primary">{webPage}</a>}
+                <a href={p.webUrl} target="blank" rel='nofollow noopener' className="text-sm text-primary">{webPage}</a>}
 
             </div>
         );

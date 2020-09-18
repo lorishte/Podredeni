@@ -1,5 +1,8 @@
 import React from 'react';
 
+// SEO
+import SEO_MetaTags from '../../common/SEO/SEO_MetaTags'
+
 //external components
 import { Link } from 'react-router-dom';
 import { Col, Row, Grid, Clearfix } from 'react-bootstrap';
@@ -121,8 +124,13 @@ class NewsList extends React.Component {
 			});
 		}
 
+		let urlPath = this.props.location.pathname;
+
 		return (
 			<Grid id="news">
+
+				<SEO_MetaTags activeLanguage={'bg'} pageName={'news'} url={urlPath}/>
+
 				<ToastContainer
 					ref={ref => this.toastContainer = ref}
 					className="toast-bottom-right"

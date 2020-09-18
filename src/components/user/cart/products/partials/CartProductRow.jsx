@@ -45,7 +45,7 @@ class CartProductRow extends React.Component {
 
 		let url = p.image;
 
-		if (!url.includes('http')) url = '/images/products/' + url;
+		if (url && !url.includes('http')) url = '/images/products/' + url;
 
 		return (
 			<div className="products-table-row">
