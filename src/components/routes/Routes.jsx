@@ -79,7 +79,7 @@ let Routes = () => {
 
 			<Route exact path='/products' component={ProductsListNew}/>
 			<Route exact path='/products/:categoryName' component={ProductsListByCategory}/>
-			<Route path='/products/:categoryName/:productId' component={ProductDetails}/>
+			<Route path='/products/:categoryName/:productName' component={ProductDetails}/>
 			{/*<Route path='/products/:id' component={ProductDetails}/>*/}
 			
 			{/*<Route path='/products-by-category/:id' component={ProductsListByCategory}/>*/}

@@ -1,130 +1,133 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import { withRouter } from 'react-router-dom';
-import { Col } from 'react-bootstrap';
+import {Link} from 'react-router-dom';
+import {withRouter} from 'react-router-dom';
+import {Col} from 'react-bootstrap';
 import PropTypes from 'prop-types';
 
 
 // Constants
-import { TOASTR_MESSAGES, CURRENCY } from '../../../../../data/constants/componentConstants';
+import {TOASTR_MESSAGES, CURRENCY} from '../../../../../data/constants/componentConstants';
 
 // Utils
 import utils from '../../../../../utils/utils';
 
 
 class ProductCard extends React.Component {
-	constructor (props) {
-		super(props);
+    constructor(props) {
+        super(props);
 
-		this.state = {
-			xsRes: this.props.xsRes
-		};
-	}
+        this.state = {
+            xsRes: this.props.xsRes
+        };
+    }
 
-	componentWillReceiveProps (nextProps) {
-		this.setState({xsRes: nextProps.xsRes});
-	}
+    componentWillReceiveProps(nextProps) {
+        this.setState({xsRes: nextProps.xsRes});
+    }
 
-	addToCart = () => {
-		if (sessionStorage.getItem('products') === null) {
-			sessionStorage.setItem('products', '[]');
-		}
+    addToCart = (e) => {
 
-		let addedProducts = JSON.parse(sessionStorage.getItem('products'));
+        e.preventDefault()
 
-		if (this.checkIfProductIsInCart(addedProducts)) {
-			this.props.showMessage('warning', TOASTR_MESSAGES.editQuantityFromCart, TOASTR_MESSAGES.productAlreadyInCart);
-			return;
-		}
+        if (sessionStorage.getItem('products') === null) {
+            sessionStorage.setItem('products', '[]');
+        }
 
-		let p = this.props.product;
-		let product = {
-			id: p.id,
-			name: p.name,
-			image: p.images[0],
-			price: p.price,
-			quantity: 1,
-			discount: p.discount
-		};
+        let addedProducts = JSON.parse(sessionStorage.getItem('products'));
 
-		addedProducts.push(product);
-		sessionStorage.products = JSON.stringify(addedProducts);
+        if (this.checkIfProductIsInCart(addedProducts)) {
+            this.props.showMessage('warning', TOASTR_MESSAGES.editQuantityFromCart, TOASTR_MESSAGES.productAlreadyInCart);
+            return;
+        }
 
-		this.props.showMessage('success', TOASTR_MESSAGES.productAddedToCart, '');
+        let p = this.props.product;
+        let product = {
+            id: p.id,
+            name: p.name,
+            image: p.images[0],
+            price: p.price,
+            quantity: 1,
+            discount: p.discount
+        };
 
-		// Paths are different if added from category list or all products
-		let path = this.props.match.path;
+        addedProducts.push(product);
+        sessionStorage.products = JSON.stringify(addedProducts);
 
-		this.props.history.push(path);// to refresh products count in header
-		this.props.history.go(-1); // step back to fix history logic
-	};
+        this.props.showMessage('success', TOASTR_MESSAGES.productAddedToCart, '');
 
-	checkIfProductIsInCart = (array) => {
-		return (array.filter(e => e.id === this.props.product.id).length > 0);
-	};
+        // Paths are different if added from category list or all products
+        let path = this.props.match.path;
 
-	render () {
-		const {product, size} = this.props;
+        this.props.history.push(path);// to refresh products count in header
+        this.props.history.go(-1); // step back to fix history logic
+    };
 
-		let url = product.images[0];
+    checkIfProductIsInCart = (array) => {
+        return (array.filter(e => e.id === this.props.product.id).length > 0);
+    };
 
-		if (url && !url.includes('http')) url = '/images/products/' + url;
+    render() {
+        const {product, size} = this.props;
 
-		let categoryName = utils.generateRouteName(product.categories[0].name)
+        let url = product.images[0];
 
+        if (url && !url.includes('http')) url = '/images/products/' + url;
 
-		return (
-			<Col xs={this.state.xsRes} sm={6} md={size === 'smaller' ? 3 : 4}>
+        let categoryName = utils.generateRouteName(product.categories[0].name)
 
-				<div className="card">
-
-					{product.discount > 0 &&
-					<span className="promo-label">-{product.discount}%</span>
-					}
-
-					{product.isNewProduct && <span className={'new-label'}>НОВО!</span>}
+        let productName = utils.generateRouteName(product.name)
 
 
-					<div className="product-image">
-						<img className="card-img-top" src={url} alt={url}/>
-					</div>
+        return (
+            <Col xs={this.state.xsRes} sm={6} md={size === 'smaller' ? 3 : 4}>
+                <Link to={'/products/' + categoryName + '/' + productName}>
+                    <div className="card">
 
-					<div className="card-body">
-						<h4 className="card-title">{product.name}</h4>
-						<p className="card-text">{product.description.substring(0, 80) + ' ...'}</p>
+                        {product.discount > 0 && <span className="promo-label">-{product.discount}%</span> }
 
-						{product.discount === 0 &&
-						<p className="price">{product.price.toFixed(2)} {CURRENCY}</p>}
+                        {product.isNewProduct && <span className={'new-label'}>НОВО!</span>}
 
-						{product.discount > 0 &&
-						<p className="price">
-							<span className="old-price">{product.price.toFixed(2)} {CURRENCY}</span>
-							<span>{(utils.calculatePriceAfterDiscount(product.price, product.discount)).toFixed(2)} {CURRENCY}</span>
-						</p>
-						}
+                        <div className="product-image">
+                            <img className="card-img-top" src={url} alt={url}/>
+                        </div>
 
-						<button className="add-to-cart-btn" onClick={this.addToCart}>
-							<i className="fa fa-shopping-cart" aria-hidden="true"/>
-						</button>
+                        <div className="card-body">
+                            <h4 className="card-title">{product.name}</h4>
+                            <p className="card-text">{product.description.substring(0, 80) + ' ...'}</p>
 
-						<Link to={'/products/' + categoryName + '/' + product.id} className="add-to-cart-btn">
-							<i className="fa fa-search" aria-hidden="true"/>
-						</Link>
+                            {product.discount === 0 &&
+                            <p className="price">{product.price.toFixed(2)} {CURRENCY}</p>}
 
-					</div>
-				</div>
+                            {product.discount > 0 &&
+                            <p className="price">
+                                <span className="old-price">{product.price.toFixed(2)} {CURRENCY}</span>
+                                <span>{(utils.calculatePriceAfterDiscount(product.price, product.discount)).toFixed(2)} {CURRENCY}</span>
+                            </p>
+                            }
+
+                            <button className="add-to-cart-btn" onClick={this.addToCart}>
+                                <i className="fa fa-shopping-cart" aria-hidden="true"/>
+                            </button>
+
+                            <span className="add-to-cart-btn">
+                                <i className="fa fa-search" aria-hidden="true"/>
+                            </span>
+
+                        </div>
+                    </div>
+                </Link>
 
 
-			</Col>
-		);
-	}
+            </Col>
+        );
+    }
 }
 
 export default withRouter(ProductCard);
 
 ProductCard.propTypes = {
-	product: PropTypes.object,
-	showMessage: PropTypes.func,
-	size: PropTypes.string,
-	xsRes: PropTypes.number
+    product: PropTypes.object,
+    showMessage: PropTypes.func,
+    size: PropTypes.string,
+    xsRes: PropTypes.number
 };

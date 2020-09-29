@@ -3,7 +3,7 @@ const META_TAGS = {
     // Home
     'home': {
         title: {
-            bg: 'Начало | Podredeni.eu',
+            bg: 'Начало — Podredeni.eu',
             en: 'Home | Podredeni.eu'
         },
         description: {
@@ -19,7 +19,7 @@ const META_TAGS = {
     // All products
     'products': {
         title: {
-            bg: 'Продукти | Podredeni.eu',
+            bg: 'Продукти — Podredeni.eu',
             en: ''
         },
         description: {
@@ -35,7 +35,7 @@ const META_TAGS = {
     // News
     'news': {
         title: {
-            bg: 'Новини | Podredeni.eu',
+            bg: 'Новини — Podredeni.eu',
             en: ''
         },
         description: {
@@ -51,7 +51,7 @@ const META_TAGS = {
     // Videos
     'videos': {
         title: {
-            bg: 'Видео | Podredeni.eu',
+            bg: 'Видео — Podredeni.eu',
             en: ''
         },
         description: {
@@ -67,7 +67,7 @@ const META_TAGS = {
     // Partners
     'partners': {
         title: {
-            bg: 'Партньори | Podredeni.eu',
+            bg: 'Партньори — Podredeni.eu',
             en: ''
         },
         description: {
@@ -83,7 +83,7 @@ const META_TAGS = {
     // Contact
     'contact': {
         title: {
-            bg: 'Контакт | Podredeni.eu',
+            bg: 'Контакт — Podredeni.eu',
             en: ''
         },
         description: {
@@ -99,7 +99,7 @@ const META_TAGS = {
     // Cart
     'cart': {
         title: {
-            bg: 'Количка | Podredeni.eu',
+            bg: 'Количка — Podredeni.eu',
             en: ''
         },
         description: {
@@ -118,7 +118,7 @@ const META_TAGS = {
     // Magnetic clips
     '2d256711-5f08-4d68-ba1a-30311f0b9c6f': {
         title: {
-            bg: 'Магнитни Клипсове за Очила ReadeRest | Podredeni.eu',
+            bg: 'Магнитни Клипсове за Очила ReadeRest — Podredeni.eu',
             en: ''
         },
         description: {
@@ -135,7 +135,7 @@ const META_TAGS = {
     // Towels Dock&Bay
     '92e8f56e-1a18-46bb-be40-633559284cdc' : {
         title: {
-            bg: 'Бързосъхнещи Плажни Кърпи Dock&Bay | Podredeni.eu',
+            bg: 'Бързосъхнещи Плажни Кърпи Dock&Bay — Podredeni.eu',
             en: ''
         },
         description: {
@@ -152,7 +152,7 @@ const META_TAGS = {
     // Smart kitchen
     '58a4edb3-4946-4f28-bd62-c18e7d763099': {
         title: {
-            bg: 'Смарт Домакински Електоуреди | Podredeni.eu',
+            bg: 'Смарт Домакински Електоуреди — Podredeni.eu',
             en: ''
         },
         description: {
@@ -168,7 +168,7 @@ const META_TAGS = {
     // Single Product
     'product': {
         title: {
-            bg: ' | Podredeni.eu',
+            bg: ' — Купи Онлайн от Podredeni.eu',
             en: ''
         },
         description: {

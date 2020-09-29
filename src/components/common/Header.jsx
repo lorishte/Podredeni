@@ -171,17 +171,17 @@ class Header extends React.Component {
                                      id="basic-nav-dropdown"
                                      className=''>
 
-                            <MenuItem href="/products/aksesoari_i_ochila" className='sub-menu nav-link'>
+                            <MenuItem href="/products/aksesoari-i-ochila" className='sub-menu nav-link'>
                                 Магнитни клипсове ReadeRest
                             </MenuItem>
 
 
-                            <MenuItem href="/products/vakantsiya_i_sport" className='sub-menu nav-link'>
+                            <MenuItem href="/products/vakantsiya-i-sport" className='sub-menu nav-link'>
                                 Бързосъхнещи кърпи Dock&Bay
                             </MenuItem>
 
 
-                            <MenuItem href="/products/smart_kuhnenski_uredi" className='sub-menu nav-link'>
+                            <MenuItem href="/products/smart-kuhnenski-uredi" className='sub-menu nav-link'>
                                 Смарт домакински уреди
                             </MenuItem>
 

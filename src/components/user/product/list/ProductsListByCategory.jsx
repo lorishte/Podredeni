@@ -1,6 +1,6 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
-import {Col, Row, Grid, Breadcrumb, Accordion, Button} from 'react-bootstrap';
+import {Col, Row, Grid, Breadcrumb, PageHeader} from 'react-bootstrap';
 import {ToastContainer} from 'react-toastr';
 
 // SEO
@@ -14,10 +14,10 @@ import productsService from '../../../../services/products/productsService';
 import categoryService from '../../../../services/categories/categoryService';
 
 // Constants
-import {RESOLUTIONS, PRODUCT} from '../../../../data/constants/componentConstants';
+import {RESOLUTIONS} from '../../../../data/constants/componentConstants';
+import {categorySefUrls} from '../../../../data/constants/sefUrls'
+import utils from "../../../../utils/utils";
 
-// Utils
-import utils from '../../../../utils/utils'
 
 class ProductsListByCategory extends React.Component {
     constructor(props) {
@@ -49,7 +49,7 @@ class ProductsListByCategory extends React.Component {
 
         // this.catId = this.props.match.params.id;
 
-        this.catId = utils.sefUrls[this.props.match.params.categoryName];
+        this.catId = categorySefUrls[this.props.match.params.categoryName];
     }
 
     componentDidMount() {
@@ -86,11 +86,20 @@ class ProductsListByCategory extends React.Component {
     };
 
     loadNestedCategories = () => {
-        console.log(222)
+
+        let test = {}
 
         categoryService
             .loadNestedCategories(null, 1000)
             .then(res => {
+
+                res.map(c =>
+                {
+                    c.products.map(p => {
+                        let key = '[utils.generateRouteName(' + p.name + ')]'
+                        test[key] = p.id
+                    })
+                })
 
                 let selectedCategory = res.filter(c => c.id === this.catId)[0];
 

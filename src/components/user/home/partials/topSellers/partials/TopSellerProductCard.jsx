@@ -23,12 +23,9 @@ class TopSellerProductCard extends React.Component {
 
 		let productName= utils.generateRouteName(p.name)
 
-		// let route = categoryName + '/' + productName
+		let route = categoryName + '/' + productName
 
-		let route = categoryName + '/' + p.id
-
-
-		console.log(route)
+		// let route = categoryName + '/' + p.id
 
 
 		return (
@@ -42,7 +39,7 @@ class TopSellerProductCard extends React.Component {
 						{p.isNewProduct && <span className={'new-label'}>НОВО!</span>}
 
 						<div className="product-image">
-							<img className="card-img-top" src={url} alt={url}/>
+							<img className="card-img-top" src={url} alt={p.images[0]}/>
 						</div>
 
 						<div className="card-body">

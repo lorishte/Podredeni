@@ -16,6 +16,7 @@ import productsService from '../../../../services/products/productsService';
 
 // Constants
 import { RESOLUTIONS, TOASTR_MESSAGES, BUTTONS_BG } from '../../../../data/constants/componentConstants';
+import {productSefUrls} from '../../../../data/constants/sefUrls'
 
 // Utils
 import utils from '../../../../utils/utils'
@@ -30,7 +31,8 @@ class Product extends React.Component {
 			resolution: window.innerWidth
 		};
 
-		// this.productId = utils.sefUrls[this.props.match.params.categoryName]
+		this.productId = productSefUrls[this.props.match.params.productName]
+
 	}
 
 	componentDidMount () {
@@ -48,11 +50,9 @@ class Product extends React.Component {
 
 	loadProductData = () => {
 
-		console.log(this.props.match.params)
-
 		let id = this.props.match.params.productId;
 		productsService
-			.getProduct(id)
+			.getProduct(this.productId)
 			.then(res => {
 
 				res.product.images.reverse();

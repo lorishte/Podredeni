@@ -96,8 +96,7 @@ function createStateCopy(state) {
 }
 
 function generateRouteName(name) {
-    let transliterated = transliterate(name.toLowerCase()).split(' ').filter(w => w !== '').join('_')
-    return transliterated
+    return transliterate(name.toLowerCase()).split(' ').filter(w => w !== '').join('-')
 }
 
 
@@ -105,12 +104,6 @@ function transliterate(word){
     return word.split('').map(function (char) {
         return chars[char] || char;
     }).join("");
-}
-
-const sefUrls = {
-    'aksesoari_i_ochila': '2d256711-5f08-4d68-ba1a-30311f0b9c6f',
-    'vakantsiya_i_sport': '92e8f56e-1a18-46bb-be40-633559284cdc',
-    'smart_kuhnenski_uredi': '58a4edb3-4946-4f28-bd62-c18e7d763099'
 }
 
 
@@ -125,10 +118,10 @@ export default {
     getVideoDescription,
     createStateCopy,
     generateRouteName,
-    sefUrls
 }
 
 const chars = {
+    '/': '-',
     "а":"a",
     "б":"b",
     "в":"v",

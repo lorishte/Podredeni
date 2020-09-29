@@ -19,7 +19,7 @@ body {
   padding: 0;
   position: relative;
   min-height: 100vh;
-  //color: $dark-grey;
+  color: $dark-grey;
   //background-color: #f0f0f0;
   font-family: Montserrat, sans-serif;
   //font-family: Nunito, sans-serif;
@@ -30,7 +30,7 @@ main {
   //margin-top: $header-height;
   min-height: calc(100vh - 80px);
 
-  padding-top: 193px;
+  padding-top: 190px;
   padding-bottom: 50px;
   background-color: $warm-light-grey;
 }
@@ -289,12 +289,12 @@ input[type=checkbox], input[type=radio] {
 
 .section-heading {
   text-align: center;
-  font-size: 2em;
+  font-size: 3em;
   padding: 25px 15px;
   //border-top: 1px solid $warm-light-grey;
-  //border-bottom: 1px solid $warm-light-grey;
+  border-bottom: 1px solid $warm-light-grey;
   text-transform: uppercase;
-  //font-weight: 200;
+  font-weight: 200;
   letter-spacing: 1px;
   color: $primary;
 }
@@ -393,22 +393,15 @@ nav {
 
         &:hover,
         &:active,
-        &.open {
-          background-color: $black;
+        &.open,
+        &.active {
+          background-color: $primary;
           color: $white;
-        }
 
-        &:hover{
           a {
-            background-color: $black;
+            background-color: $primary;
             color: $white;
           }
-        }
-
-        &.active {
-          //color: $primary;
-          color: $white;
-          background-color: $black;
         }
       }
     }
@@ -428,20 +421,19 @@ nav {
       &:hover,
       &:active,
       &.open {
-        background-color: $black;
+        background-color: $primary;
         color: $white;
       }
 
       &.active {
-        //color: $primary;
+        background-color: $primary;
         color: $white;
-        background-color: $black;
       }
     }
 
     .dropdown-menu > li:hover ~ a {
+      background-color: $primary;
       color: $white;
-      background-color: $black;
     }
 
     .dropdown-menu > li > a {
@@ -750,8 +742,10 @@ nav {
   border: 1px solid transparent;
 
   text-align: center;
+  overflow: visible;
 
   @include transition;
+
 
   &:hover,
   &:active,
@@ -851,7 +845,7 @@ nav {
     padding: 5px 10px;
     font-weight: 400;
     color: $primary;
-    //font-size: 1.35em;
+    font-size: 1.35em;
     @include transition;
   }
 
@@ -898,7 +892,7 @@ nav {
   }
 
   .price {
-    //font-size: 1.3em;
+    font-size: 1.3em;
     display: inline-block;
   }
 }
