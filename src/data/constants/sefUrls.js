@@ -97,7 +97,9 @@ const productSefUrls = {
     [utils.generateRouteName("Тюрбан Нежно Розово")]: "78fe95d1-51d6-4cd0-bd9f-5fc6028e840e",
     [utils.generateRouteName("Тюрбан Розово")]: "3b1d2a4b-1e13-4feb-9a6f-644cfe0a7f6d",
     [utils.generateRouteName("Тюрбан Синьо")]: "3083a198-a5bd-4696-bba0-f439d713898d",
-    [utils.generateRouteName("Тюрбан-кърпа Нежно Зелен")]: "51c2fd12-eb5f-4d7b-b1c6-eced909f2fbd"
+    [utils.generateRouteName("Тюрбан-кърпа Нежно Зелен")]: "51c2fd12-eb5f-4d7b-b1c6-eced909f2fbd",
+    [utils.generateRouteName('Двустенна чаша ChillWhiskey - очаквайте')]: '5bd46498-29cb-4961-a338-98e7f924422e',
+    [utils.generateRouteName('Лъжица за сладолед ScoopTHAT')]: '265560d2-d53b-40cf-b178-03a93253d769',
 }
 
 
