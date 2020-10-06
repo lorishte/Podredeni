@@ -393,7 +393,12 @@ nav {
 
         &:hover,
         &:active,
-        &.open,
+        &.open{
+          //background-color: $warm-light-grey;
+          background-color: $primary;
+          color: $white;
+        }
+
         &.active {
           background-color: $primary;
           color: $white;
@@ -407,7 +412,8 @@ nav {
     }
 
     // Dropdown corrections
-    .navbar-nav > li > a {
+    .dropdown-menu > li > a,
+    .nav > li > a{
       @include flex;
       @include align-items(center);
       padding: 10px 20px;
@@ -420,25 +426,52 @@ nav {
 
       &:hover,
       &:active,
-      &.open {
-        background-color: $primary;
-        color: $white;
-      }
-
-      &.active {
+      &.open,
+      &.active{
         background-color: $primary;
         color: $white;
       }
     }
 
     .dropdown-menu > li:hover ~ a {
-      background-color: $primary;
-      color: $white;
+      //background-color: $primary;
+      //color: $white;
     }
 
     .dropdown-menu > li > a {
       padding: 0;
     }
+
+    //.dropdown {
+    //  position: relative;
+    //
+    //  .sub-menu {
+    //    display: none;
+    //    position: absolute;
+    //    left: 0;
+    //    width: max-content;
+    //    background-color: $white;
+    //    border: 1px solid $warm-light-grey-2;
+    //  }
+    //
+    //  i {
+    //    margin-left: 8px;
+    //  }
+    //
+    //  hr {
+    //    margin: 0;
+    //  }
+    //
+    //  &:hover {
+    //    .sub-menu {
+    //      display: block;
+    //    }
+    //
+    //    button {
+    //      background-color: $warm-light-grey;
+    //    }
+    //  }
+    //}
   }
 
   #admin-nav {
@@ -644,8 +677,8 @@ nav {
       text-align: center;
 
       .article-heading {
-        //color: $primary-hover;
-        //font-weight: 300;
+        color: $primary-hover;
+        font-weight: 300;
         text-transform: uppercase;
         font-size: 1.5em;
         @include flex-basis(100%);
@@ -680,6 +713,8 @@ nav {
   color: $medium-grey;
 
   .testimonial {
+    padding-top: 20px;
+
     .testimonial-body {
 
       .testimonial-text {
@@ -908,7 +943,7 @@ nav {
 
   .news-card {
     min-height: 303px;
-    margin: 10px 0 20px 0;
+    //margin: 10px 0 20px 0;
 
     background-color: $white;
 
@@ -932,7 +967,7 @@ nav {
 
     .news-body {
       position: relative;
-      padding: 10px 25px;
+      //padding: 10px 25px;
 
       .news-title {
         font-size: 1em;
@@ -941,7 +976,7 @@ nav {
 
       .news-date {
         font-size: .9em;
-        color: $medium-grey;
+        //color: $medium-grey;
 
         .day {
           //display: block;

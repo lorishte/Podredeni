@@ -67,6 +67,7 @@ class ProductsListByCategory extends React.Component {
         sessionStorage.setItem('selectedSubcategoryIds', JSON.stringify(this.state.selectedSubcategoryIds));
     }
 
+
     checkFilters = () => {
 
         let subCategories = JSON.parse(sessionStorage.getItem('selectedSubcategoryIds'));
@@ -87,19 +88,9 @@ class ProductsListByCategory extends React.Component {
 
     loadNestedCategories = () => {
 
-        let test = {}
-
         categoryService
             .loadNestedCategories(null, 1000)
             .then(res => {
-
-                res.map(c =>
-                {
-                    c.products.map(p => {
-                        let key = '[utils.generateRouteName(' + p.name + ')]'
-                        test[key] = p.id
-                    })
-                })
 
                 let selectedCategory = res.filter(c => c.id === this.catId)[0];
 

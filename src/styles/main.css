@@ -310,13 +310,17 @@ nav {
         display: block;
         width: 100%;
         padding: 10px 20px; }
-      nav #user-nav .nav .nav-link:hover, nav #user-nav .nav .nav-link:active, nav #user-nav .nav .nav-link.open, nav #user-nav .nav .nav-link.active {
+      nav #user-nav .nav .nav-link:hover, nav #user-nav .nav .nav-link:active, nav #user-nav .nav .nav-link.open {
         background-color: #b49543;
         color: #ffffff; }
-        nav #user-nav .nav .nav-link:hover a, nav #user-nav .nav .nav-link:active a, nav #user-nav .nav .nav-link.open a, nav #user-nav .nav .nav-link.active a {
+      nav #user-nav .nav .nav-link.active {
+        background-color: #b49543;
+        color: #ffffff; }
+        nav #user-nav .nav .nav-link.active a {
           background-color: #b49543;
           color: #ffffff; }
-  nav #user-nav .navbar-nav > li > a {
+  nav #user-nav .dropdown-menu > li > a,
+  nav #user-nav .nav > li > a {
     display: -webkit-box;
     display: -webkit-flex;
     display: -ms-flexbox;
@@ -336,15 +340,13 @@ nav {
     -o-transition: .4s;
     transition: .4s;
     line-height: 1.42857143; }
-    nav #user-nav .navbar-nav > li > a:hover, nav #user-nav .navbar-nav > li > a:active, nav #user-nav .navbar-nav > li > a.open {
+    nav #user-nav .dropdown-menu > li > a:hover, nav #user-nav .dropdown-menu > li > a:active, nav #user-nav .dropdown-menu > li > a.open, nav #user-nav .dropdown-menu > li > a.active,
+    nav #user-nav .nav > li > a:hover,
+    nav #user-nav .nav > li > a:active,
+    nav #user-nav .nav > li > a.open,
+    nav #user-nav .nav > li > a.active {
       background-color: #b49543;
       color: #ffffff; }
-    nav #user-nav .navbar-nav > li > a.active {
-      background-color: #b49543;
-      color: #ffffff; }
-  nav #user-nav .dropdown-menu > li:hover ~ a {
-    background-color: #b49543;
-    color: #ffffff; }
   nav #user-nav .dropdown-menu > li > a {
     padding: 0; }
   nav #admin-nav .nav {
@@ -522,6 +524,8 @@ nav {
       justify-content: center;
       text-align: center; }
       #home #home-about .article-content .article-heading {
+        color: #896e36;
+        font-weight: 300;
         text-transform: uppercase;
         font-size: 1.5em;
         -webkit-flex-basis: 100%;
@@ -534,20 +538,22 @@ nav {
 #testimonials {
   background-color: #5b5b5b;
   color: #c6c6c6; }
-  #testimonials .testimonial .testimonial-body .testimonial-text {
-    margin-top: 25px;
-    font-style: italic;
-    font-size: 1.2em;
-    text-align: left;
-    margin-bottom: 15px; }
-  #testimonials .testimonial .testimonial-body .testimonial-author {
-    font-weight: 600;
-    text-align: right; }
-  #testimonials .testimonial .testimonial-body::before {
-    content: open-quote;
-    font-size: 5em;
-    color: #b49543;
-    line-height: 1em; }
+  #testimonials .testimonial {
+    padding-top: 20px; }
+    #testimonials .testimonial .testimonial-body .testimonial-text {
+      margin-top: 25px;
+      font-style: italic;
+      font-size: 1.2em;
+      text-align: left;
+      margin-bottom: 15px; }
+    #testimonials .testimonial .testimonial-body .testimonial-author {
+      font-weight: 600;
+      text-align: right; }
+    #testimonials .testimonial .testimonial-body::before {
+      content: open-quote;
+      font-size: 5em;
+      color: #b49543;
+      line-height: 1em; }
   #testimonials .avatar {
     width: 100px;
     height: 100px;
@@ -760,7 +766,6 @@ nav {
 
 #news-container .news-card {
   min-height: 303px;
-  margin: 10px 0 20px 0;
   background-color: #ffffff; }
   #news-container .news-card .news-image-container {
     -webkit-flex-basis: 100%;
@@ -790,14 +795,12 @@ nav {
       -o-transition: .4s;
       transition: .4s; }
   #news-container .news-card .news-body {
-    position: relative;
-    padding: 10px 25px; }
+    position: relative; }
     #news-container .news-card .news-body .news-title {
       font-size: 1em;
       line-height: 1.3em; }
     #news-container .news-card .news-body .news-date {
-      font-size: .9em;
-      color: #c6c6c6; }
+      font-size: .9em; }
   #news-container .news-card .news-buttons-container {
     height: 40px;
     padding: 0 25px 20px 25px;

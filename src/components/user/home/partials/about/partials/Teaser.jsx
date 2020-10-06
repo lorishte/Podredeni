@@ -21,7 +21,7 @@ class Teaser extends React.Component {
                 </div>
 
                 <div className="article-content">
-                    <h4 className={'article-heading'} dangerouslySetInnerHTML={{__html: heading}}/>
+                    <h2 className={'article-heading'} dangerouslySetInnerHTML={{__html: heading}}/>
                     <p className={'article-text'} dangerouslySetInnerHTML={{__html: text}}/>
                     {buttonLink &&
                     <Link className={'btn btn-custom primary sm'} to={buttonLink}>{BUTTONS_BG.seeProducts}</Link>

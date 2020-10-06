@@ -54,6 +54,8 @@ class Header extends React.Component {
         if (this.adminNav) this.adminNav.classList.remove('in');
     };
 
+
+
     render() {
 
         let isAdmin = sessionStorage.getItem('role') === 'admin';
@@ -160,28 +162,29 @@ class Header extends React.Component {
 
                 <div id="user-nav" className="collapse navbar-collapse">
 
-                    <div className="nav navbar-nav" onClick={this.hideMenu}>
+                    <div className="nav navbar-nav" >
 
-                        <NavLink to="/home" activeClassName="active" className='nav-link'>
+                        <NavLink to="/home" activeClassName="active" className='nav-link' onClick={this.hideMenu}>
                             Начало
                         </NavLink>
 
 
                         <NavDropdown eventKey={3} title="Продукти"
+                                     href=""
                                      id="basic-nav-dropdown"
                                      className=''>
 
-                            <MenuItem href="/products/aksesoari-i-ochila" className='sub-menu nav-link'>
+                            <MenuItem href="/products/aksesoari-i-ochila" className='sub-menu nav-link'  onClick={this.hideMenu}>
                                 Магнитни клипсове ReadeRest
                             </MenuItem>
 
 
-                            <MenuItem href="/products/vakantsiya-i-sport" className='sub-menu nav-link'>
+                            <MenuItem href="/products/vakantsiya-i-sport" className='sub-menu nav-link'  onClick={this.hideMenu}>
                                 Бързосъхнещи кърпи Dock&Bay
                             </MenuItem>
 
 
-                            <MenuItem href="/products/smart-kuhnenski-uredi" className='sub-menu nav-link'>
+                            <MenuItem href="/products/smart-kuhnenski-uredi" className='sub-menu nav-link' onClick={this.hideMenu}>
                                 Смарт домакински уреди
                             </MenuItem>
 
@@ -189,52 +192,52 @@ class Header extends React.Component {
                             <MenuItem divider/>
 
 
-                            <MenuItem href="/products" className='sub-menu nav-link'>
+                            <MenuItem href="/products" className='sub-menu nav-link'  onClick={this.hideMenu}>
                                 Всички категории
                             </MenuItem>
 
                         </NavDropdown>
 
 
-                        <NavLink to="/news/list" activeClassName="active" className='nav-link'>
+                        <NavLink to="/news/list" activeClassName="active" className='nav-link' onClick={this.hideMenu}>
                             Новини
                         </NavLink>
 
-                        <NavLink to="/videos" activeClassName="active" className='nav-link'>
+                        <NavLink to="/videos" activeClassName="active" className='nav-link' onClick={this.hideMenu}>
                             Видео
                         </NavLink>
 
-                        <NavLink to="/partners" activeClassName="active" className='nav-link'>
+                        <NavLink to="/partners" activeClassName="active" className='nav-link' onClick={this.hideMenu}>
                             Партньори
                         </NavLink>
 
-                        <NavLink to="/contact" activeClassName="active" className='nav-link'>
+                        <NavLink to="/contact" activeClassName="active" className='nav-link' onClick={this.hideMenu}>
                             Контакт
                         </NavLink>
 
-                        {isLoggedInUser &&
-                        <NavLink to="/" className="btn btn-default"
-                                 onClick={this.logout}>Изход
-                        </NavLink>
-                        }
 
-                        <NavLink to="/cart" activeClassName="active" className='nav-link cart hidden-xs'>
+                        <NavLink to="/cart" activeClassName="active" className='nav-link cart hidden-xs' onClick={this.hideMenu}>
                             <i className="fa fa-cart-arrow-down" aria-hidden="true"/>
                             {productsCount !== 0 &&
                             <Label bsStyle="danger">{' ' + productsCount}</Label>
                             }
                         </NavLink>
 
-                        <div className="social-media-icons visible-xs">
+                        <div className="social-media-icons visible-xs" onClick={this.hideMenu}>
                             <a className="icon" target="_blank" rel="noopener noreferrer"
                                href="https://www.facebook.com/VakanciaSportOchila/">
                                 <i className="fa fa-facebook-official" aria-hidden="true"/>
                             </a>
+                            <a className="icon" target="_blank" rel="noopener noreferrer"
+                               href="https://www.instagram.com/podredeni.eu">
+                                <i className="fa fa-instagram" aria-hidden="true"/>
+                            </a>
                         </div>
+
                     </div>
                 </div>
 
-                <div className="cart-xs">
+                <div className="cart-xs" onClick={this.hideMenu}>
                     <NavLink to="/cart" activeClassName="active" className='nav-link cart visible-xs'>
                         <i className="fa fa-cart-arrow-down" aria-hidden="true"/>
                         {productsCount !== 0 &&

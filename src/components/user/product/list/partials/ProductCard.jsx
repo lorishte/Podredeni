@@ -29,6 +29,7 @@ class ProductCard extends React.Component {
 
         e.preventDefault()
 
+
         if (sessionStorage.getItem('products') === null) {
             sessionStorage.setItem('products', '[]');
         }

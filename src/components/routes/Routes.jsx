@@ -79,6 +79,12 @@ let Routes = () => {
 
 			<Route exact path='/products' component={ProductsListNew}/>
 			<Route exact path='/products/:categoryName' component={ProductsListByCategory}/>
+
+			{/*Rerender component on category change (in url)*/}
+			{/*<Route exact path="/products/:categoryName" render={(props) => (*/}
+			{/*	<ProductsListByCategory key={props.match.params.categoryName} {...props} />)*/}
+			{/*} />*/}
+
 			<Route path='/products/:categoryName/:productName' component={ProductDetails}/>
 			{/*<Route path='/products/:id' component={ProductDetails}/>*/}
 			
