@@ -20,6 +20,7 @@ class ProductInfo extends React.Component {
 						<span className="promo-label">-{p.discount}%</span>
 						}
 						{p.name + ' '}
+						{!p.inStock && <span className="outOfStock">{PRODUCT.temporaryOutOfStock}</span>}
 					</PageHeader>
 					<p>{p.description}</p>
 

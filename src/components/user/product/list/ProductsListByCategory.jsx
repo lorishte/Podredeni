@@ -16,6 +16,7 @@ import categoryService from '../../../../services/categories/categoryService';
 // Constants
 import {RESOLUTIONS} from '../../../../data/constants/componentConstants';
 import {categorySefUrls} from '../../../../data/constants/sefUrls'
+import productsInStock from '../../../../data/constants/productsInStock'
 import utils from "../../../../utils/utils";
 
 
@@ -94,17 +95,29 @@ class ProductsListByCategory extends React.Component {
 
                 let selectedCategory = res.filter(c => c.id === this.catId)[0];
 
-                // Reverse images to get the first
-                selectedCategory.products.forEach(p => p.images.reverse());
+                let products = selectedCategory.products
+
+                // Reverse images to get the first and get inStock
+                products.forEach(p => {
+                    p.images.reverse();
+                    p.inStock = productsInStock[p.id].inStock
+                });
+
+                // Put OutOfStock products at the end of the list
+                let inStockProducts = products.filter(e => e.inStock)
+                let outOfStockProducts = products.filter(e => !e.inStock)
+
+                products = inStockProducts.concat(outOfStockProducts)
 
                 // Sort subcategories by alphabetical order
                 selectedCategory.subcategories.sort((a, b) => a.name.localeCompare(b.name));
 
+
                 this.setState({
                     categoryName: selectedCategory.name,
                     categoryId: selectedCategory.id,
-                    allProducts: selectedCategory.products,
-                    filteredProducts: selectedCategory.products,
+                    allProducts: products,
+                    filteredProducts: products,
                     subcategories: selectedCategory.subcategories,
                     loading: false
                 }, () => this.checkFilters());
@@ -228,7 +241,7 @@ class ProductsListByCategory extends React.Component {
 
                         <Col xs={12} className="filters-container">
                             <div className={'category-name'}>
-                                <h4>{this.state.categoryName}</h4>
+                                <h1>{this.state.categoryName}</h1>
                                 <button className={this.state.filterOpen ? 'toggle-menu' : 'toggle-menu clicked'}
                                         onClick={() => this.setState({filterOpen: !this.state.filterOpen})}>
                                     <span className={'toggle'}/>

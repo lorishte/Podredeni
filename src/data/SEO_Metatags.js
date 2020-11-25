@@ -19,11 +19,11 @@ const META_TAGS = {
     // All products
     'products': {
         title: {
-            bg: 'Продукти — Podredeni.eu',
+            bg: 'Продукти — PODREDENI.EU',
             en: ''
         },
         description: {
-            bg: '',
+            bg: '✅ Магнитни клипсове за очила ReadeREST. ✅ Бързосъхнещи кърпи и бански Dock&Bay. ✅ Смарт кухненски уреди THATInventions. Разнообразие от модели. Бърза доставка!',
             en: ''
         },
         keywords: {
@@ -39,7 +39,7 @@ const META_TAGS = {
             en: ''
         },
         description: {
-            bg: 'Най-новите тенденции в сферата на Екологичните Продукти,  Здравословното Хранене и Устойчивото бъдеще. Новини за нашите продукти- Аксесоари за очила, Бързосъхнещи кърпи за спорт и плаж, мъжки бански, Детско пончо, Кърпа за коса, Уреди за Домакинството.',
+            bg: 'Най-новите тенденции в сферата на Екологичните Продукти, Здравословното Хранене и Устойчивото бъдеще. Новини за нашите продукти- Аксесоари за очила, Бързосъхнещи кърпи за спорт и плаж, мъжки бански, Детско пончо, Кърпа за коса, Уреди за Домакинството.',
             en: ''
         },
         keywords: {
@@ -83,7 +83,7 @@ const META_TAGS = {
     // Contact
     'contact': {
         title: {
-            bg: 'Контакт — Podredeni.eu',
+            bg: 'Контакт — PODREDENI.EU',
             en: ''
         },
         description: {
@@ -99,7 +99,7 @@ const META_TAGS = {
     // Cart
     'cart': {
         title: {
-            bg: 'Количка — Podredeni.eu',
+            bg: 'Количка — PODREDENI.EU',
             en: ''
         },
         description: {
@@ -165,6 +165,22 @@ const META_TAGS = {
         },
     },
 
+    // Home, health, beauty
+    'b4396565-c1b4-4879-a0de-a8e75355e9f2': {
+        title: {
+            bg: 'Дом, здраве и красота — PODREDENI.EU',
+            en: ''
+        },
+        description: {
+            bg: 'Създайте комфорт и уют у дома с нашите супер предложения! Безплатна доставка за поръчки над 60 лв. Купете сега!',
+            en: ''
+        },
+        keywords: {
+            bg: '',
+            en:''
+        },
+    },
+
     // Single Product
     'product': {
         title: {
@@ -181,6 +197,21 @@ const META_TAGS = {
         },
     },
 
+    // NewsDetails
+    'newsDetails': {
+        title: {
+            bg: ' — PODREDENI.EU',
+            en: ''
+        },
+        description: {
+            bg: '',
+            en: ''
+        },
+        keywords: {
+            bg: '',
+            en:''
+        },
+    },
 };
 
 export {

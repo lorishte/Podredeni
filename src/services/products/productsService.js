@@ -71,8 +71,8 @@ export default {
 function generateProductDetails (state) {
 
 	return {
-		Name: state.name,
-		Description: state.description,
+		Name: state.name.trim(),
+		Description: state.description.trim(),
 		Price: state.price,
 		ImageUrls: state.imageUrls,
 		IsTopSeller: state.isTopSeller,

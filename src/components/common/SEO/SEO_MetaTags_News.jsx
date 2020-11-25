@@ -4,16 +4,16 @@ import {META_TAGS} from "../../../data/SEO_Metatags";
 import PropTypes from "prop-types";
 
 
-class SEO_MetaTags_News extends React.Component {
+class SEO_MetaTags_Dynamic extends React.Component {
 
     render() {
 
-        let {pageName, productName, activeLanguage, url} = this.props;
+        let {pageName, title, description, activeLanguage, url} = this.props;
 
         return (
             <Helmet>
-                <title>{productName + META_TAGS[pageName].title[activeLanguage] }</title>
-                <meta name="description" content={META_TAGS[pageName].description[activeLanguage]}/>
+                <title>{title + META_TAGS[pageName].title[activeLanguage] }</title>
+                <meta name="description" content={description}/>
                 <meta name="keywords" content={META_TAGS[pageName].keywords[activeLanguage]}/>
                 <link rel="canonical" href={'https://podredeni.eu' + url}/>
             </Helmet>
@@ -22,11 +22,12 @@ class SEO_MetaTags_News extends React.Component {
 }
 
 
-export default SEO_MetaTags_News;
+export default SEO_MetaTags_Dynamic;
 
-SEO_MetaTags_News.propTypes = {
+SEO_MetaTags_Dynamic.propTypes = {
     activeLanguage: PropTypes.string,
     pageName: PropTypes.string,
-    productName: PropTypes.string,
+    title: PropTypes.string,
+    description: PropTypes.string,
     url: PropTypes.string
 };

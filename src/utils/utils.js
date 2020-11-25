@@ -99,11 +99,22 @@ function generateRouteName(name) {
     return transliterate(name.toLowerCase()).split(' ').filter(w => w !== '').join('-')
 }
 
-
 function transliterate(word){
     return word.split('').map(function (char) {
         return chars[char] || char;
     }).join("");
+}
+
+// Remove html tags
+function removeTags(string){
+    return string.replace(/<[^>]*>/g, '') //remove tags
+        .replace(/&(.*?);/g, '') // remove &nbsp;
+        .trim();
+}
+
+function shortenString(str, maxLen, separator = ' ') {
+    if (str.length <= maxLen) return str;
+    return str.substr(0, str.lastIndexOf(separator, maxLen)) + '...';
 }
 
 
@@ -118,17 +129,20 @@ export default {
     getVideoDescription,
     createStateCopy,
     generateRouteName,
+    removeTags,
+    shortenString
 }
 
 const chars = {
     '/': '-',
+    ',': ' ',
     "а":"a",
     "б":"b",
     "в":"v",
     "г":"g",
     "д":"d",
     "е":"e",
-    "ж":"zh",
+    "ж":"z",
     "з":"z",
     "и":"i",
     "й":"y",
@@ -152,5 +166,6 @@ const chars = {
     "ь":"i",
     "ю":"yu",
     "я":"ya",
+    "&":"-and-"
 };
 

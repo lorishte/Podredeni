@@ -53,7 +53,7 @@ class About extends React.Component {
         if (this.state.loading) return <div className="loader"/>
 
         let teasers = this.state.teasersText.map(e => {
-            return <Teaser key={e.imageUrl} imageUrl={e.imageUrl} heading={e.heading} text={e.text} buttonLink={e.buttonLink}/>
+            return <Teaser key={e.imageUrl} imageUrl={e.imageUrl} heading={e.heading} text={e.text} buttonLink={e.buttonLink} buttonText={e.buttonText}/>
         })
 
         return (

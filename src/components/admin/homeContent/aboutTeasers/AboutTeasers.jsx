@@ -113,6 +113,7 @@ class AboutTeasers extends React.Component {
             heading: '',
             text: '',
             buttonLink: '',
+            buttonText: '',
             isVisible: false
         }
 
@@ -252,6 +253,16 @@ class AboutTeasers extends React.Component {
                                 name={inputName + 'buttonLink'}
                                 label='Линк за бутона'
                                 value={teaser.buttonLink}
+                                required={false}
+                                disabled={false}
+                                onChange={this.handleInputsChange}
+                            />
+
+                            <FormInputField
+                                type='text'
+                                name={inputName + 'buttonText'}
+                                label='Текст на бутона'
+                                value={teaser.buttonText}
                                 required={false}
                                 disabled={false}
                                 onChange={this.handleInputsChange}

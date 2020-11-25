@@ -20,6 +20,7 @@ import {productSefUrls} from '../../../../data/constants/sefUrls'
 
 // Utils
 import utils from '../../../../utils/utils'
+import productsInStock from "../../../../data/constants/productsInStock";
 
 class Product extends React.Component {
 	constructor (props) {
@@ -40,6 +41,7 @@ class Product extends React.Component {
 		window.addEventListener('orientationchange', this.handleResolutionChange);
 		window.addEventListener('resize', this.handleResolutionChange);
 
+		console.log(this.props)
 		this.loadProductData();
 	}
 
@@ -50,7 +52,7 @@ class Product extends React.Component {
 
 	loadProductData = () => {
 
-		let id = this.props.match.params.productId;
+		// let id = this.props.match.params.productId;
 		productsService
 			.getProduct(this.productId)
 			.then(res => {
@@ -110,9 +112,13 @@ class Product extends React.Component {
 
 	render () {
 		let product = this.state.product;
+
+		if (!product) return <div className={'loader'}/>
 		let resolution = this.state.resolution < RESOLUTIONS.xs;
 
 		let urlPath = this.props.location.pathname;
+
+		product.inStock = productsInStock[product.id].inStock
 
 		return (
 			<Grid id="product">
@@ -124,16 +130,16 @@ class Product extends React.Component {
 					className="toast-bottom-right"
 				/>
 
-				{this.state.product === '' && <div className="loader"/>}
+				{product === '' && <div className="loader"/>}
 
-				{this.state.product !== '' &&
+				{product !== '' &&
 				<Row>
 					<Col xs={resolution ? 12 : 6} sm={6} md={5}>
 						<ImageGallery images={product.images}/>
 					</Col>
 					<Col xs={resolution ? 12 : 6} sm={6} md={7}>
 						<ProductInfo data={product}/>
-						<AddToCartForm onSubmit={this.addToCart}/>
+						{product.inStock && <AddToCartForm onSubmit={this.addToCart}/>}
 					</Col>
 				</Row>
 				}

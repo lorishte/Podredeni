@@ -66,6 +66,9 @@
     flex-basis: 60%;
     padding: 15px 5%; }
 
+  #product .outOfStock {
+    font-size: .55em; }
+
   #cart #cart-products-table .table-header .sum {
     -webkit-box-flex: 1;
     -moz-box-flex: 1;

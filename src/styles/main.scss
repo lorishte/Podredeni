@@ -666,6 +666,13 @@ nav {
       }
     }
 
+    .accent {
+      color: $success;
+      font-weight: 300;
+      font-size: 1.5em;
+      text-transform: uppercase;
+    }
+
     .article-content {
       @include flex-basis(70%);
 
@@ -843,11 +850,26 @@ nav {
     clip-path: polygon(0% 0%, 90% 0%, 100% 50%, 90% 100%, 0% 100%);
   }
 
+  .outOfStock {
+    position: absolute;
+    top: 45%;
+    left: 50%;
+    transform: translateX(-50%);
+    display: inline-block;
+    background-color: $danger;
+    padding: 0 .2em;
+    color: $white
+  }
+
   .product-image {
     width: 200px;
     height: 200px;
     overflow: hidden;
     @include transition;
+
+    &.faded {
+      opacity: .3;
+    }
   }
 
   .card-body {
@@ -944,6 +966,8 @@ nav {
   .news-card {
     min-height: 303px;
     //margin: 10px 0 20px 0;
+    margin: 10px 0;
+    padding: 10px;
 
     background-color: $white;
 
@@ -1032,6 +1056,11 @@ nav {
       @include flex;
       @include align-items(center);
       @include justify-content(space-between);
+
+      h1 {
+        font-size: 18px;
+        margin: 10px 0 ;
+      }
     }
 
     .toggle-menu {
@@ -1216,6 +1245,25 @@ nav {
 
     font-size: .5em;
     font-weight: 600;
+    z-index: 5;
+  }
+
+  .outOfStock {
+    //position: absolute;
+    //top: 10px;
+    //right: 10px;
+
+    padding: .6em 1em;
+    margin-top: 1em;
+
+    @include flex;
+    @include align-items(center);
+    @include justify-content(center);
+
+    background-color: $danger;
+    color: $white;
+
+    font-size: .35em;
     z-index: 5;
   }
 

@@ -14,6 +14,7 @@ import categoryService from '../../../../services/categories/categoryService';
 
 // Constants
 import { RESOLUTIONS, BUTTONS_BG } from '../../../../data/constants/componentConstants';
+import productsInStock from "../../../../data/constants/productsInStock";
 
 // Utils
 import utils from '../../../../utils/utils'
@@ -64,7 +65,10 @@ class ProductsListNew extends React.Component {
 			.loadNestedCategories(null, 3)
 			.then(res => {
 				res.forEach(cat => {
-					cat.products.forEach(p => p.images.reverse());
+					cat.products.forEach(p => {
+;						p.images.reverse();
+						p.inStock = productsInStock[p.id].inStock
+					});
 				});
 				this.setState({nestedCategories: res, loading: false});
 			})
@@ -84,10 +88,10 @@ class ProductsListNew extends React.Component {
 		let productsList = this.state.nestedCategories.map(cat => {
 
 			if (cat.name !== 'Default' && cat.count > 0) {
-				let products = cat.products.map(e => {
+				let products = cat.products.map(p => {
 
-					return <ProductCard key={e.id}
-					                    product={e}
+					return <ProductCard key={p.id}
+					                    product={p}
 					                    showMessage={this.showMessage}
 					                    size={''}
 					                    xsRes={resolution ? 12 : 6}/>;

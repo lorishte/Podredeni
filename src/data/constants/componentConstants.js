@@ -1,4 +1,3 @@
-import { Col } from 'react-bootstrap';
 
 const FILTER_INPUT_WAIT_INTERVAL = 1000;
 
@@ -232,6 +231,9 @@ const PRODUCT = {
 	price: 'Цена:',
 	addToCart: 'Добави',
 	category: 'Категория',
+	outOfStock: 'Изчерпан',
+	temporaryOutOfStock: 'Този продукт е временно изчерпан!',
+	new: 'НОВО!',
 	subCategory: 'Подкатегория',
 	resultsFor: 'Резултати за'
 };

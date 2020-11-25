@@ -146,6 +146,7 @@ class ValidPromo extends React.Component {
         });
 
 
+
         let availablePresents;
         if (discountedProductsCount > 0) {
             for (let i = 0; i < discountedProducts.length; i++) {
@@ -187,9 +188,9 @@ class ValidPromo extends React.Component {
                 <h2 className="valid-promo-headline">Валидна промоция</h2>
 
                 {promotion && <p>{promotion.description}</p>}
-                {!promotion &&
-                <p>При покупка на всеки 2 броя магнитни клипса, получавате подарък по избор от серия стандартни
-                    клипсове.</p>}
+                {/*{!promotion &&*/}
+                {/*<p>При покупка на всеки 2 броя магнитни клипса, получавате подарък по избор от серия стандартни*/}
+                {/*    клипсове.</p>}*/}
 
 
                 <Col>

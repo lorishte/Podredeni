@@ -503,6 +503,11 @@ nav {
       #home #home-about .article-image img {
         width: 100%;
         object-fit: cover; }
+    #home #home-about .accent {
+      color: #17ce7f;
+      font-weight: 300;
+      font-size: 1.5em;
+      text-transform: uppercase; }
     #home #home-about .article-content {
       -webkit-flex-basis: 70%;
       flex-basis: 70%;
@@ -672,6 +677,16 @@ nav {
     font-weight: 600;
     z-index: 5;
     clip-path: polygon(0% 0%, 90% 0%, 100% 50%, 90% 100%, 0% 100%); }
+  .card .outOfStock,
+  .top-seller-card .outOfStock {
+    position: absolute;
+    top: 45%;
+    left: 50%;
+    transform: translateX(-50%);
+    display: inline-block;
+    background-color: #ea445b;
+    padding: 0 .2em;
+    color: #ffffff; }
   .card .product-image,
   .top-seller-card .product-image {
     width: 200px;
@@ -681,6 +696,9 @@ nav {
     -moz-transition: .4s;
     -o-transition: .4s;
     transition: .4s; }
+    .card .product-image.faded,
+    .top-seller-card .product-image.faded {
+      opacity: .3; }
   .card .card-body,
   .top-seller-card .card-body {
     width: 100%; }
@@ -766,6 +784,8 @@ nav {
 
 #news-container .news-card {
   min-height: 303px;
+  margin: 10px 0;
+  padding: 10px;
   background-color: #ffffff; }
   #news-container .news-card .news-image-container {
     -webkit-flex-basis: 100%;
@@ -834,6 +854,9 @@ nav {
     -ms-flex-pack: justify;
     -webkit-justify-content: space-between;
     justify-content: space-between; }
+    #products .filters-container .category-name h1 {
+      font-size: 18px;
+      margin: 10px 0; }
   #products .filters-container .toggle-menu .toggle {
     display: block;
     height: 1px;
@@ -972,6 +995,27 @@ nav {
     border-radius: 50%;
     font-size: .5em;
     font-weight: 600;
+    z-index: 5; }
+  #product .outOfStock {
+    padding: .6em 1em;
+    margin-top: 1em;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -moz-box-align: center;
+    -ms-flex-align: center;
+    -webkit-align-items: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    -moz-box-pack: center;
+    -ms-flex-pack: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+    background-color: #ea445b;
+    color: #ffffff;
+    font-size: .35em;
     z-index: 5; }
   #product .price {
     padding: 5px 10px;

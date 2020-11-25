@@ -1,5 +1,8 @@
 import React from 'react';
 
+// SEO
+import SEO_MetaTags_Dynamic from "../../common/SEO/SEO_MetaTags_Dynamic";
+
 //external components
 import {Grid, Row, Col, Image} from 'react-bootstrap';
 import {Link} from 'react-router-dom';
@@ -9,6 +12,10 @@ import newsService from '../../../services/news/newsService';
 
 //constants
 import {RESOLUTIONS, BUTTONS_BG, NEWS_CONTENT_EMPTY} from '../../../data/constants/componentConstants';
+
+// Utils
+import utils from '../../../utils/utils'
+import SEO_MetaTags_News from "../../common/SEO/SEO_MetaTags_News";
 
 class News extends React.Component {
     constructor(props) {
@@ -59,15 +66,23 @@ class News extends React.Component {
 
     render() {
         let resolution = this.state.resolution < RESOLUTIONS.xs;
+        let title = this.state.title;
+
+        let urlPath = this.props.location.pathname;
+        let description = utils.removeTags(this.state.content)
+        description = utils.shortenString(description, 155, ' ')
 
         return (
             <Grid id="news-details">
+
+                <SEO_MetaTags_News activeLanguage={'bg'} pageName={'newsDetails'} description={description} title={title} url={urlPath} />
+
                 <Row>
                     <Col xs={resolution ? 12 : 6} sm={6} md={5}>
                         <Image src={this.state.imageUrl}/>
                     </Col>
                     <Col xs={resolution ? 12 : 6} sm={6} md={7}>
-                        <h2>{this.state.title}</h2>
+                        <h1>{title}</h1>
 
                         <div dangerouslySetInnerHTML={{ __html: this.state.content }} />
 

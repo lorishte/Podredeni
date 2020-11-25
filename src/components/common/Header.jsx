@@ -175,22 +175,22 @@ class Header extends React.Component {
                                      className=''>
 
                             <MenuItem href="/products/aksesoari-i-ochila" className='sub-menu nav-link'  onClick={this.hideMenu}>
-                                Магнитни клипсове ReadeRest
+                                Аксесоари и очила
                             </MenuItem>
-
 
                             <MenuItem href="/products/vakantsiya-i-sport" className='sub-menu nav-link'  onClick={this.hideMenu}>
-                                Бързосъхнещи кърпи Dock&Bay
+                                Ваканция и спорт
                             </MenuItem>
-
 
                             <MenuItem href="/products/smart-kuhnenski-uredi" className='sub-menu nav-link' onClick={this.hideMenu}>
-                                Смарт домакински уреди
+                                Смарт кухненски уреди
                             </MenuItem>
 
+                            <MenuItem href="/products/dom-zdrave-i-krasota" className='sub-menu nav-link' onClick={this.hideMenu}>
+                                Дом, здраве и красота
+                            </MenuItem>
 
                             <MenuItem divider/>
-
 
                             <MenuItem href="/products" className='sub-menu nav-link'  onClick={this.hideMenu}>
                                 Всички категории

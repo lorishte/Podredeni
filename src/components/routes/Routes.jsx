@@ -87,7 +87,7 @@ let Routes = () => {
 
 			<Route path='/products/:categoryName/:productName' component={ProductDetails}/>
 			{/*<Route path='/products/:id' component={ProductDetails}/>*/}
-			
+
 			{/*<Route path='/products-by-category/:id' component={ProductsListByCategory}/>*/}
 
 
@@ -148,5 +148,6 @@ let Routes = () => {
 		</Switch>
 	);
 };
+
 
 export default Routes;
