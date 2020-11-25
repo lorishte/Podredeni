@@ -60,6 +60,16 @@ class CategoriesList extends React.Component {
             .loadCategories(this.state, isSubcategory)
             .then(res => {
 
+
+                // Get category id and names - for sef urls
+                // let data = {}
+                //
+                // res.categories.forEach(c => {
+                //     data += '[utils.generateRouteName("' + c.name + '")]: "' + c.id + '",'
+                // })
+                //
+                // console.log(data)
+
                 res.categories.sort((a, b) => a.place - b.place)
 
                 let categoriesCount = Number(res.categoriesCount);

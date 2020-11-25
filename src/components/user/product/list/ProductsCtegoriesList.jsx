@@ -19,7 +19,7 @@ import productsInStock from "../../../../data/constants/productsInStock";
 // Utils
 import utils from '../../../../utils/utils'
 
-class ProductsListNew extends React.Component {
+class ProductsCtegoriesList extends React.Component {
 	constructor (props) {
 		super(props);
 
@@ -134,4 +134,4 @@ class ProductsListNew extends React.Component {
 	}
 }
 
-export default ProductsListNew;
+export default ProductsCtegoriesList;

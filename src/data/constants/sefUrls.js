@@ -1,31 +1,28 @@
 import utils from '../../utils/utils'
 
-import productsService from "../../services/products/productsService";
-
-
-// Get all products from server - in case there have been made corrections in product names
-// const state = {
-//     products: [],
-//     newProductsOrder: [],
-// };
-//
-// let productSefUrlsServer = {}
-//
-// productsService
-//     .loadProducts(state, true)
-//     .then(res => {
-//
-//         res.products.map(p => {
-//             let key = '[utils.generateRouteName(' + '"' + p.name + '"' + ')]'
-//             productSefUrlsServer[key] = p.id
-//         })
-//     })
 
 const categorySefUrls = {
     [utils.generateRouteName('Аксесоари и очила')]: '2d256711-5f08-4d68-ba1a-30311f0b9c6f',
     [utils.generateRouteName('Ваканция и спорт')]: '92e8f56e-1a18-46bb-be40-633559284cdc',
     [utils.generateRouteName('Смарт кухненски уреди')]: '58a4edb3-4946-4f28-bd62-c18e7d763099',
     [utils.generateRouteName('Дом, здраве и красота')]: 'b4396565-c1b4-4879-a0de-a8e75355e9f2'
+}
+
+const subCategorySefUrls = {
+    [utils.generateRouteName("Eко кърпи  Active рециклирани")]: "1429b308-0474-4033-a8e2-9dea821ca2d4",
+    [utils.generateRouteName("THATInventions")]: "e778ca74-5239-4137-bdbd-20de00110dc8",
+    [utils.generateRouteName("Бързосъхнещи кърпи Cabana ")]: "90d007ac-0018-45d1-b508-105af8279f98",
+    [utils.generateRouteName("Бързосъхнещи кърпи Summer")]: "b16fb58e-e8e0-4856-bcf0-c71b5ad3f89e",
+    [utils.generateRouteName("Детско пончо 2-4/4-7 г")]: "7cfb14e6-8fb1-4f94-ab43-22d6c87b86e9",
+    [utils.generateRouteName("Еко кърпи Jungle 100% рециклирани")]: "99799467-7fd1-4d70-9088-f7bb309f16fe",
+    [utils.generateRouteName("Еко кърпи за баня 100% рециклирани")]: "0fcb76fd-293e-477e-b165-23c7c860f488",
+    [utils.generateRouteName("Еко мъжки шорти 100% рециклирани")]: "e0be5d20-3594-4c3c-8f02-68a05cb0ec99",
+    [utils.generateRouteName("Етерични масла")]: "8d0dd16c-b4fc-4852-a106-e6bad3586288",
+    [utils.generateRouteName("Магнитни клипсове Magcessory")]: "91e86296-e81d-4aab-9cba-34389e856278",
+    [utils.generateRouteName("Магнитни клипсове Standart")]: "20792e4d-2e77-421f-8918-ef49d38b9836",
+    [utils.generateRouteName("Очила за четене ReadeREST")]: "5a8fd08a-f26c-4399-a883-6d05768e8a84",
+    [utils.generateRouteName("Сенници  и тенти")]: "6f9d1951-bfdc-449b-b072-b4f5772bcbaa",
+    [utils.generateRouteName("Тюрбан-кърпа 100% рециклирани")]: "4bf3e362-8d81-4b38-b45c-b421a536d90e",
 }
 
 const productSefUrls = {
@@ -126,5 +123,6 @@ const productSefUrls = {
 
 export {
     categorySefUrls,
+    subCategorySefUrls,
     productSefUrls
 }

@@ -15,7 +15,7 @@ import categoryService from '../../../../services/categories/categoryService';
 
 // Constants
 import {RESOLUTIONS} from '../../../../data/constants/componentConstants';
-import {categorySefUrls, productSefUrls} from '../../../../data/constants/sefUrls'
+import {categorySefUrls, subCategorySefUrls} from '../../../../data/constants/sefUrls'
 import productsInStock from '../../../../data/constants/productsInStock'
 import utils from "../../../../utils/utils";
 
@@ -96,7 +96,30 @@ class ProductsListByCategory extends React.Component {
         this.setState({resolution: window.innerWidth});
     };
 
+    checkUrl = () => {
+
+        let filter = this.props.location.search
+
+        if (filter) {
+
+            let filterName = filter.split('=').pop()
+
+            let subCatId = subCategorySefUrls[filterName]
+
+            this.setState({
+                selectedSubcategoryIds: [...this.state.selectedSubcategoryIds, subCatId],
+            }, () => {
+                this.setState({
+                    filteredProducts: this.filterProducts(),
+                    filtering: false
+                });
+            });
+        }
+    }
+
     loadNestedCategories = () => {
+
+        this.checkUrl()
 
         categoryService
             .loadNestedCategories(null, 1000)
@@ -131,6 +154,7 @@ class ProductsListByCategory extends React.Component {
                     loading: false
                 }, () => {
                     // this.checkFilters()
+                    this.checkUrl()
                 });
             })
             .catch(err => console.log(err));
@@ -144,6 +168,7 @@ class ProductsListByCategory extends React.Component {
 
         let subCats = this.state.selectedSubcategoryIds;
 
+        // Remove subcategory if already selected
         if (subCats.includes(id)) {
 
             this.setState({
@@ -155,6 +180,7 @@ class ProductsListByCategory extends React.Component {
                 });
             });
         } else {
+            // Add subcategory
             this.setState({
                 selectedSubcategoryIds: [...this.state.selectedSubcategoryIds, id],
             }, () => {

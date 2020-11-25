@@ -17,7 +17,7 @@ import Contact from '../user/contact/Contact';
 import Terms from '../user/termsAndConditions/Terms';
 
 // User Products
-import ProductsListNew from '../user/product/list/ProductsListNew';
+import ProductsCtegoriesList from '../user/product/list/ProductsCtegoriesList';
 import ProductsListByCategory from '../user/product/list/ProductsListByCategory';
 import ProductDetails from '../user/product/details/ProductDetails';
 
@@ -77,7 +77,7 @@ let Routes = () => {
 			<Route path='/login' component={Login}/>
 			<Route path='/register' component={NotFound}/>
 
-			<Route exact path='/products' component={ProductsListNew}/>
+			<Route exact path='/products' component={ProductsCtegoriesList}/>
 			<Route exact path='/products/:categoryName' component={ProductsListByCategory}/>
 
 			{/*Rerender component on category change (in url)*/}
@@ -90,13 +90,10 @@ let Routes = () => {
 
 			{/*<Route path='/products-by-category/:id' component={ProductsListByCategory}/>*/}
 
-
-
 			<Route exact path='/news/create' component={NewsCreate}/>
 			<Route exact path='/news/list' component={NewsList}/>
 			<Route exact path='/news/:id' component={NewsDetails}/>
 			<Route exact path='/news/edit/:id' component={NewsEdit}/>
-
 
 			<Route path='/cart' component={Cart}/>
 
@@ -107,6 +104,8 @@ let Routes = () => {
 			<Route path='/contact' component={Contact}/>
 
 			<Route path='/terms' component={Terms}/>
+
+
 
 			/*Admin*/
 			<PrivateRoute path='/product/create' component={CreateProduct}/>
