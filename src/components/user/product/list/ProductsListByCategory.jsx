@@ -15,7 +15,7 @@ import categoryService from '../../../../services/categories/categoryService';
 
 // Constants
 import {RESOLUTIONS} from '../../../../data/constants/componentConstants';
-import {categorySefUrls} from '../../../../data/constants/sefUrls'
+import {categorySefUrls, productSefUrls} from '../../../../data/constants/sefUrls'
 import productsInStock from '../../../../data/constants/productsInStock'
 import utils from "../../../../utils/utils";
 
@@ -61,26 +61,35 @@ class ProductsListByCategory extends React.Component {
         this.loadNestedCategories();
     }
 
+
     componentWillUnmount() {
         window.removeEventListener('orientationchange', this.handleResolutionChange);
         window.removeEventListener('resize', this.handleResolutionChange);
 
-        sessionStorage.setItem('selectedSubcategoryIds', JSON.stringify(this.state.selectedSubcategoryIds));
+        // sessionStorage.setItem('selectedSubcategoryIds', JSON.stringify(this.state.selectedSubcategoryIds));
+        // sessionStorage.setItem('categoryId', JSON.stringify(this.state.categoryId));
     }
 
 
     checkFilters = () => {
+        let prevCategory = JSON.parse(sessionStorage.getItem('categoryId'))
 
-        let subCategories = JSON.parse(sessionStorage.getItem('selectedSubcategoryIds'));
+        let currentCategory = categorySefUrls[this.props.match.params.categoryName]
 
-        if (subCategories) {
-            this.setState({selectedSubcategoryIds: subCategories}, () => {
-                this.setState({
-                    filteredProducts: this.filterProducts()
+        console.log(prevCategory)
+        console.log(currentCategory)
+
+        if (prevCategory && prevCategory === currentCategory) {
+            let subCategories = JSON.parse(sessionStorage.getItem('selectedSubcategoryIds'));
+
+            if (subCategories) {
+                this.setState({selectedSubcategoryIds: subCategories}, () => {
+                    this.setState({
+                        filteredProducts: this.filterProducts()
+                    });
                 });
-            });
+            }
         }
-
     };
 
     handleResolutionChange = () => {
@@ -120,7 +129,9 @@ class ProductsListByCategory extends React.Component {
                     filteredProducts: products,
                     subcategories: selectedCategory.subcategories,
                     loading: false
-                }, () => this.checkFilters());
+                }, () => {
+                    // this.checkFilters()
+                });
             })
             .catch(err => console.log(err));
     };
