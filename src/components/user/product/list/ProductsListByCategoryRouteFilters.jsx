@@ -1,5 +1,5 @@
 import React from 'react';
-import {Link} from 'react-router-dom';
+import {Redirect} from 'react-router';
 import {Col, Row, Grid, Breadcrumb, PageHeader} from 'react-bootstrap';
 import {ToastContainer} from 'react-toastr';
 
@@ -10,14 +10,12 @@ import SEO_MetaTags from '../../../common/SEO/SEO_MetaTags'
 import ProductCard from './partials/ProductCard';
 
 // Services
-import productsService from '../../../../services/products/productsService';
 import categoryService from '../../../../services/categories/categoryService';
 
 // Constants
 import {RESOLUTIONS} from '../../../../data/constants/componentConstants';
-import {categorySefUrls, subCategorySefUrls} from '../../../../data/constants/sefUrls'
+import {categorySefUrls, subCategorySefUrls, subCategorySefUrlsToId} from '../../../../data/constants/sefUrls'
 import productsInStock from '../../../../data/constants/productsInStock'
-import utils from "../../../../utils/utils";
 
 
 class ProductsListByCategory extends React.Component {
@@ -102,12 +100,16 @@ class ProductsListByCategory extends React.Component {
 
         if (filter) {
 
-            let filterName = filter.split('=').pop()
+            let filterNames = filter.split('=').pop().split('&').map(e => e = subCategorySefUrls[e])
 
-            let subCatId = subCategorySefUrls[filterName]
+            console.log(filterNames)
+
+            // let subCatId = subCategorySefUrls[filterName]
+
+            console.log(filterNames)
 
             this.setState({
-                selectedSubcategoryIds: [...this.state.selectedSubcategoryIds, subCatId],
+                selectedSubcategoryIds: filterNames,
             }, () => {
                 this.setState({
                     filteredProducts: this.filterProducts(),
@@ -117,9 +119,31 @@ class ProductsListByCategory extends React.Component {
         }
     }
 
-    loadNestedCategories = () => {
+    changeUrl = (id) => {
 
-        this.checkUrl()
+        let query = this.props.location.search
+
+        let filtersArr = query.split('=').pop().split('&')
+
+        let el = subCategorySefUrlsToId[id]
+
+        const index = filtersArr.indexOf(subCategorySefUrlsToId[id]);
+        if (index > -1) {
+            filtersArr.splice(index, 1);
+        }
+
+        let newQuery = '?filter='
+
+        filtersArr.forEach(e => newQuery += e + '&')
+
+        let queryFinal = newQuery.slice(0, -1)
+
+        console.log(queryFinal)
+
+        return queryFinal
+    }
+
+    loadNestedCategories = () => {
 
         categoryService
             .loadNestedCategories(null, 1000)
@@ -138,6 +162,7 @@ class ProductsListByCategory extends React.Component {
                     } else {
                         p.inStock = true
                     }
+
                 });
 
                 // Put OutOfStock products at the end of the list
@@ -183,6 +208,8 @@ class ProductsListByCategory extends React.Component {
                     filteredProducts: this.filterProducts(),
                     filtering: false
                 });
+
+                this.props.history.push(this.props.location.pathname + this.changeUrl(id));
             });
         } else {
             // Add subcategory
@@ -192,6 +219,18 @@ class ProductsListByCategory extends React.Component {
                 this.setState({
                     filteredProducts: this.filterProducts(),
                     filtering: false
+                }, () => {
+
+                    let filter = this.props.location.search
+
+                    if (filter) {
+                        filter += '&' + subCategorySefUrlsToId[id]
+                    } else {
+                        filter = '?filter=' + subCategorySefUrlsToId[id]
+                    }
+
+                    console.log(filter)
+                    this.props.history.push(this.props.location.pathname + filter);
                 });
             });
         }

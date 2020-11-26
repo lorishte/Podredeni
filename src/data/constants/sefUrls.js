@@ -25,6 +25,23 @@ const subCategorySefUrls = {
     [utils.generateRouteName("Тюрбан-кърпа 100% рециклирани")]: "4bf3e362-8d81-4b38-b45c-b421a536d90e",
 }
 
+const subCategorySefUrlsToId = {
+    "1429b308-0474-4033-a8e2-9dea821ca2d4": utils.generateRouteName("Eко кърпи  Active рециклирани"),
+    "e778ca74-5239-4137-bdbd-20de00110dc8": utils.generateRouteName("THATInventions"),
+    "90d007ac-0018-45d1-b508-105af8279f98": utils.generateRouteName("Бързосъхнещи кърпи Cabana "),
+    "b16fb58e-e8e0-4856-bcf0-c71b5ad3f89e": utils.generateRouteName("Бързосъхнещи кърпи Summer"),
+    "7cfb14e6-8fb1-4f94-ab43-22d6c87b86e9": utils.generateRouteName("Детско пончо 2-4/4-7 г"),
+    "99799467-7fd1-4d70-9088-f7bb309f16fe": utils.generateRouteName("Еко кърпи Jungle 100% рециклирани"),
+    "0fcb76fd-293e-477e-b165-23c7c860f488": utils.generateRouteName("Еко кърпи за баня 100% рециклирани"),
+    "e0be5d20-3594-4c3c-8f02-68a05cb0ec99": utils.generateRouteName("Еко мъжки шорти 100% рециклирани"),
+    "8d0dd16c-b4fc-4852-a106-e6bad3586288": utils.generateRouteName("Етерични масла"),
+    "91e86296-e81d-4aab-9cba-34389e856278": utils.generateRouteName("Магнитни клипсове Magcessory"),
+    "20792e4d-2e77-421f-8918-ef49d38b9836": utils.generateRouteName("Магнитни клипсове Standart"),
+    "5a8fd08a-f26c-4399-a883-6d05768e8a84": utils.generateRouteName("Очила за четене ReadeREST"),
+    "6f9d1951-bfdc-449b-b072-b4f5772bcbaa": utils.generateRouteName("Сенници  и тенти"),
+    "4bf3e362-8d81-4b38-b45c-b421a536d90e": utils.generateRouteName("Тюрбан-кърпа 100% рециклирани"),
+}
+
 const productSefUrls = {
     [utils.generateRouteName("Магнитен клипс Очила")]: "8726552e-5202-47a7-80b2-6cbd8bd7df4a",
     [utils.generateRouteName("Mагнитен клипс Черен")]: "96d0e2d2-b543-4f3a-b356-b123aaf81b9f",
@@ -118,11 +135,19 @@ const productSefUrls = {
     [utils.generateRouteName("Лавандула Спика етерично масло")]: "5b626dc8-dc1f-48c5-9849-b44ff9546c3f",
     [utils.generateRouteName("Евкалипт Радиата етерично масло")]: "8c13eb8d-adc7-4e50-9bd0-3c81d2ab8cba",
     [utils.generateRouteName("Аромафорс Сироп")]: "340a95e2-b002-4804-ba67-cfc6d78c694d",
+    [utils.generateRouteName("Кърпа за баня Синьо Небе")]: "81e2a130-9b72-476d-8521-ea81f042919d",
+    [utils.generateRouteName("Лавандула Спика етерично масло")]: "e1dcfde1-e918-4197-9d68-8eacb1d7d21d",
+    [utils.generateRouteName("Шипка – капсули")]: "1bce03ea-9bf6-41f5-9def-24bb7ff4551d",
+    [utils.generateRouteName("Растително масло Шипка")]: "2f8f6b2b-c533-42e2-b344-5021558a7165",
+    [utils.generateRouteName("Растително масло Нощна иглика")]: "44f254af-42ac-4cde-a1be-8d6611dc0aed",
+    [utils.generateRouteName("Нощна Иглика – капсули")]: "559e2dda-2306-4c97-9f68-84c6c070e44c",
+    [utils.generateRouteName("Растително масло Арган")]: "b87c17f2-97c7-4d18-abfc-e2dbfcf46863",
 }
 
 
 export {
     categorySefUrls,
     subCategorySefUrls,
+    subCategorySefUrlsToId,
     productSefUrls
 }

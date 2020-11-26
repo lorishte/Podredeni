@@ -96,7 +96,9 @@ function createStateCopy(state) {
 }
 
 function generateRouteName(name) {
-    return transliterate(name.toLowerCase()).split(' ').filter(w => w !== '').join('-')
+    let path = transliterate(name.toLowerCase()).split(' ').filter(w => w !== '' && w !== '-').join('-')
+    // console.log(path)
+    return path
 }
 
 function transliterate(word){
@@ -136,6 +138,7 @@ export default {
 const chars = {
     '/': '-',
     ',': ' ',
+    '–': ' ',
     '-': ' ',
     "а":"a",
     "б":"b",

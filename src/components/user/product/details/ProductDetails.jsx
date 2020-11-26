@@ -118,7 +118,12 @@ class Product extends React.Component {
 
 		let urlPath = this.props.location.pathname;
 
-		product.inStock = productsInStock[product.id].inStock
+		if (productsInStock[product.id]) {
+			product.inStock = productsInStock[product.id].inStock
+		}
+		else {
+			product.inStock = true
+		}
 
 		return (
 			<Grid id="product">

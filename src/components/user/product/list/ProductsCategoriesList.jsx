@@ -19,7 +19,7 @@ import productsInStock from "../../../../data/constants/productsInStock";
 // Utils
 import utils from '../../../../utils/utils'
 
-class ProductsCtegoriesList extends React.Component {
+class ProductsCategoriesList extends React.Component {
 	constructor (props) {
 		super(props);
 
@@ -67,7 +67,12 @@ class ProductsCtegoriesList extends React.Component {
 				res.forEach(cat => {
 					cat.products.forEach(p => {
 ;						p.images.reverse();
-						p.inStock = productsInStock[p.id].inStock
+						if (productsInStock[p.id]) {
+							p.inStock = productsInStock[p.id].inStock
+						}
+						else {
+							p.inStock = true
+						}
 					});
 				});
 				this.setState({nestedCategories: res, loading: false});
@@ -134,4 +139,4 @@ class ProductsCtegoriesList extends React.Component {
 	}
 }
 
-export default ProductsCtegoriesList;
+export default ProductsCategoriesList;

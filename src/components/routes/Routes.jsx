@@ -17,8 +17,9 @@ import Contact from '../user/contact/Contact';
 import Terms from '../user/termsAndConditions/Terms';
 
 // User Products
-import ProductsCtegoriesList from '../user/product/list/ProductsCtegoriesList';
+import ProductsCategoriesList from '../user/product/list/ProductsCategoriesList';
 import ProductsListByCategory from '../user/product/list/ProductsListByCategory';
+import ProductsListByCategoryRouteFilters from '../user/product/list/ProductsListByCategoryRouteFilters';
 import ProductDetails from '../user/product/details/ProductDetails';
 
 // User News
@@ -77,8 +78,8 @@ let Routes = () => {
 			<Route path='/login' component={Login}/>
 			<Route path='/register' component={NotFound}/>
 
-			<Route exact path='/products' component={ProductsCtegoriesList}/>
-			<Route exact path='/products/:categoryName' component={ProductsListByCategory}/>
+			<Route exact path='/products' component={ProductsCategoriesList}/>
+			<Route exact path='/products/:categoryName' component={ProductsListByCategoryRouteFilters}/>
 
 			{/*Rerender component on category change (in url)*/}
 			{/*<Route exact path="/products/:categoryName" render={(props) => (*/}

@@ -23,6 +23,10 @@ import {
 import SortableProducts from '../../category/reOrder/partials/SortableProducts';
 import utils from "../../../../utils/utils";
 
+// Constants
+import productsInStock from '../../../../data/constants/productsInStock'
+
+
 class ProductsList extends React.Component {
     constructor(props) {
         super(props);
@@ -69,18 +73,26 @@ class ProductsList extends React.Component {
                 // console.log(tester)
 
                 // Get all product names and ids - Out of Stock
-                // let allProducts = {}
-                //
+                // let allProducts = []
+                // //
                 // res.products
+                //     .filter(p => p.subcategories.length > 0)
                 //     .forEach(p => {
-                //
                 //         let key = '"' + p.id + '"';
                 //
-                //         allProducts[key] = {
+                //         allProducts.push({
+                //             id: p.id,
                 //             name: p.name,
+                //             category: p.categories[0].name,
+                //             subcategory: p.subcategories[0].name,
                 //             inStock: true
-                //         }
+                //         })
                 //     })
+                //
+                //
+                // allProducts
+                //     .sort((a, b) => a.subCategory - b.subcategory)
+                //
                 //
                 // console.log(allProducts)
 
