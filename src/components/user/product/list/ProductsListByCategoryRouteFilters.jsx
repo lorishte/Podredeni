@@ -74,9 +74,6 @@ class ProductsListByCategory extends React.Component {
 
         let currentCategory = categorySefUrls[this.props.match.params.categoryName]
 
-        console.log(prevCategory)
-        console.log(currentCategory)
-
         if (prevCategory && prevCategory === currentCategory) {
             let subCategories = JSON.parse(sessionStorage.getItem('selectedSubcategoryIds'));
 
@@ -119,28 +116,44 @@ class ProductsListByCategory extends React.Component {
         }
     }
 
-    changeUrl = (id) => {
+    removeFilterFromUrl = (id) => {
 
         let query = this.props.location.search
 
         let filtersArr = query.split('=').pop().split('&')
 
-        let el = subCategorySefUrlsToId[id]
+        let filterToRemove = subCategorySefUrlsToId[id]
 
-        const index = filtersArr.indexOf(subCategorySefUrlsToId[id]);
+        const index = filtersArr.indexOf(filterToRemove);
+
         if (index > -1) {
             filtersArr.splice(index, 1);
         }
 
-        let newQuery = '?filter='
+        let queryFinal = ''
 
-        filtersArr.forEach(e => newQuery += e + '&')
+        if (filtersArr.length > 0) {
 
-        let queryFinal = newQuery.slice(0, -1)
+            let newQuery = '?filter='
 
-        console.log(queryFinal)
+            filtersArr.forEach(e => newQuery += e + '&')
 
-        return queryFinal
+            queryFinal = newQuery.slice(0, -1)
+        }
+
+        this.props.history.push(this.props.location.pathname + queryFinal)
+    }
+
+    addFilterToUrl = (id) => {
+        let filter = this.props.location.search
+
+        if (filter) {
+            filter += '&' + subCategorySefUrlsToId[id]
+        } else {
+            filter = '?filter=' + subCategorySefUrlsToId[id]
+        }
+
+        this.props.history.push(this.props.location.pathname + filter);
     }
 
     loadNestedCategories = () => {
@@ -209,28 +222,19 @@ class ProductsListByCategory extends React.Component {
                     filtering: false
                 });
 
-                this.props.history.push(this.props.location.pathname + this.changeUrl(id));
+                this.removeFilterFromUrl(id);
             });
         } else {
             // Add subcategory
             this.setState({
                 selectedSubcategoryIds: [...this.state.selectedSubcategoryIds, id],
             }, () => {
+
+                this.addFilterToUrl(id);
+
                 this.setState({
                     filteredProducts: this.filterProducts(),
                     filtering: false
-                }, () => {
-
-                    let filter = this.props.location.search
-
-                    if (filter) {
-                        filter += '&' + subCategorySefUrlsToId[id]
-                    } else {
-                        filter = '?filter=' + subCategorySefUrlsToId[id]
-                    }
-
-                    console.log(filter)
-                    this.props.history.push(this.props.location.pathname + filter);
                 });
             });
         }
